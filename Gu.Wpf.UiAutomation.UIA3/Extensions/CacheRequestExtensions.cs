@@ -15,10 +15,12 @@
             {
                 nativeCacheRequest.AddPattern(pattern.Id);
             }
+
             foreach (var property in cacheRequest.Properties)
             {
                 nativeCacheRequest.AddProperty(property.Id);
             }
+
             return nativeCacheRequest;
         }
     }

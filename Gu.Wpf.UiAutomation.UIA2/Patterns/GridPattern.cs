@@ -13,7 +13,8 @@
         public static readonly PropertyId ColumnCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.ColumnCountProperty.Id, "ColumnCount");
         public static readonly PropertyId RowCountProperty = PropertyId.Register(AutomationType.UIA2, UIA.GridPattern.RowCountProperty.Id, "RowCount");
 
-        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public GridPattern(BasicAutomationElementBase basicAutomationElement, UIA.GridPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

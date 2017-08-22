@@ -33,6 +33,7 @@
                 automation.UnRegisterFocusChangedEvent(x);
                 mainWindow.Close();
             }
+
             app.Dispose();
             Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
         }

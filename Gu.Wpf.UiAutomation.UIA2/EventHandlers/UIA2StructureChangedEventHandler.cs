@@ -10,7 +10,8 @@
     {
         public UIA.StructureChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(automation, callAction)
+        public UIA2StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction)
+            : base(automation, callAction)
         {
             this.EventHandler = this.HandleStructureChangedEvent;
         }

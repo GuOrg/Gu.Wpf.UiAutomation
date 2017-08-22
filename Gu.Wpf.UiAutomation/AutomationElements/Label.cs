@@ -4,7 +4,8 @@
 
     public class Label : AutomationElement
     {
-        public Label(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Label(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

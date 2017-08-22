@@ -11,7 +11,8 @@
         public static readonly PropertyId CurrentViewProperty = PropertyId.Register(AutomationType.UIA2, UIA.MultipleViewPattern.CurrentViewProperty.Id, "CurrentView");
         public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(AutomationType.UIA2, UIA.MultipleViewPattern.SupportedViewsProperty.Id, "SupportedViews");
 
-        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.MultipleViewPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.MultipleViewPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

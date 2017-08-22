@@ -14,7 +14,8 @@
     /// </summary>
     public class UIA2Automation : AutomationBase
     {
-        public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary())
+        public UIA2Automation()
+            : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary())
         {
             this.TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }
@@ -88,6 +89,7 @@
             {
                 return getAction();
             }
+
             var cacheRequest = CacheRequest.Current.ToNative();
             using (cacheRequest.Activate())
             {

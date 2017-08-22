@@ -10,7 +10,8 @@
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.InvokePattern.Pattern.Id, "Invoke", AutomationObjectIds.IsInvokePatternAvailableProperty);
         public static readonly EventId InvokedEvent = EventId.Register(AutomationType.UIA2, UIA.InvokePattern.InvokedEvent.Id, "Invoked");
 
-        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.InvokePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.InvokePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

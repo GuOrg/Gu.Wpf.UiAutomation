@@ -23,11 +23,13 @@
             {
                 throw new ArgumentNullException(nameof(propertyName));
             }
+
             object value;
             if (this.backingFieldValues.TryGetValue(propertyName, out value))
             {
                 return (T)value;
             }
+
             return default(T);
         }
 
@@ -40,7 +42,12 @@
             {
                 throw new ArgumentNullException(nameof(propertyName));
             }
-            if (this.IsEqual(this.GetProperty<T>(propertyName), newValue)) return false;
+
+            if (this.IsEqual(this.GetProperty<T>(propertyName), newValue))
+            {
+                return false;
+            }
+
             this.backingFieldValues[propertyName] = newValue;
             this.OnPropertyChanged(propertyName);
             return true;
@@ -51,7 +58,11 @@
         /// </summary>
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
-            if (this.IsEqual(field, newValue)) return false;
+            if (this.IsEqual(field, newValue))
+            {
+                return false;
+            }
+
             field = newValue;
             this.OnPropertyChanged(propertyName);
             return true;

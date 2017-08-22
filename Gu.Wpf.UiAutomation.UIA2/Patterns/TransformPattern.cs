@@ -12,7 +12,8 @@
         public static readonly PropertyId CanResizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.TransformPattern.CanResizeProperty.Id, "CanResize");
         public static readonly PropertyId CanRotateProperty = PropertyId.Register(AutomationType.UIA2, UIA.TransformPattern.CanRotateProperty.Id, "CanRotate");
 
-        public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.TransformPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TransformPattern(BasicAutomationElementBase basicAutomationElement, UIA.TransformPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
         

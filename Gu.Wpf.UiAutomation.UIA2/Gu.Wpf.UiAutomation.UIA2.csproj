@@ -2,9 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UIA2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.UiAutomation\Gu.Wpf.UiAutomation.csproj" />

@@ -52,6 +52,7 @@
                 {
                     return cacheStack.Peek();
                 }
+
                 return null;
             }
         }
@@ -62,6 +63,7 @@
             {
                 cacheStack = new Stack<CacheRequest>();
             }
+
             cacheStack.Push(cacheRequest);
         }
 
@@ -71,6 +73,7 @@
             {
                 throw new InvalidOperationException("No cache request available to pop");
             }
+
             cacheStack.Pop();
         }
 
@@ -95,6 +98,7 @@
                 {
                     forceNoCacheStack = new Stack<bool>();
                 }
+
                 forceNoCacheStack.Push(true);
             }
 

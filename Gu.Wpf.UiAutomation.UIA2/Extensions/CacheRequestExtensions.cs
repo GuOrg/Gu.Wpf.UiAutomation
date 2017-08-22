@@ -15,10 +15,12 @@
             {
                 nativeCacheRequest.Add(UIA.AutomationPattern.LookupById(pattern.Id));
             }
+
             foreach (var property in cacheRequest.Properties)
             {
                 nativeCacheRequest.Add(UIA.AutomationProperty.LookupById(property.Id));
             }
+
             return nativeCacheRequest;
         }
     }

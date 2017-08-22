@@ -22,7 +22,8 @@
     {
         private AutomationProperty<ToggleState> toggleState;
 
-        protected TogglePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TogglePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

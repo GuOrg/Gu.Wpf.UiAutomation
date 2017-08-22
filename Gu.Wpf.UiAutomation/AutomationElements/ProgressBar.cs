@@ -5,7 +5,8 @@
 
     public class ProgressBar : AutomationElement
     {
-        public ProgressBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ProgressBar(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

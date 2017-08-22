@@ -37,7 +37,8 @@
         private AutomationProperty<bool> isGrabbed;
         private AutomationProperty<AutomationElement[]> grabbedItems;
 
-        protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

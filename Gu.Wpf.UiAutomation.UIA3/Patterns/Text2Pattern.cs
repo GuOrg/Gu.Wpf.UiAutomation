@@ -12,7 +12,8 @@
     {
         public new static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
 
-        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
+        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
             this.ExtendedNativePattern = nativePattern;
         }

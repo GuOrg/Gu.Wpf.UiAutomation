@@ -31,7 +31,8 @@
         private AutomationProperty<double> zoomMaximum;
         private AutomationProperty<double> zoomMinimum;
 
-        protected Transform2PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected Transform2PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

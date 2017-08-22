@@ -10,7 +10,8 @@
         private const string DefaultMessage = "The requested pattern is not cached";
         private const string DefaultMessageWithData = "The requested pattern '{0}' is not cached";
 
-        public PatternNotCachedException() : base(DefaultMessage)
+        public PatternNotCachedException()
+            : base(DefaultMessage)
         {
         }
 
@@ -52,6 +53,7 @@
             {
                 throw new ArgumentNullException(nameof(info));
             }
+
             info.AddValue("Pattern", this.Pattern);
             base.GetObjectData(info, context);
         }

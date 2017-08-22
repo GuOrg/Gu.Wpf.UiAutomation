@@ -48,19 +48,23 @@
                 {
                     modifiers.Add(VirtualKeyShort.SHIFT);
                 }
+
                 if (HasScanModifier(high, VkKeyScanModifiers.CONTROL))
                 {
                     modifiers.Add(VirtualKeyShort.CONTROL);
                 }
+
                 if (HasScanModifier(high, VkKeyScanModifiers.ALT))
                 {
                     modifiers.Add(VirtualKeyShort.ALT);
                 }
+
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
                     Press(mod);
                 }
+
                 // Type the effective key
                 SendInput(low, true, false, false, false);
                 SendInput(low, false, false, false, false);
@@ -81,6 +85,7 @@
             {
                 return;
             }
+
             foreach (var key in virtualKeys)
             {
                 Press(key);
@@ -97,10 +102,12 @@
             {
                 return;
             }
+
             foreach (var key in virtualKeys)
             {
                 Press(key);
             }
+
             foreach (var key in virtualKeys.Reverse())
             {
                 Release(key);

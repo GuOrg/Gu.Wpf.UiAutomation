@@ -10,7 +10,8 @@
 
     public class Slider : AutomationElement
     {
-        public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Slider(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -35,6 +36,7 @@
                 {
                     return this.RangeValuePattern.Value.Value;
                 }
+
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
                 return Convert.ToDouble(this.ValuePattern.Value.Value);
@@ -84,6 +86,7 @@
                 // For WPF, this is simple
                 return this.FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
             }
+
             // For WinForms, we loop thru the buttons and find the one right of the thumb
             var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
@@ -93,6 +96,7 @@
                     return button.AsButton();
                 }
             }
+
             return null;
         }
 
@@ -103,6 +107,7 @@
                 // For WPF, this is simple
                 return this.FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
             }
+
             // For WinForms, we loop thru the buttons and find the one left of the thumb
             var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
@@ -112,6 +117,7 @@
                     return button.AsButton();
                 }
             }
+
             return null;
         }
     }

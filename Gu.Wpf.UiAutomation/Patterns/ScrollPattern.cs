@@ -43,7 +43,8 @@
         private AutomationProperty<double> verticalScrollPercent;
         private AutomationProperty<double> verticalViewSize;
 
-        protected ScrollPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected ScrollPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

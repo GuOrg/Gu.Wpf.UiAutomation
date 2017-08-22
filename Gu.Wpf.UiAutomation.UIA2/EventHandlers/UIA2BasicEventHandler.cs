@@ -10,7 +10,8 @@
     {
         public UIA.AutomationEventHandler EventHandler { get; private set; }
 
-        public UIA2BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
+        public UIA2BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction)
+            : base(automation, callAction)
         {
             this.EventHandler = this.HandleAutomationEvent;
         }

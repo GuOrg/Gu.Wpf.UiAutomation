@@ -15,26 +15,26 @@
 
         public double X
         {
-            get { return this.Left; }
-            set { this.Left = value; }
+            get => this.Left;
+            set => this.Left = value;
         }
 
         public double Y
         {
-            get { return this.Top; }
-            set { this.Top = value; }
+            get => this.Top;
+            set => this.Top = value;
         }
 
         public double Width
         {
-            get { return this.Right - this.Left; }
-            set { this.Right = this.Left + value; }
+            get => this.Right - this.Left;
+            set => this.Right = this.Left + value;
         }
 
         public double Height
         {
-            get { return this.Bottom - this.Top; }
-            set { this.Bottom = this.Top + value; }
+            get => this.Bottom - this.Top;
+            set => this.Bottom = this.Top + value;
         }
 
         public bool IsEmpty => this.X.Equals(0) && this.Y.Equals(0) && this.Width.Equals(0) && this.Height.Equals(0);

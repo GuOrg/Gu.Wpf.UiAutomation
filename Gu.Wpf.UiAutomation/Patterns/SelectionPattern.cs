@@ -32,7 +32,8 @@
         private AutomationProperty<bool> isSelectionRequired;
         private AutomationProperty<AutomationElement[]> selection;
 
-        protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

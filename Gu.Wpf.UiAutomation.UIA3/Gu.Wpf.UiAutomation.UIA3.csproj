@@ -2,6 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
+    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UIA3.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Gu.Wpf.UiAutomation\Gu.Wpf.UiAutomation.csproj" />
@@ -9,12 +10,7 @@
   <ItemGroup Label="References">
     <Reference Include="Accessibility" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Interop.UIAutomationClient" Condition="'$(TargetFramework)'=='net35'">
-      <HintPath>..\libs\Interop\3.5\Interop.UIAutomationClient.dll</HintPath>
-      <EmbedInteropTypes>false</EmbedInteropTypes>
-      <SpecificVersion>false</SpecificVersion>
-    </Reference>
-    <Reference Include="Interop.UIAutomationClient" Condition="'$(TargetFramework)'=='net40' Or '$(TargetFramework)'=='net45'">
+    <Reference Include="Interop.UIAutomationClient">
       <HintPath>..\libs\Interop\4.5\Interop.UIAutomationClient.dll</HintPath>
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <SpecificVersion>false</SpecificVersion>

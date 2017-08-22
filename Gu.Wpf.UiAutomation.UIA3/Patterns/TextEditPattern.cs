@@ -13,7 +13,8 @@
         public static readonly EventId ConversionTargetChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
         public static readonly EventId TextChangedEvent2 = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
-        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
             this.ExtendedNativePattern = nativePattern;
         }

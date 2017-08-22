@@ -11,6 +11,7 @@
             {
                 return new ITextRange[0];
             }
+
             return nativeElements.Select(r => (ITextRange)NativeToManaged(automation, r)).ToArray();
         }
 

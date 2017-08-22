@@ -75,6 +75,7 @@
             {
                 return null;
             }
+
             // If unrolledRects is somehow not a multiple of 4, we still will not 
             // overrun it, since (x / 4) * 4 <= x for C# integer math.
             var result = new Rectangle[unrolledRects.Length / 4];
@@ -83,6 +84,7 @@
                 var j = i * 4;
                 result[i] = new Rectangle(unrolledRects[j], unrolledRects[j + 1], unrolledRects[j + 2], unrolledRects[j + 3]);
             }
+
             return result;
         }
 
@@ -147,6 +149,7 @@
             {
                 throw new Exception("TextRange is no UIA3 TextRange");
             }
+
             return concreteTextRange.NativeRange;
         }
     }

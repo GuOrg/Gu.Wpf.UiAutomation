@@ -18,6 +18,7 @@
             {
                 return null;
             }
+
             if (val is ControlType)
             {
                 val = (UIA.ControlType)ControlTypeConverter.ToControlTypeNative((ControlType)val);
@@ -26,6 +27,7 @@
             {
                 val = ToNative((AutomationElement)val);
             }
+
             return val;
         }
 

@@ -12,6 +12,7 @@
             {
                 return new AutomationElement[0];
             }
+
             var uia3Automation = (UIA3Automation)automation;
             var nativeElementsCasted = (UIA.IUIAutomationElementArray)nativeElements;
             var retArray = new AutomationElement[nativeElementsCasted.Length];
@@ -21,6 +22,7 @@
                 var automationElement = uia3Automation.WrapNativeElement(nativeElement);
                 retArray[i] = automationElement;
             }
+
             return retArray;
         }
 
@@ -36,11 +38,13 @@
             {
                 return null;
             }
+
             var basicElement = automationElement.BasicAutomationElement as UIA3BasicAutomationElement;
             if (basicElement == null)
             {
                 throw new Exception("Element is not an UIA3 element");
             }
+
             return basicElement.NativeElement;
         }
     }

@@ -44,10 +44,12 @@ namespace Gu.Wpf.UiAutomation
                 {
                     return XPathNodeType.Attribute;
                 }
+
                 if (this.currentElement.Equals(this.rootElement))
                 {
                     return XPathNodeType.Root;
                 }
+
                 return XPathNodeType.Element;
             }
         }
@@ -56,10 +58,7 @@ namespace Gu.Wpf.UiAutomation
 
         public override string Name => this.LocalName;
 
-        public override XmlNameTable NameTable
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public override XmlNameTable NameTable => throw new NotImplementedException();
 
         public override string NamespaceURI => String.Empty;
 
@@ -85,6 +84,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
+
             this.attributeIndex = 0;
             return true;
         }
@@ -96,10 +96,12 @@ namespace Gu.Wpf.UiAutomation
                 // No more attributes
                 return false;
             }
+
             if (!this.IsInAttribute)
             {
                 return false;
             }
+
             this.attributeIndex++;
             return true;
         }
@@ -110,11 +112,13 @@ namespace Gu.Wpf.UiAutomation
             {
                 return String.Empty;
             }
+
             var attributeIndex = this.GetAttributeIndexFromName(localName);
             if (attributeIndex != NoAttributeValue)
             {
                 return this.GetAttributeValue(attributeIndex);
             }
+
             return String.Empty;
         }
 
@@ -124,12 +128,14 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
+
             var attributeIndex = this.GetAttributeIndexFromName(localName);
             if (attributeIndex != NoAttributeValue)
             {
                 this.attributeIndex = attributeIndex;
                 return true;
             }
+
             return false;
         }
 
@@ -151,36 +157,51 @@ namespace Gu.Wpf.UiAutomation
 
         public override bool MoveToNext()
         {
-            if (this.IsInAttribute) { return false; }
+            if (this.IsInAttribute)
+            {
+                return false;
+            }
+
             var nextElement = this.treeWalker.GetNextSibling(this.currentElement);
             if (nextElement == null)
             {
                 return false;
             }
+
             this.currentElement = nextElement;
             return true;
         }
 
         public override bool MoveToPrevious()
         {
-            if (this.IsInAttribute) { return false; }
+            if (this.IsInAttribute)
+            {
+                return false;
+            }
+
             var previousElement = this.treeWalker.GetPreviousSibling(this.currentElement);
             if (previousElement == null)
             {
                 return false;
             }
+
             this.currentElement = previousElement;
             return true;
         }
 
         public override bool MoveToFirstChild()
         {
-            if (this.IsInAttribute) { return false; }
+            if (this.IsInAttribute)
+            {
+                return false;
+            }
+
             var childElement = this.treeWalker.GetFirstChild(this.currentElement);
             if (childElement == null)
             {
                 return false;
             }
+
             this.currentElement = childElement;
             return true;
         }
@@ -192,10 +213,12 @@ namespace Gu.Wpf.UiAutomation
                 this.attributeIndex = NoAttributeValue;
                 return true;
             }
+
             if (this.currentElement.Equals(this.rootElement))
             {
                 return false;
             }
+
             this.currentElement = this.treeWalker.GetParent(this.currentElement);
             return true;
         }
@@ -207,10 +230,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
+
             if (!this.rootElement.Equals(specificNavigator.rootElement))
             {
                 return false;
             }
+
             this.currentElement = specificNavigator.currentElement;
             this.attributeIndex = specificNavigator.attributeIndex;
             return true;
@@ -228,10 +253,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
+
             if (!this.rootElement.Equals(specificNavigator.rootElement))
             {
                 return false;
             }
+
             return this.currentElement.Equals(specificNavigator.currentElement)
                 && this.attributeIndex == specificNavigator.attributeIndex;
         }
@@ -260,6 +287,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }
+
             return name;
         }
 
@@ -274,6 +302,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 return (int)parsedValue;
             }
+
             return NoAttributeValue;
         }
 

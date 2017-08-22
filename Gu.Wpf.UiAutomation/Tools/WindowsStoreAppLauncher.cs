@@ -16,10 +16,12 @@
             {
                 Marshal.ThrowExceptionForHR(hr);
             }
+
             if (processId > 0)
             {
                 return Process.GetProcessById((int)processId);
             }
+
             throw new Exception($"Could not launch Store App '{appUserModelId}'");
         }
 

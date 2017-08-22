@@ -22,6 +22,7 @@
                 newConditions.Add(newCondition);
                 return new AndCondition(newConditions);
             }
+
             // It is not, so pack it into an and condition
             return new AndCondition(this, newCondition);
         }
@@ -41,6 +42,7 @@
                 newConditions.Add(newCondition);
                 return new OrCondition(newConditions);
             }
+
             // It is not, so pack it into an or condition
             return new OrCondition(this, newCondition);
         }

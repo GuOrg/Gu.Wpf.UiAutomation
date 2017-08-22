@@ -15,7 +15,8 @@
         public static readonly EventId TextChangedEvent = EventId.Register(AutomationType.UIA2, UIA.TextPattern.TextChangedEvent.Id, "TextChanged");
         public static readonly EventId TextSelectionChangedEvent = EventId.Register(AutomationType.UIA2, UIA.TextPattern.TextSelectionChangedEvent.Id, "TextSelectionChanged");
 
-        public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.TextPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.TextPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

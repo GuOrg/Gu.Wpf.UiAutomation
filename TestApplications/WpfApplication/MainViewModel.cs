@@ -10,7 +10,9 @@
 
         public ICommand InvokeButtonCommand { get; }
 
-        public string InvokeButtonText { get { return this.GetProperty<string>(); } set { this.SetProperty(value); } }
+        public string InvokeButtonText { get => this.GetProperty<string>();
+            set => this.SetProperty(value);
+        }
 
         public MainViewModel()
         {

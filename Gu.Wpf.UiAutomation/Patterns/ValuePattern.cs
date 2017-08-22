@@ -24,7 +24,8 @@
         private AutomationProperty<bool> isReadOnly;
         private AutomationProperty<string> value;
 
-        protected ValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected ValuePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

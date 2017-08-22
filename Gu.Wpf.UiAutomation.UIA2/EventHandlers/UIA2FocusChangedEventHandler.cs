@@ -9,7 +9,8 @@
     {
         public UIA.AutomationFocusChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction) : base(automation, callAction)
+        public UIA2FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction)
+            : base(automation, callAction)
         {
             this.EventHandler = this.HandleFocusChangedEvent;
         }

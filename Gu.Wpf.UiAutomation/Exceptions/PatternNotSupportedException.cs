@@ -10,7 +10,8 @@
         private const string DefaultMessage = "The requested pattern is not supported";
         private const string DefaultMessageWithData = "The requested pattern '{0}' is not supported";
 
-        public PatternNotSupportedException() : base(DefaultMessage)
+        public PatternNotSupportedException()
+            : base(DefaultMessage)
         {
         }
 
@@ -52,6 +53,7 @@
             {
                 throw new ArgumentNullException(nameof(info));
             }
+
             info.AddValue("Pattern", this.Pattern);
             base.GetObjectData(info, context);
         }

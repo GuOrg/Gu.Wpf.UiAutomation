@@ -8,7 +8,8 @@
 
     public class UIA3AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
-        public UIA3AutomationElementPatternValues(UIA3BasicAutomationElement basicAutomationElement) : base(basicAutomationElement)
+        public UIA3AutomationElementPatternValues(UIA3BasicAutomationElement basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

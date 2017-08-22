@@ -12,7 +12,8 @@
     /// </summary>
     public class Menu : AutomationElement
     {
-        public Menu(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Menu(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -45,7 +46,8 @@
         private readonly InvokeAutomationElement invokeAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
 
-        public MenuItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public MenuItem(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
             this.invokeAutomationElement = new InvokeAutomationElement(basicAutomationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
@@ -76,6 +78,7 @@
                     // Now return the menu items
                     return menu.MenuItems;
                 }
+
                 // Expand if needed, WinForms does not have the expand pattern but all children are already visible so it works as well
                 if (this.Patterns.ExpandCollapse.IsSupported)
                 {
@@ -87,9 +90,11 @@
                         {
                             this.Expand();
                         }
+
                         Thread.Sleep(50);
                     } while (state != ExpandCollapseState.Expanded);
                 }
+
                 var childItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)).Select(e => e.AsMenuItem());
                 return new MenuItems(childItems);
             }
@@ -119,7 +124,8 @@
     /// </summary>
     public class MenuItems : List<MenuItem>
     {
-        public MenuItems(IEnumerable<MenuItem> collection) : base(collection)
+        public MenuItems(IEnumerable<MenuItem> collection)
+            : base(collection)
         {
         }
 

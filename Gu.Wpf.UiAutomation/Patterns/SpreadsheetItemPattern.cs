@@ -27,7 +27,8 @@
         private AutomationProperty<AutomationElement[]> annotationObjects;
         private AutomationProperty<AnnotationType[]> annotationTypes;
 
-        protected SpreadsheetItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected SpreadsheetItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

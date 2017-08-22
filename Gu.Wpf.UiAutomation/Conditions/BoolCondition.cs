@@ -19,14 +19,16 @@
 
     public class TrueCondition : BoolCondition
     {
-        public TrueCondition() : base(true)
+        public TrueCondition()
+            : base(true)
         {
         }
     }
 
     public class FalseCondition : BoolCondition
     {
-        public FalseCondition() : base(false)
+        public FalseCondition()
+            : base(false)
         {
         }
     }

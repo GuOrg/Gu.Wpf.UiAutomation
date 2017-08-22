@@ -10,11 +10,13 @@
             {
                 return new ITextRange[0];
             }
+
             var retArray = new ITextRange[nativeTextRangeArray.Length];
             for (var i = 0; i < nativeTextRangeArray.Length; i++)
             {
                 retArray[i] = NativeToManaged(automation, nativeTextRangeArray.GetElement(i));
             }
+
             return retArray;
         }
         

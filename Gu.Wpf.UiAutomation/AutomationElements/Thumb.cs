@@ -5,7 +5,8 @@
 
     public class Thumb : AutomationElement
     {
-        public Thumb(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Thumb(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

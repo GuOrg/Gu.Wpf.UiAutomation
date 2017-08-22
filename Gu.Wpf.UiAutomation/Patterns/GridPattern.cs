@@ -25,7 +25,8 @@
         private AutomationProperty<int> columnCount;
         private AutomationProperty<int> rowCount;
 
-        protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

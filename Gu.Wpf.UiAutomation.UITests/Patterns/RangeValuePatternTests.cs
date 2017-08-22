@@ -7,7 +7,8 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class RangeValuePatternTests : UITestBase
     {
-        public RangeValuePatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        public RangeValuePatternTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 

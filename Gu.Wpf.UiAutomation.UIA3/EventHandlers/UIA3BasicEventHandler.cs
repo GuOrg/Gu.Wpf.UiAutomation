@@ -8,7 +8,8 @@
 
     public class UIA3BasicEventHandler : BasicEventHandlerBase, UIA.IUIAutomationEventHandler
     {
-        public UIA3BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
+        public UIA3BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction)
+            : base(automation, callAction)
         {
         }
 

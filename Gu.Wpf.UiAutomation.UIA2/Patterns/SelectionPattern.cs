@@ -14,7 +14,8 @@
         public static readonly PropertyId SelectionProperty = PropertyId.Register(AutomationType.UIA2, UIA.SelectionPattern.SelectionProperty.Id, "Selection").SetConverter(AutomationElementConverter.NativeArrayToManaged);
         public static readonly EventId InvalidatedEvent = EventId.Register(AutomationType.UIA2, UIA.SelectionPattern.InvalidatedEvent.Id, "Invalidated");
 
-        public SelectionPattern(BasicAutomationElementBase basicAutomationElement, UIA.SelectionPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SelectionPattern(BasicAutomationElementBase basicAutomationElement, UIA.SelectionPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
     }

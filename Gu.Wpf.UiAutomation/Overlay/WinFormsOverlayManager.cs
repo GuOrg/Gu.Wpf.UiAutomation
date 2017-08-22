@@ -62,6 +62,7 @@
                 // Show the window
                 User32.ShowWindow(form.Handle, ShowWindowTypes.SW_SHOWNA);
             }
+
             Thread.Sleep(durationInMs);
             foreach (var form in forms)
             {

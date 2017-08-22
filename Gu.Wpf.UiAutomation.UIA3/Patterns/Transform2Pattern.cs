@@ -17,7 +17,8 @@
 
         private readonly TransformPattern transformPattern;
 
-        public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
+        public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
             this.transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
         }

@@ -13,7 +13,8 @@
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
 
-        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationItemContainerPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationItemContainerPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

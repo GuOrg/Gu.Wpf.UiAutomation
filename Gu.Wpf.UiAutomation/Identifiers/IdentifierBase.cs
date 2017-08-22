@@ -133,6 +133,7 @@
             {
                 return dict[commonId];
             }
+
             var newIdObject = creator();
             dict[commonId] = newIdObject;
             return newIdObject;
@@ -156,6 +157,7 @@
                     }
                 }
             }
+
             return IdentifiersDict[automationType];
             // ReSharper restore InconsistentlySynchronizedField
         }

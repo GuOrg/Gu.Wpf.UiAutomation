@@ -131,6 +131,7 @@
             {
                 throw new Exception("TextRange is no UIA2 TextRange");
             }
+
             return concreteTextRange.NativeRange;
         }
     }

@@ -23,7 +23,8 @@
         private AutomationProperty<AutomationElement[]> columnHeaderItems;
         private AutomationProperty<AutomationElement[]> rowHeaderItems;
 
-        protected TableItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TableItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

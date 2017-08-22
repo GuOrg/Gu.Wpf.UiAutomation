@@ -9,7 +9,8 @@
     {
         private const string DefaultMessage = "The requested pattern or property is not supported by the choosen framework. Consider using a newer framework.";
 
-        public NotSupportedByFrameworkException() : base(DefaultMessage)
+        public NotSupportedByFrameworkException()
+            : base(DefaultMessage)
         {
         }
 

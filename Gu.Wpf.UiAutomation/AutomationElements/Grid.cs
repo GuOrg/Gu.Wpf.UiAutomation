@@ -13,7 +13,8 @@
     /// </summary>
     public class Grid : AutomationElement
     {
-        public Grid(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Grid(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -185,6 +186,7 @@
                     }
                 }
             }
+
             return returnList.ToArray();
         }
 
@@ -210,7 +212,8 @@
     /// </summary>
     public class GridHeader : AutomationElement
     {
-        public GridHeader(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeader(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -229,7 +232,8 @@
     /// </summary>
     public class GridHeaderItem : AutomationElement
     {
-        public GridHeaderItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridHeaderItem(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -241,7 +245,8 @@
     /// </summary>
     public class GridRow : SelectionItemAutomationElement
     {
-        public GridRow(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridRow(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -285,7 +290,8 @@
     /// </summary>
     public class GridCell : AutomationElement
     {
-        public GridCell(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public GridCell(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

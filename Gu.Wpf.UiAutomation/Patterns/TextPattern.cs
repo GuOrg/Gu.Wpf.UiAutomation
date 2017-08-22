@@ -27,7 +27,8 @@
 
     public abstract class TextPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITextPattern
     {
-        protected TextPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TextPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

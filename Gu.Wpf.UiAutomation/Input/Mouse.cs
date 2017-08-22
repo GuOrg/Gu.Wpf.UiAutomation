@@ -145,6 +145,7 @@
                 Position = point;
                 Thread.Sleep(interval);
             }
+
             Helpers.WaitUntilInputIsProcessed();
         }
 
@@ -170,8 +171,12 @@
                 // Get the timeout needed to not fire a double click
                 var timeout = CurrentDoubleClickTime - DateTime.Now.Subtract(LastClickTimes[mouseButton]).Milliseconds;
                 // Wait the needed time to prevent the double click
-                if (timeout > 0) Thread.Sleep(timeout + ExtraMillisecondsBecauseOfBugInWindows);
+                if (timeout > 0)
+                {
+                    Thread.Sleep(timeout + ExtraMillisecondsBecauseOfBugInWindows);
+                }
             }
+
             // Perform the click
             Down(mouseButton);
             Up(mouseButton);
@@ -316,6 +321,7 @@
                 default:
                     throw new ArgumentOutOfRangeException("mouseButton");
             }
+
             data = (uint)mouseData;
             return mouseEventFlags;
         }
@@ -325,7 +331,11 @@
         /// </summary>
         private static MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
         {
-            if (!AreButtonsSwapped) return mouseButton;
+            if (!AreButtonsSwapped)
+            {
+                return mouseButton;
+            }
+
             switch (mouseButton)
             {
                 case MouseButton.Left:

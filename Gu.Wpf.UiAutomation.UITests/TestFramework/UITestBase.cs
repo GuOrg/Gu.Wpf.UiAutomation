@@ -57,6 +57,7 @@
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             this.App.WaitWhileMainHandleIsMissing();
         }
 
@@ -100,7 +101,11 @@
         protected void RestartApp()
         {
             // Don't restart if no test was already run on it
-            if (!this.wasTestRun) return;
+            if (!this.wasTestRun)
+            {
+                return;
+            }
+
             // Restart the application
             this.BaseTeardown();
             this.BaseSetup();
@@ -110,7 +115,7 @@
         private void TakeScreenshot(string screenshotName)
         {
             var imagename = screenshotName + ".png";
-            imagename = imagename.Replace("\"", "");
+            imagename = imagename.Replace("\"", string.Empty);
             var imagePath = Path.Combine(this.ScreenshotDir, imagename);
             try
             {

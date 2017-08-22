@@ -13,7 +13,8 @@
     /// </summary>
     public class ComboBox : AutomationElement
     {
-        public ComboBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ComboBox(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -27,7 +28,7 @@
         /// </summary>
         public string EditableText
         {
-            get { return this.EditableItem.Text; }
+            get => this.EditableItem.Text;
             set
             {
                 this.EditableItem.Text = value;
@@ -57,6 +58,7 @@
                 {
                     return edit.AsTextBox();
                 }
+
                 throw new Exception("ComboBox is not editable.");
             }
         }
@@ -66,8 +68,8 @@
         /// </summary>
         public string Value
         {
-            get { return this.ValuePattern.Value.Value; }
-            set { this.ValuePattern.SetValue(value); }
+            get => this.ValuePattern.Value.Value;
+            set => this.ValuePattern.SetValue(value);
         }
 
         /// <summary>
@@ -82,6 +84,7 @@
                 {
                     return this.Items.Where(x => x.IsSelected).ToArray();
                 }
+
                 return this.SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
             }
         }
@@ -111,6 +114,7 @@
                     // WPF
                     items = this.FindAllChildren(cf => cf.ByControlType(ControlType.ListItem));
                 }
+
                 return items.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
             }
         }
@@ -126,6 +130,7 @@
                     // UIA3 does not see the list if it is collapsed
                     return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
+
                 // WPF
                 var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
                 if (ecp != null)
@@ -133,6 +138,7 @@
                     var state = ecp.ExpandCollapseState.Value;
                     return state;
                 }
+
                 return ExpandCollapseState.LeafNode;
             }
         }
@@ -143,6 +149,7 @@
             {
                 return;
             }
+
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
@@ -168,6 +175,7 @@
             {
                 return;
             }
+
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
@@ -188,6 +196,7 @@
                 var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
                 ecp?.Collapse();
             }
+
             Helpers.WaitUntilResponsive(this);
         }
 

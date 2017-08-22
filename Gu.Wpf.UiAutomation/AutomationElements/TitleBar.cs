@@ -5,7 +5,8 @@
 
     public class TitleBar : AutomationElement
     {
-        public TitleBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TitleBar(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

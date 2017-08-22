@@ -4,7 +4,8 @@
 
     public class HScrollBar : ScrollBarBase
     {
-        public HScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public HScrollBar(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -27,6 +28,7 @@
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
+
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -52,6 +54,7 @@
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
+
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -77,6 +80,7 @@
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
+
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -102,6 +106,7 @@
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
+
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

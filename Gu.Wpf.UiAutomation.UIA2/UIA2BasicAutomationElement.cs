@@ -15,7 +15,8 @@
 
     public class UIA2BasicAutomationElement : BasicAutomationElementBase
     {
-        public UIA2BasicAutomationElement(UIA2Automation automation, UIA.AutomationElement nativeElement) : base(automation)
+        public UIA2BasicAutomationElement(UIA2Automation automation, UIA.AutomationElement nativeElement)
+            : base(automation)
         {
             this.Automation = automation;
             this.NativeElement = nativeElement;
@@ -88,6 +89,7 @@
             {
                 success = this.Properties.ClickablePoint.TryGetValue(out point);
             } 
+
             return success;
         }
 
@@ -146,6 +148,7 @@
                 var updatedElement = this.NativeElement.GetUpdatedCache(CacheRequest.Current.ToNative());
                 return AutomationElementConverter.NativeToManaged(this.Automation, updatedElement);
             }
+
             return null;
         }
 

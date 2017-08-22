@@ -7,7 +7,8 @@
 
     public class Tab : AutomationElement
     {
-        public Tab(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Tab(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -50,12 +51,14 @@
             {
                 throw new Exception($"No TabItem found with text '{text}'");
             }
+
             var tabItem = tabItems[foundTabItemIndex];
             if (this.SelectedTabItemIndex != foundTabItemIndex)
             {
                 // It is not the selected one, so select it
                 tabItem.Select();
             }
+
             return tabItem;
         }
 

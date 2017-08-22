@@ -46,7 +46,8 @@
         private AutomationProperty<WindowInteractionState> windowInteractionState;
         private AutomationProperty<WindowVisualState> windowVisualState;
 
-        protected WindowPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected WindowPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

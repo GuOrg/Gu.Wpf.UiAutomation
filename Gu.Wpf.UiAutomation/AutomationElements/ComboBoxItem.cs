@@ -7,7 +7,8 @@
     /// </summary>
     public class ComboBoxItem : SelectionItemAutomationElement
     {
-        public ComboBoxItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ComboBoxItem(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -26,6 +27,7 @@
                         return rawElement.Properties.Name.Value;
                     }
                 }
+
                 return this.BasicAutomationElement.Properties.Name.Value;
             }
         }

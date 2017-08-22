@@ -8,16 +8,14 @@
 
         public static ILogger Default
         {
-            get
-            {
-                return @default;
-            }
+            get => @default;
             set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException(nameof(value));
                 }
+
                 @default = value;
             }
         }

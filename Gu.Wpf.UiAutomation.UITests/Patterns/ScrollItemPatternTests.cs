@@ -11,7 +11,8 @@
     public class ScrollItemPatternTests : UITestBase
     {
         private AutomationElement grid;
-        public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
@@ -45,6 +46,7 @@
                 Assert.That(scrollItemPattern, Is.Not.Null);
                 item.ScrollIntoView();
             }
+
             Assert.That(scrollPattern.VerticalScrollPercent.Value, Is.GreaterThan(0));
         }
     }

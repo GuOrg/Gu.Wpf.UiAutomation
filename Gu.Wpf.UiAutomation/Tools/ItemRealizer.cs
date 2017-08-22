@@ -34,9 +34,11 @@
                     {
                         break;
                     }
+
                     var vp = currElement.Patterns.VirtualizedItem.PatternOrDefault;
                     vp?.Realize();
                 }
+
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }

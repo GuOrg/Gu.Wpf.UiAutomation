@@ -35,6 +35,7 @@
 
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
             }
+
             app.Dispose();
         }
     }

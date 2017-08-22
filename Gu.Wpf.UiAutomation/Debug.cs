@@ -26,6 +26,7 @@
             {
                 return String.Empty;
             }
+
             // Get the index
             var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
             var currentItemText = $"{element.Properties.ControlType.Value}";
@@ -39,10 +40,13 @@
                     {
                         break;
                     }
+
                     indexInParent++;
                 }
+
                 currentItemText += $"[{indexInParent}]";
             }
+
             return $"{GetXPathToElement(parent, treeWalker, rootElement)}/{currentItemText}";
         }
 
@@ -74,6 +78,7 @@
                     automationElement = automationElement.FindFirst(TreeScope.Element, new TrueCondition());
                     Details(stringBuilder, automationElement, String.Empty);
                 }
+
                 return stringBuilder.ToString();
             }
             catch (Exception ex)
@@ -115,6 +120,7 @@
             {
                 WriteWithPadding(stringBuilder, automationPattern.ToString(), displayPadding);
             }
+
             stringBuilder.AppendLine();
         }
 

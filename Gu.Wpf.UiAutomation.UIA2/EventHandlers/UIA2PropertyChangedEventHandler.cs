@@ -10,7 +10,8 @@
     {
         public UIA.AutomationPropertyChangedEventHandler EventHandler { get; private set; }
 
-        public UIA2PropertyChangedEventHandler(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction) : base(automation, callAction)
+        public UIA2PropertyChangedEventHandler(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction)
+            : base(automation, callAction)
         {
             this.EventHandler = this.HandlePropertyChangedEvent;
         }

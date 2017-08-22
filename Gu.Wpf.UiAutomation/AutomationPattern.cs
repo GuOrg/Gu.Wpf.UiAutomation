@@ -57,6 +57,7 @@
                 pattern = this.patternCreateFunc(this.BasicAutomationElement, nativePattern);
                 return true;
             }
+
             pattern = default(T);
             return false;
         }

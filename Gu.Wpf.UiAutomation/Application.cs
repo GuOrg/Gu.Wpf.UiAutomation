@@ -20,6 +20,28 @@
         /// </summary>
         private readonly Process process;
 
+
+        /// <summary>
+        /// Creates an application object with the given process id.
+        /// </summary>
+        /// <param name="processId">The process id.</param>
+        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
+        public Application(int processId, bool isStoreApp = false)
+            : this(FindProcess(processId), isStoreApp)
+        {
+        }
+
+        /// <summary>
+        /// Creates an application object with the given process.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
+        public Application(Process process, bool isStoreApp = false)
+        {
+            this.process = process ?? throw new ArgumentNullException(nameof(process));
+            this.IsStoreApp = isStoreApp;
+        }
+
         /// <summary>
         /// Flag to indicate, if the application is a windows store app.
         /// </summary>
@@ -52,27 +74,6 @@
         public int ExitCode => this.process.ExitCode;
 
         /// <summary>
-        /// Creates an application object with the given process id.
-        /// </summary>
-        /// <param name="processId">The process id.</param>
-        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        public Application(int processId, bool isStoreApp = false)
-            : this(FindProcess(processId), isStoreApp)
-        {
-        }
-
-        /// <summary>
-        /// Creates an application object with the given process.
-        /// </summary>
-        /// <param name="process">The process.</param>
-        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        public Application(Process process, bool isStoreApp = false)
-        {
-            this.process = process ?? throw new ArgumentNullException(nameof(process));
-            this.IsStoreApp = isStoreApp;
-        }
-
-        /// <summary>
         /// Closes the application. Force-closes it after a small timeout.
         /// </summary>
         /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
@@ -84,11 +85,13 @@
                 this.process.Dispose();
                 return true;
             }
+
             this.process.CloseMainWindow();
             if (this.IsStoreApp)
             {
                 return true;
             }
+
             this.process.WaitForExit(5000);
             var closedNormally = true;
             if (!this.process.HasExited)
@@ -98,6 +101,7 @@
                 this.process.WaitForExit(5000);
                 closedNormally = false;
             }
+
             this.process.Close();
             this.process.Dispose();
             return closedNormally;
@@ -110,7 +114,11 @@
         {
             try
             {
-                if (this.process.HasExited) return;
+                if (this.process.HasExited)
+                {
+                    return;
+                }
+
                 this.process.Kill();
                 this.process.WaitForExit();
                 this.process.Dispose();
@@ -147,6 +155,7 @@
             {
                 return Attach(processes[index]);
             }
+
             throw new Exception("Unable to find process with name: " + executable);
         }
 
@@ -239,11 +248,13 @@
             {
                 return null;
             }
+
             var mainWindow = automation.FromHandle(mainWindowHandle).AsWindow();
             if (mainWindow != null)
             {
                 mainWindow.IsMainWindow = true;
             }
+
             return mainWindow;
         }
 

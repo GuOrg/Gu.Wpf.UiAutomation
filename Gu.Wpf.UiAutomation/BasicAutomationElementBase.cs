@@ -40,6 +40,7 @@
             {
                 throw new NotSupportedByFrameworkException();
             }
+
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
@@ -48,6 +49,7 @@
                 {
                     throw new PropertyNotSupportedException(property);
                 }
+
                 return property.Convert<T>(this.Automation, value);
             }
             catch (Exception ex)
@@ -60,6 +62,7 @@
                         throw new PropertyNotCachedException(property, ex);
                     }
                 }
+
                 // Should actually never come here
                 throw;
             }
@@ -80,6 +83,7 @@
             {
                 throw new NotSupportedByFrameworkException();
             }
+
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
@@ -89,6 +93,7 @@
                     value = default(T);
                     return false;
                 }
+
                 value = property.Convert<T>(this.Automation, internalValue);
                 return true;
             }
@@ -102,6 +107,7 @@
                         throw new PropertyNotCachedException(property, ex);
                     }
                 }
+
                 // Should actually never come here
                 throw;
             }
@@ -113,6 +119,7 @@
             {
                 throw new NotSupportedByFrameworkException();
             }
+
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
@@ -121,6 +128,7 @@
                 {
                     throw new InvalidOperationException("Native pattern is null");
                 }
+
                 return (T)nativePattern;
             }
             catch (Exception ex)
@@ -133,6 +141,7 @@
                         throw new PatternNotCachedException(pattern, ex);
                     }
                 }
+
                 throw new PatternNotSupportedException(pattern, ex);
             }
         }
@@ -158,6 +167,7 @@
             {
                 throw new NoClickablePointException();
             }
+
             return point;
         }
 

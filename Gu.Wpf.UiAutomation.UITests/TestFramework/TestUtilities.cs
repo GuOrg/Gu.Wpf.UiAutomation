@@ -24,6 +24,7 @@
                     Assert.Inconclusive($"UIA parameter set to {uiaVersion} but automation of type {automationType} is requested");
                 }
             }
+
             switch (automationType)
             {
                 case AutomationType.UIA2:

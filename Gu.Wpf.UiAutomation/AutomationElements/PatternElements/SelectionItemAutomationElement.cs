@@ -8,7 +8,8 @@
     /// </summary>
     public class SelectionItemAutomationElement : AutomationElement
     {
-        public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -19,10 +20,14 @@
         /// </summary>
         public bool IsSelected
         {
-            get { return this.SelectionItemPattern.IsSelected; }
+            get => this.SelectionItemPattern.IsSelected;
             set
             {
-                if (this.IsSelected == value) return;
+                if (this.IsSelected == value)
+                {
+                    return;
+                }
+
                 if (value && !this.IsSelected)
                 {
                     this.Select();

@@ -17,10 +17,12 @@
             {
                 throw new ArgumentNullException(nameof(basicAutomationElement));
             }
+
             if (nativePattern == null)
             {
                 throw new ArgumentNullException(nameof(nativePattern));
             }
+
             this.BasicAutomationElement = basicAutomationElement;
             this.NativePattern = nativePattern;
         }

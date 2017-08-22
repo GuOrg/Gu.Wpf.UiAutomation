@@ -32,7 +32,8 @@
         private AutomationProperty<int> row;
         private AutomationProperty<int> rowSpan;
 
-        protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

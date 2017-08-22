@@ -17,6 +17,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
         }
 
@@ -32,6 +33,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
         }
 
@@ -47,6 +49,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
         }
 
@@ -62,6 +65,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
 
             app = Application.AttachOrLaunch(new ProcessStartInfo("notepad.exe"));
@@ -72,6 +76,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
         }
 
@@ -87,6 +92,7 @@
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
+
             app.Close();
         }
     }

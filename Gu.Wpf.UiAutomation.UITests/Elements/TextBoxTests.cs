@@ -7,7 +7,8 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TextBoxTests : UITestBase
     {
-        public TextBoxTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        public TextBoxTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 
@@ -22,7 +23,7 @@
             textBox.Text = textToSet;
             text = textBox.Text;
             Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = "";
+            textBox.Text = string.Empty;
         }
 
         [Test]
@@ -36,7 +37,7 @@
             textBox.Enter(textToSet);
             text = textBox.Text;
             Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = "";
+            textBox.Text = string.Empty;
         }
     }
 }

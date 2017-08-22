@@ -29,6 +29,7 @@
             {
                 throw new ArgumentNullException(nameof(basicAutomationElement));
             }
+
             this.BasicAutomationElement = basicAutomationElement;
         }
 
@@ -170,6 +171,7 @@
             {
                 Mouse.Position = clickablePoint;
             }
+
             action();
             Helpers.WaitUntilInputIsProcessed();
         }
@@ -275,6 +277,7 @@
                     this.BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
                 }
             }
+
             return this;
         }
 
@@ -353,6 +356,7 @@
                     return null;
                 }
             }
+
             return currentElement;
         }
 
@@ -371,6 +375,7 @@
                     return null;
                 }
             }
+
             return currentElement.FindAllChildren(nestedConditions.Last());
         }
 
@@ -397,6 +402,7 @@
                 var automationItem = (AutomationElement)itemNodeIterator.Current.UnderlyingObject;
                 itemList.Add(automationItem);
             }
+
             return itemList.ToArray();
         }
 
@@ -428,6 +434,7 @@
             {
                 throw new NotSupportedByFrameworkException();
             }
+
             return this.BasicAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
@@ -488,10 +495,12 @@
             {
                 return false;
             }
+
             if (pattern.AvailabilityProperty == null)
             {
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
+
             bool isPatternAvailable;
             var success = this.BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
             return success && isPatternAvailable;
@@ -578,10 +587,12 @@
             {
                 return func(pattern);
             }
+
             if (throwIfNotSupported)
             {
                 throw new System.NotSupportedException();
             }
+
             return default(TRet);
         }
 

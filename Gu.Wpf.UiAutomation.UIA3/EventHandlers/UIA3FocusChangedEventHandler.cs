@@ -7,7 +7,8 @@
 
     public class UIA3FocusChangedEventHandler : FocusChangedEventHandlerBase, UIA.IUIAutomationFocusChangedEventHandler
     {
-        public UIA3FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction) : base(automation, callAction)
+        public UIA3FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction)
+            : base(automation, callAction)
         {
         }
 

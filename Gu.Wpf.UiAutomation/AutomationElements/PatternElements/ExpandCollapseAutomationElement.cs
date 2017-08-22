@@ -6,7 +6,8 @@
 
     public class ExpandCollapseAutomationElement : AutomationElement
     {
-        public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

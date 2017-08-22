@@ -59,11 +59,13 @@
                 // Use the store application on those systems
                 return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
             }
+
             if (SystemProductNameFetcher.IsWindowsServer2016())
             {
                 // The calc.exe on this system is just a stub which launches win32calc.exe
                 return Application.Launch("win32calc.exe");
             }
+
             return Application.Launch("calc.exe");
         }
     }
@@ -104,7 +106,7 @@
             {
                 var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
                 var value = resultElement.Properties.Name;
-                return Regex.Replace(value, "[^0-9]", "");
+                return Regex.Replace(value, "[^0-9]", string.Empty);
             }
         }
 
@@ -141,7 +143,7 @@
             {
                 var resultElement = this.FindElement("CalculatorResults");
                 var value = resultElement.Properties.Name;
-                return Regex.Replace(value, "[^0-9]", "");
+                return Regex.Replace(value, "[^0-9]", string.Empty);
             }
         }
 

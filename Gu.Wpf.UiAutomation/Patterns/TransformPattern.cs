@@ -29,7 +29,8 @@
         private AutomationProperty<bool> canResize;
         private AutomationProperty<bool> canRotate;
 
-        protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

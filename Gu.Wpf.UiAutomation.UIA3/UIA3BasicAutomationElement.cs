@@ -16,7 +16,8 @@
 
     public class UIA3BasicAutomationElement : BasicAutomationElementBase
     {
-        public UIA3BasicAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement) : base(automation)
+        public UIA3BasicAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
+            : base(automation)
         {
             this.Automation = automation;
             this.NativeElement = nativeElement;
@@ -95,6 +96,7 @@
             {
                 success = this.Properties.ClickablePoint.TryGetValue(out point);
             }
+
             return success;
         }
 
@@ -159,6 +161,7 @@
                 var updatedElement = this.NativeElement.BuildUpdatedCache(CacheRequest.Current.ToNative(this.Automation));
                 return AutomationElementConverter.NativeToManaged(this.Automation, updatedElement);
             }
+
             return null;
         }
 
@@ -190,6 +193,7 @@
             {
                 throw new NotSupportedException($"OS does not have {typeof(T).Name} support.");
             }
+
             return element;
         }
     }

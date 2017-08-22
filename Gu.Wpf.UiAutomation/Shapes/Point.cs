@@ -55,9 +55,21 @@
 
         public override bool Equals(object other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            if (other.GetType() != this.GetType()) return false;
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != this.GetType())
+            {
+                return false;
+            }
+
             return this.Equals((Point)other);
         }
 

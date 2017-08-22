@@ -38,7 +38,8 @@
         private AutomationProperty<StyleType> style;
         private AutomationProperty<string> styleName;
 
-        protected StylesPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected StylesPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

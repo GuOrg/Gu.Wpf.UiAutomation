@@ -16,7 +16,8 @@
     /// </summary>
     public class UIA3Automation : AutomationBase
     {
-        public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
+        public UIA3Automation()
+            : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
         {
             this.NativeAutomation = this.InitializeAutomation();
             this.TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
@@ -139,6 +140,7 @@
                 // Fall back to CUIAutomation
                 nativeAutomation = new UIA.CUIAutomation();
             }
+
             return nativeAutomation;
         }
 
@@ -153,6 +155,7 @@
             {
                 throw new NotSupportedException($"OS does not have {typeof(T).Name} support.");
             }
+
             return element;
         }
 

@@ -17,6 +17,7 @@
             {
                 return null;
             }
+
             if (val is ControlType)
             {
                 val = (int)ControlTypeConverter.ToControlTypeNative((ControlType)val);
@@ -43,6 +44,7 @@
             {
                 val = AutomationElementConverter.ToNative((AutomationElement)val);
             }
+
             return val;
         }
 
@@ -53,6 +55,7 @@
             {
                 return null;
             }
+
             return new Rectangle(origValue[0], origValue[1], origValue[2], origValue[3]);
         }
 
@@ -63,6 +66,7 @@
             {
                 return null;
             }
+
             return new Point(origValue[0], origValue[1]);
         }
 

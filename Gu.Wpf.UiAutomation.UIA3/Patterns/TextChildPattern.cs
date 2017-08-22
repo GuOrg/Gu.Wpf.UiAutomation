@@ -13,7 +13,8 @@
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextChildPatternId, "TextChild", AutomationObjectIds.IsTextChildPatternAvailableProperty);
 
-        public TextChildPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextChildPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public TextChildPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextChildPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

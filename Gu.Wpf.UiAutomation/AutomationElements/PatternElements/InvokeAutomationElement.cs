@@ -5,7 +5,8 @@
 
     public class InvokeAutomationElement : AutomationElement
     {
-        public InvokeAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public InvokeAutomationElement(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

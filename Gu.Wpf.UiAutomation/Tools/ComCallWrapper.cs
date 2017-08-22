@@ -59,6 +59,7 @@
                 {
                     throw newEx;
                 }
+
                 var errorCode = Marshal.GetLastWin32Error();
                 throw new Win32Exception(errorCode, ex.Message);
             }
@@ -81,6 +82,7 @@
                 {
                     throw newEx;
                 }
+
                 var errorCode = Marshal.GetLastWin32Error();
                 throw new Win32Exception(errorCode, ex.Message);
             }
@@ -99,6 +101,7 @@
                 {
                     throw newEx;
                 }
+
                 var errorCode = Marshal.GetLastWin32Error();
                 throw new Win32Exception(errorCode, ex.Message);
             }
@@ -136,6 +139,7 @@
                     handled = false;
                     break;
             }
+
             return handled;
         }
     }

@@ -16,8 +16,8 @@
         {
         }
 
-        public NotCachedException(Exception innerException) :
-            base(String.Empty, innerException)
+        public NotCachedException(Exception innerException)
+            : base(String.Empty, innerException)
         {
         }
 

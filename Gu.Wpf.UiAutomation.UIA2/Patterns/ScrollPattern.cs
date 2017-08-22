@@ -16,7 +16,8 @@
         public static readonly PropertyId VerticalScrollPercentProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.VerticalScrollPercentProperty.Id, "VerticalScrollPercent");
         public static readonly PropertyId VerticalViewSizeProperty = PropertyId.Register(AutomationType.UIA2, UIA.ScrollPattern.VerticalViewSizeProperty.Id, "VerticalViewSize");
 
-        public ScrollPattern(BasicAutomationElementBase basicAutomationElement, UIA.ScrollPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ScrollPattern(BasicAutomationElementBase basicAutomationElement, UIA.ScrollPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

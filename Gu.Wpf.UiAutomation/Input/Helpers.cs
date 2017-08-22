@@ -37,6 +37,7 @@
             {
                 currentElement = treeWalker.GetParent(currentElement);
             }
+
             return WaitUntilResponsive(currentElement.Properties.NativeWindowHandle, timeout);
         }
 

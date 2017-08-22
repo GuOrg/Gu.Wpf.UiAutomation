@@ -6,7 +6,8 @@
 
     public abstract class ScrollBarBase : AutomationElement
     {
-        protected ScrollBarBase(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        protected ScrollBarBase(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

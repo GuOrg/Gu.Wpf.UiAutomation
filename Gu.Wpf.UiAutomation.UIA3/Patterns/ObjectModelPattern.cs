@@ -11,7 +11,8 @@
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_ObjectModelPatternId, "ObjectModel", AutomationObjectIds.IsObjectModelPatternAvailableProperty);
 
-        public ObjectModelPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationObjectModelPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ObjectModelPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationObjectModelPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

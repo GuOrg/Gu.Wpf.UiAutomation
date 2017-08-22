@@ -35,7 +35,8 @@
         private AutomationProperty<bool> isSelected;
         private AutomationProperty<AutomationElement> selectionContainer;
 
-        protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

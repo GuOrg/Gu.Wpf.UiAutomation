@@ -4,7 +4,8 @@
 
     public class CheckBox : ToggleAutomationElement
     {
-        public CheckBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public CheckBox(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 

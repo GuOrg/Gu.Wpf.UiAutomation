@@ -12,7 +12,8 @@
     {
         private AutomationElement expander;
 
-        public ExpandCollapsePatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        public ExpandCollapsePatternTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 

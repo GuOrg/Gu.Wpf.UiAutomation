@@ -36,6 +36,7 @@
                 Thread.Sleep(500);
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
             }
+
             app.Dispose();
         }
     }

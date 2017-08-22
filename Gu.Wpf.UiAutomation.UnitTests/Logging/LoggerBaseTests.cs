@@ -21,8 +21,8 @@
             instance.IsTraceEnabled = false;
 
             // Act
-            instance.Trace("");
-            instance.Trace("", new Exception());
+            instance.Trace(string.Empty);
+            instance.Trace(string.Empty, new Exception());
             instance.Trace("{0}", 1);
             instance.Trace("{0}", new Exception() , 1);
 
@@ -43,8 +43,8 @@
             instance.IsTraceEnabled = true;
 
             // Act
-            instance.Trace("");
-            instance.Trace("", new Exception());
+            instance.Trace(string.Empty);
+            instance.Trace(string.Empty, new Exception());
             instance.Trace("{0}", 1);
             instance.Trace("{0}", new Exception(), 1);
 
@@ -65,8 +65,8 @@
             instance.IsDebugEnabled = false;
 
             // Act
-            instance.Debug("");
-            instance.Debug("", new Exception());
+            instance.Debug(string.Empty);
+            instance.Debug(string.Empty, new Exception());
             instance.Debug("{0}", 1);
             instance.Debug("{0}", new Exception(), 1);
 
@@ -87,8 +87,8 @@
             instance.IsDebugEnabled = true;
 
             // Act
-            instance.Debug("");
-            instance.Debug("", new Exception());
+            instance.Debug(string.Empty);
+            instance.Debug(string.Empty, new Exception());
             instance.Debug("{0}", 1);
             instance.Debug("{0}", new Exception(), 1);
 
@@ -109,8 +109,8 @@
             instance.IsInfoEnabled = false;
 
             // Act
-            instance.Info("");
-            instance.Info("", new Exception());
+            instance.Info(string.Empty);
+            instance.Info(string.Empty, new Exception());
             instance.Info("{0}", 1);
             instance.Info("{0}", new Exception(), 1);
 
@@ -131,8 +131,8 @@
             instance.IsInfoEnabled = true;
 
             // Act
-            instance.Info("");
-            instance.Info("", new Exception());
+            instance.Info(string.Empty);
+            instance.Info(string.Empty, new Exception());
             instance.Info("{0}", 1);
             instance.Info("{0}", new Exception(), 1);
 
@@ -153,8 +153,8 @@
             instance.IsWarnEnabled = false;
 
             // Act
-            instance.Warn("");
-            instance.Warn("", new Exception());
+            instance.Warn(string.Empty);
+            instance.Warn(string.Empty, new Exception());
             instance.Warn("{0}", 1);
             instance.Warn("{0}", new Exception(), 1);
 
@@ -175,8 +175,8 @@
             instance.IsWarnEnabled = true;
 
             // Act
-            instance.Warn("");
-            instance.Warn("", new Exception());
+            instance.Warn(string.Empty);
+            instance.Warn(string.Empty, new Exception());
             instance.Warn("{0}", 1);
             instance.Warn("{0}", new Exception(), 1);
 
@@ -197,8 +197,8 @@
             instance.IsErrorEnabled = false;
 
             // Act
-            instance.Error("");
-            instance.Error("", new Exception());
+            instance.Error(string.Empty);
+            instance.Error(string.Empty, new Exception());
             instance.Error("{0}", 1);
             instance.Error("{0}", new Exception(), 1);
 
@@ -219,8 +219,8 @@
             instance.IsErrorEnabled = true;
 
             // Act
-            instance.Error("");
-            instance.Error("", new Exception());
+            instance.Error(string.Empty);
+            instance.Error(string.Empty, new Exception());
             instance.Error("{0}", 1);
             instance.Error("{0}", new Exception(), 1);
 
@@ -241,8 +241,8 @@
             instance.IsFatalEnabled = false;
 
             // Act
-            instance.Fatal("");
-            instance.Fatal("", new Exception());
+            instance.Fatal(string.Empty);
+            instance.Fatal(string.Empty, new Exception());
             instance.Fatal("{0}", 1);
             instance.Fatal("{0}", new Exception(), 1);
 
@@ -263,8 +263,8 @@
             instance.IsFatalEnabled = true;
 
             // Act
-            instance.Fatal("");
-            instance.Fatal("", new Exception());
+            instance.Fatal(string.Empty);
+            instance.Fatal(string.Empty, new Exception());
             instance.Fatal("{0}", 1);
             instance.Fatal("{0}", new Exception(), 1);
 

@@ -4,7 +4,8 @@
 
     public class TabItem : SelectionItemAutomationElement
     {
-        public TabItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TabItem(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
     }

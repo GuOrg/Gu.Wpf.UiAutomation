@@ -17,7 +17,8 @@
 
     public abstract class InvokePatternBase<TNativePattern> : PatternBase<TNativePattern>, IInvokePattern
     {
-        protected InvokePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected InvokePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

@@ -13,7 +13,8 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.ItemContainerPattern.Pattern.Id, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
 
-        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.ItemContainerPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.ItemContainerPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

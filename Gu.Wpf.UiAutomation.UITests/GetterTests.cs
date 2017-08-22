@@ -10,7 +10,8 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Custom)]
     public class GetterTests : UITestBase
     {
-        public GetterTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
+        public GetterTests(AutomationType automationType, TestApplicationType appType)
+            : base(automationType, appType)
         {
         }
 

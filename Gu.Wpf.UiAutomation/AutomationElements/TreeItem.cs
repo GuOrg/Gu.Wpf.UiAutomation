@@ -11,7 +11,8 @@
         private readonly SelectionItemAutomationElement selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
 
-        public TreeItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public TreeItem(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
@@ -35,14 +36,15 @@
                     var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
                     return textElement == null ? String.Empty : textElement.Properties.Name;
                 }
+
                 return value;
             }
         }
 
         public bool IsSelected
         {
-            get { return this.selectionItemAutomationElement.IsSelected; }
-            set { this.selectionItemAutomationElement.IsSelected = value; }
+            get => this.selectionItemAutomationElement.IsSelected;
+            set => this.selectionItemAutomationElement.IsSelected = value;
         }
 
         public void Expand()

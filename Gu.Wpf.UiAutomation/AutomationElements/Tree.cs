@@ -6,7 +6,8 @@
 
     public class Tree : AutomationElement
     {
-        public Tree(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Tree(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -23,6 +24,7 @@
             {
                 return directSelectedItem;
             }
+
             // Loop thru the children and search in their children
             foreach (var treeItem in treeItems)
             {
@@ -32,6 +34,7 @@
                     return selectedInChildItem;
                 }
             }
+
             return null;
         }
 

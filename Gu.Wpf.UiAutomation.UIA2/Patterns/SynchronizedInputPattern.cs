@@ -16,7 +16,8 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
         public static readonly EventId ReachedOtherElementEvent = EventId.Register(AutomationType.UIA2, UIA.SynchronizedInputPattern.InputReachedOtherElementEvent.Id, "ReachedOtherElement");
         public static readonly EventId ReachedTargetEvent = EventId.Register(AutomationType.UIA2, UIA.SynchronizedInputPattern.InputReachedTargetEvent.Id, "ReachedTarget");
 
-        public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.SynchronizedInputPattern nativePattern) : base(basicAutomationElement, nativePattern)
+        public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.SynchronizedInputPattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
         

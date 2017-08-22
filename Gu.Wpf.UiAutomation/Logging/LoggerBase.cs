@@ -39,22 +39,46 @@
             switch (logLevel)
             {
                 case LogLevel.Trace:
-                    if (this.IsTraceEnabled) { this.GatedTrace(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsTraceEnabled)
+                    {
+                        this.GatedTrace(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 case LogLevel.Debug:
-                    if (this.IsDebugEnabled) { this.GatedDebug(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsDebugEnabled)
+                    {
+                        this.GatedDebug(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 case LogLevel.Info:
-                    if (this.IsInfoEnabled) { this.GatedInfo(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsInfoEnabled)
+                    {
+                        this.GatedInfo(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 case LogLevel.Warn:
-                    if (this.IsWarnEnabled) { this.GatedWarn(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsWarnEnabled)
+                    {
+                        this.GatedWarn(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 case LogLevel.Error:
-                    if (this.IsErrorEnabled) { this.GatedError(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsErrorEnabled)
+                    {
+                        this.GatedError(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 case LogLevel.Fatal:
-                    if (this.IsFatalEnabled) { this.GatedFatal(this.GetFormattedMessage(message, exception, args)); }
+                    if (this.IsFatalEnabled)
+                    {
+                        this.GatedFatal(this.GetFormattedMessage(message, exception, args));
+                    }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null);

@@ -27,7 +27,8 @@
         private AutomationProperty<AutomationElement[]> rowHeaders;
         private AutomationProperty<RowOrColumnMajor> rowOrColumnMajor;
 
-        protected TablePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected TablePatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 

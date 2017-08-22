@@ -4,7 +4,8 @@
 
     public class Button : InvokeAutomationElement
     {
-        public Button(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Button(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
     }

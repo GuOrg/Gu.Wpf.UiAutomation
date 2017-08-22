@@ -10,7 +10,8 @@
         private const string DefaultMessage = "The requested property is not supported";
         private const string DefaultMessageWithData = "The requested property '{0}' is not supported";
 
-        public PropertyNotSupportedException() : base(DefaultMessage)
+        public PropertyNotSupportedException()
+            : base(DefaultMessage)
         {
         }
 
@@ -52,6 +53,7 @@
             {
                 throw new ArgumentNullException(nameof(info));
             }
+
             info.AddValue("Property", this.Property);
             base.GetObjectData(info, context);
         }

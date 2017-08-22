@@ -24,6 +24,7 @@
                     {
                         throw new Exception("Timeout occurred in retry", ex);
                     }
+
                     Thread.Sleep(retryInterval ?? DefaultRetryInterval);
                 }
             }
@@ -44,6 +45,7 @@
                     {
                         throw new Exception("Timeout occurred in retry", ex);
                     }
+
                     Thread.Sleep(retryInterval ?? DefaultRetryInterval);
                 }
             }
@@ -59,10 +61,12 @@
                 {
                     return obj;
                 }
+
                 if (IsTimeouted(startTime, timeout))
                 {
                     return obj;
                 }
+
                 Thread.Sleep(retryInterval ?? DefaultRetryInterval);
             }
         }
@@ -76,10 +80,12 @@
                 {
                     return;
                 }
+
                 if (IsTimeouted(startTime, timeout))
                 {
                     return;
                 }
+
                 Thread.Sleep(retryInterval ?? DefaultRetryInterval);
             }
         }
@@ -91,6 +97,7 @@
             {
                 return false;
             }
+
             return DateTime.Now.Subtract(startTime) >= timeout;
         }
     }

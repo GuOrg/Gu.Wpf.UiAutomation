@@ -11,7 +11,8 @@
 
     public class Window : AutomationElement
     {
-        public Window(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
+        public Window(BasicAutomationElementBase basicAutomationElement)
+            : base(basicAutomationElement)
         {
         }
 
@@ -46,7 +47,7 @@
             get
             {
                 var mainWindow = this.GetMainWindow();
-                var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByText("").And(cf.ByClassName("Popup"))));
+                var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByText(string.Empty).And(cf.ByClassName("Popup"))));
                 return popup?.AsWindow();
             }
         }
@@ -71,12 +72,14 @@
                     return ctxMenu;
                 }
             }
+
             var mainWindow = this.GetMainWindow();
             if (frameworkType == FrameworkType.WinForms)
             {
                 var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
                 return ctxMenu.AsMenu();
             }
+
             if (frameworkType == FrameworkType.Wpf)
             {
                 // In WPF, there is a window (Popup) where the menu is inside
@@ -84,6 +87,7 @@
                 var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
                 return ctxMenu.AsMenu();
             }
+
             // No menu found
             return null;
         }
@@ -96,12 +100,14 @@
                 titleBar.CloseButton.Invoke();
                 return;
             }
+
             var windowPattern = this.Patterns.Window.PatternOrDefault;
             if (windowPattern != null)
             {
                 windowPattern.Close();
                 return;
             }
+
             throw new MethodNotSupportedException("Close is not supported");
         }
 
@@ -119,6 +125,7 @@
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
+
             if (!User32.SetLayeredWindowAttributes(this.Properties.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -134,6 +141,7 @@
             {
                 return this;
             }
+
             var mainWindow = this.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value)).AsWindow();
             return mainWindow ?? this;
         }

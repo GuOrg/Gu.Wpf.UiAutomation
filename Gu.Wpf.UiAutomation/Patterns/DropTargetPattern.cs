@@ -30,7 +30,8 @@
         private AutomationProperty<string> dropTargetEffect;
         private AutomationProperty<string[]> dropTargetEffects;
 
-        protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
+        protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
+            : base(basicAutomationElement, nativePattern)
         {
         }
 
