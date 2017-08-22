@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Gu.Wpf.UiAutomation;
 using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 using Gu.Wpf.UiAutomation.Conditions;
 using Gu.Wpf.UiAutomation.Definitions;

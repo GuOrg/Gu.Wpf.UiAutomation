@@ -1,5 +1,4 @@
 ﻿using System;
-using Gu.Wpf.UiAutomation;
 using Gu.Wpf.UiAutomation.Exceptions;
 using Gu.Wpf.UiAutomation.Identifiers;
 using Gu.Wpf.UiAutomation.Patterns;

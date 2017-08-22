@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Gu.Wpf.UiAutomation;
 using UIA = System.Windows.Automation;
 
 namespace Gu.Wpf.UiAutomation.UIA2.Converters

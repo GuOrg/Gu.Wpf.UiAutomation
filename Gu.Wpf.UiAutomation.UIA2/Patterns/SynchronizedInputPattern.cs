@@ -1,5 +1,4 @@
 ﻿#if !NET35
-using Gu.Wpf.UiAutomation;
 using Gu.Wpf.UiAutomation.Definitions;
 using Gu.Wpf.UiAutomation.UIA2.Identifiers;
 using UIA = System.Windows.Automation;

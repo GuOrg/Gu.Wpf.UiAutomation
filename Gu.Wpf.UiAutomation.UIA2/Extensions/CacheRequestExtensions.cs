@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
+﻿using Gu.Wpf.UiAutomation.UIA2.Converters;
 using UIA = System.Windows.Automation;
 
 namespace Gu.Wpf.UiAutomation.UIA2.Extensions

@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using UIA = Interop.UIAutomationClient;
+﻿using UIA = Interop.UIAutomationClient;
 
 namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {

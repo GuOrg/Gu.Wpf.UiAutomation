@@ -1,2 +1,8 @@
 NUnit
 Moq
+
+group Analyzers
+  StyleCop.Analyzers
+  AsyncUsageAnalyzers
+  Gu.Analyzers
+  JetBrains.Annotations

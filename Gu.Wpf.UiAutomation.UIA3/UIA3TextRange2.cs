@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using Gu.Wpf.UiAutomation.Tools;
+﻿using Gu.Wpf.UiAutomation.Tools;
 using UIA = Interop.UIAutomationClient;
 
 namespace Gu.Wpf.UiAutomation.UIA3

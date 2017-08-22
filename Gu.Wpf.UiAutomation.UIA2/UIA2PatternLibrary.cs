@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using Gu.Wpf.UiAutomation.Identifiers;
+﻿using Gu.Wpf.UiAutomation.Identifiers;
 
 namespace Gu.Wpf.UiAutomation.UIA2
 {

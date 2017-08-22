@@ -1,0 +1,6 @@
+group Analyzers
+  StyleCop.Analyzers
+  AsyncUsageAnalyzers
+  Gu.Analyzers
+  WpfAnalyzers
+  JetBrains.Annotations

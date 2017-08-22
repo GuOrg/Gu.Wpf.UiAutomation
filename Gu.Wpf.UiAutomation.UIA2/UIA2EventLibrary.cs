@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 using Gu.Wpf.UiAutomation.Patterns;
 using Gu.Wpf.UiAutomation.UIA2.Patterns;
 

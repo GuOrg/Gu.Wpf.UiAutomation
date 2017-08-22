@@ -5,7 +5,6 @@ using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 using Gu.Wpf.UiAutomation.Definitions;
 using Gu.Wpf.UiAutomation.Input;
 using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.WindowsAPI;
 
 namespace Gu.Wpf.UiAutomation.AutomationElements
 {

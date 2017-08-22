@@ -1,5 +1,4 @@
-﻿using Gu.Wpf.UiAutomation;
-using Gu.Wpf.UiAutomation.Identifiers;
+﻿using Gu.Wpf.UiAutomation.Identifiers;
 using Gu.Wpf.UiAutomation.Patterns;
 using Gu.Wpf.UiAutomation.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
