@@ -1,13 +1,14 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-#if NET35
+﻿#if NET35
 using Gu.Wpf.UiAutomation.Tools;
 #endif
 
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+
     /// <summary>
     /// Custom implementation of a <see cref="XPathNavigator" /> which allows
     /// selecting items by xpath by using the <see cref="ITreeWalker" />.

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using System.Collections.Generic;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public partial class CacheRequest
     {
         public AutomationElementMode AutomationElementMode { get; set; }

@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests
+﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using NUnit.Framework;
+
     [TestFixture]
     public class XPathTests
     {

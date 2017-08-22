@@ -1,13 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using Gu.Wpf.UiAutomation.Tools;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.Tools;
+
     /// <summary>
     /// Provides methods to capture screenshots or partially screenshots
     /// </summary>

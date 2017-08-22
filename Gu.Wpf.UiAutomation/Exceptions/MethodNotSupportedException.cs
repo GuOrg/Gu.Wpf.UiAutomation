@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-
-namespace Gu.Wpf.UiAutomation.Exceptions
+﻿namespace Gu.Wpf.UiAutomation.Exceptions
 {
+    using System;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+
     [Serializable]
     public class MethodNotSupportedException : UiAutomationException
     {

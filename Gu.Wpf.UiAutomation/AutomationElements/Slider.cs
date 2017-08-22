@@ -1,13 +1,13 @@
-﻿using System;
-using System.Globalization;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System;
+    using System.Globalization;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class Slider : AutomationElement
     {
         public Slider(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

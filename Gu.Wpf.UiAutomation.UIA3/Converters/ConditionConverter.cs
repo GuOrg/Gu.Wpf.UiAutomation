@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Gu.Wpf.UiAutomation.Conditions;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
+    using System;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using UIA = Interop.UIAutomationClient;
+
     public static class ConditionConverter
     {
         public static UIA.IUIAutomationCondition ToNative(UIA3Automation automation, ConditionBase condition)

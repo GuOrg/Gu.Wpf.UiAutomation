@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.UIA3.Identifiers;
+
     public class UIA3AutomationElementPatternAvailabilityProperties : IAutomationElementPatternAvailabilityProperties
     {
         public PropertyId IsAnnotationPatternAvailable => AutomationObjectIds.IsAnnotationPatternAvailableProperty;

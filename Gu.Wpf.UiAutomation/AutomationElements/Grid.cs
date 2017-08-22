@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Patterns;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Patterns;
+
     /// <summary>
     /// Element for grids and tables.
     /// </summary>

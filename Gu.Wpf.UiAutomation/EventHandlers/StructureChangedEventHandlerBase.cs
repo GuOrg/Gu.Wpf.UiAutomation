@@ -1,9 +1,9 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-
-namespace Gu.Wpf.UiAutomation.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation.EventHandlers
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+
     public abstract class StructureChangedEventHandlerBase : EventHandlerBase, IAutomationStructureChangedEventHandler
     {
         private readonly Action<AutomationElement, StructureChangeType, int[]> _callAction;

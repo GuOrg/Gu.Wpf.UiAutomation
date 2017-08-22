@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.Patterns;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.Patterns;
+
     /// <summary>
     /// Element which can be used for combobox elements.
     /// </summary>

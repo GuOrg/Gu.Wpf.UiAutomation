@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Tools;
-
-namespace Gu.Wpf.UiAutomation.Conditions
+﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Tools;
+
     /// <summary>
     /// Helper class with some commonly used conditions
     /// </summary>

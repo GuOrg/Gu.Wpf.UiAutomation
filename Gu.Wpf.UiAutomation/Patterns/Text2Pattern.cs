@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+
     public interface IText2Pattern : ITextPattern
     {
         ITextRange GetCaretRange(out bool isActive);

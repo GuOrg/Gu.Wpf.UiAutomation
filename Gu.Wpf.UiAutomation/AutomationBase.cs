@@ -1,12 +1,12 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.EventHandlers;
-using Gu.Wpf.UiAutomation.Overlay;
-using Gu.Wpf.UiAutomation.Shapes;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.EventHandlers;
+    using Gu.Wpf.UiAutomation.Overlay;
+    using Gu.Wpf.UiAutomation.Shapes;
+
     /// <summary>
     /// Base class for the native automation object
     /// </summary>

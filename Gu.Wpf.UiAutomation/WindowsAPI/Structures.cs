@@ -1,11 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 #pragma warning disable
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System;
+    using System.Drawing;
+    using System.Runtime.InteropServices;
+
     [StructLayout(LayoutKind.Sequential)]
     public struct POINT
     {

@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.Tools;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Extensions
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Extensions
 {
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.Tools;
+    using UIA = Interop.UIAutomationClient;
+
     public static class PointExtensions
     {
         public static UIA.tagPOINT ToTagPoint(this Point p)

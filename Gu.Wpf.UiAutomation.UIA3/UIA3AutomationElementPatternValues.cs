@@ -1,11 +1,11 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.UIA3.Patterns;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.UIA3.Patterns;
+    using UIA = Interop.UIAutomationClient;
+
     public class UIA3AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
         public UIA3AutomationElementPatternValues(UIA3BasicAutomationElement basicAutomationElement) : base(basicAutomationElement)

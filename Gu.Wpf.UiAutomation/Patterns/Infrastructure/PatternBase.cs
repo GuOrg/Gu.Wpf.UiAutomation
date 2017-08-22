@@ -1,8 +1,8 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.Patterns.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation.Patterns.Infrastructure
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public abstract class PatternBase<TNativePattern> : IPattern
     {
         public BasicAutomationElementBase BasicAutomationElement { get; }

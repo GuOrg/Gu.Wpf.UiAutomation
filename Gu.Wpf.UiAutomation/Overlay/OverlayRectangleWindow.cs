@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Controls;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Threading;
-using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Overlay
+﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Automation;
+    using System.Windows.Controls;
+    using System.Windows.Interop;
+    using System.Windows.Media;
+    using System.Windows.Threading;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class OverlayRectangleWindow : Window
     {
         public OverlayRectangleWindow(Rectangle rectangle, Color color, int durationInMs)

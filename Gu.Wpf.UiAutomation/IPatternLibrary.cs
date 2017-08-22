@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public interface IPatternLibrary
     {
         PatternId AnnotationPattern { get; }

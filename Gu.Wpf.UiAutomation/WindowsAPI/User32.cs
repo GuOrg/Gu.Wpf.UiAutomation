@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace Gu.Wpf.UiAutomation.WindowsAPI
+﻿namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     public static class User32
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]

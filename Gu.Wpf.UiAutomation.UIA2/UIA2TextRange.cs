@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using System;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using UIA = System.Windows.Automation;
+
     public class UIA2TextRange : ITextRange
     {
         public UIA2Automation Automation { get; }

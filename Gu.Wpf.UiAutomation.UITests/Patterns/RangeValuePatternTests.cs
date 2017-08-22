@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using NUnit.Framework;
+
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class RangeValuePatternTests : UITestBase
     {

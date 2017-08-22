@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.UIA3.Converters;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+
     public class UIA3TreeWalkerFactory : ITreeWalkerFactory
     {
         private readonly UIA3Automation _automation;

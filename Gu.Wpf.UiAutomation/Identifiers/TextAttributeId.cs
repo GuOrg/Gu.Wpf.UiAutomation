@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.Identifiers
+﻿namespace Gu.Wpf.UiAutomation.Identifiers
 {
+    using System;
+
     /// <summary>
     /// A wrapper around text attribute ids
     /// </summary>

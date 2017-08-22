@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.UIA2.Patterns;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.UIA2.Patterns;
+
     public class UIA2PropertyLibrary : IPropertyLibray
     {
         public UIA2PropertyLibrary()

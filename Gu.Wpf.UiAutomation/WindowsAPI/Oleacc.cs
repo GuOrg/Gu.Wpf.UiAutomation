@@ -1,8 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using System.Text;
-
-namespace Gu.Wpf.UiAutomation.WindowsAPI
+﻿namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System.Runtime.InteropServices;
+    using System.Text;
+
     public static class Oleacc
     {
         [DllImport("oleacc.dll")]

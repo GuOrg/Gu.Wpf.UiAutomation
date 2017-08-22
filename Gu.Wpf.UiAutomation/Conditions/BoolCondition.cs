@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.Conditions
+﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
+    using System;
+
     public class BoolCondition : ConditionBase
     {
         public BoolCondition(bool booleanValue)

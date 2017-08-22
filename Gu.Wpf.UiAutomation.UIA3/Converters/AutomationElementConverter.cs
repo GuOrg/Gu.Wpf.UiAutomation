@@ -1,9 +1,9 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using UIA = Interop.UIAutomationClient;
+
     public static class AutomationElementConverter
     {
         public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)

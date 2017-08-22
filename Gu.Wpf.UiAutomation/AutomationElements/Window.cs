@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Exceptions;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Exceptions;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class Window : AutomationElement
     {
         public Window(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

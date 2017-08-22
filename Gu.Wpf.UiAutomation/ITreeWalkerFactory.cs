@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Conditions;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using Gu.Wpf.UiAutomation.Conditions;
+
     public interface ITreeWalkerFactory
     {
         ITreeWalker GetControlViewWalker();

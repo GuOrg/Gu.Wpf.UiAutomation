@@ -1,8 +1,8 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     /// <summary>
     /// Inferface for property objects.
     /// </summary>

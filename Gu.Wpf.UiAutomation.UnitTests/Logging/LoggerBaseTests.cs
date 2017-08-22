@@ -1,10 +1,10 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Logging;
-using Moq;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UnitTests.Logging
+﻿namespace Gu.Wpf.UiAutomation.UnitTests.Logging
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Logging;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class LoggerBaseTests
     {

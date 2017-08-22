@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.Logging
+﻿namespace Gu.Wpf.UiAutomation.Logging
 {
+    using System;
+
     public abstract class LoggerBase : ILogger
     {
         public bool IsTraceEnabled { get; set; }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-
-namespace WpfApplication.Infrastructure
+﻿namespace WpfApplication.Infrastructure
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
+
     [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
     public abstract class ObservableObject : INotifyPropertyChanged
     {

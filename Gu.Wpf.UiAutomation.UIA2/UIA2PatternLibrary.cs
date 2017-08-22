@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public class UIA2PatternLibrary : IPatternLibrary
     {
         public PatternId AnnotationPattern => PatternId.NotSupportedByFramework;

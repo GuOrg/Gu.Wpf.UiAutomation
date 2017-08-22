@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using Gu.Wpf.UiAutomation.Exceptions;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
+    using Gu.Wpf.UiAutomation.Exceptions;
+
     /// <summary>
     /// Wrapper for com calls
     /// </summary>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Gu.Wpf.UiAutomation.Logging;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Input
+﻿namespace Gu.Wpf.UiAutomation.Input
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using Gu.Wpf.UiAutomation.Logging;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     /// <summary>
     /// Keyboard class to simulate key input.
     /// </summary>

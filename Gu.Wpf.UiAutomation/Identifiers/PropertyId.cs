@@ -1,8 +1,8 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Conditions;
-
-namespace Gu.Wpf.UiAutomation.Identifiers
+﻿namespace Gu.Wpf.UiAutomation.Identifiers
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Conditions;
+
     /// <summary>
     /// A wrapper around the property ids
     /// </summary>

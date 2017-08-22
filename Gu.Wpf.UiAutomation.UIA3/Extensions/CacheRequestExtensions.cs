@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.UIA3.Converters;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Extensions
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Extensions
 {
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using UIA = Interop.UIAutomationClient;
+
     public static class CacheRequestExtensions
     {
         public static UIA.IUIAutomationCacheRequest ToNative(this CacheRequest cacheRequest, UIA3Automation automation)

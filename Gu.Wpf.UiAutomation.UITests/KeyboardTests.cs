@@ -1,12 +1,12 @@
-﻿using System.Threading;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-using Gu.Wpf.UiAutomation.UIA3;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests
+﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.UIA3;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+    using NUnit.Framework;
+
     [TestFixture]
     public class KeyboardTests
     {

@@ -1,7 +1,7 @@
-﻿using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
+    using UIA = Interop.UIAutomationClient;
+
     public static class TextRangeConverter
     {
         public static ITextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeTextRangeArray)

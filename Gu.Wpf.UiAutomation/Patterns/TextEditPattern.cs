@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public interface ITextEditPattern : ITextPattern
     {
         new ITextEditPatternEvents Events { get; }

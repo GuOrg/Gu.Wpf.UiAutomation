@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Patterns;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Patterns;
+
     /// <summary>
     /// Helper class which tries to load all items for an item container
     /// </summary>

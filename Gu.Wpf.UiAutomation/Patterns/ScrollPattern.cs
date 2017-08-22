@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
+
     public class ScrollPatternConstants
     {
         public const double NoScroll = -1.0;

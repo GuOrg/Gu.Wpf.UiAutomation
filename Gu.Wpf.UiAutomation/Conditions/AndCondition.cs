@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Gu.Wpf.UiAutomation.Conditions
+﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class AndCondition : JunctionConditionBase
     {
         public AndCondition(ConditionBase condition1, ConditionBase condition2)

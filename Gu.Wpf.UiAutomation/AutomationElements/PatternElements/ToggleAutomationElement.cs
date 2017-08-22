@@ -1,10 +1,10 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Patterns;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements.PatternElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements.PatternElements
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Patterns;
+
     public class ToggleAutomationElement : AutomationElement
     {
         public ToggleAutomationElement(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
+
     /// <summary>
     /// Represents an item in a combobox
     /// </summary>

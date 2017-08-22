@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Overlay
+﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class WinFormsOverlayManager : IOverlayManager
     {
         public int Size { get; set; }

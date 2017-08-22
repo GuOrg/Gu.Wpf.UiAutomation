@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public interface IAutomationElementProperties
     {
         PropertyId AcceleratorKey { get; }

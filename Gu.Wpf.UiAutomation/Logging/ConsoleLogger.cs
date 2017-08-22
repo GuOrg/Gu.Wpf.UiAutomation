@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.Logging
+﻿namespace Gu.Wpf.UiAutomation.Logging
 {
+    using System;
+
     public class ConsoleLogger : LoggerBase
     {
         protected internal override void GatedDebug(string message)

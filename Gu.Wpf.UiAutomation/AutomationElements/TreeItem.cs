@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
-using Gu.Wpf.UiAutomation.Definitions;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
+    using Gu.Wpf.UiAutomation.Definitions;
+
     public class TreeItem : AutomationElement
     {
         private readonly SelectionItemAutomationElement _selectionItemAutomationElement;

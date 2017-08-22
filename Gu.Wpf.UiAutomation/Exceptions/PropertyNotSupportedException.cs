@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.Exceptions
+﻿namespace Gu.Wpf.UiAutomation.Exceptions
 {
+    using System;
+    using System.Runtime.Serialization;
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     [Serializable]
     public class PropertyNotSupportedException : NotSupportedException
     {

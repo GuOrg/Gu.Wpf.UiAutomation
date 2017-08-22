@@ -2,12 +2,12 @@
 using Gu.Wpf.UiAutomation.Definitions;
 using Gu.Wpf.UiAutomation.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
-#endif
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-
 namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 {
+#endif
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+
 #if !NET35
     public class SynchronizedInputPattern : SynchronizedInputPatternBase<UIA.SynchronizedInputPattern>
     {

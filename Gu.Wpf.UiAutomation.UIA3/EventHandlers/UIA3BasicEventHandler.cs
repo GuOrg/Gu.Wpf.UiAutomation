@@ -1,11 +1,11 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.EventHandlers;
-using Gu.Wpf.UiAutomation.Identifiers;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation.UIA3.EventHandlers
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.EventHandlers;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using UIA = Interop.UIAutomationClient;
+
     public class UIA3BasicEventHandler : BasicEventHandlerBase, UIA.IUIAutomationEventHandler
     {
         public UIA3BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)

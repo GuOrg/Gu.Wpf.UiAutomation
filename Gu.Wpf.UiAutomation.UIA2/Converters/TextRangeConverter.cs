@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Converters
 {
+    using System.Linq;
+    using UIA = System.Windows.Automation;
+
     public static class TextRangeConverter
     {
         public static ITextRange[] NativeArrayToManaged(UIA2Automation automation, UIA.Text.TextPatternRange[] nativeElements)

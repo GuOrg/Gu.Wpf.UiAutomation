@@ -1,9 +1,9 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
+
     public interface IAutomationPattern<T> where T : IPattern
     {
         T Pattern { get; }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Converters
 {
+    using System;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using UIA = System.Windows.Automation;
+
     public static class AutomationElementConverter
     {
         public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)

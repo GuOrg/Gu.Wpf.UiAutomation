@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using UIA = System.Windows.Automation;
+
     public class UIA2TreeWalkerFactory : ITreeWalkerFactory
     {
         private readonly UIA2Automation _automation;

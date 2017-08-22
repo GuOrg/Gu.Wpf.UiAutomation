@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Gu.Wpf.UiAutomation.AutomationElements.Scrolling;
-using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.EventHandlers;
-using Gu.Wpf.UiAutomation.Exceptions;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-using GdiColor = System.Drawing.Color;
-using WpfColor = System.Windows.Media.Color;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.AutomationElements.Scrolling;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.EventHandlers;
+    using Gu.Wpf.UiAutomation.Exceptions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+    using GdiColor = System.Drawing.Color;
+    using WpfColor = System.Windows.Media.Color;
+
     /// <summary>
     /// Wrapper object for each ui element which is automatable.
     /// </summary>

@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using WpfApplication.Infrastructure;
-
-namespace WpfApplication
+﻿namespace WpfApplication
 {
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
+    using WpfApplication.Infrastructure;
+
     public class MainViewModel : ObservableObject
     {
         public ObservableCollection<DataGridItem> DataGridItems { get; }

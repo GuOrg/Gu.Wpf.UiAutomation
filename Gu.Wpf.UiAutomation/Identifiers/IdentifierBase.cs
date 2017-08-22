@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Gu.Wpf.UiAutomation.Identifiers
+﻿namespace Gu.Wpf.UiAutomation.Identifiers
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Base class for wrappers around various identifiers
     /// </summary>

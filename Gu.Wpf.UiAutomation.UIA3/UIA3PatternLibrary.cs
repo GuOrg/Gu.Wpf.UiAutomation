@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+
     public class UIA3PatternLibrary : IPatternLibrary
     {
         public PatternId AnnotationPattern => Patterns.AnnotationPattern.Pattern;

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Conditions;
-using Gu.Wpf.UiAutomation.Definitions;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Conditions;
+    using Gu.Wpf.UiAutomation.Definitions;
+
     public static class Debug
     {
         /// <summary>

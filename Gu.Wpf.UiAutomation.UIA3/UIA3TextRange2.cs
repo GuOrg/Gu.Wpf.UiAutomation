@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.Tools;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using Gu.Wpf.UiAutomation.Tools;
+    using UIA = Interop.UIAutomationClient;
+
     public class UIA3TextRange2 : UIA3TextRange, ITextRange2
     {
         public UIA.IUIAutomationTextRange2 NativeRange2 { get; }

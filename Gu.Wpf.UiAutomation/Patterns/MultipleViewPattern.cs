@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
+
     public interface IMultipleViewPattern : IPattern
     {
         IMultipleViewPatternProperties Properties { get; }

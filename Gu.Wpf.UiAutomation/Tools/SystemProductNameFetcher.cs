@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.Win32;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System;
+    using Microsoft.Win32;
+
     public static class SystemProductNameFetcher
     {
         private static readonly string CurrentProductName;

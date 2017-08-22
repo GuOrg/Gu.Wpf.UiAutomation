@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using Gu.Wpf.UiAutomation.Tools;
-
-namespace Gu.Wpf.UiAutomation.Shapes
+﻿namespace Gu.Wpf.UiAutomation.Shapes
 {
+    using System.Windows;
+    using Gu.Wpf.UiAutomation.Tools;
+
     /// <summary>
     /// UI-independent implementation of a rectangle
     /// </summary>

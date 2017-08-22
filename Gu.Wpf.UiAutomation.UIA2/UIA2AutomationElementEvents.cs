@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.UIA2.Identifiers;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.UIA2.Identifiers;
+
     public class UIA2AutomationElementEvents : IAutomationElementEvents
     {
         public EventId AsyncContentLoadedEvent => AutomationObjectIds.AsyncContentLoadedEvent;

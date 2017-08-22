@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System;
+    using System.Threading;
+
     public static class Retry
     {
         public static readonly TimeSpan DefaultRetryFor = TimeSpan.FromMilliseconds(1000);

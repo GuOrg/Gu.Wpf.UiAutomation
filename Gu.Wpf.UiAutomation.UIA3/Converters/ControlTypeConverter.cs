@@ -1,9 +1,9 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Definitions;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using UIA = Interop.UIAutomationClient;
+
     public static class ControlTypeConverter
     {
         public static object ToControlType(object nativeControlType)

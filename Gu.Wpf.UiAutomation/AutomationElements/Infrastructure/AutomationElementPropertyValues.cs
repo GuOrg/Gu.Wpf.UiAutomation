@@ -1,11 +1,11 @@
-﻿using System;
-using System.Globalization;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Shapes;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
 {
+    using System;
+    using System.Globalization;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Shapes;
+
     public class AutomationElementPropertyValues
     {
         private AutomationProperty<string> _acceleratorKey;

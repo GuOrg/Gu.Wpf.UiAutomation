@@ -1,9 +1,9 @@
-﻿using System;
-
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 #pragma warning disable
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System;
+
     public static class CommonHresultValues
     {
         public const long S_OK = 0x00000000; // Operation successful

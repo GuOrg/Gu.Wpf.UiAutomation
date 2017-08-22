@@ -1,9 +1,9 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.UIA3.Converters;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Identifiers
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Identifiers
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using UIA = Interop.UIAutomationClient;
+
     public static class TextAttributes
     {
         public static readonly TextAttributeId AnimationStyle = TextAttributeId.Register(AutomationType.UIA3, UIA.UIA_TextAttributeIds.UIA_AnimationStyleAttributeId, "AnimationStyle");

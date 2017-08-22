@@ -1,10 +1,10 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.UIA3.Converters;
-using Gu.Wpf.UiAutomation.UIA3.Extensions;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3
+﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using Gu.Wpf.UiAutomation.UIA3.Extensions;
+    using UIA = Interop.UIAutomationClient;
+
     public class UIA3TreeWalker : ITreeWalker
     {
         public UIA3Automation Automation { get; }

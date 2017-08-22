@@ -1,9 +1,9 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Shapes
+﻿namespace Gu.Wpf.UiAutomation.Shapes
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     /// <summary>
     /// UI-independent implementation of a point
     /// </summary>

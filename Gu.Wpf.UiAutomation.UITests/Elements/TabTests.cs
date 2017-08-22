@@ -1,10 +1,10 @@
-﻿using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests.Elements
+﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using NUnit.Framework;
+
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TabTests : UITestBase

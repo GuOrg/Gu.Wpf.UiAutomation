@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Input;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Input;
+
     public class Thumb : AutomationElement
     {
         public Thumb(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

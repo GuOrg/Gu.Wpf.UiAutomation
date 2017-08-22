@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
-using Gu.Wpf.UiAutomation.Definitions;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
+    using Gu.Wpf.UiAutomation.Definitions;
+
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>

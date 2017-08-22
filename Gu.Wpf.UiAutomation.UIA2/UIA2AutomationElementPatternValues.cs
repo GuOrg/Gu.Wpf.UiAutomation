@@ -1,12 +1,12 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Exceptions;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.UIA2.Patterns;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Exceptions;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.UIA2.Patterns;
+    using UIA = System.Windows.Automation;
+
     public class UIA2AutomationElementPatternValues : AutomationElementPatternValuesBase
     {
         public UIA2AutomationElementPatternValues(UIA2BasicAutomationElement basicAutomationElement) : base(basicAutomationElement)

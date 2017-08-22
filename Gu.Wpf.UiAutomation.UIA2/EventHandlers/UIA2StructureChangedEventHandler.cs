@@ -1,11 +1,11 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.EventHandlers;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation.UIA2.EventHandlers
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.EventHandlers;
+    using UIA = System.Windows.Automation;
+
     public class UIA2StructureChangedEventHandler : StructureChangedEventHandlerBase
     {
         public UIA.StructureChangedEventHandler EventHandler { get; private set; }

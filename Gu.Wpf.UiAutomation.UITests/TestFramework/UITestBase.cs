@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
-
-namespace Gu.Wpf.UiAutomation.UITests.TestFramework
+﻿namespace Gu.Wpf.UiAutomation.UITests.TestFramework
 {
+    using System;
+    using System.IO;
+    using NUnit.Framework;
+    using NUnit.Framework.Interfaces;
+
     /// <summary>
     /// Base class for ui test with some helper methods
     /// </summary>

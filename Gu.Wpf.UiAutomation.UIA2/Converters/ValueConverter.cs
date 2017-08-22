@@ -1,12 +1,12 @@
-﻿using System;
-using System.Globalization;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Shapes;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Converters
 {
+    using System;
+    using System.Globalization;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using UIA = System.Windows.Automation;
+
     public static class ValueConverter
     {
         /// <summary>

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Gu.Wpf.UiAutomation.Conditions
+﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Base class for the conditions
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System.Globalization;
+
     public static class SystemLanguageRetreiver
     {
         public static CultureInfo GetCurrentOsCulture()

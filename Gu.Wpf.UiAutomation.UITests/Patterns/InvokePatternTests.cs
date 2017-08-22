@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
+    using System;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using NUnit.Framework;
+
     [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class InvokePatternTests : UITestBase

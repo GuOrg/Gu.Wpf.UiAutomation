@@ -1,10 +1,10 @@
-﻿using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
-using Gu.Wpf.UiAutomation.UIA2.Extensions;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2
+﻿namespace Gu.Wpf.UiAutomation.UIA2
 {
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using Gu.Wpf.UiAutomation.UIA2.Extensions;
+    using UIA = System.Windows.Automation;
+
     public class UIA2TreeWalker : ITreeWalker
     {
         public UIA2Automation Automation { get; }

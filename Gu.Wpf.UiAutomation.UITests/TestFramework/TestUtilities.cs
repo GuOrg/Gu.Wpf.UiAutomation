@@ -1,13 +1,13 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.AutomationElements;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.UIA2;
-using Gu.Wpf.UiAutomation.UIA3;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests.TestFramework
+﻿namespace Gu.Wpf.UiAutomation.UITests.TestFramework
 {
+    using System;
+    using Gu.Wpf.UiAutomation.AutomationElements;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.UIA2;
+    using Gu.Wpf.UiAutomation.UIA3;
+    using NUnit.Framework;
+
     /// <summary>
     /// Various helpful methods
     /// </summary>

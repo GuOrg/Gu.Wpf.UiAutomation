@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using Gu.Wpf.UiAutomation.UIA3;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests
+﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System.Diagnostics;
+    using Gu.Wpf.UiAutomation.UIA3;
+    using NUnit.Framework;
+
     [TestFixture]
     public class NotepadTests
     {

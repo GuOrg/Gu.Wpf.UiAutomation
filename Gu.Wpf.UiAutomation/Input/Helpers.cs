@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Input
+﻿namespace Gu.Wpf.UiAutomation.Input
 {
+    using System;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     /// <summary>
     /// Class with various helper tools used in various places
     /// </summary>

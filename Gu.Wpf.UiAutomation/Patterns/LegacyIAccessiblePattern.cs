@@ -1,11 +1,11 @@
-﻿using Accessibility;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Accessibility;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public interface ILegacyIAccessiblePattern : IPattern
     {
         ILegacyIAccessiblePatternProperties Properties { get; }

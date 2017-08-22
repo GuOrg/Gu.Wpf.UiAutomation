@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.UIA2.Converters;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Extensions
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Extensions
 {
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using UIA = System.Windows.Automation;
+
     public static class CacheRequestExtensions
     {
         public static UIA.CacheRequest ToNative(this CacheRequest cacheRequest)

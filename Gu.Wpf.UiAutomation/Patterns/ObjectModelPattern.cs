@@ -1,7 +1,7 @@
-﻿using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
-namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
+    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
+
     public interface IObjectModelPattern : IPattern
     {
         object GetUnderlyingObjectModel();

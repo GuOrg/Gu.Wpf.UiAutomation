@@ -1,8 +1,8 @@
-﻿using System.Windows.Forms;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Overlay
+﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
+    using System.Windows.Forms;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class OverlayRectangleForm : Form
     {
         public OverlayRectangleForm()

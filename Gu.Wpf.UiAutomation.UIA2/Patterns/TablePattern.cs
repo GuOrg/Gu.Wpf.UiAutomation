@@ -1,11 +1,11 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
-using Gu.Wpf.UiAutomation.UIA2.Identifiers;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using Gu.Wpf.UiAutomation.UIA2.Identifiers;
+    using UIA = System.Windows.Automation;
+
     public class TablePattern : TablePatternBase<UIA.TablePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.TablePattern.Pattern.Id, "Table", AutomationObjectIds.IsTablePatternAvailableProperty);

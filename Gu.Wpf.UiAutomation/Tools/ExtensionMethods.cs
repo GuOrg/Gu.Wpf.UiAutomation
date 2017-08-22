@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class ExtensionMethods
     {
         /// <summary>

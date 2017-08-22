@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements.Scrolling
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Scrolling
 {
+    using System;
+
     public class VScrollBar : ScrollBarBase
     {
         public VScrollBar(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

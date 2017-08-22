@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Exceptions;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation.AutomationElements
 {
+    using System;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Exceptions;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public class TextBox : AutomationElement
     {
         public TextBox(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)

@@ -1,11 +1,11 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.UIA2.Converters;
-using Gu.Wpf.UiAutomation.UIA2.Identifiers;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.UIA2.Converters;
+    using Gu.Wpf.UiAutomation.UIA2.Identifiers;
+    using UIA = System.Windows.Automation;
+
     public class SelectionItemPattern : SelectionItemPatternBase<UIA.SelectionItemPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA2, UIA.SelectionItemPattern.Pattern.Id, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);

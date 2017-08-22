@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Gu.Wpf.UiAutomation.Identifiers
+﻿namespace Gu.Wpf.UiAutomation.Identifiers
 {
+    using System;
+
     /// <summary>
     /// Base class for identifiers which are convertible
     /// </summary>

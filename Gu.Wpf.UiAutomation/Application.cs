@@ -1,15 +1,15 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using Gu.Wpf.UiAutomation.AutomationElements;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Logging;
-using Gu.Wpf.UiAutomation.Tools;
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using Gu.Wpf.UiAutomation.AutomationElements;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Logging;
+    using Gu.Wpf.UiAutomation.Tools;
+
     /// <summary>
     /// Wrapper for an application which should be automated.
     /// </summary>

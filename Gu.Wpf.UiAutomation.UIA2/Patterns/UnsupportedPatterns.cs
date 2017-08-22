@@ -1,8 +1,8 @@
-﻿using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 {
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+
     public class AnnotationPatternProperties : IAnnotationPatternProperties
     {
         public PropertyId AnnotationTypeId => PropertyId.NotSupportedByFramework;

@@ -1,10 +1,10 @@
-﻿using System;
-using Gu.Wpf.UiAutomation.Definitions;
-using Gu.Wpf.UiAutomation.Exceptions;
-using UIA = System.Windows.Automation;
-
-namespace Gu.Wpf.UiAutomation.UIA2.Converters
+﻿namespace Gu.Wpf.UiAutomation.UIA2.Converters
 {
+    using System;
+    using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.Exceptions;
+    using UIA = System.Windows.Automation;
+
     public static class ControlTypeConverter
     {
         public static object ToControlType(object nativeControlType)

@@ -1,14 +1,14 @@
-﻿using System.Text.RegularExpressions;
-using Gu.Wpf.UiAutomation.AutomationElements;
-using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-using Gu.Wpf.UiAutomation.Input;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.UITests.TestFramework;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-using NUnit.Framework;
-
-namespace Gu.Wpf.UiAutomation.UITests
+﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System.Text.RegularExpressions;
+    using Gu.Wpf.UiAutomation.AutomationElements;
+    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+    using Gu.Wpf.UiAutomation.Input;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+    using NUnit.Framework;
+
     [TestFixture]
     public class CalculatorTests : UITestBase
     {

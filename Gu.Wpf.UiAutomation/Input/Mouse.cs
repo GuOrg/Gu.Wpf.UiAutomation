@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-using Gu.Wpf.UiAutomation.Logging;
-using Gu.Wpf.UiAutomation.Shapes;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Input
+﻿namespace Gu.Wpf.UiAutomation.Input
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Gu.Wpf.UiAutomation.Logging;
+    using Gu.Wpf.UiAutomation.Shapes;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     /// <summary>
     /// Mouse class to simulate mouse input
     /// </summary>

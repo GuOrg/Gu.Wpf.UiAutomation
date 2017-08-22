@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-
-namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation.Tools
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+
     public static class AccessibilityTextResolver
     {
         public static string GetRoleText(AccessibilityRole role)

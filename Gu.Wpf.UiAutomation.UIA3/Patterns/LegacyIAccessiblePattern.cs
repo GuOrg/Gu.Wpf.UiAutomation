@@ -1,15 +1,15 @@
-﻿using System;
-using Accessibility;
-using Gu.Wpf.UiAutomation.Identifiers;
-using Gu.Wpf.UiAutomation.Patterns;
-using Gu.Wpf.UiAutomation.Tools;
-using Gu.Wpf.UiAutomation.WindowsAPI;
-using Gu.Wpf.UiAutomation.UIA3.Converters;
-using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-using UIA = Interop.UIAutomationClient;
-
-namespace Gu.Wpf.UiAutomation.UIA3.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
+    using System;
+    using Accessibility;
+    using Gu.Wpf.UiAutomation.Identifiers;
+    using Gu.Wpf.UiAutomation.Patterns;
+    using Gu.Wpf.UiAutomation.Tools;
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using Gu.Wpf.UiAutomation.UIA3.Identifiers;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
+    using UIA = Interop.UIAutomationClient;
+
     public class LegacyIAccessiblePattern : LegacyIAccessiblePatternBase<UIA.IUIAutomationLegacyIAccessiblePattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);

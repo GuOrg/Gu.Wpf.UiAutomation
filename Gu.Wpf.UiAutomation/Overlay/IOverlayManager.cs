@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Media;
-using Gu.Wpf.UiAutomation.Shapes;
-
-namespace Gu.Wpf.UiAutomation.Overlay
+﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
+    using System;
+    using System.Windows.Media;
+    using Gu.Wpf.UiAutomation.Shapes;
+
     public interface IOverlayManager: IDisposable
     {
         /// <summary>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Input;
-
-namespace WpfApplication.Infrastructure
+﻿namespace WpfApplication.Infrastructure
 {
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Input;
+
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _methodToExecute;
