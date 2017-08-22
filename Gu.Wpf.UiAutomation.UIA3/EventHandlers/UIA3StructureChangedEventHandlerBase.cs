@@ -1,0 +1,23 @@
+﻿using System;
+using Gu.Wpf.UiAutomation;
+using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
+using Gu.Wpf.UiAutomation.Definitions;
+using Gu.Wpf.UiAutomation.EventHandlers;
+using UIA = Interop.UIAutomationClient;
+
+namespace Gu.Wpf.UiAutomation.UIA3.EventHandlers
+{
+    public class UIA3StructureChangedEventHandler : StructureChangedEventHandlerBase, UIA.IUIAutomationStructureChangedEventHandler
+    {
+        public UIA3StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(automation, callAction)
+        {
+        }
+
+        public void HandleStructureChangedEvent(UIA.IUIAutomationElement sender, UIA.StructureChangeType changeType, int[] runtimeId)
+        {
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var senderElement = new AutomationElement(basicAutomationElement);
+            HandleStructureChangedEvent(senderElement, (StructureChangeType)changeType, runtimeId);
+        }
+    }
+}
