@@ -29,7 +29,7 @@
             {
                 throw new ArgumentNullException(nameof(basicAutomationElement));
             }
-            BasicAutomationElement = basicAutomationElement;
+            this.BasicAutomationElement = basicAutomationElement;
         }
 
         public AutomationElement(AutomationElement automationElement)
@@ -45,37 +45,37 @@
         /// <summary>
         /// The current used automationn object.
         /// </summary>
-        public AutomationBase Automation => BasicAutomationElement.Automation;
+        public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
         /// <summary>
         /// Shortcut to the condition factory for the current automation.
         /// </summary>
-        public ConditionFactory ConditionFactory => BasicAutomationElement.Automation.ConditionFactory;
+        public ConditionFactory ConditionFactory => this.BasicAutomationElement.Automation.ConditionFactory;
 
         /// <summary>
         /// The current <see cref="AutomationType" /> for this element.
         /// </summary>
-        public AutomationType AutomationType => BasicAutomationElement.Automation.AutomationType;
+        public AutomationType AutomationType => this.BasicAutomationElement.Automation.AutomationType;
 
         /// <summary>
         /// Standard UIA patterns of this element.
         /// </summary>
-        public AutomationElementPatternValuesBase Patterns => BasicAutomationElement.Patterns;
+        public AutomationElementPatternValuesBase Patterns => this.BasicAutomationElement.Patterns;
 
         /// <summary>
         /// Standard UIA properties of this element.
         /// </summary>
-        public AutomationElementPropertyValues Properties => BasicAutomationElement.Properties;
+        public AutomationElementPropertyValues Properties => this.BasicAutomationElement.Properties;
 
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
-        public AutomationElement[] CachedChildren => BasicAutomationElement.GetCachedChildren();
+        public AutomationElement[] CachedChildren => this.BasicAutomationElement.GetCachedChildren();
 
         /// <summary>
         /// Gets the cached parent for this element.
         /// </summary>
-        public AutomationElement CachedParent => BasicAutomationElement.GetCachedParent();
+        public AutomationElement CachedParent => this.BasicAutomationElement.GetCachedParent();
 
         #region Convenience properties
         /// <summary>
@@ -87,7 +87,7 @@
             get
             {
                 string currentFrameworkId;
-                var hasProperty = Properties.FrameworkId.TryGetValue(out currentFrameworkId);
+                var hasProperty = this.Properties.FrameworkId.TryGetValue(out currentFrameworkId);
                 return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
@@ -95,32 +95,32 @@
         /// <summary>
         /// The automation id of the element.
         /// </summary>
-        public string AutomationId => Properties.AutomationId.Value;
+        public string AutomationId => this.Properties.AutomationId.Value;
 
         /// <summary>
         /// The name of the element.
         /// </summary>
-        public string Name => Properties.Name.Value;
+        public string Name => this.Properties.Name.Value;
 
         /// <summary>
         /// The class name of the element.
         /// </summary>
-        public string ClassName => Properties.ClassName.Value;
+        public string ClassName => this.Properties.ClassName.Value;
 
         /// <summary>
         /// The control type of the element.
         /// </summary>
-        public ControlType ControlType => Properties.ControlType.Value;
+        public ControlType ControlType => this.Properties.ControlType.Value;
 
         /// <summary>
         /// Flag if the element is enabled or not.
         /// </summary>
-        public bool IsEnabled => Properties.IsEnabled.Value;
+        public bool IsEnabled => this.Properties.IsEnabled.Value;
 
         /// <summary>
         /// Flag if the element off-screen or on-screen(visible).
         /// </summary>
-        public bool IsOffscreen => Properties.IsOffscreen.Value;
+        public bool IsOffscreen => this.Properties.IsOffscreen.Value;
         #endregion Convenience properties
 
         /// <summary>
@@ -129,7 +129,7 @@
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void Click(bool moveMouse = false)
         {
-            PerformMouseAction(moveMouse, Mouse.LeftClick);
+            this.PerformMouseAction(moveMouse, Mouse.LeftClick);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void DoubleClick(bool moveMouse = false)
         {
-            PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
+            this.PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightClick(bool moveMouse = false)
         {
-            PerformMouseAction(moveMouse, Mouse.RightClick);
+            this.PerformMouseAction(moveMouse, Mouse.RightClick);
         }
 
         /// <summary>
@@ -156,12 +156,12 @@
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightDoubleClick(bool moveMouse = false)
         {
-            PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
+            this.PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
         }
 
         private void PerformMouseAction(bool moveMouse, Action action)
         {
-            var clickablePoint = GetClickablePoint();
+            var clickablePoint = this.GetClickablePoint();
             if (moveMouse)
             {
                 Mouse.MoveTo(clickablePoint);
@@ -180,7 +180,7 @@
         /// </summary>
         public virtual void Focus()
         {
-            BasicAutomationElement.SetFocus();
+            this.BasicAutomationElement.SetFocus();
         }
 
         /// <summary>
@@ -188,7 +188,7 @@
         /// </summary>
         public void FocusNative()
         {
-            var windowHandle = Properties.NativeWindowHandle;
+            var windowHandle = this.Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
@@ -197,7 +197,7 @@
             else
             {
                 // Fallback to the UIA Version
-                Focus();
+                this.Focus();
             }
         }
 
@@ -206,7 +206,7 @@
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = Properties.NativeWindowHandle;
+            var windowHandle = this.Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
@@ -215,7 +215,7 @@
             else
             {
                 // Fallback to the UIA Version
-                Focus();
+                this.Focus();
             }
         }
 
@@ -224,7 +224,7 @@
         /// </summary>
         public AutomationElement DrawHighlight()
         {
-            return DrawHighlight(Colors.Red);
+            return this.DrawHighlight(Colors.Red);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(WpfColor color)
         {
-            return DrawHighlight(true, color, 2000);
+            return this.DrawHighlight(true, color, 2000);
         }
 
         /// <summary>
@@ -240,7 +240,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(GdiColor color)
         {
-            return DrawHighlight(true, color, 2000);
+            return this.DrawHighlight(true, color, 2000);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@
         /// <remarks>Override for winforms color.</remarks>
         public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
         {
-            return DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
+            return this.DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
         }
 
         /// <summary>
@@ -263,16 +263,16 @@
         /// <param name="durationInMs">The duration (im ms) how long the highlight is shown.</param>
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
-            var rectangle = Properties.BoundingRectangle.Value;
+            var rectangle = this.Properties.BoundingRectangle.Value;
             if (!rectangle.IsEmpty)
             {
                 if (blocking)
                 {
-                    BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                    this.BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
                 }
                 else
                 {
-                    BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                    this.BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
                 }
             }
             return this;
@@ -283,7 +283,7 @@
         /// </summary>
         public Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(Properties.BoundingRectangle);
+            return ScreenCapture.CaptureArea(this.Properties.BoundingRectangle);
         }
 
         /// <summary>
@@ -291,7 +291,7 @@
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(Properties.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(this.Properties.BoundingRectangle);
         }
 
         /// <summary>
@@ -300,7 +300,7 @@
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(Properties.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(this.Properties.BoundingRectangle, filePath);
         }
 
         /// <summary>
@@ -308,7 +308,7 @@
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            return FindAll(treeScope, condition, Retry.DefaultRetryFor);
+            return this.FindAll(treeScope, condition, Retry.DefaultRetryFor);
         }
 
         /// <summary>
@@ -317,7 +317,7 @@
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement[]> whilePredicate = elements => elements.Length == 0;
-            Func<AutomationElement[]> retryMethod = () => BasicAutomationElement.FindAll(treeScope, condition);
+            Func<AutomationElement[]> retryMethod = () => this.BasicAutomationElement.FindAll(treeScope, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
@@ -326,7 +326,7 @@
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            return FindFirst(treeScope, condition, Retry.DefaultRetryFor);
+            return this.FindFirst(treeScope, condition, Retry.DefaultRetryFor);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
             Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => BasicAutomationElement.FindFirst(treeScope, condition);
+            Func<AutomationElement> retryMethod = () => this.BasicAutomationElement.FindFirst(treeScope, condition);
             return Retry.While(retryMethod, whilePredicate, timeOut);
         }
 
@@ -406,7 +406,7 @@
         /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
         public Shapes.Point GetClickablePoint()
         {
-            return BasicAutomationElement.GetClickablePoint();
+            return this.BasicAutomationElement.GetClickablePoint();
         }
 
         /// <summary>
@@ -416,7 +416,7 @@
         /// <returns>True if a point was found, false otherwise</returns>
         public bool TryGetClickablePoint(out Shapes.Point point)
         {
-            return BasicAutomationElement.TryGetClickablePoint(out point);
+            return this.BasicAutomationElement.TryGetClickablePoint(out point);
         }
 
         /// <summary>
@@ -428,7 +428,7 @@
             {
                 throw new NotSupportedByFrameworkException();
             }
-            return BasicAutomationElement.RegisterEvent(@event, treeScope, action);
+            return this.BasicAutomationElement.RegisterEvent(@event, treeScope, action);
         }
 
         /// <summary>
@@ -436,7 +436,7 @@
         /// </summary>
         public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
-            return BasicAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
+            return this.BasicAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
         }
 
         /// <summary>
@@ -444,7 +444,7 @@
         /// </summary>
         public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
-            return BasicAutomationElement.RegisterStructureChangedEvent(treeScope, action);
+            return this.BasicAutomationElement.RegisterStructureChangedEvent(treeScope, action);
         }
 
         /// <summary>
@@ -452,7 +452,7 @@
         /// </summary>
         public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
         {
-            BasicAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
+            this.BasicAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
         }
 
         /// <summary>
@@ -460,7 +460,7 @@
         /// </summary>
         public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
         {
-            BasicAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
+            this.BasicAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
         }
 
         /// <summary>
@@ -468,7 +468,7 @@
         /// </summary>
         public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
         {
-            BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
+            this.BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
         }
 
         /// <summary>
@@ -476,7 +476,7 @@
         /// </summary>
         public PatternId[] GetSupportedPatterns()
         {
-            return Automation.PatternLibrary.AllForCurrentFramework.Where(IsPatternSupported).ToArray();
+            return this.Automation.PatternLibrary.AllForCurrentFramework.Where(this.IsPatternSupported).ToArray();
         }
 
         /// <summary>
@@ -493,7 +493,7 @@
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
             bool isPatternAvailable;
-            var success = BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
+            var success = this.BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
             return success && isPatternAvailable;
         }
 
@@ -503,7 +503,7 @@
         /// </summary>
         public PatternId[] GetSupportedPatternsDirect()
         {
-            return BasicAutomationElement.GetSupportedPatterns();
+            return this.BasicAutomationElement.GetSupportedPatterns();
         }
 
         /// <summary>
@@ -512,7 +512,7 @@
         /// </summary>
         public bool IsPatternSupportedDirect(PatternId pattern)
         {
-            return GetSupportedPatternsDirect().Contains(pattern);
+            return this.GetSupportedPatternsDirect().Contains(pattern);
         }
 
         /// <summary>
@@ -521,7 +521,7 @@
         /// </summary>
         public PropertyId[] GetSupportedPropertiesDirect()
         {
-            return BasicAutomationElement.GetSupportedProperties();
+            return this.BasicAutomationElement.GetSupportedProperties();
         }
 
         /// <summary>
@@ -530,7 +530,7 @@
         /// </summary>
         public bool IsPropertySupportedDirect(PropertyId property)
         {
-            return GetSupportedPropertiesDirect().Contains(property);
+            return this.GetSupportedPropertiesDirect().Contains(property);
         }
 
         /// <summary>
@@ -538,17 +538,17 @@
         /// </summary>
         public bool Equals(AutomationElement other)
         {
-            return other != null && Automation.Compare(this, other);
+            return other != null && this.Automation.Compare(this, other);
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as AutomationElement);
+            return this.Equals(obj as AutomationElement);
         }
 
         public override int GetHashCode()
         {
-            return BasicAutomationElement?.GetHashCode() ?? 0;
+            return this.BasicAutomationElement?.GetHashCode() ?? 0;
         }
 
         /// <summary>
@@ -557,7 +557,7 @@
         public override string ToString()
         {
             return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                Properties.AutomationId.ValueOrDefault, Properties.Name.ValueOrDefault, Properties.LocalizedControlType.ValueOrDefault, Properties.FrameworkId.ValueOrDefault);
+                this.Properties.AutomationId.ValueOrDefault, this.Properties.Name.ValueOrDefault, this.Properties.LocalizedControlType.ValueOrDefault, this.Properties.FrameworkId.ValueOrDefault);
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
@@ -588,210 +588,210 @@
         #region Conversion Methods
         public Button AsButton()
         {
-            return new Button(BasicAutomationElement);
+            return new Button(this.BasicAutomationElement);
         }
 
         public CheckBox AsCheckBox()
         {
-            return new CheckBox(BasicAutomationElement);
+            return new CheckBox(this.BasicAutomationElement);
         }
 
         public ComboBox AsComboBox()
         {
-            return new ComboBox(BasicAutomationElement);
+            return new ComboBox(this.BasicAutomationElement);
         }
 
         public Label AsLabel()
         {
-            return new Label(BasicAutomationElement);
+            return new Label(this.BasicAutomationElement);
         }
 
         public Grid AsGrid()
         {
-            return new Grid(BasicAutomationElement);
+            return new Grid(this.BasicAutomationElement);
         }
 
         public GridRow AsGridRow()
         {
-            return new GridRow(BasicAutomationElement);
+            return new GridRow(this.BasicAutomationElement);
         }
 
         public GridCell AsGridCell()
         {
-            return new GridCell(BasicAutomationElement);
+            return new GridCell(this.BasicAutomationElement);
         }
 
         public GridHeader AsGridHeader()
         {
-            return new GridHeader(BasicAutomationElement);
+            return new GridHeader(this.BasicAutomationElement);
         }
 
         public GridHeaderItem AsGridHeaderItem()
         {
-            return new GridHeaderItem(BasicAutomationElement);
+            return new GridHeaderItem(this.BasicAutomationElement);
         }
 
         public HScrollBar AsHScrollBar()
         {
-            return new HScrollBar(BasicAutomationElement);
+            return new HScrollBar(this.BasicAutomationElement);
         }
 
         public Menu AsMenu()
         {
-            return new Menu(BasicAutomationElement);
+            return new Menu(this.BasicAutomationElement);
         }
 
         public MenuItem AsMenuItem()
         {
-            return new MenuItem(BasicAutomationElement);
+            return new MenuItem(this.BasicAutomationElement);
         }
 
         public ProgressBar AsProgressBar()
         {
-            return new ProgressBar(BasicAutomationElement);
+            return new ProgressBar(this.BasicAutomationElement);
         }
 
         public RadioButton AsRadioButton()
         {
-            return new RadioButton(BasicAutomationElement);
+            return new RadioButton(this.BasicAutomationElement);
         }
 
         public Slider AsSlider()
         {
-            return new Slider(BasicAutomationElement);
+            return new Slider(this.BasicAutomationElement);
         }
 
         public Tab AsTab()
         {
-            return new Tab(BasicAutomationElement);
+            return new Tab(this.BasicAutomationElement);
         }
 
         public TabItem AsTabItem()
         {
-            return new TabItem(BasicAutomationElement);
+            return new TabItem(this.BasicAutomationElement);
         }
 
         public TextBox AsTextBox()
         {
-            return new TextBox(BasicAutomationElement);
+            return new TextBox(this.BasicAutomationElement);
         }
 
         public Thumb AsThumb()
         {
-            return new Thumb(BasicAutomationElement);
+            return new Thumb(this.BasicAutomationElement);
         }
 
         public TitleBar AsTitleBar()
         {
-            return new TitleBar(BasicAutomationElement);
+            return new TitleBar(this.BasicAutomationElement);
         }
 
         public Tree AsTree()
         {
-            return new Tree(BasicAutomationElement);
+            return new Tree(this.BasicAutomationElement);
         }
 
         public TreeItem AsTreeItem()
         {
-            return new TreeItem(BasicAutomationElement);
+            return new TreeItem(this.BasicAutomationElement);
         }
 
         public VScrollBar AsVScrollBar()
         {
-            return new VScrollBar(BasicAutomationElement);
+            return new VScrollBar(this.BasicAutomationElement);
         }
 
         public Window AsWindow()
         {
-            return new Window(BasicAutomationElement);
+            return new Window(this.BasicAutomationElement);
         }
         #endregion Conversion Methods
 
         #region Convenience methods
         public AutomationElement FindFirstChild()
         {
-            return FindFirst(TreeScope.Children, new TrueCondition());
+            return this.FindFirst(TreeScope.Children, new TrueCondition());
         }
 
         public AutomationElement FindFirstChild(string automationId)
         {
-            return FindFirst(TreeScope.Children, ConditionFactory.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Children, this.ConditionFactory.ByAutomationId(automationId));
         }
 
         public AutomationElement FindFirstChild(ConditionBase condition)
         {
-            return FindFirst(TreeScope.Children, condition);
+            return this.FindFirst(TreeScope.Children, condition);
         }
 
         public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
-            return FindFirstChild(condition);
+            var condition = newConditionFunc(this.ConditionFactory);
+            return this.FindFirstChild(condition);
         }
 
         public AutomationElement[] FindAllChildren()
         {
-            return FindAll(TreeScope.Children, new TrueCondition());
+            return this.FindAll(TreeScope.Children, new TrueCondition());
         }
 
         public AutomationElement[] FindAllChildren(ConditionBase condition)
         {
-            return FindAll(TreeScope.Children, condition);
+            return this.FindAll(TreeScope.Children, condition);
         }
 
         public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
-            return FindAllChildren(condition);
+            var condition = newConditionFunc(this.ConditionFactory);
+            return this.FindAllChildren(condition);
         }
 
         public AutomationElement FindFirstDescendant()
         {
-            return FindFirst(TreeScope.Descendants, new TrueCondition());
+            return this.FindFirst(TreeScope.Descendants, new TrueCondition());
         }
 
         public AutomationElement FindFirstDescendant(string automationId)
         {
-            return FindFirst(TreeScope.Descendants, ConditionFactory.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Descendants, this.ConditionFactory.ByAutomationId(automationId));
         }
 
         public AutomationElement FindFirstDescendant(ConditionBase condition)
         {
-            return FindFirst(TreeScope.Descendants, condition);
+            return this.FindFirst(TreeScope.Descendants, condition);
         }
 
         public AutomationElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
-            return FindFirstDescendant(condition);
+            var condition = newConditionFunc(this.ConditionFactory);
+            return this.FindFirstDescendant(condition);
         }
 
         public AutomationElement[] FindAllDescendants()
         {
-            return FindAll(TreeScope.Descendants, new TrueCondition());
+            return this.FindAll(TreeScope.Descendants, new TrueCondition());
         }
 
         public AutomationElement[] FindAllDescendants(ConditionBase condition)
         {
-            return FindAll(TreeScope.Descendants, condition);
+            return this.FindAll(TreeScope.Descendants, condition);
         }
 
         public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
-            var condition = newConditionFunc(ConditionFactory);
-            return FindAllDescendants(condition);
+            var condition = newConditionFunc(this.ConditionFactory);
+            return this.FindAllDescendants(condition);
         }
 
         public AutomationElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
         {
-            var conditions = nestedConditionsFunc(ConditionFactory);
-            return FindFirstNested(conditions.ToArray());
+            var conditions = nestedConditionsFunc(this.ConditionFactory);
+            return this.FindFirstNested(conditions.ToArray());
         }
 
         public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
         {
-            var conditions = nestedConditionsFunc(ConditionFactory);
-            return FindAllNested(conditions.ToArray());
+            var conditions = nestedConditionsFunc(this.ConditionFactory);
+            return this.FindAllNested(conditions.ToArray());
         }
         #endregion Convenience methods
     }

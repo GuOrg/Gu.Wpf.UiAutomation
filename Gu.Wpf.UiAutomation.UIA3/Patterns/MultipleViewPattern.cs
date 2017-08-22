@@ -18,12 +18,12 @@
 
         public override string GetViewName(int view)
         {
-            return ComCallWrapper.Call(() => NativePattern.GetViewName(view));
+            return ComCallWrapper.Call(() => this.NativePattern.GetViewName(view));
         }
 
         public override void SetCurrentView(int view)
         {
-            ComCallWrapper.Call(() => NativePattern.SetCurrentView(view));
+            ComCallWrapper.Call(() => this.NativePattern.SetCurrentView(view));
         }
     }
 

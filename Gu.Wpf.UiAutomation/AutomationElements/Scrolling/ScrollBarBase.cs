@@ -10,29 +10,29 @@
         {
         }
 
-        protected IRangeValuePattern RangeValuePattern => Patterns.RangeValue.Pattern;
+        protected IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.Pattern;
 
-        protected Button SmallDecrementButton => FindButton(SmallDecrementText);
+        protected Button SmallDecrementButton => this.FindButton(this.SmallDecrementText);
 
-        protected Button SmallIncrementButton => FindButton(SmallIncrementText);
+        protected Button SmallIncrementButton => this.FindButton(this.SmallIncrementText);
 
-        protected Button LargeDecrementButton => FindButton(LargeDecrementText);
+        protected Button LargeDecrementButton => this.FindButton(this.LargeDecrementText);
 
-        protected Button LargeIncrementButton => FindButton(LargeIncrementText);
+        protected Button LargeIncrementButton => this.FindButton(this.LargeIncrementText);
 
-        protected Thumb Thumb => FindThumb();
+        protected Thumb Thumb => this.FindThumb();
 
-        public double Value => RangeValuePattern.Value.Value;
+        public double Value => this.RangeValuePattern.Value.Value;
 
-        public double MinimumValue => RangeValuePattern.Minimum.Value;
+        public double MinimumValue => this.RangeValuePattern.Minimum.Value;
 
-        public double MaximumValue => RangeValuePattern.Maximum.Value;
+        public double MaximumValue => this.RangeValuePattern.Maximum.Value;
 
-        public double SmallChange => RangeValuePattern.SmallChange.Value;
+        public double SmallChange => this.RangeValuePattern.SmallChange.Value;
 
-        public double LargeChange => RangeValuePattern.LargeChange.Value;
+        public double LargeChange => this.RangeValuePattern.LargeChange.Value;
 
-        public bool IsReadOnly => RangeValuePattern.IsReadOnly.Value;
+        public bool IsReadOnly => this.RangeValuePattern.IsReadOnly.Value;
 
         protected abstract string SmallDecrementText { get; }
 
@@ -44,13 +44,13 @@
 
         private Button FindButton(string automationId)
         {
-            var button = FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
+            var button = this.FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
             return button?.AsButton();
         }
 
         private Thumb FindThumb()
         {
-            var thumb = FindFirstChild(cf => cf.ByControlType(ControlType.Thumb));
+            var thumb = this.FindFirstChild(cf => cf.ByControlType(ControlType.Thumb));
             return thumb?.AsThumb();
         }
     }

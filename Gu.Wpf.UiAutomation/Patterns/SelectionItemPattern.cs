@@ -32,18 +32,18 @@
 
     public abstract class SelectionItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionItemPattern
     {
-        private AutomationProperty<bool> _isSelected;
-        private AutomationProperty<AutomationElement> _selectionContainer;
+        private AutomationProperty<bool> isSelected;
+        private AutomationProperty<AutomationElement> selectionContainer;
 
         protected SelectionItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public ISelectionItemPatternProperties Properties => Automation.PropertyLibrary.SelectionItem;
-        public ISelectionItemPatternEvents Events => Automation.EventLibrary.SelectionItem;
+        public ISelectionItemPatternProperties Properties => this.Automation.PropertyLibrary.SelectionItem;
+        public ISelectionItemPatternEvents Events => this.Automation.EventLibrary.SelectionItem;
 
-        public AutomationProperty<bool> IsSelected => GetOrCreate(ref _isSelected, Properties.IsSelected);
-        public AutomationProperty<AutomationElement> SelectionContainer => GetOrCreate(ref _selectionContainer, Properties.SelectionContainer);
+        public AutomationProperty<bool> IsSelected => this.GetOrCreate(ref this.isSelected, this.Properties.IsSelected);
+        public AutomationProperty<AutomationElement> SelectionContainer => this.GetOrCreate(ref this.selectionContainer, this.Properties.SelectionContainer);
 
         public abstract void AddToSelection();
         public abstract void RemoveFromSelection();

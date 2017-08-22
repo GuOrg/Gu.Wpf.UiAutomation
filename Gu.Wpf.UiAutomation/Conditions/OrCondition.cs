@@ -13,7 +13,7 @@
 
         public OrCondition(IEnumerable<ConditionBase> conditions)
         {
-            Conditions.AddRange(conditions);
+            this.Conditions.AddRange(conditions);
         }
 
         public override string ToString()
@@ -21,7 +21,7 @@
 #if NET35
             var conditions = String.Join(" OR ", Conditions.Select(c => c.ToString()).ToArray());
 #else
-            var conditions = String.Join(" OR ", Conditions.Select(c => c.ToString()));
+            var conditions = String.Join(" OR ", this.Conditions.Select(c => c.ToString()));
 #endif
             return $"({conditions})";
         }

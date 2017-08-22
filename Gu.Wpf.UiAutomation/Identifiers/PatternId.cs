@@ -13,7 +13,7 @@
         public PatternId(int id, string name, PropertyId availabilityProperty)
             : base(id, name)
         {
-            AvailabilityProperty = availabilityProperty;
+            this.AvailabilityProperty = availabilityProperty;
         }
 
         /// <summary>

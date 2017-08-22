@@ -12,48 +12,48 @@
 
         public UIA2TreeWalker(UIA2Automation automation, UIA.TreeWalker nativeTreeWalker)
         {
-            Automation = automation;
-            NativeTreeWalker = nativeTreeWalker;
+            this.Automation = automation;
+            this.NativeTreeWalker = nativeTreeWalker;
         }
 
         public AutomationElement GetParent(AutomationElement element)
         {
             var parent = CacheRequest.Current == null ?
-                NativeTreeWalker.GetParent(element.ToNative()) :
-                NativeTreeWalker.GetParent(element.ToNative(), CacheRequest.Current.ToNative());
-            return Automation.WrapNativeElement(parent);
+                this.NativeTreeWalker.GetParent(element.ToNative()) :
+                this.NativeTreeWalker.GetParent(element.ToNative(), CacheRequest.Current.ToNative());
+            return this.Automation.WrapNativeElement(parent);
         }
 
         public AutomationElement GetFirstChild(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
-                NativeTreeWalker.GetFirstChild(element.ToNative()) :
-                NativeTreeWalker.GetFirstChild(element.ToNative(), CacheRequest.Current.ToNative());
-            return Automation.WrapNativeElement(child);
+                this.NativeTreeWalker.GetFirstChild(element.ToNative()) :
+                this.NativeTreeWalker.GetFirstChild(element.ToNative(), CacheRequest.Current.ToNative());
+            return this.Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetLastChild(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
-                NativeTreeWalker.GetLastChild(element.ToNative()) :
-                NativeTreeWalker.GetLastChild(element.ToNative(), CacheRequest.Current.ToNative());
-            return Automation.WrapNativeElement(child);
+                this.NativeTreeWalker.GetLastChild(element.ToNative()) :
+                this.NativeTreeWalker.GetLastChild(element.ToNative(), CacheRequest.Current.ToNative());
+            return this.Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetNextSibling(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
-                NativeTreeWalker.GetNextSibling(element.ToNative()) :
-                NativeTreeWalker.GetNextSibling(element.ToNative(), CacheRequest.Current.ToNative());
-            return Automation.WrapNativeElement(child);
+                this.NativeTreeWalker.GetNextSibling(element.ToNative()) :
+                this.NativeTreeWalker.GetNextSibling(element.ToNative(), CacheRequest.Current.ToNative());
+            return this.Automation.WrapNativeElement(child);
         }
 
         public AutomationElement GetPreviousSibling(AutomationElement element)
         {
             var child = CacheRequest.Current == null ?
-                NativeTreeWalker.GetPreviousSibling(element.ToNative()) :
-                NativeTreeWalker.GetPreviousSibling(element.ToNative(), CacheRequest.Current.ToNative());
-            return Automation.WrapNativeElement(child);
+                this.NativeTreeWalker.GetPreviousSibling(element.ToNative()) :
+                this.NativeTreeWalker.GetPreviousSibling(element.ToNative(), CacheRequest.Current.ToNative());
+            return this.Automation.WrapNativeElement(child);
         }
     }
 }

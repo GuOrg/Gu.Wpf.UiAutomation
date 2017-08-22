@@ -18,15 +18,15 @@
     {
         public UIA3Automation() : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
         {
-            NativeAutomation = InitializeAutomation();
-            TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
+            this.NativeAutomation = this.InitializeAutomation();
+            this.TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
         }
 
         public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
         public override AutomationType AutomationType => AutomationType.UIA3;
 
-        public override object NotSupportedValue => NativeAutomation.ReservedNotSupportedValue;
+        public override object NotSupportedValue => this.NativeAutomation.ReservedNotSupportedValue;
 
         /// <summary>
         /// Native object for the ui automation
@@ -36,21 +36,21 @@
         /// <summary>
         /// Native object for Windows 8 automation
         /// </summary>
-        public UIA.IUIAutomation2 NativeAutomation2 => GetAutomationAs<UIA.IUIAutomation2>();
+        public UIA.IUIAutomation2 NativeAutomation2 => this.GetAutomationAs<UIA.IUIAutomation2>();
 
         /// <summary>
         /// Native object for Windows 8.1 automation
         /// </summary>
-        public UIA.IUIAutomation3 NativeAutomation3 => GetAutomationAs<UIA.IUIAutomation3>();
+        public UIA.IUIAutomation3 NativeAutomation3 => this.GetAutomationAs<UIA.IUIAutomation3>();
 
         public override AutomationElement GetDesktop()
         {
             return ComCallWrapper.Call(() =>
             {
                 var desktop = CacheRequest.IsCachingActive
-                    ? NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
-                    : NativeAutomation.GetRootElement();
-                return WrapNativeElement(desktop);
+                    ? this.NativeAutomation.GetRootElementBuildCache(CacheRequest.Current.ToNative(this))
+                    : this.NativeAutomation.GetRootElement();
+                return this.WrapNativeElement(desktop);
             });
         }
 
@@ -63,9 +63,9 @@
             {
                 var nativePoint = point.ToTagPoint();
                 var nativeElement = CacheRequest.IsCachingActive
-                    ? NativeAutomation.ElementFromPointBuildCache(nativePoint, CacheRequest.Current.ToNative(this))
-                    : NativeAutomation.ElementFromPoint(nativePoint);
-                return WrapNativeElement(nativeElement);
+                    ? this.NativeAutomation.ElementFromPointBuildCache(nativePoint, CacheRequest.Current.ToNative(this))
+                    : this.NativeAutomation.ElementFromPoint(nativePoint);
+                return this.WrapNativeElement(nativeElement);
             });
         }
 
@@ -77,9 +77,9 @@
             return ComCallWrapper.Call(() =>
             {
                 var nativeElement = CacheRequest.IsCachingActive
-                    ? NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
-                    : NativeAutomation.ElementFromHandle(hwnd);
-                return WrapNativeElement(nativeElement);
+                    ? this.NativeAutomation.ElementFromHandleBuildCache(hwnd, CacheRequest.Current.ToNative(this))
+                    : this.NativeAutomation.ElementFromHandle(hwnd);
+                return this.WrapNativeElement(nativeElement);
             });
         }
 
@@ -88,29 +88,29 @@
             return ComCallWrapper.Call(() =>
             {
                 var nativeElement = CacheRequest.IsCachingActive
-                    ? NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
-                    : NativeAutomation.GetFocusedElement();
-                return WrapNativeElement(nativeElement);
+                    ? this.NativeAutomation.GetFocusedElementBuildCache(CacheRequest.Current.ToNative(this))
+                    : this.NativeAutomation.GetFocusedElement();
+                return this.WrapNativeElement(nativeElement);
             });
         }
 
         public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA3FocusChangedEventHandler(this, action);
-            ComCallWrapper.Call(() => NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
+            ComCallWrapper.Call(() => this.NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
             return eventHandler;
         }
 
         public override void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler)
         {
-            NativeAutomation.RemoveFocusChangedEventHandler((UIA3FocusChangedEventHandler)eventHandler);
+            this.NativeAutomation.RemoveFocusChangedEventHandler((UIA3FocusChangedEventHandler)eventHandler);
         }
 
         public override void UnregisterAllEvents()
         {
             try
             {
-                NativeAutomation.RemoveAllEventHandlers();
+                this.NativeAutomation.RemoveAllEventHandlers();
             }
             catch
             {
@@ -120,7 +120,7 @@
 
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
-            return NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
+            return this.NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
         }
 
         /// <summary>
@@ -148,7 +148,7 @@
         /// </summary>
         private T GetAutomationAs<T>() where T : class, UIA.IUIAutomation
         {
-            var element = NativeAutomation as T;
+            var element = this.NativeAutomation as T;
             if (element == null)
             {
                 throw new NotSupportedException($"OS does not have {typeof(T).Name} support.");

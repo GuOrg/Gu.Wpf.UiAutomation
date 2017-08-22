@@ -13,9 +13,9 @@
 
         public void HandleFocusChangedEvent(UIA.IUIAutomationElement sender)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            HandleFocusChangedEvent(senderElement);
+            this.HandleFocusChangedEvent(senderElement);
         }
     }
 }

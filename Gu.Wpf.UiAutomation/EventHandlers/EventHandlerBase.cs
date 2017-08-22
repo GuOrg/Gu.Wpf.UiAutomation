@@ -6,7 +6,7 @@
 
         protected EventHandlerBase(AutomationBase automation)
         {
-            Automation = automation;
+            this.Automation = automation;
         }
     }
 }

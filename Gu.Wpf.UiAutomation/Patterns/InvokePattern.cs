@@ -21,7 +21,7 @@
         {
         }
 
-        public IInvokePatternEvents Events => Automation.EventLibrary.Invoke;
+        public IInvokePatternEvents Events => this.Automation.EventLibrary.Invoke;
 
         public abstract void Invoke();
     }

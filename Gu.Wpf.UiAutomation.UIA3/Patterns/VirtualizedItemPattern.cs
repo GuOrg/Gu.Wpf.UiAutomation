@@ -17,7 +17,7 @@
 
         public void Realize()
         {
-            ComCallWrapper.Call(() => NativePattern.Realize());
+            ComCallWrapper.Call(() => this.NativePattern.Realize());
         }
     }
 }

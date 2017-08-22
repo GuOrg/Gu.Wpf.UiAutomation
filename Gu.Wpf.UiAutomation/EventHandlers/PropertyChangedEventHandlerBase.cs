@@ -6,17 +6,17 @@
 
     public abstract class PropertyChangedEventHandlerBase : EventHandlerBase, IAutomationPropertyChangedEventHandler
     {
-        private readonly Action<AutomationElement, PropertyId, object> _callAction;
+        private readonly Action<AutomationElement, PropertyId, object> callAction;
 
         protected PropertyChangedEventHandlerBase(AutomationBase automation, Action<AutomationElement, PropertyId, object> callAction)
             : base(automation)
         {
-            _callAction = callAction;
+            this.callAction = callAction;
         }
 
         public void HandlePropertyChangedEvent(AutomationElement sender, PropertyId propertyId, object newValue)
         {
-            _callAction(sender, propertyId, newValue);
+            this.callAction(sender, propertyId, newValue);
         }
     }
 }

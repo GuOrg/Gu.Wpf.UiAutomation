@@ -23,18 +23,18 @@
 
     public abstract class SpreadsheetItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISpreadsheetItemPattern
     {
-        private AutomationProperty<string> _formula;
-        private AutomationProperty<AutomationElement[]> _annotationObjects;
-        private AutomationProperty<AnnotationType[]> _annotationTypes;
+        private AutomationProperty<string> formula;
+        private AutomationProperty<AutomationElement[]> annotationObjects;
+        private AutomationProperty<AnnotationType[]> annotationTypes;
 
         protected SpreadsheetItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public ISpreadsheetItemPatternProperties Properties => Automation.PropertyLibrary.SpreadsheetItem;
+        public ISpreadsheetItemPatternProperties Properties => this.Automation.PropertyLibrary.SpreadsheetItem;
 
-        public AutomationProperty<string> Formula => GetOrCreate(ref _formula, Properties.Formula);
-        public AutomationProperty<AutomationElement[]> AnnotationObjects => GetOrCreate(ref _annotationObjects, Properties.AnnotationObjects);
-        public AutomationProperty<AnnotationType[]> AnnotationTypes => GetOrCreate(ref _annotationTypes, Properties.AnnotationTypes);
+        public AutomationProperty<string> Formula => this.GetOrCreate(ref this.formula, this.Properties.Formula);
+        public AutomationProperty<AutomationElement[]> AnnotationObjects => this.GetOrCreate(ref this.annotationObjects, this.Properties.AnnotationObjects);
+        public AutomationProperty<AnnotationType[]> AnnotationTypes => this.GetOrCreate(ref this.annotationTypes, this.Properties.AnnotationTypes);
     }
 }

@@ -250,17 +250,17 @@
         /// </summary>
         private class KeyPressingActivation : IDisposable
         {
-            private readonly VirtualKeyShort _virtualKey;
+            private readonly VirtualKeyShort virtualKey;
 
             public KeyPressingActivation(VirtualKeyShort virtualKey)
             {
-                _virtualKey = virtualKey;
-                Press(_virtualKey);
+                this.virtualKey = virtualKey;
+                Press(this.virtualKey);
             }
 
             public void Dispose()
             {
-                Release(_virtualKey);
+                Release(this.virtualKey);
             }
         }
     }

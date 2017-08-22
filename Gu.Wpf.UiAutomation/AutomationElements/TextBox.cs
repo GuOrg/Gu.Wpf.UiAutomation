@@ -17,40 +17,40 @@
         {
             get
             {
-                if (Properties.IsPassword)
+                if (this.Properties.IsPassword)
                 {
-                    throw new MethodNotSupportedException($"Text from element '{ToString()}' cannot be retrieved because it is set as password.");
+                    throw new MethodNotSupportedException($"Text from element '{this.ToString()}' cannot be retrieved because it is set as password.");
                 }
-                var valuePattern = Patterns.Value.PatternOrDefault;
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
                 if (valuePattern != null)
                 {
                     return valuePattern.Value;
                 }
-                var textPattern = Patterns.Text.PatternOrDefault;
+                var textPattern = this.Patterns.Text.PatternOrDefault;
                 if (textPattern != null)
                 {
                     return textPattern.DocumentRange.GetText(Int32.MaxValue);
                 }
-                throw new MethodNotSupportedException($"AutomationElement '{ToString()}' supports neither ValuePattern or TextPattern");
+                throw new MethodNotSupportedException($"AutomationElement '{this.ToString()}' supports neither ValuePattern or TextPattern");
             }
             set
             {
-                var valuePattern = Patterns.Value.PatternOrDefault;
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
                 if (valuePattern != null)
                 {
                     valuePattern.SetValue(value);
                 }
                 else
                 {
-                    Enter(value);
+                    this.Enter(value);
                 }
             }
         }
 
         public void Enter(string value)
         {
-            Focus();
-            var valuePattern = Patterns.Value.PatternOrDefault;
+            this.Focus();
+            var valuePattern = this.Patterns.Value.PatternOrDefault;
             valuePattern?.SetValue(String.Empty);
             if (String.IsNullOrEmpty(value)) return;
 

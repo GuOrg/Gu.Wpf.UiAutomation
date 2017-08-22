@@ -20,12 +20,12 @@
 
         public override void Cancel()
         {
-            ComCallWrapper.Call(() => NativePattern.Cancel());
+            ComCallWrapper.Call(() => this.NativePattern.Cancel());
         }
 
         public override void StartListening(SynchronizedInputType inputType)
         {
-            ComCallWrapper.Call(() => NativePattern.StartListening((UIA.SynchronizedInputType)inputType));
+            ComCallWrapper.Call(() => this.NativePattern.StartListening((UIA.SynchronizedInputType)inputType));
         }
     }
 

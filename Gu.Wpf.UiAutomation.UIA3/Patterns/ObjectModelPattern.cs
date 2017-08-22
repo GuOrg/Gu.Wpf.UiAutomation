@@ -17,7 +17,7 @@
 
         public object GetUnderlyingObjectModel()
         {
-            return ComCallWrapper.Call(() => NativePattern.GetUnderlyingObjectModel());
+            return ComCallWrapper.Call(() => this.NativePattern.GetUnderlyingObjectModel());
         }
     }
 }

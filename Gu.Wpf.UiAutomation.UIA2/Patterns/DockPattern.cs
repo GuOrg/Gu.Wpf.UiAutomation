@@ -17,7 +17,7 @@
 
         public override void SetDockPosition(DockPosition dockPos)
         {
-            NativePattern.SetDockPosition((UIA.DockPosition)dockPos);
+            this.NativePattern.SetDockPosition((UIA.DockPosition)dockPos);
         }
     }
 

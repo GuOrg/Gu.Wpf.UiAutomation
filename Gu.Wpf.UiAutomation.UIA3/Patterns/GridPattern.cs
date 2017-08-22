@@ -20,8 +20,8 @@
 
         public override AutomationElement GetItem(int row, int column)
         {
-            var nativeItem = ComCallWrapper.Call(() => NativePattern.GetItem(row, column));
-            return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeItem);
+            var nativeItem = ComCallWrapper.Call(() => this.NativePattern.GetItem(row, column));
+            return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeItem);
         }
     }
 

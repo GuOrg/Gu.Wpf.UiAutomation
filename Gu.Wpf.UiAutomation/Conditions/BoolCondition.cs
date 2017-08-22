@@ -6,14 +6,14 @@
     {
         public BoolCondition(bool booleanValue)
         {
-            BooleanValue = booleanValue;
+            this.BooleanValue = booleanValue;
         }
 
         public bool BooleanValue { get; }
 
         public override string ToString()
         {
-            return String.Format("BOOL: {0}", BooleanValue);
+            return String.Format("BOOL: {0}", this.BooleanValue);
         }
     }
 

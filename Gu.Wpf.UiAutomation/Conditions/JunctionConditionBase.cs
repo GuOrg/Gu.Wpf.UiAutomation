@@ -6,11 +6,11 @@
     {
         protected JunctionConditionBase()
         {
-            Conditions = new List<ConditionBase>();
+            this.Conditions = new List<ConditionBase>();
         }
 
         public List<ConditionBase> Conditions { get; }
 
-        public int ChildCount => Conditions.Count;
+        public int ChildCount => this.Conditions.Count;
     }
 }

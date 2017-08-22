@@ -15,23 +15,23 @@
 
         public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            ExtendedNativePattern = nativePattern;
+            this.ExtendedNativePattern = nativePattern;
         }
 
         public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
 
-        ITextEditPatternEvents ITextEditPattern.Events => Automation.EventLibrary.TextEdit;
+        ITextEditPatternEvents ITextEditPattern.Events => this.Automation.EventLibrary.TextEdit;
 
         public ITextRange GetActiveComposition()
         {
-            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetActiveComposition());
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = ComCallWrapper.Call(() => this.ExtendedNativePattern.GetActiveComposition());
+            return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange GetConversionTarget()
         {
-            var nativeRange = ComCallWrapper.Call(() => ExtendedNativePattern.GetConversionTarget());
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = ComCallWrapper.Call(() => this.ExtendedNativePattern.GetConversionTarget());
+            return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }
 

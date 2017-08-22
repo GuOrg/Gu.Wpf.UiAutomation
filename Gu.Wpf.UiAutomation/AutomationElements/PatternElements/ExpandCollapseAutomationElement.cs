@@ -10,18 +10,18 @@
         {
         }
 
-        public IExpandCollapsePattern ExpandCollapsePattern => Patterns.ExpandCollapse.Pattern;
+        public IExpandCollapsePattern ExpandCollapsePattern => this.Patterns.ExpandCollapse.Pattern;
 
-        public ExpandCollapseState ExpandCollapseState => ExpandCollapsePattern.ExpandCollapseState;
+        public ExpandCollapseState ExpandCollapseState => this.ExpandCollapsePattern.ExpandCollapseState;
 
         public void Expand()
         {
-            ExpandCollapsePattern.Expand();
+            this.ExpandCollapsePattern.Expand();
         }
 
         public void Collapse()
         {
-            ExpandCollapsePattern.Expand();
+            this.ExpandCollapsePattern.Expand();
         }
     }
 }

@@ -6,22 +6,22 @@
 
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> _methodToExecute;
-        readonly Func<object, bool> _canExecuteEvaluator;
+        private readonly Action<object> methodToExecute;
+        readonly Func<object, bool> canExecuteEvaluator;
 
         public RelayCommand(Action<object> methodToExecute)
             : this(methodToExecute, null) { }
 
         public RelayCommand(Action<object> methodToExecute, Func<object, bool> canExecuteEvaluator)
         {
-            _methodToExecute = methodToExecute;
-            _canExecuteEvaluator = canExecuteEvaluator;
+            this.methodToExecute = methodToExecute;
+            this.canExecuteEvaluator = canExecuteEvaluator;
         }
 
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return _canExecuteEvaluator == null || _canExecuteEvaluator.Invoke(parameter);
+            return this.canExecuteEvaluator == null || this.canExecuteEvaluator.Invoke(parameter);
         }
 
         public event EventHandler CanExecuteChanged
@@ -32,7 +32,7 @@
 
         public void Execute(object parameter)
         {
-            _methodToExecute.Invoke(parameter);
+            this.methodToExecute.Invoke(parameter);
         }
     }
 }

@@ -8,16 +8,16 @@
     {
         public UIA3EventLibrary()
         {
-            Element = new UIA3AutomationElementEvents();
-            Drag = new DragPatternEvents();
-            DropTarget = new DropTargetPatternEvents();
-            Invoke = new InvokePatternEvents();
-            SelectionItem = new SelectionItemPatternEvents();
-            Selection = new SelectionPatternEvents();
-            SynchronizedInput = new SynchronizedInputPatternEvents();
-            TextEdit = new TextEditPatternEvents();
-            Text = new TextPatternEvents();
-            Window = new WindowPatternEvents();
+            this.Element = new UIA3AutomationElementEvents();
+            this.Drag = new DragPatternEvents();
+            this.DropTarget = new DropTargetPatternEvents();
+            this.Invoke = new InvokePatternEvents();
+            this.SelectionItem = new SelectionItemPatternEvents();
+            this.Selection = new SelectionPatternEvents();
+            this.SynchronizedInput = new SynchronizedInputPatternEvents();
+            this.TextEdit = new TextEditPatternEvents();
+            this.Text = new TextPatternEvents();
+            this.Window = new WindowPatternEvents();
         }
 
         public IAutomationElementEvents Element { get; }

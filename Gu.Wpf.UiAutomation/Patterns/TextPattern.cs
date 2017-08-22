@@ -31,7 +31,7 @@
         {
         }
 
-        public ITextPatternEvents Events => Automation.EventLibrary.Text;
+        public ITextPatternEvents Events => this.Automation.EventLibrary.Text;
 
         public abstract ITextRange DocumentRange { get; }
         public abstract SupportedTextSelection SupportedTextSelection { get; }

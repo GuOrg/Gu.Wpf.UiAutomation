@@ -7,7 +7,7 @@
     /// </summary>
     public abstract class ConvertibleIdentifierBase : IdentifierBase
     {
-        private Func<AutomationBase, object, object> _converterMethod;
+        private Func<AutomationBase, object, object> converterMethod;
 
         protected ConvertibleIdentifierBase(int id, string name)
             : base(id, name)
@@ -19,7 +19,7 @@
         /// </summary>
         protected T SetConverter<T>(Func<AutomationBase, object, object> convertMethod) where T : ConvertibleIdentifierBase
         {
-            _converterMethod = convertMethod;
+            this.converterMethod = convertMethod;
             return (T)this;
         }
 
@@ -28,7 +28,7 @@
         /// </summary>
         public T Convert<T>(AutomationBase automation, object value)
         {
-            return _converterMethod == null ? (T)value : (T)_converterMethod(automation, value);
+            return this.converterMethod == null ? (T)value : (T)this.converterMethod(automation, value);
         }
     }
 }

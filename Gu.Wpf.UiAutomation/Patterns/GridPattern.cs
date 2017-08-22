@@ -22,17 +22,17 @@
 
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
     {
-        private AutomationProperty<int> _columnCount;
-        private AutomationProperty<int> _rowCount;
+        private AutomationProperty<int> columnCount;
+        private AutomationProperty<int> rowCount;
 
         protected GridPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IGridPatternProperties Properties => Automation.PropertyLibrary.Grid;
+        public IGridPatternProperties Properties => this.Automation.PropertyLibrary.Grid;
 
-        public AutomationProperty<int> ColumnCount => GetOrCreate(ref _columnCount, Properties.ColumnCount);
-        public AutomationProperty<int> RowCount => GetOrCreate(ref _rowCount, Properties.RowCount);
+        public AutomationProperty<int> ColumnCount => this.GetOrCreate(ref this.columnCount, this.Properties.ColumnCount);
+        public AutomationProperty<int> RowCount => this.GetOrCreate(ref this.rowCount, this.Properties.RowCount);
 
         public abstract AutomationElement GetItem(int row, int column);
     }

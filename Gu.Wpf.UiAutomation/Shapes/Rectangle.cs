@@ -15,64 +15,64 @@
 
         public double X
         {
-            get { return Left; }
-            set { Left = value; }
+            get { return this.Left; }
+            set { this.Left = value; }
         }
 
         public double Y
         {
-            get { return Top; }
-            set { Top = value; }
+            get { return this.Top; }
+            set { this.Top = value; }
         }
 
         public double Width
         {
-            get { return Right - Left; }
-            set { Right = Left + value; }
+            get { return this.Right - this.Left; }
+            set { this.Right = this.Left + value; }
         }
 
         public double Height
         {
-            get { return Bottom - Top; }
-            set { Bottom = Top + value; }
+            get { return this.Bottom - this.Top; }
+            set { this.Bottom = this.Top + value; }
         }
 
-        public bool IsEmpty => X.Equals(0) && Y.Equals(0) && Width.Equals(0) && Height.Equals(0);
+        public bool IsEmpty => this.X.Equals(0) && this.Y.Equals(0) && this.Width.Equals(0) && this.Height.Equals(0);
 
-        public bool IsValid => X.HasValue() && Y.HasValue() && Width.HasValue() && Height.HasValue();
+        public bool IsValid => this.X.HasValue() && this.Y.HasValue() && this.Width.HasValue() && this.Height.HasValue();
 
-        public Point Center => new Point(Width / 2 + Left, Height / 2 + Top);
+        public Point Center => new Point(this.Width / 2 + this.Left, this.Height / 2 + this.Top);
 
-        public Point North => GetNorth();
+        public Point North => this.GetNorth();
 
-        public Point East => GetEast();
+        public Point East => this.GetEast();
 
-        public Point South => GetSouth();
+        public Point South => this.GetSouth();
 
-        public Point West => GetWest();
+        public Point West => this.GetWest();
 
-        public Point ImmediateExteriorNorth => GetNorth(-1);
+        public Point ImmediateExteriorNorth => this.GetNorth(-1);
 
-        public Point ImmediateInteriorNorth => GetNorth(1);
+        public Point ImmediateInteriorNorth => this.GetNorth(1);
 
-        public Point ImmediateExteriorEast => GetEast(1);
+        public Point ImmediateExteriorEast => this.GetEast(1);
 
-        public Point ImmediateInteriorEast => GetEast(-1);
+        public Point ImmediateInteriorEast => this.GetEast(-1);
 
-        public Point ImmediateExteriorSouth => GetSouth(1);
+        public Point ImmediateExteriorSouth => this.GetSouth(1);
 
-        public Point ImmediateInteriorSouth => GetSouth(-1);
+        public Point ImmediateInteriorSouth => this.GetSouth(-1);
 
-        public Point ImmediateExteriorWest => GetWest(-1);
+        public Point ImmediateExteriorWest => this.GetWest(-1);
 
-        public Point ImmediateInteriorWest => GetWest(1);
+        public Point ImmediateInteriorWest => this.GetWest(1);
 
         public Rectangle(double x, double y, double width, double height)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
         }
 
         /// <summary>
@@ -109,27 +109,27 @@
 
         public override string ToString()
         {
-            return $"X={X},Y={Y},Width={Width},Height={Height}";
+            return $"X={this.X},Y={this.Y},Width={this.Width},Height={this.Height}";
         }
 
         private Point GetNorth(int by = 0)
         {
-            return new Point(Center.X, Top + by);
+            return new Point(this.Center.X, this.Top + by);
         }
 
         private Point GetEast(int by = 0)
         {
-            return new Point(Right + by, Center.Y);
+            return new Point(this.Right + by, this.Center.Y);
         }
 
         private Point GetSouth(int by = 0)
         {
-            return new Point(Center.X, Bottom + by);
+            return new Point(this.Center.X, this.Bottom + by);
         }
 
         private Point GetWest(int by = 0)
         {
-            return new Point(Left + by, Center.Y);
+            return new Point(this.Left + by, this.Center.Y);
         }
 
         public static Rectangle Empty => new Rectangle(0, 0, 0, 0);

@@ -48,8 +48,8 @@
         /// <param name="basicAutomationElement">The <see cref="BasicAutomationElement"/> for this property object.</param>
         public AutomationProperty(PropertyId propertyId, BasicAutomationElementBase basicAutomationElement)
         {
-            PropertyId = propertyId;
-            BasicAutomationElement = basicAutomationElement;
+            this.PropertyId = propertyId;
+            this.BasicAutomationElement = basicAutomationElement;
         }
 
         /// <summary>
@@ -63,14 +63,14 @@
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
         /// <inheritdoc />
-        public TVal Value => BasicAutomationElement.GetPropertyValue<TVal>(PropertyId);
+        public TVal Value => this.BasicAutomationElement.GetPropertyValue<TVal>(this.PropertyId);
 
         /// <inheritdoc />
         public TVal ValueOrDefault
         {
             get
             {
-                TryGetValue(out TVal value);
+                this.TryGetValue(out TVal value);
                 return value;
             }
         }
@@ -78,11 +78,11 @@
         /// <inheritdoc />
         public bool TryGetValue(out TVal value)
         {
-            return BasicAutomationElement.TryGetPropertyValue(PropertyId, out value);
+            return this.BasicAutomationElement.TryGetPropertyValue(this.PropertyId, out value);
         }
 
         /// <inheritdoc />
-        public bool IsSupported => TryGetValue(out TVal _);
+        public bool IsSupported => this.TryGetValue(out TVal _);
 
         /// <summary>
         /// Implicit operator to convert the property object directly to its value.
@@ -95,17 +95,17 @@
 
         public bool Equals(TVal other)
         {
-            return Value.Equals(other);
+            return this.Value.Equals(other);
         }
 
         public bool Equals(AutomationProperty<TVal> other)
         {
-            return other != null && Value.Equals(other.Value);
+            return other != null && this.Value.Equals(other.Value);
         }
 
         public override string ToString()
         {
-            return Convert.ToString(ValueOrDefault);
+            return Convert.ToString(this.ValueOrDefault);
         }
     }
 }

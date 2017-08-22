@@ -17,31 +17,31 @@
         public PropertyNotSupportedException(PropertyId property)
             : base(String.Format(DefaultMessageWithData, property))
         {
-            Property = property;
+            this.Property = property;
         }
 
         public PropertyNotSupportedException(string message, PropertyId property)
             : base(message)
         {
-            Property = property;
+            this.Property = property;
         }
 
         public PropertyNotSupportedException(PropertyId property, Exception innerException)
             : base(String.Format(DefaultMessageWithData, property), innerException)
         {
-            Property = property;
+            this.Property = property;
         }
 
         public PropertyNotSupportedException(string message, PropertyId property, Exception innerException)
             : base(message, innerException)
         {
-            Property = property;
+            this.Property = property;
         }
 
         protected PropertyNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
+            this.Property = (PropertyId)info.GetValue("Property", typeof(PropertyId));
         }
 
         public PropertyId Property { get; }
@@ -52,7 +52,7 @@
             {
                 throw new ArgumentNullException(nameof(info));
             }
-            info.AddValue("Property", Property);
+            info.AddValue("Property", this.Property);
             base.GetObjectData(info, context);
         }
     }

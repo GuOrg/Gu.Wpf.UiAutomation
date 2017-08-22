@@ -14,43 +14,43 @@
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => Patterns.RangeValue.PatternOrDefault;
+        private IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.PatternOrDefault;
 
-        private IValuePattern ValuePattern => Patterns.Value.PatternOrDefault;
+        private IValuePattern ValuePattern => this.Patterns.Value.PatternOrDefault;
 
-        private Button LargeIncreaseButton => GetLargeIncreaseButton();
+        private Button LargeIncreaseButton => this.GetLargeIncreaseButton();
 
-        private Button LargeDecreaseButton => GetLargeDecreaseButton();
+        private Button LargeDecreaseButton => this.GetLargeDecreaseButton();
 
-        public Thumb Thumb => FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
+        public Thumb Thumb => this.FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
 
-        public bool IsOnlyValue => !IsPatternSupported(Automation.PatternLibrary.RangeValuePattern);
+        public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
 
         public double Value
         {
             get
             {
-                var rangeValuePattern = RangeValuePattern;
+                var rangeValuePattern = this.RangeValuePattern;
                 if (rangeValuePattern != null)
                 {
-                    return RangeValuePattern.Value.Value;
+                    return this.RangeValuePattern.Value.Value;
                 }
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(ValuePattern.Value.Value);
+                return Convert.ToDouble(this.ValuePattern.Value.Value);
             }
             set
             {
-                var rangeValuePattern = RangeValuePattern;
+                var rangeValuePattern = this.RangeValuePattern;
                 if (rangeValuePattern != null)
                 {
-                    RangeValuePattern.SetValue(value);
+                    this.RangeValuePattern.SetValue(value);
                 }
                 else
                 {
                     // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                     // The value in this case is always between 0 and 100
-                    ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));
+                    this.ValuePattern.SetValue(value.ToString(CultureInfo.InvariantCulture));
                 }
             }
         }
@@ -69,26 +69,26 @@
 
         public void LargeIncrement()
         {
-            LargeIncreaseButton.Invoke();
+            this.LargeIncreaseButton.Invoke();
         }
 
         public void LargeDecrement()
         {
-            LargeDecreaseButton.Invoke();
+            this.LargeDecreaseButton.Invoke();
         }
 
         private Button GetLargeIncreaseButton()
         {
-            if (FrameworkType == FrameworkType.Wpf)
+            if (this.FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
+                return this.FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one right of the thumb
-            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Left > Thumb.Properties.BoundingRectangle.Value.Left)
+                if (button.Properties.BoundingRectangle.Value.Left > this.Thumb.Properties.BoundingRectangle.Value.Left)
                 {
                     return button.AsButton();
                 }
@@ -98,16 +98,16 @@
 
         private Button GetLargeDecreaseButton()
         {
-            if (FrameworkType == FrameworkType.Wpf)
+            if (this.FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
+                return this.FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
             }
             // For WinForms, we loop thru the buttons and find the one left of the thumb
-            var buttons = FindAllChildren(cf => cf.ByControlType(ControlType.Button));
+            var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Right < Thumb.Properties.BoundingRectangle.Value.Right)
+                if (button.Properties.BoundingRectangle.Value.Right < this.Thumb.Properties.BoundingRectangle.Value.Right)
                 {
                     return button.AsButton();
                 }

@@ -9,7 +9,7 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class GridPatternTests : UITestBase
     {
-        private AutomationElement _dataGrid;
+        private AutomationElement dataGrid;
 
         public GridPatternTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -19,16 +19,16 @@
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = this.App.GetMainWindow(this.Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
-            _dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
+            this.dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
         }
 
         [Test]
         public void GridTest()
         {
-            var dataGrid = _dataGrid;
+            var dataGrid = this.dataGrid;
             Assert.That(dataGrid, Is.Not.Null);
             var gridPattern = dataGrid.Patterns.Grid.Pattern;
             Assert.That(gridPattern, Is.Not.Null);

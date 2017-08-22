@@ -17,12 +17,12 @@
 
         public override string GetViewName(int view)
         {
-            return NativePattern.GetViewName(view);
+            return this.NativePattern.GetViewName(view);
         }
 
         public override void SetCurrentView(int view)
         {
-            NativePattern.SetCurrentView(view);
+            this.NativePattern.SetCurrentView(view);
         }
     }
 

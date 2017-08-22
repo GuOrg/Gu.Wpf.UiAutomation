@@ -32,21 +32,21 @@
 
     public abstract class DragPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDragPattern
     {
-        private AutomationProperty<string> _dropEffect;
-        private AutomationProperty<string[]> _dropEffects;
-        private AutomationProperty<bool> _isGrabbed;
-        private AutomationProperty<AutomationElement[]> _grabbedItems;
+        private AutomationProperty<string> dropEffect;
+        private AutomationProperty<string[]> dropEffects;
+        private AutomationProperty<bool> isGrabbed;
+        private AutomationProperty<AutomationElement[]> grabbedItems;
 
         protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IDragPatternProperties Properties => Automation.PropertyLibrary.Drag;
-        public IDragPatternEvents Events => Automation.EventLibrary.Drag;
+        public IDragPatternProperties Properties => this.Automation.PropertyLibrary.Drag;
+        public IDragPatternEvents Events => this.Automation.EventLibrary.Drag;
 
-        public AutomationProperty<string> DropEffect => GetOrCreate(ref _dropEffect, Properties.DropEffect);
-        public AutomationProperty<string[]> DropEffects => GetOrCreate(ref _dropEffects, Properties.DropEffects);
-        public AutomationProperty<bool> IsGrabbed => GetOrCreate(ref _isGrabbed, Properties.IsGrabbed);
-        public AutomationProperty<AutomationElement[]> GrabbedItems => GetOrCreate(ref _grabbedItems, Properties.GrabbedItems);
+        public AutomationProperty<string> DropEffect => this.GetOrCreate(ref this.dropEffect, this.Properties.DropEffect);
+        public AutomationProperty<string[]> DropEffects => this.GetOrCreate(ref this.dropEffects, this.Properties.DropEffects);
+        public AutomationProperty<bool> IsGrabbed => this.GetOrCreate(ref this.isGrabbed, this.Properties.IsGrabbed);
+        public AutomationProperty<AutomationElement[]> GrabbedItems => this.GetOrCreate(ref this.grabbedItems, this.Properties.GrabbedItems);
     }
 }

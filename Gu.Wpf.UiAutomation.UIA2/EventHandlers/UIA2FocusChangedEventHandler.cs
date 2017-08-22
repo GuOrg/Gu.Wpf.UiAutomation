@@ -11,14 +11,14 @@
 
         public UIA2FocusChangedEventHandler(AutomationBase automation, Action<AutomationElement> callAction) : base(automation, callAction)
         {
-            EventHandler = HandleFocusChangedEvent;
+            this.EventHandler = this.HandleFocusChangedEvent;
         }
 
         private void HandleFocusChangedEvent(object sender, UIA.AutomationFocusChangedEventArgs automationFocusChangedEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)this.Automation, (UIA.AutomationElement)sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            HandleFocusChangedEvent(senderElement);
+            this.HandleFocusChangedEvent(senderElement);
         }
     }
 }

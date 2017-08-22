@@ -52,28 +52,28 @@
 
         protected IdentifierBase(int id, string name)
         {
-            Id = id;
-            Name = name;
+            this.Id = id;
+            this.Name = name;
         }
 
         public bool Equals(IdentifierBase other)
         {
-            return other != null && Id.Equals(other.Id);
+            return other != null && this.Id.Equals(other.Id);
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as IdentifierBase);
+            return this.Equals(obj as IdentifierBase);
         }
 
         public override int GetHashCode()
         {
-            return Id;
+            return this.Id;
         }
 
         public override string ToString()
         {
-            return $"{Name} [#{Id}]";
+            return $"{this.Name} [#{this.Id}]";
         }
 
         protected static PropertyId RegisterProperty(AutomationType automationType, int id, string name)

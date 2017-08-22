@@ -8,51 +8,51 @@
     /// </summary>
     public class ConditionFactory
     {
-        private readonly IPropertyLibray _propertyLibrary;
+        private readonly IPropertyLibray propertyLibrary;
 
         public ConditionFactory(IPropertyLibray propertyLibrary)
         {
-            _propertyLibrary = propertyLibrary;
+            this.propertyLibrary = propertyLibrary;
         }
 
         public PropertyCondition ByAutomationId(string automationId)
         {
-            return new PropertyCondition(_propertyLibrary.Element.AutomationId, automationId);
+            return new PropertyCondition(this.propertyLibrary.Element.AutomationId, automationId);
         }
 
         public PropertyCondition ByControlType(ControlType controlType)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ControlType, controlType);
+            return new PropertyCondition(this.propertyLibrary.Element.ControlType, controlType);
         }
 
         public PropertyCondition ByClassName(string className)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ClassName, className);
+            return new PropertyCondition(this.propertyLibrary.Element.ClassName, className);
         }
 
         public PropertyCondition ByName(string name)
         {
-            return new PropertyCondition(_propertyLibrary.Element.Name, name);
+            return new PropertyCondition(this.propertyLibrary.Element.Name, name);
         }
 
         public PropertyCondition ByText(string text)
         {
-            return ByName(text);
+            return this.ByName(text);
         }
 
         public PropertyCondition ByProcessId(int processId)
         {
-            return new PropertyCondition(_propertyLibrary.Element.ProcessId, processId);
+            return new PropertyCondition(this.propertyLibrary.Element.ProcessId, processId);
         }
 
         public PropertyCondition ByLocalizedControlType(string localizedControlType)
         {
-           return new PropertyCondition(_propertyLibrary.Element.LocalizedControlType, localizedControlType);
+           return new PropertyCondition(this.propertyLibrary.Element.LocalizedControlType, localizedControlType);
         }
 
         public PropertyCondition ByHelpTextProperty(string helpText)
         {
-           return new PropertyCondition(_propertyLibrary.Element.HelpText, helpText);  
+           return new PropertyCondition(this.propertyLibrary.Element.HelpText, helpText);  
         }
 
         /// <summary>
@@ -60,7 +60,7 @@
         /// </summary>
         public OrCondition Menu()
         {
-            return new OrCondition(ByControlType(ControlType.Menu), ByControlType(ControlType.MenuBar));
+            return new OrCondition(this.ByControlType(ControlType.Menu), this.ByControlType(ControlType.MenuBar));
         }
 
         /// <summary>
@@ -68,17 +68,17 @@
         /// </summary>
         public OrCondition Grid()
         {
-            return new OrCondition(ByControlType(ControlType.DataGrid), ByControlType(ControlType.List));
+            return new OrCondition(this.ByControlType(ControlType.DataGrid), this.ByControlType(ControlType.List));
         }
 
         public OrCondition HScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.HorizontalScrollBar));
+            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(TranslatableStrings.HorizontalScrollBar));
         }
 
         public OrCondition VScrollBar()
         {
-            return new OrCondition(ByControlType(ControlType.ScrollBar), ByName(TranslatableStrings.VerticalScrollBar));
+            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(TranslatableStrings.VerticalScrollBar));
         }
     }
 }

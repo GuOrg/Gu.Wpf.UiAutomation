@@ -17,36 +17,36 @@
         {
         }
 
-        protected IGridPattern GridPattern => Patterns.Grid.Pattern;
+        protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
 
-        protected ITablePattern TablePattern => Patterns.Table.Pattern;
+        protected ITablePattern TablePattern => this.Patterns.Table.Pattern;
 
-        protected ISelectionPattern SelectionPattern => Patterns.Selection.Pattern;
+        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
 
         /// <summary>
         /// Gets the total row count.
         /// </summary>
-        public int RowCount => GridPattern.RowCount.Value;
+        public int RowCount => this.GridPattern.RowCount.Value;
 
         /// <summary>
         /// Gets the total column count.
         /// </summary>
-        public int ColumnCount => GridPattern.ColumnCount.Value;
+        public int ColumnCount => this.GridPattern.ColumnCount.Value;
 
         /// <summary>
         /// Gets all column header elements.
         /// </summary>
-        public AutomationElement[] ColumnHeaders => TablePattern.ColumnHeaders.Value;
+        public AutomationElement[] ColumnHeaders => this.TablePattern.ColumnHeaders.Value;
 
         /// <summary>
         /// Gets all row header elements.
         /// </summary>
-        public AutomationElement[] RowHeaders => TablePattern.RowHeaders.Value;
+        public AutomationElement[] RowHeaders => this.TablePattern.RowHeaders.Value;
 
         /// <summary>
         /// Gets whether the data should be read primarily by row or by column.
         /// </summary>
-        public RowOrColumnMajor RowOrColumnMajor => TablePattern.RowOrColumnMajor.Value;
+        public RowOrColumnMajor RowOrColumnMajor => this.TablePattern.RowOrColumnMajor.Value;
 
         /// <summary>
         /// Gets the header item.
@@ -55,7 +55,7 @@
         {
             get
             {
-                var header = FindFirstChild(cf => cf.ByControlType(ControlType.Header));
+                var header = this.FindFirstChild(cf => cf.ByControlType(ControlType.Header));
                 return header?.AsGridHeader();
             }
         }
@@ -68,7 +68,7 @@
         {
             get
             {
-                var rows = FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)));
+                var rows = this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)));
                 return rows.Select(x => x.AsGridRow()).ToArray();
             }
         }
@@ -76,19 +76,19 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public GridRow[] SelectedItems => SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+        public GridRow[] SelectedItems => this.SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public GridRow SelectedItem => SelectedItems?.FirstOrDefault();
+        public GridRow SelectedItem => this.SelectedItems?.FirstOrDefault();
 
         /// <summary>
         /// Select a row by index.
         /// </summary>
         public GridRow Select(int rowIndex)
         {
-            var gridRow = GetRowByIndex(rowIndex);
+            var gridRow = this.GetRowByIndex(rowIndex);
             gridRow.Select();
             return gridRow;
         }
@@ -98,7 +98,7 @@
         /// </summary>
         public GridRow Select(int columnIndex, string textToFind)
         {
-            var gridRow = GetRowByValue(columnIndex, textToFind);
+            var gridRow = this.GetRowByValue(columnIndex, textToFind);
             gridRow.Select();
             return gridRow;
         }
@@ -108,7 +108,7 @@
         /// </summary>
         public GridRow AddToSelection(int rowIndex)
         {
-            var gridRow = GetRowByIndex(rowIndex);
+            var gridRow = this.GetRowByIndex(rowIndex);
             gridRow.AddToSelection();
             return gridRow;
         }
@@ -118,7 +118,7 @@
         /// </summary>
         public GridRow AddToSelection(int columnIndex, string textToFind)
         {
-            var gridRow = GetRowByValue(columnIndex, textToFind);
+            var gridRow = this.GetRowByValue(columnIndex, textToFind);
             gridRow.AddToSelection();
             return gridRow;
         }
@@ -128,7 +128,7 @@
         /// </summary>
         public GridRow RemoveFromSelection(int rowIndex)
         {
-            var gridRow = GetRowByIndex(rowIndex);
+            var gridRow = this.GetRowByIndex(rowIndex);
             gridRow.RemoveFromSelection();
             return gridRow;
         }
@@ -138,7 +138,7 @@
         /// </summary>
         public GridRow RemoveFromSelection(int columnIndex, string textToFind)
         {
-            var gridRow = GetRowByValue(columnIndex, textToFind);
+            var gridRow = this.GetRowByValue(columnIndex, textToFind);
             gridRow.RemoveFromSelection();
             return gridRow;
         }
@@ -148,8 +148,8 @@
         /// </summary>
         public GridRow GetRowByIndex(int rowIndex)
         {
-            PreCheckRow(rowIndex);
-            var gridCell = GridPattern.GetItem(rowIndex, 0).AsGridCell();
+            this.PreCheckRow(rowIndex);
+            var gridCell = this.GridPattern.GetItem(rowIndex, 0).AsGridCell();
             return gridCell.ContainingRow;
         }
 
@@ -158,7 +158,7 @@
         /// </summary>
         public GridRow GetRowByValue(int columnIndex, string value)
         {
-            return GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
+            return this.GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
         }
 
         /// <summary>
@@ -170,10 +170,10 @@
         /// <returns>List of found rows.</returns>
         public GridRow[] GetRowsByValue(int columnIndex, string value, int maxItems = 0)
         {
-            PreCheckColumn(columnIndex);
-            var gridPattern = GridPattern;
+            this.PreCheckColumn(columnIndex);
+            var gridPattern = this.GridPattern;
             var returnList = new List<GridRow>();
-            for (var rowIndex = 0; rowIndex < RowCount; rowIndex++)
+            for (var rowIndex = 0; rowIndex < this.RowCount; rowIndex++)
             {
                 var currentCell = gridPattern.GetItem(rowIndex, columnIndex).AsGridCell();
                 if (currentCell.Value == value)
@@ -190,17 +190,17 @@
 
         private void PreCheckRow(int rowIndex)
         {
-            if (RowCount <= rowIndex)
+            if (this.RowCount <= rowIndex)
             {
-                throw new Exception($"Grid contains only {RowCount} row(s) but index {rowIndex} was requested");
+                throw new Exception($"Grid contains only {this.RowCount} row(s) but index {rowIndex} was requested");
             }
         }
 
         private void PreCheckColumn(int columnIndex)
         {
-            if (ColumnCount <= columnIndex)
+            if (this.ColumnCount <= columnIndex)
             {
-                throw new Exception($"Grid contains only {ColumnCount} columns(s) but index {columnIndex} was requested");
+                throw new Exception($"Grid contains only {this.ColumnCount} columns(s) but index {columnIndex} was requested");
             }
         }
     }
@@ -218,7 +218,7 @@
         {
             get
             {
-                var headerItems = FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem));
+                var headerItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem));
                 return headerItems.Select(x => x.AsGridHeaderItem()).ToArray();
             }
         }
@@ -233,7 +233,7 @@
         {
         }
 
-        public string Text => Properties.Name.Value;
+        public string Text => this.Properties.Name.Value;
     }
 
     /// <summary>
@@ -245,13 +245,13 @@
         {
         }
 
-        protected IScrollItemPattern ScrollItemPattern => Patterns.ScrollItem.Pattern;
+        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
 
         public GridCell[] Cells
         {
             get
             {
-                var cells = FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not());
+                var cells = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not());
                 return cells.Select(x => x.AsGridCell()).ToArray();
             }
         }
@@ -260,7 +260,7 @@
         {
             get
             {
-                var headerItem = FindFirstChild(ConditionFactory.ByControlType(ControlType.HeaderItem));
+                var headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
                 return headerItem?.AsGridHeaderItem();
             }
         }
@@ -270,12 +270,12 @@
         /// </summary>
         public GridCell FindCellByText(string textToFind)
         {
-            return Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
+            return this.Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
         }
 
         public GridRow ScrollIntoView()
         {
-            ScrollItemPattern?.ScrollIntoView();
+            this.ScrollItemPattern?.ScrollIntoView();
             return this;
         }
     }
@@ -289,22 +289,22 @@
         {
         }
 
-        protected IGridItemPattern GridItemPattern => Patterns.GridItem.Pattern;
+        protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
 
-        protected ITableItemPattern TableItemPattern => Patterns.TableItem.Pattern;
+        protected ITableItemPattern TableItemPattern => this.Patterns.TableItem.Pattern;
 
-        public Grid ContainingGrid => GridItemPattern.ContainingGrid.Value.AsGrid();
+        public Grid ContainingGrid => this.GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
         {
             get
             {
                 // Get the parent of the cell (which should be the row)
-                var rowElement = Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
+                var rowElement = this.Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
                 return rowElement?.AsGridRow();
             }
         }
 
-        public string Value => Properties.Name.Value;
+        public string Value => this.Properties.Name.Value;
     }
 }

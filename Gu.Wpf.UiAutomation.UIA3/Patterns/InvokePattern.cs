@@ -17,7 +17,7 @@
 
         public override void Invoke()
         {
-            ComCallWrapper.Call(() => NativePattern.Invoke());
+            ComCallWrapper.Call(() => this.NativePattern.Invoke());
         }
     }
 

@@ -7,7 +7,7 @@
     {
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
-        public AutomationBase Automation => BasicAutomationElement.Automation;
+        public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
         public TNativePattern NativePattern { get; private set; }
 
@@ -21,13 +21,13 @@
             {
                 throw new ArgumentNullException(nameof(nativePattern));
             }
-            BasicAutomationElement = basicAutomationElement;
-            NativePattern = nativePattern;
+            this.BasicAutomationElement = basicAutomationElement;
+            this.NativePattern = nativePattern;
         }
 
         protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {
-            return val ?? (val = new AutomationProperty<T>(propertyId, BasicAutomationElement));
+            return val ?? (val = new AutomationProperty<T>(propertyId, this.BasicAutomationElement));
         }
     }
 }

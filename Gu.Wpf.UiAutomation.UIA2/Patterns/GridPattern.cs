@@ -19,8 +19,8 @@
 
         public override AutomationElement GetItem(int row, int column)
         {
-            var nativeItem = NativePattern.GetItem(row, column);
-            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeItem);
+            var nativeItem = this.NativePattern.GetItem(row, column);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeItem);
         }
     }
 

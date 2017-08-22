@@ -27,17 +27,17 @@
 
     public abstract class DropTargetPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDropTargetPattern
     {
-        private AutomationProperty<string> _dropTargetEffect;
-        private AutomationProperty<string[]> _dropTargetEffects;
+        private AutomationProperty<string> dropTargetEffect;
+        private AutomationProperty<string[]> dropTargetEffects;
 
         protected DropTargetPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IDropTargetPatternProperties Properties => Automation.PropertyLibrary.DropTarget;
-        public IDropTargetPatternEvents Events => Automation.EventLibrary.DropTarget;
+        public IDropTargetPatternProperties Properties => this.Automation.PropertyLibrary.DropTarget;
+        public IDropTargetPatternEvents Events => this.Automation.EventLibrary.DropTarget;
 
-        public AutomationProperty<string> DropTargetEffect => GetOrCreate(ref _dropTargetEffect, Properties.DropTargetEffect);
-        public AutomationProperty<string[]> DropTargetEffects => GetOrCreate(ref _dropTargetEffects, Properties.DropTargetEffects);
+        public AutomationProperty<string> DropTargetEffect => this.GetOrCreate(ref this.dropTargetEffect, this.Properties.DropTargetEffect);
+        public AutomationProperty<string[]> DropTargetEffects => this.GetOrCreate(ref this.dropTargetEffects, this.Properties.DropTargetEffects);
     }
 }

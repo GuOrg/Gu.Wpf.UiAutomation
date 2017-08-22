@@ -18,14 +18,14 @@
     public class AutomationPattern<T, TNative> : IAutomationPattern<T>
         where T : IPattern
     {
-        private readonly Func<BasicAutomationElementBase, TNative, T> _patternCreateFunc;
-        private readonly PatternId _patternId;
+        private readonly Func<BasicAutomationElementBase, TNative, T> patternCreateFunc;
+        private readonly PatternId patternId;
 
         public AutomationPattern(PatternId patternId, BasicAutomationElementBase basicAutomationElement, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
         {
-            _patternId = patternId;
-            BasicAutomationElement = basicAutomationElement;
-            _patternCreateFunc = patternCreateFunc;
+            this.patternId = patternId;
+            this.BasicAutomationElement = basicAutomationElement;
+            this.patternCreateFunc = patternCreateFunc;
         }
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
@@ -34,8 +34,8 @@
         {
             get
             {
-                var nativePattern = BasicAutomationElement.GetNativePattern<TNative>(_patternId);
-                return _patternCreateFunc(BasicAutomationElement, nativePattern);
+                var nativePattern = this.BasicAutomationElement.GetNativePattern<TNative>(this.patternId);
+                return this.patternCreateFunc(this.BasicAutomationElement, nativePattern);
             }
         }
 
@@ -44,7 +44,7 @@
             get
             {
                 T pattern;
-                TryGetPattern(out pattern);
+                this.TryGetPattern(out pattern);
                 return pattern;
             }
         }
@@ -52,9 +52,9 @@
         public bool TryGetPattern(out T pattern)
         {
             TNative nativePattern;
-            if (BasicAutomationElement.TryGetNativePattern(_patternId, out nativePattern))
+            if (this.BasicAutomationElement.TryGetNativePattern(this.patternId, out nativePattern))
             {
-                pattern = _patternCreateFunc(BasicAutomationElement, nativePattern);
+                pattern = this.patternCreateFunc(this.BasicAutomationElement, nativePattern);
                 return true;
             }
             pattern = default(T);
@@ -66,7 +66,7 @@
             get
             {
                 T pattern;
-                return TryGetPattern(out pattern);
+                return this.TryGetPattern(out pattern);
             }
         }
     }

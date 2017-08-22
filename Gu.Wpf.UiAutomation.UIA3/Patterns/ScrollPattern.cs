@@ -23,12 +23,12 @@
 
         public override void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
-            ComCallWrapper.Call(() => NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount));
+            ComCallWrapper.Call(() => this.NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount));
         }
 
         public override void SetScrollPercent(double horizontalPercent, double verticalPercent)
         {
-            ComCallWrapper.Call(() => NativePattern.SetScrollPercent(horizontalPercent, verticalPercent));
+            ComCallWrapper.Call(() => this.NativePattern.SetScrollPercent(horizontalPercent, verticalPercent));
         }
     }
 

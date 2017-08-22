@@ -20,18 +20,18 @@
 
         protected LoggerBase()
         {
-            IsTraceEnabled = false;
-            IsDebugEnabled = false;
+            this.IsTraceEnabled = false;
+            this.IsDebugEnabled = false;
             // Default log level is info and higher
-            IsInfoEnabled = true;
-            IsWarnEnabled = true;
-            IsErrorEnabled = true;
-            IsFatalEnabled = true;
+            this.IsInfoEnabled = true;
+            this.IsWarnEnabled = true;
+            this.IsErrorEnabled = true;
+            this.IsFatalEnabled = true;
         }
 
         public void Log(LogLevel logLevel, string message, params object[] args)
         {
-            Log(logLevel, message, null, args);
+            this.Log(logLevel, message, null, args);
         }
 
         public void Log(LogLevel logLevel, string message, Exception exception, params object[] args)
@@ -39,22 +39,22 @@
             switch (logLevel)
             {
                 case LogLevel.Trace:
-                    if (IsTraceEnabled) { GatedTrace(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsTraceEnabled) { this.GatedTrace(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 case LogLevel.Debug:
-                    if (IsDebugEnabled) { GatedDebug(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsDebugEnabled) { this.GatedDebug(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 case LogLevel.Info:
-                    if (IsInfoEnabled) { GatedInfo(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsInfoEnabled) { this.GatedInfo(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 case LogLevel.Warn:
-                    if (IsWarnEnabled) { GatedWarn(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsWarnEnabled) { this.GatedWarn(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 case LogLevel.Error:
-                    if (IsErrorEnabled) { GatedError(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsErrorEnabled) { this.GatedError(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 case LogLevel.Fatal:
-                    if (IsFatalEnabled) { GatedFatal(GetFormattedMessage(message, exception, args)); }
+                    if (this.IsFatalEnabled) { this.GatedFatal(this.GetFormattedMessage(message, exception, args)); }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null);
@@ -63,62 +63,62 @@
 
         public void Trace(string message, params object[] args)
         {
-            Log(LogLevel.Trace, message, null, args);
+            this.Log(LogLevel.Trace, message, null, args);
         }
 
         public void Trace(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Trace, message, exception, args);
+            this.Log(LogLevel.Trace, message, exception, args);
         }
 
         public void Debug(string message, params object[] args)
         {
-            Log(LogLevel.Debug, message, null, args);
+            this.Log(LogLevel.Debug, message, null, args);
         }
 
         public void Debug(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Debug, message, exception, args);
+            this.Log(LogLevel.Debug, message, exception, args);
         }
 
         public void Info(string message, params object[] args)
         {
-            Log(LogLevel.Info, message, null, args);
+            this.Log(LogLevel.Info, message, null, args);
         }
 
         public void Info(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Info, message, exception, args);
+            this.Log(LogLevel.Info, message, exception, args);
         }
 
         public void Warn(string message, params object[] args)
         {
-            Log(LogLevel.Warn, message, null, args);
+            this.Log(LogLevel.Warn, message, null, args);
         }
 
         public void Warn(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Warn, message, exception, args);
+            this.Log(LogLevel.Warn, message, exception, args);
         }
 
         public void Error(string message, params object[] args)
         {
-            Log(LogLevel.Error, message, null, args);
+            this.Log(LogLevel.Error, message, null, args);
         }
 
         public void Error(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Error, message, exception, args);
+            this.Log(LogLevel.Error, message, exception, args);
         }
 
         public void Fatal(string message, params object[] args)
         {
-            Log(LogLevel.Fatal, message, null, args);
+            this.Log(LogLevel.Fatal, message, null, args);
         }
 
         public void Fatal(string message, Exception exception, params object[] args)
         {
-            Log(LogLevel.Fatal, message, exception, args);
+            this.Log(LogLevel.Fatal, message, exception, args);
         }
 
         private string GetFormattedMessage(string message, Exception exception, params object[] args)

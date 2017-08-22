@@ -25,8 +25,8 @@
         {
             get
             {
-                var nativeRange = ComCallWrapper.Call(() => NativePattern.DocumentRange);
-                return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+                var nativeRange = ComCallWrapper.Call(() => this.NativePattern.DocumentRange);
+                return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
             }
         }
 
@@ -34,34 +34,34 @@
         {
             get
             {
-                var nativeObject = ComCallWrapper.Call(() => NativePattern.SupportedTextSelection);
+                var nativeObject = ComCallWrapper.Call(() => this.NativePattern.SupportedTextSelection);
                 return (SupportedTextSelection)nativeObject;
             }
         }
 
         public override ITextRange[] GetSelection()
         {
-            var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetSelection());
-            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
+            var nativeRanges = ComCallWrapper.Call(() => this.NativePattern.GetSelection());
+            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange[] GetVisibleRanges()
         {
-            var nativeRanges = ComCallWrapper.Call(() => NativePattern.GetVisibleRanges());
-            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRanges);
+            var nativeRanges = ComCallWrapper.Call(() => this.NativePattern.GetVisibleRanges());
+            return TextRangeConverter.NativeArrayToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange RangeFromChild(AutomationElement child)
         {
             var nativeChild = child.ToNative();
-            var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromChild(nativeChild));
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = ComCallWrapper.Call(() => this.NativePattern.RangeFromChild(nativeChild));
+            return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
 
         public override ITextRange RangeFromPoint(Point point)
         {
-            var nativeRange = ComCallWrapper.Call(() => NativePattern.RangeFromPoint(point.ToTagPoint()));
-            return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = ComCallWrapper.Call(() => this.NativePattern.RangeFromPoint(point.ToTagPoint()));
+            return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }
 

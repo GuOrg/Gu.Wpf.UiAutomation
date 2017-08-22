@@ -16,8 +16,8 @@
         [Test]
         public void ToggleTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            this.RestartApp();
+            var window = this.App.GetMainWindow(this.Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
@@ -27,7 +27,7 @@
         [Test]
         public void SetStateTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("Test Checkbox")).AsCheckBox();
             checkBox.State = ToggleState.On;
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
@@ -40,8 +40,8 @@
         [Test]
         public void ThreeWayToggleTest()
         {
-            RestartApp();
-            var window = App.GetMainWindow(Automation);
+            this.RestartApp();
+            var window = this.App.GetMainWindow(this.Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
             checkBox.Toggle();
@@ -53,7 +53,7 @@
         [Test]
         public void ThreeWaySetStateTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
             checkBox.State = ToggleState.On;
             Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));

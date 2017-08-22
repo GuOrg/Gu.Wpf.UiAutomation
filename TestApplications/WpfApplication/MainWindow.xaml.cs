@@ -10,9 +10,9 @@
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             var vm = new MainViewModel();
-            DataContext = vm;
+            this.DataContext = vm;
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

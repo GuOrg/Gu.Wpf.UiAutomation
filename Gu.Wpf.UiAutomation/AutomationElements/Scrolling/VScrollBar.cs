@@ -12,13 +12,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PART_LineUpButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "SmallDecrement";
@@ -37,13 +37,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PART_LineDownButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "SmallIncrement";
@@ -62,13 +62,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PageUp";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "LargeDecrement";
@@ -87,13 +87,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PageDown";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "LargeIncrement";
@@ -110,22 +110,22 @@
 
         public void ScrollUp()
         {
-            SmallDecrementButton.Invoke();
+            this.SmallDecrementButton.Invoke();
         }
 
         public void ScrollDown()
         {
-            SmallIncrementButton.Invoke();
+            this.SmallIncrementButton.Invoke();
         }
 
         public void ScrollUpLarge()
         {
-            LargeDecrementButton.Invoke();
+            this.LargeDecrementButton.Invoke();
         }
 
         public void ScrollDownLarge()
         {
-            LargeIncrementButton.Invoke();
+            this.LargeIncrementButton.Invoke();
         }
     }
 }

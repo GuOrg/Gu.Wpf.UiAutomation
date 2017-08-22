@@ -9,17 +9,17 @@
         {
         }
 
-        public Button MinimizeButton => FindButton("Minimize");
+        public Button MinimizeButton => this.FindButton("Minimize");
 
-        public Button MaximizeButton => FindButton("Maximize");
+        public Button MaximizeButton => this.FindButton("Maximize");
 
-        public Button RestoreButton => FindButton("Restore");
+        public Button RestoreButton => this.FindButton("Restore");
 
-        public Button CloseButton => FindButton("Close");
+        public Button CloseButton => this.FindButton("Close");
 
         private Button FindButton(string automationId)
         {
-            var buttonElement = FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
+            var buttonElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
             return buttonElement?.AsButton();
         }
     }

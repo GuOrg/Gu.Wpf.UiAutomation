@@ -21,8 +21,8 @@
         {
             get
             {
-                var nativeElement = ComCallWrapper.Call(() => NativePattern.TextContainer);
-                return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeElement);
+                var nativeElement = ComCallWrapper.Call(() => this.NativePattern.TextContainer);
+                return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeElement);
             }
         }
 
@@ -30,8 +30,8 @@
         {
             get
             {
-                var nativeRange = ComCallWrapper.Call(() => NativePattern.TextRange);
-                return TextRangeConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, nativeRange);
+                var nativeRange = ComCallWrapper.Call(() => this.NativePattern.TextRange);
+                return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
             }
         }
     }

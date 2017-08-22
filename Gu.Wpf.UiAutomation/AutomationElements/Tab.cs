@@ -16,25 +16,25 @@
         /// </summary>
         public TabItem SelectedTabItem
         {
-            get { return TabItems.FirstOrDefault(t => t.IsSelected); }
+            get { return this.TabItems.FirstOrDefault(t => t.IsSelected); }
         }
 
         /// <summary>
         /// The index of the currently selected <see cref="TabItem" />
         /// </summary>
-        public int SelectedTabItemIndex => GetIndexOfSelectedTabItem();
+        public int SelectedTabItemIndex => this.GetIndexOfSelectedTabItem();
 
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="Tab" />
         /// </summary>
-        public TabItem[] TabItems => GetTabItems();
+        public TabItem[] TabItems => this.GetTabItems();
 
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
         /// </summary>
         public TabItem SelectTabItem(int index)
         {
-            var tabItem = TabItems[index];
+            var tabItem = this.TabItems[index];
             tabItem.Select();
             return tabItem;
         }
@@ -44,14 +44,14 @@
         /// </summary>
         public TabItem SelectTabItem(string text)
         {
-            var tabItems = TabItems;
+            var tabItems = this.TabItems;
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Properties.Name == text);
             if (foundTabItemIndex < 0)
             {
                 throw new Exception($"No TabItem found with text '{text}'");
             }
             var tabItem = tabItems[foundTabItemIndex];
-            if (SelectedTabItemIndex != foundTabItemIndex)
+            if (this.SelectedTabItemIndex != foundTabItemIndex)
             {
                 // It is not the selected one, so select it
                 tabItem.Select();
@@ -64,13 +64,13 @@
         /// </summary>
         private TabItem[] GetTabItems()
         {
-            return FindAll(TreeScope.Children, ConditionFactory.ByControlType(ControlType.TabItem))
+            return this.FindAll(TreeScope.Children, this.ConditionFactory.ByControlType(ControlType.TabItem))
                 .Select(e => e.AsTabItem()).ToArray();
         }
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(TabItems, t => t.IsSelected);
+            return Array.FindIndex(this.TabItems, t => t.IsSelected);
         }
     }
 }

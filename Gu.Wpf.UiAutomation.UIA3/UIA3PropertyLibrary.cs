@@ -8,30 +8,30 @@
     {
         public UIA3PropertyLibrary()
         {
-            PatternAvailability = new UIA3AutomationElementPatternAvailabilityProperties();
-            Element = new UIA3AutomationElementProperties();
-            Annotation = new AnnotationPatternProperties();
-            Dock = new DockPatternProperties();
-            Drag = new DragPatternProperties();
-            DropTarget = new DropTargetPatternProperties();
-            ExpandCollapse = new ExpandCollapsePatternProperties();
-            GridItem = new GridItemPatternProperties();
-            Grid = new GridPatternProperties();
-            LegacyIAccessible = new LegacyIAccessiblePatternProperties();
-            MultipleView = new MultipleViewPatternProperties();
-            RangeValue = new RangeValuePatternProperties();
-            Scroll = new ScrollPatternProperties();
-            SelectionItem = new SelectionItemPatternProperties();
-            Selection = new SelectionPatternProperties();
-            SpreadsheetItem = new SpreadsheetItemPatternProperties();
-            Styles = new StylesPatternProperties();
-            TableItem = new TableItemPatternProperties();
-            Table = new TablePatternProperties();
-            Toggle = new TogglePatternProperties();
-            Transform2 = new Transform2PatternProperties();
-            Transform = new TransformPatternProperties();
-            Value = new ValuePatternProperties();
-            Window = new WindowPatternProperties();
+            this.PatternAvailability = new UIA3AutomationElementPatternAvailabilityProperties();
+            this.Element = new UIA3AutomationElementProperties();
+            this.Annotation = new AnnotationPatternProperties();
+            this.Dock = new DockPatternProperties();
+            this.Drag = new DragPatternProperties();
+            this.DropTarget = new DropTargetPatternProperties();
+            this.ExpandCollapse = new ExpandCollapsePatternProperties();
+            this.GridItem = new GridItemPatternProperties();
+            this.Grid = new GridPatternProperties();
+            this.LegacyIAccessible = new LegacyIAccessiblePatternProperties();
+            this.MultipleView = new MultipleViewPatternProperties();
+            this.RangeValue = new RangeValuePatternProperties();
+            this.Scroll = new ScrollPatternProperties();
+            this.SelectionItem = new SelectionItemPatternProperties();
+            this.Selection = new SelectionPatternProperties();
+            this.SpreadsheetItem = new SpreadsheetItemPatternProperties();
+            this.Styles = new StylesPatternProperties();
+            this.TableItem = new TableItemPatternProperties();
+            this.Table = new TablePatternProperties();
+            this.Toggle = new TogglePatternProperties();
+            this.Transform2 = new Transform2PatternProperties();
+            this.Transform = new TransformPatternProperties();
+            this.Value = new ValuePatternProperties();
+            this.Window = new WindowPatternProperties();
         }
 
         public IAutomationElementPatternAvailabilityProperties PatternAvailability { get; }

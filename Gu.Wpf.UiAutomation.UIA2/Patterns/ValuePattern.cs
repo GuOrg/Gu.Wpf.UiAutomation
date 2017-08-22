@@ -17,7 +17,7 @@
 
         public override void SetValue(string value)
         {
-            NativePattern.SetValue(value);
+            this.NativePattern.SetValue(value);
         }
     }
 

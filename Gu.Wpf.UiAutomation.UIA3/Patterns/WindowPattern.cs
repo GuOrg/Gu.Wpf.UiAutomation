@@ -25,17 +25,17 @@
 
         public override void Close()
         {
-            ComCallWrapper.Call(() => NativePattern.Close());
+            ComCallWrapper.Call(() => this.NativePattern.Close());
         }
 
         public override void SetWindowVisualState(WindowVisualState state)
         {
-            ComCallWrapper.Call(() => NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
+            ComCallWrapper.Call(() => this.NativePattern.SetWindowVisualState((UIA.WindowVisualState)state));
         }
 
         public override bool WaitForInputIdle(int milliseconds)
         {
-            return ComCallWrapper.Call(() => NativePattern.WaitForInputIdle(milliseconds)) != 0;
+            return ComCallWrapper.Call(() => this.NativePattern.WaitForInputIdle(milliseconds)) != 0;
         }
     }
 

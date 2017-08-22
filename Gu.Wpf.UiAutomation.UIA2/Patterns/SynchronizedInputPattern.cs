@@ -22,12 +22,12 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
         
         public override void Cancel()
         {
-            NativePattern.Cancel();
+            this.NativePattern.Cancel();
         }
 
         public override void StartListening(SynchronizedInputType inputType)
         {
-            NativePattern.StartListening((UIA.SynchronizedInputType)inputType);
+            this.NativePattern.StartListening((UIA.SynchronizedInputType)inputType);
         }
     }
 

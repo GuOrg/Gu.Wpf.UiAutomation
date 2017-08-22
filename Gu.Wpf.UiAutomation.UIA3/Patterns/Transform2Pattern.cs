@@ -15,36 +15,36 @@
         public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
         public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
 
-        private readonly TransformPattern _transformPattern;
+        private readonly TransformPattern transformPattern;
 
         public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern) : base(basicAutomationElement, nativePattern)
         {
-            _transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
+            this.transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
         }
         
         public override void Zoom(double zoom)
         {
-            ComCallWrapper.Call(() => NativePattern.Zoom(zoom));
+            ComCallWrapper.Call(() => this.NativePattern.Zoom(zoom));
         }
 
         public override void ZoomByUnit(ZoomUnit zoomUnit)
         {
-            ComCallWrapper.Call(() => NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
+            ComCallWrapper.Call(() => this.NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
         }
 
         public override void Move(double x, double y)
         {
-            _transformPattern.Move(x,y);
+            this.transformPattern.Move(x,y);
         }
 
         public override void Resize(double width, double height)
         {
-            _transformPattern.Resize(width, height);
+            this.transformPattern.Resize(width, height);
         }
 
         public override void Rotate(double degrees)
         {
-            _transformPattern.Rotate(degrees);
+            this.transformPattern.Rotate(degrees);
         }
     }
 

@@ -16,7 +16,7 @@
 
         public override void Toggle()
         {
-            NativePattern.Toggle();
+            this.NativePattern.Toggle();
         }
     }
     

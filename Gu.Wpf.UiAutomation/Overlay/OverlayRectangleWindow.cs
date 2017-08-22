@@ -16,27 +16,27 @@
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
             AutomationProperties.SetName(this, "Gu.Wpf.UiAutomationOverlayWindow");
-            AllowsTransparency = true;
-            WindowStyle = WindowStyle.None;
-            Topmost = true;
-            ShowActivated = false;
-            ShowInTaskbar = false;
-            Background = Brushes.Transparent;
-            Top = rectangle.Top;
-            Left = rectangle.Left;
-            Width = rectangle.Width;
-            Height = rectangle.Height;
+            this.AllowsTransparency = true;
+            this.WindowStyle = WindowStyle.None;
+            this.Topmost = true;
+            this.ShowActivated = false;
+            this.ShowInTaskbar = false;
+            this.Background = Brushes.Transparent;
+            this.Top = rectangle.Top;
+            this.Left = rectangle.Left;
+            this.Width = rectangle.Width;
+            this.Height = rectangle.Height;
             var borderBrush = new SolidColorBrush(color);
             borderBrush.Freeze();
-            Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
-            StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
+            this.Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
+            this.StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
         }
 
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
             // Make the window click-thru
-            SetWindowTransparent();
+            this.SetWindowTransparent();
         }
 
         private void SetWindowTransparent()
@@ -49,16 +49,16 @@
         private void StartCloseTimer(TimeSpan closeTimeout)
         {
             var timer = new DispatcherTimer {Interval = closeTimeout};
-            timer.Tick += TimerTick;
+            timer.Tick += this.TimerTick;
             timer.Start();
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
             var timer = (DispatcherTimer)sender;
-            timer.Tick -= TimerTick;
+            timer.Tick -= this.TimerTick;
             timer.Stop();
-            Close();
+            this.Close();
         }
     }
 }

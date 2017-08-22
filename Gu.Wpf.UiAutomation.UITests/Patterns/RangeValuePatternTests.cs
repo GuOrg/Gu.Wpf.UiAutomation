@@ -14,7 +14,7 @@
         [Test]
         public void RangeValuePatternTest()
         {
-            var slider = GetSlider();
+            var slider = this.GetSlider();
             Assert.That(slider, Is.Not.Null);
             var rvPattern = slider.Patterns.RangeValue.Pattern;
             Assert.That(rvPattern, Is.Not.Null);
@@ -34,7 +34,7 @@
 
         private AutomationElement GetSlider()
         {
-            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
+            var element = this.App.GetMainWindow(this.Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
             return element;
         }
     }

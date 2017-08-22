@@ -15,7 +15,7 @@
         [Test]
         public void GetControlType()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox"));
             Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
         }

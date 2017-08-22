@@ -9,7 +9,7 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TreeTests : UITestBase
     {
-        private Tree _tree;
+        private Tree tree;
 
         public TreeTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
@@ -19,17 +19,17 @@
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = this.App.GetMainWindow(this.Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
             var tree = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("treeView1")).AsTree();
-            _tree = tree;
+            this.tree = tree;
         }
 
         [Test]
         public void SelectionTest()
         {
-            var tree = _tree;
+            var tree = this.tree;
             Assert.That(tree.SelectedTreeItem, Is.Null);
             Assert.That(tree.TreeItems, Has.Length.EqualTo(2));
             tree.TreeItems[0].Expand();

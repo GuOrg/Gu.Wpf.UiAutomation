@@ -14,13 +14,13 @@
     {
         protected AutomationBase(IPropertyLibray propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
         {
-            PropertyLibrary = propertyLibrary;
-            EventLibrary = eventLibrary;
-            PatternLibrary = patternLibrary;
-            ConditionFactory = new ConditionFactory(propertyLibrary);
-            OverlayManager = new WinFormsOverlayManager();
+            this.PropertyLibrary = propertyLibrary;
+            this.EventLibrary = eventLibrary;
+            this.PatternLibrary = patternLibrary;
+            this.ConditionFactory = new ConditionFactory(propertyLibrary);
+            this.OverlayManager = new WinFormsOverlayManager();
             // Make sure all pattern ids are initialized
-            var unused = PatternLibrary.AllForCurrentFramework;
+            var unused = this.PatternLibrary.AllForCurrentFramework;
         }
 
         public IPropertyLibray PropertyLibrary { get; }
@@ -78,8 +78,8 @@
         /// </summary>
         public void Dispose()
         {
-            UnregisterAllEvents();
-            OverlayManager.Dispose();
+            this.UnregisterAllEvents();
+            this.OverlayManager.Dispose();
         }
     }
 }

@@ -24,17 +24,17 @@
 
         public override void Close()
         {
-            NativePattern.Close();
+            this.NativePattern.Close();
         }
 
         public override void SetWindowVisualState(WindowVisualState state)
         {
-            NativePattern.SetWindowVisualState((UIA.WindowVisualState)state);
+            this.NativePattern.SetWindowVisualState((UIA.WindowVisualState)state);
         }
 
         public override bool WaitForInputIdle(int milliseconds)
         {
-            return NativePattern.WaitForInputIdle(milliseconds);
+            return this.NativePattern.WaitForInputIdle(milliseconds);
         }
     }
 

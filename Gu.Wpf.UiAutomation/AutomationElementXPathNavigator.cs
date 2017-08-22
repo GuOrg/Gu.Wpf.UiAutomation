@@ -16,35 +16,35 @@ namespace Gu.Wpf.UiAutomation
     public class AutomationElementXPathNavigator : XPathNavigator
     {
         private const int NoAttributeValue = -1;
-        private readonly AutomationElement _rootElement;
-        private readonly ITreeWalker _treeWalker;
-        private AutomationElement _currentElement;
-        private int _attributeIndex = NoAttributeValue;
+        private readonly AutomationElement rootElement;
+        private readonly ITreeWalker treeWalker;
+        private AutomationElement currentElement;
+        private int attributeIndex = NoAttributeValue;
 
         public AutomationElementXPathNavigator(AutomationElement rootElement)
         {
-            _treeWalker = rootElement.Automation.TreeWalkerFactory.GetControlViewWalker();
-            _rootElement = rootElement;
-            _currentElement = rootElement;
+            this.treeWalker = rootElement.Automation.TreeWalkerFactory.GetControlViewWalker();
+            this.rootElement = rootElement;
+            this.currentElement = rootElement;
         }
 
-        private bool IsInAttribute => _attributeIndex != NoAttributeValue;
+        private bool IsInAttribute => this.attributeIndex != NoAttributeValue;
 
-        public override bool HasAttributes => !IsInAttribute;
+        public override bool HasAttributes => !this.IsInAttribute;
 
-        public override string Value => IsInAttribute ? GetAttributeValue(_attributeIndex) : _currentElement.ToString();
+        public override string Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
 
-        public override object UnderlyingObject => _currentElement;
+        public override object UnderlyingObject => this.currentElement;
 
         public override XPathNodeType NodeType
         {
             get
             {
-                if (IsInAttribute)
+                if (this.IsInAttribute)
                 {
                     return XPathNodeType.Attribute;
                 }
-                if (_currentElement.Equals(_rootElement))
+                if (this.currentElement.Equals(this.rootElement))
                 {
                     return XPathNodeType.Root;
                 }
@@ -52,9 +52,9 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public override string LocalName => IsInAttribute ? GetAttributeName(_attributeIndex) : _currentElement.Properties.ControlType.Value.ToString();
+        public override string LocalName => this.IsInAttribute ? this.GetAttributeName(this.attributeIndex) : this.currentElement.Properties.ControlType.Value.ToString();
 
-        public override string Name => LocalName;
+        public override string Name => this.LocalName;
 
         public override XmlNameTable NameTable
         {
@@ -71,63 +71,63 @@ namespace Gu.Wpf.UiAutomation
 
         public override XPathNavigator Clone()
         {
-            var clonedObject = new AutomationElementXPathNavigator(_rootElement)
+            var clonedObject = new AutomationElementXPathNavigator(this.rootElement)
             {
-                _currentElement = _currentElement,
-                _attributeIndex = _attributeIndex
+                currentElement = this.currentElement,
+                attributeIndex = this.attributeIndex
             };
             return clonedObject;
         }
 
         public override bool MoveToFirstAttribute()
         {
-            if (IsInAttribute)
+            if (this.IsInAttribute)
             {
                 return false;
             }
-            _attributeIndex = 0;
+            this.attributeIndex = 0;
             return true;
         }
 
         public override bool MoveToNextAttribute()
         {
-            if (_attributeIndex >= Enum.GetNames(typeof(ElementAttributes)).Length - 1)
+            if (this.attributeIndex >= Enum.GetNames(typeof(ElementAttributes)).Length - 1)
             {
                 // No more attributes
                 return false;
             }
-            if (!IsInAttribute)
+            if (!this.IsInAttribute)
             {
                 return false;
             }
-            _attributeIndex++;
+            this.attributeIndex++;
             return true;
         }
 
         public override string GetAttribute(string localName, string namespaceUri)
         {
-            if (IsInAttribute)
+            if (this.IsInAttribute)
             {
                 return String.Empty;
             }
-            var attributeIndex = GetAttributeIndexFromName(localName);
+            var attributeIndex = this.GetAttributeIndexFromName(localName);
             if (attributeIndex != NoAttributeValue)
             {
-                return GetAttributeValue(attributeIndex);
+                return this.GetAttributeValue(attributeIndex);
             }
             return String.Empty;
         }
 
         public override bool MoveToAttribute(string localName, string namespaceUri)
         {
-            if (IsInAttribute)
+            if (this.IsInAttribute)
             {
                 return false;
             }
-            var attributeIndex = GetAttributeIndexFromName(localName);
+            var attributeIndex = this.GetAttributeIndexFromName(localName);
             if (attributeIndex != NoAttributeValue)
             {
-                _attributeIndex = attributeIndex;
+                this.attributeIndex = attributeIndex;
                 return true;
             }
             return false;
@@ -145,58 +145,58 @@ namespace Gu.Wpf.UiAutomation
 
         public override void MoveToRoot()
         {
-            _attributeIndex = NoAttributeValue;
-            _currentElement = _rootElement;
+            this.attributeIndex = NoAttributeValue;
+            this.currentElement = this.rootElement;
         }
 
         public override bool MoveToNext()
         {
-            if (IsInAttribute) { return false; }
-            var nextElement = _treeWalker.GetNextSibling(_currentElement);
+            if (this.IsInAttribute) { return false; }
+            var nextElement = this.treeWalker.GetNextSibling(this.currentElement);
             if (nextElement == null)
             {
                 return false;
             }
-            _currentElement = nextElement;
+            this.currentElement = nextElement;
             return true;
         }
 
         public override bool MoveToPrevious()
         {
-            if (IsInAttribute) { return false; }
-            var previousElement = _treeWalker.GetPreviousSibling(_currentElement);
+            if (this.IsInAttribute) { return false; }
+            var previousElement = this.treeWalker.GetPreviousSibling(this.currentElement);
             if (previousElement == null)
             {
                 return false;
             }
-            _currentElement = previousElement;
+            this.currentElement = previousElement;
             return true;
         }
 
         public override bool MoveToFirstChild()
         {
-            if (IsInAttribute) { return false; }
-            var childElement = _treeWalker.GetFirstChild(_currentElement);
+            if (this.IsInAttribute) { return false; }
+            var childElement = this.treeWalker.GetFirstChild(this.currentElement);
             if (childElement == null)
             {
                 return false;
             }
-            _currentElement = childElement;
+            this.currentElement = childElement;
             return true;
         }
 
         public override bool MoveToParent()
         {
-            if (IsInAttribute)
+            if (this.IsInAttribute)
             {
-                _attributeIndex = NoAttributeValue;
+                this.attributeIndex = NoAttributeValue;
                 return true;
             }
-            if (_currentElement.Equals(_rootElement))
+            if (this.currentElement.Equals(this.rootElement))
             {
                 return false;
             }
-            _currentElement = _treeWalker.GetParent(_currentElement);
+            this.currentElement = this.treeWalker.GetParent(this.currentElement);
             return true;
         }
 
@@ -207,12 +207,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
-            if (!_rootElement.Equals(specificNavigator._rootElement))
+            if (!this.rootElement.Equals(specificNavigator.rootElement))
             {
                 return false;
             }
-            _currentElement = specificNavigator._currentElement;
-            _attributeIndex = specificNavigator._attributeIndex;
+            this.currentElement = specificNavigator.currentElement;
+            this.attributeIndex = specificNavigator.attributeIndex;
             return true;
         }
 
@@ -228,12 +228,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 return false;
             }
-            if (!_rootElement.Equals(specificNavigator._rootElement))
+            if (!this.rootElement.Equals(specificNavigator.rootElement))
             {
                 return false;
             }
-            return _currentElement.Equals(specificNavigator._currentElement)
-                && _attributeIndex == specificNavigator._attributeIndex;
+            return this.currentElement.Equals(specificNavigator.currentElement)
+                && this.attributeIndex == specificNavigator.attributeIndex;
         }
 
         private string GetAttributeValue(int attributeIndex)
@@ -241,13 +241,13 @@ namespace Gu.Wpf.UiAutomation
             switch ((ElementAttributes)attributeIndex)
             {
                 case ElementAttributes.AutomationId:
-                    return _currentElement.Properties.AutomationId.Value;
+                    return this.currentElement.Properties.AutomationId.Value;
                 case ElementAttributes.Name:
-                    return _currentElement.Properties.Name.Value;
+                    return this.currentElement.Properties.Name.Value;
                 case ElementAttributes.ClassName:
-                    return _currentElement.Properties.ClassName.Value;
+                    return this.currentElement.Properties.ClassName.Value;
                 case ElementAttributes.HelpText:
-                    return _currentElement.Properties.HelpText.Value;
+                    return this.currentElement.Properties.HelpText.Value;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }

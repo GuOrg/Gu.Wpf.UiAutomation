@@ -22,17 +22,17 @@
 
     public abstract class MultipleViewPatternBase<TNativePattern> : PatternBase<TNativePattern>, IMultipleViewPattern
     {
-        private AutomationProperty<int> _currentView;
-        private AutomationProperty<int[]> _supportedViews;
+        private AutomationProperty<int> currentView;
+        private AutomationProperty<int[]> supportedViews;
 
         protected MultipleViewPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IMultipleViewPatternProperties Properties => Automation.PropertyLibrary.MultipleView;
+        public IMultipleViewPatternProperties Properties => this.Automation.PropertyLibrary.MultipleView;
 
-        public AutomationProperty<int> CurrentView => GetOrCreate(ref _currentView, Properties.CurrentView);
-        public AutomationProperty<int[]> SupportedViews => GetOrCreate(ref _supportedViews, Properties.SupportedViews);
+        public AutomationProperty<int> CurrentView => this.GetOrCreate(ref this.currentView, this.Properties.CurrentView);
+        public AutomationProperty<int[]> SupportedViews => this.GetOrCreate(ref this.supportedViews, this.Properties.SupportedViews);
 
         public abstract string GetViewName(int view);
         public abstract void SetCurrentView(int view);

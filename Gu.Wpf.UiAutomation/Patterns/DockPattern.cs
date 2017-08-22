@@ -20,15 +20,15 @@
 
     public abstract class DockPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDockPattern
     {
-        private AutomationProperty<DockPosition> _dockPosition;
+        private AutomationProperty<DockPosition> dockPosition;
 
         protected DockPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IDockPatternProperties Properties => Automation.PropertyLibrary.Dock;
+        public IDockPatternProperties Properties => this.Automation.PropertyLibrary.Dock;
 
-        public AutomationProperty<DockPosition> DockPosition => GetOrCreate(ref _dockPosition, Properties.DockPosition);
+        public AutomationProperty<DockPosition> DockPosition => this.GetOrCreate(ref this.dockPosition, this.Properties.DockPosition);
 
         public abstract void SetDockPosition(DockPosition dockPos);
     }

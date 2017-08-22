@@ -26,22 +26,22 @@
 
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
     {
-        private AutomationProperty<int> _column;
-        private AutomationProperty<int> _columnSpan;
-        private AutomationProperty<AutomationElement> _containingGrid;
-        private AutomationProperty<int> _row;
-        private AutomationProperty<int> _rowSpan;
+        private AutomationProperty<int> column;
+        private AutomationProperty<int> columnSpan;
+        private AutomationProperty<AutomationElement> containingGrid;
+        private AutomationProperty<int> row;
+        private AutomationProperty<int> rowSpan;
 
         protected GridItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public IGridItemPatternProperties Properties => Automation.PropertyLibrary.GridItem;
+        public IGridItemPatternProperties Properties => this.Automation.PropertyLibrary.GridItem;
 
-        public AutomationProperty<int> Column => GetOrCreate(ref _column, Properties.Column);
-        public AutomationProperty<int> ColumnSpan => GetOrCreate(ref _columnSpan, Properties.ColumnSpan);
-        public AutomationProperty<AutomationElement> ContainingGrid => GetOrCreate(ref _containingGrid, Properties.ContainingGrid);
-        public AutomationProperty<int> Row => GetOrCreate(ref _row, Properties.Row);
-        public AutomationProperty<int> RowSpan => GetOrCreate(ref _rowSpan, Properties.RowSpan);
+        public AutomationProperty<int> Column => this.GetOrCreate(ref this.column, this.Properties.Column);
+        public AutomationProperty<int> ColumnSpan => this.GetOrCreate(ref this.columnSpan, this.Properties.ColumnSpan);
+        public AutomationProperty<AutomationElement> ContainingGrid => this.GetOrCreate(ref this.containingGrid, this.Properties.ContainingGrid);
+        public AutomationProperty<int> Row => this.GetOrCreate(ref this.row, this.Properties.Row);
+        public AutomationProperty<int> RowSpan => this.GetOrCreate(ref this.rowSpan, this.Properties.RowSpan);
     }
 }

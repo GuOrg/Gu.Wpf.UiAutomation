@@ -16,7 +16,7 @@
     {
         public UIA2Automation() : base(new UIA2PropertyLibrary(), new UIA2EventLibrary(), new UIA2PatternLibrary())
         {
-            TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
+            this.TreeWalkerFactory = new UIA2TreeWalkerFactory(this);
         }
 
         public override ITreeWalkerFactory TreeWalkerFactory { get; }
@@ -27,13 +27,13 @@
 
         public override AutomationElement GetDesktop()
         {
-            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.RootElement);
+            var nativeElement = this.InternalGetNativeElement(() => UIA.AutomationElement.RootElement);
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
         public override AutomationElement FromPoint(Point point)
         {
-            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(point));
+            var nativeElement = this.InternalGetNativeElement(() => UIA.AutomationElement.FromPoint(point));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
@@ -42,13 +42,13 @@
         /// </summary>
         public override AutomationElement FromHandle(IntPtr hwnd)
         {
-            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FromHandle(hwnd));
+            var nativeElement = this.InternalGetNativeElement(() => UIA.AutomationElement.FromHandle(hwnd));
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 
         public override AutomationElement FocusedElement()
         {
-            var nativeElement = InternalGetNativeElement(() => UIA.AutomationElement.FocusedElement);
+            var nativeElement = this.InternalGetNativeElement(() => UIA.AutomationElement.FocusedElement);
             return AutomationElementConverter.NativeToManaged(this, nativeElement);
         }
 

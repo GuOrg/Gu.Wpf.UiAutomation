@@ -12,20 +12,20 @@
         {
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => Patterns.SelectionItem.Pattern;
+        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
 
         /// <summary>
         /// Flag to get/set the selection of this element.
         /// </summary>
         public bool IsSelected
         {
-            get { return SelectionItemPattern.IsSelected; }
+            get { return this.SelectionItemPattern.IsSelected; }
             set
             {
-                if (IsSelected == value) return;
-                if (value && !IsSelected)
+                if (this.IsSelected == value) return;
+                if (value && !this.IsSelected)
                 {
-                    Select();
+                    this.Select();
                 }
             }
         }
@@ -35,7 +35,7 @@
         /// </summary>
         public SelectionItemAutomationElement Select()
         {
-            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.Select());
+            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.Select());
             return this;
         }
 
@@ -44,7 +44,7 @@
         /// </summary>
         public SelectionItemAutomationElement AddToSelection()
         {
-            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.AddToSelection());
+            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.AddToSelection());
             return this;
         }
 
@@ -53,7 +53,7 @@
         /// </summary>
         public SelectionItemAutomationElement RemoveFromSelection()
         {
-            ExecuteInPattern(SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
+            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
             return this;
         }
     }

@@ -22,10 +22,10 @@
                 var mainWindow = app.GetMainWindow(automation);
                 var x = automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
                 Thread.Sleep(100);
-                var button1 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Button).And(cf.ByText(GetResizeText())));
+                var button1 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Button).And(cf.ByText(this.GetResizeText())));
                 button1.AsButton().Invoke();
                 Thread.Sleep(100);
-                var radio2 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.RadioButton).And(cf.ByText(GetPixelsText())));
+                var radio2 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.RadioButton).And(cf.ByText(this.GetPixelsText())));
                 Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
                 Keyboard.Press(VirtualKeyShort.ESCAPE);

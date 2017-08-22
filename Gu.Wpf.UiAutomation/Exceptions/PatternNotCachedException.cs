@@ -17,31 +17,31 @@
         public PatternNotCachedException(PatternId pattern)
             : base(String.Format(DefaultMessageWithData, pattern))
         {
-            Pattern = pattern;
+            this.Pattern = pattern;
         }
 
         public PatternNotCachedException(string message, PatternId pattern)
             : base(message)
         {
-            Pattern = pattern;
+            this.Pattern = pattern;
         }
 
         public PatternNotCachedException(PatternId pattern, Exception innerException)
             : base(String.Format(DefaultMessageWithData, pattern), innerException)
         {
-            Pattern = pattern;
+            this.Pattern = pattern;
         }
 
         public PatternNotCachedException(string message, PatternId pattern, Exception innerException)
             : base(message, innerException)
         {
-            Pattern = pattern;
+            this.Pattern = pattern;
         }
 
         protected PatternNotCachedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            Pattern = (PatternId)info.GetValue("Pattern", typeof(PatternId));
+            this.Pattern = (PatternId)info.GetValue("Pattern", typeof(PatternId));
         }
 
         public PatternId Pattern { get; }
@@ -52,7 +52,7 @@
             {
                 throw new ArgumentNullException(nameof(info));
             }
-            info.AddValue("Pattern", Pattern);
+            info.AddValue("Pattern", this.Pattern);
             base.GetObjectData(info, context);
         }
     }

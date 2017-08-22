@@ -11,27 +11,27 @@
         {
         }
 
-        public ITogglePattern TogglePattern => Patterns.Toggle.Pattern;
+        public ITogglePattern TogglePattern => this.Patterns.Toggle.Pattern;
 
         public ToggleState State
         {
-            get { return TogglePattern.ToggleState; }
+            get { return this.TogglePattern.ToggleState; }
             set
             {
                 // Loop for all states
                 for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
                 {
                     // Break if we're in the correct state
-                    if (State == value) return;
+                    if (this.State == value) return;
                     // Toggle to the next state
-                    Toggle();
+                    this.Toggle();
                 }
             }
         }
 
         public void Toggle()
         {
-            TogglePattern.Toggle();
+            this.TogglePattern.Toggle();
         }
     }
 }

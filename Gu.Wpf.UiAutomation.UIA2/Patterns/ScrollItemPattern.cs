@@ -16,7 +16,7 @@
 
         public void ScrollIntoView()
         {
-            NativePattern.ScrollIntoView();
+            this.NativePattern.ScrollIntoView();
         }
     }
 }

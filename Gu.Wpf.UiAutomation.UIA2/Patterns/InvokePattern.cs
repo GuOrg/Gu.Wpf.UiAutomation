@@ -16,7 +16,7 @@
 
         public override void Invoke()
         {
-            NativePattern.Invoke();
+            this.NativePattern.Invoke();
         }
     }
 

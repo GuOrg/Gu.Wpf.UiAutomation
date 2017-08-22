@@ -21,7 +21,7 @@
 
         public override void SetValue(double val)
         {
-            NativePattern.SetValue(val);
+            this.NativePattern.SetValue(val);
         }
     }
 

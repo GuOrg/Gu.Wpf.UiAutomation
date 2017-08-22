@@ -18,7 +18,7 @@
         [Test]
         public void SlideThumbTest()
         {
-            var slider = GetSlider();
+            var slider = this.GetSlider();
             var thumb = slider.Thumb;
             var oldPos = thumb.Properties.BoundingRectangle.Value.Center;
             thumb.SlideHorizontally(50);
@@ -29,11 +29,11 @@
         [Test]
         public void SetValueTest()
         {
-            var slider = GetSlider();
-            var number1 = AdjustNumberIfOnlyValue(slider, 6);
+            var slider = this.GetSlider();
+            var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
             slider.Value = number1;
             Assert.That(slider.Value, Is.EqualTo(number1));
-            var number2 = AdjustNumberIfOnlyValue(slider, 4);
+            var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
             slider.Value = number2;
             Assert.That(slider.Value, Is.EqualTo(number2));
         }
@@ -41,42 +41,42 @@
         [Test]
         public void SmallIncrementTest()
         {
-            var slider = GetSlider();
-            ResetToCenter(slider);
+            var slider = this.GetSlider();
+            this.ResetToCenter(slider);
             slider.SmallIncrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 6)));
+            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 6)));
         }
 
         [Test]
         public void SmallDecrementTest()
         {
-            var slider = GetSlider();
-            ResetToCenter(slider);
+            var slider = this.GetSlider();
+            this.ResetToCenter(slider);
             slider.SmallDecrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 4)));
+            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 4)));
         }
 
         [Test]
         public void LargeIncrementTest()
         {
-            var slider = GetSlider();
-            ResetToCenter(slider);
+            var slider = this.GetSlider();
+            this.ResetToCenter(slider);
             slider.LargeIncrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 9)));
+            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 9)));
         }
 
         [Test]
         public void LargeDecrementTest()
         {
-            var slider = GetSlider();
-            ResetToCenter(slider);
+            var slider = this.GetSlider();
+            this.ResetToCenter(slider);
             slider.LargeDecrement();
-            Assert.That(slider.Value, Is.EqualTo(AdjustNumberIfOnlyValue(slider, 1)));
+            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 1)));
         }
 
         private Slider GetSlider()
         {
-            var element = App.GetMainWindow(Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
+            var element = this.App.GetMainWindow(this.Automation).FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 
@@ -95,7 +95,7 @@
 
         private void ResetToCenter(Slider slider)
         {
-            slider.Value = AdjustNumberIfOnlyValue(slider, 5);
+            slider.Value = this.AdjustNumberIfOnlyValue(slider, 5);
         }
     }
 }

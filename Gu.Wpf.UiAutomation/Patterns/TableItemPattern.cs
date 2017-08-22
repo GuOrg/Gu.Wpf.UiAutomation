@@ -20,16 +20,16 @@
 
     public abstract class TableItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITableItemPattern
     {
-        private AutomationProperty<AutomationElement[]> _columnHeaderItems;
-        private AutomationProperty<AutomationElement[]> _rowHeaderItems;
+        private AutomationProperty<AutomationElement[]> columnHeaderItems;
+        private AutomationProperty<AutomationElement[]> rowHeaderItems;
 
         protected TableItemPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public ITableItemPatternProperties Properties => Automation.PropertyLibrary.TableItem;
+        public ITableItemPatternProperties Properties => this.Automation.PropertyLibrary.TableItem;
 
-        public AutomationProperty<AutomationElement[]> ColumnHeaderItems => GetOrCreate(ref _columnHeaderItems, Properties.ColumnHeaderItems);
-        public AutomationProperty<AutomationElement[]> RowHeaderItems => GetOrCreate(ref _rowHeaderItems, Properties.RowHeaderItems);
+        public AutomationProperty<AutomationElement[]> ColumnHeaderItems => this.GetOrCreate(ref this.columnHeaderItems, this.Properties.ColumnHeaderItems);
+        public AutomationProperty<AutomationElement[]> RowHeaderItems => this.GetOrCreate(ref this.rowHeaderItems, this.Properties.RowHeaderItems);
     }
 }

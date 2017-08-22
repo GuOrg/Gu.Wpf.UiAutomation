@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 
         public void Realize()
         {
-            NativePattern.Realize();
+            this.NativePattern.Realize();
         }
     }
 }

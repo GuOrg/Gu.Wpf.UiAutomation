@@ -20,14 +20,14 @@
         [Test]
         public void CalculatorTest()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode
             System.Threading.Thread.Sleep(1000);
             Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_1);
             Helpers.WaitUntilInputIsProcessed();
-            App.WaitWhileBusy();
+            this.App.WaitWhileBusy();
             System.Threading.Thread.Sleep(1000);
 
             // Simple addition
@@ -41,7 +41,7 @@
             calc.Button7.Click();
             calc.Button8.Click();
             calc.ButtonEquals.Click();
-            App.WaitWhileBusy();
+            this.App.WaitWhileBusy();
             var result = calc.Result;
             Assert.That(result, Is.EqualTo("6912"));
 
@@ -85,24 +85,24 @@
 
     public class LegacyCalc : ICalculator
     {
-        private readonly AutomationElement _mainWindow;
+        private readonly AutomationElement mainWindow;
 
-        public Button Button1 => FindElement("1").AsButton();
-        public Button Button2 => FindElement("2").AsButton();
-        public Button Button3 => FindElement("3").AsButton();
-        public Button Button4 => FindElement("4").AsButton();
-        public Button Button5 => FindElement("5").AsButton();
-        public Button Button6 => FindElement("6").AsButton();
-        public Button Button7 => FindElement("7").AsButton();
-        public Button Button8 => FindElement("8").AsButton();
-        public Button ButtonAdd => FindElement("Add").AsButton();
-        public Button ButtonEquals => FindElement("Equals").AsButton();
+        public Button Button1 => this.FindElement("1").AsButton();
+        public Button Button2 => this.FindElement("2").AsButton();
+        public Button Button3 => this.FindElement("3").AsButton();
+        public Button Button4 => this.FindElement("4").AsButton();
+        public Button Button5 => this.FindElement("5").AsButton();
+        public Button Button6 => this.FindElement("6").AsButton();
+        public Button Button7 => this.FindElement("7").AsButton();
+        public Button Button8 => this.FindElement("8").AsButton();
+        public Button ButtonAdd => this.FindElement("Add").AsButton();
+        public Button ButtonEquals => this.FindElement("Equals").AsButton();
 
         public string Result
         {
             get
             {
-                var resultElement = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
+                var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
                 var value = resultElement.Properties.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
@@ -110,36 +110,36 @@
 
         public LegacyCalc(AutomationElement mainWindow)
         {
-            _mainWindow = mainWindow;
+            this.mainWindow = mainWindow;
         }
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirstDescendant(cf => cf.ByText(text));
+            var element = this.mainWindow.FindFirstDescendant(cf => cf.ByText(text));
             return element;
         }
     }
 
     public class Win10Calc : ICalculator
     {
-        private readonly AutomationElement _mainWindow;
+        private readonly AutomationElement mainWindow;
 
-        public Button Button1 => FindElement("num1Button").AsButton();
-        public Button Button2 => FindElement("num2Button").AsButton();
-        public Button Button3 => FindElement("num3Button").AsButton();
-        public Button Button4 => FindElement("num4Button").AsButton();
-        public Button Button5 => FindElement("num5Button").AsButton();
-        public Button Button6 => FindElement("num6Button").AsButton();
-        public Button Button7 => FindElement("num7Button").AsButton();
-        public Button Button8 => FindElement("num8Button").AsButton();
-        public Button ButtonAdd => FindElement("plusButton").AsButton();
-        public Button ButtonEquals => FindElement("equalButton").AsButton();
+        public Button Button1 => this.FindElement("num1Button").AsButton();
+        public Button Button2 => this.FindElement("num2Button").AsButton();
+        public Button Button3 => this.FindElement("num3Button").AsButton();
+        public Button Button4 => this.FindElement("num4Button").AsButton();
+        public Button Button5 => this.FindElement("num5Button").AsButton();
+        public Button Button6 => this.FindElement("num6Button").AsButton();
+        public Button Button7 => this.FindElement("num7Button").AsButton();
+        public Button Button8 => this.FindElement("num8Button").AsButton();
+        public Button ButtonAdd => this.FindElement("plusButton").AsButton();
+        public Button ButtonEquals => this.FindElement("equalButton").AsButton();
 
         public string Result
         {
             get
             {
-                var resultElement = FindElement("CalculatorResults");
+                var resultElement = this.FindElement("CalculatorResults");
                 var value = resultElement.Properties.Name;
                 return Regex.Replace(value, "[^0-9]", "");
             }
@@ -147,12 +147,12 @@
 
         public Win10Calc(AutomationElement mainWindow)
         {
-            _mainWindow = mainWindow;
+            this.mainWindow = mainWindow;
         }
 
         private AutomationElement FindElement(string text)
         {
-            var element = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(text));
+            var element = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(text));
             return element;
         }
     }

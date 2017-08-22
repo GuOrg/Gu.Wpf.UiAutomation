@@ -13,7 +13,7 @@
 
         public AndCondition(IEnumerable<ConditionBase> conditions)
         {
-            Conditions.AddRange(conditions);
+            this.Conditions.AddRange(conditions);
         }
 
         public override string ToString()
@@ -21,7 +21,7 @@
 #if NET35
             var conditions = String.Join(" AND ", Conditions.Select(c => c.ToString()).ToArray());
 #else
-            var conditions = String.Join(" AND ", Conditions.Select(c => c.ToString()));
+            var conditions = String.Join(" AND ", this.Conditions.Select(c => c.ToString()));
 #endif
             return $"({conditions})";
         }

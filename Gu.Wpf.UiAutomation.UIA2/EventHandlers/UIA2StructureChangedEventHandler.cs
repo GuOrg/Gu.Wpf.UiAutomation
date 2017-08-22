@@ -12,14 +12,14 @@
 
         public UIA2StructureChangedEventHandler(AutomationBase automation, Action<AutomationElement, StructureChangeType, int[]> callAction) : base(automation, callAction)
         {
-            EventHandler = HandleStructureChangedEvent;
+            this.EventHandler = this.HandleStructureChangedEvent;
         }
 
         private void HandleStructureChangedEvent(object sender, UIA.StructureChangedEventArgs structureChangedEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)this.Automation, (UIA.AutomationElement)sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            HandleStructureChangedEvent(senderElement, (StructureChangeType)structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
+            this.HandleStructureChangedEvent(senderElement, (StructureChangeType)structureChangedEventArgs.StructureChangeType, structureChangedEventArgs.GetRuntimeId());
         }
     }
 }

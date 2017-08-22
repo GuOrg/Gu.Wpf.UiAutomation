@@ -5,17 +5,17 @@
 
     public abstract class FocusChangedEventHandlerBase : EventHandlerBase, IAutomationFocusChangedEventHandler
     {
-        private readonly Action<AutomationElement> _callAction;
+        private readonly Action<AutomationElement> callAction;
 
         protected FocusChangedEventHandlerBase(AutomationBase automation, Action<AutomationElement> callAction)
             : base(automation)
         {
-            _callAction = callAction;
+            this.callAction = callAction;
         }
 
         public void HandleFocusChangedEvent(AutomationElement sender)
         {
-            _callAction(sender);
+            this.callAction(sender);
         }
     }
 }

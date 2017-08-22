@@ -7,13 +7,13 @@
     {
         public OverlayRectangleForm()
         {
-            FormBorderStyle = FormBorderStyle.None;
-            ShowInTaskbar = false;
-            Left = 0;
-            Top = 0;
-            Width = 1;
-            Height = 1;
-            Visible = false;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.ShowInTaskbar = false;
+            this.Left = 0;
+            this.Top = 0;
+            this.Width = 1;
+            this.Height = 1;
+            this.Visible = false;
         }
 
         protected override bool ShowWithoutActivation => true;

@@ -8,12 +8,12 @@
 
         public NotCondition(ConditionBase condition)
         {
-            Condition = condition;
+            this.Condition = condition;
         }
 
         public override string ToString()
         {
-            return String.Format("NOT ({0})", Condition);
+            return String.Format("NOT ({0})", this.Condition);
         }
     }
 }

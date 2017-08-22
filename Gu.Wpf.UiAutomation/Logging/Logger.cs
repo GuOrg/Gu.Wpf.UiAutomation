@@ -4,13 +4,13 @@
 
     public static class Logger
     {
-        private static ILogger _default = new ConsoleLogger();
+        private static ILogger @default = new ConsoleLogger();
 
         public static ILogger Default
         {
             get
             {
-                return _default;
+                return @default;
             }
             set
             {
@@ -18,7 +18,7 @@
                 {
                     throw new ArgumentNullException(nameof(value));
                 }
-                _default = value;
+                @default = value;
             }
         }
     }

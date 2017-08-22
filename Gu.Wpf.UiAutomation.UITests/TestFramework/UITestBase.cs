@@ -13,7 +13,7 @@
         /// <summary>
         /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
-        private bool _wasTestRun;
+        private bool wasTestRun;
 
         protected AutomationType AutomationType { get; }
 
@@ -33,11 +33,11 @@
 
         protected UITestBase(AutomationType automationType, TestApplicationType appType)
         {
-            AutomationType = automationType;
-            ApplicationType = appType;
-            ScreenshotDir = @"c:\FailedTestsScreenshots";
-            _wasTestRun = false;
-            Automation = TestUtilities.GetAutomation(automationType);
+            this.AutomationType = automationType;
+            this.ApplicationType = appType;
+            this.ScreenshotDir = @"c:\FailedTestsScreenshots";
+            this.wasTestRun = false;
+            this.Automation = TestUtilities.GetAutomation(automationType);
         }
 
         /// <summary>
@@ -46,18 +46,18 @@
         [OneTimeSetUp]
         public void BaseSetup()
         {
-            switch (ApplicationType)
+            switch (this.ApplicationType)
             {
                 case TestApplicationType.Custom:
-                    App = StartApplication();
+                    this.App = this.StartApplication();
                     break;
                 case TestApplicationType.Wpf:
-                    App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
+                    this.App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            App.WaitWhileMainHandleIsMissing();
+            this.App.WaitWhileMainHandleIsMissing();
         }
 
         /// <summary>
@@ -66,9 +66,9 @@
         [OneTimeTearDown]
         public void BaseTeardown()
         {
-            Automation.Dispose();
-            App.Dispose();
-            App = null;
+            this.Automation.Dispose();
+            this.App.Dispose();
+            this.App = null;
         }
 
         /// <summary>
@@ -78,11 +78,11 @@
         public void BaseTestTeardown()
         {
             // Mark that a test was run on this application
-            _wasTestRun = true;
+            this.wasTestRun = true;
             // Make a screenshot if the test failed
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                TakeScreenshot(TestContext.CurrentContext.Test.FullName);
+                this.TakeScreenshot(TestContext.CurrentContext.Test.FullName);
             }
         }
 
@@ -100,27 +100,27 @@
         protected void RestartApp()
         {
             // Don't restart if no test was already run on it
-            if (!_wasTestRun) return;
+            if (!this.wasTestRun) return;
             // Restart the application
-            BaseTeardown();
-            BaseSetup();
-            _wasTestRun = false;
+            this.BaseTeardown();
+            this.BaseSetup();
+            this.wasTestRun = false;
         }
 
         private void TakeScreenshot(string screenshotName)
         {
             var imagename = screenshotName + ".png";
             imagename = imagename.Replace("\"", "");
-            var imagePath = Path.Combine(ScreenshotDir, imagename);
+            var imagePath = Path.Combine(this.ScreenshotDir, imagename);
             try
             {
-                Directory.CreateDirectory(ScreenshotDir);
+                Directory.CreateDirectory(this.ScreenshotDir);
                 ScreenCapture.CaptureScreenToFile(imagePath);
                 Console.WriteLine("Screenshot taken: {0}", imagePath);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", ScreenshotDir, imagePath, ex);
+                Console.WriteLine("Failed to save screenshot to directory: {0}, filename: {1}, Ex: {2}", this.ScreenshotDir, imagePath, ex);
             }
         }
     }

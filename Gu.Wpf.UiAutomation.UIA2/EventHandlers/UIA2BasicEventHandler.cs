@@ -12,15 +12,15 @@
 
         public UIA2BasicEventHandler(AutomationBase automation, Action<AutomationElement, EventId> callAction) : base(automation, callAction)
         {
-            EventHandler = HandleAutomationEvent;
+            this.EventHandler = this.HandleAutomationEvent;
         }
 
         private void HandleAutomationEvent(object sender, UIA.AutomationEventArgs automationEventArgs)
         {
-            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)Automation, (UIA.AutomationElement)sender);
+            var basicAutomationElement = new UIA2BasicAutomationElement((UIA2Automation)this.Automation, (UIA.AutomationElement)sender);
             var senderElement = new AutomationElement(basicAutomationElement);
             var @event = EventId.Find(AutomationType.UIA2, automationEventArgs.EventId.Id);
-            HandleAutomationEvent(senderElement, @event);
+            this.HandleAutomationEvent(senderElement, @event);
         }
     }
 }

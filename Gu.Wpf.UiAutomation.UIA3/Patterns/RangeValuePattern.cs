@@ -22,7 +22,7 @@
 
         public override void SetValue(double val)
         {
-            ComCallWrapper.Call(() => NativePattern.SetValue(val));
+            ComCallWrapper.Call(() => this.NativePattern.SetValue(val));
         }
     }
 

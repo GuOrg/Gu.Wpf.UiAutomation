@@ -13,8 +13,8 @@
     {
         protected BasicAutomationElementBase(AutomationBase automation)
         {
-            Automation = automation;
-            Properties = new AutomationElementPropertyValues(this);
+            this.Automation = automation;
+            this.Properties = new AutomationElementPropertyValues(this);
         }
 
         public abstract AutomationElementPatternValuesBase Patterns { get; }
@@ -31,7 +31,7 @@
         /// </summary>
         public object GetPropertyValue(PropertyId property)
         {
-            return GetPropertyValue<object>(property);
+            return this.GetPropertyValue<object>(property);
         }
 
         public T GetPropertyValue<T>(PropertyId property)
@@ -43,12 +43,12 @@
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var value = InternalGetPropertyValue(property.Id, isCacheActive, false);
-                if (value == Automation.NotSupportedValue)
+                var value = this.InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (value == this.Automation.NotSupportedValue)
                 {
                     throw new PropertyNotSupportedException(property);
                 }
-                return property.Convert<T>(Automation, value);
+                return property.Convert<T>(this.Automation, value);
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@
         /// </summary>
         public bool TryGetPropertyValue(PropertyId property, out object value)
         {
-            return TryGetPropertyValue<object>(property, out value);
+            return this.TryGetPropertyValue<object>(property, out value);
         }
 
         public bool TryGetPropertyValue<T>(PropertyId property, out T value)
@@ -83,13 +83,13 @@
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var internalValue = InternalGetPropertyValue(property.Id, isCacheActive, false);
-                if (internalValue == Automation.NotSupportedValue)
+                var internalValue = this.InternalGetPropertyValue(property.Id, isCacheActive, false);
+                if (internalValue == this.Automation.NotSupportedValue)
                 {
                     value = default(T);
                     return false;
                 }
-                value = property.Convert<T>(Automation, internalValue);
+                value = property.Convert<T>(this.Automation, internalValue);
                 return true;
             }
             catch (Exception ex)
@@ -116,7 +116,7 @@
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var nativePattern = InternalGetPattern(pattern.Id, isCacheActive);
+                var nativePattern = this.InternalGetPattern(pattern.Id, isCacheActive);
                 if (nativePattern == null)
                 {
                     throw new InvalidOperationException("Native pattern is null");
@@ -141,7 +141,7 @@
         {
             try
             {
-                nativePattern = GetNativePattern<T>(pattern);
+                nativePattern = this.GetNativePattern<T>(pattern);
                 return true;
             }
             catch (PatternNotSupportedException)
@@ -154,7 +154,7 @@
         public Point GetClickablePoint()
         {
             Point point;
-            if (!TryGetClickablePoint(out point))
+            if (!this.TryGetClickablePoint(out point))
             {
                 throw new NoClickablePointException();
             }

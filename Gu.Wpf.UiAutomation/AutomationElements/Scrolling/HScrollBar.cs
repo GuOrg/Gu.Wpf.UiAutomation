@@ -12,13 +12,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PART_LineLeftButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "SmallDecrement";
@@ -37,13 +37,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PART_LineRightButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "SmallIncrement";
@@ -62,13 +62,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PageLeft";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "LargeDecrement";
@@ -87,13 +87,13 @@
         {
             get
             {
-                switch (FrameworkType)
+                switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
                         return "PageRight";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (AutomationType)
+                        switch (this.AutomationType)
                         {
                             case AutomationType.UIA2:
                                 return "LargeIncrement";
@@ -110,22 +110,22 @@
 
         public virtual void ScrollLeft()
         {
-            SmallDecrementButton.Click();
+            this.SmallDecrementButton.Click();
         }
 
         public virtual void ScrollRight()
         {
-            SmallIncrementButton.Click();
+            this.SmallIncrementButton.Click();
         }
 
         public virtual void ScrollLeftLarge()
         {
-            LargeDecrementButton.Click();
+            this.LargeDecrementButton.Click();
         }
 
         public virtual void ScrollRightLarge()
         {
-            LargeIncrementButton.Click();
+            this.LargeIncrementButton.Click();
         }
     }
 }

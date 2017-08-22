@@ -15,7 +15,7 @@
         [Test]
         public void TestMenuWithSubMenus()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
@@ -38,7 +38,7 @@
         [Test]
         public void TestMenuWithSubMenusByName()
         {
-            var window = App.GetMainWindow(Automation);
+            var window = this.App.GetMainWindow(this.Automation);
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             var edit = menu.MenuItems["Edit"];
             Assert.That(edit, Is.Not.Null);

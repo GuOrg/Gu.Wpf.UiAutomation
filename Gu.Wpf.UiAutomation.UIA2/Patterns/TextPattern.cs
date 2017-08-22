@@ -23,8 +23,8 @@
         {
             get
             {
-                var nativeRange = NativePattern.DocumentRange;
-                return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+                var nativeRange = this.NativePattern.DocumentRange;
+                return TextRangeConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRange);
             }
         }
 
@@ -32,34 +32,34 @@
         {
             get
             {
-                var nativeObject = NativePattern.SupportedTextSelection;
+                var nativeObject = this.NativePattern.SupportedTextSelection;
                 return (SupportedTextSelection)nativeObject;
             }
         }
 
         public override ITextRange[] GetSelection()
         {
-            var nativeRanges = NativePattern.GetSelection();
-            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            var nativeRanges = this.NativePattern.GetSelection();
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange[] GetVisibleRanges()
         {
-            var nativeRanges = NativePattern.GetVisibleRanges();
-            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRanges);
+            var nativeRanges = this.NativePattern.GetVisibleRanges();
+            return TextRangeConverter.NativeArrayToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRanges);
         }
 
         public override ITextRange RangeFromChild(AutomationElement child)
         {
             var nativeChild = child.ToNative();
-            var nativeRange = NativePattern.RangeFromChild(nativeChild);
-            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = this.NativePattern.RangeFromChild(nativeChild);
+            return TextRangeConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
 
         public override ITextRange RangeFromPoint(Point point)
         {
-            var nativeRange = NativePattern.RangeFromPoint(ValueConverter.ToNative(point));
-            return TextRangeConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, nativeRange);
+            var nativeRange = this.NativePattern.RangeFromPoint(ValueConverter.ToNative(point));
+            return TextRangeConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }
 

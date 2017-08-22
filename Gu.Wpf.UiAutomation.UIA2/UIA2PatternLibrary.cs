@@ -51,33 +51,33 @@
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
 
         public PatternId[] AllForCurrentFramework => new[] {
-            DockPattern,
-            ExpandCollapsePattern,
-            GridItemPattern,
-            GridPattern,
-            InvokePattern,
+            this.DockPattern,
+            this.ExpandCollapsePattern,
+            this.GridItemPattern,
+            this.GridPattern,
+            this.InvokePattern,
 #if !NET35
-            ItemContainerPattern,
+            this.ItemContainerPattern,
 #endif
-            MultipleViewPattern,
-            RangeValuePattern,
-            ScrollItemPattern,
-            ScrollPattern,
-            SelectionItemPattern,
-            SelectionPattern,
+            this.MultipleViewPattern,
+            this.RangeValuePattern,
+            this.ScrollItemPattern,
+            this.ScrollPattern,
+            this.SelectionItemPattern,
+            this.SelectionPattern,
 #if !NET35
-            SynchronizedInputPattern,
+            this.SynchronizedInputPattern,
 #endif
-            TableItemPattern,
-            TablePattern,
-            TextPattern,
-            TogglePattern,
-            TransformPattern,
-            ValuePattern,
+            this.TableItemPattern,
+            this.TablePattern,
+            this.TextPattern,
+            this.TogglePattern,
+            this.TransformPattern,
+            this.ValuePattern,
 #if !NET35
-            VirtualizedItemPattern,
+            this.VirtualizedItemPattern,
 #endif
-            WindowPattern
+            this.WindowPattern
         };
     }
 }

@@ -15,27 +15,27 @@
         [Test]
         public void MinimumValueTest()
         {
-            var bar = GetProgressBar();
+            var bar = this.GetProgressBar();
             Assert.That(bar.Minimum, Is.EqualTo(0));
         }
 
         [Test]
         public void MaximumValueTest()
         {
-            var bar = GetProgressBar();
+            var bar = this.GetProgressBar();
             Assert.That(bar.Maximum, Is.EqualTo(100));
         }
 
         [Test]
         public void ValueTest()
         {
-            var bar = GetProgressBar();
+            var bar = this.GetProgressBar();
             Assert.That(bar.Value, Is.EqualTo(50));
         }
 
         private ProgressBar GetProgressBar()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = this.App.GetMainWindow(this.Automation);
             var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("ProgressBar")).AsProgressBar();
             return element;
         }

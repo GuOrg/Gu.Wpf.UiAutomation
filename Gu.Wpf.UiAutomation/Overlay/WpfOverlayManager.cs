@@ -8,41 +8,41 @@
 
     public class WpfOverlayManager : IOverlayManager
     {
-        private readonly Thread _uiThread;
+        private readonly Thread uiThread;
 #if NET35
         private readonly ManualResetEvent _startedEvent = new ManualResetEvent(false);
 #else
-        private readonly ManualResetEventSlim _startedEvent = new ManualResetEventSlim(false);
+        private readonly ManualResetEventSlim startedEvent = new ManualResetEventSlim(false);
 #endif
-        private Dispatcher _dispatcher;
-        private OverlayRectangleWindow _currWin;
+        private Dispatcher dispatcher;
+        private OverlayRectangleWindow currWin;
 
         public WpfOverlayManager()
         {
-            _uiThread = new Thread(() =>
+            this.uiThread = new Thread(() =>
             {
                 // Create and install a new dispatcher context
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(
                         Dispatcher.CurrentDispatcher));
 
-                _dispatcher = Dispatcher.CurrentDispatcher;
+                this.dispatcher = Dispatcher.CurrentDispatcher;
                 // Signal that it is initialized
-                _startedEvent.Set();
+                this.startedEvent.Set();
                 // Start the dispatcher processing
                 Dispatcher.Run();
             });
 
             // Set the apartment state
-            _uiThread.SetApartmentState(ApartmentState.STA);
+            this.uiThread.SetApartmentState(ApartmentState.STA);
             // Make the thread a background thread
-            _uiThread.IsBackground = true;
+            this.uiThread.IsBackground = true;
             // Start the thread
-            _uiThread.Start();
+            this.uiThread.Start();
 #if NET35
             _startedEvent.WaitOne();
 #else
-            _startedEvent.Wait();
+            this.startedEvent.Wait();
 #endif
         }
 
@@ -54,12 +54,12 @@
             if (rectangle.IsValid)
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
-                _dispatcher.Invoke(new Action(() =>
+                this.dispatcher.Invoke(new Action(() =>
                 {
-                    _currWin?.Close();
+                    this.currWin?.Close();
                     var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                     win.Show();
-                    _currWin = win;
+                    this.currWin = win;
                 }));
             }
         }
@@ -69,20 +69,20 @@
             if (rectangle.IsValid)
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
-                _dispatcher.Invoke(new Action(() =>
+                this.dispatcher.Invoke(new Action(() =>
                 {
-                    _currWin?.Close();
+                    this.currWin?.Close();
                     var win = new OverlayRectangleWindow(rectangle, color, durationInMs);
                     win.ShowDialog();
-                    _currWin = win;
+                    this.currWin = win;
                 }));
             }
         }
 
         public void Dispose()
         {
-            _dispatcher.InvokeShutdown();
-            _uiThread.Join(1000);
+            this.dispatcher.InvokeShutdown();
+            this.uiThread.Join(1000);
         }
     }
 }

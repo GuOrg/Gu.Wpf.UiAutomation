@@ -17,8 +17,8 @@
         [Test]
         public void TabSelectTest()
         {
-            RestartApp();
-            var mainWindow = App.GetMainWindow(Automation);
+            this.RestartApp();
+            var mainWindow = this.App.GetMainWindow(this.Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             Assert.That(tab.TabItems, Has.Length.EqualTo(2));
             Assert.That(tab.SelectedTabItemIndex, Is.EqualTo(0));

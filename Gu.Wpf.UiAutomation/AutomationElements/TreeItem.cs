@@ -8,19 +8,19 @@
 
     public class TreeItem : AutomationElement
     {
-        private readonly SelectionItemAutomationElement _selectionItemAutomationElement;
-        private readonly ExpandCollapseAutomationElement _expandCollapseAutomationElement;
+        private readonly SelectionItemAutomationElement selectionItemAutomationElement;
+        private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
 
         public TreeItem(BasicAutomationElementBase basicAutomationElement) : base(basicAutomationElement)
         {
-            _selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
-            _expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
+            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
         }
 
         /// <summary>
         /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />
         /// </summary>
-        public TreeItem[] TreeItems => GetTreeItems();
+        public TreeItem[] TreeItems => this.GetTreeItems();
 
         /// <summary>
         /// The text of the <see cref="TreeItem" />
@@ -29,10 +29,10 @@
         {
             get
             {
-                var value = Properties.Name.Value;
+                var value = this.Properties.Name.Value;
                 if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = FindFirstChild(cf => cf.ByControlType(ControlType.Text));
+                    var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
                     return textElement == null ? String.Empty : textElement.Properties.Name;
                 }
                 return value;
@@ -41,23 +41,23 @@
 
         public bool IsSelected
         {
-            get { return _selectionItemAutomationElement.IsSelected; }
-            set { _selectionItemAutomationElement.IsSelected = value; }
+            get { return this.selectionItemAutomationElement.IsSelected; }
+            set { this.selectionItemAutomationElement.IsSelected = value; }
         }
 
         public void Expand()
         {
-            _expandCollapseAutomationElement.Expand();
+            this.expandCollapseAutomationElement.Expand();
         }
 
         public void Collapse()
         {
-            _expandCollapseAutomationElement.Collapse();
+            this.expandCollapseAutomationElement.Collapse();
         }
 
         public void Select()
         {
-            _selectionItemAutomationElement.Select();
+            this.selectionItemAutomationElement.Select();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
+            return this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
                 .Select(e => e.AsTreeItem()).ToArray();
         }
     }

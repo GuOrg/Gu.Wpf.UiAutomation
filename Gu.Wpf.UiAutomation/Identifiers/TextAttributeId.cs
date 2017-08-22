@@ -14,7 +14,7 @@
 
         public TextAttributeId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
-            return SetConverter<TextAttributeId>(convertMethod);
+            return this.SetConverter<TextAttributeId>(convertMethod);
         }
 
         public static TextAttributeId Register(AutomationType automationType, int id, string name)

@@ -15,11 +15,11 @@
         {
         }
 
-        public string Title => Properties.Name.Value;
+        public string Title => this.Properties.Name.Value;
 
-        public bool IsModal => Patterns.Window.Pattern.IsModal.Value;
+        public bool IsModal => this.Patterns.Window.Pattern.IsModal.Value;
 
-        public TitleBar TitleBar => FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
+        public TitleBar TitleBar => this.FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
         /// <summary>
         /// Flag to indicate, if the window is the application's main window.
@@ -31,9 +31,9 @@
         {
             get
             {
-                return FindAllChildren(cf =>
+                return this.FindAllChildren(cf =>
                     cf.ByControlType(ControlType.Window).
-                    And(new PropertyCondition(Automation.PropertyLibrary.Window.IsModal, true))
+                    And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true))
                 ).Select(e => e.AsWindow()).ToArray();
             }
         }
@@ -45,7 +45,7 @@
         {
             get
             {
-                var mainWindow = GetMainWindow();
+                var mainWindow = this.GetMainWindow();
                 var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByText("").And(cf.ByClassName("Popup"))));
                 return popup?.AsWindow();
             }
@@ -55,15 +55,15 @@
         /// Gets the contest menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
-        public Menu ContextMenu => GetContextMenuByFrameworkType(FrameworkType);
+        public Menu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
         public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
             if (frameworkType == FrameworkType.Win32)
             {
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                var desktop = BasicAutomationElement.Automation.GetDesktop();
-                var nameCondition = ConditionFactory.ByName("Context").Or(ConditionFactory.ByName("System"));
+                var desktop = this.BasicAutomationElement.Automation.GetDesktop();
+                var nameCondition = this.ConditionFactory.ByName("Context").Or(this.ConditionFactory.ByName("System"));
                 var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
                 if (ctxMenu != null)
                 {
@@ -71,7 +71,7 @@
                     return ctxMenu;
                 }
             }
-            var mainWindow = GetMainWindow();
+            var mainWindow = this.GetMainWindow();
             if (frameworkType == FrameworkType.WinForms)
             {
                 var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
@@ -80,7 +80,7 @@
             if (frameworkType == FrameworkType.Wpf)
             {
                 // In WPF, there is a window (Popup) where the menu is inside
-                var popup = Popup;
+                var popup = this.Popup;
                 var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
                 return ctxMenu.AsMenu();
             }
@@ -90,13 +90,13 @@
 
         public void Close()
         {
-            var titleBar = TitleBar;
+            var titleBar = this.TitleBar;
             if (titleBar?.CloseButton != null)
             {
                 titleBar.CloseButton.Invoke();
                 return;
             }
-            var windowPattern = Patterns.Window.PatternOrDefault;
+            var windowPattern = this.Patterns.Window.PatternOrDefault;
             if (windowPattern != null)
             {
                 windowPattern.Close();
@@ -107,7 +107,7 @@
 
         public void Move(int x, int y)
         {
-            Patterns.Transform.PatternOrDefault?.Move(x, y);
+            this.Patterns.Transform.PatternOrDefault?.Move(x, y);
         }
 
         /// <summary>
@@ -115,11 +115,11 @@
         /// </summary>
         public void SetTransparency(byte alpha)
         {
-            if (User32.SetWindowLong(Properties.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
+            if (User32.SetWindowLong(this.Properties.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-            if (!User32.SetLayeredWindowAttributes(Properties.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
+            if (!User32.SetLayeredWindowAttributes(this.Properties.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
@@ -130,11 +130,11 @@
         /// </summary>
         private Window GetMainWindow()
         {
-            if (IsMainWindow)
+            if (this.IsMainWindow)
             {
                 return this;
             }
-            var mainWindow = Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(Properties.ProcessId.Value)).AsWindow();
+            var mainWindow = this.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value)).AsWindow();
             return mainWindow ?? this;
         }
     }

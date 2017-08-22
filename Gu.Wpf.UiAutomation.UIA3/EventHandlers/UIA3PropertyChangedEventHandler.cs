@@ -14,10 +14,10 @@
 
         public void HandlePropertyChangedEvent(UIA.IUIAutomationElement sender, int propertyId, object newValue)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            var property = PropertyId.Find(Automation.AutomationType, propertyId);
-            HandlePropertyChangedEvent(senderElement, property, newValue);
+            var property = PropertyId.Find(this.Automation.AutomationType, propertyId);
+            this.HandlePropertyChangedEvent(senderElement, property, newValue);
         }
     }
 }

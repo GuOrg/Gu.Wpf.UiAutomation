@@ -25,7 +25,7 @@
         {
         }
 
-        public ISynchronizedInputPatternEvents Events => Automation.EventLibrary.SynchronizedInput;
+        public ISynchronizedInputPatternEvents Events => this.Automation.EventLibrary.SynchronizedInput;
 
         public abstract void Cancel();
         public abstract void StartListening(SynchronizedInputType inputType);

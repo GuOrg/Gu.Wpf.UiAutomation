@@ -22,12 +22,12 @@
 
         public override void Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
         {
-            NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount);
+            this.NativePattern.Scroll((UIA.ScrollAmount)horizontalAmount, (UIA.ScrollAmount)verticalAmount);
         }
 
         public override void SetScrollPercent(double horizontalPercent, double verticalPercent)
         {
-            NativePattern.SetScrollPercent(horizontalPercent, verticalPercent);
+            this.NativePattern.SetScrollPercent(horizontalPercent, verticalPercent);
         }
     }
 

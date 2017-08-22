@@ -14,10 +14,10 @@
 
         public void HandleAutomationEvent(UIA.IUIAutomationElement sender, int eventId)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
             var @event = EventId.Find(AutomationType.UIA3, eventId);
-            HandleAutomationEvent(senderElement, @event);
+            this.HandleAutomationEvent(senderElement, @event);
         }
     }
 }

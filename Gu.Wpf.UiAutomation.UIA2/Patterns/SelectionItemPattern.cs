@@ -21,17 +21,17 @@
 
         public override void AddToSelection()
         {
-            NativePattern.AddToSelection();
+            this.NativePattern.AddToSelection();
         }
 
         public override void RemoveFromSelection()
         {
-            NativePattern.RemoveFromSelection();
+            this.NativePattern.RemoveFromSelection();
         }
 
         public override void Select()
         {
-            NativePattern.Select();
+            this.NativePattern.Select();
         }
     }
 

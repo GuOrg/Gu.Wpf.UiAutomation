@@ -13,7 +13,7 @@
         /// <summary>
         /// The currently selected <see cref="TreeItem" />
         /// </summary>
-        public TreeItem SelectedTreeItem => SearchSelectedItem(TreeItems);
+        public TreeItem SelectedTreeItem => this.SearchSelectedItem(this.TreeItems);
 
         private TreeItem SearchSelectedItem(TreeItem[] treeItems)
         {
@@ -26,7 +26,7 @@
             // Loop thru the children and search in their children
             foreach (var treeItem in treeItems)
             {
-                var selectedInChildItem = SearchSelectedItem(treeItem.TreeItems);
+                var selectedInChildItem = this.SearchSelectedItem(treeItem.TreeItems);
                 if (selectedInChildItem != null)
                 {
                     return selectedInChildItem;
@@ -38,14 +38,14 @@
         /// <summary>
         /// All child <see cref="TreeItem" /> objects from this <see cref="Tree" />
         /// </summary>
-        public TreeItem[] TreeItems => GetTreeItems();
+        public TreeItem[] TreeItems => this.GetTreeItems();
 
         /// <summary>
         /// Gets all the <see cref="TreeItem" /> objects for this <see cref="Tree" />
         /// </summary>
         private TreeItem[] GetTreeItems()
         {
-            return FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
+            return this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
                 .Select(e => e.AsTreeItem()).ToArray();
         }
     }

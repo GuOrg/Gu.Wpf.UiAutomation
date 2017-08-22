@@ -5,36 +5,36 @@
 
     public class UIA3TreeWalkerFactory : ITreeWalkerFactory
     {
-        private readonly UIA3Automation _automation;
+        private readonly UIA3Automation automation;
 
         public UIA3TreeWalkerFactory(UIA3Automation automation)
         {
-            _automation = automation;
+            this.automation = automation;
         }
 
         public ITreeWalker GetControlViewWalker()
         {
-            var nativeTreeWalker = _automation.NativeAutomation.ControlViewWalker;
-            return new UIA3TreeWalker(_automation, nativeTreeWalker);
+            var nativeTreeWalker = this.automation.NativeAutomation.ControlViewWalker;
+            return new UIA3TreeWalker(this.automation, nativeTreeWalker);
         }
 
         public ITreeWalker GetContentViewWalker()
         {
-            var nativeTreeWalker = _automation.NativeAutomation.ContentViewWalker;
-            return new UIA3TreeWalker(_automation, nativeTreeWalker);
+            var nativeTreeWalker = this.automation.NativeAutomation.ContentViewWalker;
+            return new UIA3TreeWalker(this.automation, nativeTreeWalker);
         }
 
         public ITreeWalker GetRawViewWalker()
         {
-            var nativeTreeWalker = _automation.NativeAutomation.RawViewWalker;
-            return new UIA3TreeWalker(_automation, nativeTreeWalker);
+            var nativeTreeWalker = this.automation.NativeAutomation.RawViewWalker;
+            return new UIA3TreeWalker(this.automation, nativeTreeWalker);
         }
 
         public ITreeWalker GetCustomTreeWalker(ConditionBase condition)
         {
-            var nativeCondition = ConditionConverter.ToNative(_automation, condition);
-            var nativeTreeWalker = _automation.NativeAutomation.CreateTreeWalker(nativeCondition);
-            return new UIA3TreeWalker(_automation, nativeTreeWalker);
+            var nativeCondition = ConditionConverter.ToNative(this.automation, condition);
+            var nativeTreeWalker = this.automation.NativeAutomation.CreateTreeWalker(nativeCondition);
+            return new UIA3TreeWalker(this.automation, nativeTreeWalker);
         }
     }
 }

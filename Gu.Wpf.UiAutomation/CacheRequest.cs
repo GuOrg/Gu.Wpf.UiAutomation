@@ -20,12 +20,12 @@
 
         public void Add(PatternId pattern)
         {
-            Patterns.Add(pattern);
+            this.Patterns.Add(pattern);
         }
 
         public void Add(PropertyId property)
         {
-            Properties.Add(property);
+            this.Properties.Add(property);
         }
 
         public IDisposable Activate()
@@ -38,19 +38,19 @@
     public partial class CacheRequest
     {
         [ThreadStatic]
-        private static Stack<CacheRequest> _cacheStack;
+        private static Stack<CacheRequest> cacheStack;
         [ThreadStatic]
-        private static Stack<bool> _forceNoCacheStack;
+        private static Stack<bool> forceNoCacheStack;
 
-        public static bool IsCachingActive => (_forceNoCacheStack == null || _forceNoCacheStack.Count == 0) && Current != null;
+        public static bool IsCachingActive => (forceNoCacheStack == null || forceNoCacheStack.Count == 0) && Current != null;
 
         public static CacheRequest Current
         {
             get
             {
-                if ((_cacheStack != null) && (_cacheStack.Count != 0))
+                if ((cacheStack != null) && (cacheStack.Count != 0))
                 {
-                    return _cacheStack.Peek();
+                    return cacheStack.Peek();
                 }
                 return null;
             }
@@ -58,20 +58,20 @@
 
         public static void Push(CacheRequest cacheRequest)
         {
-            if (_cacheStack == null)
+            if (cacheStack == null)
             {
-                _cacheStack = new Stack<CacheRequest>();
+                cacheStack = new Stack<CacheRequest>();
             }
-            _cacheStack.Push(cacheRequest);
+            cacheStack.Push(cacheRequest);
         }
 
         public static void Pop()
         {
-            if ((_cacheStack == null) || (_cacheStack.Count == 0))
+            if ((cacheStack == null) || (cacheStack.Count == 0))
             {
                 throw new InvalidOperationException("No cache request available to pop");
             }
-            _cacheStack.Pop();
+            cacheStack.Pop();
         }
 
         public static IDisposable ForceNoCache()
@@ -91,16 +91,16 @@
         {
             public ForceNoCacheActivation()
             {
-                if (_forceNoCacheStack == null)
+                if (forceNoCacheStack == null)
                 {
-                    _forceNoCacheStack = new Stack<bool>();
+                    forceNoCacheStack = new Stack<bool>();
                 }
-                _forceNoCacheStack.Push(true);
+                forceNoCacheStack.Push(true);
             }
 
             public void Dispose()
             {
-                _forceNoCacheStack.Pop();
+                forceNoCacheStack.Pop();
             }
         }
     }

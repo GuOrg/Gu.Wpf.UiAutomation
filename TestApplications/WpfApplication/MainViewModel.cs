@@ -10,17 +10,17 @@
 
         public ICommand InvokeButtonCommand { get; }
 
-        public string InvokeButtonText { get { return GetProperty<string>(); } set { SetProperty(value); } }
+        public string InvokeButtonText { get { return this.GetProperty<string>(); } set { this.SetProperty(value); } }
 
         public MainViewModel()
         {
-            DataGridItems = new ObservableCollection<DataGridItem>();
-            DataGridItems.Add(new DataGridItem { Id = 1, Name = "Spongebob" });
-            DataGridItems.Add(new DataGridItem { Id = 2, Name = "Patrick" });
-            DataGridItems.Add(new DataGridItem { Id = 3, Name = "Tadeus" });
+            this.DataGridItems = new ObservableCollection<DataGridItem>();
+            this.DataGridItems.Add(new DataGridItem { Id = 1, Name = "Spongebob" });
+            this.DataGridItems.Add(new DataGridItem { Id = 2, Name = "Patrick" });
+            this.DataGridItems.Add(new DataGridItem { Id = 3, Name = "Tadeus" });
 
-            InvokeButtonText = "Invoke me!";
-            InvokeButtonCommand = new RelayCommand(o => InvokeButtonText = "Invoked!");
+            this.InvokeButtonText = "Invoke me!";
+            this.InvokeButtonCommand = new RelayCommand(o => this.InvokeButtonText = "Invoked!");
         }
     }
 }

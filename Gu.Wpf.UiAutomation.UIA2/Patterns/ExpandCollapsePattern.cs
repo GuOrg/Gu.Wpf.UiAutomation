@@ -16,12 +16,12 @@
 
         public override void Collapse()
         {
-            NativePattern.Collapse();
+            this.NativePattern.Collapse();
         }
 
         public override void Expand()
         {
-            NativePattern.Expand();
+            this.NativePattern.Expand();
         }
     }
 

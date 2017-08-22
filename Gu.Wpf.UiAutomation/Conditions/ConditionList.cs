@@ -6,7 +6,7 @@
     {
         public ConditionList(params ConditionBase[] conditions)
         {
-            AddRange(conditions);
+            this.AddRange(conditions);
         }
     }
 }

@@ -17,111 +17,111 @@
 
         public UIA2TextRange(UIA2Automation automation, UIA.Text.TextPatternRange nativeRange)
         {
-            Automation = automation;
-            NativeRange = nativeRange;
+            this.Automation = automation;
+            this.NativeRange = nativeRange;
         }
 
         public void AddToSelection()
         {
-            NativeRange.AddToSelection();
+            this.NativeRange.AddToSelection();
         }
 
         public ITextRange Clone()
         {
-            var clonedTextRangeNative = NativeRange.Clone();
-            return TextRangeConverter.NativeToManaged(Automation, clonedTextRangeNative);
+            var clonedTextRangeNative = this.NativeRange.Clone();
+            return TextRangeConverter.NativeToManaged(this.Automation, clonedTextRangeNative);
         }
 
         public bool Compare(ITextRange range)
         {
-            var nativeRange = ToNativeRange(range);
-            return NativeRange.Compare(nativeRange);
+            var nativeRange = this.ToNativeRange(range);
+            return this.NativeRange.Compare(nativeRange);
         }
 
         public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            var nativeRange = ToNativeRange(targetRange);
-            return NativeRange.CompareEndpoints((UIA.Text.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.Text.TextPatternRangeEndpoint)targetEndPoint);
+            var nativeRange = this.ToNativeRange(targetRange);
+            return this.NativeRange.CompareEndpoints((UIA.Text.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.Text.TextPatternRangeEndpoint)targetEndPoint);
         }
 
         public void ExpandToEnclosingUnit(TextUnit textUnit)
         {
-            NativeRange.ExpandToEnclosingUnit((UIA.Text.TextUnit)textUnit);
+            this.NativeRange.ExpandToEnclosingUnit((UIA.Text.TextUnit)textUnit);
         }
 
         public ITextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
         {
             var nativeValue = ValueConverter.ToNative(value);
             var nativeAttribute = UIA.AutomationTextAttribute.LookupById(attribute.Id);
-            var nativeTextRange = NativeRange.FindAttribute(nativeAttribute, nativeValue, backward);
-            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
+            var nativeTextRange = this.NativeRange.FindAttribute(nativeAttribute, nativeValue, backward);
+            return TextRangeConverter.NativeToManaged(this.Automation, nativeTextRange);
         }
 
         public ITextRange FindText(string text, bool backward, bool ignoreCase)
         {
-            var nativeTextRange = NativeRange.FindText(text, backward, ignoreCase);
-            return TextRangeConverter.NativeToManaged(Automation, nativeTextRange);
+            var nativeTextRange = this.NativeRange.FindText(text, backward, ignoreCase);
+            return TextRangeConverter.NativeToManaged(this.Automation, nativeTextRange);
         }
 
         public object GetAttributeValue(TextAttributeId attribute)
         {
             var nativeAttribute = UIA.AutomationTextAttribute.LookupById(attribute.Id);
-            var nativeValue = NativeRange.GetAttributeValue(nativeAttribute);
-            return attribute.Convert<object>(Automation, nativeValue);
+            var nativeValue = this.NativeRange.GetAttributeValue(nativeAttribute);
+            return attribute.Convert<object>(this.Automation, nativeValue);
         }
 
         public Rectangle[] GetBoundingRectangles()
         {
-            var unrolledRects = NativeRange.GetBoundingRectangles();
+            var unrolledRects = this.NativeRange.GetBoundingRectangles();
             return unrolledRects?.Select(r => (Rectangle)ValueConverter.ToRectangle(r)).ToArray();
         }
 
         public AutomationElement[] GetChildren()
         {
-            var nativeChildren = NativeRange.GetChildren();
-            return AutomationElementConverter.NativeArrayToManaged(Automation, nativeChildren);
+            var nativeChildren = this.NativeRange.GetChildren();
+            return AutomationElementConverter.NativeArrayToManaged(this.Automation, nativeChildren);
         }
 
         public AutomationElement GetEnclosingElement()
         {
-            var nativeElement = NativeRange.GetEnclosingElement();
-            return AutomationElementConverter.NativeToManaged(Automation, nativeElement);
+            var nativeElement = this.NativeRange.GetEnclosingElement();
+            return AutomationElementConverter.NativeToManaged(this.Automation, nativeElement);
         }
 
         public string GetText(int maxLength)
         {
-            return NativeRange.GetText(maxLength);
+            return this.NativeRange.GetText(maxLength);
         }
 
         public int Move(TextUnit unit, int count)
         {
-            return NativeRange.Move((UIA.Text.TextUnit)unit, count);
+            return this.NativeRange.Move((UIA.Text.TextUnit)unit, count);
         }
 
         public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
-            var nativeRange = ToNativeRange(targetRange);
-            NativeRange.MoveEndpointByRange((UIA.Text.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.Text.TextPatternRangeEndpoint)targetEndPoint);
+            var nativeRange = this.ToNativeRange(targetRange);
+            this.NativeRange.MoveEndpointByRange((UIA.Text.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.Text.TextPatternRangeEndpoint)targetEndPoint);
         }
 
         public int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count)
         {
-            return NativeRange.MoveEndpointByUnit((UIA.Text.TextPatternRangeEndpoint)endpoint, (UIA.Text.TextUnit)unit, count);
+            return this.NativeRange.MoveEndpointByUnit((UIA.Text.TextPatternRangeEndpoint)endpoint, (UIA.Text.TextUnit)unit, count);
         }
 
         public void RemoveFromSelection()
         {
-            NativeRange.RemoveFromSelection();
+            this.NativeRange.RemoveFromSelection();
         }
 
         public void ScrollIntoView(bool alignToTop)
         {
-            NativeRange.ScrollIntoView(alignToTop);
+            this.NativeRange.ScrollIntoView(alignToTop);
         }
 
         public void Select()
         {
-            NativeRange.Select();
+            this.NativeRange.Select();
         }
 
         protected UIA.Text.TextPatternRange ToNativeRange(ITextRange range)

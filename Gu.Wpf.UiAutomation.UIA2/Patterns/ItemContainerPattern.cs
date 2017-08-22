@@ -19,10 +19,10 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 
         public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
         {
-            var foundNativeElement = NativePattern.FindItemByProperty(
+            var foundNativeElement = this.NativePattern.FindItemByProperty(
                     startAfter?.ToNative(),
                     property == null ? null : UIA.AutomationProperty.LookupById(property.Id), ValueConverter.ToNative(value));
-            return AutomationElementConverter.NativeToManaged((UIA2Automation)BasicAutomationElement.Automation, foundNativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, foundNativeElement);
         }
     }
 }

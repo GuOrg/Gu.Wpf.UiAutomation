@@ -20,10 +20,10 @@
         public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
         {
             var foundNativeElement = ComCallWrapper.Call(() =>
-                NativePattern.FindItemByProperty(
+                this.NativePattern.FindItemByProperty(
                     startAfter?.ToNative(),
                     property?.Id ?? 0, ValueConverter.ToNative(value)));
-            return AutomationElementConverter.NativeToManaged((UIA3Automation)BasicAutomationElement.Automation, foundNativeElement);
+            return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, foundNativeElement);
         }
     }
 }

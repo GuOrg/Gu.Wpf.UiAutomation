@@ -14,9 +14,9 @@
 
         public void HandleStructureChangedEvent(UIA.IUIAutomationElement sender, UIA.StructureChangeType changeType, int[] runtimeId)
         {
-            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)Automation, sender);
+            var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            HandleStructureChangedEvent(senderElement, (StructureChangeType)changeType, runtimeId);
+            this.HandleStructureChangedEvent(senderElement, (StructureChangeType)changeType, runtimeId);
         }
     }
 }

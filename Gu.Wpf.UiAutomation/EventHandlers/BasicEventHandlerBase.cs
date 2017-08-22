@@ -6,17 +6,17 @@
 
     public abstract class BasicEventHandlerBase : EventHandlerBase, IAutomationEventHandler
     {
-        private readonly Action<AutomationElement, EventId> _callAction;
+        private readonly Action<AutomationElement, EventId> callAction;
 
         protected BasicEventHandlerBase(AutomationBase automation, Action<AutomationElement, EventId> callAction)
             : base(automation)
         {
-            _callAction = callAction;
+            this.callAction = callAction;
         }
 
         public void HandleAutomationEvent(AutomationElement sender, EventId eventId)
         {
-            _callAction(sender, eventId);
+            this.callAction(sender, eventId);
         }
     }
 }

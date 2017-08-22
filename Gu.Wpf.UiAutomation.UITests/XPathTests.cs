@@ -16,7 +16,7 @@
                 var window = app.GetMainWindow(automation);
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
-                var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{GetFileMenuText()}']");
+                var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
                 Assert.That(file, Is.Not.Null);
                 app.Close();
             }

@@ -25,19 +25,19 @@
 
     public abstract class TransformPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITransformPattern
     {
-        private AutomationProperty<bool> _canMove;
-        private AutomationProperty<bool> _canResize;
-        private AutomationProperty<bool> _canRotate;
+        private AutomationProperty<bool> canMove;
+        private AutomationProperty<bool> canResize;
+        private AutomationProperty<bool> canRotate;
 
         protected TransformPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public ITransformPatternProperties Properties => Automation.PropertyLibrary.Transform;
+        public ITransformPatternProperties Properties => this.Automation.PropertyLibrary.Transform;
 
-        public AutomationProperty<bool> CanMove => GetOrCreate(ref _canMove, Properties.CanMove);
-        public AutomationProperty<bool> CanResize => GetOrCreate(ref _canResize, Properties.CanResize);
-        public AutomationProperty<bool> CanRotate => GetOrCreate(ref _canRotate, Properties.CanRotate);
+        public AutomationProperty<bool> CanMove => this.GetOrCreate(ref this.canMove, this.Properties.CanMove);
+        public AutomationProperty<bool> CanResize => this.GetOrCreate(ref this.canResize, this.Properties.CanResize);
+        public AutomationProperty<bool> CanRotate => this.GetOrCreate(ref this.canRotate, this.Properties.CanRotate);
 
         public abstract void Move(double x, double y);
         public abstract void Resize(double width, double height);

@@ -22,12 +22,12 @@
         /// <summary>
         /// Gets a value indicating whether this point is empty (all coordinates are 0)
         /// </summary>
-        public bool IsEmpty => Equals(EmptyPoint);
+        public bool IsEmpty => this.Equals(EmptyPoint);
 
         public Point(double x, double y)
         {
-            X = x;
-            Y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>
@@ -35,12 +35,12 @@
         /// </summary>
         public double Distance(Point otherPoint)
         {
-            return Distance(otherPoint.X, otherPoint.Y);
+            return this.Distance(otherPoint.X, otherPoint.Y);
         }
 
         public double Distance(double otherX, double otherY)
         {
-            return Math.Sqrt(Math.Pow(X - otherX, 2) + Math.Pow(Y - otherY, 2));
+            return Math.Sqrt(Math.Pow(this.X - otherX, 2) + Math.Pow(this.Y - otherY, 2));
         }
 
         public override int GetHashCode()
@@ -48,7 +48,7 @@
             unchecked
             {
                 // ReSharper disable NonReadonlyMemberInGetHashCode
-                return X.GetHashCode() * 397 ^ Y.GetHashCode();
+                return this.X.GetHashCode() * 397 ^ this.Y.GetHashCode();
                 // ReSharper restore NonReadonlyMemberInGetHashCode
             }
         }
@@ -57,13 +57,13 @@
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            if (other.GetType() != GetType()) return false;
-            return Equals((Point)other);
+            if (other.GetType() != this.GetType()) return false;
+            return this.Equals((Point)other);
         }
 
         public bool Equals(Point other)
         {
-            return X.Equals(other.X) && Y.Equals(other.Y);
+            return this.X.Equals(other.X) && this.Y.Equals(other.Y);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@
 
         public override string ToString()
         {
-            return $"X={X},Y={Y}";
+            return $"X={this.X},Y={this.Y}";
         }
 
         /// <summary>

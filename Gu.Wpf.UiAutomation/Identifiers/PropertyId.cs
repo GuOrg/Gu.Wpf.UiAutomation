@@ -20,7 +20,7 @@
 
         public PropertyId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
-            return SetConverter<PropertyId>(convertMethod);
+            return this.SetConverter<PropertyId>(convertMethod);
         }
 
         /// <summary>

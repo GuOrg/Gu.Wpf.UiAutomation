@@ -12,9 +12,9 @@
 
         public PropertyCondition(PropertyId property, object value, PropertyConditionFlags propertyConditionFlags)
         {
-            Property = property;
-            Value = value;
-            PropertyConditionFlags = propertyConditionFlags;
+            this.Property = property;
+            this.Value = value;
+            this.PropertyConditionFlags = propertyConditionFlags;
         }
 
         public PropertyId Property { get; }
@@ -25,7 +25,7 @@
 
         public override string ToString()
         {
-            return $"{Property}: {Value}";
+            return $"{this.Property}: {this.Value}";
         }
     }
 }

@@ -17,7 +17,7 @@
 
         public void ScrollIntoView()
         {
-            ComCallWrapper.Call(() => NativePattern.ScrollIntoView());
+            ComCallWrapper.Call(() => this.NativePattern.ScrollIntoView());
         }
     }
 }

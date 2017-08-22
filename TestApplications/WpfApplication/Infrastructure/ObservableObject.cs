@@ -12,7 +12,7 @@
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly Dictionary<string, object> _backingFieldValues = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> backingFieldValues = new Dictionary<string, object>();
 
         /// <summary>
         /// Gets a property value from the internal backing field
@@ -24,7 +24,7 @@
                 throw new ArgumentNullException(nameof(propertyName));
             }
             object value;
-            if (_backingFieldValues.TryGetValue(propertyName, out value))
+            if (this.backingFieldValues.TryGetValue(propertyName, out value))
             {
                 return (T)value;
             }
@@ -40,9 +40,9 @@
             {
                 throw new ArgumentNullException(nameof(propertyName));
             }
-            if (IsEqual(GetProperty<T>(propertyName), newValue)) return false;
-            _backingFieldValues[propertyName] = newValue;
-            OnPropertyChanged(propertyName);
+            if (this.IsEqual(this.GetProperty<T>(propertyName), newValue)) return false;
+            this.backingFieldValues[propertyName] = newValue;
+            this.OnPropertyChanged(propertyName);
             return true;
         }
 
@@ -51,20 +51,20 @@
         /// </summary>
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
-            if (IsEqual(field, newValue)) return false;
+            if (this.IsEqual(field, newValue)) return false;
             field = newValue;
-            OnPropertyChanged(propertyName);
+            this.OnPropertyChanged(propertyName);
             return true;
         }
 
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> selectorExpression)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(GetNameFromExpression(selectorExpression)));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(this.GetNameFromExpression(selectorExpression)));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private bool IsEqual<T>(T field, T newValue)

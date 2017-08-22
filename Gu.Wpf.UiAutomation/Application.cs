@@ -18,7 +18,7 @@
         /// <summary>
         /// The process of this application.
         /// </summary>
-        private readonly Process _process;
+        private readonly Process process;
 
         /// <summary>
         /// Flag to indicate, if the application is a windows store app.
@@ -28,28 +28,28 @@
         /// <summary>
         /// The proces Id of the application.
         /// </summary>
-        public int ProcessId => _process.Id;
+        public int ProcessId => this.process.Id;
 
         /// <summary>
         /// The name of the application's process.
         /// </summary>
-        public string Name => _process.ProcessName;
+        public string Name => this.process.ProcessName;
 
         /// <summary>
         /// The current handle (Win32) of the application's main window.
         /// Can be IntPtr.Zero if no main window is currently available.
         /// </summary>
-        public IntPtr MainWindowHandle => _process.MainWindowHandle;
+        public IntPtr MainWindowHandle => this.process.MainWindowHandle;
 
         /// <summary>
         /// Gets a value indicating whether the associated process has been terminated.
         /// </summary>
-        public bool HasExited => _process.HasExited;
+        public bool HasExited => this.process.HasExited;
 
         /// <summary>
         /// Gets the value that the associated process specified when it terminated.
         /// </summary>
-        public int ExitCode => _process.ExitCode;
+        public int ExitCode => this.process.ExitCode;
 
         /// <summary>
         /// Creates an application object with the given process id.
@@ -68,8 +68,8 @@
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(Process process, bool isStoreApp = false)
         {
-            _process = process ?? throw new ArgumentNullException(nameof(process));
-            IsStoreApp = isStoreApp;
+            this.process = process ?? throw new ArgumentNullException(nameof(process));
+            this.IsStoreApp = isStoreApp;
         }
 
         /// <summary>
@@ -79,27 +79,27 @@
         public bool Close()
         {
             Logger.Default.Debug("Closing application");
-            if (_process.HasExited)
+            if (this.process.HasExited)
             {
-                _process.Dispose();
+                this.process.Dispose();
                 return true;
             }
-            _process.CloseMainWindow();
-            if (IsStoreApp)
+            this.process.CloseMainWindow();
+            if (this.IsStoreApp)
             {
                 return true;
             }
-            _process.WaitForExit(5000);
+            this.process.WaitForExit(5000);
             var closedNormally = true;
-            if (!_process.HasExited)
+            if (!this.process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
-                _process.Kill();
-                _process.WaitForExit(5000);
+                this.process.Kill();
+                this.process.WaitForExit(5000);
                 closedNormally = false;
             }
-            _process.Close();
-            _process.Dispose();
+            this.process.Close();
+            this.process.Dispose();
             return closedNormally;
         }
 
@@ -110,10 +110,10 @@
         {
             try
             {
-                if (_process.HasExited) return;
-                _process.Kill();
-                _process.WaitForExit();
-                _process.Dispose();
+                if (this.process.HasExited) return;
+                this.process.Kill();
+                this.process.WaitForExit();
+                this.process.Dispose();
             }
             catch
             {
@@ -126,7 +126,7 @@
         /// </summary>
         public void Dispose()
         {
-            Close();
+            this.Close();
         }
 
         public static Application Attach(int processId)
@@ -208,7 +208,7 @@
         public void WaitWhileBusy(TimeSpan? waitTimeout = null)
         {
             var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
-            _process.WaitForInputIdle((int)waitTime);
+            this.process.WaitForInputIdle((int)waitTime);
         }
 
         /// <summary>
@@ -220,8 +220,8 @@
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
             Retry.While(() =>
             {
-                _process.Refresh();
-                return _process.MainWindowHandle == IntPtr.Zero;
+                this.process.Refresh();
+                return this.process.MainWindowHandle == IntPtr.Zero;
             }, waitTime, TimeSpan.FromMilliseconds(50));
         }
 
@@ -233,8 +233,8 @@
         /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
         public Window GetMainWindow(AutomationBase automation, TimeSpan? waitTimeout = null)
         {
-            WaitWhileMainHandleIsMissing(waitTimeout);
-            var mainWindowHandle = MainWindowHandle;
+            this.WaitWhileMainHandleIsMissing(waitTimeout);
+            var mainWindowHandle = this.MainWindowHandle;
             if (mainWindowHandle == IntPtr.Zero)
             {
                 return null;
@@ -253,7 +253,7 @@
         public Window[] GetAllTopLevelWindows(AutomationBase automation)
         {
             var desktop = automation.GetDesktop();
-            var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(ProcessId)));
+            var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
             return foundElements.Select(x => x.AsWindow()).ToArray();
         }
 

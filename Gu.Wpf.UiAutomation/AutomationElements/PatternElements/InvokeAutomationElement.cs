@@ -9,11 +9,11 @@
         {
         }
 
-        public IInvokePattern InvokePattern => Patterns.Invoke.Pattern;
+        public IInvokePattern InvokePattern => this.Patterns.Invoke.Pattern;
 
         public void Invoke()
         {
-            InvokePattern.Invoke();
+            this.InvokePattern.Invoke();
         }
     }
 }

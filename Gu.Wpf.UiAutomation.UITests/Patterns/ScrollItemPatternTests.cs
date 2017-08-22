@@ -10,7 +10,7 @@
     [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ScrollItemPatternTests : UITestBase
     {
-        private AutomationElement _grid;
+        private AutomationElement grid;
         public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType) : base(automationType, appType)
         {
         }
@@ -18,18 +18,18 @@
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = App.GetMainWindow(Automation);
+            var mainWindow = this.App.GetMainWindow(this.Automation);
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
-            _grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
+            this.grid = tab.FindFirstDescendant(cf => cf.ByAutomationId("LargeListView"));
         }
 
         [Test]
         public void Test()
         {
-            var grid = _grid;
+            var grid = this.grid;
             Assert.That(grid, Is.Not.Null);
-            var gridPattern = _grid.Patterns.Grid.Pattern;
+            var gridPattern = this.grid.Patterns.Grid.Pattern;
             Assert.That(gridPattern, Is.Not.Null);
             Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
             Assert.That(gridPattern.RowCount.Value, Is.EqualTo(7));

@@ -18,17 +18,17 @@
         
         public override void Move(double x, double y)
         {
-            NativePattern.Move(x, y);
+            this.NativePattern.Move(x, y);
         }
 
         public override void Resize(double width, double height)
         {
-            NativePattern.Resize(width, height);
+            this.NativePattern.Resize(width, height);
         }
 
         public override void Rotate(double degrees)
         {
-            NativePattern.Rotate(degrees);
+            this.NativePattern.Rotate(degrees);
         }
     }
 

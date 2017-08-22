@@ -28,19 +28,19 @@
 
     public abstract class SelectionPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionPattern
     {
-        private AutomationProperty<bool> _canSelectMultiple;
-        private AutomationProperty<bool> _isSelectionRequired;
-        private AutomationProperty<AutomationElement[]> _selection;
+        private AutomationProperty<bool> canSelectMultiple;
+        private AutomationProperty<bool> isSelectionRequired;
+        private AutomationProperty<AutomationElement[]> selection;
 
         protected SelectionPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern) : base(basicAutomationElement, nativePattern)
         {
         }
 
-        public ISelectionPatternProperties Properties => Automation.PropertyLibrary.Selection;
-        public ISelectionPatternEvents Events => Automation.EventLibrary.Selection;
+        public ISelectionPatternProperties Properties => this.Automation.PropertyLibrary.Selection;
+        public ISelectionPatternEvents Events => this.Automation.EventLibrary.Selection;
 
-        public AutomationProperty<bool> CanSelectMultiple => GetOrCreate(ref _canSelectMultiple, Properties.CanSelectMultiple);
-        public AutomationProperty<bool> IsSelectionRequired => GetOrCreate(ref _isSelectionRequired, Properties.IsSelectionRequired);
-        public AutomationProperty<AutomationElement[]> Selection => GetOrCreate(ref _selection, Properties.Selection);
+        public AutomationProperty<bool> CanSelectMultiple => this.GetOrCreate(ref this.canSelectMultiple, this.Properties.CanSelectMultiple);
+        public AutomationProperty<bool> IsSelectionRequired => this.GetOrCreate(ref this.isSelectionRequired, this.Properties.IsSelectionRequired);
+        public AutomationProperty<AutomationElement[]> Selection => this.GetOrCreate(ref this.selection, this.Properties.Selection);
     }
 }

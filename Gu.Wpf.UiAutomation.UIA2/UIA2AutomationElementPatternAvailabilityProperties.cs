@@ -53,33 +53,33 @@
         public PropertyId IsWindowPatternAvailable => AutomationObjectIds.IsWindowPatternAvailableProperty;
 
         public PropertyId[] AllForCurrentFramework => new[] {
-            IsDockPatternAvailable,
-            IsExpandCollapsePatternAvailable,
-            IsGridItemPatternAvailable,
-            IsGridPatternAvailable,
-            IsInvokePatternAvailable,
+            this.IsDockPatternAvailable,
+            this.IsExpandCollapsePatternAvailable,
+            this.IsGridItemPatternAvailable,
+            this.IsGridPatternAvailable,
+            this.IsInvokePatternAvailable,
 #if !NET35
-            IsItemContainerPatternAvailable,
+            this.IsItemContainerPatternAvailable,
 #endif
-            IsMultipleViewPatternAvailable,
-            IsRangeValuePatternAvailable,
-            IsScrollItemPatternAvailable,
-            IsScrollPatternAvailable,
-            IsSelectionItemPatternAvailable,
-            IsSelectionPatternAvailable,
+            this.IsMultipleViewPatternAvailable,
+            this.IsRangeValuePatternAvailable,
+            this.IsScrollItemPatternAvailable,
+            this.IsScrollPatternAvailable,
+            this.IsSelectionItemPatternAvailable,
+            this.IsSelectionPatternAvailable,
 #if !NET35
-            IsSynchronizedInputPatternAvailable,
+            this.IsSynchronizedInputPatternAvailable,
 #endif
-            IsTableItemPatternAvailable,
-            IsTablePatternAvailable,
-            IsTextPatternAvailable,
-            IsTogglePatternAvailable,
-            IsTransformPatternAvailable,
-            IsValuePatternAvailable,
+            this.IsTableItemPatternAvailable,
+            this.IsTablePatternAvailable,
+            this.IsTextPatternAvailable,
+            this.IsTogglePatternAvailable,
+            this.IsTransformPatternAvailable,
+            this.IsValuePatternAvailable,
 #if !NET35
-            IsVirtualizedItemPatternAvailable,
+            this.IsVirtualizedItemPatternAvailable,
 #endif
-            IsWindowPatternAvailable
+            this.IsWindowPatternAvailable
         };
     }
 }
