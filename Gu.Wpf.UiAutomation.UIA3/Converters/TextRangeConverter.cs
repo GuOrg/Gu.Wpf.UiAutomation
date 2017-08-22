@@ -19,7 +19,7 @@
 
             return retArray;
         }
-        
+
         public static UIA3TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeTextRange)
         {
             return nativeTextRange == null ? null : new UIA3TextRange(automation, nativeTextRange);

@@ -16,7 +16,7 @@
         }
 
         public PatternNotSupportedException(PatternId pattern)
-            : base(String.Format(DefaultMessageWithData, pattern))
+            : base(string.Format(DefaultMessageWithData, pattern))
         {
             this.Pattern = pattern;
         }
@@ -28,7 +28,7 @@
         }
 
         public PatternNotSupportedException(PatternId pattern, Exception innerException)
-            : base(String.Format(DefaultMessageWithData, pattern), innerException)
+            : base(string.Format(DefaultMessageWithData, pattern), innerException)
         {
             this.Pattern = pattern;
         }

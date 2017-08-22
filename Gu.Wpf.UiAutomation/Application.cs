@@ -173,7 +173,7 @@
 
         public static Application Launch(ProcessStartInfo processStartInfo)
         {
-            if (String.IsNullOrEmpty(processStartInfo.WorkingDirectory))
+            if (string.IsNullOrEmpty(processStartInfo.WorkingDirectory))
             {
                 processStartInfo.WorkingDirectory = ".";
             }
@@ -191,7 +191,7 @@
             }
             catch (Win32Exception ex)
             {
-                var error = String.Format(
+                var error = string.Format(
                     "[Failed Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
                     processStartInfo.FileName,
                     new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,

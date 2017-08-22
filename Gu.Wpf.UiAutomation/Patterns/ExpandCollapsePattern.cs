@@ -11,6 +11,7 @@
         AutomationProperty<ExpandCollapseState> ExpandCollapseState { get; }
 
         void Collapse();
+
         void Expand();
     }
 
@@ -33,6 +34,7 @@
         public AutomationProperty<ExpandCollapseState> ExpandCollapseState => this.GetOrCreate(ref this.expandCollapseState, this.Properties.ExpandCollapseState);
 
         public abstract void Collapse();
+
         public abstract void Expand();
     }
 }

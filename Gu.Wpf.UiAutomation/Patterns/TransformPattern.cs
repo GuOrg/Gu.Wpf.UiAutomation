@@ -8,18 +8,24 @@
         ITransformPatternProperties Properties { get; }
 
         AutomationProperty<bool> CanMove { get; }
+
         AutomationProperty<bool> CanResize { get; }
+
         AutomationProperty<bool> CanRotate { get; }
 
         void Move(double x, double y);
+
         void Resize(double width, double height);
+
         void Rotate(double degrees);
     }
 
     public interface ITransformPatternProperties
     {
         PropertyId CanMove { get; }
+
         PropertyId CanResize { get; }
+
         PropertyId CanRotate { get; }
     }
 
@@ -37,11 +43,15 @@
         public ITransformPatternProperties Properties => this.Automation.PropertyLibrary.Transform;
 
         public AutomationProperty<bool> CanMove => this.GetOrCreate(ref this.canMove, this.Properties.CanMove);
+
         public AutomationProperty<bool> CanResize => this.GetOrCreate(ref this.canResize, this.Properties.CanResize);
+
         public AutomationProperty<bool> CanRotate => this.GetOrCreate(ref this.canRotate, this.Properties.CanRotate);
 
         public abstract void Move(double x, double y);
+
         public abstract void Resize(double width, double height);
+
         public abstract void Rotate(double degrees);
     }
 }

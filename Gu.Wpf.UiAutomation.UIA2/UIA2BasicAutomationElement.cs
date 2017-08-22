@@ -22,7 +22,7 @@
             this.NativeElement = nativeElement;
             this.Patterns = new UIA2AutomationElementPatternValues(this);
         }
-        
+
         public override AutomationElementPatternValuesBase Patterns { get; }
 
         /// <summary>
@@ -88,7 +88,7 @@
             else
             {
                 success = this.Properties.ClickablePoint.TryGetValue(out point);
-            } 
+            }
 
             return success;
         }

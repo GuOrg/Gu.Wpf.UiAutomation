@@ -8,6 +8,7 @@
     public class UIA3TreeWalker : ITreeWalker
     {
         public UIA3Automation Automation { get; }
+
         public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
 
         public UIA3TreeWalker(UIA3Automation automation, UIA.IUIAutomationTreeWalker nativeTreeWalker)

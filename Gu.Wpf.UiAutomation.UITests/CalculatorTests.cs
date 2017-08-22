@@ -73,15 +73,25 @@
     public interface ICalculator
     {
         Button Button1 { get; }
+
         Button Button2 { get; }
+
         Button Button3 { get; }
+
         Button Button4 { get; }
+
         Button Button5 { get; }
+
         Button Button6 { get; }
+
         Button Button7 { get; }
+
         Button Button8 { get; }
+
         Button ButtonAdd { get; }
+
         Button ButtonEquals { get; }
+
         string Result { get; }
     }
 
@@ -90,14 +100,23 @@
         private readonly AutomationElement mainWindow;
 
         public Button Button1 => this.FindElement("1").AsButton();
+
         public Button Button2 => this.FindElement("2").AsButton();
+
         public Button Button3 => this.FindElement("3").AsButton();
+
         public Button Button4 => this.FindElement("4").AsButton();
+
         public Button Button5 => this.FindElement("5").AsButton();
+
         public Button Button6 => this.FindElement("6").AsButton();
+
         public Button Button7 => this.FindElement("7").AsButton();
+
         public Button Button8 => this.FindElement("8").AsButton();
+
         public Button ButtonAdd => this.FindElement("Add").AsButton();
+
         public Button ButtonEquals => this.FindElement("Equals").AsButton();
 
         public string Result
@@ -127,14 +146,23 @@
         private readonly AutomationElement mainWindow;
 
         public Button Button1 => this.FindElement("num1Button").AsButton();
+
         public Button Button2 => this.FindElement("num2Button").AsButton();
+
         public Button Button3 => this.FindElement("num3Button").AsButton();
+
         public Button Button4 => this.FindElement("num4Button").AsButton();
+
         public Button Button5 => this.FindElement("num5Button").AsButton();
+
         public Button Button6 => this.FindElement("num6Button").AsButton();
+
         public Button Button7 => this.FindElement("num7Button").AsButton();
+
         public Button Button8 => this.FindElement("num8Button").AsButton();
+
         public Button ButtonAdd => this.FindElement("plusButton").AsButton();
+
         public Button ButtonEquals => this.FindElement("equalButton").AsButton();
 
         public string Result

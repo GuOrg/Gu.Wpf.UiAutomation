@@ -10,14 +10,18 @@
         ITablePatternProperties Properties { get; }
 
         AutomationProperty<AutomationElement[]> ColumnHeaders { get; }
+
         AutomationProperty<AutomationElement[]> RowHeaders { get; }
+
         AutomationProperty<RowOrColumnMajor> RowOrColumnMajor { get; }
     }
 
     public interface ITablePatternProperties
     {
         PropertyId ColumnHeaders { get; }
+
         PropertyId RowHeaders { get; }
+
         PropertyId RowOrColumnMajor { get; }
     }
 
@@ -35,7 +39,9 @@
         public ITablePatternProperties Properties => this.Automation.PropertyLibrary.Table;
 
         public AutomationProperty<AutomationElement[]> ColumnHeaders => this.GetOrCreate(ref this.columnHeaders, this.Properties.ColumnHeaders);
+
         public AutomationProperty<AutomationElement[]> RowHeaders => this.GetOrCreate(ref this.rowHeaders, this.Properties.RowHeaders);
+
         public AutomationProperty<RowOrColumnMajor> RowOrColumnMajor => this.GetOrCreate(ref this.rowOrColumnMajor, this.Properties.RowOrColumnMajor);
     }
 }

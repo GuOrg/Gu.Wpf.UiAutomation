@@ -68,7 +68,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataGridItem.cs" />
-    <Compile Include="Infrastructure\ObservableObject.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="ListViewItem.cs" />
     <Compile Include="MainViewModel.cs" />

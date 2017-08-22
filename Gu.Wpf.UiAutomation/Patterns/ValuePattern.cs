@@ -8,6 +8,7 @@
         IValuePatternProperties Properties { get; }
 
         AutomationProperty<bool> IsReadOnly { get; }
+
         AutomationProperty<string> Value { get; }
 
         void SetValue(string value);
@@ -16,6 +17,7 @@
     public interface IValuePatternProperties
     {
         PropertyId IsReadOnly { get; }
+
         PropertyId Value { get; }
     }
 
@@ -32,6 +34,7 @@
         public IValuePatternProperties Properties => this.Automation.PropertyLibrary.Value;
 
         public AutomationProperty<bool> IsReadOnly => this.GetOrCreate(ref this.isReadOnly, this.Properties.IsReadOnly);
+
         public AutomationProperty<string> Value => this.GetOrCreate(ref this.value, this.Properties.Value);
 
         public abstract void SetValue(string value);

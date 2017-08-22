@@ -78,7 +78,6 @@
         /// </summary>
         public AutomationElement CachedParent => this.BasicAutomationElement.GetCachedParent();
 
-        #region Convenience properties
         /// <summary>
         /// The direct framework type of the element.
         /// Results in "FrameworkType.Unknown" if it couldn't be resolved.
@@ -122,7 +121,6 @@
         /// Flag if the element off-screen or on-screen(visible).
         /// </summary>
         public bool IsOffscreen => this.Properties.IsOffscreen.Value;
-        #endregion Convenience properties
 
         /// <summary>
         /// Performs a left click on the element.
@@ -565,7 +563,7 @@
         /// </summary>
         public override string ToString()
         {
-            return String.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
+            return string.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
                 this.Properties.AutomationId.ValueOrDefault, this.Properties.Name.ValueOrDefault, this.Properties.LocalizedControlType.ValueOrDefault, this.Properties.FrameworkId.ValueOrDefault);
         }
 
@@ -596,7 +594,6 @@
             return default(TRet);
         }
 
-        #region Conversion Methods
         public Button AsButton()
         {
             return new Button(this.BasicAutomationElement);
@@ -716,9 +713,7 @@
         {
             return new Window(this.BasicAutomationElement);
         }
-        #endregion Conversion Methods
 
-        #region Convenience methods
         public AutomationElement FindFirstChild()
         {
             return this.FindFirst(TreeScope.Children, new TrueCondition());
@@ -804,6 +799,5 @@
             var conditions = nestedConditionsFunc(this.ConditionFactory);
             return this.FindAllNested(conditions.ToArray());
         }
-        #endregion Convenience methods
     }
 }

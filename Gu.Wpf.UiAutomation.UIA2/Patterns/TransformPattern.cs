@@ -16,7 +16,7 @@
             : base(basicAutomationElement, nativePattern)
         {
         }
-        
+
         public override void Move(double x, double y)
         {
             this.NativePattern.Move(x, y);

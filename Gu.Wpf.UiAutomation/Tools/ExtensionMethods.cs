@@ -9,7 +9,8 @@
         /// <summary>
         /// Makes sure a comparable object is between a given range
         /// </summary>
-        public static T Clamp<T>(this T source, T min, T max) where T : IComparable
+        public static T Clamp<T>(this T source, T min, T max)
+            where T : IComparable
         {
             var isReversed = min.CompareTo(max) > 0;
             var smallest = isReversed ? max : min;
@@ -48,7 +49,7 @@
         /// </summary>
         public static bool HasValue(this double value)
         {
-            return !Double.IsNaN(value) && !Double.IsInfinity(value);
+            return !double.IsNaN(value) && !double.IsInfinity(value);
         }
 
 #if NET35

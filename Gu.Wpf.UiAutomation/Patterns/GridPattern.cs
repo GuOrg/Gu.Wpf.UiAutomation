@@ -9,6 +9,7 @@
         IGridPatternProperties Properties { get; }
 
         AutomationProperty<int> ColumnCount { get; }
+
         AutomationProperty<int> RowCount { get; }
 
         AutomationElement GetItem(int row, int column);
@@ -17,6 +18,7 @@
     public interface IGridPatternProperties
     {
         PropertyId ColumnCount { get; }
+
         PropertyId RowCount { get; }
     }
 
@@ -33,6 +35,7 @@
         public IGridPatternProperties Properties => this.Automation.PropertyLibrary.Grid;
 
         public AutomationProperty<int> ColumnCount => this.GetOrCreate(ref this.columnCount, this.Properties.ColumnCount);
+
         public AutomationProperty<int> RowCount => this.GetOrCreate(ref this.rowCount, this.Properties.RowCount);
 
         public abstract AutomationElement GetItem(int row, int column);

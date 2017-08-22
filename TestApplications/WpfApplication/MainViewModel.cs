@@ -1,18 +1,14 @@
 ﻿namespace WpfApplication
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using WpfApplication.Infrastructure;
 
-    public class MainViewModel : ObservableObject
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<DataGridItem> DataGridItems { get; }
-
-        public ICommand InvokeButtonCommand { get; }
-
-        public string InvokeButtonText { get => this.GetProperty<string>();
-            set => this.SetProperty(value);
-        }
+        private string invokeButtonText;
 
         public MainViewModel()
         {
@@ -21,8 +17,35 @@
             this.DataGridItems.Add(new DataGridItem { Id = 2, Name = "Patrick" });
             this.DataGridItems.Add(new DataGridItem { Id = 3, Name = "Tadeus" });
 
-            this.InvokeButtonText = "Invoke me!";
+            this.invokeButtonText = "Invoke me!";
             this.InvokeButtonCommand = new RelayCommand(o => this.InvokeButtonText = "Invoked!");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<DataGridItem> DataGridItems { get; }
+
+        public ICommand InvokeButtonCommand { get; }
+
+        public string InvokeButtonText
+        {
+            get => this.invokeButtonText;
+
+            set
+            {
+                if (value == this.invokeButtonText)
+                {
+                    return;
+                }
+
+                this.invokeButtonText = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

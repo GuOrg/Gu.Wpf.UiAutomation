@@ -8,15 +8,18 @@
         IMultipleViewPatternProperties Properties { get; }
 
         AutomationProperty<int> CurrentView { get; }
+
         AutomationProperty<int[]> SupportedViews { get; }
 
         string GetViewName(int view);
+
         void SetCurrentView(int view);
     }
 
     public interface IMultipleViewPatternProperties
     {
         PropertyId CurrentView { get; }
+
         PropertyId SupportedViews { get; }
     }
 
@@ -33,9 +36,11 @@
         public IMultipleViewPatternProperties Properties => this.Automation.PropertyLibrary.MultipleView;
 
         public AutomationProperty<int> CurrentView => this.GetOrCreate(ref this.currentView, this.Properties.CurrentView);
+
         public AutomationProperty<int[]> SupportedViews => this.GetOrCreate(ref this.supportedViews, this.Properties.SupportedViews);
 
         public abstract string GetViewName(int view);
+
         public abstract void SetCurrentView(int view);
     }
 }

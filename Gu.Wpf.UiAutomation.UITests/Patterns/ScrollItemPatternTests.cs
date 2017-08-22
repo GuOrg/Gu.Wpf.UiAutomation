@@ -11,6 +11,7 @@
     public class ScrollItemPatternTests : UITestBase
     {
         private AutomationElement grid;
+
         public ScrollItemPatternTests(AutomationType automationType, TestApplicationType appType)
             : base(automationType, appType)
         {

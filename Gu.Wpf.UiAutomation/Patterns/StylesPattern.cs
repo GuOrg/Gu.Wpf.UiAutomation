@@ -9,22 +9,34 @@
         IStylesPatternProperties Properties { get; }
 
          AutomationProperty<string> ExtendedProperties { get; }
+
          AutomationProperty<int> FillColor { get; }
+
          AutomationProperty<int> FillPatternColor { get; }
+
          AutomationProperty<string> FillPatternStyle { get; }
+
          AutomationProperty<string> Shape { get; }
+
          AutomationProperty<StyleType> Style { get; }
+
          AutomationProperty<string> StyleName { get; }
     }
 
     public interface IStylesPatternProperties
     {
         PropertyId ExtendedProperties { get; }
+
         PropertyId FillColor { get; }
+
         PropertyId FillPatternColor { get; }
+
         PropertyId FillPatternStyle { get; }
+
         PropertyId Shape { get; }
+
         PropertyId StyleId { get; }
+
         PropertyId StyleName { get; }
     }
 
@@ -46,11 +58,17 @@
         public IStylesPatternProperties Properties => this.Automation.PropertyLibrary.Styles;
 
         public AutomationProperty<string> ExtendedProperties => this.GetOrCreate(ref this.extendedProperties, this.Properties.ExtendedProperties);
+
         public AutomationProperty<int> FillColor => this.GetOrCreate(ref this.fillColor, this.Properties.FillColor);
+
         public AutomationProperty<int> FillPatternColor => this.GetOrCreate(ref this.fillPatternColor, this.Properties.FillPatternColor);
+
         public AutomationProperty<string> FillPatternStyle => this.GetOrCreate(ref this.fillPatternStyle, this.Properties.FillPatternStyle);
+
         public AutomationProperty<string> Shape => this.GetOrCreate(ref this.shape, this.Properties.Shape);
+
         public AutomationProperty<StyleType> Style => this.GetOrCreate(ref this.style, this.Properties.StyleId);
+
         public AutomationProperty<string> StyleName => this.GetOrCreate(ref this.styleName, this.Properties.StyleName);
     }
 }

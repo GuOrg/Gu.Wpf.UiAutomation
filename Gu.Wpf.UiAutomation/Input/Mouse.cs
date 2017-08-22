@@ -68,6 +68,7 @@
                 User32.GetCursorPos(out point);
                 return point;
             }
+
             set
             {
                 POINT point = value;

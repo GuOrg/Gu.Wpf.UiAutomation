@@ -17,7 +17,7 @@
         }
 
         public NoClickablePointException(Exception innerException)
-            : base(String.Empty, innerException)
+            : base(string.Empty, innerException)
         {
         }
 

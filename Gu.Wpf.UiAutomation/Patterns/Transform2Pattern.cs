@@ -8,19 +8,26 @@
         new ITransform2PatternProperties Properties { get; }
 
         AutomationProperty<bool> CanZoom { get; }
+
         AutomationProperty<double> ZoomLevel { get; }
+
         AutomationProperty<double> ZoomMaximum { get; }
+
         AutomationProperty<double> ZoomMinimum { get; }
 
         void Zoom(double zoom);
+
         void ZoomByUnit(ZoomUnit zoomUnit);
     }
 
     public interface ITransform2PatternProperties : ITransformPatternProperties
     {
         PropertyId CanZoom { get; }
+
         PropertyId ZoomLevel { get; }
+
         PropertyId ZoomMaximum { get; }
+
         PropertyId ZoomMinimum { get; }
     }
 
@@ -39,11 +46,15 @@
         ITransform2PatternProperties ITransform2Pattern.Properties => this.Automation.PropertyLibrary.Transform2;
 
         public AutomationProperty<bool> CanZoom => this.GetOrCreate(ref this.canZoom, ((ITransform2Pattern)this).Properties.CanZoom);
+
         public AutomationProperty<double> ZoomLevel => this.GetOrCreate(ref this.zoomLevel, ((ITransform2Pattern)this).Properties.ZoomLevel);
+
         public AutomationProperty<double> ZoomMaximum => this.GetOrCreate(ref this.zoomMaximum, ((ITransform2Pattern)this).Properties.ZoomMaximum);
+
         public AutomationProperty<double> ZoomMinimum => this.GetOrCreate(ref this.zoomMinimum, ((ITransform2Pattern)this).Properties.ZoomMinimum);
 
         public abstract void Zoom(double zoom);
+
         public abstract void ZoomByUnit(ZoomUnit zoomUnit);
     }
 }

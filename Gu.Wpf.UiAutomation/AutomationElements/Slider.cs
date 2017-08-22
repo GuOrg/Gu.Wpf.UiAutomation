@@ -41,6 +41,7 @@
                 // The value in this case is always between 0 and 100
                 return Convert.ToDouble(this.ValuePattern.Value.Value);
             }
+
             set
             {
                 var rangeValuePattern = this.RangeValuePattern;

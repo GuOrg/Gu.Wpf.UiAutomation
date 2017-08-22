@@ -10,14 +10,18 @@
         ISpreadsheetItemPatternProperties Properties { get; }
 
         AutomationProperty<string> Formula { get; }
+
         AutomationProperty<AutomationElement[]> AnnotationObjects { get; }
+
         AutomationProperty<AnnotationType[]> AnnotationTypes { get; }
     }
 
     public interface ISpreadsheetItemPatternProperties
     {
         PropertyId Formula { get; }
+
         PropertyId AnnotationObjects { get; }
+
         PropertyId AnnotationTypes { get; }
     }
 
@@ -35,7 +39,9 @@
         public ISpreadsheetItemPatternProperties Properties => this.Automation.PropertyLibrary.SpreadsheetItem;
 
         public AutomationProperty<string> Formula => this.GetOrCreate(ref this.formula, this.Properties.Formula);
+
         public AutomationProperty<AutomationElement[]> AnnotationObjects => this.GetOrCreate(ref this.annotationObjects, this.Properties.AnnotationObjects);
+
         public AutomationProperty<AnnotationType[]> AnnotationTypes => this.GetOrCreate(ref this.annotationTypes, this.Properties.AnnotationTypes);
     }
 }

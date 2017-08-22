@@ -103,25 +103,25 @@
         protected static PropertyId FindProperty(AutomationType automationType, int id)
         {
             var idsHolder = GetIdHolder(automationType);
-            return idsHolder.PropertyDict.ContainsKey(id) ? idsHolder.PropertyDict[id] : new PropertyId(id, String.Format("Property#{0}", id));
+            return idsHolder.PropertyDict.ContainsKey(id) ? idsHolder.PropertyDict[id] : new PropertyId(id, string.Format("Property#{0}", id));
         }
 
         protected static EventId FindEvent(AutomationType automationType, int id)
         {
             var idsHolder = GetIdHolder(automationType);
-            return idsHolder.EventDict.ContainsKey(id) ? idsHolder.EventDict[id] : new EventId(id, String.Format("Event#{0}", id));
+            return idsHolder.EventDict.ContainsKey(id) ? idsHolder.EventDict[id] : new EventId(id, string.Format("Event#{0}", id));
         }
 
         protected static PatternId FindPattern(AutomationType automationType, int id)
         {
             var idsHolder = GetIdHolder(automationType);
-            return idsHolder.PatternDict.ContainsKey(id) ? idsHolder.PatternDict[id] : new PatternId(id, String.Format("Pattern#{0}", id), null);
+            return idsHolder.PatternDict.ContainsKey(id) ? idsHolder.PatternDict[id] : new PatternId(id, string.Format("Pattern#{0}", id), null);
         }
 
         protected static TextAttributeId FindTextAttribute(AutomationType automationType, int id)
         {
             var idsHolder = GetIdHolder(automationType);
-            return idsHolder.TextAttributeDict.ContainsKey(id) ? idsHolder.TextAttributeDict[id] : new TextAttributeId(id, String.Format("TextAttribute#{0}", id));
+            return idsHolder.TextAttributeDict.ContainsKey(id) ? idsHolder.TextAttributeDict[id] : new TextAttributeId(id, string.Format("TextAttribute#{0}", id));
         }
 
         /// <summary>

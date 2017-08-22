@@ -47,6 +47,7 @@
         }
 
         public int Size { get; set; }
+
         public int Margin { get; set; }
 
         public void Show(Rectangle rectangle, Color color, int durationInMs)

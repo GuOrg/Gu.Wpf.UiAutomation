@@ -22,7 +22,7 @@
         {
             this.transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
         }
-        
+
         public override void Zoom(double zoom)
         {
             ComCallWrapper.Call(() => this.NativePattern.Zoom(zoom));
@@ -52,8 +52,11 @@
     public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
     {
         public PropertyId CanZoom => Transform2Pattern.CanZoomProperty;
+
         public PropertyId ZoomLevel => Transform2Pattern.ZoomLevelProperty;
+
         public PropertyId ZoomMaximum => Transform2Pattern.ZoomMaximumProperty;
+
         public PropertyId ZoomMinimum => Transform2Pattern.ZoomMinimumProperty;
     }
 }

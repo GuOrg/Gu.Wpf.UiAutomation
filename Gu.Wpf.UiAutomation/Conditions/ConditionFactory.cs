@@ -52,7 +52,7 @@
 
         public PropertyCondition ByHelpTextProperty(string helpText)
         {
-           return new PropertyCondition(this.propertyLibrary.Element.HelpText, helpText);  
+           return new PropertyCondition(this.propertyLibrary.Element.HelpText, helpText);
         }
 
         /// <summary>

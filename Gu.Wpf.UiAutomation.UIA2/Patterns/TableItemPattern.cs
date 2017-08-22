@@ -21,6 +21,7 @@
     public class TableItemPatternProperties : ITableItemPatternProperties
     {
         public PropertyId ColumnHeaderItems => TableItemPattern.ColumnHeaderItemsProperty;
+
         public PropertyId RowHeaderItems => TableItemPattern.RowHeaderItemsProperty;
     }
 }

@@ -9,13 +9,16 @@
         ISynchronizedInputPatternEvents Events { get; }
 
         void Cancel();
+
         void StartListening(SynchronizedInputType inputType);
     }
 
     public interface ISynchronizedInputPatternEvents
     {
         EventId DiscardedEvent { get; }
+
         EventId ReachedOtherElementEvent { get; }
+
         EventId ReachedTargetEvent { get; }
     }
 
@@ -29,6 +32,7 @@
         public ISynchronizedInputPatternEvents Events => this.Automation.EventLibrary.SynchronizedInput;
 
         public abstract void Cancel();
+
         public abstract void StartListening(SynchronizedInputType inputType);
     }
 }

@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return String.Format("NOT ({0})", this.Condition);
+            return string.Format("NOT ({0})", this.Condition);
         }
     }
 }

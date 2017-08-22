@@ -26,15 +26,20 @@
     public class DragPatternProperties : IDragPatternProperties
     {
         public PropertyId DropEffect => DragPattern.DropEffectProperty;
+
         public PropertyId DropEffects => DragPattern.DropEffectsProperty;
+
         public PropertyId IsGrabbed => DragPattern.IsGrabbedProperty;
+
         public PropertyId GrabbedItems => DragPattern.GrabbedItemsProperty;
     }
 
     public class DragPatternEvents : IDragPatternEvents
     {
         public EventId DragCancelEvent => DragPattern.DragCancelEvent;
+
         public EventId DragCompleteEvent => DragPattern.DragCompleteEvent;
+
         public EventId DragStartEvent => DragPattern.DragStartEvent;
     }
 }

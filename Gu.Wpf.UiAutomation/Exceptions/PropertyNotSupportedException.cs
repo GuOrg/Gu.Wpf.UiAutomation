@@ -16,7 +16,7 @@
         }
 
         public PropertyNotSupportedException(PropertyId property)
-            : base(String.Format(DefaultMessageWithData, property))
+            : base(string.Format(DefaultMessageWithData, property))
         {
             this.Property = property;
         }
@@ -28,7 +28,7 @@
         }
 
         public PropertyNotSupportedException(PropertyId property, Exception innerException)
-            : base(String.Format(DefaultMessageWithData, property), innerException)
+            : base(string.Format(DefaultMessageWithData, property), innerException)
         {
             this.Property = property;
         }

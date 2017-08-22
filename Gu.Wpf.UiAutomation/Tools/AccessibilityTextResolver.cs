@@ -24,7 +24,7 @@
         public static string GetStateText(AccessibilityState state)
         {
             var allStates = state.GetFlags();
-            return String.Join(", ", allStates.Select(s => GetStateBitText((AccessibilityState)s)).ToArray());
+            return string.Join(", ", allStates.Select(s => GetStateBitText((AccessibilityState)s)).ToArray());
         }
     }
 }

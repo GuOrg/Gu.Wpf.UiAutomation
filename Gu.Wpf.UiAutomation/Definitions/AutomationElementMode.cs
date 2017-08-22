@@ -1,7 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.Definitions
 {
     /// <summary>
-    /// Contains values that specify the type of reference to use when returning UI Automation elements. 
+    /// Contains values that specify the type of reference to use when returning UI Automation elements.
     /// </summary>
     public enum AutomationElementMode
     {
@@ -11,7 +11,7 @@
         /// </summary>
         None = 0,
         /// <summary>
-        /// Specifies that returned elements have a full reference to the underlying UI. 
+        /// Specifies that returned elements have a full reference to the underlying UI.
         /// </summary>
         Full = 1
     }

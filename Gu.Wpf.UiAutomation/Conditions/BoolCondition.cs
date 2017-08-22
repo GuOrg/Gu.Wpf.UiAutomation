@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return String.Format("BOOL: {0}", this.BooleanValue);
+            return string.Format("BOOL: {0}", this.BooleanValue);
         }
     }
 

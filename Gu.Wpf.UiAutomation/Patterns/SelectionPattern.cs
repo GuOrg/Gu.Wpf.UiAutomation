@@ -7,17 +7,22 @@
     public interface ISelectionPattern : IPattern
     {
         ISelectionPatternProperties Properties { get; }
+
         ISelectionPatternEvents Events { get; }
 
         AutomationProperty<bool> CanSelectMultiple { get; }
+
         AutomationProperty<bool> IsSelectionRequired { get; }
+
         AutomationProperty<AutomationElement[]> Selection { get; }
     }
 
     public interface ISelectionPatternProperties
     {
         PropertyId CanSelectMultiple { get; }
+
         PropertyId IsSelectionRequired { get; }
+
         PropertyId Selection { get; }
     }
 
@@ -38,10 +43,13 @@
         }
 
         public ISelectionPatternProperties Properties => this.Automation.PropertyLibrary.Selection;
+
         public ISelectionPatternEvents Events => this.Automation.EventLibrary.Selection;
 
         public AutomationProperty<bool> CanSelectMultiple => this.GetOrCreate(ref this.canSelectMultiple, this.Properties.CanSelectMultiple);
+
         public AutomationProperty<bool> IsSelectionRequired => this.GetOrCreate(ref this.isSelectionRequired, this.Properties.IsSelectionRequired);
+
         public AutomationProperty<AutomationElement[]> Selection => this.GetOrCreate(ref this.selection, this.Properties.Selection);
     }
 }

@@ -32,11 +32,12 @@
                 var textPattern = this.Patterns.Text.PatternOrDefault;
                 if (textPattern != null)
                 {
-                    return textPattern.DocumentRange.GetText(Int32.MaxValue);
+                    return textPattern.DocumentRange.GetText(int.MaxValue);
                 }
 
                 throw new MethodNotSupportedException($"AutomationElement '{this.ToString()}' supports neither ValuePattern or TextPattern");
             }
+
             set
             {
                 var valuePattern = this.Patterns.Value.PatternOrDefault;
@@ -55,8 +56,8 @@
         {
             this.Focus();
             var valuePattern = this.Patterns.Value.PatternOrDefault;
-            valuePattern?.SetValue(String.Empty);
-            if (String.IsNullOrEmpty(value))
+            valuePattern?.SetValue(string.Empty);
+            if (string.IsNullOrEmpty(value))
             {
                 return;
             }

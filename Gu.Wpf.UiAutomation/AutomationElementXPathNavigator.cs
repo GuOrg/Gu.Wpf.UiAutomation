@@ -60,11 +60,11 @@ namespace Gu.Wpf.UiAutomation
 
         public override XmlNameTable NameTable => throw new NotImplementedException();
 
-        public override string NamespaceURI => String.Empty;
+        public override string NamespaceURI => string.Empty;
 
-        public override string Prefix => String.Empty;
+        public override string Prefix => string.Empty;
 
-        public override string BaseURI => String.Empty;
+        public override string BaseURI => string.Empty;
 
         public override bool IsEmptyElement => false;
 
@@ -110,7 +110,7 @@ namespace Gu.Wpf.UiAutomation
         {
             if (this.IsInAttribute)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             var attributeIndex = this.GetAttributeIndexFromName(localName);
@@ -119,7 +119,7 @@ namespace Gu.Wpf.UiAutomation
                 return this.GetAttributeValue(attributeIndex);
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         public override bool MoveToAttribute(string localName, string namespaceUri)

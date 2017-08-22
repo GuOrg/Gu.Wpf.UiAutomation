@@ -21,14 +21,23 @@
         }
 
         public IAutomationElementEvents Element { get; }
+
         public IDragPatternEvents Drag { get; }
+
         public IDropTargetPatternEvents DropTarget { get; }
+
         public IInvokePatternEvents Invoke { get; }
+
         public ISelectionItemPatternEvents SelectionItem { get; }
+
         public ISelectionPatternEvents Selection { get; }
+
         public ISynchronizedInputPatternEvents SynchronizedInput { get; }
+
         public ITextEditPatternEvents TextEdit { get; }
+
         public ITextPatternEvents Text { get; }
+
         public IWindowPatternEvents Window { get; }
     }
 }

@@ -9,7 +9,7 @@
         public static extern uint GetWindowLong(IntPtr hWnd, int nIndex);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt32 dwNewLong);
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, uint dwNewLong);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]

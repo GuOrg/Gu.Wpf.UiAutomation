@@ -10,18 +10,26 @@
         IAnnotationPatternProperties Properties { get; }
 
         AutomationProperty<AnnotationType> AnnotationType { get; }
+
         AutomationProperty<string> AnnotationTypeName { get; }
+
         AutomationProperty<string> Author { get; }
+
         AutomationProperty<string> DateTime { get; }
+
         AutomationProperty<AutomationElement> Target { get; }
     }
 
     public interface IAnnotationPatternProperties
     {
         PropertyId AnnotationTypeId { get; }
+
         PropertyId AnnotationTypeName { get; }
+
         PropertyId Author { get; }
+
         PropertyId DateTime { get; }
+
         PropertyId Target { get; }
     }
 
@@ -41,9 +49,13 @@
         public IAnnotationPatternProperties Properties => this.Automation.PropertyLibrary.Annotation;
 
         public AutomationProperty<AnnotationType> AnnotationType => this.GetOrCreate(ref this.annotationType, this.Properties.AnnotationTypeId);
+
         public AutomationProperty<string> AnnotationTypeName => this.GetOrCreate(ref this.annotationTypeName, this.Properties.AnnotationTypeName);
+
         public AutomationProperty<string> Author => this.GetOrCreate(ref this.author, this.Properties.Author);
+
         public AutomationProperty<string> DateTime => this.GetOrCreate(ref this.dateTime, this.Properties.DateTime);
+
         public AutomationProperty<AutomationElement> Target => this.GetOrCreate(ref this.target, this.Properties.Target);
     }
 }

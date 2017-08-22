@@ -22,8 +22,11 @@
         }
 
         public static string HorizontalScrollBar { get; }
+
         public static string VerticalScrollBar { get; }
+
         public static string TableHorizontalScrollBar { get; }
+
         public static string TableVerticalScrollBar { get; }
     }
 }

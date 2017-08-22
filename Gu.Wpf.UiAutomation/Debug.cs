@@ -24,7 +24,7 @@
             var parent = treeWalker.GetParent(element);
             if (parent == null || (rootElement != null && parent.Equals(rootElement)))
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             // Get the index
@@ -76,7 +76,7 @@
                 {
                     // Re-find the root element with caching activated
                     automationElement = automationElement.FindFirst(TreeScope.Element, new TrueCondition());
-                    Details(stringBuilder, automationElement, String.Empty);
+                    Details(stringBuilder, automationElement, string.Empty);
                 }
 
                 return stringBuilder.ToString();

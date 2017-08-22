@@ -2,6 +2,7 @@
 using Gu.Wpf.UiAutomation.Definitions;
 using Gu.Wpf.UiAutomation.UIA2.Identifiers;
 using UIA = System.Windows.Automation;
+
 namespace Gu.Wpf.UiAutomation.UIA2.Patterns
 {
 #endif
@@ -20,7 +21,7 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
             : base(basicAutomationElement, nativePattern)
         {
         }
-        
+
         public override void Cancel()
         {
             this.NativePattern.Cancel();
@@ -35,7 +36,9 @@ namespace Gu.Wpf.UiAutomation.UIA2.Patterns
     public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
     {
         public EventId DiscardedEvent => SynchronizedInputPattern.DiscardedEvent;
+
         public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
+
         public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
     }
 #else

@@ -5,17 +5,27 @@
     public abstract class LoggerBase : ILogger
     {
         public bool IsTraceEnabled { get; set; }
+
         public bool IsDebugEnabled { get; set; }
+
         public bool IsInfoEnabled { get; set; }
+
         public bool IsWarnEnabled { get; set; }
+
         public bool IsErrorEnabled { get; set; }
+
         public bool IsFatalEnabled { get; set; }
 
         protected internal abstract void GatedTrace(string message);
+
         protected internal abstract void GatedDebug(string message);
+
         protected internal abstract void GatedInfo(string message);
+
         protected internal abstract void GatedWarn(string message);
+
         protected internal abstract void GatedError(string message);
+
         protected internal abstract void GatedFatal(string message);
 
         protected LoggerBase()
@@ -147,8 +157,8 @@
 
         private string GetFormattedMessage(string message, Exception exception, params object[] args)
         {
-            var formattedMsg = args == null ? message : String.Format(message, args);
-            return exception == null ? formattedMsg : String.Concat(formattedMsg, Environment.NewLine, exception);
+            var formattedMsg = args == null ? message : string.Format(message, args);
+            return exception == null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);
         }
     }
 }

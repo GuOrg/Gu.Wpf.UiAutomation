@@ -186,7 +186,8 @@
         /// Tries to cast the automation element to a specific interface.
         /// Throws an exception if that is not possible.
         /// </summary>
-        private T GetAutomationElementAs<T>() where T : class, UIA.IUIAutomationElement
+        private T GetAutomationElementAs<T>()
+            where T : class, UIA.IUIAutomationElement
         {
             var element = this.NativeElement as T;
             if (element == null)

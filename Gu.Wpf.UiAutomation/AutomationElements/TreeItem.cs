@@ -31,10 +31,10 @@
             get
             {
                 var value = this.Properties.Name.Value;
-                if (String.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
+                if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? String.Empty : textElement.Properties.Name;
+                    return textElement == null ? string.Empty : textElement.Properties.Name;
                 }
 
                 return value;

@@ -30,6 +30,7 @@
     public class MultipleViewPatternProperties : IMultipleViewPatternProperties
     {
         public PropertyId CurrentView => MultipleViewPattern.CurrentViewProperty;
+
         public PropertyId SupportedViews => MultipleViewPattern.SupportedViewsProperty;
     }
 }

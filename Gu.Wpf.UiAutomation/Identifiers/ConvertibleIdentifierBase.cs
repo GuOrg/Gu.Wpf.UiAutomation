@@ -17,7 +17,8 @@
         /// <summary>
         /// Sets a custom convert method to convert the values for this id
         /// </summary>
-        protected T SetConverter<T>(Func<AutomationBase, object, object> convertMethod) where T : ConvertibleIdentifierBase
+        protected T SetConverter<T>(Func<AutomationBase, object, object> convertMethod)
+            where T : ConvertibleIdentifierBase
         {
             this.converterMethod = convertMethod;
             return (T)this;

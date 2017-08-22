@@ -10,6 +10,7 @@
     public class WinFormsOverlayManager : IOverlayManager
     {
         public int Size { get; set; }
+
         public int Margin { get; set; }
 
         public WinFormsOverlayManager()

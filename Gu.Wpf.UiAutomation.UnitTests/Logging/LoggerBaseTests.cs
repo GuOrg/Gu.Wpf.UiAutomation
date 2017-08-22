@@ -24,7 +24,7 @@
             instance.Trace(string.Empty);
             instance.Trace(string.Empty, new Exception());
             instance.Trace("{0}", 1);
-            instance.Trace("{0}", new Exception() , 1);
+            instance.Trace("{0}", new Exception(), 1);
 
             // Assert
             mock.Verify(x => x.GatedTrace(It.IsAny<string>()), Times.Never);
