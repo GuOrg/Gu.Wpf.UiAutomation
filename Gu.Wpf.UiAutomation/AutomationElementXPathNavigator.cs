@@ -1,8 +1,4 @@
-﻿#if NET35
-using Gu.Wpf.UiAutomation.Tools;
-#endif
-
-namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Xml;
@@ -318,11 +314,7 @@ namespace Gu.Wpf.UiAutomation
 
         private int GetAttributeIndexFromName(string attributeName)
         {
-#if NET35
-            if (ExtensionMethods.TryParse(attributeName, out parsedValue))
-#else
             if (Enum.TryParse(attributeName, out ElementAttributes parsedValue))
-#endif
             {
                 return (int)parsedValue;
             }

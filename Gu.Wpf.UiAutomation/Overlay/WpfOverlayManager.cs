@@ -9,11 +9,8 @@
     public class WpfOverlayManager : IOverlayManager
     {
         private readonly Thread uiThread;
-#if NET35
-        private readonly ManualResetEvent _startedEvent = new ManualResetEvent(false);
-#else
-        private readonly ManualResetEventSlim startedEvent = new ManualResetEventSlim(false);
-#endif
+        private readonly ManualResetEventSlim startedEvent = new ManualResetEventSlim(initialState: false);
+
         private Dispatcher dispatcher;
         private OverlayRectangleWindow currWin;
 
@@ -43,11 +40,7 @@
 
             // Start the thread
             this.uiThread.Start();
-#if NET35
-            _startedEvent.WaitOne();
-#else
             this.startedEvent.Wait();
-#endif
         }
 
         /// <inheritdoc/>
@@ -93,6 +86,7 @@
         {
             this.dispatcher.InvokeShutdown();
             this.uiThread.Join(1000);
+            this.startedEvent.Dispose();
         }
     }
 }
