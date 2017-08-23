@@ -3,7 +3,7 @@
     using System.Linq;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
-    public class TextBox : AutomationElement
+    public class TextBox : Control
     {
         public TextBox(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

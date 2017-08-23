@@ -14,7 +14,7 @@
         public void CheckBoxInPopupTest()
         {
             var window = this.App.MainWindow();
-            var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1"));
+            var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1")).AsToggleButton();
             btn.Click();
             Helpers.WaitUntilInputIsProcessed();
             var popup = window.Popup;
@@ -29,7 +29,7 @@
         public void MenuInPopupTest()
         {
             var window = this.App.MainWindow();
-            var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2"));
+            var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2")).AsToggleButton();
             btn.Click();
             Helpers.WaitUntilInputIsProcessed();
             var popup = window.Popup;

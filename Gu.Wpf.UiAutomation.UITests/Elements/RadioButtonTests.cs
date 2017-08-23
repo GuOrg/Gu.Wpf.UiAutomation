@@ -15,7 +15,7 @@
         {
             this.RestartApp();
             var radioButton = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
-            Assert.That(radioButton.IsSelected, Is.False);
+            Assert.AreEqual(false, radioButton.IsSelected);
             radioButton.Select();
             Assert.That(radioButton.IsSelected, Is.True);
         }

@@ -6,7 +6,7 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Represents a menuitem which can also contain sub-menuitems
     /// </summary>
-    public class MenuItem : AutomationElement
+    public class MenuItem : Control
     {
         private readonly InvokeAutomationElement invokeAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;

@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class ExpandCollapseAutomationElement : AutomationElement
+    public class ExpandCollapseAutomationElement : Control
     {
         public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

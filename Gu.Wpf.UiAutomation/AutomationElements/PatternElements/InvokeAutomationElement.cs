@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class InvokeAutomationElement : AutomationElement
+    public class InvokeAutomationElement : Control
     {
         public InvokeAutomationElement(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

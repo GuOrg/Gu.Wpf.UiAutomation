@@ -3,7 +3,7 @@
     /// <summary>
     /// An UI-item which supports the <see cref="ISelectionItemPattern" />
     /// </summary>
-    public class SelectionItemAutomationElement : AutomationElement
+    public class SelectionItemAutomationElement : Control
     {
         public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
