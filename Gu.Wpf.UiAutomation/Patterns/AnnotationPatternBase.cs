@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class AnnotationPatternBase<TNativePattern> : PatternBase<TNativePattern>, IAnnotationPattern
+        where TNativePattern : class
     {
         private AutomationProperty<AnnotationType> annotationType;
         private AutomationProperty<string> annotationTypeName;

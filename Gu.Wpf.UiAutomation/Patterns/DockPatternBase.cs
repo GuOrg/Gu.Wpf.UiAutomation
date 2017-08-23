@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class DockPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDockPattern
+        where TNativePattern : class
     {
         private AutomationProperty<DockPosition> dockPosition;
 

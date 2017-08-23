@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class WindowPatternBase<TNativePattern> : PatternBase<TNativePattern>, IWindowPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> canMaximize;
         private AutomationProperty<bool> canMinimize;

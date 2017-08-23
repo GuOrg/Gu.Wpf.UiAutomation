@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class TablePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITablePattern
+        where TNativePattern : class
     {
         private AutomationProperty<AutomationElement[]> columnHeaders;
         private AutomationProperty<AutomationElement[]> rowHeaders;

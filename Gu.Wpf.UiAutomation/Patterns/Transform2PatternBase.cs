@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class Transform2PatternBase<TNativePattern> : TransformPatternBase<TNativePattern>, ITransform2Pattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> canZoom;
         private AutomationProperty<double> zoomLevel;

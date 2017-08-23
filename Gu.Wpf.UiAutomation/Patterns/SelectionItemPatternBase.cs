@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class SelectionItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionItemPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> isSelected;
         private AutomationProperty<AutomationElement> selectionContainer;

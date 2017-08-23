@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> columnCount;
         private AutomationProperty<int> rowCount;

@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class GridItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridItemPattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> column;
         private AutomationProperty<int> columnSpan;

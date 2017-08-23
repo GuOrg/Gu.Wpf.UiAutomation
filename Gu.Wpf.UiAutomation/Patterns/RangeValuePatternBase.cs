@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class RangeValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IRangeValuePattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> isReadOnly;
         private AutomationProperty<double> largeChange;

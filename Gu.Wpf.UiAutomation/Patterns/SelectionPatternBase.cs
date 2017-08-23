@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class SelectionPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISelectionPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> canSelectMultiple;
         private AutomationProperty<bool> isSelectionRequired;

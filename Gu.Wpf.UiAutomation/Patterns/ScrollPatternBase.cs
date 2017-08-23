@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
     public abstract class ScrollPatternBase<TNativePattern> : PatternBase<TNativePattern>, IScrollPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> horizontallyScrollable;
         private AutomationProperty<double> horizontalScrollPercent;

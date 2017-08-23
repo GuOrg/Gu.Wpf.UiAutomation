@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class DragPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDragPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> dropEffect;
         private AutomationProperty<string[]> dropEffects;

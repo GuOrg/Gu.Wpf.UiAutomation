@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class TogglePatternBase<TNativePattern> : PatternBase<TNativePattern>, ITogglePattern
+        where TNativePattern : class
     {
         private AutomationProperty<ToggleState> toggleState;
 

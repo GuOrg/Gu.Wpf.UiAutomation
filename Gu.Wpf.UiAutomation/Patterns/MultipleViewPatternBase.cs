@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class MultipleViewPatternBase<TNativePattern> : PatternBase<TNativePattern>, IMultipleViewPattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> currentView;
         private AutomationProperty<int[]> supportedViews;

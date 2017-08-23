@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class SpreadsheetItemPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISpreadsheetItemPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> formula;
         private AutomationProperty<AutomationElement[]> annotationObjects;

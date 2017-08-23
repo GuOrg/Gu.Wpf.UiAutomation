@@ -4,6 +4,7 @@
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public abstract class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern
+        where TNativePattern : class
     {
         private AutomationProperty<int> childId;
         private AutomationProperty<string> defaultAction;

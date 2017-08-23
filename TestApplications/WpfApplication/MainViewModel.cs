@@ -4,7 +4,6 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
-    using WpfApplication.Infrastructure;
 
     public class MainViewModel : INotifyPropertyChanged
     {

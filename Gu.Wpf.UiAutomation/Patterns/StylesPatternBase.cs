@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class StylesPatternBase<TNativePattern> : PatternBase<TNativePattern>, IStylesPattern
+        where TNativePattern : class
     {
         private AutomationProperty<string> extendedProperties;
         private AutomationProperty<int> fillColor;

@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class TransformPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITransformPattern
+        where TNativePattern : class
     {
         private AutomationProperty<bool> canMove;
         private AutomationProperty<bool> canResize;

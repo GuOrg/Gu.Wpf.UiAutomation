@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class ExpandCollapsePatternBase<TNativePattern> : PatternBase<TNativePattern>, IExpandCollapsePattern
+        where TNativePattern : class
     {
         private AutomationProperty<ExpandCollapseState> expandCollapseState;
 
