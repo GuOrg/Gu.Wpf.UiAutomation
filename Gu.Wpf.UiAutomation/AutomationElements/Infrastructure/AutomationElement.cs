@@ -270,6 +270,33 @@
         }
 
         /// <summary>
+        /// Find the first checkbox by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public CheckBox FindCheckBox(string name)
+        {
+            return this.FindByNameOrId(name, ControlType.CheckBox).AsCheckBox();
+        }
+
+        public AutomationElement FindByNameOrId(string name, ControlType controlType)
+        {
+            return this.FindFirstDescendant(
+                new AndCondition(
+                    this.ConditionFactory.ByControlType(controlType),
+                    new OrCondition(
+                        this.ConditionFactory.ByName(name),
+                        this.ConditionFactory.ByAutomationId(name))));
+        }
+
+        public AutomationElement FindByNameOrId(string name)
+        {
+            return this.FindFirstDescendant(
+                new OrCondition(
+                    this.ConditionFactory.ByName(name),
+                    this.ConditionFactory.ByAutomationId(name)));
+        }
+
+        /// <summary>
         /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
         public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)

@@ -11,25 +11,47 @@
 
         public ITogglePattern TogglePattern => this.Patterns.Toggle.Pattern;
 
-        public ToggleState State
+        public bool? IsChecked
         {
-            get => this.TogglePattern.ToggleState;
-            set
+            get
             {
-                // Loop for all states
-                for (var i = 0; i < Enum.GetNames(typeof(ToggleState)).Length; i++)
+                switch (this.State)
                 {
-                    // Break if we're in the correct state
-                    if (this.State == value)
-                    {
-                        return;
-                    }
-
-                    // Toggle to the next state
-                    this.Toggle();
+                    case ToggleState.Off:
+                        return false;
+                    case ToggleState.On:
+                        return true;
+                    case ToggleState.Indeterminate:
+                        return null;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
+
+            set
+            {
+                if (this.IsChecked == value)
+                {
+                    return;
+                }
+
+                this.Toggle();
+                if (this.IsChecked == value)
+                {
+                    return;
+                }
+
+                this.Toggle();
+                if (this.IsChecked == value)
+                {
+                    return;
+                }
+
+                throw new UiAutomationException($"Setting {this} .IsChecked to {value?.ToString() ?? "null failed."}");
+            }
         }
+
+        private ToggleState State => this.TogglePattern.ToggleState;
 
         public void Toggle()
         {

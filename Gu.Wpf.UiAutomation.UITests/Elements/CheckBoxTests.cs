@@ -11,55 +11,75 @@
         }
 
         [Test]
+        public void SetIsChecked()
+        {
+            var window = this.App.GetMainWindow();
+            var checkBox = window.FindCheckBox("Test Checkbox");
+            checkBox.IsChecked = true;
+            Assert.AreEqual(true, checkBox.IsChecked);
+
+            checkBox.IsChecked = false;
+            Assert.AreEqual(false, checkBox.IsChecked);
+
+            checkBox.IsChecked = true;
+            Assert.AreEqual(true, checkBox.IsChecked);
+
+            var exception = Assert.Throws<UiAutomationException>(() => checkBox.IsChecked = null);
+            Assert.AreEqual("Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:check box, FrameworkId:WPF .IsChecked to null failed.", exception.Message);
+        }
+
+        [Test]
+        public void ThreeStateSetIsChecked()
+        {
+            var window = this.App.GetMainWindow();
+            var checkBox = window.FindCheckBox("3-Way Test Checkbox");
+            checkBox.IsChecked = true;
+            Assert.AreEqual(true, checkBox.IsChecked);
+
+            checkBox.IsChecked = false;
+            Assert.AreEqual(false, checkBox.IsChecked);
+
+            checkBox.IsChecked = null;
+            Assert.AreEqual(null, checkBox.IsChecked);
+
+            checkBox.IsChecked = true;
+            Assert.AreEqual(true, checkBox.IsChecked);
+        }
+
+        [Test]
         public void ToggleTest()
         {
             this.RestartApp();
             var window = this.App.GetMainWindow();
-            var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox")).AsCheckBox();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
+            var checkBox = window.FindCheckBox("Test Checkbox");
+            Assert.AreEqual(false, checkBox.IsChecked);
+
             checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            Assert.AreEqual(true, checkBox.IsChecked);
+
+            checkBox.Toggle();
+            Assert.AreEqual(false, checkBox.IsChecked);
+
+            checkBox.Toggle();
+            Assert.AreEqual(true, checkBox.IsChecked);
         }
 
         [Test]
-        public void SetStateTest()
-        {
-            var window = this.App.GetMainWindow();
-            var checkBox = window.FindFirstDescendant(cf => cf.ByText("Test Checkbox")).AsCheckBox();
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-            checkBox.State = ToggleState.Off;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-        }
-
-        [Test]
-        public void ThreeWayToggleTest()
+        public void ThreeStateToggleTest()
         {
             this.RestartApp();
             var window = this.App.GetMainWindow();
-            var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
-            checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-            checkBox.Toggle();
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Indeterminate));
-        }
+            var checkBox = window.FindCheckBox("3-Way Test Checkbox");
+            Assert.AreEqual(false, checkBox.IsChecked);
 
-        [Test]
-        public void ThreeWaySetStateTest()
-        {
-            var window = this.App.GetMainWindow();
-            var checkBox = window.FindFirstDescendant(cf => cf.ByText("3-Way Test Checkbox")).AsCheckBox();
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
-            checkBox.State = ToggleState.Off;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Off));
-            checkBox.State = ToggleState.Indeterminate;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.Indeterminate));
-            checkBox.State = ToggleState.On;
-            Assert.That(checkBox.State, Is.EqualTo(ToggleState.On));
+            checkBox.Toggle();
+            Assert.AreEqual(true, checkBox.IsChecked);
+
+            checkBox.Toggle();
+            Assert.AreEqual(null, checkBox.IsChecked);
+
+            checkBox.Toggle();
+            Assert.AreEqual(false, checkBox.IsChecked);
         }
     }
 }
