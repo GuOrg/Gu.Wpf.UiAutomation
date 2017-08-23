@@ -53,47 +53,39 @@
             }
         }
 
-        [Test]
-        public void NotepadAttachOrLauchIdTest()
+        [TestCase(@"C:\WINDOWS\system32\notepad.exe")]
+        [TestCase("notepad.exe")]
+        public void NotepadAttachOrLauchIdTest(string name)
         {
-            var application = Application.Launch("notepad.exe");
-            var app = Application.AttachOrLaunch(new ProcessStartInfo(@"C:\WINDOWS\system32\notepad.exe"));
-
-            using (var automation = new UIA3Automation())
+            using (Application.Launch("notepad.exe"))
             {
-                var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                using (var app = Application.AttachOrLaunch(new ProcessStartInfo(name)))
+                {
+                    using (var automation = new UIA3Automation())
+                    {
+                        var window = app.GetMainWindow(automation);
+                        Assert.That(window, Is.Not.Null);
+                        Assert.That(window.Title, Is.Not.Null);
+                    }
+                }
             }
-
-            app.Close();
-
-            app = Application.AttachOrLaunch(new ProcessStartInfo("notepad.exe"));
-
-            using (var automation = new UIA3Automation())
-            {
-                var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
-            }
-
-            app.Close();
         }
 
         [Test]
         public void NotepadAttachWithAbsoluteExePath()
         {
-            Application.Launch("notepad.exe");
-            var app = Application.Attach(@"C:\WINDOWS\system32\notepad.exe");
-
-            using (var automation = new UIA3Automation())
+            using (Application.Launch("notepad.exe"))
             {
-                var window = app.GetMainWindow(automation);
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                using (var app = Application.Attach(@"C:\WINDOWS\system32\notepad.exe"))
+                {
+                    using (var automation = new UIA3Automation())
+                    {
+                        var window = app.GetMainWindow(automation);
+                        Assert.That(window, Is.Not.Null);
+                        Assert.That(window.Title, Is.Not.Null);
+                    }
+                }
             }
-
-            app.Close();
         }
     }
 }

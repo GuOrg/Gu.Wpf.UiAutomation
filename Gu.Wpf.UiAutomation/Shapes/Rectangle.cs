@@ -45,7 +45,7 @@
 
         public bool IsValid => this.X.HasValue() && this.Y.HasValue() && this.Width.HasValue() && this.Height.HasValue();
 
-        public Point Center => new Point(this.Width / 2 + this.Left, this.Height / 2 + this.Top);
+        public Point Center => new Point((this.Width / 2) + this.Left, (this.Height / 2) + this.Top);
 
         public Point North => this.GetNorth();
 

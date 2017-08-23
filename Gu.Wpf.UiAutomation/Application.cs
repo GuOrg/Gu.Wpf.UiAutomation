@@ -77,7 +77,8 @@
         public bool Close()
         {
             Logger.Default.Debug("Closing application");
-            if (this.process.HasExited)
+            if (this.disposed ||
+                this.process.HasExited)
             {
                 return true;
             }
