@@ -65,7 +65,7 @@
         }
 
         [Test]
-        public void Toggle()
+        public void Click()
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
@@ -73,13 +73,13 @@
                 var toggleButton = window.FindToggleButton("Test ToggleButton");
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(true, toggleButton.IsChecked);
             }
         }
@@ -93,13 +93,13 @@
                 var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(null, toggleButton.IsChecked);
 
-                toggleButton.Toggle();
+                toggleButton.Click();
                 Assert.AreEqual(false, toggleButton.IsChecked);
             }
         }

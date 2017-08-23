@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Base class for wrappers around various identifiers

@@ -37,13 +37,13 @@
                     return;
                 }
 
-                this.Toggle();
+                this.TogglePattern.Toggle();
                 if (this.IsChecked == value)
                 {
                     return;
                 }
 
-                this.Toggle();
+                this.TogglePattern.Toggle();
                 if (this.IsChecked == value)
                 {
                     return;
@@ -54,10 +54,5 @@
         }
 
         private ToggleState State => this.TogglePattern.ToggleState;
-
-        public void Toggle()
-        {
-            this.TogglePattern.Toggle();
-        }
     }
 }

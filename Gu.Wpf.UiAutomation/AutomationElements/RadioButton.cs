@@ -33,10 +33,5 @@
         }
 
         protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
-
-        public void Toggle()
-        {
-            this.IsChecked = !this.IsChecked;
-        }
     }
 }

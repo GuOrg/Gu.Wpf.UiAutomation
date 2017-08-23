@@ -40,7 +40,7 @@
         }
 
         [Test]
-        public void Toggle()
+        public void Click()
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
@@ -48,13 +48,13 @@
                 var radioButton = window.FindRadioButton("Test RadioButton");
                 Assert.AreEqual(false, radioButton.IsChecked);
 
-                radioButton.Toggle();
+                radioButton.Click();
                 Assert.AreEqual(true, radioButton.IsChecked);
 
-                radioButton.Toggle();
+                radioButton.Click();
                 Assert.AreEqual(false, radioButton.IsChecked);
 
-                radioButton.Toggle();
+                radioButton.Click();
                 Assert.AreEqual(true, radioButton.IsChecked);
             }
         }

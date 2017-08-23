@@ -73,13 +73,13 @@
                 var checkBox = window.FindCheckBox("Test Checkbox");
                 Assert.AreEqual(false, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(true, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(false, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(true, checkBox.IsChecked);
             }
         }
@@ -93,13 +93,13 @@
                 var checkBox = window.FindCheckBox("3-Way Test Checkbox");
                 Assert.AreEqual(false, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(true, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(null, checkBox.IsChecked);
 
-                checkBox.Toggle();
+                checkBox.Click();
                 Assert.AreEqual(false, checkBox.IsChecked);
             }
         }
