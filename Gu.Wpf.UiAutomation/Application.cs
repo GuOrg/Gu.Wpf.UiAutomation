@@ -16,7 +16,7 @@
         /// <summary>
         /// The process of this application.
         /// </summary>
-        private readonly Process process;
+        private readonly ProcessReference processReference;
         private bool disposed;
 
         /// <summary>
@@ -25,7 +25,7 @@
         /// <param name="processId">The process id.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
         public Application(int processId, bool isStoreApp = false)
-            : this(FindProcess(processId), isStoreApp)
+            : this(new ProcessReference(FindProcess(processId), dispose: false), isStoreApp)
         {
         }
 
@@ -34,9 +34,9 @@
         /// </summary>
         /// <param name="process">The process, NOTE: the process is disposed with this instance.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        private Application(Process process, bool isStoreApp = false)
+        private Application(ProcessReference process, bool isStoreApp = false)
         {
-            this.process = process ?? throw new ArgumentNullException(nameof(process));
+            this.processReference = process;
             this.IsStoreApp = isStoreApp;
             this.Automation = new UIA3Automation();
         }
@@ -51,28 +51,28 @@
         /// <summary>
         /// The proces Id of the application.
         /// </summary>
-        public int ProcessId => this.process.Id;
+        public int ProcessId => this.processReference.Process.Id;
 
         /// <summary>
         /// The name of the application's process.
         /// </summary>
-        public string Name => this.process.ProcessName;
+        public string Name => this.processReference.Process.ProcessName;
 
         /// <summary>
         /// The current handle (Win32) of the application's main window.
         /// Can be IntPtr.Zero if no main window is currently available.
         /// </summary>
-        public IntPtr MainWindowHandle => this.process.MainWindowHandle;
+        public IntPtr MainWindowHandle => this.processReference.Process.MainWindowHandle;
 
         /// <summary>
         /// Gets a value indicating whether the associated process has been terminated.
         /// </summary>
-        public bool HasExited => this.process.HasExited;
+        public bool HasExited => this.processReference.Process.HasExited;
 
         /// <summary>
         /// Gets the value that the associated process specified when it terminated.
         /// </summary>
-        public int ExitCode => this.process.ExitCode;
+        public int ExitCode => this.processReference.Process.ExitCode;
 
         /// <summary>
         /// Closes the application. Force-closes it after a small timeout.
@@ -82,23 +82,23 @@
         {
             Logger.Default.Debug("Closing application");
             if (this.disposed ||
-                this.process.HasExited)
+                this.processReference.Process.HasExited)
             {
                 return true;
             }
 
-            this.process.CloseMainWindow();
+            this.processReference.Process.CloseMainWindow();
             if (this.IsStoreApp)
             {
                 return true;
             }
 
-            this.process.WaitForExit(5000);
-            if (!this.process.HasExited)
+            this.processReference.Process.WaitForExit(5000);
+            if (!this.processReference.Process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
-                this.process.Kill();
-                this.process.WaitForExit(5000);
+                this.processReference.Process.Kill();
+                this.processReference.Process.WaitForExit(5000);
                 return false;
             }
 
@@ -112,13 +112,13 @@
         {
             try
             {
-                if (this.process.HasExited)
+                if (this.processReference.Process.HasExited)
                 {
                     return;
                 }
 
-                this.process.Kill();
-                this.process.WaitForExit();
+                this.processReference.Process.Kill();
+                this.processReference.Process.WaitForExit();
             }
             catch
             {
@@ -139,10 +139,10 @@
         /// <summary>
         /// Attach to a running process
         /// </summary>
-        public static Application Attach(Process process)
+        public static Application Attach(Process process, bool dispose = false)
         {
             Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
-            return new Application(process);
+            return new Application(new ProcessReference(process, dispose));
         }
 
         /// <summary>
@@ -200,19 +200,17 @@
             }
             catch (Win32Exception ex)
             {
-                var error =
-                    $"[Failed Launching process:{processStartInfo.FileName}] [Working directory:{new DirectoryInfo(processStartInfo.WorkingDirectory).FullName}] [Process full path:{new FileInfo(processStartInfo.FileName).FullName}] [Current Directory:{Environment.CurrentDirectory}]";
+                var error = $"[Failed Launching process:{processStartInfo.FileName}] [Working directory:{new DirectoryInfo(processStartInfo.WorkingDirectory).FullName}] [Process full path:{new FileInfo(processStartInfo.FileName).FullName}] [Current Directory:{Environment.CurrentDirectory}]";
                 Logger.Default.Error(error, ex);
                 throw;
             }
 
-            return new Application(process);
+            return new Application(new ProcessReference(process, dispose: true));
         }
 
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
         {
-            var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
-            return new Application(process, isStoreApp: true);
+            return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), dispose: true), isStoreApp: true);
         }
 
         /// <summary>
@@ -223,7 +221,7 @@
         {
             this.ThrowIfDisposed();
             var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
-            this.process.WaitForInputIdle((int)waitTime);
+            this.processReference.Process.WaitForInputIdle((int)waitTime);
         }
 
         /// <summary>
@@ -236,8 +234,8 @@
             Retry.While(
                 () =>
                 {
-                    this.process.Refresh();
-                    return this.process.MainWindowHandle == IntPtr.Zero;
+                    this.processReference.Process.Refresh();
+                    return this.processReference.Process.MainWindowHandle == IntPtr.Zero;
                 },
                 waitTime,
                 TimeSpan.FromMilliseconds(50));
@@ -292,8 +290,9 @@
             this.disposed = true;
             if (disposing)
             {
-                this.process.Dispose();
-                this.Automation?.Dispose();
+                this.Close();
+                this.processReference.Dispose();
+                this.Automation.Dispose();
             }
         }
 
@@ -321,6 +320,28 @@
         private static Process[] FindProcess(string executable)
         {
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
+        }
+
+        private sealed class ProcessReference : IDisposable
+        {
+            internal readonly Process Process;
+            internal readonly bool dispose;
+
+            public ProcessReference(Process process, bool dispose)
+            {
+                this.Process = process;
+                this.dispose = dispose;
+            }
+
+            public void Dispose()
+            {
+                if (this.dispose)
+                {
+#pragma warning disable GU0036 // Don't dispose injected.
+                    this.Process.Dispose();
+#pragma warning restore GU0036 // Don't dispose injected.
+                }
+            }
         }
     }
 }
