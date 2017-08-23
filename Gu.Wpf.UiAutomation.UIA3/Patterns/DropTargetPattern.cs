@@ -19,20 +19,4 @@
         {
         }
     }
-
-    public class DropTargetPatternProperties : IDropTargetPatternProperties
-    {
-        public PropertyId DropTargetEffect => DropTargetPattern.DropTargetEffectProperty;
-
-        public PropertyId DropTargetEffects => DropTargetPattern.DropTargetEffectsProperty;
-    }
-
-    public class DropTargetPatternEvents : IDropTargetPatternEvents
-    {
-        public EventId DragEnterEvent => DropTargetPattern.DragEnterEvent;
-
-        public EventId DragLeaveEvent => DropTargetPattern.DragLeaveEvent;
-
-        public EventId DragCompleteEvent => DropTargetPattern.DragCompleteEvent;
-    }
 }

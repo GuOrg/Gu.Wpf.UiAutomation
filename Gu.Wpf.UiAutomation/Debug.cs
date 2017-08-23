@@ -55,8 +55,8 @@
             try
             {
                 var stringBuilder = new StringBuilder();
-                var cr = new CacheRequest();
-                cr.AutomationElementMode = AutomationElementMode.None;
+                var cr = new CacheRequest { AutomationElementMode = AutomationElementMode.None };
+
                 // Add the element properties
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.AutomationId);
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.ControlType);
@@ -67,10 +67,12 @@
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.IsOffscreen);
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.FrameworkId);
                 cr.Add(automationElement.Automation.PropertyLibrary.Element.ProcessId);
+
                 // Add the pattern availability properties
-                automationElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x=> cr.Add(x));
+                automationElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x => cr.Add(x));
                 cr.TreeScope = TreeScope.Subtree;
                 cr.TreeFilter = new TrueCondition();
+
                 // Activate the cache request
                 using (cr.Activate())
                 {

@@ -25,7 +25,6 @@
             throw new Exception($"Could not launch Store App '{appUserModelId}'");
         }
 
-        #region Win32
         // ReSharper disable InconsistentNaming
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         [Flags]
@@ -61,7 +60,7 @@
         }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
         // ReSharper restore InconsistentNaming
-        #endregion Win32
     }
 }

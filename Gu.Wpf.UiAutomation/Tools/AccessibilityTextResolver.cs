@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.Tools
 {
-    using System;
     using System.Linq;
     using System.Text;
     using Gu.Wpf.UiAutomation.WindowsAPI;

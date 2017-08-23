@@ -35,20 +35,4 @@
             this.NativePattern.Select();
         }
     }
-
-    public class SelectionItemPatternProperties : ISelectionItemPatternProperties
-    {
-        public PropertyId IsSelected => SelectionItemPattern.IsSelectedProperty;
-
-        public PropertyId SelectionContainer => SelectionItemPattern.SelectionContainerProperty;
-    }
-
-    public class SelectionItemPatternEvents : ISelectionItemPatternEvents
-    {
-        public EventId ElementAddedToSelectionEvent => SelectionItemPattern.ElementAddedToSelectionEvent;
-
-        public EventId ElementRemovedFromSelectionEvent => SelectionItemPattern.ElementRemovedFromSelectionEvent;
-
-        public EventId ElementSelectedEvent => SelectionItemPattern.ElementSelectedEvent;
-    }
 }

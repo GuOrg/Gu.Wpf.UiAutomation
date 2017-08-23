@@ -34,8 +34,9 @@
             {
                 return this.FindAllChildren(cf =>
                     cf.ByControlType(ControlType.Window).
-                    And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true))
-                ).Select(e => e.AsWindow()).ToArray();
+                    And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true)))
+                    .Select(e => e.AsWindow())
+                    .ToArray();
             }
         }
 

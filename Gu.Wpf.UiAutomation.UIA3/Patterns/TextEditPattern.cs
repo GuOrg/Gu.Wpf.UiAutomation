@@ -35,11 +35,4 @@
             return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }
-
-    public class TextEditPatternEvents : TextPatternEvents, ITextEditPatternEvents
-    {
-        public EventId ConversionTargetChangedEvent => TextEditPattern.ConversionTargetChangedEvent;
-
-        public EventId TextChangedEvent2 => TextEditPattern.TextChangedEvent2;
-    }
 }

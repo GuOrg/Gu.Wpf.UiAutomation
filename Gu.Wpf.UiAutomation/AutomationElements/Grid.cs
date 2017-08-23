@@ -18,12 +18,6 @@
         {
         }
 
-        protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
-
-        protected ITablePattern TablePattern => this.Patterns.Table.Pattern;
-
-        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
-
         /// <summary>
         /// Gets the total row count.
         /// </summary>
@@ -83,6 +77,12 @@
         /// Gets the first selected item or null otherwise.
         /// </summary>
         public GridRow SelectedItem => this.SelectedItems?.FirstOrDefault();
+
+        protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
+
+        protected ITablePattern TablePattern => this.Patterns.Table.Pattern;
+
+        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
 
         /// <summary>
         /// Select a row by index.
@@ -250,8 +250,6 @@
         {
         }
 
-        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
-
         public GridCell[] Cells
         {
             get
@@ -269,6 +267,8 @@
                 return headerItem?.AsGridHeaderItem();
             }
         }
+
+        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
 
         /// <summary>
         /// Find a cell by a given text.
@@ -295,10 +295,6 @@
         {
         }
 
-        protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
-
-        protected ITableItemPattern TableItemPattern => this.Patterns.TableItem.Pattern;
-
         public Grid ContainingGrid => this.GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
@@ -312,5 +308,9 @@
         }
 
         public string Value => this.Properties.Name.Value;
+
+        protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
+
+        protected ITableItemPattern TableItemPattern => this.Patterns.TableItem.Pattern;
     }
 }

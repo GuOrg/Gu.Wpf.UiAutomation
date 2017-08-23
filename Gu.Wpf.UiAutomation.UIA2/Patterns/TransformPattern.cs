@@ -32,13 +32,4 @@
             this.NativePattern.Rotate(degrees);
         }
     }
-
-    public class TransformPatternProperties : ITransformPatternProperties
-    {
-        public PropertyId CanMove => TransformPattern.CanMoveProperty;
-
-        public PropertyId CanResize => TransformPattern.CanResizeProperty;
-
-        public PropertyId CanRotate => TransformPattern.CanRotateProperty;
-    }
 }

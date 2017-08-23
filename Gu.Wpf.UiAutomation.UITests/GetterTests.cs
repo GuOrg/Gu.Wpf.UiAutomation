@@ -20,7 +20,6 @@
             return Application.Launch("notepad.exe");
         }
 
-        #region Pattern
         [Test]
         public void CorrectPattern()
         {
@@ -102,9 +101,7 @@
                 Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("ExpandCollapse"));
             }
         }
-        #endregion Pattern
 
-        #region Property
         [Test]
         public void CorrectProperty()
         {
@@ -186,6 +183,5 @@
                 Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
             }
         }
-        #endregion Property
     }
 }

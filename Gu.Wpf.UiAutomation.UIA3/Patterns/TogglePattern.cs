@@ -21,9 +21,4 @@
             ComCallWrapper.Call(() => this.NativePattern.Toggle());
         }
     }
-
-    public class TogglePatternProperties : ITogglePatternProperties
-    {
-        public PropertyId ToggleState => TogglePattern.ToggleStateProperty;
-    }
 }

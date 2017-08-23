@@ -22,11 +22,4 @@
             ComCallWrapper.Call(() => this.NativePattern.SetValue(value));
         }
     }
-
-    public class ValuePatternProperties : IValuePatternProperties
-    {
-        public PropertyId IsReadOnly => ValuePattern.IsReadOnlyProperty;
-
-        public PropertyId Value => ValuePattern.ValueProperty;
-    }
 }

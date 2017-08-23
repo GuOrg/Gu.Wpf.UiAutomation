@@ -57,9 +57,11 @@
             {
                 var form = new OverlayRectangleForm { BackColor = gdiColor };
                 forms.Add(form);
+
                 // Position the window
                 User32.SetWindowPos(form.Handle, new IntPtr(-1), border.X.ToInt(), border.Y.ToInt(),
                     border.Width.ToInt(), border.Height.ToInt(), SetWindowPosFlags.SWP_NOACTIVATE);
+
                 // Show the window
                 User32.ShowWindow(form.Handle, ShowWindowTypes.SW_SHOWNA);
             }

@@ -166,11 +166,13 @@
         public static void Click(MouseButton mouseButton)
         {
             var currClickPosition = Position;
+
             // Check if the position is the same as with last click
             if (LastClickPositions[mouseButton].Equals(currClickPosition))
             {
                 // Get the timeout needed to not fire a double click
                 var timeout = CurrentDoubleClickTime - DateTime.Now.Subtract(LastClickTimes[mouseButton]).Milliseconds;
+
                 // Wait the needed time to prevent the double click
                 if (timeout > 0)
                 {
@@ -181,6 +183,7 @@
             // Perform the click
             Down(mouseButton);
             Up(mouseButton);
+
             // Update the time and location
             LastClickTimes[mouseButton] = DateTime.Now;
             LastClickPositions[mouseButton] = Position;
@@ -379,6 +382,7 @@
 
             // Build the input object
             var input = INPUT.MouseInput(mouseInput);
+
             // Send the command
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {
@@ -402,7 +406,6 @@
             y = (y - vScreenTop) * 65536 / vScreenHeight + 65536 / (vScreenHeight * 2);
         }
 
-        #region Convenience methods
         public static void LeftClick()
         {
             Click(MouseButton.Left);
@@ -442,6 +445,5 @@
         {
             DoubleClick(MouseButton.Right, point);
         }
-        #endregion Convenience methods
     }
 }

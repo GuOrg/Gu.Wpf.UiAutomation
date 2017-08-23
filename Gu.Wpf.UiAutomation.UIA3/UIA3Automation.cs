@@ -130,6 +130,7 @@
         private UIA.IUIAutomation InitializeAutomation()
         {
             UIA.IUIAutomation nativeAutomation;
+
             // Try CUIAutomation8 (Windows 8)
             try
             {

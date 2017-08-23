@@ -63,11 +63,4 @@
             return TextRangeConverter.NativeToManaged((UIA2Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }
-
-    public class TextPatternEvents : ITextPatternEvents
-    {
-        public EventId TextChangedEvent => TextPattern.TextChangedEvent;
-
-        public EventId TextSelectionChangedEvent => TextPattern.TextSelectionChangedEvent;
-    }
 }

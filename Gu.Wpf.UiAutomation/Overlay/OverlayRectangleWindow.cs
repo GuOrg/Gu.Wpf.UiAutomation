@@ -35,6 +35,7 @@
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
+
             // Make the window click-thru
             this.SetWindowTransparent();
         }
@@ -48,7 +49,7 @@
 
         private void StartCloseTimer(TimeSpan closeTimeout)
         {
-            var timer = new DispatcherTimer {Interval = closeTimeout};
+            var timer = new DispatcherTimer { Interval = closeTimeout };
             timer.Tick += this.TimerTick;
             timer.Start();
         }

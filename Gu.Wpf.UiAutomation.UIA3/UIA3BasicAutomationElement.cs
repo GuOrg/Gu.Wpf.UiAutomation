@@ -111,8 +111,12 @@
         {
             var eventHandler = new UIA3PropertyChangedEventHandler(this.Automation, action);
             var propertyIds = properties.Select(p => p.Id).ToArray();
-            this.Automation.NativeAutomation.AddPropertyChangedEventHandler(this.NativeElement,
-                (UIA.TreeScope)treeScope, null, eventHandler, propertyIds);
+            this.Automation.NativeAutomation.AddPropertyChangedEventHandler(
+                this.NativeElement,
+                (UIA.TreeScope)treeScope,
+                null,
+                eventHandler,
+                propertyIds);
             return eventHandler;
         }
 
@@ -140,17 +144,13 @@
 
         public override PatternId[] GetSupportedPatterns()
         {
-            int[] rawIds;
-            string[] rawPatternNames;
-            this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out rawIds, out rawPatternNames);
+            this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
             return rawIds.Select(id => PatternId.Find(this.Automation.AutomationType, id)).ToArray();
         }
 
         public override PropertyId[] GetSupportedProperties()
         {
-            int[] rawIds;
-            string[] rawPatternNames;
-            this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out rawIds, out rawPatternNames);
+            this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
             return rawIds.Select(id => PropertyId.Find(this.Automation.AutomationType, id)).ToArray();
         }
 

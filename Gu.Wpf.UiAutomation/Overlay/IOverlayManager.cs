@@ -4,12 +4,13 @@
     using System.Windows.Media;
     using Gu.Wpf.UiAutomation.Shapes;
 
-    public interface IOverlayManager: IDisposable
+    public interface IOverlayManager : IDisposable
     {
         /// <summary>
         /// Border size of the overlay
         /// </summary>
         int Size { get; set; }
+
         /// <summary>
         /// Margin of the overlay (use negative to move it inside)
         /// </summary>

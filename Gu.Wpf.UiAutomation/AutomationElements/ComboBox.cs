@@ -32,6 +32,7 @@
             set
             {
                 this.EditableItem.Text = value;
+
                 // UIA2/WinForms does not set the selected item until it is expanded
                 if (this.AutomationType == AutomationType.UIA2 && this.FrameworkType == FrameworkType.WinForms)
                 {
@@ -127,6 +128,7 @@
                 {
                     // WinForms
                     var itemsList = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
+
                     // UIA3 does not see the list if it is collapsed
                     return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
                 }
@@ -163,6 +165,7 @@
                 if (ecp != null)
                 {
                     ecp.Expand();
+
                     // Wait a bit in case there is an open animation
                     Thread.Sleep(50);
                 }

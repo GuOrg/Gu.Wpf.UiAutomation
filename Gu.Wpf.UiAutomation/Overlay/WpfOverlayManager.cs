@@ -27,16 +27,20 @@
                         Dispatcher.CurrentDispatcher));
 
                 this.dispatcher = Dispatcher.CurrentDispatcher;
+
                 // Signal that it is initialized
                 this.startedEvent.Set();
+
                 // Start the dispatcher processing
                 Dispatcher.Run();
             });
 
             // Set the apartment state
             this.uiThread.SetApartmentState(ApartmentState.STA);
+
             // Make the thread a background thread
             this.uiThread.IsBackground = true;
+
             // Start the thread
             this.uiThread.Start();
 #if NET35

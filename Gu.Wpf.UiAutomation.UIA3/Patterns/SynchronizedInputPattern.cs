@@ -29,13 +29,4 @@
             ComCallWrapper.Call(() => this.NativePattern.StartListening((UIA.SynchronizedInputType)inputType));
         }
     }
-
-    public class SynchronizedInputPatternEvents : ISynchronizedInputPatternEvents
-    {
-        public EventId DiscardedEvent => SynchronizedInputPattern.DiscardedEvent;
-
-        public EventId ReachedOtherElementEvent => SynchronizedInputPattern.ReachedOtherElementEvent;
-
-        public EventId ReachedTargetEvent => SynchronizedInputPattern.ReachedTargetEvent;
-    }
 }

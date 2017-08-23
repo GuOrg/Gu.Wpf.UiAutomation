@@ -49,6 +49,7 @@
             {
                 // ReSharper disable NonReadonlyMemberInGetHashCode
                 return this.X.GetHashCode() * 397 ^ this.Y.GetHashCode();
+
                 // ReSharper restore NonReadonlyMemberInGetHashCode
             }
         }
@@ -134,6 +135,6 @@
         /// <summary>
         /// Instance of an empty point
         /// </summary>
-        public static Point EmptyPoint = new Point(0, 0);
+        public static readonly Point EmptyPoint = new Point(0, 0);
     }
 }

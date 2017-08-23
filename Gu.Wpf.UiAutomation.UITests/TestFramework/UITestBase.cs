@@ -80,6 +80,7 @@
         {
             // Mark that a test was run on this application
             this.wasTestRun = true;
+
             // Make a screenshot if the test failed
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {

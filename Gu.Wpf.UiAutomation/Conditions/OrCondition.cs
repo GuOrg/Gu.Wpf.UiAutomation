@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 

@@ -29,6 +29,7 @@
         public static void Type(char character)
         {
             var code = User32.VkKeyScan(character);
+
             // Check if the char is unicode or no virtual key could be found
             if (character > 0xFE || code == -1)
             {
@@ -68,6 +69,7 @@
                 // Type the effective key
                 SendInput(low, true, false, false, false);
                 SendInput(low, false, false, false, false);
+
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
@@ -223,6 +225,7 @@
             {
                 keyboardInput.wScan = keyCode;
                 keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_SCANCODE;
+
                 // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
                 // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
                 if (isExtended || (keyCode & 0xFF00) == 0xE0)
@@ -242,6 +245,7 @@
 
             // Build the input object
             var input = INPUT.KeyboardInput(keyboardInput);
+
             // Send the command
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {

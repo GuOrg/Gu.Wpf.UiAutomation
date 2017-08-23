@@ -32,6 +32,7 @@
         {
             this.IsTraceEnabled = false;
             this.IsDebugEnabled = false;
+
             // Default log level is info and higher
             this.IsInfoEnabled = true;
             this.IsWarnEnabled = true;

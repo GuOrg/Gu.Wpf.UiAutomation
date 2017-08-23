@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.Conditions
 {
-    using System;
-
     public class NotCondition : ConditionBase
     {
         public ConditionBase Condition { get; }

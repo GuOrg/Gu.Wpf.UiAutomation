@@ -22,9 +22,4 @@
             ComCallWrapper.Call(() => this.NativePattern.SetDockPosition((UIA.DockPosition)dockPos));
         }
     }
-
-    public class DockPatternProperties : IDockPatternProperties
-    {
-        public PropertyId DockPosition => DockPattern.DockPositionProperty;
-    }
 }

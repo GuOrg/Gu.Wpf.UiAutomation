@@ -21,9 +21,4 @@
             ComCallWrapper.Call(() => this.NativePattern.Invoke());
         }
     }
-
-    public class InvokePatternEvents : IInvokePatternEvents
-    {
-        public EventId InvokedEvent => InvokePattern.InvokedEvent;
-    }
 }

@@ -39,26 +39,4 @@
             return ComCallWrapper.Call(() => this.NativePattern.WaitForInputIdle(milliseconds)) != 0;
         }
     }
-
-    public class WindowPatternProperties : IWindowPatternProperties
-    {
-        public PropertyId CanMaximize => WindowPattern.CanMaximizeProperty;
-
-        public PropertyId CanMinimize => WindowPattern.CanMinimizeProperty;
-
-        public PropertyId IsModal => WindowPattern.IsModalProperty;
-
-        public PropertyId IsTopmost => WindowPattern.IsTopmostProperty;
-
-        public PropertyId WindowInteractionState => WindowPattern.WindowInteractionStateProperty;
-
-        public PropertyId WindowVisualState => WindowPattern.WindowVisualStateProperty;
-    }
-
-    public class WindowPatternEvents : IWindowPatternEvents
-    {
-        public EventId WindowClosedEvent => WindowPattern.WindowClosedEvent;
-
-        public EventId WindowOpenedEvent => WindowPattern.WindowOpenedEvent;
-    }
 }

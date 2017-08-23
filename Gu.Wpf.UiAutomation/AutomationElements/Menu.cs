@@ -69,12 +69,15 @@
                 {
                     // Click the item to load the child items
                     this.Click();
+
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
                     var appWindow = this.BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.Properties.ProcessId)));
+
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(this.Text))).AsMenu();
                     menu.IsWin32Menu = true;
+
                     // Now return the menu items
                     return menu.MenuItems;
                 }

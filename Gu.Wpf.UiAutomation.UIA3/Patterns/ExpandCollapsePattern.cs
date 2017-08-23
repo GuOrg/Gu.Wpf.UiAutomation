@@ -26,9 +26,4 @@
             ComCallWrapper.Call(() => this.NativePattern.Expand());
         }
     }
-
-    public class ExpandCollapsePatternProperties : IExpandCollapsePatternProperties
-    {
-        public PropertyId ExpandCollapseState => ExpandCollapsePattern.ExpandCollapseStateProperty;
-    }
 }

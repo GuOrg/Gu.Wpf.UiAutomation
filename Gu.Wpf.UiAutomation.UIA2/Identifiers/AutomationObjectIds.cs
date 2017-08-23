@@ -6,7 +6,6 @@
 
     public static class AutomationObjectIds
     {
-        #region Property Identifiers
         // Base element properties
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AcceleratorKeyProperty.Id, "AcceleratorKey");
         public static readonly PropertyId AccessKeyProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.AccessKeyProperty.Id, "AccessKey");
@@ -35,6 +34,7 @@
         public static readonly PropertyId OrientationProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.OrientationProperty.Id, "Orientation");
         public static readonly PropertyId ProcessIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.ProcessIdProperty.Id, "ProcessId");
         public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElementIdentifiers.RuntimeIdProperty.Id, "RuntimeId");
+
         // Pattern availability properties
         public static readonly PropertyId IsDockPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsDockPatternAvailableProperty.Id, "IsDockPatternAvailable");
         public static readonly PropertyId IsExpandCollapsePatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsExpandCollapsePatternAvailableProperty.Id, "IsExpandCollapsePatternAvailable");
@@ -63,9 +63,7 @@
         public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsVirtualizedItemPatternAvailableProperty.Id, "IsVirtualizedItemPatternAvailable");
 #endif
         public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA2, UIA.AutomationElement.IsWindowPatternAvailableProperty.Id, "IsWindowPatternAvailable");
-        #endregion Property Identifiers
 
-        #region Event identifiers
         public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AsyncContentLoadedEvent.Id, "AsyncContentLoaded");
         public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AutomationFocusChangedEvent.Id, "AutomationFocusChanged");
         public static readonly EventId PropertyChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.AutomationPropertyChangedEvent.Id, "AutomationPropertyChanged");
@@ -75,6 +73,5 @@
         public static readonly EventId StructureChangedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.StructureChangedEvent.Id, "StructureChanged");
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipClosedEvent.Id, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA2, UIA.AutomationElement.ToolTipOpenedEvent.Id, "ToolTipOpened");
-        #endregion Event identifiers
     }
 }

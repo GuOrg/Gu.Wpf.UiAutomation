@@ -10,6 +10,7 @@
         /// This mode might be used, for example, to retrieve the names of items in a list box without obtaining references to the items themselves.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// Specifies that returned elements have a full reference to the underlying UI.
         /// </summary>

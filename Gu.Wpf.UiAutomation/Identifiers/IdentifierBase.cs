@@ -159,6 +159,7 @@
             }
 
             return IdentifiersDict[automationType];
+
             // ReSharper restore InconsistentlySynchronizedField
         }
     }

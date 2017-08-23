@@ -19,6 +19,7 @@
             this.PatternLibrary = patternLibrary;
             this.ConditionFactory = new ConditionFactory(propertyLibrary);
             this.OverlayManager = new WinFormsOverlayManager();
+
             // Make sure all pattern ids are initialized
             var unused = this.PatternLibrary.AllForCurrentFramework;
         }

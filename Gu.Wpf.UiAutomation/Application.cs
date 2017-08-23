@@ -137,28 +137,47 @@
             this.Close();
         }
 
+        /// <summary>
+        /// Attach to a running process
+        /// </summary>
+        /// <param name="processId">The id as shown in task manager</param>
+        /// <returns>The application</returns>
         public static Application Attach(int processId)
         {
             return Attach(FindProcess(processId));
         }
 
+        /// <summary>
+        /// Attach to a running process
+        /// </summary>
         public static Application Attach(Process process)
         {
             Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
             return new Application(process);
         }
 
+        /// <summary>
+        /// Attach to a running process
+        /// </summary>
         public static Application Attach(string executable, int index = 0)
         {
             var processes = FindProcess(executable);
-            if (processes.Length > index)
+            if (processes.Length == 0)
             {
-                return Attach(processes[index]);
+                throw new ArgumentException($"Unable to find process with name: {executable}");
             }
 
-            throw new Exception("Unable to find process with name: " + executable);
+            if (processes.Length <= index)
+            {
+                throw new ArgumentException($"Unable to find process with name: {executable} and index: {index}");
+            }
+
+            return Attach(processes[index]);
         }
 
+        /// <summary>
+        /// Attach to a running process or start a new if not found.
+        /// </summary>
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
         {
             var processes = FindProcess(processStartInfo.FileName);
@@ -178,7 +197,8 @@
                 processStartInfo.WorkingDirectory = ".";
             }
 
-            Logger.Default.Debug("[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
+            Logger.Default.Debug(
+                "[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
                 processStartInfo.FileName,
                 new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
                 new FileInfo(processStartInfo.FileName).FullName,
@@ -227,11 +247,14 @@
         public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
             var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
-            Retry.While(() =>
-            {
-                this.process.Refresh();
-                return this.process.MainWindowHandle == IntPtr.Zero;
-            }, waitTime, TimeSpan.FromMilliseconds(50));
+            Retry.While(
+                () =>
+                {
+                    this.process.Refresh();
+                    return this.process.MainWindowHandle == IntPtr.Zero;
+                },
+                waitTime,
+                TimeSpan.FromMilliseconds(50));
         }
 
         /// <summary>

@@ -25,11 +25,4 @@
             return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeItem);
         }
     }
-
-    public class GridPatternProperties : IGridPatternProperties
-    {
-        public PropertyId ColumnCount => GridPattern.ColumnCountProperty;
-
-        public PropertyId RowCount => GridPattern.RowCountProperty;
-    }
 }

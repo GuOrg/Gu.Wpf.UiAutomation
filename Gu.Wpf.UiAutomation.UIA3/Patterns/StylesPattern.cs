@@ -23,24 +23,7 @@
         }
 
         // TODO: Any way to implement that?
-        //public void GetCachedExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
-        //public void GetCurrentExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
-    }
-
-    public class StylesPatternProperties : IStylesPatternProperties
-    {
-        public PropertyId ExtendedProperties => StylesPattern.ExtendedPropertiesProperty;
-
-        public PropertyId FillColor => StylesPattern.FillColorProperty;
-
-        public PropertyId FillPatternColor => StylesPattern.FillPatternColorProperty;
-
-        public PropertyId FillPatternStyle => StylesPattern.FillPatternStyleProperty;
-
-        public PropertyId Shape => StylesPattern.ShapeProperty;
-
-        public PropertyId StyleId => StylesPattern.StyleIdProperty;
-
-        public PropertyId StyleName => StylesPattern.StyleNameProperty;
+        ////public void GetCachedExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
+        ////public void GetCurrentExtendedPropertiesAsArray(IntPtr propertyArray, out int propertyCount){}
     }
 }

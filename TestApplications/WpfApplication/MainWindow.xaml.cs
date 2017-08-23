@@ -19,7 +19,7 @@
         {
             foreach (var item in e.AddedItems)
             {
-                var textBlock = (TextBlock) item;
+                var textBlock = (TextBlock)item;
                 if (textBlock.Text == "Item 4")
                 {
                     MessageBox.Show("Do you really want to do it?");

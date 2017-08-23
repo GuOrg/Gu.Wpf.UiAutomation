@@ -49,7 +49,8 @@
         private TreeItem[] GetTreeItems()
         {
             return this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
-                .Select(e => e.AsTreeItem()).ToArray();
+                .Select(e => e.AsTreeItem())
+                .ToArray();
         }
     }
 }

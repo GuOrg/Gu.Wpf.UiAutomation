@@ -9,10 +9,12 @@
         /// Specifies that data in the table should be read row by row.
         /// </summary>
         RowMajor = 0,
+
         /// <summary>
         /// Specifies that data in the table should be read column by column
         /// </summary>
         ColumnMajor = 1,
+
         /// <summary>
         /// Specifies that the best way to present the data is indeterminate.
         /// </summary>

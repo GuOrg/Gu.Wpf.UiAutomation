@@ -6,7 +6,6 @@
 
     public static class AutomationObjectIds
     {
-        #region Property Identifiers
         // Base element properties
         public static readonly PropertyId AcceleratorKeyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AcceleratorKeyPropertyId, "AcceleratorKey");
         public static readonly PropertyId AccessKeyProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_AccessKeyPropertyId, "AccessKey");
@@ -46,6 +45,7 @@
         public static readonly PropertyId ProcessIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ProcessIdPropertyId, "ProcessId");
         public static readonly PropertyId ProviderDescriptionProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_ProviderDescriptionPropertyId, "ProviderDescription");
         public static readonly PropertyId RuntimeIdProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_RuntimeIdPropertyId, "RuntimeId");
+
         // Pattern availability properties
         public static readonly PropertyId IsAnnotationPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsAnnotationPatternAvailablePropertyId, "IsAnnotationPatternAvailable");
         public static readonly PropertyId IsDockPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsDockPatternAvailablePropertyId, "IsDockPatternAvailable");
@@ -80,9 +80,7 @@
         public static readonly PropertyId IsValuePatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsValuePatternAvailablePropertyId, "IsValuePatternAvailable");
         public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId, "IsVirtualizedItemPatternAvailable");
         public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId, "IsWindowPatternAvailable");
-        #endregion Property Identifiers
 
-        #region Event identifiers
         public static readonly EventId AsyncContentLoadedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
         public static readonly EventId FocusChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
         public static readonly EventId PropertyChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
@@ -97,6 +95,5 @@
         public static readonly EventId SystemAlertEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
         public static readonly EventId ToolTipClosedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
         public static readonly EventId ToolTipOpenedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
-        #endregion Event identifiers
     }
 }

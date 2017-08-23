@@ -25,12 +25,7 @@
     {
         public AutomationElement(BasicAutomationElementBase basicAutomationElement)
         {
-            if (basicAutomationElement == null)
-            {
-                throw new ArgumentNullException(nameof(basicAutomationElement));
-            }
-
-            this.BasicAutomationElement = basicAutomationElement;
+            this.BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
         }
 
         public AutomationElement(AutomationElement automationElement)
@@ -86,8 +81,7 @@
         {
             get
             {
-                string currentFrameworkId;
-                var hasProperty = this.Properties.FrameworkId.TryGetValue(out currentFrameworkId);
+                var hasProperty = this.Properties.FrameworkId.TryGetValue(out string currentFrameworkId);
                 return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
@@ -499,8 +493,7 @@
                 throw new ArgumentException("Pattern doesn't have an AvailabilityProperty");
             }
 
-            bool isPatternAvailable;
-            var success = this.BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out isPatternAvailable);
+            var success = this.BasicAutomationElement.TryGetPropertyValue(pattern.AvailabilityProperty, out bool isPatternAvailable);
             return success && isPatternAvailable;
         }
 
@@ -563,8 +556,7 @@
         /// </summary>
         public override string ToString()
         {
-            return string.Format("AutomationId:{0}, Name:{1}, ControlType:{2}, FrameworkId:{3}",
-                this.Properties.AutomationId.ValueOrDefault, this.Properties.Name.ValueOrDefault, this.Properties.LocalizedControlType.ValueOrDefault, this.Properties.FrameworkId.ValueOrDefault);
+            return $"AutomationId:{this.Properties.AutomationId.ValueOrDefault}, Name:{this.Properties.Name.ValueOrDefault}, ControlType:{this.Properties.LocalizedControlType.ValueOrDefault}, FrameworkId:{this.Properties.FrameworkId.ValueOrDefault}";
         }
 
         protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)

@@ -15,8 +15,7 @@
             }
 
             var uia2Automation = (UIA2Automation)automation;
-            var nativeElementsCollection = nativeElements as UIA.AutomationElementCollection;
-            if (nativeElementsCollection != null)
+            if (nativeElements is UIA.AutomationElementCollection nativeElementsCollection)
             {
                 var retArray = new AutomationElement[nativeElementsCollection.Count];
                 for (var i = 0; i < nativeElementsCollection.Count; i++)
@@ -29,8 +28,7 @@
                 return retArray;
             }
 
-            var nativeElementsArray = nativeElements as UIA.AutomationElement[];
-            if (nativeElementsArray != null)
+            if (nativeElements is UIA.AutomationElement[] nativeElementsArray)
             {
                 return nativeElementsArray.Select(uia2Automation.WrapNativeElement).ToArray();
             }
