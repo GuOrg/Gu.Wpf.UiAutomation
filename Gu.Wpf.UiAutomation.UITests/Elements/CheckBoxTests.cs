@@ -65,7 +65,7 @@
         }
 
         [Test]
-        public void Toggle()
+        public void Click()
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
@@ -85,7 +85,7 @@
         }
 
         [Test]
-        public void ThreeStateToggle()
+        public void ThreeStateClick()
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {

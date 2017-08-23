@@ -85,7 +85,7 @@
         }
 
         [Test]
-        public void ThreeStateToggle()
+        public void ThreeStateClick()
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
