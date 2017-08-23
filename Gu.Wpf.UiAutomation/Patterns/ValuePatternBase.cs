@@ -12,12 +12,16 @@
         {
         }
 
+        /// <inheritdoc/>
         public IValuePatternProperties Properties => this.Automation.PropertyLibrary.Value;
 
+        /// <inheritdoc/>
         public AutomationProperty<bool> IsReadOnly => this.GetOrCreate(ref this.isReadOnly, this.Properties.IsReadOnly);
 
+        /// <inheritdoc/>
         public AutomationProperty<string> Value => this.GetOrCreate(ref this.value, this.Properties.Value);
 
+        /// <inheritdoc/>
         public abstract void SetValue(string value);
     }
 }

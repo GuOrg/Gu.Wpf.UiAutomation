@@ -110,6 +110,7 @@
             return new Rectangle(r.X, r.Y, r.Width, r.Height);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"X={this.X},Y={this.Y},Width={this.Width},Height={this.Height}";

@@ -14,6 +14,7 @@
             this.callAction = callAction;
         }
 
+        /// <inheritdoc/>
         public void HandleAutomationEvent(AutomationElement sender, EventId eventId)
         {
             this.callAction(sender, eventId);

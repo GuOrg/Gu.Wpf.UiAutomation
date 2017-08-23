@@ -13,10 +13,13 @@
         {
         }
 
+        /// <inheritdoc/>
         public ITableItemPatternProperties Properties => this.Automation.PropertyLibrary.TableItem;
 
+        /// <inheritdoc/>
         public AutomationProperty<AutomationElement[]> ColumnHeaderItems => this.GetOrCreate(ref this.columnHeaderItems, this.Properties.ColumnHeaderItems);
 
+        /// <inheritdoc/>
         public AutomationProperty<AutomationElement[]> RowHeaderItems => this.GetOrCreate(ref this.rowHeaderItems, this.Properties.RowHeaderItems);
     }
 }

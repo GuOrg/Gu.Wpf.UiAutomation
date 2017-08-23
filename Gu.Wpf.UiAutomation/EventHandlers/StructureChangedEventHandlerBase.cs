@@ -14,6 +14,7 @@
             this.callAction = callAction;
         }
 
+        /// <inheritdoc/>
         public void HandleStructureChangedEvent(AutomationElement sender, StructureChangeType changeType, int[] runtimeId)
         {
             this.callAction(sender, changeType, runtimeId);

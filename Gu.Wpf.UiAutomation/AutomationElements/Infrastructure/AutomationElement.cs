@@ -536,11 +536,13 @@
             return other != null && this.Automation.Compare(this, other);
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             return this.Equals(obj as AutomationElement);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return this.BasicAutomationElement?.GetHashCode() ?? 0;

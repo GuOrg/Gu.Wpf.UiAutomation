@@ -9,8 +9,10 @@
 
     public class WinFormsOverlayManager : IOverlayManager
     {
+        /// <inheritdoc/>
         public int Size { get; set; }
 
+        /// <inheritdoc/>
         public int Margin { get; set; }
 
         public WinFormsOverlayManager()
@@ -19,6 +21,7 @@
             this.Margin = 0;
         }
 
+        /// <inheritdoc/>
         public void Show(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
         {
             if (rectangle.IsValid)
@@ -38,6 +41,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public void ShowBlocking(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
         {
             this.CreateAndShowForms(rectangle, color, durationInMs);
@@ -82,6 +86,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             // Nothing to dispose

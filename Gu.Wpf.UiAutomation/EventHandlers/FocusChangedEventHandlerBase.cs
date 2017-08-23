@@ -13,6 +13,7 @@
             this.callAction = callAction;
         }
 
+        /// <inheritdoc/>
         public void HandleFocusChangedEvent(AutomationElement sender)
         {
             this.callAction(sender);

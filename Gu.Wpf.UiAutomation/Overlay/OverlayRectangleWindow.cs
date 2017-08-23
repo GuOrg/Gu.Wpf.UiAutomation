@@ -32,6 +32,7 @@
             this.StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
         }
 
+        /// <inheritdoc/>
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);

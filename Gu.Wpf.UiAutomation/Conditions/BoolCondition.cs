@@ -9,6 +9,7 @@
 
         public bool BooleanValue { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"BOOL: {this.BooleanValue}";

@@ -9,6 +9,7 @@
             this.Condition = condition;
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return string.Format("NOT ({0})", this.Condition);

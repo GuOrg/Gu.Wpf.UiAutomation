@@ -30,12 +30,16 @@ namespace Gu.Wpf.UiAutomation
 
         private bool IsInAttribute => this.attributeIndex != NoAttributeValue;
 
+        /// <inheritdoc/>
         public override bool HasAttributes => !this.IsInAttribute;
 
+        /// <inheritdoc/>
         public override string Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
 
+        /// <inheritdoc/>
         public override object UnderlyingObject => this.currentElement;
 
+        /// <inheritdoc/>
         public override XPathNodeType NodeType
         {
             get
@@ -54,20 +58,28 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        /// <inheritdoc/>
         public override string LocalName => this.IsInAttribute ? this.GetAttributeName(this.attributeIndex) : this.currentElement.Properties.ControlType.Value.ToString();
 
+        /// <inheritdoc/>
         public override string Name => this.LocalName;
 
+        /// <inheritdoc/>
         public override XmlNameTable NameTable => throw new NotImplementedException();
 
+        /// <inheritdoc/>
         public override string NamespaceURI => string.Empty;
 
+        /// <inheritdoc/>
         public override string Prefix => string.Empty;
 
+        /// <inheritdoc/>
         public override string BaseURI => string.Empty;
 
+        /// <inheritdoc/>
         public override bool IsEmptyElement => false;
 
+        /// <inheritdoc/>
         public override XPathNavigator Clone()
         {
             var clonedObject = new AutomationElementXPathNavigator(this.rootElement)
@@ -78,6 +90,7 @@ namespace Gu.Wpf.UiAutomation
             return clonedObject;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToFirstAttribute()
         {
             if (this.IsInAttribute)
@@ -89,6 +102,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToNextAttribute()
         {
             if (this.attributeIndex >= Enum.GetNames(typeof(ElementAttributes)).Length - 1)
@@ -106,6 +120,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override string GetAttribute(string localName, string namespaceUri)
         {
             if (this.IsInAttribute)
@@ -122,6 +137,7 @@ namespace Gu.Wpf.UiAutomation
             return string.Empty;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToAttribute(string localName, string namespaceUri)
         {
             if (this.IsInAttribute)
@@ -139,22 +155,26 @@ namespace Gu.Wpf.UiAutomation
             return false;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public override void MoveToRoot()
         {
             this.attributeIndex = NoAttributeValue;
             this.currentElement = this.rootElement;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToNext()
         {
             if (this.IsInAttribute)
@@ -172,6 +192,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToPrevious()
         {
             if (this.IsInAttribute)
@@ -189,6 +210,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToFirstChild()
         {
             if (this.IsInAttribute)
@@ -206,6 +228,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToParent()
         {
             if (this.IsInAttribute)
@@ -223,6 +246,7 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveTo(XPathNavigator other)
         {
             var specificNavigator = other as AutomationElementXPathNavigator;
@@ -241,11 +265,13 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
+        /// <inheritdoc/>
         public override bool MoveToId(string id)
         {
             return false;
         }
 
+        /// <inheritdoc/>
         public override bool IsSamePosition(XPathNavigator other)
         {
             var specificNavigator = other as AutomationElementXPathNavigator;

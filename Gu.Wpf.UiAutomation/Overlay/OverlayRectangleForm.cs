@@ -16,8 +16,10 @@
             this.Visible = false;
         }
 
+        /// <inheritdoc/>
         protected override bool ShowWithoutActivation => true;
 
+        /// <inheritdoc/>
         protected override CreateParams CreateParams
         {
             get

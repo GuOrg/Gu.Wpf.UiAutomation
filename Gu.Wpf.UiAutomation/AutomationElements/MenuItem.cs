@@ -63,7 +63,8 @@ namespace Gu.Wpf.UiAutomation.AutomationElements
                         }
 
                         Thread.Sleep(50);
-                    } while (state != ExpandCollapseState.Expanded);
+                    }
+                    while (state != ExpandCollapseState.Expanded);
                 }
 
                 var childItems = Enumerable.Select(this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)), e => e.AsMenuItem());

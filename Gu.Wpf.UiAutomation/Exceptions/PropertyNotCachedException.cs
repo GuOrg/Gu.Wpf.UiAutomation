@@ -47,6 +47,7 @@
 
         public PropertyId Property { get; }
 
+        /// <inheritdoc/>
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)

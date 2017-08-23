@@ -19,6 +19,7 @@
 
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
+        /// <inheritdoc/>
         public T Pattern
         {
             get
@@ -28,6 +29,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public T PatternOrDefault
         {
             get
@@ -37,6 +39,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public bool TryGetPattern(out T pattern)
         {
             if (this.BasicAutomationElement.TryGetNativePattern(this.patternId, out TNative nativePattern))
@@ -49,6 +52,7 @@
             return false;
         }
 
+        /// <inheritdoc/>
         public bool IsSupported
         {
             get

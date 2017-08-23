@@ -14,6 +14,7 @@
             this.callAction = callAction;
         }
 
+        /// <inheritdoc/>
         public void HandlePropertyChangedEvent(AutomationElement sender, PropertyId propertyId, object newValue)
         {
             this.callAction(sender, propertyId, newValue);

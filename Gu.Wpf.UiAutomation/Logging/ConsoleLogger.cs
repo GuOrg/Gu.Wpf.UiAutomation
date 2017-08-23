@@ -4,6 +4,7 @@
 
     public class ConsoleLogger : LoggerBase
     {
+        /// <inheritdoc/>
         protected internal override void GatedDebug(string message)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -11,6 +12,7 @@
             Console.ResetColor();
         }
 
+        /// <inheritdoc/>
         protected internal override void GatedError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -18,6 +20,7 @@
             Console.ResetColor();
         }
 
+        /// <inheritdoc/>
         protected internal override void GatedFatal(string message)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -25,11 +28,13 @@
             Console.ResetColor();
         }
 
+        /// <inheritdoc/>
         protected internal override void GatedInfo(string message)
         {
             Console.WriteLine(message);
         }
 
+        /// <inheritdoc/>
         protected internal override void GatedTrace(string message)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -37,6 +42,7 @@
             Console.ResetColor();
         }
 
+        /// <inheritdoc/>
         protected internal override void GatedWarn(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

@@ -9,6 +9,7 @@
         {
         }
 
+        /// <inheritdoc/>
         protected override string SmallDecrementText
         {
             get
@@ -26,6 +27,7 @@
             }
         }
 
+        /// <inheritdoc/>
         protected override string SmallIncrementText
         {
             get
@@ -43,6 +45,7 @@
             }
         }
 
+        /// <inheritdoc/>
         protected override string LargeDecrementText
         {
             get
@@ -60,6 +63,7 @@
             }
         }
 
+        /// <inheritdoc/>
         protected override string LargeIncrementText
         {
             get

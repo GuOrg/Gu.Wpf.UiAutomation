@@ -43,6 +43,7 @@
             return Math.Sqrt(Math.Pow(this.X - otherX, 2) + Math.Pow(this.Y - otherY, 2));
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
@@ -54,6 +55,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object other)
         {
             if (ReferenceEquals(null, other))
@@ -127,6 +129,7 @@
             return new Point(p.X, p.Y);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"X={this.X},Y={this.Y}";

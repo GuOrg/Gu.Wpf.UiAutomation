@@ -13,12 +13,16 @@
         {
         }
 
+        /// <inheritdoc/>
         public IGridPatternProperties Properties => this.Automation.PropertyLibrary.Grid;
 
+        /// <inheritdoc/>
         public AutomationProperty<int> ColumnCount => this.GetOrCreate(ref this.columnCount, this.Properties.ColumnCount);
 
+        /// <inheritdoc/>
         public AutomationProperty<int> RowCount => this.GetOrCreate(ref this.rowCount, this.Properties.RowCount);
 
+        /// <inheritdoc/>
         public abstract AutomationElement GetItem(int row, int column);
     }
 }

@@ -61,16 +61,19 @@
             return automationProperty == null ? default(TVal) : automationProperty.Value;
         }
 
+        /// <inheritdoc/>
         public bool Equals(TVal other)
         {
             return this.Value.Equals(other);
         }
 
+        /// <inheritdoc/>
         public bool Equals(AutomationProperty<TVal> other)
         {
             return other != null && this.Value.Equals(other.Value);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return Convert.ToString(this.ValueOrDefault);

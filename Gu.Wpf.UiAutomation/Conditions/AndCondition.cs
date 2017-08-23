@@ -15,6 +15,7 @@
             this.Conditions.AddRange(conditions);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
 #if NET35

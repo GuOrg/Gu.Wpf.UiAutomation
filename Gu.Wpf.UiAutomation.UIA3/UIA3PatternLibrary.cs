@@ -70,7 +70,8 @@
 
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
 
-        public PatternId[] AllForCurrentFramework => new[] {
+        public PatternId[] AllForCurrentFramework => new[]
+        {
             this.AnnotationPattern,
             this.DockPattern,
             this.DragPattern,
@@ -103,6 +104,7 @@
             this.TransformPattern,
             this.ValuePattern,
             this.VirtualizedItemPattern,
-            this.WindowPattern };
+            this.WindowPattern
+        };
     }
 }

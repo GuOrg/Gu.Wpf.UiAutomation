@@ -50,10 +50,13 @@
 #endif
         }
 
+        /// <inheritdoc/>
         public int Size { get; set; }
 
+        /// <inheritdoc/>
         public int Margin { get; set; }
 
+        /// <inheritdoc/>
         public void Show(Rectangle rectangle, Color color, int durationInMs)
         {
             if (rectangle.IsValid)
@@ -69,6 +72,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
         {
             if (rectangle.IsValid)
@@ -84,6 +88,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             this.dispatcher.InvokeShutdown();

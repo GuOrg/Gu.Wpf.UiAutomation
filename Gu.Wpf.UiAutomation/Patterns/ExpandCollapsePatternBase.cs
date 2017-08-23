@@ -12,12 +12,16 @@
         {
         }
 
+        /// <inheritdoc/>
         public IExpandCollapsePatternProperties Properties => this.Automation.PropertyLibrary.ExpandCollapse;
 
+        /// <inheritdoc/>
         public AutomationProperty<ExpandCollapseState> ExpandCollapseState => this.GetOrCreate(ref this.expandCollapseState, this.Properties.ExpandCollapseState);
 
+        /// <inheritdoc/>
         public abstract void Collapse();
 
+        /// <inheritdoc/>
         public abstract void Expand();
     }
 }

@@ -23,6 +23,7 @@
 
         public object Value { get; }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"{this.Property}: {this.Value}";

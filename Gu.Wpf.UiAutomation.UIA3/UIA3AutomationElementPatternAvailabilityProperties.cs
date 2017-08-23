@@ -72,7 +72,8 @@
 
         public PropertyId IsWindowPatternAvailable => AutomationObjectIds.IsWindowPatternAvailableProperty;
 
-        public PropertyId[] AllForCurrentFramework => new[] {
+        public PropertyId[] AllForCurrentFramework => new[]
+        {
             this.IsAnnotationPatternAvailable,
             this.IsDockPatternAvailable,
             this.IsDragPatternAvailable,

@@ -9,8 +9,10 @@
         {
         }
 
+        /// <inheritdoc/>
         public IInvokePatternEvents Events => this.Automation.EventLibrary.Invoke;
 
+        /// <inheritdoc/>
         public abstract void Invoke();
     }
 }

@@ -19,7 +19,6 @@
                     Assert.That(window.Title, Is.Not.Null);
                     var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
                     Assert.That(file, Is.Not.Null);
-                    app.Close();
                 }
             }
         }
@@ -37,7 +36,6 @@
                     var items = window.FindAllByXPath("//MenuItem");
                     Assert.That(items, Is.Not.Null);
                     Assert.That(items, Has.Length.EqualTo(6));
-                    app.Close();
                 }
             }
         }
@@ -58,7 +56,6 @@
                     items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
                     Assert.That(items, Is.Not.Null);
                     Assert.That(items, Has.Length.EqualTo(5));
-                    app.Close();
                 }
             }
         }

@@ -12,10 +12,13 @@
         {
         }
 
+        /// <inheritdoc/>
         public ITogglePatternProperties Properties => this.Automation.PropertyLibrary.Toggle;
 
+        /// <inheritdoc/>
         public AutomationProperty<ToggleState> ToggleState => this.GetOrCreate(ref this.toggleState, this.Properties.ToggleState);
 
+        /// <inheritdoc/>
         public abstract void Toggle();
     }
 }

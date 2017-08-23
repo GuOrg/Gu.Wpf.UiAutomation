@@ -37,6 +37,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             return new COLORREF(c.R, c.G, c.B);
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"R={R},G={G},B={B}";

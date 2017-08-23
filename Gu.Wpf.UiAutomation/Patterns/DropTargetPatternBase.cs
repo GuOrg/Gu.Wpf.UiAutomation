@@ -12,12 +12,16 @@
         {
         }
 
+        /// <inheritdoc/>
         public IDropTargetPatternProperties Properties => this.Automation.PropertyLibrary.DropTarget;
 
+        /// <inheritdoc/>
         public IDropTargetPatternEvents Events => this.Automation.EventLibrary.DropTarget;
 
+        /// <inheritdoc/>
         public AutomationProperty<string> DropTargetEffect => this.GetOrCreate(ref this.dropTargetEffect, this.Properties.DropTargetEffect);
 
+        /// <inheritdoc/>
         public AutomationProperty<string[]> DropTargetEffects => this.GetOrCreate(ref this.dropTargetEffects, this.Properties.DropTargetEffects);
     }
 }

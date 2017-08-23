@@ -53,21 +53,25 @@
             this.Name = name;
         }
 
+        /// <inheritdoc/>
         public bool Equals(IdentifierBase other)
         {
             return other != null && this.Id.Equals(other.Id);
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             return this.Equals(obj as IdentifierBase);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return this.Id;
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"{this.Name} [#{this.Id}]";

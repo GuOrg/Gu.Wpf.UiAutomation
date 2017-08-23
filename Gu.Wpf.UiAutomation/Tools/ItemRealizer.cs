@@ -50,7 +50,8 @@
                 do
                 {
                     scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
-                } while (scrollPattern.VerticalScrollPercent < 100);
+                }
+                while (scrollPattern.VerticalScrollPercent < 100);
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }

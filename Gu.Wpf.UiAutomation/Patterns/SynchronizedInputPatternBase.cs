@@ -10,10 +10,13 @@
         {
         }
 
+        /// <inheritdoc/>
         public ISynchronizedInputPatternEvents Events => this.Automation.EventLibrary.SynchronizedInput;
 
+        /// <inheritdoc/>
         public abstract void Cancel();
 
+        /// <inheritdoc/>
         public abstract void StartListening(SynchronizedInputType inputType);
     }
 }

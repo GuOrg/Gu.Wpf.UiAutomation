@@ -4,16 +4,22 @@
 
     public abstract class LoggerBase : ILogger
     {
+        /// <inheritdoc/>
         public bool IsTraceEnabled { get; set; }
 
+        /// <inheritdoc/>
         public bool IsDebugEnabled { get; set; }
 
+        /// <inheritdoc/>
         public bool IsInfoEnabled { get; set; }
 
+        /// <inheritdoc/>
         public bool IsWarnEnabled { get; set; }
 
+        /// <inheritdoc/>
         public bool IsErrorEnabled { get; set; }
 
+        /// <inheritdoc/>
         public bool IsFatalEnabled { get; set; }
 
         protected internal abstract void GatedTrace(string message);
@@ -40,11 +46,13 @@
             this.IsFatalEnabled = true;
         }
 
+        /// <inheritdoc/>
         public void Log(LogLevel logLevel, string message, params object[] args)
         {
             this.Log(logLevel, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Log(LogLevel logLevel, string message, Exception exception, params object[] args)
         {
             switch (logLevel)
@@ -96,61 +104,73 @@
             }
         }
 
+        /// <inheritdoc/>
         public void Trace(string message, params object[] args)
         {
             this.Log(LogLevel.Trace, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Trace(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Trace, message, exception, args);
         }
 
+        /// <inheritdoc/>
         public void Debug(string message, params object[] args)
         {
             this.Log(LogLevel.Debug, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Debug(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Debug, message, exception, args);
         }
 
+        /// <inheritdoc/>
         public void Info(string message, params object[] args)
         {
             this.Log(LogLevel.Info, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Info(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Info, message, exception, args);
         }
 
+        /// <inheritdoc/>
         public void Warn(string message, params object[] args)
         {
             this.Log(LogLevel.Warn, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Warn(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Warn, message, exception, args);
         }
 
+        /// <inheritdoc/>
         public void Error(string message, params object[] args)
         {
             this.Log(LogLevel.Error, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Error(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Error, message, exception, args);
         }
 
+        /// <inheritdoc/>
         public void Fatal(string message, params object[] args)
         {
             this.Log(LogLevel.Fatal, message, null, args);
         }
 
+        /// <inheritdoc/>
         public void Fatal(string message, Exception exception, params object[] args)
         {
             this.Log(LogLevel.Fatal, message, exception, args);
