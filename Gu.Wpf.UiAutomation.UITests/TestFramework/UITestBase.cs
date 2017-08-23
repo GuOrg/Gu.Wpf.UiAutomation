@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.TestFramework
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
@@ -10,14 +11,17 @@
     /// </summary>
     public abstract class UITestBase : IDisposable
     {
+        private readonly string args;
+
         /// <summary>
         /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
         private bool wasTestRun;
         private bool disposed;
 
-        protected UITestBase(TestApplicationType appType)
+        protected UITestBase(TestApplicationType appType, string args = null)
         {
+            this.args = args;
             this.ApplicationType = appType;
             this.ScreenshotDir = @"c:\FailedTestsScreenshots";
             this.wasTestRun = false;
@@ -48,7 +52,13 @@
                     this.App = this.StartApplication();
                     break;
                 case TestApplicationType.Wpf:
-                    this.App = Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"));
+                    var processStartInfo = new ProcessStartInfo
+                                           {
+                                               FileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"),
+                                               Arguments = this.args,
+                                               UseShellExecute = false,
+                                           };
+                    this.App = Application.Launch(processStartInfo);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
