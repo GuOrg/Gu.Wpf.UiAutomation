@@ -9,12 +9,21 @@
     /// <summary>
     /// Base class for ui test with some helper methods
     /// </summary>
-    public abstract class UITestBase
+    public abstract class UITestBase : IDisposable
     {
         /// <summary>
         /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
         private bool wasTestRun;
+        private bool disposed;
+
+        protected UITestBase(TestApplicationType appType)
+        {
+            this.ApplicationType = appType;
+            this.ScreenshotDir = @"c:\FailedTestsScreenshots";
+            this.wasTestRun = false;
+            this.Automation = new UIA3Automation();
+        }
 
         protected TestApplicationType ApplicationType { get; }
 
@@ -30,20 +39,13 @@
 
         protected AutomationBase Automation { get; }
 
-        protected UITestBase(TestApplicationType appType)
-        {
-            this.ApplicationType = appType;
-            this.ScreenshotDir = @"c:\FailedTestsScreenshots";
-            this.wasTestRun = false;
-            this.Automation = new UIA3Automation();
-        }
-
         /// <summary>
         /// Setup which starts the application (once per test-class)
         /// </summary>
         [OneTimeSetUp]
         public void BaseSetup()
         {
+            this.App?.Dispose();
             switch (this.ApplicationType)
             {
                 case TestApplicationType.Custom:
@@ -86,6 +88,26 @@
             }
         }
 
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.disposed = true;
+            if (disposing)
+            {
+                this.App?.Dispose();
+                this.Automation.Dispose();
+            }
+        }
+
         /// <summary>
         /// Method which starts the custom application to test
         /// </summary>
@@ -109,6 +131,14 @@
             this.BaseTeardown();
             this.BaseSetup();
             this.wasTestRun = false;
+        }
+
+        protected void ThrowIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
         }
 
         private void TakeScreenshot(string screenshotName)

@@ -548,33 +548,6 @@
             return $"AutomationId:{this.Properties.AutomationId.ValueOrDefault}, Name:{this.Properties.Name.ValueOrDefault}, ControlType:{this.Properties.LocalizedControlType.ValueOrDefault}, FrameworkId:{this.Properties.FrameworkId.ValueOrDefault}";
         }
 
-        protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
-        {
-            if (pattern != null)
-            {
-                action(pattern);
-            }
-            else if (throwIfNotSupported)
-            {
-                throw new System.NotSupportedException();
-            }
-        }
-
-        protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
-        {
-            if (pattern != null)
-            {
-                return func(pattern);
-            }
-
-            if (throwIfNotSupported)
-            {
-                throw new System.NotSupportedException();
-            }
-
-            return default(TRet);
-        }
-
         public Button AsButton()
         {
             return new Button(this.BasicAutomationElement);
@@ -779,6 +752,33 @@
         {
             var conditions = nestedConditionsFunc(this.ConditionFactory);
             return this.FindAllNested(conditions.ToArray());
+        }
+
+        protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
+        {
+            if (pattern != null)
+            {
+                action(pattern);
+            }
+            else if (throwIfNotSupported)
+            {
+                throw new System.NotSupportedException();
+            }
+        }
+
+        protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
+        {
+            if (pattern != null)
+            {
+                return func(pattern);
+            }
+
+            if (throwIfNotSupported)
+            {
+                throw new System.NotSupportedException();
+            }
+
+            return default(TRet);
         }
     }
 }

@@ -51,12 +51,6 @@
         }
 
         /// <inheritdoc/>
-        public bool IsSupported
-        {
-            get
-            {
-                return this.TryGetPattern(out T pattern);
-            }
-        }
+        public bool IsSupported => this.TryGetPattern(out T _);
     }
 }

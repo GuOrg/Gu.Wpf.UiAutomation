@@ -7,15 +7,15 @@
 
     public class UIA3TextRange : ITextRange
     {
-        public UIA3Automation Automation { get; }
-
-        public UIA.IUIAutomationTextRange NativeRange { get; }
-
         internal UIA3TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
         {
             this.Automation = automation;
             this.NativeRange = nativeRange;
         }
+
+        public UIA3Automation Automation { get; }
+
+        public UIA.IUIAutomationTextRange NativeRange { get; }
 
         public void AddToSelection()
         {

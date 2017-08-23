@@ -61,8 +61,10 @@
         /// </summary>
         public static void CaptureScreenToFile(string filePath)
         {
-            var bmp = CaptureScreen();
-            bmp.Save(filePath, ImageFormat.Png);
+            using (var bmp = CaptureScreen())
+            {
+                bmp.Save(filePath, ImageFormat.Png);
+            }
         }
 
         /// <summary>
@@ -70,8 +72,10 @@
         /// </summary>
         public static void CaptureAreaToFile(Rect rectangle, string filePath)
         {
-            var bmp = CaptureArea(rectangle);
-            bmp.Save(filePath, ImageFormat.Png);
+            using (var bmp = CaptureArea(rectangle))
+            {
+                bmp.Save(filePath, ImageFormat.Png);
+            }
         }
 
         /// <summary>

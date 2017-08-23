@@ -34,19 +34,21 @@
 
         private static string GetCurrentProductName()
         {
-            var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-            if (reg == null)
+            using (var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
             {
-                throw new Exception("Could not find the registry path needed for determining the OS version.");
-            }
+                if (reg == null)
+                {
+                    throw new Exception("Could not find the registry path needed for determining the OS version.");
+                }
 
-            var productName = (string)reg.GetValue("ProductName");
-            if (productName == null)
-            {
-                throw new Exception("Could not find the registry key needed for determining the OS version.");
-            }
+                var productName = (string)reg.GetValue("ProductName");
+                if (productName == null)
+                {
+                    throw new Exception("Could not find the registry key needed for determining the OS version.");
+                }
 
-            return productName;
+                return productName;
+            }
         }
     }
 }

@@ -223,7 +223,7 @@
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
         {
             var process = WindowsStoreAppLauncher.Launch(appUserModelId, arguments);
-            return new Application(process, true);
+            return new Application(process, isStoreApp: true);
         }
 
         /// <summary>

@@ -67,10 +67,7 @@
                 return new Point(p.X, p.Y);
             }
 
-            set
-            {
-                User32.SetCursorPos((int)value.X, (int)value.Y);
-            }
+            set => User32.SetCursorPos((int)value.X, (int)value.Y);
         }
 
         /// <summary>
@@ -125,8 +122,8 @@
             var movements = new List<Point>();
             for (var i = 1; i < steps; i++)
             {
-                var tempX = startX + i * stepX;
-                var tempY = startY + i * stepY;
+                var tempX = startX + (i * stepX);
+                var tempY = startY + (i * stepY);
                 movements.Add(new Point(tempX, tempY));
             }
 
@@ -290,6 +287,46 @@
             Up(mouseButton);
         }
 
+        public static void LeftClick()
+        {
+            Click(MouseButton.Left);
+        }
+
+        public static void LeftClick(Point point)
+        {
+            Click(MouseButton.Left, point);
+        }
+
+        public static void LeftDoubleClick()
+        {
+            DoubleClick(MouseButton.Left);
+        }
+
+        public static void LeftDoubleClick(Point point)
+        {
+            DoubleClick(MouseButton.Left, point);
+        }
+
+        public static void RightClick()
+        {
+            Click(MouseButton.Right);
+        }
+
+        public static void RightClick(Point point)
+        {
+            Click(MouseButton.Right, point);
+        }
+
+        public static void RightDoubleClick()
+        {
+            DoubleClick(MouseButton.Right);
+        }
+
+        public static void RightDoubleClick(Point point)
+        {
+            DoubleClick(MouseButton.Right, point);
+        }
+
         /// <summary>
         /// Converts the button to the correct <see cref="MouseEventFlags" /> object
         /// and fills the additional data if needed
@@ -366,14 +403,14 @@
 
             // Build the mouse input object
             var mouseInput = new MOUSEINPUT
-            {
-                dx = x,
-                dy = y,
-                mouseData = data,
-                dwExtraInfo = User32.GetMessageExtraInfo(),
-                time = 0,
-                dwFlags = flags
-            };
+                             {
+                                 dx = x,
+                                 dy = y,
+                                 mouseData = data,
+                                 dwExtraInfo = User32.GetMessageExtraInfo(),
+                                 time = 0,
+                                 dwFlags = flags
+                             };
 
             // Build the input object
             var input = INPUT.MouseInput(mouseInput);
@@ -397,48 +434,8 @@
             var vScreenLeft = User32.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
             var vScreenTop = User32.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
 
-            x = (x - vScreenLeft) * 65536 / vScreenWidth + 65536 / (vScreenWidth * 2);
-            y = (y - vScreenTop) * 65536 / vScreenHeight + 65536 / (vScreenHeight * 2);
-        }
-
-        public static void LeftClick()
-        {
-            Click(MouseButton.Left);
-        }
-
-        public static void LeftClick(Point point)
-        {
-            Click(MouseButton.Left, point);
-        }
-
-        public static void LeftDoubleClick()
-        {
-            DoubleClick(MouseButton.Left);
-        }
-
-        public static void LeftDoubleClick(Point point)
-        {
-            DoubleClick(MouseButton.Left, point);
-        }
-
-        public static void RightClick()
-        {
-            Click(MouseButton.Right);
-        }
-
-        public static void RightClick(Point point)
-        {
-            Click(MouseButton.Right, point);
-        }
-
-        public static void RightDoubleClick()
-        {
-            DoubleClick(MouseButton.Right);
-        }
-
-        public static void RightDoubleClick(Point point)
-        {
-            DoubleClick(MouseButton.Right, point);
+            x = ((x - vScreenLeft) * 65536 / vScreenWidth) + (65536 / (vScreenWidth * 2));
+            y = ((y - vScreenTop) * 65536 / vScreenHeight) + (65536 / (vScreenHeight * 2));
         }
     }
 }
