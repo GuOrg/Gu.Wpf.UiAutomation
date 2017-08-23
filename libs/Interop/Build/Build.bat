@@ -10,7 +10,7 @@ mkdir %TEMP%
 midl.exe /nologo /out %TEMP% /char signed /tlb UIAutomationClient.tlb /h UIAutomationClient_h.h "%WINSDK%UIAutomationClient.idl"
 midl.exe /nologo /out %TEMP% /char signed /tlb UIAutomationCore.tlb /h UIAutomationCore_h.h "%WINSDK%UIAutomationCore.idl"
 http://stackoverflow.com/questions/5615206/windows-batch-files-setting-variable-in-for-loop
-FOR %%A IN (3.5 4.5) DO (
+FOR %%A IN (4.5) DO (
 	mkdir %TEMP%\%%A
 	@REM Create the original dlls from the tlbs
 	%%A\tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%%A\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb

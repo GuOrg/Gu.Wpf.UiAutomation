@@ -3,28 +3,19 @@
     using System;
 
     public abstract class PatternBase<TNativePattern> : IPattern
+        where TNativePattern : class
     {
-        public BasicAutomationElementBase BasicAutomationElement { get; }
-
-        public AutomationBase Automation => this.BasicAutomationElement.Automation;
-
-        public TNativePattern NativePattern { get; private set; }
-
         protected PatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
         {
-            if (basicAutomationElement == null)
-            {
-                throw new ArgumentNullException(nameof(basicAutomationElement));
-            }
-
-            if (nativePattern == null)
-            {
-                throw new ArgumentNullException(nameof(nativePattern));
-            }
-
-            this.BasicAutomationElement = basicAutomationElement;
-            this.NativePattern = nativePattern;
+            this.BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
+            this.NativePattern = nativePattern ?? throw new ArgumentNullException(nameof(nativePattern));
         }
+
+        public BasicAutomationElementBase BasicAutomationElement { get; }
+
+        public TNativePattern NativePattern { get; }
+
+        public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
         protected AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {

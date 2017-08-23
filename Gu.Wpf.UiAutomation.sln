@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1C843
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation", "Gu.Wpf.UiAutomation\Gu.Wpf.UiAutomation.csproj", "{DF81078D-0932-47BA-B5A7-176CFF202375}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.UIA3", "Gu.Wpf.UiAutomation.UIA3\Gu.Wpf.UiAutomation.UIA3.csproj", "{55FAC715-04D7-47E9-A715-5BF3FE2B901F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApplications", "{00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
@@ -21,6 +19,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.UiAutomation.UITests", "Gu.Wpf.UiAutomation.UITests\Gu.Wpf.UiAutomation.UITests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.UiAutomation.UnitTests", "Gu.Wpf.UiAutomation.UnitTests\Gu.Wpf.UiAutomation.UnitTests.csproj", "{AFE453D1-C9B6-43D0-835F-BAE465063453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{3DB16548-AA97-4652-BCE9-2FA4AF413AFD}"
+	ProjectSection(SolutionItems) = preProject
+		.paket\tools\install.ps1 = .paket\tools\install.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +35,6 @@ Global
 		{DF81078D-0932-47BA-B5A7-176CFF202375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF81078D-0932-47BA-B5A7-176CFF202375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF81078D-0932-47BA-B5A7-176CFF202375}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55FAC715-04D7-47E9-A715-5BF3FE2B901F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55FAC715-04D7-47E9-A715-5BF3FE2B901F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55FAC715-04D7-47E9-A715-5BF3FE2B901F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55FAC715-04D7-47E9-A715-5BF3FE2B901F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8276299-FA43-409B-A969-EF030AB56224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8276299-FA43-409B-A969-EF030AB56224}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8276299-FA43-409B-A969-EF030AB56224}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,6 +53,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C8276299-FA43-409B-A969-EF030AB56224} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
+		{3DB16548-AA97-4652-BCE9-2FA4AF413AFD} = {B1C84389-441E-4870-9EAC-F241B568B204}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA1E3AD6-06D8-4ECD-9AF7-37DD4785FEC5}
