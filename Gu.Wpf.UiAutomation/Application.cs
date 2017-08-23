@@ -19,7 +19,6 @@
         /// The process of this application.
         /// </summary>
         private readonly Process process;
-
         private bool disposed;
 
         /// <summary>

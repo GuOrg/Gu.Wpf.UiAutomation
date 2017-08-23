@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.Identifiers
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     /// <summary>
