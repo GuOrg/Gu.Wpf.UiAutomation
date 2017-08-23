@@ -13,17 +13,17 @@
         /// <summary>
         /// Flag to get/set the selection of this element.
         /// </summary>
-        public bool IsSelected
+        public bool IsChecked
         {
             get => this.SelectionItemPattern.IsSelected;
             set
             {
-                if (this.IsSelected == value)
+                if (this.IsChecked == value)
                 {
                     return;
                 }
 
-                if (value && !this.IsSelected)
+                if (value && !this.IsChecked)
                 {
                     this.Select();
                 }

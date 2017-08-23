@@ -189,10 +189,16 @@
         public CheckBox FindCheckBox(string name) => this.FindByNameOrId(name, ControlType.CheckBox).AsCheckBox();
 
         /// <summary>
-        /// Find the first checkbox by x:Name, Content or AutomationID
+        /// Find the first toggle button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ToggleButton FindToggleButton(string name) => this.FindByNameOrId(name, ControlType.Button).AsToggleButton();
+
+        /// <summary>
+        /// Find the first toggle button by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public RadioButton FindRadioButton(string name) => this.FindByNameOrId(name, ControlType.RadioButton).AsRadioButton();
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {

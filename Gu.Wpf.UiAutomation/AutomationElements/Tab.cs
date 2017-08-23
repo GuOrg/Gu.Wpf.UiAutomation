@@ -15,7 +15,7 @@
         /// </summary>
         public TabItem SelectedTabItem
         {
-            get { return this.TabItems.FirstOrDefault(t => t.IsSelected); }
+            get { return this.TabItems.FirstOrDefault(t => t.IsChecked); }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(this.TabItems, t => t.IsSelected);
+            return Array.FindIndex(this.TabItems, t => t.IsChecked);
         }
     }
 }

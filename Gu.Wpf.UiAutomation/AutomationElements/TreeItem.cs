@@ -39,8 +39,8 @@
 
         public bool IsSelected
         {
-            get => this.selectionItemAutomationElement.IsSelected;
-            set => this.selectionItemAutomationElement.IsSelected = value;
+            get => this.selectionItemAutomationElement.IsChecked;
+            set => this.selectionItemAutomationElement.IsChecked = value;
         }
 
         public void Expand()

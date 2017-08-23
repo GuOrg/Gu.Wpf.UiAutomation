@@ -29,7 +29,7 @@
                 // In WinForms, there is no selection pattern, so search the items which are selected.
                 if (this.SelectionPattern == null)
                 {
-                    return this.Items.Where(x => x.IsSelected).ToArray();
+                    return this.Items.Where(x => x.IsChecked).ToArray();
                 }
 
                 return this.SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();

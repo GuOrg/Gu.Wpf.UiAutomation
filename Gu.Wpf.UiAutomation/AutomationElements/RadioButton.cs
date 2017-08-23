@@ -6,5 +6,10 @@
             : base(basicAutomationElement)
         {
         }
+
+        public void Toggle()
+        {
+            this.IsChecked = !this.IsChecked;
+        }
     }
 }
