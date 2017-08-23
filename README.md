@@ -29,17 +29,6 @@ public void IsChecked()
         var checkBox = window.FindCheckBox("Test Checkbox");
         checkBox.IsChecked = true;
         Assert.AreEqual(true, checkBox.IsChecked);
-
-        checkBox.IsChecked = false;
-        Assert.AreEqual(false, checkBox.IsChecked);
-
-        checkBox.IsChecked = true;
-        Assert.AreEqual(true, checkBox.IsChecked);
-
-        var exception = Assert.Throws<UiAutomationException>(() => checkBox.IsChecked = null);
-        Assert.AreEqual(
-            "Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:check box, FrameworkId:WPF .IsChecked to null failed.",
-            exception.Message);
     }
 }
 ```
