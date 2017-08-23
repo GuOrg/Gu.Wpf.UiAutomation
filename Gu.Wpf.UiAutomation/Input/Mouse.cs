@@ -228,7 +228,7 @@
         /// <param name="mouseButton">The mouse button to press</param>
         public static void Down(MouseButton mouseButton)
         {
-            var flags = GetFlagsAndDataForButton(mouseButton, true, out uint data);
+            var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out uint data);
             SendInput(0, 0, data, flags);
         }
 

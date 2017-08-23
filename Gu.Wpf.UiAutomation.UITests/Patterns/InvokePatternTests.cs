@@ -25,18 +25,23 @@
             var invokePattern = button.Patterns.Invoke.Pattern;
             Assert.That(invokePattern, Is.Not.Null);
             var invokeFired = false;
-            var waitHandle = new ManualResetEventSlim(false);
-            var registeredEvent = button.RegisterEvent(invokePattern.Events.InvokedEvent, TreeScope.Element, (element, id) =>
+            using (var waitHandle = new ManualResetEventSlim(initialState: false))
             {
-                invokeFired = true;
-                waitHandle.Set();
-            });
-            invokePattern.Invoke();
-            var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
-            Assert.That(waitResult, Is.True);
-            Assert.That(button.Properties.Name, Is.Not.EqualTo(origButtonText));
-            Assert.That(invokeFired, Is.True);
-            button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
+                var registeredEvent = button.RegisterEvent(
+                    invokePattern.Events.InvokedEvent,
+                    TreeScope.Element,
+                    (element, id) =>
+                    {
+                        invokeFired = true;
+                        waitHandle.Set();
+                    });
+                invokePattern.Invoke();
+                var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
+                Assert.That(waitResult, Is.True);
+                Assert.That(button.Properties.Name, Is.Not.EqualTo(origButtonText));
+                Assert.That(invokeFired, Is.True);
+                button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
+            }
         }
     }
 }

@@ -39,7 +39,7 @@
         /// </summary>
         public SelectionItemAutomationElement Select()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.Select());
+            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.Select());
             return this;
         }
 
@@ -57,7 +57,7 @@
         /// </summary>
         public SelectionItemAutomationElement RemoveFromSelection()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.RemoveFromSelection());
+            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.RemoveFromSelection());
             return this;
         }
     }
