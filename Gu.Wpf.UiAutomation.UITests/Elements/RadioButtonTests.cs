@@ -16,6 +16,7 @@
             {
                 var window = app.MainWindow();
                 var radioButton = window.FindRadioButton(key);
+                Assert.AreEqual(true, radioButton.IsEnabled);
                 Assert.NotNull(radioButton);
             }
         }
@@ -44,17 +45,17 @@
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow();
-                var RadioButton = window.FindRadioButton("Test RadioButton");
-                Assert.AreEqual(false, RadioButton.IsChecked);
+                var radioButton = window.FindRadioButton("Test RadioButton");
+                Assert.AreEqual(false, radioButton.IsChecked);
 
-                RadioButton.Toggle();
-                Assert.AreEqual(true, RadioButton.IsChecked);
+                radioButton.Toggle();
+                Assert.AreEqual(true, radioButton.IsChecked);
 
-                RadioButton.Toggle();
-                Assert.AreEqual(false, RadioButton.IsChecked);
+                radioButton.Toggle();
+                Assert.AreEqual(false, radioButton.IsChecked);
 
-                RadioButton.Toggle();
-                Assert.AreEqual(true, RadioButton.IsChecked);
+                radioButton.Toggle();
+                Assert.AreEqual(true, radioButton.IsChecked);
             }
         }
 
