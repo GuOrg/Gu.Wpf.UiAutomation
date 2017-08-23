@@ -1,4 +1,7 @@
-﻿namespace Gu.Wpf.UiAutomation
+﻿#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning disable SA1310 // Field names must not contain underscore
+#pragma warning disable SA1600 // Elements must be documented
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.ComponentModel;
@@ -11,9 +14,9 @@
     [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "To keep the original Win32 names")]
     public static class ComCallWrapper
     {
-        /// <summary>
-        /// Indicates that a method that requires an enabled element, such as ISelectionItemProvider::Select or IExpandCollapseProvider::Expand, was called on an element that was disabled.
-        /// </summary>
+                              /// <summary>
+                              /// Indicates that a method that requires an enabled element, such as ISelectionItemProvider::Select or IExpandCollapseProvider::Expand, was called on an element that was disabled.
+                              /// </summary>
         public const uint UIA_E_ELEMENTNOTENABLED = 0x80040200;
 
         /// <summary>

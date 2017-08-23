@@ -213,12 +213,8 @@
             }
             catch (Win32Exception ex)
             {
-                var error = string.Format(
-                    "[Failed Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
-                    processStartInfo.FileName,
-                    new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
-                    new FileInfo(processStartInfo.FileName).FullName,
-                    Environment.CurrentDirectory);
+                var error =
+                    $"[Failed Launching process:{processStartInfo.FileName}] [Working directory:{new DirectoryInfo(processStartInfo.WorkingDirectory).FullName}] [Process full path:{new FileInfo(processStartInfo.FileName).FullName}] [Current Directory:{Environment.CurrentDirectory}]";
                 Logger.Default.Error(error, ex);
                 throw;
             }

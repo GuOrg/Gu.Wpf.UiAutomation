@@ -50,12 +50,6 @@
             this.BasicAutomationElement = basicAutomationElement;
         }
 
-        private BasicAutomationElementBase BasicAutomationElement { get; }
-
-        private AutomationBase Automation => this.BasicAutomationElement.Automation;
-
-        private IAutomationElementProperties Properties => this.Automation.PropertyLibrary.Element;
-
         public AutomationProperty<string> AcceleratorKey => this.GetOrCreate(ref this.acceleratorKey, this.Properties.AcceleratorKey);
 
         public AutomationProperty<string> AccessKey => this.GetOrCreate(ref this.accessKey, this.Properties.AccessKey);
@@ -131,6 +125,12 @@
         public AutomationProperty<string> ProviderDescription => this.GetOrCreate(ref this.providerDescription, this.Properties.ProviderDescription);
 
         public AutomationProperty<int[]> RuntimeId => this.GetOrCreate(ref this.runtimeId, this.Properties.RuntimeId);
+
+        private BasicAutomationElementBase BasicAutomationElement { get; }
+
+        private AutomationBase Automation => this.BasicAutomationElement.Automation;
+
+        private IAutomationElementProperties Properties => this.Automation.PropertyLibrary.Element;
 
         private AutomationProperty<T> GetOrCreate<T>(ref AutomationProperty<T> val, PropertyId propertyId)
         {

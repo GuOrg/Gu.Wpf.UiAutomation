@@ -1,3 +1,5 @@
+#pragma warning disable SA1310 // Field names must not contain underscore
+#pragma warning disable SA1600 // Elements must be documented
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     public static class WindowStyles
@@ -34,14 +36,14 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         public const uint WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
         public const uint WS_CHILDWINDOW = WS_CHILD;
 
-        //Extended Window Styles
+        // Extended Window Styles
         public const uint WS_EX_DLGMODALFRAME = 0x00000001;
         public const uint WS_EX_NOPARENTNOTIFY = 0x00000004;
         public const uint WS_EX_TOPMOST = 0x00000008;
         public const uint WS_EX_ACCEPTFILES = 0x00000010;
         public const uint WS_EX_TRANSPARENT = 0x00000020;
 
-        //#if(WINVER >= 0x0400)
+        ////#if(WINVER >= 0x0400)
         public const uint WS_EX_MDICHILD = 0x00000040;
         public const uint WS_EX_TOOLWINDOW = 0x00000080;
         public const uint WS_EX_WINDOWEDGE = 0x00000100;
@@ -61,16 +63,16 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
 
         public const uint WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
         public const uint WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
-        //#endif /* WINVER >= 0x0400 */
+        ////#endif /* WINVER >= 0x0400 */
 
-        //#if(_WIN32_WINNT >= 0x0500)
+        ////#if(_WIN32_WINNT >= 0x0500)
         public const uint WS_EX_LAYERED = 0x00080000;
-        //#endif /* _WIN32_WINNT >= 0x0500 */
+        ////#endif /* _WIN32_WINNT >= 0x0500 */
 
-        //#if(WINVER >= 0x0500)
+        ////#if(WINVER >= 0x0500)
         public const uint WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritance of mirroring by children
         public const uint WS_EX_LAYOUTRTL = 0x00400000; // Right to left mirroring
-        ////#endif /* WINVER >= 0x0500 */
+                                                        ////#endif /* WINVER >= 0x0500 */
 
         ////#if(_WIN32_WINNT >= 0x0500)
         public const uint WS_EX_COMPOSITED = 0x02000000;

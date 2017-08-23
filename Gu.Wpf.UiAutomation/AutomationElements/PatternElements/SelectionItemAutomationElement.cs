@@ -46,7 +46,7 @@
         /// </summary>
         public SelectionItemAutomationElement AddToSelection()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, true, pattern => pattern.AddToSelection());
+            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.AddToSelection());
             return this;
         }
 

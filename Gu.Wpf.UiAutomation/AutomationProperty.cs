@@ -19,16 +19,6 @@
             this.BasicAutomationElement = basicAutomationElement;
         }
 
-        /// <summary>
-        /// The <see cref="PropertyId"/> of this property object.
-        /// </summary>
-        protected PropertyId PropertyId { get; }
-
-        /// <summary>
-        /// The <see cref="BasicAutomationElement"/> where this property object belongs to.
-        /// </summary>
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
-
         /// <inheritdoc />
         public TVal Value => this.BasicAutomationElement.GetPropertyValue<TVal>(this.PropertyId);
 
@@ -43,13 +33,23 @@
         }
 
         /// <inheritdoc />
+        public bool IsSupported => this.TryGetValue(out TVal _);
+
+        /// <summary>
+        /// The <see cref="PropertyId"/> of this property object.
+        /// </summary>
+        protected PropertyId PropertyId { get; }
+
+        /// <summary>
+        /// The <see cref="BasicAutomationElement"/> where this property object belongs to.
+        /// </summary>
+        protected BasicAutomationElementBase BasicAutomationElement { get; }
+
+        /// <inheritdoc />
         public bool TryGetValue(out TVal value)
         {
             return this.BasicAutomationElement.TryGetPropertyValue(this.PropertyId, out value);
         }
-
-        /// <inheritdoc />
-        public bool IsSupported => this.TryGetValue(out TVal _);
 
         /// <summary>
         /// Implicit operator to convert the property object directly to its value.

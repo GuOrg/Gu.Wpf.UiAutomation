@@ -114,6 +114,11 @@
             }
         }
 
+        public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        {
+            return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
+        }
+
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return this.NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
@@ -154,11 +159,6 @@
             }
 
             return element;
-        }
-
-        public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
-        {
-            return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
 
         public COLORREF(byte r, byte g, byte b)
         {
-            R = r;
-            G = g;
-            B = b;
+            this.R = r;
+            this.G = g;
+            this.B = b;
         }
 
         public static implicit operator Color(COLORREF c)
@@ -40,7 +40,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"R={R},G={G},B={B}";
+            return $"R={this.R},G={this.G},B={this.B}";
         }
     }
 }
