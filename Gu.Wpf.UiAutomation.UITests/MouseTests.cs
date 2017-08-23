@@ -22,7 +22,7 @@
         {
             using (var app = Application.Launch("mspaint"))
             {
-                var mainWindow = app.GetMainWindow();
+                var mainWindow = app.MainWindow();
                 var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 50;
                 var mouseY = mainWindow.Properties.BoundingRectangle.Value.Top + 200;
                 Mouse.Position = new Point(mouseX, mouseY);

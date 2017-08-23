@@ -33,7 +33,7 @@
 
         private AutomationElement GetSlider()
         {
-            var element = this.App.GetMainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
+            var element = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
             return element;
         }
     }

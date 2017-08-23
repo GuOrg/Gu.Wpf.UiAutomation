@@ -11,6 +11,8 @@
     /// </summary>
     public abstract class UITestBase : IDisposable
     {
+        protected static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
         private readonly string args;
 
         /// <summary>
@@ -54,7 +56,7 @@
                 case TestApplicationType.Wpf:
                     var processStartInfo = new ProcessStartInfo
                                            {
-                                               FileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe"),
+                                               FileName = ExeFileName,
                                                Arguments = this.args,
                                                UseShellExecute = false,
                                            };

@@ -13,7 +13,7 @@
         [Test]
         public void TestMenuWithSubMenus()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             Assert.That(menu, Is.Not.Null);
             var items = menu.MenuItems;
@@ -36,7 +36,7 @@
         [Test]
         public void TestMenuWithSubMenusByName()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var menu = window.FindFirstChild(cf => cf.Menu()).AsMenu();
             var edit = menu.MenuItems["Edit"];
             Assert.That(edit, Is.Not.Null);

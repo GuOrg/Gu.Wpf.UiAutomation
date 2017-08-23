@@ -14,7 +14,7 @@
         public void SelectSingleRadioButtonTest()
         {
             this.RestartApp();
-            var radioButton = this.App.GetMainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
             Assert.That(radioButton.IsSelected, Is.False);
             radioButton.Select();
             Assert.That(radioButton.IsSelected, Is.True);
@@ -24,8 +24,8 @@
         public void SelectRadioButtonGroupTest()
         {
             this.RestartApp();
-            var radioButton1 = this.App.GetMainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
-            var radioButton2 = this.App.GetMainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton2")).AsRadioButton();
+            var radioButton1 = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
+            var radioButton2 = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("RadioButton2")).AsRadioButton();
 
             Assert.That(radioButton1.IsSelected && radioButton2.IsSelected, Is.False);
 

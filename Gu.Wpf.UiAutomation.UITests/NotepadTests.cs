@@ -11,7 +11,7 @@
         {
             using (var app = Application.Launch("notepad.exe"))
             {
-                var window = app.GetMainWindow();
+                var window = app.MainWindow();
                 Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
             }
@@ -24,7 +24,7 @@
             {
                 using (var app = Application.Attach("notepad.exe"))
                 {
-                    var window = app.GetMainWindow();
+                    var window = app.MainWindow();
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }
@@ -38,7 +38,7 @@
             {
                 using (var app = Application.Attach(launchedApp.ProcessId))
                 {
-                    var window = app.GetMainWindow();
+                    var window = app.MainWindow();
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }
@@ -53,7 +53,7 @@
             {
                 using (var app = Application.AttachOrLaunch(new ProcessStartInfo(name)))
                 {
-                    var window = app.GetMainWindow();
+                    var window = app.MainWindow();
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }
@@ -67,7 +67,7 @@
             {
                 using (var app = Application.Attach(@"C:\WINDOWS\system32\notepad.exe"))
                 {
-                    var window = app.GetMainWindow();
+                    var window = app.MainWindow();
                     Assert.That(window, Is.Not.Null);
                     Assert.That(window.Title, Is.Not.Null);
                 }

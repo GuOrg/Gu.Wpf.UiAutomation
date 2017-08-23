@@ -15,7 +15,7 @@
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = this.App.GetMainWindow();
+            var mainWindow = this.App.MainWindow();
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.SelectTabItem(1);
             this.expander = tabItem.FindFirstNested(cf => new ConditionBase[] { cf.ByControlType(ControlType.Pane), cf.ByAutomationId("Expander") });

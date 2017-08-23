@@ -13,7 +13,7 @@
         {
             using (var app = Application.Launch("notepad.exe"))
             {
-                var mainWindow = app.GetMainWindow();
+                var mainWindow = app.MainWindow();
 
                 Keyboard.Type("ééééééööööö aaa | ");
 

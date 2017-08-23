@@ -15,7 +15,7 @@
         [OneTimeSetUp]
         public void SelectTab()
         {
-            var mainWindow = this.App.GetMainWindow();
+            var mainWindow = this.App.MainWindow();
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             tab.SelectTabItem(1);
             var grid = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("listView1")).AsGrid();

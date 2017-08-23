@@ -13,7 +13,7 @@
         [Test]
         public void DirectSetTest()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.Empty);
@@ -27,7 +27,7 @@
         [Test]
         public void EnterTest()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
             var text = textBox.Text;
             Assert.That(text, Is.Empty);

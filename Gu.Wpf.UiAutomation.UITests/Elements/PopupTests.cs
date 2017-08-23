@@ -13,7 +13,7 @@
         [Test]
         public void CheckBoxInPopupTest()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1"));
             btn.Click();
             Helpers.WaitUntilInputIsProcessed();
@@ -28,7 +28,7 @@
         [Test]
         public void MenuInPopupTest()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2"));
             btn.Click();
             Helpers.WaitUntilInputIsProcessed();

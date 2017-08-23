@@ -15,7 +15,7 @@
         [Test]
         public void InvokeWithEventTest()
         {
-            var mainWindow = this.App.GetMainWindow();
+            var mainWindow = this.App.MainWindow();
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
             var tabItem = tab.TabItems[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));

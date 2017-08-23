@@ -15,7 +15,7 @@
         [Test]
         public void CalculatorTest()
         {
-            var window = this.App.GetMainWindow();
+            var window = this.App.MainWindow();
             var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
             // Switch to default mode

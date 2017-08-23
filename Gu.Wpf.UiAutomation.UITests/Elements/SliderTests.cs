@@ -72,7 +72,7 @@
 
         private Slider GetSlider()
         {
-            var element = this.App.GetMainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
+            var element = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
             return element;
         }
 

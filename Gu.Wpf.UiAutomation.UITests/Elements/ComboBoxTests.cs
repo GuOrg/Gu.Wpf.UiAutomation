@@ -16,7 +16,7 @@
         [OneTimeSetUp]
         public void TestOneTimeSetup()
         {
-            this.mainWindow = this.App.GetMainWindow();
+            this.mainWindow = this.App.MainWindow();
         }
 
         [Test]

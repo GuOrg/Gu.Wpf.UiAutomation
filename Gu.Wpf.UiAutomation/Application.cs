@@ -122,9 +122,24 @@
             return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
         }
 
+        /// <summary>
+        /// Start the application.
+        /// </summary>
+        /// <param name="executable">The full file name of the executable.</param>
         public static Application Launch(string executable)
         {
             var processStartInfo = new ProcessStartInfo(executable);
+            return Launch(processStartInfo);
+        }
+
+        /// <summary>
+        /// Start the application.
+        /// </summary>
+        /// <param name="executable">The full file name of the executable.</param>
+        /// <param name="args">The start arguments.</param>
+        public static Application Launch(string executable, string args)
+        {
+            var processStartInfo = new ProcessStartInfo(executable) { Arguments = args };
             return Launch(processStartInfo);
         }
 
@@ -247,7 +262,7 @@
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
-        public Window GetMainWindow(TimeSpan? waitTimeout = null)
+        public Window MainWindow(TimeSpan? waitTimeout = null)
         {
             this.ThrowIfDisposed();
             this.WaitWhileMainHandleIsMissing(waitTimeout);
@@ -288,13 +303,15 @@
                 return;
             }
 
-            this.disposed = true;
             if (disposing)
             {
                 this.Close();
+                this.disposed = true;
                 this.processReference.Dispose();
                 this.Automation.Dispose();
             }
+
+            this.disposed = true;
         }
 
         protected void ThrowIfDisposed()
