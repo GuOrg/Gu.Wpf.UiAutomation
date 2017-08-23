@@ -20,6 +20,7 @@
         /// </summary>
         private readonly Process process;
 
+        private bool disposed;
 
         /// <summary>
         /// Creates an application object with the given process id.
@@ -82,7 +83,6 @@
             Logger.Default.Debug("Closing application");
             if (this.process.HasExited)
             {
-                this.process.Dispose();
                 return true;
             }
 
@@ -103,7 +103,6 @@
             }
 
             this.process.Close();
-            this.process.Dispose();
             return closedNormally;
         }
 
@@ -121,7 +120,6 @@
 
                 this.process.Kill();
                 this.process.WaitForExit();
-                this.process.Dispose();
             }
             catch
             {
@@ -134,7 +132,14 @@
         /// </summary>
         public void Dispose()
         {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.disposed = true;
             this.Close();
+            this.process.Dispose();
         }
 
         /// <summary>
