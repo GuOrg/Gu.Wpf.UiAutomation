@@ -58,6 +58,7 @@
     <Compile Include="Elements\TableTests.cs" />
     <Compile Include="Elements\TabTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />
+    <Compile Include="Elements\ToggleButtonTests.cs" />
     <Compile Include="Elements\TreeTests.cs" />
     <Compile Include="Elements\WindowTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />

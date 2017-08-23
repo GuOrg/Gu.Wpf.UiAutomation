@@ -273,10 +273,13 @@
         /// Find the first checkbox by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public CheckBox FindCheckBox(string name)
-        {
-            return this.FindByNameOrId(name, ControlType.CheckBox).AsCheckBox();
-        }
+        public CheckBox FindCheckBox(string name) => this.FindByNameOrId(name, ControlType.CheckBox).AsCheckBox();
+
+        /// <summary>
+        /// Find the first checkbox by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ToggleButton FindToggleButton(string name) => this.FindByNameOrId(name, ControlType.Button).AsToggleButton();
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
@@ -567,6 +570,11 @@
         public CheckBox AsCheckBox()
         {
             return new CheckBox(this.BasicAutomationElement);
+        }
+
+        public ToggleButton AsToggleButton()
+        {
+            return new ToggleButton(this.BasicAutomationElement);
         }
 
         public ComboBox AsComboBox()

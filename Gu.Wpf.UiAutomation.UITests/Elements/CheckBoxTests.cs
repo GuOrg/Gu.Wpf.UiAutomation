@@ -5,7 +5,7 @@
 
     public class CheckBoxTests
     {
-        protected static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [TestCase("AutomationId")]
         [TestCase("XName")]
