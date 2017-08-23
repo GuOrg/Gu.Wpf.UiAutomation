@@ -45,12 +45,6 @@
         /// </summary>
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
-        /// <inheritdoc />
-        public bool TryGetValue(out TVal value)
-        {
-            return this.BasicAutomationElement.TryGetPropertyValue(this.PropertyId, out value);
-        }
-
         /// <summary>
         /// Implicit operator to convert the property object directly to its value.
         /// </summary>
@@ -58,6 +52,12 @@
         public static implicit operator TVal(AutomationProperty<TVal> automationProperty)
         {
             return automationProperty == null ? default(TVal) : automationProperty.Value;
+        }
+
+        /// <inheritdoc />
+        public bool TryGetValue(out TVal value)
+        {
+            return this.BasicAutomationElement.TryGetPropertyValue(this.PropertyId, out value);
         }
 
         /// <inheritdoc/>

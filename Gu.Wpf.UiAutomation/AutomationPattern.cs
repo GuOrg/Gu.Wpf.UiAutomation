@@ -15,8 +15,6 @@
             this.patternCreateFunc = patternCreateFunc;
         }
 
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
-
         /// <inheritdoc/>
         public T Pattern
         {
@@ -38,6 +36,11 @@
         }
 
         /// <inheritdoc/>
+        public bool IsSupported => this.TryGetPattern(out T _);
+
+        protected BasicAutomationElementBase BasicAutomationElement { get; }
+
+        /// <inheritdoc/>
         public bool TryGetPattern(out T pattern)
         {
             if (this.BasicAutomationElement.TryGetNativePattern(this.patternId, out TNative nativePattern))
@@ -49,8 +52,5 @@
             pattern = default(T);
             return false;
         }
-
-        /// <inheritdoc/>
-        public bool IsSupported => this.TryGetPattern(out T _);
     }
 }

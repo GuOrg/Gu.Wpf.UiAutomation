@@ -221,7 +221,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(GdiColor color)
         {
-            return this.DrawHighlight(true, color, 2000);
+            return this.DrawHighlight(blocking: true, color: color, durationInMs: 2000);
         }
 
         /// <summary>

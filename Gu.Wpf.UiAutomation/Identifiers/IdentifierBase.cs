@@ -131,19 +131,5 @@
 
             return new TextAttributeId(id, $"TextAttribute#{id}");
         }
-
-        /// <summary>
-        /// Adds the property to the dictionary if it does not exist yet
-        /// </summary>
-        private static T Register<T>(int commonId, IDictionary<int, T> dict, Func<T> creator)
-        {
-            if (!dict.TryGetValue(commonId, out var id))
-            {
-                id = creator();
-                dict[commonId] = id;
-            }
-
-            return id;
-        }
     }
 }

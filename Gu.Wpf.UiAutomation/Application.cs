@@ -20,6 +20,7 @@
         private bool disposed;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Application"/> class.
         /// Creates an application object with the given process id.
         /// </summary>
         /// <param name="processId">The process id.</param>
@@ -73,58 +74,6 @@
         /// Gets the value that the associated process specified when it terminated.
         /// </summary>
         public int ExitCode => this.processReference.Process.ExitCode;
-
-        /// <summary>
-        /// Closes the application. Force-closes it after a small timeout.
-        /// </summary>
-        /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
-        public bool Close()
-        {
-            Logger.Default.Debug("Closing application");
-            if (this.disposed ||
-                this.processReference.Process.HasExited)
-            {
-                return true;
-            }
-
-            this.processReference.Process.CloseMainWindow();
-            if (this.IsStoreApp)
-            {
-                return true;
-            }
-
-            this.processReference.Process.WaitForExit(5000);
-            if (!this.processReference.Process.HasExited)
-            {
-                Logger.Default.Info("Application failed to exit, killing process");
-                this.processReference.Process.Kill();
-                this.processReference.Process.WaitForExit(5000);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Kills the applications and waits until it is closed.
-        /// </summary>
-        public void Kill()
-        {
-            try
-            {
-                if (this.processReference.Process.HasExited)
-                {
-                    return;
-                }
-
-                this.processReference.Process.Kill();
-                this.processReference.Process.WaitForExit();
-            }
-            catch
-            {
-                // NOOP
-            }
-        }
 
         /// <summary>
         /// Attach to a running process
@@ -211,6 +160,58 @@
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
         {
             return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), dispose: true), isStoreApp: true);
+        }
+
+        /// <summary>
+        /// Closes the application. Force-closes it after a small timeout.
+        /// </summary>
+        /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
+        public bool Close()
+        {
+            Logger.Default.Debug("Closing application");
+            if (this.disposed ||
+                this.processReference.Process.HasExited)
+            {
+                return true;
+            }
+
+            this.processReference.Process.CloseMainWindow();
+            if (this.IsStoreApp)
+            {
+                return true;
+            }
+
+            this.processReference.Process.WaitForExit(5000);
+            if (!this.processReference.Process.HasExited)
+            {
+                Logger.Default.Info("Application failed to exit, killing process");
+                this.processReference.Process.Kill();
+                this.processReference.Process.WaitForExit(5000);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Kills the applications and waits until it is closed.
+        /// </summary>
+        public void Kill()
+        {
+            try
+            {
+                if (this.processReference.Process.HasExited)
+                {
+                    return;
+                }
+
+                this.processReference.Process.Kill();
+                this.processReference.Process.WaitForExit();
+            }
+            catch
+            {
+                // NOOP
+            }
         }
 
         /// <summary>
@@ -325,7 +326,7 @@
         private sealed class ProcessReference : IDisposable
         {
             internal readonly Process Process;
-            internal readonly bool dispose;
+            private readonly bool dispose;
 
             public ProcessReference(Process process, bool dispose)
             {

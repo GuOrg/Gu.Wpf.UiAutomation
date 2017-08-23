@@ -11,6 +11,11 @@
         {
         }
 
+        public override IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
+        {
+            return new AutomationPattern<T, TNative>(pattern, this.BasicAutomationElement, patternCreateFunc);
+        }
+
         protected override IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern()
         {
             return new AutomationPattern<IAnnotationPattern, UIA.IUIAutomationAnnotationPattern>(
@@ -207,11 +212,6 @@
         {
             return new AutomationPattern<IWindowPattern, UIA.IUIAutomationWindowPattern>(
                 WindowPattern.Pattern, this.BasicAutomationElement, (b, p) => new WindowPattern(b, p));
-        }
-
-        public override IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
-        {
-            return new AutomationPattern<T, TNative>(pattern, this.BasicAutomationElement, patternCreateFunc);
         }
     }
 }

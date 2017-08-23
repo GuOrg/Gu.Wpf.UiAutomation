@@ -3,8 +3,28 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class CacheRequest
+    public class CacheRequest
     {
+        [ThreadStatic]
+        private static Stack<CacheRequest> cacheStack;
+        [ThreadStatic]
+        private static Stack<bool> forceNoCacheStack;
+
+        public static bool IsCachingActive => (forceNoCacheStack == null || forceNoCacheStack.Count == 0) && Current != null;
+
+        public static CacheRequest Current
+        {
+            get
+            {
+                if ((cacheStack != null) && (cacheStack.Count != 0))
+                {
+                    return cacheStack.Peek();
+                }
+
+                return null;
+            }
+        }
+
         public AutomationElementMode AutomationElementMode { get; set; }
 
         public ConditionBase TreeFilter { get; set; } = new TrueCondition();
@@ -29,29 +49,6 @@
         {
             Push(this);
             return new CacheRequestActivation();
-        }
-    }
-
-    public partial class CacheRequest
-    {
-        [ThreadStatic]
-        private static Stack<CacheRequest> cacheStack;
-        [ThreadStatic]
-        private static Stack<bool> forceNoCacheStack;
-
-        public static bool IsCachingActive => (forceNoCacheStack == null || forceNoCacheStack.Count == 0) && Current != null;
-
-        public static CacheRequest Current
-        {
-            get
-            {
-                if ((cacheStack != null) && (cacheStack.Count != 0))
-                {
-                    return cacheStack.Peek();
-                }
-
-                return null;
-            }
         }
 
         public static void Push(CacheRequest cacheRequest)

@@ -17,7 +17,7 @@
             this.EventLibrary = eventLibrary;
             this.PatternLibrary = patternLibrary;
             this.ConditionFactory = new ConditionFactory(propertyLibrary);
-            this.OverlayManager = new WinFormsOverlayManager();
+            this.OverlayManager = new WpfOverlayManager();
 
             // Make sure all pattern ids are initialized
             var unused = this.PatternLibrary.AllForCurrentFramework;

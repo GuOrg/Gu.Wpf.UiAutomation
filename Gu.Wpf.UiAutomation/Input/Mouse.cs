@@ -233,7 +233,7 @@
         /// <param name="mouseButton">The mouse button to release</param>
         public static void Up(MouseButton mouseButton)
         {
-            var flags = GetFlagsAndDataForButton(mouseButton, false, out uint data);
+            var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out uint data);
             SendInput(0, 0, data, flags);
         }
 

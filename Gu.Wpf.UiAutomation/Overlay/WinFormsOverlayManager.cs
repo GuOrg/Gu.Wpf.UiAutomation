@@ -8,17 +8,17 @@
 
     public class WinFormsOverlayManager : IOverlayManager
     {
-        /// <inheritdoc/>
-        public int Size { get; set; }
-
-        /// <inheritdoc/>
-        public int Margin { get; set; }
-
         public WinFormsOverlayManager()
         {
             this.Size = 3;
             this.Margin = 0;
         }
+
+        /// <inheritdoc/>
+        public int Size { get; set; }
+
+        /// <inheritdoc/>
+        public int Margin { get; set; }
 
         /// <inheritdoc/>
         public void Show(Rect rectangle, System.Windows.Media.Color color, int durationInMs)
@@ -94,7 +94,7 @@
         }
 
         /// <inheritdoc/>
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             // Nothing to dispose
         }

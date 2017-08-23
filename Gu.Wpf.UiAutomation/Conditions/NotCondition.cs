@@ -2,12 +2,12 @@
 {
     public class NotCondition : ConditionBase
     {
-        public ConditionBase Condition { get; }
-
         public NotCondition(ConditionBase condition)
         {
             this.Condition = condition;
         }
+
+        public ConditionBase Condition { get; }
 
         /// <inheritdoc/>
         public override string ToString()

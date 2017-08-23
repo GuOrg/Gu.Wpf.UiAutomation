@@ -6,15 +6,15 @@
 
     public class UIA3TreeWalker : ITreeWalker
     {
-        public UIA3Automation Automation { get; }
-
-        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
-
         public UIA3TreeWalker(UIA3Automation automation, UIA.IUIAutomationTreeWalker nativeTreeWalker)
         {
             this.Automation = automation;
             this.NativeTreeWalker = nativeTreeWalker;
         }
+
+        public UIA3Automation Automation { get; }
+
+        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
 
         public AutomationElement GetParent(AutomationElement element)
         {

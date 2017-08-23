@@ -35,7 +35,9 @@
             NoSplashScreen = 0x00000004
         }
 
-        [ComImport, Guid("2E941141-7F97-4756-BA1D-9DECDE894A3D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport]
+        [Guid("2E941141-7F97-4756-BA1D-9DECDE894A3D")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IApplicationActivationManager
         {
             IntPtr ActivateApplication([In] string appUserModelId, [In] string arguments, [In] ActivateOptions options, [Out] out uint processId);
@@ -45,7 +47,8 @@
             IntPtr ActivateForProtocol([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [Out] out uint processId);
         }
 
-        [ComImport, Guid("45BA127D-10A8-46EA-8AB7-56EA9078943C")]
+        [ComImport]
+        [Guid("45BA127D-10A8-46EA-8AB7-56EA9078943C")]
         private class ApplicationActivationManager : IApplicationActivationManager
         {
             [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
