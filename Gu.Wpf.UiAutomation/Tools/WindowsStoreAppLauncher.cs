@@ -10,8 +10,7 @@
         public static Process Launch(string appUserModelId, string arguments)
         {
             var launcher = new ApplicationActivationManager();
-            uint processId;
-            var hr = launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out processId).ToInt32();
+            var hr = launcher.ActivateApplication(appUserModelId, arguments, ActivateOptions.None, out uint processId).ToInt32();
             if (hr < 0)
             {
                 Marshal.ThrowExceptionForHR(hr);

@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
     using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Patterns;
 
     /// <summary>
     /// Element for grids and tables.
@@ -205,112 +203,5 @@
                 throw new Exception($"Grid contains only {this.ColumnCount} columns(s) but index {columnIndex} was requested");
             }
         }
-    }
-
-    /// <summary>
-    /// Header element for grids and tables.
-    /// </summary>
-    public class GridHeader : AutomationElement
-    {
-        public GridHeader(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
-        {
-        }
-
-        public GridHeaderItem[] Columns
-        {
-            get
-            {
-                var headerItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem));
-                return headerItems.Select(x => x.AsGridHeaderItem()).ToArray();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Header item for grids and tables.
-    /// </summary>
-    public class GridHeaderItem : AutomationElement
-    {
-        public GridHeaderItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
-        {
-        }
-
-        public string Text => this.Properties.Name.Value;
-    }
-
-    /// <summary>
-    /// Row element for grids and tables.
-    /// </summary>
-    public class GridRow : SelectionItemAutomationElement
-    {
-        public GridRow(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
-        {
-        }
-
-        public GridCell[] Cells
-        {
-            get
-            {
-                var cells = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not());
-                return cells.Select(x => x.AsGridCell()).ToArray();
-            }
-        }
-
-        public GridHeaderItem Header
-        {
-            get
-            {
-                var headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return headerItem?.AsGridHeaderItem();
-            }
-        }
-
-        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
-
-        /// <summary>
-        /// Find a cell by a given text.
-        /// </summary>
-        public GridCell FindCellByText(string textToFind)
-        {
-            return this.Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
-        }
-
-        public GridRow ScrollIntoView()
-        {
-            this.ScrollItemPattern?.ScrollIntoView();
-            return this;
-        }
-    }
-
-    /// <summary>
-    /// Cell element for grids and tables.
-    /// </summary>
-    public class GridCell : AutomationElement
-    {
-        public GridCell(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
-        {
-        }
-
-        public Grid ContainingGrid => this.GridItemPattern.ContainingGrid.Value.AsGrid();
-
-        public GridRow ContainingRow
-        {
-            get
-            {
-                // Get the parent of the cell (which should be the row)
-                var rowElement = this.Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
-                return rowElement?.AsGridRow();
-            }
-        }
-
-        public string Value => this.Properties.Name.Value;
-
-        protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
-
-        protected ITableItemPattern TableItemPattern => this.Patterns.TableItem.Pattern;
     }
 }

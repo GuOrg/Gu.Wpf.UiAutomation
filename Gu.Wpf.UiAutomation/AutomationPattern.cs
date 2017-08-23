@@ -4,18 +4,6 @@
     using Gu.Wpf.UiAutomation.Identifiers;
     using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
 
-    public interface IAutomationPattern<T>
-        where T : IPattern
-    {
-        T Pattern { get; }
-
-        T PatternOrDefault { get; }
-
-        bool TryGetPattern(out T pattern);
-
-        bool IsSupported { get; }
-    }
-
     public class AutomationPattern<T, TNative> : IAutomationPattern<T>
         where T : IPattern
     {
@@ -44,16 +32,14 @@
         {
             get
             {
-                T pattern;
-                this.TryGetPattern(out pattern);
+                this.TryGetPattern(out T pattern);
                 return pattern;
             }
         }
 
         public bool TryGetPattern(out T pattern)
         {
-            TNative nativePattern;
-            if (this.BasicAutomationElement.TryGetNativePattern(this.patternId, out nativePattern))
+            if (this.BasicAutomationElement.TryGetNativePattern(this.patternId, out TNative nativePattern))
             {
                 pattern = this.patternCreateFunc(this.BasicAutomationElement, nativePattern);
                 return true;
@@ -67,8 +53,7 @@
         {
             get
             {
-                T pattern;
-                return this.TryGetPattern(out pattern);
+                return this.TryGetPattern(out T pattern);
             }
         }
     }

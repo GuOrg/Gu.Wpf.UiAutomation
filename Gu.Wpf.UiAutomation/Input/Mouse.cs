@@ -64,8 +64,7 @@
         {
             get
             {
-                POINT point;
-                User32.GetCursorPos(out point);
+                User32.GetCursorPos(out POINT point);
                 return point;
             }
 
@@ -229,8 +228,7 @@
         /// <param name="mouseButton">The mouse button to press</param>
         public static void Down(MouseButton mouseButton)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, true, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, true, out uint data);
             SendInput(0, 0, data, flags);
         }
 
@@ -240,8 +238,7 @@
         /// <param name="mouseButton">The mouse button to release</param>
         public static void Up(MouseButton mouseButton)
         {
-            uint data;
-            var flags = GetFlagsAndDataForButton(mouseButton, false, out data);
+            var flags = GetFlagsAndDataForButton(mouseButton, false, out uint data);
             SendInput(0, 0, data, flags);
         }
 

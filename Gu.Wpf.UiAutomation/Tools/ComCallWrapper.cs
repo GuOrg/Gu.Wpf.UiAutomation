@@ -58,8 +58,7 @@
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }
@@ -81,8 +80,7 @@
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }
@@ -100,8 +98,7 @@
             }
             catch (COMException ex)
             {
-                Exception newEx;
-                if (ConvertException(ex, out newEx))
+                if (ConvertException(ex, out Exception newEx))
                 {
                     throw newEx;
                 }

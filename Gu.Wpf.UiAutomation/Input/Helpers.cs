@@ -52,9 +52,8 @@
         /// </summary>
         public static bool WaitUntilResponsive(IntPtr hWnd, TimeSpan timeout)
         {
-            UIntPtr result;
             var ret = User32.SendMessageTimeout(hWnd, WindowsMessages.WM_NULL,
-                UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NORMAL, (uint)timeout.TotalMilliseconds, out result);
+                UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NORMAL, (uint)timeout.TotalMilliseconds, out UIntPtr result);
 
             // There might be other things going on so do a small sleep anyway...
             // Other sources: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx

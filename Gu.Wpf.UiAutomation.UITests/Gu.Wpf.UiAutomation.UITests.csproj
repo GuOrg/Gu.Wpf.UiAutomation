@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UITests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UITests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -58,7 +60,9 @@
     <Compile Include="Elements\WindowTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="GetterTests.cs" />
+    <Compile Include="ICalculator.cs" />
     <Compile Include="KeyboardTests.cs" />
+    <Compile Include="LegacyCalc.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />
     <Compile Include="Patterns\AnnotationPatternTests.cs" />
@@ -79,6 +83,7 @@
     <Compile Include="TestFramework\TestApplicationType.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />
     <Compile Include="TestFramework\UITestBase.cs" />
+    <Compile Include="Win10Calc.cs" />
     <Compile Include="XPathTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +109,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gu.Wpf.UiAutomation.UITests.ruleset" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

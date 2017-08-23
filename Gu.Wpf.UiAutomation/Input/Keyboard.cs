@@ -34,8 +34,8 @@
             if (character > 0xFE || code == -1)
             {
                 // It seems to be unicode
-                SendInput(character, true, false, false, true);
-                SendInput(character, false, false, false, true);
+                SendInput(character, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: true);
+                SendInput(character, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: true);
             }
             else
             {
@@ -67,8 +67,8 @@
                 }
 
                 // Type the effective key
-                SendInput(low, true, false, false, false);
-                SendInput(low, false, false, false, false);
+                SendInput(low, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput(low, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
 
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
@@ -147,7 +147,7 @@
         /// </summary>
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, true, true, isExtendedKey, false);
+            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@
         /// </summary>
         public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, true, false, false, false);
+            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@
         /// </summary>
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, false, true, isExtendedKey, false);
+            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@
         /// </summary>
         public static void ReleaseVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, false, false, false, false);
+            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
         }
 
         /// <summary>

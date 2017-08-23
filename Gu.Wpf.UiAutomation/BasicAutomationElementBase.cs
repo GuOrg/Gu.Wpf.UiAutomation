@@ -162,8 +162,7 @@
 
         public Point GetClickablePoint()
         {
-            Point point;
-            if (!this.TryGetClickablePoint(out point))
+            if (!this.TryGetClickablePoint(out Point point))
             {
                 throw new NoClickablePointException();
             }

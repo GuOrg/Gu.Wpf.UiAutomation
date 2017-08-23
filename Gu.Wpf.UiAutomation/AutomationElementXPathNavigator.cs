@@ -293,11 +293,10 @@ namespace Gu.Wpf.UiAutomation
 
         private int GetAttributeIndexFromName(string attributeName)
         {
-            ElementAttributes parsedValue;
 #if NET35
             if (ExtensionMethods.TryParse(attributeName, out parsedValue))
 #else
-            if (Enum.TryParse(attributeName, out parsedValue))
+            if (Enum.TryParse(attributeName, out ElementAttributes parsedValue))
 #endif
             {
                 return (int)parsedValue;
