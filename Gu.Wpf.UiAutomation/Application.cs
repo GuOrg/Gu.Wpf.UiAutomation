@@ -90,17 +90,15 @@
             }
 
             this.process.WaitForExit(5000);
-            var closedNormally = true;
             if (!this.process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
                 this.process.Kill();
                 this.process.WaitForExit(5000);
-                closedNormally = false;
+                return false;
             }
 
-            this.process.Close();
-            return closedNormally;
+            return true;
         }
 
         /// <summary>
