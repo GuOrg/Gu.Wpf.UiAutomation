@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using Gu.Wpf.UiAutomation.AutomationElements;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.Tools;
