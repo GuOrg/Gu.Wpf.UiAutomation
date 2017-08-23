@@ -30,7 +30,7 @@
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
         /// <summary>
-        /// The current used automationn object.
+        /// The current used automation object.
         /// </summary>
         public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
@@ -199,6 +199,12 @@
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public RadioButton FindRadioButton(string name) => this.FindByNameOrId(name, ControlType.RadioButton).AsRadioButton();
+
+        /// <summary>
+        /// Find the first combo box by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ComboBox FindComboBox(string name) => this.FindByNameOrId(name, ControlType.ComboBox).AsComboBox();
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {

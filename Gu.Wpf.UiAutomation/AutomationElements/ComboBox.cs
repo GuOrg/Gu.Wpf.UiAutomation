@@ -66,7 +66,7 @@
             }
         }
 
-        public ExpandCollapseState ExpandCollapseState
+        public bool IsDropDownOpen
         {
             get
             {
@@ -76,18 +76,13 @@
                     var itemsList = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
 
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList == null || itemsList.Properties.IsOffscreen ? ExpandCollapseState.Collapsed : ExpandCollapseState.Expanded;
+                    return itemsList != null && !itemsList.Properties.IsOffscreen;
                 }
 
                 // WPF
                 var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                if (ecp != null)
-                {
-                    var state = ecp.ExpandCollapseState.Value;
-                    return state;
-                }
-
-                return ExpandCollapseState.LeafNode;
+                var state = ecp?.ExpandCollapseState.Value;
+                return state == ExpandCollapseState.Expanded;
             }
         }
 
@@ -133,7 +128,8 @@
 
         public void Expand()
         {
-            if (!this.Properties.IsEnabled.Value || this.ExpandCollapseState != ExpandCollapseState.Collapsed)
+            if (!this.Properties.IsEnabled.Value || 
+                this.IsDropDownOpen)
             {
                 return;
             }
@@ -160,7 +156,8 @@
 
         public void Collapse()
         {
-            if (!this.Properties.IsEnabled || this.ExpandCollapseState != ExpandCollapseState.Expanded)
+            if (!this.Properties.IsEnabled || 
+                !this.IsDropDownOpen)
             {
                 return;
             }

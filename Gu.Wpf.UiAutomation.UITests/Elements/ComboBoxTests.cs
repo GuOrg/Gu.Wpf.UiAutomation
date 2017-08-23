@@ -1,89 +1,99 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
     using System;
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class ComboBoxTests : UITestBase
+    public class ComboBoxTests
     {
-        private Window mainWindow;
+        private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
-        public ComboBoxTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
-
-        [OneTimeSetUp]
-        public void TestOneTimeSetup()
-        {
-            this.mainWindow = this.App.MainWindow();
-        }
-
-        [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
         public void SelectedItemTest(string comboBoxId)
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
-            combo.Items[1].Select();
-            var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox(comboBoxId);
+                combo.Items[1].Select();
+                var selectedItem = combo.SelectedItem;
+                Assert.AreEqual("Item 2", selectedItem.Text);
+            }
         }
 
-        [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
         public void SelectByIndexTest(string comboBoxId)
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
-            combo.Select(1);
-            var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox(comboBoxId);
+                combo.Select(1);
+                var selectedItem = combo.SelectedItem;
+                Assert.AreEqual("Item 2", selectedItem.Text);
+            }
         }
 
-        [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
         public void SelectByTextTest(string comboBoxId)
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
-            combo.Select("Item 2");
-            var selectedItem = combo.SelectedItem;
-            Assert.That(selectedItem, Is.Not.Null);
-            Assert.That(selectedItem.Text, Is.EqualTo("Item 2"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox(comboBoxId);
+                combo.Select("Item 2");
+                var selectedItem = combo.SelectedItem;
+                Assert.AreEqual("Item 2", selectedItem.Text);
+            }
         }
 
-        [Test]
         [TestCase("EditableCombo")]
         [TestCase("NonEditableCombo")]
         public void ExpandCollapseTest(string comboBoxId)
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(comboBoxId)).AsComboBox();
-            combo.Expand();
-            Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Expanded));
-            combo.Collapse();
-            Assert.That(combo.ExpandCollapseState, Is.EqualTo(ExpandCollapseState.Collapsed));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox(comboBoxId);
+
+                combo.Expand();
+                Assert.AreEqual(true, combo.IsDropDownOpen);
+
+                combo.Collapse();
+                Assert.AreEqual(false, combo.IsDropDownOpen);
+            }
         }
 
         [Test]
         public void EditableTextTest()
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
-            combo.EditableText = "Item 3";
-            Assert.That(combo.SelectedItem, Is.Not.Null);
-            Assert.That(combo.SelectedItem.Text, Is.EqualTo("Item 3"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox("EditableCombo");
+                combo.EditableText = "Item 3";
+                Assert.AreEqual("Item 3", combo.SelectedItem.Text);
+            }
         }
 
         [Test]
         public void AssertMessageBoxCanBeRetrievedInSelection()
         {
-            var combo = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("NonEditableCombo")).AsComboBox();
-            combo.Items[3].Click();
-            var window = Retry.While(() => this.mainWindow.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(), w => w == null, TimeSpan.FromMilliseconds(1000));
-            Assert.That(window, Is.Not.Null, "Expected a window that was shown when combobox item was selected");
-            window.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var combo = window.FindComboBox("NonEditableCombo");
+                combo.Items[3].Click();
+                var dialog = Retry.While(
+                    () => window.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(),
+                    w => w == null,
+                    TimeSpan.FromMilliseconds(1000));
+                Assert.NotNull(dialog, "Expected a window that was shown when combobox item was selected");
+                dialog.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
+            }
         }
     }
 }
