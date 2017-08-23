@@ -18,11 +18,6 @@ namespace Gu.Wpf.UiAutomation
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
         }
 
-        /// <summary>
-        /// Flag to indicate if the containing menu is a Win32 menu because that one needs special handling
-        /// </summary>
-        internal bool IsWin32Menu { get; set; }
-
         public string Text => this.Properties.Name.Value;
 
         public MenuItems SubMenuItems
@@ -68,6 +63,11 @@ namespace Gu.Wpf.UiAutomation
                 return new MenuItems(childItems);
             }
         }
+
+        /// <summary>
+        /// Flag to indicate if the containing menu is a Win32 menu because that one needs special handling
+        /// </summary>
+        internal bool IsWin32Menu { get; set; }
 
         public MenuItem Invoke()
         {

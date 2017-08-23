@@ -38,7 +38,7 @@
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var value = this.InternalGetPropertyValue(property.Id, isCacheActive, false);
+                var value = this.InternalGetPropertyValue(property.Id, isCacheActive, useDefaultIfNotSupported: false);
                 if (value == this.Automation.NotSupportedValue)
                 {
                     throw new PropertyNotSupportedException(property);
@@ -166,25 +166,6 @@
 
         public abstract void SetFocus();
 
-        /// <summary>
-        /// Gets the desired property value
-        /// </summary>
-        /// <param name="propertyId">The id of the property to get</param>
-        /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
-        /// <param name="useDefaultIfNotSupported">
-        /// Flag to indicate, if the default value should be used if the property is not supported
-        /// </param>
-        /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
-        protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
-
-        /// <summary>
-        /// Gets the desired pattern
-        /// </summary>
-        /// <param name="patternId">The id of the pattern to get</param>
-        /// <param name="cached">Flag to indicate if the cached or current pattern should be fetched</param>
-        /// <returns>The pattern or null if it was not found / cached</returns>
-        protected abstract object InternalGetPattern(int patternId, bool cached);
-
         public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
 
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
@@ -212,5 +193,24 @@
         public abstract AutomationElement[] GetCachedChildren();
 
         public abstract AutomationElement GetCachedParent();
+
+        /// <summary>
+        /// Gets the desired property value
+        /// </summary>
+        /// <param name="propertyId">The id of the property to get</param>
+        /// <param name="cached">Flag to indicate if the cached or current value should be fetched</param>
+        /// <param name="useDefaultIfNotSupported">
+        /// Flag to indicate, if the default value should be used if the property is not supported
+        /// </param>
+        /// <returns>The value / default value of the property or <see cref="AutomationBase.NotSupportedValue" /></returns>
+        protected abstract object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported);
+
+        /// <summary>
+        /// Gets the desired pattern
+        /// </summary>
+        /// <param name="patternId">The id of the pattern to get</param>
+        /// <param name="cached">Flag to indicate if the cached or current pattern should be fetched</param>
+        /// <returns>The pattern or null if it was not found / cached</returns>
+        protected abstract object InternalGetPattern(int patternId, bool cached);
     }
 }

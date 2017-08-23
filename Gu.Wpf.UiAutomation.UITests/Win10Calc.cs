@@ -6,6 +6,11 @@ namespace Gu.Wpf.UiAutomation.UITests
     {
         private readonly AutomationElement mainWindow;
 
+        public Win10Calc(AutomationElement mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
         public Button Button1 => this.FindElement("num1Button").AsButton();
 
         public Button Button2 => this.FindElement("num2Button").AsButton();
@@ -34,11 +39,6 @@ namespace Gu.Wpf.UiAutomation.UITests
                 var value = resultElement.Properties.Name;
                 return Regex.Replace(value, "[^0-9]", string.Empty);
             }
-        }
-
-        public Win10Calc(AutomationElement mainWindow)
-        {
-            this.mainWindow = mainWindow;
         }
 
         private AutomationElement FindElement(string text)

@@ -35,6 +35,12 @@
             this.CreateAndShowForms(rectangle, color, durationInMs);
         }
 
+        /// <inheritdoc/>
+        void IDisposable.Dispose()
+        {
+            // Nothing to dispose
+        }
+
         private void CreateAndShowForms(Rect rectangle, System.Windows.Media.Color color, int durationInMs)
         {
             var leftBorder = new Rect(
@@ -91,12 +97,6 @@
                 form.Close();
                 form.Dispose();
             }
-        }
-
-        /// <inheritdoc/>
-        void IDisposable.Dispose()
-        {
-            // Nothing to dispose
         }
     }
 }

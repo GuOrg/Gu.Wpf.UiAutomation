@@ -17,6 +17,16 @@
         {
         }
 
+        public static PropertyId Register(int id, string name)
+        {
+            return RegisterProperty(id, name);
+        }
+
+        public static PropertyId Find(int id)
+        {
+            return FindProperty(id);
+        }
+
         public PropertyId SetConverter(Func<AutomationBase, object, object> convertMethod)
         {
             return this.SetConverter<PropertyId>(convertMethod);
@@ -28,16 +38,6 @@
         public PropertyCondition GetCondition(object value)
         {
             return new PropertyCondition(this, value);
-        }
-
-        public static PropertyId Register(int id, string name)
-        {
-            return RegisterProperty(id, name);
-        }
-
-        public static PropertyId Find(int id)
-        {
-            return FindProperty(id);
         }
     }
 }

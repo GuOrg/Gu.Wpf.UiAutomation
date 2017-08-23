@@ -5,8 +5,10 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     [StructLayout(LayoutKind.Sequential)]
     public struct INPUT
     {
+#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
         public InputType type;
         public INPUTUNION u;
+#pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
 
         public static int Size => Marshal.SizeOf(typeof(INPUT));
 

@@ -16,37 +16,6 @@
             return GetXPathToElement(element, treeWalker, rootElement);
         }
 
-        private static string GetXPathToElement(AutomationElement element, ITreeWalker treeWalker, AutomationElement rootElement = null)
-        {
-            var parent = treeWalker.GetParent(element);
-            if (parent == null || (rootElement != null && parent.Equals(rootElement)))
-            {
-                return string.Empty;
-            }
-
-            // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
-            var currentItemText = $"{element.Properties.ControlType.Value}";
-            if (allChildren.Length > 1)
-            {
-                // There is more than one matching child, find out the index
-                var indexInParent = 1; // Index starts with 1
-                foreach (var child in allChildren)
-                {
-                    if (child.Equals(element))
-                    {
-                        break;
-                    }
-
-                    indexInParent++;
-                }
-
-                currentItemText += $"[{indexInParent}]";
-            }
-
-            return $"{GetXPathToElement(parent, treeWalker, rootElement)}/{currentItemText}";
-        }
-
         public static string Details(AutomationElement automationElement)
         {
             try
@@ -85,6 +54,37 @@
                 Console.WriteLine("Failed to dump info: " + ex);
                 return string.Empty;
             }
+        }
+
+        private static string GetXPathToElement(AutomationElement element, ITreeWalker treeWalker, AutomationElement rootElement = null)
+        {
+            var parent = treeWalker.GetParent(element);
+            if (parent == null || (rootElement != null && parent.Equals(rootElement)))
+            {
+                return string.Empty;
+            }
+
+            // Get the index
+            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
+            var currentItemText = $"{element.Properties.ControlType.Value}";
+            if (allChildren.Length > 1)
+            {
+                // There is more than one matching child, find out the index
+                var indexInParent = 1; // Index starts with 1
+                foreach (var child in allChildren)
+                {
+                    if (child.Equals(element))
+                    {
+                        break;
+                    }
+
+                    indexInParent++;
+                }
+
+                currentItemText += $"[{indexInParent}]";
+            }
+
+            return $"{GetXPathToElement(parent, treeWalker, rootElement)}/{currentItemText}";
         }
 
         private static void Details(StringBuilder stringBuilder, AutomationElement automationElement, string displayPadding)

@@ -11,14 +11,6 @@
         {
         }
 
-        private IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.PatternOrDefault;
-
-        private IValuePattern ValuePattern => this.Patterns.Value.PatternOrDefault;
-
-        private Button LargeIncreaseButton => this.GetLargeIncreaseButton();
-
-        private Button LargeDecreaseButton => this.GetLargeDecreaseButton();
-
         public Thumb Thumb => this.FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
 
         public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
@@ -53,6 +45,14 @@
                 }
             }
         }
+
+        private IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.PatternOrDefault;
+
+        private IValuePattern ValuePattern => this.Patterns.Value.PatternOrDefault;
+
+        private Button LargeIncreaseButton => this.GetLargeIncreaseButton();
+
+        private Button LargeDecreaseButton => this.GetLargeDecreaseButton();
 
         public void SmallIncrement()
         {

@@ -45,23 +45,6 @@
             this.NativeElement.SetFocus();
         }
 
-        protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
-        {
-            var ignoreDefaultValue = useDefaultIfNotSupported ? 0 : 1;
-            var returnValue = cached ?
-                this.NativeElement.GetCachedPropertyValueEx(propertyId, ignoreDefaultValue) :
-                this.NativeElement.GetCurrentPropertyValueEx(propertyId, ignoreDefaultValue);
-            return returnValue;
-        }
-
-        protected override object InternalGetPattern(int patternId, bool cached)
-        {
-            var returnedValue = cached
-                ? this.NativeElement.GetCachedPattern(patternId)
-                : this.NativeElement.GetCurrentPattern(patternId);
-            return returnedValue;
-        }
-
         public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
@@ -174,6 +157,23 @@
         public override int GetHashCode()
         {
             return this.NativeElement.GetHashCode();
+        }
+
+        protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
+        {
+            var ignoreDefaultValue = useDefaultIfNotSupported ? 0 : 1;
+            var returnValue = cached ?
+                this.NativeElement.GetCachedPropertyValueEx(propertyId, ignoreDefaultValue) :
+                this.NativeElement.GetCurrentPropertyValueEx(propertyId, ignoreDefaultValue);
+            return returnValue;
+        }
+
+        protected override object InternalGetPattern(int patternId, bool cached)
+        {
+            var returnedValue = cached
+                ? this.NativeElement.GetCachedPattern(patternId)
+                : this.NativeElement.GetCurrentPattern(patternId);
+            return returnedValue;
         }
 
         /// <summary>

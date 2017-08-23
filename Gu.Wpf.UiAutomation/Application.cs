@@ -325,7 +325,6 @@
 
         private sealed class ProcessReference : IDisposable
         {
-            internal readonly Process Process;
             private readonly bool dispose;
 
             public ProcessReference(Process process, bool dispose)
@@ -333,6 +332,8 @@
                 this.Process = process;
                 this.dispose = dispose;
             }
+
+            internal Process Process { get; }
 
             public void Dispose()
             {

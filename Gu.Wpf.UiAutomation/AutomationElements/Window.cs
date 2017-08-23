@@ -18,12 +18,6 @@
 
         public TitleBar TitleBar => this.FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
-        /// <summary>
-        /// Flag to indicate, if the window is the application's main window.
-        /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
-        /// </summary>
-        internal bool IsMainWindow { get; set; }
-
         public Window[] ModalWindows
         {
             get
@@ -54,6 +48,12 @@
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
         public Menu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
+
+        /// <summary>
+        /// Flag to indicate, if the window is the application's main window.
+        /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
+        /// </summary>
+        internal bool IsMainWindow { get; set; }
 
         public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {

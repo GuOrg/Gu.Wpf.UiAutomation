@@ -139,22 +139,6 @@
             this.PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
         }
 
-        private void PerformMouseAction(bool moveMouse, Action action)
-        {
-            var clickablePoint = this.GetClickablePoint();
-            if (moveMouse)
-            {
-                Mouse.MoveTo(clickablePoint);
-            }
-            else
-            {
-                Mouse.Position = clickablePoint;
-            }
-
-            action();
-            Helpers.WaitUntilInputIsProcessed();
-        }
-
         /// <summary>
         /// Sets the focus to this element.
         /// Warning: This can be unreliable! <see cref="SetForeground" /> should be more reliable.
@@ -213,7 +197,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(WpfColor color)
         {
-            return this.DrawHighlight(true, color, 2000);
+            return this.DrawHighlight(blocking: true, color: color, durationInMs: 2000);
         }
 
         /// <summary>
@@ -779,6 +763,22 @@
             }
 
             return default(TRet);
+        }
+
+        private void PerformMouseAction(bool moveMouse, Action action)
+        {
+            var clickablePoint = this.GetClickablePoint();
+            if (moveMouse)
+            {
+                Mouse.MoveTo(clickablePoint);
+            }
+            else
+            {
+                Mouse.Position = clickablePoint;
+            }
+
+            action();
+            Helpers.WaitUntilInputIsProcessed();
         }
     }
 }

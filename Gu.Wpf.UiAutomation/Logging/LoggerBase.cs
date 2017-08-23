@@ -4,6 +4,18 @@
 
     public abstract class LoggerBase : ILogger
     {
+        protected LoggerBase()
+        {
+            this.IsTraceEnabled = false;
+            this.IsDebugEnabled = false;
+
+            // Default log level is info and higher
+            this.IsInfoEnabled = true;
+            this.IsWarnEnabled = true;
+            this.IsErrorEnabled = true;
+            this.IsFatalEnabled = true;
+        }
+
         /// <inheritdoc/>
         public bool IsTraceEnabled { get; set; }
 
@@ -21,30 +33,6 @@
 
         /// <inheritdoc/>
         public bool IsFatalEnabled { get; set; }
-
-        protected internal abstract void GatedTrace(string message);
-
-        protected internal abstract void GatedDebug(string message);
-
-        protected internal abstract void GatedInfo(string message);
-
-        protected internal abstract void GatedWarn(string message);
-
-        protected internal abstract void GatedError(string message);
-
-        protected internal abstract void GatedFatal(string message);
-
-        protected LoggerBase()
-        {
-            this.IsTraceEnabled = false;
-            this.IsDebugEnabled = false;
-
-            // Default log level is info and higher
-            this.IsInfoEnabled = true;
-            this.IsWarnEnabled = true;
-            this.IsErrorEnabled = true;
-            this.IsFatalEnabled = true;
-        }
 
         /// <inheritdoc/>
         public void Log(LogLevel logLevel, string message, params object[] args)
@@ -175,6 +163,18 @@
         {
             this.Log(LogLevel.Fatal, message, exception, args);
         }
+
+        protected internal abstract void GatedTrace(string message);
+
+        protected internal abstract void GatedDebug(string message);
+
+        protected internal abstract void GatedInfo(string message);
+
+        protected internal abstract void GatedWarn(string message);
+
+        protected internal abstract void GatedError(string message);
+
+        protected internal abstract void GatedFatal(string message);
 
         private string GetFormattedMessage(string message, Exception exception, params object[] args)
         {

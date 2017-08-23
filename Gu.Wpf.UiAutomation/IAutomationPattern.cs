@@ -7,8 +7,8 @@ namespace Gu.Wpf.UiAutomation
 
         T PatternOrDefault { get; }
 
-        bool TryGetPattern(out T pattern);
-
         bool IsSupported { get; }
+
+        bool TryGetPattern(out T pattern);
     }
 }

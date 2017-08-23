@@ -35,22 +35,6 @@
 
         public HashSet<PropertyId> Properties { get; } = new HashSet<PropertyId>();
 
-        public void Add(PatternId pattern)
-        {
-            this.Patterns.Add(pattern);
-        }
-
-        public void Add(PropertyId property)
-        {
-            this.Properties.Add(property);
-        }
-
-        public IDisposable Activate()
-        {
-            Push(this);
-            return new CacheRequestActivation();
-        }
-
         public static void Push(CacheRequest cacheRequest)
         {
             if (cacheStack == null)
@@ -74,6 +58,22 @@
         public static IDisposable ForceNoCache()
         {
             return new ForceNoCacheActivation();
+        }
+
+        public void Add(PatternId pattern)
+        {
+            this.Patterns.Add(pattern);
+        }
+
+        public void Add(PropertyId property)
+        {
+            this.Properties.Add(property);
+        }
+
+        public IDisposable Activate()
+        {
+            Push(this);
+            return new CacheRequestActivation();
         }
 
         private class CacheRequestActivation : IDisposable

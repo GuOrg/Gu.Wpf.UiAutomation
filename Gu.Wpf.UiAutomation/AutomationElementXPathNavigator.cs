@@ -23,7 +23,13 @@
             this.currentElement = rootElement;
         }
 
-        private bool IsInAttribute => this.attributeIndex != NoAttributeValue;
+        private enum ElementAttributes
+        {
+            AutomationId,
+            Name,
+            ClassName,
+            HelpText
+        }
 
         /// <inheritdoc/>
         public override bool HasAttributes => !this.IsInAttribute;
@@ -73,6 +79,8 @@
 
         /// <inheritdoc/>
         public override bool IsEmptyElement => false;
+
+        private bool IsInAttribute => this.attributeIndex != NoAttributeValue;
 
         /// <inheritdoc/>
         public override XPathNavigator Clone()
@@ -320,14 +328,6 @@
             }
 
             return NoAttributeValue;
-        }
-
-        private enum ElementAttributes
-        {
-            AutomationId,
-            Name,
-            ClassName,
-            HelpText
         }
     }
 }

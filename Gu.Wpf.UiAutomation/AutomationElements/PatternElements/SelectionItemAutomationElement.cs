@@ -10,8 +10,6 @@
         {
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
-
         /// <summary>
         /// Flag to get/set the selection of this element.
         /// </summary>
@@ -31,6 +29,8 @@
                 }
             }
         }
+
+        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
 
         /// <summary>
         /// Select this element.

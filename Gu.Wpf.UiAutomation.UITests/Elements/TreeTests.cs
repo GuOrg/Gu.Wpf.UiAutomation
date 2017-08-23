@@ -27,10 +27,11 @@
         {
             var tree = this.tree;
             Assert.That(tree.SelectedTreeItem, Is.Null);
-            Assert.That(tree.TreeItems, Has.Length.EqualTo(2));
-            tree.TreeItems[0].Expand();
-            tree.TreeItems[0].TreeItems[1].Expand();
-            tree.TreeItems[0].TreeItems[1].TreeItems[0].Select();
+            Assert.AreEqual(2, tree.TreeItems.Count);
+            var treeItem = tree.TreeItems[0];
+            treeItem.Expand();
+            treeItem.TreeItems[1].Expand();
+            treeItem.TreeItems[1].TreeItems[0].Select();
             Assert.That(tree.SelectedTreeItem, Is.Not.Null);
             Assert.That(tree.SelectedTreeItem.Text, Is.EqualTo("Lvl3 a"));
         }

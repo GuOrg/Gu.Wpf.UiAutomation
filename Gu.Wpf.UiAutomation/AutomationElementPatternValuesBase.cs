@@ -43,8 +43,6 @@
             this.BasicAutomationElement = basicAutomationElement;
         }
 
-        protected BasicAutomationElementBase BasicAutomationElement { get; }
-
         public IAutomationPattern<IAnnotationPattern> Annotation => this.GetOrCreate(ref this.annotationPattern, this.InitializeAnnotationPattern);
 
         public IAutomationPattern<IDockPattern> Dock => this.GetOrCreate(ref this.dockPattern, this.InitializeDockPattern);
@@ -110,6 +108,11 @@
         public IAutomationPattern<IVirtualizedItemPattern> VirtualizedItem => this.GetOrCreate(ref this.virtualizedItemPattern, this.InitializeVirtualizedItemPattern);
 
         public IAutomationPattern<IWindowPattern> Window => this.GetOrCreate(ref this.windowPattern, this.InitializeWindowPattern);
+
+        protected BasicAutomationElementBase BasicAutomationElement { get; }
+
+        public abstract IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
+            where T : IPattern;
 
         protected abstract IAutomationPattern<IAnnotationPattern> InitializeAnnotationPattern();
 
@@ -182,8 +185,5 @@
         {
             return val ?? (val = initFunc());
         }
-
-        public abstract IAutomationPattern<T> GetCustomPattern<T, TNative>(PatternId pattern, Func<BasicAutomationElementBase, TNative, T> patternCreateFunc)
-            where T : IPattern;
     }
 }

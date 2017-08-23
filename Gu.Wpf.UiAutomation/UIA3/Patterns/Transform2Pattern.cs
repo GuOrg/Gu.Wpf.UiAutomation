@@ -31,7 +31,7 @@
 
         public override void Move(double x, double y)
         {
-            this.transformPattern.Move(x,y);
+            this.transformPattern.Move(x, y);
         }
 
         public override void Resize(double width, double height)

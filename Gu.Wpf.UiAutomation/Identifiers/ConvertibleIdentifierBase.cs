@@ -9,17 +9,17 @@
     {
         private Func<AutomationBase, object, object> converterMethod;
 
+        protected ConvertibleIdentifierBase(int id, string name)
+            : base(id, name)
+        {
+        }
+
         /// <summary>
         /// Converts the given value with the converter or casts it, if no converter is given
         /// </summary>
         public T Convert<T>(AutomationBase automation, object value)
         {
             return this.converterMethod == null ? (T)value : (T)this.converterMethod(automation, value);
-        }
-
-        protected ConvertibleIdentifierBase(int id, string name)
-            : base(id, name)
-        {
         }
 
         /// <summary>

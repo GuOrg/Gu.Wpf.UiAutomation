@@ -19,16 +19,16 @@ namespace Gu.Wpf.UiAutomation
         T ValueOrDefault { get; }
 
         /// <summary>
+        /// Gets a flag if the property is supported or not.
+        /// </summary>
+        bool IsSupported { get; }
+
+        /// <summary>
         /// Tries to get the value of the property.
         /// Throws if the property is accessed in a caching context and it is not cached.
         /// </summary>
         /// <param name="value">The value of the property. Contains the default if it is not supported.</param>
         /// <returns>True if the property is supported, false otherwise.</returns>
         bool TryGetValue(out T value);
-
-        /// <summary>
-        /// Gets a flag if the property is supported or not.
-        /// </summary>
-        bool IsSupported { get; }
     }
 }

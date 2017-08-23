@@ -11,11 +11,6 @@
         {
         }
 
-        protected override Application StartApplication()
-        {
-            return Application.Launch("notepad.exe");
-        }
-
         [Test]
         public void CorrectPattern()
         {
@@ -194,6 +189,11 @@
                 ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
                 Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
             }
+        }
+
+        protected override Application StartApplication()
+        {
+            return Application.Launch("notepad.exe");
         }
     }
 }

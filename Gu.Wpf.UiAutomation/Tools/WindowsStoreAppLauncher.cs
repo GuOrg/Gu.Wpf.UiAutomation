@@ -7,6 +7,18 @@
 
     public static class WindowsStoreAppLauncher
     {
+        [ComImport]
+        [Guid("2E941141-7F97-4756-BA1D-9DECDE894A3D")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IApplicationActivationManager
+        {
+            IntPtr ActivateApplication([In] string appUserModelId, [In] string arguments, [In] ActivateOptions options, [Out] out uint processId);
+
+            IntPtr ActivateForFile([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [In] string verb, [Out] out uint processId);
+
+            IntPtr ActivateForProtocol([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [Out] out uint processId);
+        }
+
         public static Process Launch(string appUserModelId, string arguments)
         {
             var launcher = new ApplicationActivationManager();
@@ -22,29 +34,6 @@
             }
 
             throw new Exception($"Could not launch Store App '{appUserModelId}'");
-        }
-
-        // ReSharper disable InconsistentNaming
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        [Flags]
-        public enum ActivateOptions
-        {
-            None = 0x00000000,
-            DesignMode = 0x00000001,
-            NoErrorUI = 0x00000002,
-            NoSplashScreen = 0x00000004
-        }
-
-        [ComImport]
-        [Guid("2E941141-7F97-4756-BA1D-9DECDE894A3D")]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface IApplicationActivationManager
-        {
-            IntPtr ActivateApplication([In] string appUserModelId, [In] string arguments, [In] ActivateOptions options, [Out] out uint processId);
-
-            IntPtr ActivateForFile([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [In] string verb, [Out] out uint processId);
-
-            IntPtr ActivateForProtocol([In] string appUserModelId, [In] IntPtr /*IShellItemArray*/ itemArray, [Out] out uint processId);
         }
 
         [ComImport]
