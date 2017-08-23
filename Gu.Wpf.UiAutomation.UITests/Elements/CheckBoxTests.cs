@@ -11,8 +11,9 @@
         }
 
         [Test]
-        public void SetIsChecked()
+        public void IsChecked()
         {
+            this.RestartApp();
             var window = this.App.GetMainWindow();
             var checkBox = window.FindCheckBox("Test Checkbox");
             checkBox.IsChecked = true;
@@ -29,8 +30,9 @@
         }
 
         [Test]
-        public void ThreeStateSetIsChecked()
+        public void ThreeStateIsChecked()
         {
+            this.RestartApp();
             var window = this.App.GetMainWindow();
             var checkBox = window.FindCheckBox("3-Way Test Checkbox");
             checkBox.IsChecked = true;
@@ -47,7 +49,7 @@
         }
 
         [Test]
-        public void ToggleTest()
+        public void Toggle()
         {
             this.RestartApp();
             var window = this.App.GetMainWindow();
@@ -65,7 +67,7 @@
         }
 
         [Test]
-        public void ThreeStateToggleTest()
+        public void ThreeStateToggle()
         {
             this.RestartApp();
             var window = this.App.GetMainWindow();
