@@ -26,15 +26,15 @@
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow();
-                var RadioButton = window.FindRadioButton("Test RadioButton");
-                RadioButton.IsChecked = true;
-                Assert.AreEqual(true, RadioButton.IsChecked);
+                var radioButton = window.FindRadioButton("Test RadioButton");
+                radioButton.IsChecked = true;
+                Assert.AreEqual(true, radioButton.IsChecked);
 
-                RadioButton.IsChecked = false;
-                Assert.AreEqual(false, RadioButton.IsChecked);
+                radioButton.IsChecked = false;
+                Assert.AreEqual(false, radioButton.IsChecked);
 
-                RadioButton.IsChecked = true;
-                Assert.AreEqual(true, RadioButton.IsChecked);
+                radioButton.IsChecked = true;
+                Assert.AreEqual(true, radioButton.IsChecked);
             }
         }
 
@@ -66,8 +66,9 @@
                 var window = app.MainWindow();
                 var radioButton = window.FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
                 Assert.AreEqual(false, radioButton.IsChecked);
-                radioButton.Select();
-                Assert.That(radioButton.IsChecked, Is.True);
+
+                radioButton.IsChecked = true;
+                Assert.AreEqual(true, radioButton.IsChecked);
             }
         }
 
@@ -82,13 +83,13 @@
 
                 Assert.That(radioButton1.IsChecked && radioButton2.IsChecked, Is.False);
 
-                radioButton1.Select();
-                Assert.That(radioButton1.IsChecked, Is.True);
-                Assert.That(radioButton2.IsChecked, Is.False);
+                radioButton1.IsChecked = true;
+                Assert.AreEqual(true, radioButton1.IsChecked);
+                Assert.AreEqual(false, radioButton2.IsChecked);
 
-                radioButton2.Select();
-                Assert.That(radioButton1.IsChecked, Is.False);
-                Assert.That(radioButton2.IsChecked, Is.True);
+                radioButton2.IsChecked = true;
+                Assert.AreEqual(false, radioButton1.IsChecked);
+                Assert.AreEqual(true, radioButton2.IsChecked);
             }
         }
     }
