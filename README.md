@@ -18,22 +18,39 @@ On this, you can then search sub-elements and interact with them.
 There is a helper class to launch, attach or close applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 ```csharp
-var app =  Application.Launch("notepad.exe");
-using (var automation = new UIA3Automation())
+private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+[Test]
+public void IsChecked()
 {
-	var window = app.GetMainWindow(automation);
-	Console.WriteLine(window.Title);
-	...
+    using (var app = Application.Launch(ExeFileName))
+    {
+        var window = app.MainWindow();
+        var checkBox = window.FindCheckBox("Test Checkbox");
+        checkBox.IsChecked = true;
+        Assert.AreEqual(true, checkBox.IsChecked);
+
+        checkBox.IsChecked = false;
+        Assert.AreEqual(false, checkBox.IsChecked);
+
+        checkBox.IsChecked = true;
+        Assert.AreEqual(true, checkBox.IsChecked);
+
+        var exception = Assert.Throws<UiAutomationException>(() => checkBox.IsChecked = null);
+        Assert.AreEqual(
+            "Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:check box, FrameworkId:WPF .IsChecked to null failed.",
+            exception.Message);
+    }
 }
 ```
 ```csharp
 var app = Application.Launch("calc.exe");
 using (var automation = new UIA3Automation())
 {
-	var window = app.GetMainWindow(automation);
-	var button1 = window.FindFirstDescentant(cf => cf.ByText("1"))?.AsButton();
-	button1?.Invoke();
-	...
+    var window = app.GetMainWindow(automation);
+    var button1 = window.FindFirstDescentant(cf => cf.ByText("1"))?.AsButton();
+    button1?.Invoke();
+    ...
 }
 ```
 
