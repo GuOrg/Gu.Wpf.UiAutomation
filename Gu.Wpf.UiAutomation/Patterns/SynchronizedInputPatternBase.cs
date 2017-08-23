@@ -1,8 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
     public abstract class SynchronizedInputPatternBase<TNativePattern> : PatternBase<TNativePattern>, ISynchronizedInputPattern
     {
         protected SynchronizedInputPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)

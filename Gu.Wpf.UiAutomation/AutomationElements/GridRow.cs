@@ -1,9 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.PatternElements;
-    using Gu.Wpf.UiAutomation.Patterns;
 
     /// <summary>
     /// Row element for grids and tables.

@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Converters
 {
-    using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 

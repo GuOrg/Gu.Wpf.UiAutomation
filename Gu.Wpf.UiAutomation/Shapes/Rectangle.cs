@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.Shapes
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Windows;
-    using Gu.Wpf.UiAutomation.Tools;
 
     /// <summary>
     /// UI-independent implementation of a rectangle

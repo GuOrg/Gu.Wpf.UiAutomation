@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Definitions;
 
     public class Tab : AutomationElement
     {

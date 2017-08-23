@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.TestFramework
 {
-    using Gu.Wpf.UiAutomation.Input;
-    using Gu.Wpf.UiAutomation.Shapes;
     using NUnit.Framework;
 
     /// <summary>

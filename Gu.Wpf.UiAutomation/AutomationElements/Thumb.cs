@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Input;
-
     public class Thumb : AutomationElement
     {
         public Thumb(BasicAutomationElementBase basicAutomationElement)

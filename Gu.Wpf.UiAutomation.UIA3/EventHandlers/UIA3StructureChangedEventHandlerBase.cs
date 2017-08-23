@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.EventHandlers
 {
     using System;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.EventHandlers;
     using UIA = Interop.UIAutomationClient;
 
     public class UIA3StructureChangedEventHandler : StructureChangedEventHandlerBase, UIA.IUIAutomationStructureChangedEventHandler

@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
-
     public interface IAutomationElementPatternAvailabilityProperties
     {
         PropertyId IsAnnotationPatternAvailable { get; }

@@ -1,7 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
     public interface IAutomationPattern<T>
         where T : IPattern
     {

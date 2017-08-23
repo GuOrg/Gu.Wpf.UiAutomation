@@ -1,8 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.Conditions
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Identifiers;
-
     public class PropertyCondition : ConditionBase
     {
         public PropertyCondition(PropertyId property, object value)

@@ -1,7 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns;
-
     /// <summary>
     /// Cell element for grids and tables.
     /// </summary>

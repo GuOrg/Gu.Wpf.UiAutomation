@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Identifiers
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// A wrapper around the pattern ids

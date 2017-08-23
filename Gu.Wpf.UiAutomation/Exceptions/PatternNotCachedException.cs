@@ -1,8 +1,7 @@
-﻿namespace Gu.Wpf.UiAutomation.Exceptions
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Runtime.Serialization;
-    using Gu.Wpf.UiAutomation.Identifiers;
 
     [Serializable]
     public class PatternNotCachedException : NotCachedException

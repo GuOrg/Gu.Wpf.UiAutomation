@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Diagnostics;

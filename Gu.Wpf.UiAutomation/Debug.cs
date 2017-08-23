@@ -3,8 +3,6 @@
     using System;
     using System.Linq;
     using System.Text;
-    using Gu.Wpf.UiAutomation.Conditions;
-    using Gu.Wpf.UiAutomation.Definitions;
 
     public static class Debug
     {

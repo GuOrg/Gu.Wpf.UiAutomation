@@ -1,8 +1,5 @@
 namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public class LegacyIAccessiblePatternProperties : ILegacyIAccessiblePatternProperties
     {
         public PropertyId ChildId => LegacyIAccessiblePattern.ChildIdProperty;

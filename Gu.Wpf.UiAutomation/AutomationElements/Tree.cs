@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Definitions;
 
     public class Tree : AutomationElement
     {

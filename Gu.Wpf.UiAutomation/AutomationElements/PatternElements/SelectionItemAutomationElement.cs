@@ -1,7 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.PatternElements
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns;
-
     /// <summary>
     /// An UI-item which supports the <see cref="ISelectionItemPattern" />
     /// </summary>

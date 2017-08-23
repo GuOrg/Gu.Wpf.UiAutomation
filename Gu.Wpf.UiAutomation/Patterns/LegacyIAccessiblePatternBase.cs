@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation
 {
     using Accessibility;
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public abstract class LegacyIAccessiblePatternBase<TNativePattern> : PatternBase<TNativePattern>, ILegacyIAccessiblePattern

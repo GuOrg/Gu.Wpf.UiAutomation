@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation
 {
     public abstract class EventHandlerBase
     {

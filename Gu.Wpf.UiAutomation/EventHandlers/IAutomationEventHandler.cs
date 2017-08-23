@@ -1,7 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
-
     public interface IAutomationEventHandler
     {
         void HandleAutomationEvent(AutomationElement sender, EventId eventId);

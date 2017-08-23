@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Scrolling
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
 

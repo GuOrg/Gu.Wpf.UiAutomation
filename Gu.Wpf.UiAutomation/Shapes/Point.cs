@@ -1,33 +1,84 @@
-﻿namespace Gu.Wpf.UiAutomation.Shapes
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// UI-independent implementation of a point
     /// </summary>
+    [Obsolete("Is this needed?")]
     public class Point : ShapeBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Point"/> class.
+        /// </summary>
+        public Point(double x, double y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
+        /// <summary>
         /// Exact x-coordinate
         /// </summary>
-        public double X { get; set; }
+        public double X { get; }
 
         /// <summary>
         /// Exact y-coordinate
         /// </summary>
-        public double Y { get; set; }
+        public double Y { get; }
 
         /// <summary>
         /// Gets a value indicating whether this point is empty (all coordinates are 0)
         /// </summary>
         public bool IsEmpty => this.Equals(EmptyPoint);
 
-        public Point(double x, double y)
+        /// <summary>
+        /// Implicit conversion to GDI point
+        /// </summary>
+        public static implicit operator System.Drawing.Point(Point p)
         {
-            this.X = x;
-            this.Y = y;
+            return new System.Drawing.Point(p.X.ToInt(), p.Y.ToInt());
+        }
+
+        /// <summary>
+        /// Implicit conversion from GDI point
+        /// </summary>
+        public static implicit operator Point(System.Drawing.Point p)
+        {
+            return new Point(p.X, p.Y);
+        }
+
+        /// <summary>
+        /// Implicit conversion to WPF point
+        /// </summary>
+        public static implicit operator System.Windows.Point(Point p)
+        {
+            return new System.Windows.Point(p.X, p.Y);
+        }
+
+        /// <summary>
+        /// Implicit conversion from WPF point
+        /// </summary>
+        public static implicit operator Point(System.Windows.Point p)
+        {
+            return new Point(p.X, p.Y);
+        }
+
+        /// <summary>
+        /// Implicit conversion to native point
+        /// </summary>
+        public static implicit operator POINT(Point p)
+        {
+            return new POINT { X = p.X.ToInt(), Y = p.Y.ToInt() };
+        }
+
+        /// <summary>
+        /// Implicit conversion from native point
+        /// </summary>
+        public static implicit operator Point(POINT p)
+        {
+            return new Point(p.X, p.Y);
         }
 
         /// <summary>
@@ -79,54 +130,6 @@
         public bool Equals(Point other)
         {
             return this.X.Equals(other.X) && this.Y.Equals(other.Y);
-        }
-
-        /// <summary>
-        /// Implicit conversion to GDI point
-        /// </summary>
-        public static implicit operator System.Drawing.Point(Point p)
-        {
-            return new System.Drawing.Point(p.X.ToInt(), p.Y.ToInt());
-        }
-
-        /// <summary>
-        /// Implicit conversion from GDI point
-        /// </summary>
-        public static implicit operator Point(System.Drawing.Point p)
-        {
-            return new Point(p.X, p.Y);
-        }
-
-        /// <summary>
-        /// Implicit conversion to WPF point
-        /// </summary>
-        public static implicit operator System.Windows.Point(Point p)
-        {
-            return new System.Windows.Point(p.X, p.Y);
-        }
-
-        /// <summary>
-        /// Implicit conversion from WPF point
-        /// </summary>
-        public static implicit operator Point(System.Windows.Point p)
-        {
-            return new Point(p.X, p.Y);
-        }
-
-        /// <summary>
-        /// Implicit conversion to native point
-        /// </summary>
-        public static implicit operator POINT(Point p)
-        {
-            return new POINT { X = p.X.ToInt(), Y = p.Y.ToInt() };
-        }
-
-        /// <summary>
-        /// Implicit conversion from native point
-        /// </summary>
-        public static implicit operator Point(POINT p)
-        {
-            return new Point(p.X, p.Y);
         }
 
         /// <inheritdoc/>

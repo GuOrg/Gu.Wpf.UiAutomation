@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UnitTests
 {
-    using Gu.Wpf.UiAutomation.Shapes;
     using NUnit.Framework;
 
     [TestFixture]

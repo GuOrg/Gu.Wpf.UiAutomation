@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public interface IEventLibrary
     {
         IAutomationElementEvents Element { get; }

@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using Gu.Wpf.UiAutomation.Identifiers;
 
     public abstract class BasicEventHandlerBase : EventHandlerBase, IAutomationEventHandler
     {

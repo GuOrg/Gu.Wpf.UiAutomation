@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Definitions
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// Contains values that specify whether data in a table should be read primarily by row or by column.

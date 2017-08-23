@@ -2,9 +2,6 @@
 {
     using System;
     using Accessibility;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Patterns;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
     using Gu.Wpf.UiAutomation.WindowsAPI;

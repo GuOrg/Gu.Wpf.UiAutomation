@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Exceptions
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Runtime.Serialization;

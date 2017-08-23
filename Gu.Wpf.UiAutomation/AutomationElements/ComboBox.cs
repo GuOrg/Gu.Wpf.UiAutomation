@@ -3,9 +3,6 @@
     using System;
     using System.Linq;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Input;
-    using Gu.Wpf.UiAutomation.Patterns;
 
     /// <summary>
     /// Element which can be used for combobox elements.

@@ -1,8 +1,5 @@
 namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public class Transform2PatternProperties : TransformPatternProperties, ITransform2PatternProperties
     {
         public PropertyId CanZoom => Transform2Pattern.CanZoomProperty;

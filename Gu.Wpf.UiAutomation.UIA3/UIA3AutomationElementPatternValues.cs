@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
     using System;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Patterns;
     using Gu.Wpf.UiAutomation.UIA3.Patterns;
     using UIA = Interop.UIAutomationClient;
 

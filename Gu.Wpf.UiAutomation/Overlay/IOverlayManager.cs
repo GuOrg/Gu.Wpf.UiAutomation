@@ -2,7 +2,6 @@
 {
     using System;
     using System.Windows.Media;
-    using Gu.Wpf.UiAutomation.Shapes;
 
     public interface IOverlayManager : IDisposable
     {

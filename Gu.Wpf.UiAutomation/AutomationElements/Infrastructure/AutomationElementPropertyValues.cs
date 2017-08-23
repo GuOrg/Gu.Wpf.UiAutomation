@@ -2,9 +2,6 @@
 {
     using System;
     using System.Globalization;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Shapes;
 
     public class AutomationElementPropertyValues
     {

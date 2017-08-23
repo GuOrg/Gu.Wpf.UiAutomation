@@ -1,9 +1,5 @@
-namespace Gu.Wpf.UiAutomation.Patterns
+namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-    using Gu.Wpf.UiAutomation.Shapes;
-
     public interface ITextPattern : IPattern
     {
         ITextPatternEvents Events { get; }

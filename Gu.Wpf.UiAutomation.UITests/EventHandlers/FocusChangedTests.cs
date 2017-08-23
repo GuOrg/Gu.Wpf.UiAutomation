@@ -2,9 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Input;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;

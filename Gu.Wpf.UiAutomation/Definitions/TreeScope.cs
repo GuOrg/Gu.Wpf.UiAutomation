@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Definitions
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// Contains values that specify the scope of elements within the UI Automation tree.

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Input
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,6 @@
     using System.Security.Permissions;
     using System.Threading;
     using Gu.Wpf.UiAutomation.Logging;
-    using Gu.Wpf.UiAutomation.Shapes;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>

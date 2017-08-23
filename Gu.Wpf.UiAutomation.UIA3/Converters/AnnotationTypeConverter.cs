@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Definitions;
     using UIA = Interop.UIAutomationClient;
 
     public static class AnnotationTypeConverter

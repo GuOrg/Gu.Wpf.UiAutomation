@@ -1,8 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.PatternElements
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public class ExpandCollapseAutomationElement : AutomationElement
     {
         public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement)

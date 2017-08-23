@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-
     public class TitleBar : AutomationElement
     {
         public TitleBar(BasicAutomationElementBase basicAutomationElement)

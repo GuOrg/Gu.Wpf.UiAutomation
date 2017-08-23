@@ -1,9 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Patterns;
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
 
     public abstract class AutomationElementPatternValuesBase
     {

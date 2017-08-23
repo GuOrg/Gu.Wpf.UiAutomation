@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Definitions
+﻿namespace Gu.Wpf.UiAutomation
 {
     public enum ScrollAmount
     {

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Shapes
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// Base class for coordinate based shapes

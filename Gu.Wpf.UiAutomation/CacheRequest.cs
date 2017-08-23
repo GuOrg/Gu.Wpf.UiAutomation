@@ -2,9 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Gu.Wpf.UiAutomation.Conditions;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Identifiers;
 
     public partial class CacheRequest
     {

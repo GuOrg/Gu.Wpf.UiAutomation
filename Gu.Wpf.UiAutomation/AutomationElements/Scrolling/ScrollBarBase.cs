@@ -1,8 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.Scrolling
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public abstract class ScrollBarBase : AutomationElement
     {
         protected ScrollBarBase(BasicAutomationElementBase basicAutomationElement)

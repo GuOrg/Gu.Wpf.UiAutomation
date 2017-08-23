@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Definitions
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// Contains values that specify the current state of the window for purposes of user or programmatic interaction.

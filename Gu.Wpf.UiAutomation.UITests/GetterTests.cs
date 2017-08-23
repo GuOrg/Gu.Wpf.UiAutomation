@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Exceptions;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;

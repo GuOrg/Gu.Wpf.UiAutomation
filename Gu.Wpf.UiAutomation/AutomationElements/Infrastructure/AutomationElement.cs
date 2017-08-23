@@ -6,14 +6,6 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using Gu.Wpf.UiAutomation.Conditions;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.EventHandlers;
-    using Gu.Wpf.UiAutomation.Exceptions;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Input;
-    using Gu.Wpf.UiAutomation.Scrolling;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using GdiColor = System.Drawing.Color;
     using WpfColor = System.Windows.Media.Color;
@@ -396,8 +388,8 @@
         /// <summary>
         /// Gets a clickable point of the element.
         /// </summary>
-        /// <exception cref="Exceptions.NoClickablePointException">Thrown when no clickable point was found</exception>
-        public Shapes.Point GetClickablePoint()
+        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
+        public Point GetClickablePoint()
         {
             return this.BasicAutomationElement.GetClickablePoint();
         }
@@ -407,7 +399,7 @@
         /// </summary>
         /// <param name="point">The clickable point or null, if no point was found</param>
         /// <returns>True if a point was found, false otherwise</returns>
-        public bool TryGetClickablePoint(out Shapes.Point point)
+        public bool TryGetClickablePoint(out Point point)
         {
             return this.BasicAutomationElement.TryGetClickablePoint(out point);
         }

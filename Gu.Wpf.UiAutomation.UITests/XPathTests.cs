@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.UIA3;
     using NUnit.Framework;
 

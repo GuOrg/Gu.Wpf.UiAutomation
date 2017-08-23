@@ -2,9 +2,6 @@
 {
     using System;
     using System.Globalization;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Input;
-    using Gu.Wpf.UiAutomation.Patterns;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class Slider : AutomationElement

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation
 {
     public interface IText2Pattern : ITextPattern
     {

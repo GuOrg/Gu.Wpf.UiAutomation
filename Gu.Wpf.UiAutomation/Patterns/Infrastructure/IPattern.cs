@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation
 {
     public interface IPattern
     {

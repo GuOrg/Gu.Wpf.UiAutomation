@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Exceptions;
-    using Gu.Wpf.UiAutomation.Input;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class TextBox : AutomationElement

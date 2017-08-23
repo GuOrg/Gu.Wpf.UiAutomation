@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Definitions
+﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
     /// Contains values that specify the type of reference to use when returning UI Automation elements.

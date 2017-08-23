@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public class ProgressBar : AutomationElement
     {
         public ProgressBar(BasicAutomationElementBase basicAutomationElement)

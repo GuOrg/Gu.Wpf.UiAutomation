@@ -1,10 +1,9 @@
-﻿namespace Gu.Wpf.UiAutomation.Tools
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
-    using Gu.Wpf.UiAutomation.Exceptions;
 
     /// <summary>
     /// Wrapper for com calls
@@ -129,7 +128,7 @@
                     uiaException = new TimeoutException("UIA Timeout", ex);
                     break;
                 case UIA_E_NOTSUPPORTED:
-                    uiaException = new Exceptions.NotSupportedException(ex);
+                    uiaException = new UiAutomation.NotSupportedException(ex);
                     break;
                 case UIA_E_INVALIDOPERATION:
                     uiaException = new InvalidOperationException("UIA Invalid Operation", ex);

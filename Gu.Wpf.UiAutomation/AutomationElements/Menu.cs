@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
-    using Gu.Wpf.UiAutomation.Definitions;
 
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems

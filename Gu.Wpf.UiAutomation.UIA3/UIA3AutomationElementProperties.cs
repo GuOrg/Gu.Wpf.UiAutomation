@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
 
     public class UIA3AutomationElementProperties : IAutomationElementProperties

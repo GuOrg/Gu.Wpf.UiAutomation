@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Input
+﻿namespace Gu.Wpf.UiAutomation
 {
     public static class Touch
     {

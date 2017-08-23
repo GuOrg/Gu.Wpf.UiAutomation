@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using Gu.Wpf.UiAutomation.Identifiers;
 
     public abstract class PatternBase<TNativePattern> : IPattern
     {

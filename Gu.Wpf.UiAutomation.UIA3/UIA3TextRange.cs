@@ -1,10 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
     using System;
-    using Gu.Wpf.UiAutomation.Definitions;
-    using Gu.Wpf.UiAutomation.Identifiers;
-    using Gu.Wpf.UiAutomation.Shapes;
-    using Gu.Wpf.UiAutomation.Tools;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using UIA = Interop.UIAutomationClient;
 

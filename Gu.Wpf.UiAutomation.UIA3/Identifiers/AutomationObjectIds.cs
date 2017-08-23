@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Identifiers
 {
-    using Gu.Wpf.UiAutomation.Identifiers;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using UIA = Interop.UIAutomationClient;
 

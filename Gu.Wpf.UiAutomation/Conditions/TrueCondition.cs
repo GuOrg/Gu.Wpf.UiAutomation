@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.Conditions
+namespace Gu.Wpf.UiAutomation
 {
     public class TrueCondition : BoolCondition
     {

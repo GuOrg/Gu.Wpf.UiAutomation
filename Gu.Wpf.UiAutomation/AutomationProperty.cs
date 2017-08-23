@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using Gu.Wpf.UiAutomation.Identifiers;
 
     /// <summary>
     /// Implementation of the property object.

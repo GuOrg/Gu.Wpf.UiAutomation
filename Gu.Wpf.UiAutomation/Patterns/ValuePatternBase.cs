@@ -1,7 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.Patterns
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
-
     public abstract class ValuePatternBase<TNativePattern> : PatternBase<TNativePattern>, IValuePattern
     {
         private AutomationProperty<bool> isReadOnly;

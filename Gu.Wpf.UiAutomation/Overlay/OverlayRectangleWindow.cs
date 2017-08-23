@@ -7,7 +7,6 @@
     using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using Gu.Wpf.UiAutomation.Shapes;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class OverlayRectangleWindow : Window

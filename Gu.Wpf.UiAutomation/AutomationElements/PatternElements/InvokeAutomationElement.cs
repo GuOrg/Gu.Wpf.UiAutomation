@@ -1,7 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.PatternElements
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.Patterns;
-
     public class InvokeAutomationElement : AutomationElement
     {
         public InvokeAutomationElement(BasicAutomationElementBase basicAutomationElement)
