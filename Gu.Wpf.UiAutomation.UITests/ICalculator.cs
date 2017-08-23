@@ -1,7 +1,5 @@
 namespace Gu.Wpf.UiAutomation.UITests
 {
-    using Gu.Wpf.UiAutomation.AutomationElements;
-
     public interface ICalculator
     {
         Button Button1 { get; }

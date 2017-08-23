@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-
     public interface ITreeWalker
     {
         AutomationElement GetParent(AutomationElement element);

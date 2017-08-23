@@ -1,9 +1,8 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Conditions;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.Exceptions;

@@ -7,7 +7,6 @@ namespace Gu.Wpf.UiAutomation
     using System;
     using System.Xml;
     using System.Xml.XPath;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 
     /// <summary>
     /// Custom implementation of a <see cref="XPathNavigator" /> which allows

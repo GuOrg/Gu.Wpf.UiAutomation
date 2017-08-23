@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.EventHandlers
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Identifiers;
 
     public interface IAutomationPropertyChangedEventHandler

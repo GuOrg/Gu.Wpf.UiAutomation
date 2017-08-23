@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.Tools
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.Patterns;
 

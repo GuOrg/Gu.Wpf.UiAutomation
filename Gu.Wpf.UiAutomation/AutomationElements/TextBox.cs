@@ -1,7 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Exceptions;
     using Gu.Wpf.UiAutomation.Input;
     using Gu.Wpf.UiAutomation.WindowsAPI;

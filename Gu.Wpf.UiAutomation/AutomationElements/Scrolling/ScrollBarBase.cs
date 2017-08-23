@@ -1,6 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Scrolling
+﻿namespace Gu.Wpf.UiAutomation.Scrolling
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.Patterns;
 

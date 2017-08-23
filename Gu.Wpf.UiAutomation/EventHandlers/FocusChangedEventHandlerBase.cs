@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.EventHandlers
 {
     using System;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 
     public abstract class FocusChangedEventHandlerBase : EventHandlerBase, IAutomationFocusChangedEventHandler
     {

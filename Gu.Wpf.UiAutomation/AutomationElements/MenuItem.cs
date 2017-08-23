@@ -1,10 +1,9 @@
-namespace Gu.Wpf.UiAutomation.AutomationElements
+namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
     using Gu.Wpf.UiAutomation.Definitions;
+    using Gu.Wpf.UiAutomation.PatternElements;
 
     /// <summary>
     /// Represents a menuitem which can also contain sub-menuitems

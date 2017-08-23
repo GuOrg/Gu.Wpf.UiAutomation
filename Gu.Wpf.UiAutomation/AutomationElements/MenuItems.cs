@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.AutomationElements
+namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
     using System.Linq;

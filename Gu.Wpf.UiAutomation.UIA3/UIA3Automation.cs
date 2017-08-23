@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.EventHandlers;
     using Gu.Wpf.UiAutomation.Shapes;
     using Gu.Wpf.UiAutomation.Tools;

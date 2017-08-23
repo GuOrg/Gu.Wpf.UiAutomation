@@ -1,7 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
-
     public class Label : AutomationElement
     {
         public Label(BasicAutomationElementBase basicAutomationElement)

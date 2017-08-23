@@ -1,8 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UITests
 {
     using System.Text.RegularExpressions;
-    using Gu.Wpf.UiAutomation.AutomationElements;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
 
     public class Win10Calc : ICalculator
     {

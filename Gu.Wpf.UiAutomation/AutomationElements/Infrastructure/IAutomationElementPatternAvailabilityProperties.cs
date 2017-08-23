@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements.Infrastructure
+﻿namespace Gu.Wpf.UiAutomation
 {
     using Gu.Wpf.UiAutomation.Identifiers;
 

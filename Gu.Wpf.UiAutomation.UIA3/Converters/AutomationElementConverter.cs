@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
     using System;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using UIA = Interop.UIAutomationClient;
 
     public static class AutomationElementConverter

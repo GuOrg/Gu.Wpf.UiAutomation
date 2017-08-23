@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using Gu.Wpf.UiAutomation.AutomationElements;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;

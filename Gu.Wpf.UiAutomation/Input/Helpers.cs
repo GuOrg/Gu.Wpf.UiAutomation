@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>

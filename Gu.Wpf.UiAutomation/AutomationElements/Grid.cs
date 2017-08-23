@@ -1,9 +1,8 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Definitions;
     using Gu.Wpf.UiAutomation.Patterns;
 

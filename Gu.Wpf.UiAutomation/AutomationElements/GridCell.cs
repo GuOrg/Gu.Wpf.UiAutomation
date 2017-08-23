@@ -1,6 +1,5 @@
-namespace Gu.Wpf.UiAutomation.AutomationElements
+namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Patterns;
 
     /// <summary>

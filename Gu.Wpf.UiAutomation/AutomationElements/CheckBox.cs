@@ -1,6 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.AutomationElements
+﻿namespace Gu.Wpf.UiAutomation
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.PatternElements;
+    using Gu.Wpf.UiAutomation.PatternElements;
 
     public class CheckBox : ToggleAutomationElement
     {

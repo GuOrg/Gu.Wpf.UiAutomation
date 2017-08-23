@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.Patterns
 {
-    using Gu.Wpf.UiAutomation.AutomationElements.Infrastructure;
     using Gu.Wpf.UiAutomation.Patterns.Infrastructure;
 
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
