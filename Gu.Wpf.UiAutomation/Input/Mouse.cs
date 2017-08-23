@@ -102,7 +102,7 @@
             var startY = startPos.Y;
 
             // Prepare variables
-            var totalDistance = startPos.Distance(Position);
+            var totalDistance = startPos.DistanceTo(Position);
 
             // Calculate the duration for the speed
             var optimalPixelsPerMillisecond = 1;

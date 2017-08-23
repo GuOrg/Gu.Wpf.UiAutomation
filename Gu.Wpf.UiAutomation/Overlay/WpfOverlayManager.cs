@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using System.Windows;
     using System.Windows.Media;
     using System.Windows.Threading;
 
@@ -56,9 +57,9 @@
         public int Margin { get; set; }
 
         /// <inheritdoc/>
-        public void Show(Rectangle rectangle, Color color, int durationInMs)
+        public void Show(Rect rectangle, Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (rectangle.IsValid())
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 this.dispatcher.Invoke(new Action(() =>
@@ -72,9 +73,9 @@
         }
 
         /// <inheritdoc/>
-        public void ShowBlocking(Rectangle rectangle, Color color, int durationInMs)
+        public void ShowBlocking(Rect rectangle, Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (rectangle.IsValid())
             {
                 // ReSharper disable once RedundantDelegateCreation Used for older .Net versions
                 this.dispatcher.Invoke(new Action(() =>

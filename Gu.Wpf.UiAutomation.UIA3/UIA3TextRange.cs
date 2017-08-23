@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
     using System;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using UIA = Interop.UIAutomationClient;
 
@@ -63,7 +64,7 @@
             return attribute.Convert<object>(this.Automation, nativeValue);
         }
 
-        public Rectangle[] GetBoundingRectangles()
+        public Rect[] GetBoundingRectangles()
         {
             var unrolledRects = ComCallWrapper.Call(() => this.NativeRange.GetBoundingRectangles());
             if (unrolledRects == null)
@@ -73,11 +74,11 @@
 
             // If unrolledRects is somehow not a multiple of 4, we still will not
             // overrun it, since (x / 4) * 4 <= x for C# integer math.
-            var result = new Rectangle[unrolledRects.Length / 4];
+            var result = new Rect[unrolledRects.Length / 4];
             for (var i = 0; i < result.Length; i++)
             {
                 var j = i * 4;
-                result[i] = new Rectangle(unrolledRects[j], unrolledRects[j + 1], unrolledRects[j + 2], unrolledRects[j + 3]);
+                result[i] = new Rect(unrolledRects[j], unrolledRects[j + 1], unrolledRects[j + 2], unrolledRects[j + 3]);
             }
 
             return result;

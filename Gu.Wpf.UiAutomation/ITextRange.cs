@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows;
+
     public interface ITextRange
     {
         void AddToSelection();
@@ -18,7 +20,7 @@
 
         object GetAttributeValue(TextAttributeId attribute);
 
-        Rectangle[] GetBoundingRectangles();
+        Rect[] GetBoundingRectangles();
 
         AutomationElement[] GetChildren();
 

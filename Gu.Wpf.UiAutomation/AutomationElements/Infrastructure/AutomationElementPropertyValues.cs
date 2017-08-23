@@ -11,7 +11,7 @@
         private AutomationProperty<string> ariaProperties;
         private AutomationProperty<string> ariaRole;
         private AutomationProperty<string> automationId;
-        private AutomationProperty<Rectangle> boundingRectangle;
+        private AutomationProperty<Rect> boundingRectangle;
         private AutomationProperty<string> className;
         private AutomationProperty<Point> clickablePoint;
         private AutomationProperty<AutomationElement[]> controllerFor;
@@ -66,7 +66,7 @@
 
         public AutomationProperty<string> AutomationId => this.GetOrCreate(ref this.automationId, this.Properties.AutomationId);
 
-        public AutomationProperty<Rectangle> BoundingRectangle => this.GetOrCreate(ref this.boundingRectangle, this.Properties.BoundingRectangle);
+        public AutomationProperty<Rect> BoundingRectangle => this.GetOrCreate(ref this.boundingRectangle, this.Properties.BoundingRectangle);
 
         public AutomationProperty<string> ClassName => this.GetOrCreate(ref this.className, this.Properties.ClassName);
 

@@ -24,14 +24,16 @@
         [Test]
         public void NotepadAttachByNameTest()
         {
-            Application.Launch("notepad.exe");
-            using (var app = Application.Attach("notepad.exe"))
+            using (Application.Launch("notepad.exe"))
             {
-                using (var automation = new UIA3Automation())
+                using (var app = Application.Attach("notepad.exe"))
                 {
-                    var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
+                    using (var automation = new UIA3Automation())
+                    {
+                        var window = app.GetMainWindow(automation);
+                        Assert.That(window, Is.Not.Null);
+                        Assert.That(window.Title, Is.Not.Null);
+                    }
                 }
             }
         }

@@ -17,11 +17,12 @@
         /// </summary>
         public static Bitmap CaptureScreen()
         {
-            var screenTop = Convert.ToInt32(SystemParameters.VirtualScreenTop);
-            var screenLeft = Convert.ToInt32(SystemParameters.VirtualScreenLeft);
-            var screenWidth = Convert.ToInt32(SystemParameters.VirtualScreenWidth);
-            var screenHeight = Convert.ToInt32(SystemParameters.VirtualScreenHeight);
-            return CaptureArea(new Rectangle(screenLeft, screenTop, screenWidth, screenHeight));
+            return CaptureArea(
+                new Rect(
+                    x: SystemParameters.VirtualScreenLeft,
+                    y: SystemParameters.VirtualScreenTop,
+                    width: SystemParameters.VirtualScreenWidth,
+                    height: SystemParameters.VirtualScreenHeight));
         }
 
         public static BitmapImage CaptureScreenWpf()
@@ -32,17 +33,25 @@
         /// <summary>
         /// Captures a specific area from the screen
         /// </summary>
-        public static Bitmap CaptureArea(Rectangle rectangle)
+        public static Bitmap CaptureArea(Rect rectangle)
         {
             var width = rectangle.Width.ToInt();
             var height = rectangle.Height.ToInt();
             var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            var graphics = Graphics.FromImage(bmp);
-            graphics.CopyFromScreen(rectangle.Left.ToInt(), rectangle.Top.ToInt(), 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
-            return bmp;
+            using (var graphics = Graphics.FromImage(bmp))
+            {
+                graphics.CopyFromScreen(
+                sourceX: rectangle.Left.ToInt(),
+                sourceY: rectangle.Top.ToInt(),
+                destinationX: 0,
+                destinationY: 0,
+                blockRegionSize: new System.Drawing.Size(width, height),
+                copyPixelOperation: CopyPixelOperation.SourceCopy);
+                return bmp;
+            }
         }
 
-        public static BitmapImage CaptureAreaWpf(Rectangle rectangle)
+        public static BitmapImage CaptureAreaWpf(Rect rectangle)
         {
             return CaptureArea(rectangle).ToWpf();
         }
@@ -59,7 +68,7 @@
         /// <summary>
         /// Captures a specific area and saves it to a file
         /// </summary>
-        public static void CaptureAreaToFile(Rectangle rectangle, string filePath)
+        public static void CaptureAreaToFile(Rect rectangle, string filePath)
         {
             var bmp = CaptureArea(rectangle);
             bmp.Save(filePath, ImageFormat.Png);

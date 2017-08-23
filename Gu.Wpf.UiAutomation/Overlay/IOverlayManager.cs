@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
     using System;
+    using System.Windows;
     using System.Windows.Media;
 
     public interface IOverlayManager : IDisposable
@@ -15,8 +16,8 @@
         /// </summary>
         int Margin { get; set; }
 
-        void Show(Rectangle rectangle, Color color, int durationInMs);
+        void Show(Rect rectangle, Color color, int durationInMs);
 
-        void ShowBlocking(Rectangle rectangle, Color color, int durationInMs);
+        void ShowBlocking(Rect rectangle, Color color, int durationInMs);
     }
 }

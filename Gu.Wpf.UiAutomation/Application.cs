@@ -134,8 +134,8 @@
                 return;
             }
 
-            this.disposed = true;
             this.Close();
+            this.disposed = true;
             this.process.Dispose();
         }
 

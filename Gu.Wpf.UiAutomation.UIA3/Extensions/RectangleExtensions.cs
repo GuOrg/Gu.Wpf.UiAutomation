@@ -1,10 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Extensions
 {
+    using System.Windows;
     using UIA = Interop.UIAutomationClient;
 
     public static class RectangleExtensions
     {
-        public static UIA.tagRECT ToTagRect(this Rectangle r)
+        public static UIA.tagRECT ToTagRect(this Rect r)
         {
             return new UIA.tagRECT
             {
@@ -15,9 +16,9 @@
             };
         }
 
-        public static Rectangle ToRectangle(this UIA.tagRECT r)
+        public static Rect ToRectangle(this UIA.tagRECT r)
         {
-            return new Rectangle(r.left, r.top, r.right - r.left, r.bottom - r.top);
+            return new Rect(r.left, r.top, r.right - r.left, r.bottom - r.top);
         }
     }
 }

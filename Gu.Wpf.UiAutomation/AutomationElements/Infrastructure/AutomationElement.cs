@@ -245,7 +245,7 @@
         public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
         {
             var rectangle = this.Properties.BoundingRectangle.Value;
-            if (!rectangle.IsEmpty)
+            if (!rectangle.IsZeroes())
             {
                 if (blocking)
                 {

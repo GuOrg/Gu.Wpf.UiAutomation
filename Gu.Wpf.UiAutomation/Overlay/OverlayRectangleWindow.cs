@@ -11,7 +11,7 @@
 
     public class OverlayRectangleWindow : Window
     {
-        public OverlayRectangleWindow(Rectangle rectangle, Color color, int durationInMs)
+        public OverlayRectangleWindow(Rect rectangle, Color color, int durationInMs)
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
             AutomationProperties.SetName(this, "Gu.Wpf.UiAutomationOverlayWindow");

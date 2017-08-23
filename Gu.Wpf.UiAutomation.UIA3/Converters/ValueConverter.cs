@@ -24,9 +24,8 @@
             {
                 val = (int)AnnotationTypeConverter.ToAnnotationTypeNative((AnnotationType)val);
             }
-            else if (val is Rectangle)
+            else if (val is Rect rect)
             {
-                var rect = (Rectangle)val;
                 val = new[] { rect.Left, rect.Top, rect.Width, rect.Height };
             }
             else if (val is Point)
@@ -54,7 +53,7 @@
                 return null;
             }
 
-            return new Rectangle(origValue[0], origValue[1], origValue[2], origValue[3]);
+            return new Rect(origValue[0], origValue[1], origValue[2], origValue[3]);
         }
 
         public static object ToPoint(object point)

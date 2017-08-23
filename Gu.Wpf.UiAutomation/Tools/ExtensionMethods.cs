@@ -29,14 +29,6 @@
         }
 
         /// <summary>
-        /// Converts an int to a boolean
-        /// </summary>
-        public static bool ToBool(this int value)
-        {
-            return value == 1;
-        }
-
-        /// <summary>
         /// Converts a double to the nearest int32
         /// </summary>
         public static int ToInt(this double value)

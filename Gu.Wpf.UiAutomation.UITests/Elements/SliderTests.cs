@@ -16,10 +16,10 @@
         {
             var slider = this.GetSlider();
             var thumb = slider.Thumb;
-            var oldPos = thumb.Properties.BoundingRectangle.Value.Center;
+            var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
             thumb.SlideHorizontally(50);
             Helpers.WaitUntilInputIsProcessed();
-            TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center, new Point(oldPos.X + 50, oldPos.Y), 1);
+            TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center(), new Point(oldPos.X + 50, oldPos.Y), 1);
         }
 
         [Test]

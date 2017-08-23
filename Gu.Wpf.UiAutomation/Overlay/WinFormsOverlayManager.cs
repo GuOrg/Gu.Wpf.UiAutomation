@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class WinFormsOverlayManager : IOverlayManager
@@ -20,9 +21,9 @@
         }
 
         /// <inheritdoc/>
-        public void Show(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        public void Show(Rect rectangle, System.Windows.Media.Color color, int durationInMs)
         {
-            if (rectangle.IsValid)
+            if (rectangle.IsValid())
             {
 #if NET35
                 new Thread(() =>
@@ -40,17 +41,36 @@
         }
 
         /// <inheritdoc/>
-        public void ShowBlocking(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        public void ShowBlocking(Rect rectangle, System.Windows.Media.Color color, int durationInMs)
         {
             this.CreateAndShowForms(rectangle, color, durationInMs);
         }
 
-        private void CreateAndShowForms(Rectangle rectangle, System.Windows.Media.Color color, int durationInMs)
+        private void CreateAndShowForms(Rect rectangle, System.Windows.Media.Color color, int durationInMs)
         {
-            var leftBorder = new Rectangle(rectangle.X - this.Margin, rectangle.Y - this.Margin, this.Size, rectangle.Height + 2 * this.Margin);
-            var topBorder = new Rectangle(rectangle.X - this.Margin, rectangle.Y - this.Margin, rectangle.Width + 2 * this.Margin, this.Size);
-            var rightBorder = new Rectangle(rectangle.X + rectangle.Width - this.Size + this.Margin, rectangle.Y - this.Margin, this.Size, rectangle.Height + 2 * this.Margin);
-            var bottomBorder = new Rectangle(rectangle.X - this.Margin, rectangle.Y + rectangle.Height - this.Size + this.Margin, rectangle.Width + 2 * this.Margin, this.Size);
+            var leftBorder = new Rect(
+                x: rectangle.X - this.Margin,
+                y: rectangle.Y - this.Margin,
+                width: this.Size,
+                height: rectangle.Height + (2 * this.Margin));
+
+            var topBorder = new Rect(
+                x: rectangle.X - this.Margin,
+                y: rectangle.Y - this.Margin,
+                width: rectangle.Width + (2 * this.Margin),
+                height: this.Size);
+
+            var rightBorder = new Rect(
+                x: rectangle.X + rectangle.Width - this.Size + this.Margin,
+                y: rectangle.Y - this.Margin,
+                width: this.Size,
+                height: rectangle.Height + (2 * this.Margin));
+            var bottomBorder = new Rect(
+                x: rectangle.X - this.Margin,
+                y: rectangle.Y + rectangle.Height - this.Size + this.Margin,
+                width: rectangle.Width + (2 * this.Margin),
+                height: this.Size);
+
             var allBorders = new[] { leftBorder, topBorder, rightBorder, bottomBorder };
 
             var gdiColor = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
