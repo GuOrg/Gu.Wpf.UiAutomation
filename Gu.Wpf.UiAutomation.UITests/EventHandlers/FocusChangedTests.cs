@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
@@ -12,12 +11,11 @@
         [Test]
         public void FocusChangedWithPaintTest()
         {
-            var app = Application.Launch("mspaint");
-            var focusChangedElements = new List<string>();
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("mspaint"))
             {
-                var mainWindow = app.GetMainWindow(automation);
-                var x = automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
+                var focusChangedElements = new List<string>();
+                var mainWindow = app.GetMainWindow();
+                var x = app.Automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
                 Thread.Sleep(100);
                 var button1 = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Button).And(cf.ByText(this.GetResizeText())));
                 button1.AsButton().Invoke();
@@ -27,12 +25,11 @@
                 Thread.Sleep(100);
                 Keyboard.Press(VirtualKeyShort.ESCAPE);
                 Thread.Sleep(100);
-                automation.UnRegisterFocusChangedEvent(x);
+                app.Automation.UnRegisterFocusChangedEvent(x);
                 mainWindow.Close();
-            }
 
-            app.Dispose();
-            Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+                Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+            }
         }
 
         private string GetResizeText()

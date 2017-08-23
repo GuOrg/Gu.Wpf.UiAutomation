@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System.Threading;
-    using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
@@ -12,10 +11,9 @@
         [Test]
         public void KeyboardTest()
         {
-            var app = Application.Launch("notepad.exe");
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("notepad.exe"))
             {
-                var mainWindow = app.GetMainWindow(automation);
+                var mainWindow = app.GetMainWindow();
 
                 Keyboard.Type("ééééééööööö aaa | ");
 
@@ -34,8 +32,6 @@
 
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
             }
-
-            app.Dispose();
         }
     }
 }

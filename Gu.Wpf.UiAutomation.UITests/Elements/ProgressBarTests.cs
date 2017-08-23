@@ -33,7 +33,7 @@
 
         private ProgressBar GetProgressBar()
         {
-            var mainWindow = this.App.GetMainWindow(this.Automation);
+            var mainWindow = this.App.GetMainWindow();
             var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("ProgressBar")).AsProgressBar();
             return element;
         }

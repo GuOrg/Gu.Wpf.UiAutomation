@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using Gu.Wpf.UiAutomation.Logging;
+    using Gu.Wpf.UiAutomation.UIA3;
 
     /// <summary>
     /// Wrapper for an application which should be automated.
@@ -31,13 +32,16 @@
         /// <summary>
         /// Creates an application object with the given process.
         /// </summary>
-        /// <param name="process">The process.</param>
+        /// <param name="process">The process, NOTE: the process is disposed with this instance.</param>
         /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        public Application(Process process, bool isStoreApp = false)
+        private Application(Process process, bool isStoreApp = false)
         {
             this.process = process ?? throw new ArgumentNullException(nameof(process));
             this.IsStoreApp = isStoreApp;
+            this.Automation = new UIA3Automation();
         }
+
+        public UIA3Automation Automation { get; }
 
         /// <summary>
         /// Flag to indicate, if the application is a windows store app.
@@ -120,21 +124,6 @@
             {
                 // NOOP
             }
-        }
-
-        /// <summary>
-        /// Closes the associated process.
-        /// </summary>
-        public void Dispose()
-        {
-            if (this.disposed)
-            {
-                return;
-            }
-
-            this.Close();
-            this.disposed = true;
-            this.process.Dispose();
         }
 
         /// <summary>
@@ -232,6 +221,7 @@
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileBusy(TimeSpan? waitTimeout = null)
         {
+            this.ThrowIfDisposed();
             var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
             this.process.WaitForInputIdle((int)waitTime);
         }
@@ -256,11 +246,11 @@
         /// <summary>
         /// Gets the main window of the application's process.
         /// </summary>
-        /// <param name="automation">The automation object to use.</param>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
-        public Window GetMainWindow(AutomationBase automation, TimeSpan? waitTimeout = null)
+        public Window GetMainWindow(TimeSpan? waitTimeout = null)
         {
+            this.ThrowIfDisposed();
             this.WaitWhileMainHandleIsMissing(waitTimeout);
             var mainWindowHandle = this.MainWindowHandle;
             if (mainWindowHandle == IntPtr.Zero)
@@ -268,7 +258,7 @@
                 return null;
             }
 
-            var mainWindow = automation.FromHandle(mainWindowHandle).AsWindow();
+            var mainWindow = this.Automation.FromHandle(mainWindowHandle).AsWindow();
             if (mainWindow != null)
             {
                 mainWindow.IsMainWindow = true;
@@ -280,11 +270,39 @@
         /// <summary>
         /// Gets all top level windows from the application.
         /// </summary>
-        public Window[] GetAllTopLevelWindows(AutomationBase automation)
+        public Window[] GetAllTopLevelWindows()
         {
-            var desktop = automation.GetDesktop();
+            var desktop = this.Automation.GetDesktop();
             var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
             return foundElements.Select(x => x.AsWindow()).ToArray();
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.disposed = true;
+            if (disposing)
+            {
+                this.process.Dispose();
+                this.Automation?.Dispose();
+            }
+        }
+
+        protected void ThrowIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
         }
 
         private static Process FindProcess(int processId)

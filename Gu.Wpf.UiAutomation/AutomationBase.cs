@@ -9,6 +9,8 @@
     /// </summary>
     public abstract class AutomationBase : IDisposable
     {
+        private bool disposed;
+
         protected AutomationBase(IPropertyLibray propertyLibrary, IEventLibrary eventLibrary, IPatternLibrary patternLibrary)
         {
             this.PropertyLibrary = propertyLibrary;
@@ -66,13 +68,32 @@
 
         public abstract bool Compare(AutomationElement element1, AutomationElement element2);
 
-        /// <summary>
-        /// Cleans up the resources
-        /// </summary>
         public void Dispose()
         {
-            this.UnregisterAllEvents();
-            this.OverlayManager.Dispose();
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.disposed = true;
+            if (disposing)
+            {
+                this.UnregisterAllEvents();
+                this.OverlayManager.Dispose();
+            }
+        }
+
+        protected void ThrowIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
         }
     }
 }

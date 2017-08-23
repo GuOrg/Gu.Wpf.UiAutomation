@@ -12,7 +12,6 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 using (var app = Application.Launch("notepad.exe"))
                 {
-                    var window = app.GetMainWindow(automation);
                     app.Close();
                 }
             }

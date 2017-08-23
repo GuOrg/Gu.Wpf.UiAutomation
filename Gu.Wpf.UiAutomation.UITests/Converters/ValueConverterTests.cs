@@ -13,7 +13,7 @@
         [Test]
         public void GetControlType()
         {
-            var window = this.App.GetMainWindow(this.Automation);
+            var window = this.App.GetMainWindow();
             var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox"));
             Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
         }

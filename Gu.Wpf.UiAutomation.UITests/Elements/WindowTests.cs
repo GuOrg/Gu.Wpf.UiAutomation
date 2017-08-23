@@ -14,7 +14,7 @@
         public void ContextMenuTest()
         {
             this.RestartApp();
-            var window = this.App.GetMainWindow(this.Automation);
+            var window = this.App.GetMainWindow();
             var btn = window.FindFirstDescendant(cf => cf.ByName("ContextMenu")).AsButton();
             Mouse.Click(MouseButton.Right, btn.GetClickablePoint());
             Helpers.WaitUntilInputIsProcessed();

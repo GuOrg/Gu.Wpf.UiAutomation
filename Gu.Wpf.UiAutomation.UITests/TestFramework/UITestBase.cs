@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using Gu.Wpf.UiAutomation.UIA3;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
 
@@ -22,7 +21,6 @@
             this.ApplicationType = appType;
             this.ScreenshotDir = @"c:\FailedTestsScreenshots";
             this.wasTestRun = false;
-            this.Automation = new UIA3Automation();
         }
 
         protected TestApplicationType ApplicationType { get; }
@@ -36,8 +34,6 @@
         /// Instance of the current running application
         /// </summary>
         protected Application App { get; private set; }
-
-        protected AutomationBase Automation { get; }
 
         /// <summary>
         /// Setup which starts the application (once per test-class)
@@ -67,7 +63,6 @@
         [OneTimeTearDown]
         public void BaseTeardown()
         {
-            this.Automation.Dispose();
             this.App.Dispose();
             this.App = null;
         }
@@ -104,7 +99,6 @@
             if (disposing)
             {
                 this.App?.Dispose();
-                this.Automation.Dispose();
             }
         }
 

@@ -9,53 +9,44 @@
         [Test]
         public void NotepadFindFirst()
         {
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("notepad.exe"))
             {
-                using (var app = Application.Launch("notepad.exe"))
-                {
-                    var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
-                    var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
-                    Assert.That(file, Is.Not.Null);
-                }
+                var window = app.GetMainWindow();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
+                var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
+                Assert.That(file, Is.Not.Null);
             }
         }
 
         [Test]
         public void NotePadFindAll()
         {
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("notepad.exe"))
             {
-                using (var app = Application.Launch("notepad.exe"))
-                {
-                    var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
-                    var items = window.FindAllByXPath("//MenuItem");
-                    Assert.That(items, Is.Not.Null);
-                    Assert.That(items, Has.Length.EqualTo(6));
-                }
+                var window = app.GetMainWindow();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
+                var items = window.FindAllByXPath("//MenuItem");
+                Assert.That(items, Is.Not.Null);
+                Assert.That(items, Has.Length.EqualTo(6));
             }
         }
 
         [Test]
         public void NotePadFindAllIndexed()
         {
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("notepad.exe"))
             {
-                using (var app = Application.Launch("notepad.exe"))
-                {
-                    var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
-                    var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
-                    Assert.That(items, Is.Not.Null);
-                    Assert.That(items, Has.Length.EqualTo(1));
-                    items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
-                    Assert.That(items, Is.Not.Null);
-                    Assert.That(items, Has.Length.EqualTo(5));
-                }
+                var window = app.GetMainWindow();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
+                var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
+                Assert.That(items, Is.Not.Null);
+                Assert.That(items, Has.Length.EqualTo(1));
+                items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
+                Assert.That(items, Is.Not.Null);
+                Assert.That(items, Has.Length.EqualTo(5));
             }
         }
 

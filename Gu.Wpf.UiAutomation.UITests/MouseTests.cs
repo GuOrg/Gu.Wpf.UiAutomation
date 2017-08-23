@@ -2,7 +2,6 @@
 {
     using System.Threading;
     using System.Windows;
-    using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
@@ -21,10 +20,9 @@
         [Test]
         public void ClickTest()
         {
-            var app = Application.Launch("mspaint");
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("mspaint"))
             {
-                var mainWindow = app.GetMainWindow(automation);
+                var mainWindow = app.GetMainWindow();
                 var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 50;
                 var mouseY = mainWindow.Properties.BoundingRectangle.Value.Top + 200;
                 Mouse.Position = new Point(mouseX, mouseY);
@@ -35,8 +33,6 @@
                 Thread.Sleep(500);
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
             }
-
-            app.Dispose();
         }
     }
 }

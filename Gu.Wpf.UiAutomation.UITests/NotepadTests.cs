@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System.Diagnostics;
-    using Gu.Wpf.UiAutomation.UIA3;
     using NUnit.Framework;
 
     [TestFixture]
@@ -12,12 +11,9 @@
         {
             using (var app = Application.Launch("notepad.exe"))
             {
-                using (var automation = new UIA3Automation())
-                {
-                    var window = app.GetMainWindow(automation);
-                    Assert.That(window, Is.Not.Null);
-                    Assert.That(window.Title, Is.Not.Null);
-                }
+                var window = app.GetMainWindow();
+                Assert.That(window, Is.Not.Null);
+                Assert.That(window.Title, Is.Not.Null);
             }
         }
 
@@ -28,12 +24,9 @@
             {
                 using (var app = Application.Attach("notepad.exe"))
                 {
-                    using (var automation = new UIA3Automation())
-                    {
-                        var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
-                    }
+                    var window = app.GetMainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    Assert.That(window.Title, Is.Not.Null);
                 }
             }
         }
@@ -45,12 +38,9 @@
             {
                 using (var app = Application.Attach(launchedApp.ProcessId))
                 {
-                    using (var automation = new UIA3Automation())
-                    {
-                        var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
-                    }
+                    var window = app.GetMainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    Assert.That(window.Title, Is.Not.Null);
                 }
             }
         }
@@ -63,12 +53,9 @@
             {
                 using (var app = Application.AttachOrLaunch(new ProcessStartInfo(name)))
                 {
-                    using (var automation = new UIA3Automation())
-                    {
-                        var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
-                    }
+                    var window = app.GetMainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    Assert.That(window.Title, Is.Not.Null);
                 }
             }
         }
@@ -80,12 +67,9 @@
             {
                 using (var app = Application.Attach(@"C:\WINDOWS\system32\notepad.exe"))
                 {
-                    using (var automation = new UIA3Automation())
-                    {
-                        var window = app.GetMainWindow(automation);
-                        Assert.That(window, Is.Not.Null);
-                        Assert.That(window.Title, Is.Not.Null);
-                    }
+                    var window = app.GetMainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    Assert.That(window.Title, Is.Not.Null);
                 }
             }
         }
