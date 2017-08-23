@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Extensions
 {
+    using System.Windows;
     using UIA = Interop.UIAutomationClient;
 
     public static class PointExtensions

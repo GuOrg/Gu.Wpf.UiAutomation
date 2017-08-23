@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -263,7 +263,7 @@
         /// <summary>
         /// Captures the object as screenshot in WinForms Bitmap format.
         /// </summary>
-        public Bitmap Capture()
+        public System.Drawing.Bitmap Capture()
         {
             return ScreenCapture.CaptureArea(this.Properties.BoundingRectangle);
         }

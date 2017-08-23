@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows;
 
     public abstract class BasicAutomationElementBase
     {
@@ -80,7 +81,7 @@
             var isCacheActive = CacheRequest.IsCachingActive;
             try
             {
-                var internalValue = this.InternalGetPropertyValue(property.Id, isCacheActive, false);
+                var internalValue = this.InternalGetPropertyValue(property.Id, isCacheActive, useDefaultIfNotSupported: false);
                 if (internalValue == this.Automation.NotSupportedValue)
                 {
                     value = default(T);

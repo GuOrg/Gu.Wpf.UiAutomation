@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows;
+
     public abstract class TextPatternBase<TNativePattern> : PatternBase<TNativePattern>, ITextPattern
     {
         protected TextPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)

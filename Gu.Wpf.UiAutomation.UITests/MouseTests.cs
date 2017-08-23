@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System.Threading;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;

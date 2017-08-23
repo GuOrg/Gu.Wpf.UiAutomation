@@ -2,6 +2,7 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;

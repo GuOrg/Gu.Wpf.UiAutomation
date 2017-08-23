@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
+    using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;

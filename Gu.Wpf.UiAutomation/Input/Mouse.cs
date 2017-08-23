@@ -7,6 +7,7 @@
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -62,14 +63,13 @@
         {
             get
             {
-                User32.GetCursorPos(out POINT point);
-                return point;
+                User32.GetCursorPos(out POINT p);
+                return new Point(p.X, p.Y);
             }
 
             set
             {
-                POINT point = value;
-                User32.SetCursorPos(point.X, point.Y);
+                User32.SetCursorPos((int)value.X, (int)value.Y);
             }
         }
 
@@ -98,11 +98,11 @@
         {
             // Get starting position
             var startPos = Position;
-            var startX = (int)startPos.X;
-            var startY = (int)startPos.Y;
+            var startX = startPos.X;
+            var startY = startPos.Y;
 
             // Prepare variables
-            var totalDistance = startPos.Distance(newX, newY);
+            var totalDistance = startPos.Distance(Position);
 
             // Calculate the duration for the speed
             var optimalPixelsPerMillisecond = 1;

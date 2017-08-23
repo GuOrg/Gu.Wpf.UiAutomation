@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.Overlay;
 
     /// <summary>

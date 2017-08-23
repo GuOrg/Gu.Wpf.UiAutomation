@@ -1,10 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Windows;
 
     /// <summary>
     /// UI-independent implementation of a rectangle
     /// </summary>
+    [Obsolete("Remove")]
     public class Rectangle : ShapeBase
     {
         public double Left { get; set; }

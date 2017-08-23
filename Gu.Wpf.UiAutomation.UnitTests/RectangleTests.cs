@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UnitTests
 {
+    using System.Windows;
     using NUnit.Framework;
 
     [TestFixture]

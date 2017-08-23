@@ -1,5 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows;
+
     public interface ITextPattern : IPattern
     {
         ITextPatternEvents Events { get; }
