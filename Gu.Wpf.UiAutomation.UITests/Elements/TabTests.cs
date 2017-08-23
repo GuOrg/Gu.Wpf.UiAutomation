@@ -5,12 +5,10 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class TabTests : UITestBase
     {
-        public TabTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public TabTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

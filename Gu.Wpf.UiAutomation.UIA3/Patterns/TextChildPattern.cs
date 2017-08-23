@@ -11,7 +11,7 @@
 
     public class TextChildPattern : PatternBase<UIA.IUIAutomationTextChildPattern>, ITextChildPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextChildPatternId, "TextChild", AutomationObjectIds.IsTextChildPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextChildPatternId, "TextChild", AutomationObjectIds.IsTextChildPatternAvailableProperty);
 
         public TextChildPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextChildPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

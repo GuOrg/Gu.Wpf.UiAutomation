@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 15.0.26730.3
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1C84389-441E-4870-9EAC-F241B568B204}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,8 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApplications", "{00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.UIA2", "Gu.Wpf.UiAutomation.UIA2\Gu.Wpf.UiAutomation.UIA2.csproj", "{750C23DE-BF96-47D1-9BAD-13D3961BA111}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +49,6 @@ Global
 		{C8276299-FA43-409B-A969-EF030AB56224}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8276299-FA43-409B-A969-EF030AB56224}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8276299-FA43-409B-A969-EF030AB56224}.Release|Any CPU.Build.0 = Release|Any CPU
-		{750C23DE-BF96-47D1-9BAD-13D3961BA111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{750C23DE-BF96-47D1-9BAD-13D3961BA111}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{750C23DE-BF96-47D1-9BAD-13D3961BA111}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{750C23DE-BF96-47D1-9BAD-13D3961BA111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

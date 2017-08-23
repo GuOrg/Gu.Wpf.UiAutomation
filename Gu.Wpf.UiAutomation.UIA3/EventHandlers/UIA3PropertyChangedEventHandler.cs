@@ -17,7 +17,7 @@
         {
             var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            var property = PropertyId.Find(this.Automation.AutomationType, propertyId);
+            var property = PropertyId.Find(propertyId);
             this.HandlePropertyChangedEvent(senderElement, property, newValue);
         }
     }

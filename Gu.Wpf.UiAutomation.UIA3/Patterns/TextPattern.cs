@@ -13,9 +13,9 @@
 
     public class TextPattern : TextPatternBase<UIA.IUIAutomationTextPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_TextPatternId, "Text", AutomationObjectIds.IsTextPatternAvailableProperty);
-        public static readonly EventId TextChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
-        public static readonly EventId TextSelectionChangedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPatternId, "Text", AutomationObjectIds.IsTextPatternAvailableProperty);
+        public static readonly EventId TextChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
+        public static readonly EventId TextSelectionChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
         public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

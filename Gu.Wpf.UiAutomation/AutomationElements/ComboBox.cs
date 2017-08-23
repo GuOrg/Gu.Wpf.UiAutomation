@@ -18,60 +18,10 @@
         {
         }
 
-        protected IValuePattern ValuePattern => this.Patterns.Value.Pattern;
-
-        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.PatternOrDefault;
-
-        /// <summary>
-        /// The text of the editable element inside the combobox.
-        /// Only works if the combobox is editable.
-        /// </summary>
-        public string EditableText
-        {
-            get => this.EditableItem.Text;
-            set
-            {
-                this.EditableItem.Text = value;
-
-                // UIA2/WinForms does not set the selected item until it is expanded
-                if (this.AutomationType == AutomationType.UIA2 && this.FrameworkType == FrameworkType.WinForms)
-                {
-                    this.Expand();
-                    this.Collapse();
-                }
-            }
-        }
-
         /// <summary>
         /// Flag which indicates, if the combobox is editable or not.
         /// </summary>
         public virtual bool IsEditable => this.GetEditableElement() != null;
-
-        /// <summary>
-        /// Gets the editable element
-        /// </summary>
-        protected virtual TextBox EditableItem
-        {
-            get
-            {
-                var edit = this.GetEditableElement();
-                if (edit != null)
-                {
-                    return edit.AsTextBox();
-                }
-
-                throw new Exception("ComboBox is not editable.");
-            }
-        }
-
-        /// <summary>
-        /// Getter / setter for the selected value.
-        /// </summary>
-        public string Value
-        {
-            get => this.ValuePattern.Value.Value;
-            set => this.ValuePattern.SetValue(value);
-        }
 
         /// <summary>
         /// Gets all selected items.
@@ -142,6 +92,46 @@
                 }
 
                 return ExpandCollapseState.LeafNode;
+            }
+        }
+
+        /// <summary>
+        /// The text of the editable element inside the combobox.
+        /// Only works if the combobox is editable.
+        /// </summary>
+        public string EditableText
+        {
+            get => this.EditableItem.Text;
+            set => this.EditableItem.Text = value;
+        }
+
+        /// <summary>
+        /// Getter / setter for the selected value.
+        /// </summary>
+        public string Value
+        {
+            get => this.ValuePattern.Value.Value;
+            set => this.ValuePattern.SetValue(value);
+        }
+
+        protected IValuePattern ValuePattern => this.Patterns.Value.Pattern;
+
+        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.PatternOrDefault;
+
+        /// <summary>
+        /// Gets the editable element
+        /// </summary>
+        protected virtual TextBox EditableItem
+        {
+            get
+            {
+                var edit = this.GetEditableElement();
+                if (edit != null)
+                {
+                    return edit.AsTextBox();
+                }
+
+                throw new Exception("ComboBox is not editable.");
             }
         }
 

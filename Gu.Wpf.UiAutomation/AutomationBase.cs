@@ -37,11 +37,6 @@
         public IOverlayManager OverlayManager { get; }
 
         /// <summary>
-        /// The automation type of the automation implementation
-        /// </summary>
-        public abstract AutomationType AutomationType { get; }
-
-        /// <summary>
         /// Object which represents the "Not Supported" value
         /// </summary>
         public abstract object NotSupportedValue { get; }

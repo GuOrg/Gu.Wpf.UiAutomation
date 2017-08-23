@@ -17,7 +17,7 @@
         {
             var basicAutomationElement = new UIA3BasicAutomationElement((UIA3Automation)this.Automation, sender);
             var senderElement = new AutomationElement(basicAutomationElement);
-            var @event = EventId.Find(AutomationType.UIA3, eventId);
+            var @event = EventId.Find(eventId);
             this.HandleAutomationEvent(senderElement, @event);
         }
     }

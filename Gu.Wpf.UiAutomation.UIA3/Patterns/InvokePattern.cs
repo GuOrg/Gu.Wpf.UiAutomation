@@ -8,8 +8,8 @@
 
     public class InvokePattern : InvokePatternBase<UIA.IUIAutomationInvokePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_InvokePatternId, "Invoke", AutomationObjectIds.IsInvokePatternAvailableProperty);
-        public static readonly EventId InvokedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_Invoke_InvokedEventId, "Invoked");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_InvokePatternId, "Invoke", AutomationObjectIds.IsInvokePatternAvailableProperty);
+        public static readonly EventId InvokedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Invoke_InvokedEventId, "Invoked");
 
         public InvokePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationInvokePattern nativePattern)
             : base(basicAutomationElement, nativePattern)

@@ -4,11 +4,10 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class RangeValuePatternTests : UITestBase
     {
-        public RangeValuePatternTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public RangeValuePatternTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

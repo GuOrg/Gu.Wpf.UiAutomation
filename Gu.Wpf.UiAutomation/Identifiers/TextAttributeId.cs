@@ -17,14 +17,14 @@
             return this.SetConverter<TextAttributeId>(convertMethod);
         }
 
-        public static TextAttributeId Register(AutomationType automationType, int id, string name)
+        public static TextAttributeId Register(int id, string name)
         {
-            return RegisterTextAttribute(automationType, id, name);
+            return RegisterTextAttribute(id, name);
         }
 
-        public static TextAttributeId Find(AutomationType automationType, int id)
+        public static TextAttributeId Find(int id)
         {
-            return FindTextAttribute(automationType, id);
+            return FindTextAttribute(id);
         }
     }
 }

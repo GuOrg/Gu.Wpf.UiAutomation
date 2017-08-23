@@ -6,14 +6,12 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ExpandCollapsePatternTests : UITestBase
     {
         private AutomationElement expander;
 
-        public ExpandCollapsePatternTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public ExpandCollapsePatternTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

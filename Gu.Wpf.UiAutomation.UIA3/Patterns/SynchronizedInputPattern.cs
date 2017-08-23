@@ -9,10 +9,10 @@
 
     public class SynchronizedInputPattern : SynchronizedInputPatternBase<UIA.IUIAutomationSynchronizedInputPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput", AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty);
-        public static readonly EventId DiscardedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
-        public static readonly EventId ReachedOtherElementEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
-        public static readonly EventId ReachedTargetEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput", AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty);
+        public static readonly EventId DiscardedEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
+        public static readonly EventId ReachedOtherElementEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
+        public static readonly EventId ReachedTargetEvent = EventId.Register(UIA.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");
 
         public SynchronizedInputPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSynchronizedInputPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

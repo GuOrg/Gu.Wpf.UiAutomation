@@ -4,12 +4,10 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class ValueConverterTests : UITestBase
     {
-        public ValueConverterTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public ValueConverterTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

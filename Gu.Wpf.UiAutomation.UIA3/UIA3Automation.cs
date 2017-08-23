@@ -25,8 +25,6 @@
 
         public override ITreeWalkerFactory TreeWalkerFactory { get; }
 
-        public override AutomationType AutomationType => AutomationType.UIA3;
-
         public override object NotSupportedValue => this.NativeAutomation.ReservedNotSupportedValue;
 
         /// <summary>

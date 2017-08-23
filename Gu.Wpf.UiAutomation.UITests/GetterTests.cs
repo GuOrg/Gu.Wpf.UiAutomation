@@ -6,12 +6,10 @@
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Custom)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Custom)]
     public class GetterTests : UITestBase
     {
-        public GetterTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public GetterTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 
@@ -32,9 +30,11 @@
         [Test]
         public void CorrectPatternCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Patterns.Add(this.Automation.PatternLibrary.WindowPattern);
             using (cacheRequest.Activate())
             {
@@ -57,9 +57,11 @@
         [Test]
         public void UnsupportedPatternCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Patterns.Add(this.Automation.PatternLibrary.ExpandCollapsePattern);
             using (cacheRequest.Activate())
             {
@@ -73,9 +75,11 @@
         [Test]
         public void CorrectPatternUncached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Patterns.Add(this.Automation.PatternLibrary.ExpandCollapsePattern);
             using (cacheRequest.Activate())
             {
@@ -89,9 +93,11 @@
         [Test]
         public void UnsupportedPatternUnCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Patterns.Add(this.Automation.PatternLibrary.WindowPattern);
             using (cacheRequest.Activate())
             {
@@ -114,9 +120,11 @@
         [Test]
         public void CorrectPropertyCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Properties.Add(this.Automation.PropertyLibrary.Window.CanMaximize);
             using (cacheRequest.Activate())
             {
@@ -139,9 +147,11 @@
         [Test]
         public void UnsupportedPropertyCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Properties.Add(this.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             using (cacheRequest.Activate())
             {
@@ -155,9 +165,11 @@
         [Test]
         public void CorrectPropertyUncached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Properties.Add(this.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
             using (cacheRequest.Activate())
             {
@@ -171,9 +183,11 @@
         [Test]
         public void UnsupportedPropertyUnCached()
         {
-            var cacheRequest = new CacheRequest();
-            cacheRequest.AutomationElementMode = AutomationElementMode.None;
-            cacheRequest.TreeScope = TreeScope.Element;
+            var cacheRequest = new CacheRequest
+            {
+                AutomationElementMode = AutomationElementMode.None,
+                TreeScope = TreeScope.Element
+            };
             cacheRequest.Properties.Add(this.Automation.PropertyLibrary.Window.CanMaximize);
             using (cacheRequest.Activate())
             {

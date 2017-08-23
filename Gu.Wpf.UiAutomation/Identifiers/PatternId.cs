@@ -21,14 +21,14 @@
         /// </summary>
         public PropertyId AvailabilityProperty { get; private set; }
 
-        public static PatternId Register(AutomationType automationType, int id, string name, PropertyId availabilityProperty)
+        public static PatternId Register(int id, string name, PropertyId availabilityProperty)
         {
-            return RegisterPattern(automationType, id, name, availabilityProperty);
+            return RegisterPattern(id, name, availabilityProperty);
         }
 
-        public static PatternId Find(AutomationType automationType, int id)
+        public static PatternId Find(int id)
         {
-            return FindPattern(automationType, id);
+            return FindPattern(id);
         }
     }
 }

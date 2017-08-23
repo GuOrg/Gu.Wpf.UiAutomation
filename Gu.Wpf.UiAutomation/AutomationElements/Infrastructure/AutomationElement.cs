@@ -49,11 +49,6 @@
         public ConditionFactory ConditionFactory => this.BasicAutomationElement.Automation.ConditionFactory;
 
         /// <summary>
-        /// The current <see cref="AutomationType" /> for this element.
-        /// </summary>
-        public AutomationType AutomationType => this.BasicAutomationElement.Automation.AutomationType;
-
-        /// <summary>
         /// Standard UIA patterns of this element.
         /// </summary>
         public AutomationElementPatternValuesBase Patterns => this.BasicAutomationElement.Patterns;

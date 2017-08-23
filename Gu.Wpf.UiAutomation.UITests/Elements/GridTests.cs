@@ -6,14 +6,12 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class GridTests : UITestBase
     {
         private Grid grid;
 
-        public GridTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public GridTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

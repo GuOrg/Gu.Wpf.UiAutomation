@@ -145,13 +145,13 @@
         public override PatternId[] GetSupportedPatterns()
         {
             this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
-            return rawIds.Select(id => PatternId.Find(this.Automation.AutomationType, id)).ToArray();
+            return rawIds.Select(id => PatternId.Find(id)).ToArray();
         }
 
         public override PropertyId[] GetSupportedProperties()
         {
             this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
-            return rawIds.Select(id => PropertyId.Find(this.Automation.AutomationType, id)).ToArray();
+            return rawIds.Select(id => PropertyId.Find(id)).ToArray();
         }
 
         public override AutomationElement GetUpdatedCache()

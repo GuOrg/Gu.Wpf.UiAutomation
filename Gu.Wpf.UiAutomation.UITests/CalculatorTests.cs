@@ -10,7 +10,7 @@
     public class CalculatorTests : UITestBase
     {
         public CalculatorTests()
-            : base(AutomationType.UIA3, TestApplicationType.Custom)
+            : base(TestApplicationType.Custom)
         {
         }
 

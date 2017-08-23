@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using Gu.Wpf.UiAutomation.UIA3;
     using NUnit.Framework;
     using NUnit.Framework.Interfaces;
 
@@ -14,8 +15,6 @@
         /// Flag which indicates if any test was run on a new instance of the app
         /// </summary>
         private bool wasTestRun;
-
-        protected AutomationType AutomationType { get; }
 
         protected TestApplicationType ApplicationType { get; }
 
@@ -31,13 +30,12 @@
 
         protected AutomationBase Automation { get; }
 
-        protected UITestBase(AutomationType automationType, TestApplicationType appType)
+        protected UITestBase(TestApplicationType appType)
         {
-            this.AutomationType = automationType;
             this.ApplicationType = appType;
             this.ScreenshotDir = @"c:\FailedTestsScreenshots";
             this.wasTestRun = false;
-            this.Automation = TestUtilities.GetAutomation(automationType);
+            this.Automation = new UIA3Automation();
         }
 
         /// <summary>

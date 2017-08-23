@@ -3,12 +3,10 @@
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    [TestFixture(AutomationType.UIA2, TestApplicationType.Wpf)]
-    [TestFixture(AutomationType.UIA3, TestApplicationType.Wpf)]
     public class MenuTests : UITestBase
     {
-        public MenuTests(AutomationType automationType, TestApplicationType appType)
-            : base(automationType, appType)
+        public MenuTests()
+            : base(TestApplicationType.Wpf)
         {
         }
 

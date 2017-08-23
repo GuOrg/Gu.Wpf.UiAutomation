@@ -9,12 +9,12 @@
 
     public class SelectionItemPattern : SelectionItemPatternBase<UIA.IUIAutomationSelectionItemPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(AutomationType.UIA3, UIA.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
-        public static readonly PropertyId IsSelectedProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
-        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(AutomationType.UIA3, UIA.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer").SetConverter(AutomationElementConverter.NativeToManaged);
-        public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
-        public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
-        public static readonly EventId ElementSelectedEvent = EventId.Register(AutomationType.UIA3, UIA.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
+        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
+        public static readonly PropertyId IsSelectedProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
+        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer").SetConverter(AutomationElementConverter.NativeToManaged);
+        public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(UIA.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
+        public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(UIA.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
+        public static readonly EventId ElementSelectedEvent = EventId.Register(UIA.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
 
         public SelectionItemPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSelectionItemPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

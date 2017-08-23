@@ -19,16 +19,7 @@
                         return "PART_LineLeftButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (this.AutomationType)
-                        {
-                            case AutomationType.UIA2:
-                                return "SmallDecrement";
-                            case AutomationType.UIA3:
-                                return "UpButton";
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
+                        return "UpButton";
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -45,16 +36,7 @@
                         return "PART_LineRightButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (this.AutomationType)
-                        {
-                            case AutomationType.UIA2:
-                                return "SmallIncrement";
-                            case AutomationType.UIA3:
-                                return "DownButton";
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
+                        return "DownButton";
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -71,16 +53,7 @@
                         return "PageLeft";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (this.AutomationType)
-                        {
-                            case AutomationType.UIA2:
-                                return "LargeDecrement";
-                            case AutomationType.UIA3:
-                                return "DownPageButton";
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
+                        return "DownPageButton";
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -97,16 +70,7 @@
                         return "PageRight";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
-                        switch (this.AutomationType)
-                        {
-                            case AutomationType.UIA2:
-                                return "LargeIncrement";
-                            case AutomationType.UIA3:
-                                return "UpPageButton";
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
+                        return "UpPageButton";
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
