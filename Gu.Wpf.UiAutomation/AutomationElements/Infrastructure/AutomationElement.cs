@@ -249,6 +249,18 @@
         public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name).AsExpander();
 
         /// <summary>
+        /// Find the first horizontal scroll bar by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name).AsHorizontalScrollBar();
+
+        /// <summary>
+        /// Find the first vertical scroll bar by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name).AsVerticalScrollBar();
+
+        /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
