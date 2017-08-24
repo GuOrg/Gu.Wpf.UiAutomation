@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("Content")]
         public void FindTextBlock(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            using (var app = Application.Launch(ExeFileName, "TextBlockWindow"))
             {
                 var window = app.MainWindow();
                 var textBlock = window.FindTextBlock(key);

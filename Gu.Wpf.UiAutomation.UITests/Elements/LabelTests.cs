@@ -17,9 +17,9 @@
             using (var app = Application.Launch(ExeFileName, "LabelWindow"))
             {
                 var window = app.MainWindow();
-                var groupBox = window.FindLabel(key);
-                Assert.AreEqual(header, groupBox.Text);
-                Assert.NotNull(groupBox.FindTextBlock());
+                var label = window.FindLabel(key);
+                Assert.AreEqual(header, label.Text);
+                Assert.NotNull(label.FindTextBlock());
             }
         }
     }
