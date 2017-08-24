@@ -7,7 +7,7 @@
     /// <summary>
     /// Element for grids and tables.
     /// </summary>
-    public class GridView : Control
+    public abstract class GridView : Control
     {
         public GridView(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

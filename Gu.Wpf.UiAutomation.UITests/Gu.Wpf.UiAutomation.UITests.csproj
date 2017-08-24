@@ -60,7 +60,6 @@
     <Compile Include="Elements\ProgressBarTests.cs" />
     <Compile Include="Elements\RadioButtonTests.cs" />
     <Compile Include="Elements\SliderTests.cs" />
-    <Compile Include="Elements\TableTests.cs" />
     <Compile Include="Elements\TabControlTests.cs" />
     <Compile Include="Elements\TextBlockTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />

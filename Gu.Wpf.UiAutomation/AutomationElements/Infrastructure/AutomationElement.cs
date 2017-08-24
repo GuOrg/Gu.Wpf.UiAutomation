@@ -580,8 +580,6 @@
 
         public Expander AsExpander() => new Expander(this.BasicAutomationElement);
 
-        public GridView AsGrid() => new GridView(this.BasicAutomationElement);
-
         public GridRow AsGridRow() => new GridRow(this.BasicAutomationElement);
 
         public ListBox AsListBox() => new ListBox(this.BasicAutomationElement);
