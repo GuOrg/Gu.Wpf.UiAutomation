@@ -87,7 +87,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         private void CheckRow(GridRow dataGridRow, string cell1Value, string cell2Value)
         {
             var cells = dataGridRow.Cells;
-            Assert.AreEqual(3, cells.Length);
+            Assert.AreEqual(3, cells.Count);
             Assert.AreEqual(cell1Value, cells[0].Value);
             Assert.AreEqual(cell2Value, cells[1].Value);
         }

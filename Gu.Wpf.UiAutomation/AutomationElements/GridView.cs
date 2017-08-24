@@ -9,7 +9,7 @@
     /// </summary>
     public abstract class GridView : Control
     {
-        public GridView(BasicAutomationElementBase basicAutomationElement)
+        protected GridView(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -27,12 +27,12 @@
         /// <summary>
         /// Gets all column header elements.
         /// </summary>
-        public AutomationElement[] ColumnHeaders => this.TablePattern.ColumnHeaders.Value;
+        public IReadOnlyList<AutomationElement> ColumnHeaders => this.TablePattern.ColumnHeaders.Value;
 
         /// <summary>
         /// Gets all row header elements.
         /// </summary>
-        public AutomationElement[] RowHeaders => this.TablePattern.RowHeaders.Value;
+        public IReadOnlyList<AutomationElement> RowHeaders => this.TablePattern.RowHeaders.Value;
 
         /// <summary>
         /// Gets whether the data should be read primarily by row or by column.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public GridRow[] SelectedItems => this.SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+        public IReadOnlyList<GridRow> SelectedItems => this.SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.

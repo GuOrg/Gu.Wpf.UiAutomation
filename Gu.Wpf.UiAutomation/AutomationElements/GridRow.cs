@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -12,12 +13,13 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public GridCell[] Cells
+        public IReadOnlyList<GridCell> Cells
         {
             get
             {
-                var cells = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not());
-                return Enumerable.Select(cells, x => x.AsGridCell()).ToArray();
+                return this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not())
+                           .Select(x => x.AsGridCell())
+                           .ToArray();
             }
         }
 

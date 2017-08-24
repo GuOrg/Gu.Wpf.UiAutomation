@@ -86,7 +86,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         private void CheckRow(GridRow listViewRow, string cell1Value, string cell2Value)
         {
             var cells = listViewRow.Cells;
-            Assert.AreEqual(2, cells.Length);
+            Assert.AreEqual(2, cells.Count);
             Assert.AreEqual(cell1Value, cells[0].Value);
             Assert.AreEqual(cell2Value, cells[1].Value);
         }

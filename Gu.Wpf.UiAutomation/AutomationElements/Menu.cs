@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
-    public class Menu : AutomationElement
+    public class Menu : Control
     {
         public Menu(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
