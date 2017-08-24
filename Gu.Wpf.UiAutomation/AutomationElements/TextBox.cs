@@ -70,7 +70,7 @@
             {
                 if (this.Text != value)
                 {
-                    Helpers.WaitUntilInputIsProcessed();
+                    Wait.UntilInputIsProcessed();
                 }
             }
         }

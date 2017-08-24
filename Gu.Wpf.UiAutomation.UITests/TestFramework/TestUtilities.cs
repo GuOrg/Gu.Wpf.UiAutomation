@@ -14,7 +14,7 @@
         public static void CloseWindowWithDontSave(Window window)
         {
             window.Close();
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             var modal = window.ModalWindows;
             var dontSaveButton = modal[0].FindFirstDescendant(cf => cf.ByAutomationId("CommandButton_7")).AsButton();
             dontSaveButton.Invoke();

@@ -57,13 +57,13 @@
         public void SmallIncrement()
         {
             Keyboard.Press(VirtualKeyShort.RIGHT);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         public void SmallDecrement()
         {
             Keyboard.Press(VirtualKeyShort.LEFT);
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         public void LargeIncrement()

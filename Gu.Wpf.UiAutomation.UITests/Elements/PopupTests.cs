@@ -16,7 +16,7 @@
             var window = this.App.MainWindow();
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton1")).AsToggleButton();
             btn.Click();
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             var popup = window.Popup;
             Assert.That(popup, Is.Not.Null);
             var popupChildren = popup.FindAllChildren();
@@ -31,7 +31,7 @@
             var window = this.App.MainWindow();
             var btn = window.FindFirstDescendant(cf => cf.ByAutomationId("PopupToggleButton2")).AsToggleButton();
             btn.Click();
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
             var popup = window.Popup;
             Assert.That(popup, Is.Not.Null);
             var popupChildren = popup.FindAllChildren();

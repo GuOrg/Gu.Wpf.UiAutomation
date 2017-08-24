@@ -183,7 +183,7 @@
                 ecp?.Collapse();
             }
 
-            Helpers.WaitUntilResponsive(this);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>

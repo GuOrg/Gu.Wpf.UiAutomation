@@ -29,12 +29,12 @@
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
                 tab.SelectedIndex = 1;
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(1, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
                 tab.SelectedIndex = 0;
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
             }
@@ -51,12 +51,12 @@
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
                 tab.Select(1);
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(1, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
                 tab.Select(0);
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
             }
@@ -73,12 +73,12 @@
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
                 tab.Select("Complex Controls");
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(1, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
                 tab.Select("Simple Controls");
-                Helpers.WaitUntilInputIsProcessed();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
             }

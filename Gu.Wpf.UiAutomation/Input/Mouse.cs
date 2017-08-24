@@ -141,7 +141,7 @@
                 Thread.Sleep(interval);
             }
 
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>

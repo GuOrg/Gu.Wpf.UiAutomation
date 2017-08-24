@@ -7,7 +7,7 @@
     /// <summary>
     /// Class with various helper tools used in various places
     /// </summary>
-    public static class Helpers
+    public static class Wait
     {
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
 
@@ -15,7 +15,7 @@
         /// Waits for a generic time which was found to be sufficient to allow
         /// input (mouse, keyboard, ...) do be processed
         /// </summary>
-        public static void WaitUntilInputIsProcessed()
+        public static void UntilInputIsProcessed()
         {
             // Let the thread some time to process the system's hardware input queue.
             // For details see this post: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
@@ -23,12 +23,12 @@
             Thread.Sleep(100);
         }
 
-        public static bool WaitUntilResponsive(AutomationElement automationElement)
+        public static bool UntilResponsive(AutomationElement automationElement)
         {
-            return WaitUntilResponsive(automationElement, DefaultTimeout);
+            return UntilResponsive(automationElement, DefaultTimeout);
         }
 
-        public static bool WaitUntilResponsive(AutomationElement automationElement, TimeSpan timeout)
+        public static bool UntilResponsive(AutomationElement automationElement, TimeSpan timeout)
         {
             var currentElement = automationElement;
             var treeWalker = automationElement.Automation.TreeWalkerFactory.GetControlViewWalker();
@@ -37,19 +37,19 @@
                 currentElement = treeWalker.GetParent(currentElement);
             }
 
-            return WaitUntilResponsive(currentElement.Properties.NativeWindowHandle, timeout);
+            return UntilResponsive(currentElement.Properties.NativeWindowHandle, timeout);
         }
 
-        public static bool WaitUntilResponsive(IntPtr hWnd)
+        public static bool UntilResponsive(IntPtr hWnd)
         {
-            return WaitUntilResponsive(hWnd, DefaultTimeout);
+            return UntilResponsive(hWnd, DefaultTimeout);
         }
 
         /// <summary>
         /// Waits until a window is responsive by sending a WM_NULL message.
         /// See: https://blogs.msdn.microsoft.com/oldnewthing/20161118-00/?p=94745
         /// </summary>
-        public static bool WaitUntilResponsive(IntPtr hWnd, TimeSpan timeout)
+        public static bool UntilResponsive(IntPtr hWnd, TimeSpan timeout)
         {
             var ret = User32.SendMessageTimeout(
                 hWnd,

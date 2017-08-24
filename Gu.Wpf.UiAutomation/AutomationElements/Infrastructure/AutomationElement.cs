@@ -708,7 +708,7 @@
             }
 
             action();
-            Helpers.WaitUntilInputIsProcessed();
+            Wait.UntilInputIsProcessed();
         }
 
         protected AutomationElement Find(ControlType controlType, string name = null)
