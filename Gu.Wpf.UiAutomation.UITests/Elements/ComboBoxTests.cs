@@ -12,7 +12,7 @@
         [TestCase("NonEditableCombo")]
         public void SelectedItemTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox(comboBoxId);
@@ -26,7 +26,7 @@
         [TestCase("NonEditableCombo")]
         public void SelectByIndexTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox(comboBoxId);
@@ -40,7 +40,7 @@
         [TestCase("NonEditableCombo")]
         public void SelectByTextTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox(comboBoxId);
@@ -54,7 +54,7 @@
         [TestCase("NonEditableCombo")]
         public void ExpandCollapseTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox(comboBoxId);
@@ -70,7 +70,7 @@
         [Test]
         public void EditableTextTest()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox("EditableCombo");
@@ -82,7 +82,7 @@
         [Test]
         public void AssertMessageBoxCanBeRetrievedInSelection()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox("NonEditableCombo");
