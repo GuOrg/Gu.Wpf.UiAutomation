@@ -1,41 +1,56 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class TextBoxTests : UITestBase
+    public class TextBoxTests
     {
-        public TextBoxTests()
-            : base(TestApplicationType.Wpf)
+        private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+        [TestCase("AutomationId")]
+        [TestCase("XName")]
+        [TestCase("Content")]
+        public void FindCheckBox(string key)
         {
+            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
+            {
+                var window = app.MainWindow();
+                var checkBox = window.FindTextBox(key);
+                Assert.NotNull(checkBox);
+            }
         }
 
         [Test]
         public void DirectSetTest()
         {
-            var window = this.App.MainWindow();
-            var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
-            var text = textBox.Text;
-            Assert.That(text, Is.Empty);
-            var textToSet = "Hello World";
-            textBox.Text = textToSet;
-            text = textBox.Text;
-            Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = string.Empty;
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var textBox = window.FindTextBox("TextBox");
+                Assert.AreEqual(string.Empty, textBox.Text);
+
+                textBox.Text = "Hello World";
+                Assert.AreEqual("Hello World", textBox.Text);
+
+                textBox.Text = string.Empty;
+                Assert.AreEqual(string.Empty, textBox.Text);
+
+                textBox.Text = null;
+                Assert.AreEqual(string.Empty, textBox.Text);
+            }
         }
 
         [Test]
         public void EnterTest()
         {
-            var window = this.App.MainWindow();
-            var textBox = window.FindFirstDescendant(cf => cf.ByAutomationId("TextBox")).AsTextBox();
-            var text = textBox.Text;
-            Assert.That(text, Is.Empty);
-            var textToSet = "Hello World";
-            textBox.Enter(textToSet);
-            text = textBox.Text;
-            Assert.That(text, Is.EqualTo(textToSet));
-            textBox.Text = string.Empty;
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var textBox = window.FindTextBox("TextBox");
+
+                textBox.Enter("Hello World");
+                Assert.AreEqual("Hello World", textBox.Text);
+            }
         }
     }
 }

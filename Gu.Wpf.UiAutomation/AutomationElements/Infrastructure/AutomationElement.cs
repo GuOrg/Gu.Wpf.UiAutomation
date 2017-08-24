@@ -207,6 +207,12 @@
         public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name).AsComboBox();
 
         /// <summary>
+        /// Find the first text box by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TextBox FindTextBox(string name = null) => this.Find(ControlType.Edit, name).AsTextBox();
+
+        /// <summary>
         /// Find the first tab control by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
