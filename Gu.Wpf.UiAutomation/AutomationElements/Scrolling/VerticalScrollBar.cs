@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class HScrollBar : ScrollBarBase
+    public class VerticalScrollBar : ScrollBarBase
     {
-        public HScrollBar(BasicAutomationElementBase basicAutomationElement)
+        public VerticalScrollBar(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -17,7 +17,7 @@
                 switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
-                        return "PART_LineLeftButton";
+                        return "PART_LineUpButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
                         return "UpButton";
@@ -35,7 +35,7 @@
                 switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
-                        return "PART_LineRightButton";
+                        return "PART_LineDownButton";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
                         return "DownButton";
@@ -53,7 +53,7 @@
                 switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
-                        return "PageLeft";
+                        return "PageUp";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
                         return "DownPageButton";
@@ -71,7 +71,7 @@
                 switch (this.FrameworkType)
                 {
                     case FrameworkType.Wpf:
-                        return "PageRight";
+                        return "PageDown";
                     case FrameworkType.WinForms:
                     case FrameworkType.Win32:
                         return "UpPageButton";
@@ -81,24 +81,24 @@
             }
         }
 
-        public virtual void ScrollLeft()
+        public void ScrollUp()
         {
-            this.SmallDecrementButton.Click();
+            this.SmallDecrementButton.Invoke();
         }
 
-        public virtual void ScrollRight()
+        public void ScrollDown()
         {
-            this.SmallIncrementButton.Click();
+            this.SmallIncrementButton.Invoke();
         }
 
-        public virtual void ScrollLeftLarge()
+        public void ScrollUpLarge()
         {
-            this.LargeDecrementButton.Click();
+            this.LargeDecrementButton.Invoke();
         }
 
-        public virtual void ScrollRightLarge()
+        public void ScrollDownLarge()
         {
-            this.LargeIncrementButton.Click();
+            this.LargeIncrementButton.Invoke();
         }
     }
 }

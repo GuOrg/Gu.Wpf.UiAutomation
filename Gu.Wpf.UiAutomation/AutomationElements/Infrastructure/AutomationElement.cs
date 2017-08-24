@@ -570,8 +570,6 @@
 
         public GridHeaderItem AsGridHeaderItem() => new GridHeaderItem(this.BasicAutomationElement);
 
-        public HScrollBar AsHScrollBar() => new HScrollBar(this.BasicAutomationElement);
-
         public Menu AsMenu() => new Menu(this.BasicAutomationElement);
 
         public MenuItem AsMenuItem() => new MenuItem(this.BasicAutomationElement);
@@ -596,7 +594,9 @@
 
         public TreeItem AsTreeItem() => new TreeItem(this.BasicAutomationElement);
 
-        public VScrollBar AsVScrollBar() => new VScrollBar(this.BasicAutomationElement);
+        public HorizontalScrollBar AsHorizontalScrollBar() => new HorizontalScrollBar(this.BasicAutomationElement);
+
+        public VerticalScrollBar AsVerticalScrollBar() => new VerticalScrollBar(this.BasicAutomationElement);
 
         public Window AsWindow() => new Window(this.BasicAutomationElement);
 
