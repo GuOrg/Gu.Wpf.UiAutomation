@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
     using System.IO;
-    using System.Windows;
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
     public class SliderTests
@@ -36,9 +34,9 @@
                 var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
                 thumb.SlideHorizontally(50);
                 Wait.UntilInputIsProcessed();
-                TestUtilities.AssertPointsAreSame(
-                    thumb.Properties.BoundingRectangle.Value.Center(),
-                    new Point(oldPos.X + 50, oldPos.Y), 1);
+
+                Assert.AreEqual(oldPos.X + 50, thumb.Properties.BoundingRectangle.Value.Center().X);
+                Assert.AreEqual(oldPos.Y, thumb.Properties.BoundingRectangle.Value.Center().Y);
             }
         }
 
@@ -51,10 +49,10 @@
                 var slider = window.FindSlider("Slider");
                 var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
                 slider.Value = number1;
-                Assert.That(slider.Value, Is.EqualTo(number1));
+                Assert.AreEqual(1, slider.Value);
                 var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
                 slider.Value = number2;
-                Assert.That(slider.Value, Is.EqualTo(number2));
+                Assert.AreEqual(number2, slider.Value);
             }
         }
 
@@ -67,7 +65,7 @@
                 var slider = window.FindSlider("Slider");
                 this.ResetToCenter(slider);
                 slider.SmallIncrement();
-                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 6)));
+                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 6), slider.Value);
             }
         }
 
@@ -80,7 +78,7 @@
                 var slider = window.FindSlider("Slider");
                 this.ResetToCenter(slider);
                 slider.SmallDecrement();
-                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 4)));
+                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 4), slider.Value);
             }
         }
 
@@ -93,7 +91,7 @@
                 var slider = window.FindSlider("Slider");
                 this.ResetToCenter(slider);
                 slider.LargeIncrement();
-                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 9)));
+                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 9), slider.Value);
             }
         }
 
@@ -106,7 +104,7 @@
                 var slider = window.FindSlider("Slider");
                 this.ResetToCenter(slider);
                 slider.LargeDecrement();
-                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 1)));
+                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 1), slider.Value);
             }
         }
 

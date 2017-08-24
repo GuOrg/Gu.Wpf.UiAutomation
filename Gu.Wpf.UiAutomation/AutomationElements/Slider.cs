@@ -4,7 +4,7 @@
     using System.Globalization;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
-    public class Slider : AutomationElement
+    public class Slider : Control
     {
         public Slider(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
