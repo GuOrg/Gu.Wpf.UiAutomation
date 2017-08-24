@@ -1,22 +1,26 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class LabelTests : UITestBase
+    public class LabelTests
     {
-        public LabelTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
-        [Test]
-        public void GetText()
+        [TestCase("AutomationId", "1")]
+        [TestCase("XName", "2")]
+        [TestCase("Content", "Content")]
+        public void FindLabel(string key, string header)
         {
-            var window = this.App.MainWindow();
-            var label = window.FindFirstDescendant(cf => cf.ByText("Test Label")).AsLabel();
-            Assert.That(label, Is.Not.Null);
-            Assert.That(label.Text, Is.EqualTo("Test Label"));
+            using (var app = Application.Launch(ExeFileName, "LabelWindow"))
+            {
+                var window = app.MainWindow();
+                var groupBox = window.FindLabel(key);
+                Assert.AreEqual(header, groupBox.Text);
+                Assert.NotNull(groupBox.FindTextBlock());
+            }
         }
     }
 }
