@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation.UITests
 {
-    using Gu.Wpf.UiAutomation.UIA3;
     using NUnit.Framework;
 
     public class ApplicationTests
@@ -8,12 +7,9 @@ namespace Gu.Wpf.UiAutomation.UITests
         [Test]
         public void DisposeWhenClosed()
         {
-            using (var automation = new UIA3Automation())
+            using (var app = Application.Launch("notepad.exe"))
             {
-                using (var app = Application.Launch("notepad.exe"))
-                {
-                    app.Close();
-                }
+                app.Close();
             }
         }
     }

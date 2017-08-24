@@ -49,10 +49,10 @@
     <Compile Include="Elements\ButtonTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
+    <Compile Include="Elements\DataGridTests.cs" />
     <Compile Include="Elements\ExpanderTests.cs" />
     <Compile Include="Elements\GroupBoxTests.cs" />
     <Compile Include="Elements\LabelTests.cs" />
-    <Compile Include="Elements\GridTests.cs" />
     <Compile Include="Elements\ListBoxTests.cs" />
     <Compile Include="Elements\ListViewTests.cs" />
     <Compile Include="Elements\MenuTests.cs" />

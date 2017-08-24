@@ -11,10 +11,12 @@
 
         public MainViewModel()
         {
-            this.DataGridItems = new ObservableCollection<DataGridItem>();
-            this.DataGridItems.Add(new DataGridItem { Id = 1, Name = "Spongebob" });
-            this.DataGridItems.Add(new DataGridItem { Id = 2, Name = "Patrick" });
-            this.DataGridItems.Add(new DataGridItem { Id = 3, Name = "Tadeus" });
+            this.DataGridItems = new ObservableCollection<DataGridItem>
+            {
+                new DataGridItem { Id = 1, Name = "Spongebob" },
+                new DataGridItem { Id = 2, Name = "Patrick" },
+                new DataGridItem { Id = 3, Name = "Tadeus" }
+            };
 
             this.invokeButtonText = "Invoke me!";
             this.InvokeButtonCommand = new RelayCommand(o => this.InvokeButtonText = "Invoked!");

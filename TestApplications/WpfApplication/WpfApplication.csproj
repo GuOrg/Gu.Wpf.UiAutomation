@@ -64,6 +64,9 @@
     <Compile Include="Windows\ButtonWindowViewModel.cs">
       <DependentUpon>ButtonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DataGridWindowViewModel.cs">
+      <DependentUpon>DataGridWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,6 +88,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\ExpanderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\DataGridWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
