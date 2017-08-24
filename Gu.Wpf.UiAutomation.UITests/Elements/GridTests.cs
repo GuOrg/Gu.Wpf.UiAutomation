@@ -5,7 +5,7 @@
 
     public class GridTests : UITestBase
     {
-        private Grid grid;
+        private GridView gridView;
 
         public GridTests()
             : base(TestApplicationType.Wpf)
@@ -19,13 +19,13 @@
             var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTabControl();
             tab.Select(1);
             var grid = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("listView1")).AsGrid();
-            this.grid = grid;
+            this.gridView = grid;
         }
 
         [Test]
         public void GridPatternTest()
         {
-            var grid = this.grid;
+            var grid = this.gridView;
             Assert.That(grid.ColumnCount, Is.EqualTo(2));
             Assert.That(grid.RowCount, Is.EqualTo(3));
         }
@@ -33,7 +33,7 @@
         [Test]
         public void HeaderAndColumnsTest()
         {
-            var grid = this.grid;
+            var grid = this.gridView;
             var header = grid.Header;
             var columns = header.Columns;
             Assert.That(header, Is.Not.Null);
@@ -45,7 +45,7 @@
         [Test]
         public void RowsAndCellsTest()
         {
-            var grid = this.grid;
+            var grid = this.gridView;
             var rows = grid.Rows;
             Assert.That(rows, Has.Length.EqualTo(3));
             this.CheckRow(rows[0], "1", "10");
@@ -56,7 +56,7 @@
         [Test]
         public void SelectByIndexTest()
         {
-            var grid = this.grid;
+            var grid = this.gridView;
             grid.Select(1);
             var selectedRow = grid.SelectedItem;
             this.CheckRow(selectedRow, "2", "20");
@@ -68,7 +68,7 @@
         [Test]
         public void SelectByTextTest()
         {
-            var grid = this.grid;
+            var grid = this.gridView;
             grid.Select(1, "20");
             var selectedRow = grid.SelectedItem;
             this.CheckRow(selectedRow, "2", "20");

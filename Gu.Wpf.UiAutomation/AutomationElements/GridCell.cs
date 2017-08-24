@@ -10,7 +10,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public Grid ContainingGrid => this.GridItemPattern.ContainingGrid.Value.AsGrid();
+        public GridView ContainingGridView => this.GridItemPattern.ContainingGrid.Value.AsGrid();
 
         public GridRow ContainingRow
         {

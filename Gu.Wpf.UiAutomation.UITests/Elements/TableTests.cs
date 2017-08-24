@@ -5,7 +5,7 @@
 
     public class TableTests : UITestBase
     {
-        private Grid table;
+        private GridView table;
 
         public TableTests()
             : base(TestApplicationType.Wpf)

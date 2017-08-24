@@ -7,9 +7,9 @@
     /// <summary>
     /// Element for grids and tables.
     /// </summary>
-    public class Grid : AutomationElement
+    public class GridView : Control
     {
-        public Grid(BasicAutomationElementBase basicAutomationElement)
+        public GridView(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -55,12 +55,13 @@
         /// Returns the rows which are currently visible to UIA. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
         /// </summary>
-        public virtual GridRow[] Rows
+        public virtual IReadOnlyList<GridRow> Rows
         {
             get
             {
-                var rows = this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)));
-                return rows.Select(x => x.AsGridRow()).ToArray();
+                return this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)))
+                           .Select(x => x.AsGridRow())
+                           .ToArray();
             }
         }
 
@@ -190,7 +191,7 @@
         {
             if (this.RowCount <= rowIndex)
             {
-                throw new Exception($"Grid contains only {this.RowCount} row(s) but index {rowIndex} was requested");
+                throw new Exception($"GridView contains only {this.RowCount} row(s) but index {rowIndex} was requested");
             }
         }
 
@@ -198,7 +199,7 @@
         {
             if (this.ColumnCount <= columnIndex)
             {
-                throw new Exception($"Grid contains only {this.ColumnCount} columns(s) but index {columnIndex} was requested");
+                throw new Exception($"GridView contains only {this.ColumnCount} columns(s) but index {columnIndex} was requested");
             }
         }
     }

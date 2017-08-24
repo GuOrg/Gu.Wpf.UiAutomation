@@ -266,6 +266,12 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListBox FindListBox(string name = null) => this.Find(ControlType.Group, name).AsListBox();
 
+        /// <summary>
+        /// Find the first list box by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ListView FindListView(string name = null) => this.Find(ControlType.DataGrid, name).AsListView();
+
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
             return this.FindFirstDescendant(
@@ -568,11 +574,13 @@
 
         public Expander AsExpander() => new Expander(this.BasicAutomationElement);
 
-        public Grid AsGrid() => new Grid(this.BasicAutomationElement);
+        public GridView AsGrid() => new GridView(this.BasicAutomationElement);
 
         public GridRow AsGridRow() => new GridRow(this.BasicAutomationElement);
 
         public ListBox AsListBox() => new ListBox(this.BasicAutomationElement);
+
+        public ListView AsListView() => new ListView(this.BasicAutomationElement);
 
         public ListBoxItem AsListBoxItem() => new ListBoxItem(this.BasicAutomationElement);
 

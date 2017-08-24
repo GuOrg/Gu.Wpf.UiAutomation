@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -12,12 +13,13 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public GridHeaderItem[] Columns
+        public IReadOnlyList<GridHeaderItem> Columns
         {
             get
             {
-                var headerItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem));
-                return Enumerable.Select(headerItems, x => x.AsGridHeaderItem()).ToArray();
+                return this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem))
+                           .Select(x => x.AsGridHeaderItem())
+                           .ToArray();
             }
         }
     }

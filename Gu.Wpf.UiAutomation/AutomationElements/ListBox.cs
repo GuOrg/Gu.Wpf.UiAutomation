@@ -88,7 +88,7 @@ namespace Gu.Wpf.UiAutomation
         {
             if (this.RowCount <= rowIndex)
             {
-                throw new Exception($"Grid contains only {this.RowCount} row(s) but index {rowIndex} was requested");
+                throw new Exception($"GridView contains only {this.RowCount} row(s) but index {rowIndex} was requested");
             }
         }
     }
