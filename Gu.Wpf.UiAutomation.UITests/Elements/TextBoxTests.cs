@@ -40,16 +40,16 @@
             }
         }
 
-        [Test]
-        public void EnterTest()
+        [TestCase("Hello World")]
+        public void EnterTest(string text)
         {
             using (var app = Application.Launch(ExeFileName))
             {
                 var window = app.MainWindow();
                 var textBox = window.FindTextBox("TextBox");
 
-                textBox.Enter("Hello World");
-                Assert.AreEqual("Hello World", textBox.Text);
+                textBox.Enter(text);
+                Assert.AreEqual(text, textBox.Text);
             }
         }
     }
