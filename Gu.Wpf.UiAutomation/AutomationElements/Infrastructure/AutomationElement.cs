@@ -195,16 +195,28 @@
         public ToggleButton FindToggleButton(string name = null) => this.Find(ControlType.Button, name).AsToggleButton();
 
         /// <summary>
-        /// Find the first toggle button by x:Name, Content or AutomationID
+        /// Find the first radio button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public RadioButton FindRadioButton(string name) => this.Find(ControlType.RadioButton, name).AsRadioButton();
+
+        /// <summary>
+        /// Find the first button by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Button FindButton(string name) => this.Find(ControlType.Button, name).AsButton();
 
         /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name).AsComboBox();
+
+        /// <summary>
+        /// Find the first label by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Label FindLabel(string name = null) => this.Find(ControlType.Text, name).AsLabel();
 
         /// <summary>
         /// Find the first text box by x:Name, Content or AutomationID
