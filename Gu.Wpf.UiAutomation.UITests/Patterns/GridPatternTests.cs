@@ -1,37 +1,29 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class GridPatternTests : UITestBase
+    public class GridPatternTests
     {
-        private AutomationElement dataGrid;
-
-        public GridPatternTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
-
-        [OneTimeSetUp]
-        public void SelectTab()
-        {
-            var mainWindow = this.App.MainWindow();
-            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTabControl();
-            var tabItem = tab.Select(1);
-            this.dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void GridTest()
         {
-            var dataGrid = this.dataGrid;
-            Assert.That(dataGrid, Is.Not.Null);
-            var gridPattern = dataGrid.Patterns.Grid.Pattern;
-            Assert.That(gridPattern, Is.Not.Null);
-            Assert.That(gridPattern.ColumnCount.Value, Is.EqualTo(2));
-            Assert.That(gridPattern.RowCount.Value, Is.EqualTo(3));
-            var item = gridPattern.GetItem(1, 1);
-            Assert.That(item.Properties.Name.Value, Is.EqualTo("Patrick"));
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid();
+                Assert.NotNull(dataGrid);
+                var gridPattern = dataGrid.Patterns.Grid.Pattern;
+                Assert.AreEqual(2, gridPattern.ColumnCount.Value);
+                Assert.AreEqual(4, gridPattern.RowCount.Value);
+
+                var item = gridPattern.GetItem(1, 1);
+                Assert.AreEqual("Item 2", item.Properties.Name.Value);
+            }
         }
     }
 }

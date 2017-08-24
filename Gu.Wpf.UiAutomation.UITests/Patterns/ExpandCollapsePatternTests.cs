@@ -1,38 +1,32 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
+    using System.IO;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    public class ExpandCollapsePatternTests : UITestBase
+    public class ExpandCollapsePatternTests
     {
-        private AutomationElement expander;
-
-        public ExpandCollapsePatternTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
-
-        [OneTimeSetUp]
-        public void SelectTab()
-        {
-            var mainWindow = this.App.MainWindow();
-            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTabControl();
-            var tabItem = tab.Select(1);
-            this.expander = tabItem.FindFirstNested(cf => new ConditionBase[] { cf.ByControlType(ControlType.Pane), cf.ByAutomationId("Expander") });
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void ExpanderTest()
         {
-            var expander = this.expander;
-            Assert.That(expander, Is.Not.Null);
-            var ecp = expander.Patterns.ExpandCollapse.Pattern;
-            Assert.That(ecp, Is.Not.Null);
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
-            ecp.Expand();
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Expanded));
-            ecp.Collapse();
-            Assert.That(ecp.ExpandCollapseState.Value, Is.EqualTo(ExpandCollapseState.Collapsed));
+            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            {
+                var window = app.MainWindow();
+                var expander = window.FindExpander();
+                Assert.NotNull(expander);
+                var ecp = expander.Patterns.ExpandCollapse.Pattern;
+                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.ExpandCollapseState.Value);
+
+                ecp.Collapse();
+                Assert.AreEqual(ExpandCollapseState.Collapsed, ecp.ExpandCollapseState.Value);
+
+                ecp.Expand();
+                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.ExpandCollapseState.Value);
+            }
         }
     }
 }
