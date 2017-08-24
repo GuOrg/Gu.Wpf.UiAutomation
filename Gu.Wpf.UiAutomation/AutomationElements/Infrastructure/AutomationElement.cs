@@ -237,10 +237,16 @@
         public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name).AsTabControl();
 
         /// <summary>
-        /// Find the first group box by x:Name, Content or AutomationID
+        /// Find the first group box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public GroupBox FindGroupBox(string name = null) => this.Find(ControlType.Group, name).AsGroupBox();
+
+        /// <summary>
+        /// Find the first expander by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name).AsExpander();
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
@@ -541,6 +547,8 @@
         public TextBlock AsTextBlock() => new TextBlock(this.BasicAutomationElement);
 
         public GroupBox AsGroupBox() => new GroupBox(this.BasicAutomationElement);
+
+        public Expander AsExpander() => new Expander(this.BasicAutomationElement);
 
         public Grid AsGrid() => new Grid(this.BasicAutomationElement);
 
