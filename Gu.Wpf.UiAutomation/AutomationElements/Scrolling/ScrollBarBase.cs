@@ -39,12 +39,6 @@
 
         protected Thumb Thumb => this.FindThumb();
 
-        private Button FindButton(string automationId)
-        {
-            var button = this.FindFirstChild(cf => cf.ByControlType(ControlType.Button).And(cf.ByAutomationId(automationId)));
-            return button?.AsButton();
-        }
-
         private Thumb FindThumb()
         {
             var thumb = this.FindFirstChild(cf => cf.ByControlType(ControlType.Thumb));

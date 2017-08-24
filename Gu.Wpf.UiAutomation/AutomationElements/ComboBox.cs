@@ -127,7 +127,7 @@
 
         public void Expand()
         {
-            if (!this.Properties.IsEnabled.Value || 
+            if (!this.Properties.IsEnabled.Value ||
                 this.IsDropDownOpen)
             {
                 return;
@@ -155,7 +155,7 @@
 
         public void Collapse()
         {
-            if (!this.Properties.IsEnabled || 
+            if (!this.Properties.IsEnabled ||
                 !this.IsDropDownOpen)
             {
                 return;
