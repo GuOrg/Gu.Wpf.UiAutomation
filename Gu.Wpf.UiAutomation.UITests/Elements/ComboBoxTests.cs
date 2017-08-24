@@ -82,7 +82,7 @@
         [Test]
         public void AssertMessageBoxCanBeRetrievedInSelection()
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.Launch(ExeFileName))
             {
                 var window = app.MainWindow();
                 var combo = window.FindComboBox("NonEditableCombo");
