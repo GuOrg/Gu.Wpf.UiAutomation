@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
+    using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class TextBox : Control
@@ -66,11 +67,15 @@
                 Keyboard.Type(line);
             }
 
-            for (var i = 0; i < 5; i++)
+            // give some time to process input.
+            for (var i = 0; i < 100; i++)
             {
                 if (this.Text != value)
                 {
-                    Wait.UntilInputIsProcessed();
+                    if (!Thread.Yield())
+                    {
+                        Thread.Sleep(10);
+                    }
                 }
             }
         }

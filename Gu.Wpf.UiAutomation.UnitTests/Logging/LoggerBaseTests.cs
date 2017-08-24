@@ -12,8 +12,7 @@
         public void IsTraceEnabled_False_TraceLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -34,8 +33,7 @@
         public void IsTraceEnabled_True_TraceLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -56,8 +54,7 @@
         public void IsDebugEnabled_False_DebugLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -78,8 +75,7 @@
         public void IsDebugEnabled_True_DebugLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -100,8 +96,7 @@
         public void IsInfoEnabled_False_InfoLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -122,8 +117,7 @@
         public void IsInfoEnabled_True_InfoLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -144,8 +138,7 @@
         public void IsWarnEnabled_False_WarnLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -166,8 +159,7 @@
         public void IsWarnEnabled_True_WarnLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -188,8 +180,7 @@
         public void IsErrorEnabled_False_ErrorLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -210,8 +201,7 @@
         public void IsErrorEnabled_True_ErrorLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -232,8 +222,7 @@
         public void IsFatalEnabled_False_FatalLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -254,8 +243,7 @@
         public void IsFatalEnabled_True_FatalLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase>();
-            mock.CallBase = true;
+            var mock = new Mock<LoggerBase> { CallBase = true };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
