@@ -6,7 +6,7 @@
         Width="300"
         Height="300"
         mc:Ignorable="d">
-    <ListBox>
+    <ListBox x:Name="ListBox">
         <GroupBox Header="1">
             <TextBlock Text="1.1" />
         </GroupBox>
