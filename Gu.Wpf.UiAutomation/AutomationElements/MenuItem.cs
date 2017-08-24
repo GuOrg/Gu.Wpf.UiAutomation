@@ -20,7 +20,7 @@ namespace Gu.Wpf.UiAutomation
 
         public string Text => this.Properties.Name.Value;
 
-        public MenuItems SubMenuItems
+        public MenuItems Items
         {
             get
             {
@@ -39,7 +39,7 @@ namespace Gu.Wpf.UiAutomation
                     menu.IsWin32Menu = true;
 
                     // Now return the menu items
-                    return menu.MenuItems;
+                    return menu.Items;
                 }
 
                 // Expand if needed, WinForms does not have the expand pattern but all children are already visible so it works as well
@@ -59,7 +59,9 @@ namespace Gu.Wpf.UiAutomation
                     while (state != ExpandCollapseState.Expanded);
                 }
 
-                var childItems = Enumerable.Select(this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem)), e => e.AsMenuItem());
+                var childItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem))
+                                     .Select(e => e.AsMenuItem())
+                                     .ToArray();
                 return new MenuItems(childItems);
             }
         }

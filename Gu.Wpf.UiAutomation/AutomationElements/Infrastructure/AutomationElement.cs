@@ -255,6 +255,12 @@
         public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name).AsExpander();
 
         /// <summary>
+        /// Find the first menu by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Menu FindMenu(string name = null) => this.Find(ControlType.Menu, name).AsMenu();
+
+        /// <summary>
         /// Find the first horizontal scroll bar by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

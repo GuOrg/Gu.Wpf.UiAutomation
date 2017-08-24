@@ -1,23 +1,38 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Represents a list of <see cref="MenuItem"/>s.
     /// </summary>
-    public class MenuItems : List<MenuItem>
+    public class MenuItems : IReadOnlyList<MenuItem>
     {
-        public MenuItems(IEnumerable<MenuItem> collection)
-            : base(collection)
+        private readonly IReadOnlyList<MenuItem> items;
+
+        public MenuItems(IReadOnlyList<MenuItem> items)
         {
+            this.items = items;
         }
 
-        public int Length => this.Count;
+        public int Count => this.items.Count;
+
+        public MenuItem this[int index] => this.items[index];
 
         public MenuItem this[string text]
         {
-            get { return Enumerable.FirstOrDefault(this, x => x.Text.Equals(text)); }
+            get { return this.FirstOrDefault(x => x.Text.Equals(text)); }
+        }
+
+        public IEnumerator<MenuItem> GetEnumerator()
+        {
+            return this.items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this.items).GetEnumerator();
         }
     }
 }

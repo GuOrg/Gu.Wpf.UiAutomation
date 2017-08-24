@@ -12,17 +12,17 @@
         {
         }
 
-        public MenuItems MenuItems
+        public MenuItems Items
         {
             get
             {
                 var childItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem))
-                    .Select(e =>
-                    {
-                        var mi = e.AsMenuItem();
-                        mi.IsWin32Menu = this.IsWin32Menu;
-                        return mi;
-                    });
+                                     .Select(e =>
+                                     {
+                                         var mi = e.AsMenuItem();
+                                         mi.IsWin32Menu = this.IsWin32Menu;
+                                         return mi;
+                                     }).ToArray();
                 return new MenuItems(childItems);
             }
         }
