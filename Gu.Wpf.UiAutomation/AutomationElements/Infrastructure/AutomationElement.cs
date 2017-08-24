@@ -236,6 +236,12 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name).AsTabControl();
 
+        /// <summary>
+        /// Find the first group box by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public GroupBox FindGroupBox(string name = null) => this.Find(ControlType.Group, name).AsGroupBox();
+
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
             return this.FindFirstDescendant(
@@ -533,6 +539,8 @@
         public Label AsLabel() => new Label(this.BasicAutomationElement);
 
         public TextBlock AsTextBlock() => new TextBlock(this.BasicAutomationElement);
+
+        public GroupBox AsGroupBox() => new GroupBox(this.BasicAutomationElement);
 
         public Grid AsGrid() => new Grid(this.BasicAutomationElement);
 
