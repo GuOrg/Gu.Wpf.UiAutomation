@@ -213,6 +213,12 @@
         public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name).AsComboBox();
 
         /// <summary>
+        /// Find the first text block by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TextBlock FindTextBlock(string name = null) => this.Find(ControlType.Text, name).AsTextBlock();
+
+        /// <summary>
         /// Find the first label by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -516,130 +522,57 @@
             return $"AutomationId:{this.Properties.AutomationId.ValueOrDefault}, Name:{this.Properties.Name.ValueOrDefault}, ControlType:{this.Properties.LocalizedControlType.ValueOrDefault}, FrameworkId:{this.Properties.FrameworkId.ValueOrDefault}";
         }
 
-        public Button AsButton()
-        {
-            return new Button(this.BasicAutomationElement);
-        }
+        public Button AsButton() => new Button(this.BasicAutomationElement);
 
-        public CheckBox AsCheckBox()
-        {
-            return new CheckBox(this.BasicAutomationElement);
-        }
+        public CheckBox AsCheckBox() => new CheckBox(this.BasicAutomationElement);
 
-        public ToggleButton AsToggleButton()
-        {
-            return new ToggleButton(this.BasicAutomationElement);
-        }
+        public ToggleButton AsToggleButton() => new ToggleButton(this.BasicAutomationElement);
 
-        public ComboBox AsComboBox()
-        {
-            return new ComboBox(this.BasicAutomationElement);
-        }
+        public ComboBox AsComboBox() => new ComboBox(this.BasicAutomationElement);
 
-        public Label AsLabel()
-        {
-            return new Label(this.BasicAutomationElement);
-        }
+        public Label AsLabel() => new Label(this.BasicAutomationElement);
 
-        public Grid AsGrid()
-        {
-            return new Grid(this.BasicAutomationElement);
-        }
+        public TextBlock AsTextBlock() => new TextBlock(this.BasicAutomationElement);
 
-        public GridRow AsGridRow()
-        {
-            return new GridRow(this.BasicAutomationElement);
-        }
+        public Grid AsGrid() => new Grid(this.BasicAutomationElement);
 
-        public GridCell AsGridCell()
-        {
-            return new GridCell(this.BasicAutomationElement);
-        }
+        public GridRow AsGridRow() => new GridRow(this.BasicAutomationElement);
 
-        public GridHeader AsGridHeader()
-        {
-            return new GridHeader(this.BasicAutomationElement);
-        }
+        public GridCell AsGridCell() => new GridCell(this.BasicAutomationElement);
 
-        public GridHeaderItem AsGridHeaderItem()
-        {
-            return new GridHeaderItem(this.BasicAutomationElement);
-        }
+        public GridHeader AsGridHeader() => new GridHeader(this.BasicAutomationElement);
 
-        public HScrollBar AsHScrollBar()
-        {
-            return new HScrollBar(this.BasicAutomationElement);
-        }
+        public GridHeaderItem AsGridHeaderItem() => new GridHeaderItem(this.BasicAutomationElement);
 
-        public Menu AsMenu()
-        {
-            return new Menu(this.BasicAutomationElement);
-        }
+        public HScrollBar AsHScrollBar() => new HScrollBar(this.BasicAutomationElement);
 
-        public MenuItem AsMenuItem()
-        {
-            return new MenuItem(this.BasicAutomationElement);
-        }
+        public Menu AsMenu() => new Menu(this.BasicAutomationElement);
 
-        public ProgressBar AsProgressBar()
-        {
-            return new ProgressBar(this.BasicAutomationElement);
-        }
+        public MenuItem AsMenuItem() => new MenuItem(this.BasicAutomationElement);
 
-        public RadioButton AsRadioButton()
-        {
-            return new RadioButton(this.BasicAutomationElement);
-        }
+        public ProgressBar AsProgressBar() => new ProgressBar(this.BasicAutomationElement);
 
-        public Slider AsSlider()
-        {
-            return new Slider(this.BasicAutomationElement);
-        }
+        public RadioButton AsRadioButton() => new RadioButton(this.BasicAutomationElement);
 
-        public TabControl AsTabControl()
-        {
-            return new TabControl(this.BasicAutomationElement);
-        }
+        public Slider AsSlider() => new Slider(this.BasicAutomationElement);
 
-        public TabItem AsTabItem()
-        {
-            return new TabItem(this.BasicAutomationElement);
-        }
+        public TabControl AsTabControl() => new TabControl(this.BasicAutomationElement);
 
-        public TextBox AsTextBox()
-        {
-            return new TextBox(this.BasicAutomationElement);
-        }
+        public TabItem AsTabItem() => new TabItem(this.BasicAutomationElement);
 
-        public Thumb AsThumb()
-        {
-            return new Thumb(this.BasicAutomationElement);
-        }
+        public TextBox AsTextBox() => new TextBox(this.BasicAutomationElement);
 
-        public TitleBar AsTitleBar()
-        {
-            return new TitleBar(this.BasicAutomationElement);
-        }
+        public Thumb AsThumb() => new Thumb(this.BasicAutomationElement);
 
-        public Tree AsTree()
-        {
-            return new Tree(this.BasicAutomationElement);
-        }
+        public TitleBar AsTitleBar() => new TitleBar(this.BasicAutomationElement);
 
-        public TreeItem AsTreeItem()
-        {
-            return new TreeItem(this.BasicAutomationElement);
-        }
+        public Tree AsTree() => new Tree(this.BasicAutomationElement);
 
-        public VScrollBar AsVScrollBar()
-        {
-            return new VScrollBar(this.BasicAutomationElement);
-        }
+        public TreeItem AsTreeItem() => new TreeItem(this.BasicAutomationElement);
 
-        public Window AsWindow()
-        {
-            return new Window(this.BasicAutomationElement);
-        }
+        public VScrollBar AsVScrollBar() => new VScrollBar(this.BasicAutomationElement);
+
+        public Window AsWindow() => new Window(this.BasicAutomationElement);
 
         public AutomationElement FindFirstChild()
         {

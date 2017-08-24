@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class Label : AutomationElement
+    public class Label : Control
     {
         public Label(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

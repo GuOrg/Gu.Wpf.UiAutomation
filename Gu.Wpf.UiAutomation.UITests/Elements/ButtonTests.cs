@@ -6,7 +6,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
     public class ButtonTests
     {
         private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory, 
+            TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [TestCase("AutomationId")]
@@ -29,7 +29,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var button = window.FindButton("Test Button");
-                var textBlock = window.FindLabel("CountTextBlock");
+                var textBlock = window.FindTextBlock("CountTextBlock");
                 Assert.AreEqual("0", textBlock.Text);
 
                 button.Click();
