@@ -3,9 +3,9 @@
     using System;
     using System.Linq;
 
-    public class Tab : AutomationElement
+    public class TabControl : AutomationElement
     {
-        public Tab(BasicAutomationElementBase basicAutomationElement)
+        public TabControl(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -13,27 +13,31 @@
         /// <summary>
         /// The currently selected <see cref="TabItem" />
         /// </summary>
-        public TabItem SelectedTabItem
+        public TabItem SelectedItem
         {
-            get { return this.TabItems.FirstOrDefault(t => t.IsSelected); }
+            get { return this.Items.FirstOrDefault(t => t.IsSelected); }
         }
 
         /// <summary>
         /// The index of the currently selected <see cref="TabItem" />
         /// </summary>
-        public int SelectedTabItemIndex => this.GetIndexOfSelectedTabItem();
+        public int SelectedIndex
+        {
+            get => this.GetIndexOfSelectedTabItem();
+            set => this.Select(value);
+        }
 
         /// <summary>
-        /// All <see cref="TabItem" /> objects from this <see cref="Tab" />
+        /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public TabItem[] TabItems => this.GetTabItems();
+        public TabItem[] Items => this.GetTabItems();
 
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
         /// </summary>
-        public TabItem SelectTabItem(int index)
+        public TabItem Select(int index)
         {
-            var tabItem = this.TabItems[index];
+            var tabItem = this.Items[index];
             tabItem.Select();
             return tabItem;
         }
@@ -41,9 +45,9 @@
         /// <summary>
         /// Selects a <see cref="TabItem" /> by a give text (name property)
         /// </summary>
-        public TabItem SelectTabItem(string text)
+        public TabItem Select(string text)
         {
-            var tabItems = this.TabItems;
+            var tabItems = this.Items;
             var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Properties.Name == text);
             if (foundTabItemIndex < 0)
             {
@@ -51,7 +55,7 @@
             }
 
             var tabItem = tabItems[foundTabItemIndex];
-            if (this.SelectedTabItemIndex != foundTabItemIndex)
+            if (this.SelectedIndex != foundTabItemIndex)
             {
                 // It is not the selected one, so select it
                 tabItem.Select();
@@ -61,7 +65,7 @@
         }
 
         /// <summary>
-        /// Gets all the <see cref="TabItem" /> objects for this <see cref="Tab" />
+        /// Gets all the <see cref="TabItem" /> objects for this <see cref="TabControl" />
         /// </summary>
         private TabItem[] GetTabItems()
         {
@@ -71,7 +75,7 @@
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(this.TabItems, t => t.IsSelected);
+            return Array.FindIndex(this.Items, t => t.IsSelected);
         }
     }
 }

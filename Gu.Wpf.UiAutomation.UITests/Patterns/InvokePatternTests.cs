@@ -16,8 +16,8 @@
         public void InvokeWithEventTest()
         {
             var mainWindow = this.App.MainWindow();
-            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            var tabItem = tab.TabItems[0];
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTabControl();
+            var tabItem = tab.Items[0];
             var button = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("InvokableButton"));
             Assert.That(button, Is.Not.Null);
             var origButtonText = button.Properties.Name.Value;

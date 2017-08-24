@@ -16,8 +16,8 @@
         public void SelectTab()
         {
             var mainWindow = this.App.MainWindow();
-            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTab();
-            var tabItem = tab.SelectTabItem(1);
+            var tab = mainWindow.FindFirstDescendant(cf => cf.ByControlType(ControlType.Tab)).AsTabControl();
+            var tabItem = tab.Select(1);
             this.dataGrid = tabItem.FindFirstDescendant(cf => cf.ByAutomationId("dataGrid1"));
         }
 

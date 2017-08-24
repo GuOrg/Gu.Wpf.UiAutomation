@@ -186,25 +186,31 @@
         /// Find the first checkbox by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public CheckBox FindCheckBox(string name) => this.FindByNameOrId(name, ControlType.CheckBox).AsCheckBox();
+        public CheckBox FindCheckBox(string name = null) => this.Find(ControlType.CheckBox, name).AsCheckBox();
 
         /// <summary>
         /// Find the first toggle button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ToggleButton FindToggleButton(string name) => this.FindByNameOrId(name, ControlType.Button).AsToggleButton();
+        public ToggleButton FindToggleButton(string name = null) => this.Find(ControlType.Button, name).AsToggleButton();
 
         /// <summary>
         /// Find the first toggle button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public RadioButton FindRadioButton(string name) => this.FindByNameOrId(name, ControlType.RadioButton).AsRadioButton();
+        public RadioButton FindRadioButton(string name) => this.Find(ControlType.RadioButton, name).AsRadioButton();
 
         /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ComboBox FindComboBox(string name) => this.FindByNameOrId(name, ControlType.ComboBox).AsComboBox();
+        public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name).AsComboBox();
+
+        /// <summary>
+        /// Find the first tab control by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name).AsTabControl();
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
@@ -214,6 +220,11 @@
                     new OrCondition(
                         this.ConditionFactory.ByName(name),
                         this.ConditionFactory.ByAutomationId(name))));
+        }
+
+        public AutomationElement Find(ControlType controlType)
+        {
+            return this.FindFirstDescendant(this.ConditionFactory.ByControlType(controlType));
         }
 
         public AutomationElement FindByNameOrId(string name)
@@ -567,9 +578,9 @@
             return new Slider(this.BasicAutomationElement);
         }
 
-        public Tab AsTab()
+        public TabControl AsTabControl()
         {
-            return new Tab(this.BasicAutomationElement);
+            return new TabControl(this.BasicAutomationElement);
         }
 
         public TabItem AsTabItem()
@@ -739,6 +750,21 @@
 
             action();
             Helpers.WaitUntilInputIsProcessed();
+        }
+
+        protected AutomationElement Find(ControlType controlType, string name = null)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return this.Find(controlType);
+            }
+
+            return this.FindFirstDescendant(
+                new AndCondition(
+                    this.ConditionFactory.ByControlType(controlType),
+                    new OrCondition(
+                        this.ConditionFactory.ByName(name),
+                        this.ConditionFactory.ByAutomationId(name))));
         }
     }
 }
