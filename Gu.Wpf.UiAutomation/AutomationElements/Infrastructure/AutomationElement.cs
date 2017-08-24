@@ -204,7 +204,7 @@
         /// Find the first button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Button FindButton(string name) => this.Find(ControlType.Button, name).AsButton();
+        public Button FindButton(string name = null) => this.Find(ControlType.Button, name).AsButton();
 
         /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
