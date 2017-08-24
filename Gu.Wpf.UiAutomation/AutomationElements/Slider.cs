@@ -15,6 +15,12 @@
 
         public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
 
+        public double Minimum => this.Patterns.RangeValue.Pattern.Minimum;
+
+        public double Maximum => this.Patterns.RangeValue.Pattern.Maximum;
+
+        public double LargeChange => this.Patterns.RangeValue.Pattern.LargeChange;
+
         public double Value
         {
             get
@@ -81,7 +87,7 @@
             if (this.FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return this.FindFirstChild(cf => cf.ByAutomationId("IncreaseLarge")).AsButton();
+                return this.FindButton("IncreaseLarge");
             }
 
             // For WinForms, we loop thru the buttons and find the one right of the thumb
@@ -102,7 +108,7 @@
             if (this.FrameworkType == FrameworkType.Wpf)
             {
                 // For WPF, this is simple
-                return this.FindFirstChild(cf => cf.ByAutomationId("DecreaseLarge")).AsButton();
+                return this.FindButton("DecreaseLarge");
             }
 
             // For WinForms, we loop thru the buttons and find the one left of the thumb

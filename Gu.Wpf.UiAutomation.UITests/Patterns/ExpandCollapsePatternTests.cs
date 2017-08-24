@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
     using System.IO;
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
     public class ExpandCollapsePatternTests

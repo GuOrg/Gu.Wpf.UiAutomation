@@ -1,79 +1,113 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using System.IO;
     using System.Windows;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
-    public class SliderTests : UITestBase
+    public class SliderTests
     {
-        public SliderTests()
-            : base(TestApplicationType.Wpf)
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+        [Test]
+        public void Properties()
         {
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                Assert.AreEqual(0, slider.Minimum);
+                Assert.AreEqual(10, slider.Maximum);
+                Assert.AreEqual(5, slider.Value);
+                Assert.AreEqual(4, slider.LargeChange);
+            }
         }
 
         [Test]
         public void SlideThumbTest()
         {
-            var slider = this.GetSlider();
-            var thumb = slider.Thumb;
-            var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
-            thumb.SlideHorizontally(50);
-            Wait.UntilInputIsProcessed();
-            TestUtilities.AssertPointsAreSame(thumb.Properties.BoundingRectangle.Value.Center(), new Point(oldPos.X + 50, oldPos.Y), 1);
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                var thumb = slider.Thumb;
+                var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
+                thumb.SlideHorizontally(50);
+                Wait.UntilInputIsProcessed();
+                TestUtilities.AssertPointsAreSame(
+                    thumb.Properties.BoundingRectangle.Value.Center(),
+                    new Point(oldPos.X + 50, oldPos.Y), 1);
+            }
         }
 
         [Test]
         public void SetValueTest()
         {
-            var slider = this.GetSlider();
-            var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
-            slider.Value = number1;
-            Assert.That(slider.Value, Is.EqualTo(number1));
-            var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
-            slider.Value = number2;
-            Assert.That(slider.Value, Is.EqualTo(number2));
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
+                slider.Value = number1;
+                Assert.That(slider.Value, Is.EqualTo(number1));
+                var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
+                slider.Value = number2;
+                Assert.That(slider.Value, Is.EqualTo(number2));
+            }
         }
 
         [Test]
         public void SmallIncrementTest()
         {
-            var slider = this.GetSlider();
-            this.ResetToCenter(slider);
-            slider.SmallIncrement();
-            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 6)));
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                this.ResetToCenter(slider);
+                slider.SmallIncrement();
+                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 6)));
+            }
         }
 
         [Test]
         public void SmallDecrementTest()
         {
-            var slider = this.GetSlider();
-            this.ResetToCenter(slider);
-            slider.SmallDecrement();
-            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 4)));
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                this.ResetToCenter(slider);
+                slider.SmallDecrement();
+                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 4)));
+            }
         }
 
         [Test]
         public void LargeIncrementTest()
         {
-            var slider = this.GetSlider();
-            this.ResetToCenter(slider);
-            slider.LargeIncrement();
-            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 9)));
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                this.ResetToCenter(slider);
+                slider.LargeIncrement();
+                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 9)));
+            }
         }
 
         [Test]
         public void LargeDecrementTest()
         {
-            var slider = this.GetSlider();
-            this.ResetToCenter(slider);
-            slider.LargeDecrement();
-            Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 1)));
-        }
-
-        private Slider GetSlider()
-        {
-            var element = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider")).AsSlider();
-            return element;
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider("Slider");
+                this.ResetToCenter(slider);
+                slider.LargeDecrement();
+                Assert.That(slider.Value, Is.EqualTo(this.AdjustNumberIfOnlyValue(slider, 1)));
+            }
         }
 
         /// <summary>

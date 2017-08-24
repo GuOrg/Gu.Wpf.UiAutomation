@@ -1,40 +1,36 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class RangeValuePatternTests : UITestBase
+    public class RangeValuePatternTests
     {
-        public RangeValuePatternTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void RangeValuePatternTest()
         {
-            var slider = this.GetSlider();
-            Assert.That(slider, Is.Not.Null);
-            var rvPattern = slider.Patterns.RangeValue.Pattern;
-            Assert.That(rvPattern, Is.Not.Null);
-            Assert.That(rvPattern.IsReadOnly.Value, Is.False);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(5));
-            Assert.That(rvPattern.LargeChange.Value, Is.EqualTo(4));
-            Assert.That(rvPattern.SmallChange.Value, Is.EqualTo(1));
-            Assert.That(rvPattern.Minimum.Value, Is.EqualTo(0));
-            Assert.That(rvPattern.Maximum.Value, Is.EqualTo(10));
-            var number1 = 6;
-            rvPattern.SetValue(number1);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(number1));
-            var number2 = 3;
-            rvPattern.SetValue(number2);
-            Assert.That(rvPattern.Value.Value, Is.EqualTo(number2));
-        }
+            using (var app = Application.Launch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow();
+                var slider = window.FindSlider();
+                Assert.NotNull(slider);
+                var rvPattern = slider.Patterns.RangeValue.Pattern;
+                Assert.AreEqual(false, rvPattern.IsReadOnly.Value);
+                Assert.AreEqual(5, rvPattern.Value.Value);
+                Assert.AreEqual(4, rvPattern.LargeChange.Value);
+                Assert.AreEqual(1, rvPattern.SmallChange.Value);
+                Assert.AreEqual(0, rvPattern.Minimum.Value);
+                Assert.AreEqual(10, rvPattern.Maximum.Value);
 
-        private AutomationElement GetSlider()
-        {
-            var element = this.App.MainWindow().FindFirstDescendant(cf => cf.ByAutomationId("Slider"));
-            return element;
+                rvPattern.SetValue(6);
+                Assert.AreEqual(6, rvPattern.Value.Value);
+
+                rvPattern.SetValue(3);
+                Assert.AreEqual(3, rvPattern.Value.Value);
+            }
         }
     }
 }

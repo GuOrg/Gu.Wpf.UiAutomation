@@ -207,6 +207,12 @@
         public Button FindButton(string name = null) => this.Find(ControlType.Button, name).AsButton();
 
         /// <summary>
+        /// Find the first slider by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Slider FindSlider(string name = null) => this.Find(ControlType.Slider, name).AsSlider();
+
+        /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
