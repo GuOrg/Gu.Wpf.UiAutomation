@@ -26,8 +26,7 @@
         </ComboBox>
 
         <ComboBox AutomationProperties.AutomationId="NonEditableCombo"
-                  IsEditable="False"
-                  SelectionChanged="Selector_OnSelectionChanged">
+                  IsEditable="False">
             <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
             <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
             <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
