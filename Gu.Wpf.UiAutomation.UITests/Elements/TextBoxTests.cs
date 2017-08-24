@@ -9,14 +9,14 @@
 
         [TestCase("AutomationId")]
         [TestCase("XName")]
-        [TestCase("Content")]
-        public void FindCheckBox(string key)
+        public void FindTextBox(string key)
         {
             using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow();
-                var checkBox = window.FindTextBox(key);
-                Assert.NotNull(checkBox);
+                var textBox = window.FindTextBox(key);
+                Assert.AreEqual(true, textBox.IsEnabled);
+                Assert.NotNull(textBox);
             }
         }
 
