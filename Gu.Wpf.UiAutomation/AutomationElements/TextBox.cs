@@ -66,7 +66,13 @@
                 Keyboard.Type(line);
             }
 
-            Helpers.WaitUntilInputIsProcessed();
+            for (var i = 0; i < 5; i++)
+            {
+                if (this.Text != value)
+                {
+                    Helpers.WaitUntilInputIsProcessed();
+                }
+            }
         }
     }
 }
