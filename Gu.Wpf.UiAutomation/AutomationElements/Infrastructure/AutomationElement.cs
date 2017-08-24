@@ -248,6 +248,12 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name).AsExpander();
 
+        /// <summary>
+        /// Find the first list box by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ListBox FindListBox(string name = null) => this.Find(ControlType.Group, name).AsListBox();
+
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
             return this.FindFirstDescendant(
@@ -553,6 +559,10 @@
         public Grid AsGrid() => new Grid(this.BasicAutomationElement);
 
         public GridRow AsGridRow() => new GridRow(this.BasicAutomationElement);
+
+        public ListBox AsListBox() => new ListBox(this.BasicAutomationElement);
+
+        public ListBoxItem AsListBoxItem() => new ListBoxItem(this.BasicAutomationElement);
 
         public GridCell AsGridCell() => new GridCell(this.BasicAutomationElement);
 
