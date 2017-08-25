@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTests.cs" />
+    <Compile Include="Benchmark.cs" />
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="Converters\ValueConverterTests.cs" />
     <Compile Include="Elements\ButtonTests.cs" />
