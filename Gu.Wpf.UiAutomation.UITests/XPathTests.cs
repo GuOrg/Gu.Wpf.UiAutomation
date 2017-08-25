@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System.Globalization;
     using NUnit.Framework;
 
     [TestFixture]
@@ -51,7 +52,7 @@
 
         private string GetFileMenuText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Datei";

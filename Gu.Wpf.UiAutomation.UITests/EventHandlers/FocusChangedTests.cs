@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.EventHandlers
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
@@ -34,7 +35,7 @@
 
         private string GetResizeText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Größe ändern";
@@ -45,7 +46,7 @@
 
         private string GetPixelsText()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     return "Pixel";

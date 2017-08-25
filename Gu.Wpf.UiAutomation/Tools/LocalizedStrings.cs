@@ -1,10 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public static class TranslatableStrings
+    using System.Globalization;
+
+    public static class LocalizedStrings
     {
-        static TranslatableStrings()
+        static LocalizedStrings()
         {
-            switch (SystemLanguageRetreiver.GetCurrentOsCulture().TwoLetterISOLanguageName)
+            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {
                 case "de":
                     HorizontalScrollBar = "Horizontale Schiebeleiste";

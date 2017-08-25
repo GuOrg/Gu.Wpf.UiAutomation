@@ -70,12 +70,12 @@
 
         public OrCondition HScrollBar()
         {
-            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(TranslatableStrings.HorizontalScrollBar));
+            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(LocalizedStrings.HorizontalScrollBar));
         }
 
         public OrCondition VScrollBar()
         {
-            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(TranslatableStrings.VerticalScrollBar));
+            return new OrCondition(this.ByControlType(ControlType.ScrollBar), this.ByName(LocalizedStrings.VerticalScrollBar));
         }
     }
 }
