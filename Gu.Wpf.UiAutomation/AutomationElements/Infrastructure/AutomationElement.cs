@@ -49,6 +49,8 @@
         /// </summary>
         public AutomationElementPropertyValues Properties => this.BasicAutomationElement.Properties;
 
+        public string ItemStatus => this.Properties.ItemStatus;
+
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
