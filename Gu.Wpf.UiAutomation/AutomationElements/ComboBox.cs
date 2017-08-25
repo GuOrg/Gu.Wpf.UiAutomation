@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public ComboBoxItem[] SelectedItems
+        public IReadOnlyList<ComboBoxItem> SelectedItems
         {
             get
             {

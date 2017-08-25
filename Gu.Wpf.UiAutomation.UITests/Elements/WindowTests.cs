@@ -21,9 +21,9 @@
             var ctxMenu = window.ContextMenu;
             Assert.That(ctxMenu, Is.Not.Null);
             var subMenuLevel1 = ctxMenu.Items;
-            Assert.That(subMenuLevel1, Has.Length.EqualTo(2));
+            Assert.AreEqual(2, subMenuLevel1.Count);
             var subMenuLevel2 = subMenuLevel1[1].Items;
-            Assert.That(subMenuLevel2, Has.Length.EqualTo(1));
+            Assert.AreEqual(1, subMenuLevel2.Count);
             var innerItem = subMenuLevel2[0];
             Assert.That(innerItem.Text, Is.EqualTo("Inner Context"));
         }

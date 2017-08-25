@@ -489,7 +489,7 @@
         /// <summary>
         /// Gets the available patterns for an element via properties
         /// </summary>
-        public PatternId[] GetSupportedPatterns()
+        public IReadOnlyList<PatternId> GetSupportedPatterns()
         {
             return this.Automation.PatternLibrary.AllForCurrentFramework.Where(this.IsPatternSupported).ToArray();
         }
@@ -517,7 +517,7 @@
         /// Gets the available patterns for an element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public PatternId[] GetSupportedPatternsDirect()
+        public IReadOnlyList<PatternId> GetSupportedPatternsDirect()
         {
             return this.BasicAutomationElement.GetSupportedPatterns();
         }
@@ -535,7 +535,7 @@
         /// Gets the available properties for an element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public PropertyId[] GetSupportedPropertiesDirect()
+        public IReadOnlyList<PropertyId> GetSupportedPropertiesDirect()
         {
             return this.BasicAutomationElement.GetSupportedProperties();
         }

@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using System.Collections.Generic;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
 
     public class UIA3AutomationElementPatternAvailabilityProperties : IAutomationElementPatternAvailabilityProperties
@@ -70,7 +71,7 @@
 
         public PropertyId IsWindowPatternAvailable => AutomationObjectIds.IsWindowPatternAvailableProperty;
 
-        public PropertyId[] AllForCurrentFramework => new[]
+        public IReadOnlyList<PropertyId> AllForCurrentFramework => new[]
         {
             this.IsAnnotationPatternAvailable,
             this.IsDockPatternAvailable,

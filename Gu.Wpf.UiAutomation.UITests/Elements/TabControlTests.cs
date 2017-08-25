@@ -14,7 +14,7 @@
             {
                 var window = app.MainWindow();
                 var tab = window.FindTabControl();
-                Assert.AreEqual(2, tab.Items.Length);
+                Assert.AreEqual(2, tab.Items.Count);
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public interface IAutomationElementPatternAvailabilityProperties
     {
         PropertyId IsAnnotationPatternAvailable { get; }
@@ -68,6 +70,6 @@
 
         PropertyId IsWindowPatternAvailable { get; }
 
-        PropertyId[] AllForCurrentFramework { get; }
+        IReadOnlyList<PropertyId> AllForCurrentFramework { get; }
     }
 }

@@ -166,7 +166,7 @@
         /// <param name="value">The value to check.</param>
         /// <param name="maxItems">Maximum numbers of items to return, 0 for all.</param>
         /// <returns>List of found rows.</returns>
-        public GridRow[] GetRowsByValue(int columnIndex, string value, int maxItems = 0)
+        public IReadOnlyList<GridRow> GetRowsByValue(int columnIndex, string value, int maxItems = 0)
         {
             this.PreCheckColumn(columnIndex);
             var gridPattern = this.GridPattern;

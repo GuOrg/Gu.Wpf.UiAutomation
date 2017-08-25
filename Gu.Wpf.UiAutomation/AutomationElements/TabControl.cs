@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class TabControl : AutomationElement
@@ -30,7 +31,7 @@
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public TabItem[] Items => this.GetTabItems();
+        public IReadOnlyList<TabItem> Items => this.GetTabItems();
 
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
@@ -48,14 +49,13 @@
         public TabItem Select(string text)
         {
             var tabItems = this.Items;
-            var foundTabItemIndex = Array.FindIndex(tabItems, t => t.Properties.Name == text);
-            if (foundTabItemIndex < 0)
+            var tabItem = tabItems.FirstOrDefault( t => t.Properties.Name == text);
+            if (tabItem == null)
             {
                 throw new Exception($"No TabItem found with text '{text}'");
             }
 
-            var tabItem = tabItems[foundTabItemIndex];
-            if (this.SelectedIndex != foundTabItemIndex)
+            if (!tabItem.IsSelected)
             {
                 // It is not the selected one, so select it
                 tabItem.Select();
@@ -67,15 +67,25 @@
         /// <summary>
         /// Gets all the <see cref="TabItem" /> objects for this <see cref="TabControl" />
         /// </summary>
-        private TabItem[] GetTabItems()
+        private IReadOnlyList<TabItem> GetTabItems()
         {
             return this.FindAll(TreeScope.Children, this.ConditionFactory.ByControlType(ControlType.TabItem))
-                .Select(e => e.AsTabItem()).ToArray();
+                       .Select(e => e.AsTabItem())
+                       .ToArray();
         }
 
         private int GetIndexOfSelectedTabItem()
         {
-            return Array.FindIndex(this.Items, t => t.IsSelected);
+            var items = this.Items;
+            for (var i = 0; i < items.Count; i++)
+            {
+                if (items[i].IsSelected)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }

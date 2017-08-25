@@ -5,12 +5,7 @@
 
     public static class SystemProductNameFetcher
     {
-        private static readonly string CurrentProductName;
-
-        static SystemProductNameFetcher()
-        {
-            CurrentProductName = GetCurrentProductName();
-        }
+        private static readonly string CurrentProductName = GetCurrentProductName();
 
         public static bool CurrentProductContains(string name)
         {
