@@ -62,14 +62,18 @@
 
         public void SmallIncrement()
         {
-            Keyboard.Press(VirtualKeyShort.RIGHT);
-            Wait.UntilInputIsProcessed();
+            using (Keyboard.Pressing(VirtualKeyShort.RIGHT))
+            {
+                Wait.UntilInputIsProcessed();
+            }
         }
 
         public void SmallDecrement()
         {
-            Keyboard.Press(VirtualKeyShort.LEFT);
-            Wait.UntilInputIsProcessed();
+            using (Keyboard.Pressing(VirtualKeyShort.LEFT))
+            {
+                Wait.UntilInputIsProcessed();
+            }
         }
 
         public void LargeIncrement()

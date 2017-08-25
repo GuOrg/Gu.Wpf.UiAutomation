@@ -49,7 +49,7 @@
         public TabItem Select(string text)
         {
             var tabItems = this.Items;
-            var tabItem = tabItems.FirstOrDefault( t => t.Properties.Name == text);
+            var tabItem = tabItems.FirstOrDefault(t => t.Properties.Name == text);
             if (tabItem == null)
             {
                 throw new Exception($"No TabItem found with text '{text}'");

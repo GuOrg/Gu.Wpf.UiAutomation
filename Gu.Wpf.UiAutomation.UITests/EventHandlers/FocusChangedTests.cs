@@ -24,12 +24,13 @@
                 var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
                 Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
-                Keyboard.Press(VirtualKeyShort.ESCAPE);
-                Thread.Sleep(100);
-                app.Automation.UnRegisterFocusChangedEvent(x);
-                mainWindow.Close();
-
-                Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+                using (Keyboard.Pressing(VirtualKeyShort.ESCAPE))
+                {
+                    Thread.Sleep(100);
+                    app.Automation.UnRegisterFocusChangedEvent(x);
+                    mainWindow.Close();
+                    Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+                }
             }
         }
 

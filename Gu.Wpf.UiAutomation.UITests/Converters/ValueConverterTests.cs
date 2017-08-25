@@ -16,7 +16,7 @@
             {
                 var window = app.MainWindow();
                 var checkBox = window.FindCheckBox("Test Checkbox");
-                Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
+                Assert.AreEqual(ControlType.CheckBox, checkBox.Properties.ControlType);
             }
         }
     }

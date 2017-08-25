@@ -63,7 +63,9 @@
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
+#pragma warning disable CS0618 // Type or member is obsolete
                     Press(mod);
+#pragma warning restore CS0618 // Type or member is obsolete
                 }
 
                 // Type the effective key
@@ -90,7 +92,9 @@
 
             foreach (var key in virtualKeys)
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
+#pragma warning restore CS0618 // Type or member is obsolete
                 Release(key);
             }
         }
@@ -107,7 +111,9 @@
 
             foreach (var key in virtualKeys)
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             foreach (var key in virtualKeys.Reverse())
@@ -137,6 +143,7 @@
         /// <summary>
         /// Presses the given key.
         /// </summary>
+        [Obsolete("Prefer pressing")]
         public static void Press(VirtualKeyShort virtualKey)
         {
             PressVirtualKeyCode((ushort)virtualKey);
@@ -266,7 +273,9 @@
             public KeyPressingActivation(VirtualKeyShort virtualKey)
             {
                 this.virtualKey = virtualKey;
+#pragma warning disable CS0618 // Type or member is obsolete
                 Press(this.virtualKey);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             public void Dispose()
