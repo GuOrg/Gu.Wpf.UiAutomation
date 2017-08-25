@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
@@ -45,7 +46,7 @@
             this.NativeElement.SetFocus();
         }
 
-        public override AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public override IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
                 ? this.NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
@@ -142,7 +143,7 @@
             return null;
         }
 
-        public override AutomationElement[] GetCachedChildren()
+        public override IReadOnlyList<AutomationElement> GetCachedChildren()
         {
             var cachedChildren = this.NativeElement.GetCachedChildren();
             return AutomationElementConverter.NativeArrayToManaged(this.Automation, cachedChildren);

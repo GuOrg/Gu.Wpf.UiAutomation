@@ -1,11 +1,13 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public interface ITableItemPattern : IPattern
     {
         ITableItemPatternProperties Properties { get; }
 
-        AutomationProperty<AutomationElement[]> ColumnHeaderItems { get; }
+        AutomationProperty<IReadOnlyList<AutomationElement>> ColumnHeaderItems { get; }
 
-        AutomationProperty<AutomationElement[]> RowHeaderItems { get; }
+        AutomationProperty<IReadOnlyList<AutomationElement>> RowHeaderItems { get; }
     }
 }

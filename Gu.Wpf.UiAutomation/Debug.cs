@@ -67,7 +67,7 @@
             // Get the index
             var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
             var currentItemText = $"{element.Properties.ControlType.Value}";
-            if (allChildren.Length > 1)
+            if (allChildren.Count > 1)
             {
                 // There is more than one matching child, find out the index
                 var indexInParent = 1; // Index starts with 1

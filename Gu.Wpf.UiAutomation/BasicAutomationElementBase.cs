@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
 
     public abstract class BasicAutomationElementBase
@@ -166,7 +167,7 @@
 
         public abstract void SetFocus();
 
-        public abstract AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition);
+        public abstract IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition);
 
         public abstract AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition);
 
@@ -190,7 +191,7 @@
 
         public abstract AutomationElement GetUpdatedCache();
 
-        public abstract AutomationElement[] GetCachedChildren();
+        public abstract IReadOnlyList<AutomationElement> GetCachedChildren();
 
         public abstract AutomationElement GetCachedParent();
 

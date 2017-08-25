@@ -1,11 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
     using System;
+    using System.Collections.Generic;
     using UIA = Interop.UIAutomationClient;
 
     public static class AutomationElementConverter
     {
-        public static AutomationElement[] NativeArrayToManaged(AutomationBase automation, object nativeElements)
+        public static IReadOnlyList<AutomationElement> NativeArrayToManaged(AutomationBase automation, object nativeElements)
         {
             if (nativeElements == null)
             {

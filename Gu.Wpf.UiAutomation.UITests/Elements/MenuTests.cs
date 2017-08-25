@@ -18,7 +18,7 @@
                 var menu = window.FindMenu();
                 Assert.That(menu, Is.Not.Null);
                 var items = menu.Items;
-                Assert.AreEqual(2, items);
+                Assert.AreEqual(2, items.Count);
                 Assert.AreEqual("File", items[0].Properties.Name);
                 Assert.AreEqual("Edit", items[1].Properties.Name);
 

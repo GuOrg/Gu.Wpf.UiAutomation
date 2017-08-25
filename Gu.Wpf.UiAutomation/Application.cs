@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
@@ -100,12 +101,12 @@
         public static Application Attach(string executable, int index = 0)
         {
             var processes = FindProcess(executable);
-            if (processes.Length == 0)
+            if (processes.Count == 0)
             {
                 throw new ArgumentException($"Unable to find process with name: {executable}");
             }
 
-            if (processes.Length <= index)
+            if (processes.Count <= index)
             {
                 throw new ArgumentException($"Unable to find process with name: {executable} and index: {index}");
             }
@@ -119,7 +120,7 @@
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
         {
             var processes = FindProcess(processStartInfo.FileName);
-            return processes.Length == 0 ? Launch(processStartInfo) : Attach(processes[0]);
+            return processes.Count == 0 ? Launch(processStartInfo) : Attach(processes[0]);
         }
 
         /// <summary>
@@ -284,7 +285,7 @@
         /// <summary>
         /// Gets all top level windows from the application.
         /// </summary>
-        public Window[] GetAllTopLevelWindows()
+        public IReadOnlyList<Window> GetAllTopLevelWindows()
         {
             var desktop = this.Automation.GetDesktop();
             var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
@@ -335,7 +336,7 @@
             }
         }
 
-        private static Process[] FindProcess(string executable)
+        private static IReadOnlyList<Process> FindProcess(string executable)
         {
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
         }

@@ -37,7 +37,7 @@
             var popupChildren = popup.FindAllChildren();
             Assert.That(popupChildren, Has.Length.EqualTo(1));
             var menu = popupChildren[0].AsMenu();
-            Assert.That(menu.Items, Has.Length.EqualTo(1));
+            Assert.AreEqual(1, menu.Items.Count);
             var menuItem = menu.Items[0];
             Assert.That(menuItem.Text, Is.EqualTo("Some MenuItem"));
         }

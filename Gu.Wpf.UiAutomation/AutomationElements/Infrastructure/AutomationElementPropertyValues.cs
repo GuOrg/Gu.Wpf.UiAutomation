@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Windows;
 
@@ -14,12 +15,12 @@
         private AutomationProperty<Rect> boundingRectangle;
         private AutomationProperty<string> className;
         private AutomationProperty<Point> clickablePoint;
-        private AutomationProperty<AutomationElement[]> controllerFor;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> controllerFor;
         private AutomationProperty<ControlType> controlType;
         private AutomationProperty<CultureInfo> culture;
-        private AutomationProperty<AutomationElement[]> describedBy;
-        private AutomationProperty<AutomationElement[]> flowsFrom;
-        private AutomationProperty<AutomationElement[]> flowsTo;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> describedBy;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> flowsFrom;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> flowsTo;
         private AutomationProperty<string> frameworkId;
         private AutomationProperty<bool> hasKeyboardFocus;
         private AutomationProperty<string> helpText;
@@ -66,17 +67,17 @@
 
         public AutomationProperty<Point> ClickablePoint => this.GetOrCreate(ref this.clickablePoint, this.Properties.ClickablePoint);
 
-        public AutomationProperty<AutomationElement[]> ControllerFor => this.GetOrCreate(ref this.controllerFor, this.Properties.ControllerFor);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> ControllerFor => this.GetOrCreate(ref this.controllerFor, this.Properties.ControllerFor);
 
         public AutomationProperty<ControlType> ControlType => this.GetOrCreate(ref this.controlType, this.Properties.ControlType);
 
         public AutomationProperty<CultureInfo> Culture => this.GetOrCreate(ref this.culture, this.Properties.Culture);
 
-        public AutomationProperty<AutomationElement[]> DescribedBy => this.GetOrCreate(ref this.describedBy, this.Properties.DescribedBy);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> DescribedBy => this.GetOrCreate(ref this.describedBy, this.Properties.DescribedBy);
 
-        public AutomationProperty<AutomationElement[]> FlowsFrom => this.GetOrCreate(ref this.flowsFrom, this.Properties.FlowsFrom);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> FlowsFrom => this.GetOrCreate(ref this.flowsFrom, this.Properties.FlowsFrom);
 
-        public AutomationProperty<AutomationElement[]> FlowsTo => this.GetOrCreate(ref this.flowsTo, this.Properties.FlowsTo);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> FlowsTo => this.GetOrCreate(ref this.flowsTo, this.Properties.FlowsTo);
 
         public AutomationProperty<string> FrameworkId => this.GetOrCreate(ref this.frameworkId, this.Properties.FrameworkId);
 

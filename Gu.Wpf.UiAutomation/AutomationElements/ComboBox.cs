@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
 
@@ -44,12 +45,12 @@
         /// <summary>
         /// Gets all items.
         /// </summary>
-        public ComboBoxItem[] Items
+        public IReadOnlyList<ComboBoxItem> Items
         {
             get
             {
                 this.Expand();
-                AutomationElement[] items;
+                IReadOnlyList<AutomationElement> items;
                 if (this.FrameworkType == FrameworkType.WinForms || this.FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32

@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public abstract class DragPatternBase<TNativePattern> : PatternBase<TNativePattern>, IDragPattern
         where TNativePattern : class
     {
         private AutomationProperty<string> dropEffect;
         private AutomationProperty<string[]> dropEffects;
         private AutomationProperty<bool> isGrabbed;
-        private AutomationProperty<AutomationElement[]> grabbedItems;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> grabbedItems;
 
         protected DragPatternBase(BasicAutomationElementBase basicAutomationElement, TNativePattern nativePattern)
             : base(basicAutomationElement, nativePattern)
@@ -29,6 +31,6 @@
         public AutomationProperty<bool> IsGrabbed => this.GetOrCreate(ref this.isGrabbed, this.Properties.IsGrabbed);
 
         /// <inheritdoc/>
-        public AutomationProperty<AutomationElement[]> GrabbedItems => this.GetOrCreate(ref this.grabbedItems, this.Properties.GrabbedItems);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> GrabbedItems => this.GetOrCreate(ref this.grabbedItems, this.Properties.GrabbedItems);
     }
 }

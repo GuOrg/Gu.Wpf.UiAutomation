@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using UIA = Interop.UIAutomationClient;
@@ -84,7 +85,7 @@
             return result;
         }
 
-        public AutomationElement[] GetChildren()
+        public IReadOnlyList<AutomationElement> GetChildren()
         {
             var nativeChildren = ComCallWrapper.Call(() => this.NativeRange.GetChildren());
             return AutomationElementConverter.NativeArrayToManaged(this.Automation, nativeChildren);

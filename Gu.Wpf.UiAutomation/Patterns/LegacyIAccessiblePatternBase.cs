@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using Accessibility;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -13,7 +14,7 @@
         private AutomationProperty<string> keyboardShortcut;
         private AutomationProperty<string> name;
         private AutomationProperty<AccessibilityRole> role;
-        private AutomationProperty<AutomationElement[]> selection;
+        private AutomationProperty<IReadOnlyList<AutomationElement>> selection;
         private AutomationProperty<AccessibilityState> state;
         private AutomationProperty<string> value;
 
@@ -47,7 +48,7 @@
         public AutomationProperty<AccessibilityRole> Role => this.GetOrCreate(ref this.role, this.Properties.Role);
 
         /// <inheritdoc/>
-        public AutomationProperty<AutomationElement[]> Selection => this.GetOrCreate(ref this.selection, this.Properties.Selection);
+        public AutomationProperty<IReadOnlyList<AutomationElement>> Selection => this.GetOrCreate(ref this.selection, this.Properties.Selection);
 
         /// <inheritdoc/>
         public AutomationProperty<AccessibilityState> State => this.GetOrCreate(ref this.state, this.Properties.State);

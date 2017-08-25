@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using System.Windows;
 
     public interface ITextRange
@@ -22,7 +23,7 @@
 
         Rect[] GetBoundingRectangles();
 
-        AutomationElement[] GetChildren();
+        IReadOnlyList<AutomationElement> GetChildren();
 
         AutomationElement GetEnclosingElement();
 

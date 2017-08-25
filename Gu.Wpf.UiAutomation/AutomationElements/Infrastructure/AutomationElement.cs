@@ -52,7 +52,7 @@
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
-        public AutomationElement[] CachedChildren => this.BasicAutomationElement.GetCachedChildren();
+        public IReadOnlyList<AutomationElement> CachedChildren => this.BasicAutomationElement.GetCachedChildren();
 
         /// <summary>
         /// Gets the cached parent for this element.
@@ -316,7 +316,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
-        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition)
+        public IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
             return this.FindAll(treeScope, condition, Retry.DefaultRetryFor);
         }
@@ -324,11 +324,12 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
-        public AutomationElement[] FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        public IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<AutomationElement[]> whilePredicate = elements => elements.Length == 0;
-            Func<AutomationElement[]> retryMethod = () => this.BasicAutomationElement.FindAll(treeScope, condition);
-            return Retry.While(retryMethod, whilePredicate, timeOut);
+            return Retry.While(
+                () => this.BasicAutomationElement.FindAll(treeScope, condition),
+                elements => elements.Count == 0,
+                timeOut);
         }
 
         /// <summary>
@@ -370,7 +371,7 @@
         /// <summary>
         /// Finds all elements by looping thru all conditions.
         /// </summary>
-        public AutomationElement[] FindAllNested(params ConditionBase[] nestedConditions)
+        public IReadOnlyList<AutomationElement> FindAllNested(params ConditionBase[] nestedConditions)
         {
             var currentElement = this;
             for (var i = 0; i < nestedConditions.Length - 1; i++)
@@ -399,7 +400,7 @@
         /// <summary>
         /// Finds all items which match the given xpath.
         /// </summary>
-        public AutomationElement[] FindAllByXPath(string xPath)
+        public IReadOnlyList<AutomationElement> FindAllByXPath(string xPath)
         {
             var xPathNavigator = new AutomationElementXPathNavigator(this);
             var itemNodeIterator = xPathNavigator.Select(xPath);
@@ -659,17 +660,17 @@
             return this.FindFirstChild(condition);
         }
 
-        public AutomationElement[] FindAllChildren()
+        public IReadOnlyList<AutomationElement> FindAllChildren()
         {
             return this.FindAll(TreeScope.Children, new TrueCondition());
         }
 
-        public AutomationElement[] FindAllChildren(ConditionBase condition)
+        public IReadOnlyList<AutomationElement> FindAllChildren(ConditionBase condition)
         {
             return this.FindAll(TreeScope.Children, condition);
         }
 
-        public AutomationElement[] FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        public IReadOnlyList<AutomationElement> FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
             return this.FindAllChildren(condition);
@@ -696,17 +697,17 @@
             return this.FindFirstDescendant(condition);
         }
 
-        public AutomationElement[] FindAllDescendants()
+        public IReadOnlyList<AutomationElement> FindAllDescendants()
         {
             return this.FindAll(TreeScope.Descendants, new TrueCondition());
         }
 
-        public AutomationElement[] FindAllDescendants(ConditionBase condition)
+        public IReadOnlyList<AutomationElement> FindAllDescendants(ConditionBase condition)
         {
             return this.FindAll(TreeScope.Descendants, condition);
         }
 
-        public AutomationElement[] FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        public IReadOnlyList<AutomationElement> FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
             return this.FindAllDescendants(condition);
@@ -718,7 +719,7 @@
             return this.FindFirstNested(conditions.ToArray());
         }
 
-        public AutomationElement[] FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
+        public IReadOnlyList<AutomationElement> FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
         {
             var conditions = nestedConditionsFunc(this.ConditionFactory);
             return this.FindAllNested(conditions.ToArray());

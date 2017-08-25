@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using Accessibility;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -21,7 +22,7 @@ namespace Gu.Wpf.UiAutomation
 
         AutomationProperty<AccessibilityRole> Role { get; }
 
-        AutomationProperty<AutomationElement[]> Selection { get; }
+        AutomationProperty<IReadOnlyList<AutomationElement>> Selection { get; }
 
         AutomationProperty<AccessibilityState> State { get; }
 

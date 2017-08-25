@@ -1,5 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public interface IDragPattern : IPattern
     {
         IDragPatternProperties Properties { get; }
@@ -12,6 +14,6 @@ namespace Gu.Wpf.UiAutomation
 
         AutomationProperty<bool> IsGrabbed { get; }
 
-        AutomationProperty<AutomationElement[]> GrabbedItems { get; }
+        AutomationProperty<IReadOnlyList<AutomationElement>> GrabbedItems { get; }
     }
 }

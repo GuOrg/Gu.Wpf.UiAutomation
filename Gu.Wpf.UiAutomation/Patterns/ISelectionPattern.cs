@@ -1,5 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public interface ISelectionPattern : IPattern
     {
         ISelectionPatternProperties Properties { get; }
@@ -10,6 +12,6 @@ namespace Gu.Wpf.UiAutomation
 
         AutomationProperty<bool> IsSelectionRequired { get; }
 
-        AutomationProperty<AutomationElement[]> Selection { get; }
+        AutomationProperty<IReadOnlyList<AutomationElement>> Selection { get; }
     }
 }
