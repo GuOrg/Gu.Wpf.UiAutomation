@@ -3,26 +3,26 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Tree : AutomationElement
+    public class TreeView : Control
     {
-        public Tree(BasicAutomationElementBase basicAutomationElement)
+        public TreeView(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
 
         /// <summary>
-        /// The currently selected <see cref="TreeItem" />
+        /// The currently selected <see cref="TreeViewItem" />
         /// </summary>
-        public TreeItem SelectedTreeItem => this.SearchSelectedItem(this.TreeItems);
+        public TreeViewItem SelectedTreeViewItem => this.SearchSelectedItem(this.Items);
 
         /// <summary>
-        /// All child <see cref="TreeItem" /> objects from this <see cref="Tree" />
+        /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeView" />
         /// </summary>
-        public IReadOnlyList<TreeItem> TreeItems => this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
-                                                          .Select(e => e.AsTreeItem())
-                                                          .ToArray();
+        public IReadOnlyList<TreeViewItem> Items => this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
+                                                        .Select(e => e.AsTreeViewItem())
+                                                        .ToArray();
 
-        private TreeItem SearchSelectedItem(IReadOnlyList<TreeItem> treeItems)
+        private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)
         {
             // Search for a selected item in the direct children
             var directSelectedItem = treeItems.FirstOrDefault(t => t.IsSelected);
@@ -34,7 +34,7 @@
             // Loop thru the children and search in their children
             foreach (var treeItem in treeItems)
             {
-                var selectedInChildItem = this.SearchSelectedItem(treeItem.TreeItems);
+                var selectedInChildItem = this.SearchSelectedItem(treeItem.Items);
                 if (selectedInChildItem != null)
                 {
                     return selectedInChildItem;

@@ -290,6 +290,12 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public DataGrid FindDataGrid(string name = null) => this.Find(ControlType.DataGrid, name).AsDataGrid();
 
+        /// <summary>
+        /// Find the first list box by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TreeView FindTreeView(string name = null) => this.Find(ControlType.Tree, name).AsTreeView();
+
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
             return this.FindFirstDescendant(
@@ -629,9 +635,9 @@
 
         public TitleBar AsTitleBar() => new TitleBar(this.BasicAutomationElement);
 
-        public Tree AsTree() => new Tree(this.BasicAutomationElement);
+        public TreeView AsTreeView() => new TreeView(this.BasicAutomationElement);
 
-        public TreeItem AsTreeItem() => new TreeItem(this.BasicAutomationElement);
+        public TreeViewItem AsTreeViewItem() => new TreeViewItem(this.BasicAutomationElement);
 
         public HorizontalScrollBar AsHorizontalScrollBar() => new HorizontalScrollBar(this.BasicAutomationElement);
 
@@ -772,7 +778,8 @@
         {
             if (string.IsNullOrEmpty(name))
             {
-                return this.Find(controlType);
+                return this.Find(controlType) ??
+                       throw new InvalidOperationException($"Did not find a {controlType}.");
             }
 
             return this.FindFirstDescendant(
@@ -780,7 +787,8 @@
                     this.ConditionFactory.ByControlType(controlType),
                     new OrCondition(
                         this.ConditionFactory.ByName(name),
-                        this.ConditionFactory.ByAutomationId(name))));
+                        this.ConditionFactory.ByAutomationId(name)))) ??
+                        throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
         }
     }
 }

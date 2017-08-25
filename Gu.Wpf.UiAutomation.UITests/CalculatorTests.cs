@@ -1,7 +1,9 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
+    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     [TestFixture]
     public class CalculatorTests
@@ -11,7 +13,7 @@
         {
             using (var app = StartApplication())
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow(TimeSpan.FromSeconds(1));
                 var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
                 // Switch to default mode

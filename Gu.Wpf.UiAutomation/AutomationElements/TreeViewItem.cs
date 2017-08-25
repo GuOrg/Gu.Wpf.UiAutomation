@@ -1,13 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using System.Linq;
 
-    public class TreeItem : AutomationElement
+    public class TreeViewItem : Control
     {
         private readonly SelectionItemAutomationElement selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
 
-        public TreeItem(BasicAutomationElementBase basicAutomationElement)
+        public TreeViewItem(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
@@ -15,12 +16,12 @@
         }
 
         /// <summary>
-        /// All child <see cref="TreeItem" /> objects from this <see cref="TreeItem" />
+        /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
         /// </summary>
-        public TreeItem[] TreeItems => this.GetTreeItems();
+        public IReadOnlyList<TreeViewItem> Items => this.GetTreeItems();
 
         /// <summary>
-        /// The text of the <see cref="TreeItem" />
+        /// The text of the <see cref="TreeViewItem" />
         /// </summary>
         public string Text
         {
@@ -59,12 +60,13 @@
         }
 
         /// <summary>
-        /// Gets all the <see cref="TreeItem" /> objects for this <see cref="TreeItem" />
+        /// Gets all the <see cref="TreeViewItem" /> objects for this <see cref="TreeViewItem" />
         /// </summary>
-        private TreeItem[] GetTreeItems()
+        private IReadOnlyList<TreeViewItem> GetTreeItems()
         {
             return this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
-                .Select(e => e.AsTreeItem()).ToArray();
+                       .Select(e => e.AsTreeViewItem())
+                       .ToArray();
         }
     }
 }
