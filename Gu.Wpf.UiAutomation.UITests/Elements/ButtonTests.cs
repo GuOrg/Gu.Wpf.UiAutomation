@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -9,6 +10,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [TestCase(null)]
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]
@@ -19,6 +21,19 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 var window = app.MainWindow();
                 var button = window.FindButton(key);
                 Assert.NotNull(button);
+            }
+        }
+
+        [TestCase("AutomationId")]
+        [TestCase("XName")]
+        [TestCase("Content")]
+        public void FindButtonThrowsWhenNotFound(string key)
+        {
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            {
+                var window = app.MainWindow();
+                var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
+                Assert.AreEqual($"Did not find a Button with name {key}.", exception.Message);
             }
         }
 

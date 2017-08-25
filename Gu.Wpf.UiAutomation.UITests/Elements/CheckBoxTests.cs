@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -19,6 +20,23 @@
                 var window = app.MainWindow();
                 var checkBox = window.FindCheckBox(key);
                 Assert.NotNull(checkBox);
+            }
+        }
+
+        [TestCase(null)]
+        [TestCase("AutomationId")]
+        [TestCase("XName")]
+        [TestCase("Content")]
+        public void FindCheckBoxThrowsWhenNotFound(string key)
+        {
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            {
+                var window = app.MainWindow();
+                var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
+                var expected = key == null
+                    ? $"Did not find a CheckBox."
+                    : $"Did not find a CheckBox with name {key}.";
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
