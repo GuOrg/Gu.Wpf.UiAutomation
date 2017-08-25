@@ -8,26 +8,22 @@
     {
         public static UIA.IUIAutomationCondition ToNative(UIA3Automation automation, ConditionBase condition)
         {
-            var propCond = condition as PropertyCondition;
-            if (propCond != null)
+            if (condition is PropertyCondition propCond)
             {
                 return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, ValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
 
-            var boolCond = condition as BoolCondition;
-            if (boolCond != null)
+            if (condition is BoolCondition boolCond)
             {
                 return boolCond.BooleanValue ? automation.NativeAutomation.CreateTrueCondition() : automation.NativeAutomation.CreateFalseCondition();
             }
 
-            var notCond = condition as NotCondition;
-            if (notCond != null)
+            if (condition is NotCondition notCond)
             {
                 return automation.NativeAutomation.CreateNotCondition(ToNative(automation, notCond.Condition));
             }
 
-            var junctCond = condition as JunctionConditionBase;
-            if (junctCond != null)
+            if (condition is JunctionConditionBase junctCond)
             {
                 if (junctCond.ChildCount == 0)
                 {

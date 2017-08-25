@@ -13,8 +13,7 @@
         public AndCondition And(ConditionBase newCondition)
         {
             // Check if this condition is already an and condition
-            var thisCondition = this as AndCondition;
-            if (thisCondition != null)
+            if (this is AndCondition thisCondition)
             {
                 // If so, just add the new one
                 var newConditions = new List<ConditionBase>(thisCondition.ChildCount + 1);
@@ -33,8 +32,7 @@
         public OrCondition Or(ConditionBase newCondition)
         {
             // Check if this condition is already an or condition
-            var thisCondition = this as OrCondition;
-            if (thisCondition != null)
+            if (this is OrCondition thisCondition)
             {
                 // If so, just add the new one
                 var newConditions = new List<ConditionBase>(thisCondition.ChildCount + 1);
