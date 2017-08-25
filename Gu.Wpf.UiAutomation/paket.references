@@ -1,3 +1,5 @@
+SourceLink.Create.CommandLine
+
 group Analyzers
   StyleCop.Analyzers
   AsyncUsageAnalyzers

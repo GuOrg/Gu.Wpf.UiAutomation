@@ -1,5 +1,5 @@
 source https://api.nuget.org/v3/index.json
-
+nuget SourceLink.Create.CommandLine
 nuget NUnit
 nuget Moq
 
