@@ -32,7 +32,10 @@
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public AutomationElement Parent => this.FindFirst(TreeScope.Ancestors, TrueCondition.Default);
+        public AutomationElement Parent => this.Automation
+                                               .TreeWalkerFactory
+                                               .GetRawViewWalker()
+                                               .GetParent(this);
 
         /// <summary>
         /// The current used automation object.
