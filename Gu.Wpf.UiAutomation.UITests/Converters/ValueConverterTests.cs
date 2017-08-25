@@ -1,21 +1,23 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Converters
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class ValueConverterTests : UITestBase
+    public class ValueConverterTests
     {
-        public ValueConverterTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void GetControlType()
         {
-            var window = this.App.MainWindow();
-            var checkBox = window.FindFirstDescendant(cf => cf.ByName("Test Checkbox"));
-            Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                var checkBox = window.FindCheckBox("Test Checkbox");
+                Assert.That(ControlType.CheckBox, Is.EqualTo(checkBox.Properties.ControlType));
+            }
         }
     }
 }

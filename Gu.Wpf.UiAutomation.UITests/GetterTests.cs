@@ -1,23 +1,25 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
-    public class GetterTests : UITestBase
+    public class GetterTests
     {
-        public GetterTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void CorrectPattern()
         {
-            var mainWindow = this.App.MainWindow();
-            Assert.That(mainWindow, Is.Not.Null);
-            var windowPattern = mainWindow.BasicAutomationElement.GetNativePattern<object>(mainWindow.Automation.PatternLibrary.WindowPattern);
-            Assert.That(windowPattern, Is.Not.Null);
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                Assert.That(window, Is.Not.Null);
+                var windowPattern = window.BasicAutomationElement.GetNativePattern<object>(window.Automation.PatternLibrary.WindowPattern);
+                Assert.That(windowPattern, Is.Not.Null);
+            }
         }
 
         [Test]
@@ -28,23 +30,33 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Patterns.Add(this.App.Automation.PatternLibrary.WindowPattern);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                var windowPattern = mainWindow.BasicAutomationElement.GetNativePattern<object>(mainWindow.Automation.PatternLibrary.WindowPattern);
-                Assert.That(windowPattern, Is.Not.Null);
+                cacheRequest.Patterns.Add(app.Automation.PatternLibrary.WindowPattern);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    var windowPattern =
+                        window.BasicAutomationElement.GetNativePattern<object>(window
+                            .Automation.PatternLibrary.WindowPattern);
+                    Assert.That(windowPattern, Is.Not.Null);
+                }
             }
         }
 
         [Test]
         public void UnsupportedPattern()
         {
-            var mainWindow = this.App.MainWindow();
-            Assert.That(mainWindow, Is.Not.Null);
-            ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetNativePattern<object>(mainWindow.Automation.PatternLibrary.ExpandCollapsePattern);
-            Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var mainWindow = app.MainWindow();
+                Assert.That(mainWindow, Is.Not.Null);
+                ActualValueDelegate<object> testDelegate = () =>
+                    mainWindow.BasicAutomationElement.GetNativePattern<object>(
+                        mainWindow.Automation.PatternLibrary.ExpandCollapsePattern);
+                Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+            }
         }
 
         [Test]
@@ -55,13 +67,18 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Patterns.Add(this.App.Automation.PatternLibrary.ExpandCollapsePattern);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetNativePattern<object>(mainWindow.Automation.PatternLibrary.ExpandCollapsePattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+                cacheRequest.Patterns.Add(app.Automation.PatternLibrary.ExpandCollapsePattern);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    ActualValueDelegate<object> testDelegate = () =>
+                        window.BasicAutomationElement.GetNativePattern<object>(window
+                            .Automation.PatternLibrary.ExpandCollapsePattern);
+                    Assert.That(testDelegate, Throws.TypeOf<PatternNotSupportedException>().With.Message.Contains("ExpandCollapse"));
+                }
             }
         }
 
@@ -73,13 +90,19 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Patterns.Add(this.App.Automation.PatternLibrary.ExpandCollapsePattern);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetNativePattern<object>(this.App.Automation.PatternLibrary.WindowPattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("Window"));
+                cacheRequest.Patterns.Add(app.Automation.PatternLibrary.ExpandCollapsePattern);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    ActualValueDelegate<object> testDelegate = () =>
+                        window.BasicAutomationElement.GetNativePattern<object>(
+                            app.Automation.PatternLibrary.WindowPattern);
+                    Assert.That(testDelegate,
+                        Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("Window"));
+                }
             }
         }
 
@@ -91,23 +114,32 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Patterns.Add(this.App.Automation.PatternLibrary.WindowPattern);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetNativePattern<object>(mainWindow.Automation.PatternLibrary.ExpandCollapsePattern);
-                Assert.That(testDelegate, Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("ExpandCollapse"));
+                cacheRequest.Patterns.Add(app.Automation.PatternLibrary.WindowPattern);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    ActualValueDelegate<object> testDelegate = () =>
+                        window.BasicAutomationElement.GetNativePattern<object>(window
+                            .Automation.PatternLibrary.ExpandCollapsePattern);
+                    Assert.That(testDelegate,
+                        Throws.TypeOf<PatternNotCachedException>().With.Message.Contains("ExpandCollapse"));
+                }
             }
         }
 
         [Test]
         public void CorrectProperty()
         {
-            var mainWindow = this.App.MainWindow();
-            Assert.That(mainWindow, Is.Not.Null);
-            var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.Window.CanMaximize);
-            Assert.That(windowProperty, Is.Not.Null);
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                Assert.That(window, Is.Not.Null);
+                var windowProperty = window.BasicAutomationElement.GetPropertyValue(window.Automation.PropertyLibrary.Window.CanMaximize);
+                Assert.That(windowProperty, Is.Not.Null);
+            }
         }
 
         [Test]
@@ -118,23 +150,34 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Properties.Add(this.App.Automation.PropertyLibrary.Window.CanMaximize);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                var windowProperty = mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.Window.CanMaximize);
-                Assert.That(windowProperty, Is.Not.Null);
+                cacheRequest.Properties.Add(app.Automation.PropertyLibrary.Window.CanMaximize);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    var windowProperty =
+                        window.BasicAutomationElement.GetPropertyValue(window
+                            .Automation.PropertyLibrary.Window.CanMaximize);
+                    Assert.That(windowProperty, Is.Not.Null);
+                }
             }
         }
 
         [Test]
         public void UnsupportedProperty()
         {
-            var mainWindow = this.App.MainWindow();
-            Assert.That(mainWindow, Is.Not.Null);
-            ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-            Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var window = app.MainWindow();
+                Assert.That(window, Is.Not.Null);
+                ActualValueDelegate<object> testDelegate = () =>
+                    window.BasicAutomationElement.GetPropertyValue(window
+                        .Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                Assert.That(testDelegate,
+                    Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+            }
         }
 
         [Test]
@@ -145,13 +188,19 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Properties.Add(this.App.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+                cacheRequest.Properties.Add(app.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                using (cacheRequest.Activate())
+                {
+                    var mainWindow = app.MainWindow();
+                    Assert.That(mainWindow, Is.Not.Null);
+                    ActualValueDelegate<object> testDelegate = () =>
+                        mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow
+                            .Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                    Assert.That(testDelegate,
+                        Throws.TypeOf<PropertyNotSupportedException>().With.Message.Contains("ExpandCollapseState"));
+                }
             }
         }
 
@@ -163,13 +212,19 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Properties.Add(this.App.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.Window.CanMaximize);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("CanMaximize"));
+                cacheRequest.Properties.Add(app.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    Assert.That(window, Is.Not.Null);
+                    ActualValueDelegate<object> testDelegate = () =>
+                        window.BasicAutomationElement.GetPropertyValue(window
+                            .Automation.PropertyLibrary.Window.CanMaximize);
+                    Assert.That(testDelegate,
+                        Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("CanMaximize"));
+                }
             }
         }
 
@@ -181,19 +236,21 @@
                 AutomationElementMode = AutomationElementMode.None,
                 TreeScope = TreeScope.Element
             };
-            cacheRequest.Properties.Add(this.App.Automation.PropertyLibrary.Window.CanMaximize);
-            using (cacheRequest.Activate())
+            using (var app = Application.Launch(ExeFileName))
             {
-                var mainWindow = this.App.MainWindow();
-                Assert.That(mainWindow, Is.Not.Null);
-                ActualValueDelegate<object> testDelegate = () => mainWindow.BasicAutomationElement.GetPropertyValue(mainWindow.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState);
-                Assert.That(testDelegate, Throws.TypeOf<PropertyNotCachedException>().With.Message.Contains("ExpandCollapseState"));
-            }
-        }
+                cacheRequest.Properties.Add(app.Automation.PropertyLibrary.Window.CanMaximize);
+                using (cacheRequest.Activate())
+                {
+                    var window = app.MainWindow();
+                    var exception = Assert.Throws<PropertyNotCachedException>(() =>
+                    {
+                        var property = window.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState;
+                        window.BasicAutomationElement.GetPropertyValue(property);
+                    });
 
-        protected override Application StartApplication()
-        {
-            return Application.Launch("notepad.exe");
+                    StringAssert.Contains("ExpandCollapseState", exception.Message);
+                }
+            }
         }
     }
 }

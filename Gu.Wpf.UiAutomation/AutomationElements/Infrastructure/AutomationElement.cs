@@ -213,6 +213,12 @@
         public Slider FindSlider(string name = null) => this.Find(ControlType.Slider, name).AsSlider();
 
         /// <summary>
+        /// Find the first ProgressBar by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ProgressBar FindProgressBar(string name = null) => this.Find(ControlType.ProgressBar, name).AsProgressBar();
+
+        /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

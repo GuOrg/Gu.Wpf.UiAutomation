@@ -1,41 +1,45 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
+    using System.IO;
     using NUnit.Framework;
 
-    public class ProgressBarTests : UITestBase
+    public class ProgressBarTests
     {
-        public ProgressBarTests()
-            : base(TestApplicationType.Wpf)
-        {
-        }
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
         public void MinimumValueTest()
         {
-            var bar = this.GetProgressBar();
-            Assert.That(bar.Minimum, Is.EqualTo(0));
+            using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
+            {
+                var window = app.MainWindow();
+                var bar = window.FindProgressBar();
+                Assert.AreEqual(0, bar.Minimum);
+            }
         }
 
         [Test]
         public void MaximumValueTest()
         {
-            var bar = this.GetProgressBar();
-            Assert.That(bar.Maximum, Is.EqualTo(100));
+            using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
+            {
+                var window = app.MainWindow();
+                var bar = window.FindProgressBar();
+                Assert.AreEqual(100, bar.Maximum);
+            }
         }
 
         [Test]
         public void ValueTest()
         {
-            var bar = this.GetProgressBar();
-            Assert.That(bar.Value, Is.EqualTo(50));
-        }
-
-        private ProgressBar GetProgressBar()
-        {
-            var mainWindow = this.App.MainWindow();
-            var element = mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("ProgressBar")).AsProgressBar();
-            return element;
+            using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
+            {
+                var window = app.MainWindow();
+                var bar = window.FindProgressBar();
+                Assert.AreEqual(50, bar.Value);
+            }
         }
     }
 }
