@@ -35,7 +35,7 @@
                 thumb.SlideHorizontally(50);
                 Wait.UntilInputIsProcessed();
 
-                Assert.AreEqual(oldPos.X + 50, thumb.Properties.BoundingRectangle.Value.Center().X);
+                Assert.AreEqual(oldPos.X + 49, thumb.Properties.BoundingRectangle.Value.Center().X);
                 Assert.AreEqual(oldPos.Y, thumb.Properties.BoundingRectangle.Value.Center().Y);
             }
         }
@@ -49,7 +49,8 @@
                 var slider = window.FindSlider("Slider");
                 var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
                 slider.Value = number1;
-                Assert.AreEqual(1, slider.Value);
+                Assert.AreEqual(number1, slider.Value);
+
                 var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
                 slider.Value = number2;
                 Assert.AreEqual(number2, slider.Value);
