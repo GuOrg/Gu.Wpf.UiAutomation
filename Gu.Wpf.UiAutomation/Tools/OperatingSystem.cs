@@ -3,28 +3,28 @@
     using System;
     using Microsoft.Win32;
 
-    public static class SystemProductNameFetcher
+    public static class OperatingSystem
     {
         private static readonly string CurrentProductName = GetCurrentProductName();
 
-        public static bool CurrentProductContains(string name)
+        public static bool CurrentContains(string name)
         {
             return CurrentProductName.Contains(name);
         }
 
         public static bool IsWindows8_1()
         {
-            return CurrentProductContains("Windows 8.1");
+            return CurrentContains("Windows 8.1");
         }
 
         public static bool IsWindows10()
         {
-            return CurrentProductContains("Windows 10");
+            return CurrentContains("Windows 10");
         }
 
         public static bool IsWindowsServer2016()
         {
-            return CurrentProductContains("Windows Server 2016");
+            return CurrentContains("Windows Server 2016");
         }
 
         private static string GetCurrentProductName()

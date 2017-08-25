@@ -12,7 +12,7 @@
             using (var app = StartApplication())
             {
                 var window = app.MainWindow();
-                var calc = SystemProductNameFetcher.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
+                var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
                 // Switch to default mode
                 System.Threading.Thread.Sleep(1000);
@@ -46,13 +46,13 @@
 
         private static Application StartApplication()
         {
-            if (SystemProductNameFetcher.IsWindows10())
+            if (OperatingSystem.IsWindows10())
             {
                 // Use the store application on those systems
                 return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
             }
 
-            if (SystemProductNameFetcher.IsWindowsServer2016())
+            if (OperatingSystem.IsWindowsServer2016())
             {
                 // The calc.exe on this system is just a stub which launches win32calc.exe
                 return Application.Launch("win32calc.exe");
