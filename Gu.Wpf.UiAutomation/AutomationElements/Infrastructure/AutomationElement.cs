@@ -32,6 +32,11 @@
         /// <summary>
         /// The current used automation object.
         /// </summary>
+        public AutomationElement Parent => this.FindFirst(TreeScope.Ancestors, TrueCondition.Default);
+
+        /// <summary>
+        /// The current used automation object.
+        /// </summary>
         public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
         /// <summary>
@@ -655,7 +660,7 @@
 
         public AutomationElement FindFirstChild()
         {
-            return this.FindFirst(TreeScope.Children, new TrueCondition());
+            return this.FindFirst(TreeScope.Children, TrueCondition.Default);
         }
 
         public AutomationElement FindFirstChild(string automationId)
@@ -676,7 +681,7 @@
 
         public IReadOnlyList<AutomationElement> FindAllChildren()
         {
-            return this.FindAll(TreeScope.Children, new TrueCondition());
+            return this.FindAll(TreeScope.Children, TrueCondition.Default);
         }
 
         public IReadOnlyList<AutomationElement> FindAllChildren(ConditionBase condition)
@@ -692,7 +697,7 @@
 
         public AutomationElement FindFirstDescendant()
         {
-            return this.FindFirst(TreeScope.Descendants, new TrueCondition());
+            return this.FindFirst(TreeScope.Descendants, TrueCondition.Default);
         }
 
         public AutomationElement FindFirstDescendant(string automationId)
@@ -713,7 +718,7 @@
 
         public IReadOnlyList<AutomationElement> FindAllDescendants()
         {
-            return this.FindAll(TreeScope.Descendants, new TrueCondition());
+            return this.FindAll(TreeScope.Descendants, TrueCondition.Default);
         }
 
         public IReadOnlyList<AutomationElement> FindAllDescendants(ConditionBase condition)

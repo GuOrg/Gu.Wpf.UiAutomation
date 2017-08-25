@@ -37,13 +37,13 @@
                 // Add the pattern availability properties
                 automationElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x => cr.Add(x));
                 cr.TreeScope = TreeScope.Subtree;
-                cr.TreeFilter = new TrueCondition();
+                cr.TreeFilter = TrueCondition.Default;
 
                 // Activate the cache request
                 using (cr.Activate())
                 {
                     // Re-find the root element with caching activated
-                    automationElement = automationElement.FindFirst(TreeScope.Element, new TrueCondition());
+                    automationElement = automationElement.FindFirst(TreeScope.Element, TrueCondition.Default);
                     Details(stringBuilder, automationElement, string.Empty);
                 }
 

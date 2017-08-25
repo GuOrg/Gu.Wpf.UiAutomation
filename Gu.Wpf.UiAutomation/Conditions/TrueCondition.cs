@@ -2,9 +2,11 @@ namespace Gu.Wpf.UiAutomation
 {
     public class TrueCondition : BoolCondition
     {
-        public TrueCondition()
+        private TrueCondition()
             : base((bool)true)
         {
         }
+
+        public static TrueCondition Default { get; } = new TrueCondition();
     }
 }
