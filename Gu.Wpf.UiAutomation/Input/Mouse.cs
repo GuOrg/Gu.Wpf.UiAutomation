@@ -115,8 +115,8 @@
 
             // Calculate the interval and the step size
             var interval = duration / steps;
-            var stepX = (double)(newX - startX) / steps;
-            var stepY = (double)(newY - startY) / steps;
+            var stepX = (newX - startX) / steps;
+            var stepY = (newY - startY) / steps;
 
             // Build a list of movement points (except the last one, to set that one perfectly)
             var movements = new List<Point>();

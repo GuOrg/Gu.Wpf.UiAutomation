@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
-                Wait.UntilResponsive((AutomationElement)this);
+                Wait.UntilResponsive(this);
             }
             else
             {
@@ -92,7 +92,7 @@ namespace Gu.Wpf.UiAutomation
             if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
-                Wait.UntilResponsive((AutomationElement)this);
+                Wait.UntilResponsive(this);
             }
             else
             {

@@ -1,9 +1,9 @@
 namespace Gu.Wpf.UiAutomation
 {
-    public class FalseCondition : BoolCondition
+    public sealed class FalseCondition : BoolCondition
     {
         private FalseCondition()
-            : base((bool)false)
+            : base(booleanValue: false)
         {
         }
 
