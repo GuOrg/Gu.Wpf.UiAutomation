@@ -4,11 +4,10 @@
     using System.Collections.Generic;
     using System.Windows;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
-    using UIA = Interop.UIAutomationClient;
 
     public class UIA3TextRange : ITextRange
     {
-        internal UIA3TextRange(UIA3Automation automation, UIA.IUIAutomationTextRange nativeRange)
+        internal UIA3TextRange(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationTextRange nativeRange)
         {
             this.Automation = automation;
             this.NativeRange = nativeRange;
@@ -16,7 +15,7 @@
 
         public UIA3Automation Automation { get; }
 
-        public UIA.IUIAutomationTextRange NativeRange { get; }
+        public Interop.UIAutomationClient.IUIAutomationTextRange NativeRange { get; }
 
         public void AddToSelection()
         {
@@ -38,12 +37,12 @@
         public int CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
             var nativeRange = this.ToNativeRange(targetRange);
-            return ComCallWrapper.Call(() => this.NativeRange.CompareEndpoints((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            return ComCallWrapper.Call(() => this.NativeRange.CompareEndpoints((Interop.UIAutomationClient.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (Interop.UIAutomationClient.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public void ExpandToEnclosingUnit(TextUnit textUnit)
         {
-            ComCallWrapper.Call(() => this.NativeRange.ExpandToEnclosingUnit((UIA.TextUnit)textUnit));
+            ComCallWrapper.Call(() => this.NativeRange.ExpandToEnclosingUnit((Interop.UIAutomationClient.TextUnit)textUnit));
         }
 
         public ITextRange FindAttribute(TextAttributeId attribute, object value, bool backward)
@@ -104,18 +103,18 @@
 
         public int Move(TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => this.NativeRange.Move((UIA.TextUnit)unit, count));
+            return ComCallWrapper.Call(() => this.NativeRange.Move((Interop.UIAutomationClient.TextUnit)unit, count));
         }
 
         public void MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ITextRange targetRange, TextPatternRangeEndpoint targetEndPoint)
         {
             var nativeRange = this.ToNativeRange(targetRange);
-            ComCallWrapper.Call(() => this.NativeRange.MoveEndpointByRange((UIA.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (UIA.TextPatternRangeEndpoint)targetEndPoint));
+            ComCallWrapper.Call(() => this.NativeRange.MoveEndpointByRange((Interop.UIAutomationClient.TextPatternRangeEndpoint)srcEndPoint, nativeRange, (Interop.UIAutomationClient.TextPatternRangeEndpoint)targetEndPoint));
         }
 
         public int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count)
         {
-            return ComCallWrapper.Call(() => this.NativeRange.MoveEndpointByUnit((UIA.TextPatternRangeEndpoint)endpoint, (UIA.TextUnit)unit, count));
+            return ComCallWrapper.Call(() => this.NativeRange.MoveEndpointByUnit((Interop.UIAutomationClient.TextPatternRangeEndpoint)endpoint, (Interop.UIAutomationClient.TextUnit)unit, count));
         }
 
         public void RemoveFromSelection()
@@ -135,11 +134,11 @@
 
         public UIA3TextRange2 AsTextRange2()
         {
-            var nativeRange2 = (UIA.IUIAutomationTextRange2)this.NativeRange;
+            var nativeRange2 = (Interop.UIAutomationClient.IUIAutomationTextRange2)this.NativeRange;
             return TextRangeConverter.NativeToManaged(this.Automation, nativeRange2);
         }
 
-        protected UIA.IUIAutomationTextRange ToNativeRange(ITextRange range)
+        protected Interop.UIAutomationClient.IUIAutomationTextRange ToNativeRange(ITextRange range)
         {
             var concreteTextRange = range as UIA3TextRange;
             if (concreteTextRange == null)

@@ -1,15 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class MultipleViewPattern : MultipleViewPatternBase<UIA.IUIAutomationMultipleViewPattern>
+    public class MultipleViewPattern : MultipleViewPatternBase<Interop.UIAutomationClient.IUIAutomationMultipleViewPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView", AutomationObjectIds.IsMultipleViewPatternAvailableProperty);
-        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
-        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_MultipleViewPatternId, "MultipleView", AutomationObjectIds.IsMultipleViewPatternAvailableProperty);
+        public static readonly PropertyId CurrentViewProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId, "CurrentView");
+        public static readonly PropertyId SupportedViewsProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId, "SupportedViews");
 
-        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationMultipleViewPattern nativePattern)
+        public MultipleViewPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationMultipleViewPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

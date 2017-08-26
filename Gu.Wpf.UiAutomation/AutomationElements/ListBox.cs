@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
         public int RowCount => this.GridPattern.RowCount.Value;
 
         /// <summary>
-        /// Returns the rows which are currently visible to UIA. Might not be the full list (eg. in virtualized lists)!
+        /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetItemByIndex" /> to make sure to get the correct row.
         /// </summary>
         public virtual IReadOnlyList<ListBoxItem> Items

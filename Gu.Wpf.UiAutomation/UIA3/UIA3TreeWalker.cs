@@ -2,11 +2,10 @@
 {
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
-    using UIA = Interop.UIAutomationClient;
 
     public class UIA3TreeWalker : ITreeWalker
     {
-        public UIA3TreeWalker(UIA3Automation automation, UIA.IUIAutomationTreeWalker nativeTreeWalker)
+        public UIA3TreeWalker(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationTreeWalker nativeTreeWalker)
         {
             this.Automation = automation;
             this.NativeTreeWalker = nativeTreeWalker;
@@ -14,7 +13,7 @@
 
         public UIA3Automation Automation { get; }
 
-        public UIA.IUIAutomationTreeWalker NativeTreeWalker { get; }
+        public Interop.UIAutomationClient.IUIAutomationTreeWalker NativeTreeWalker { get; }
 
         public AutomationElement GetParent(AutomationElement element)
         {

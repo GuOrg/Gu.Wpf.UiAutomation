@@ -2,19 +2,18 @@
 {
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
     public class Text2Pattern : TextPattern, IText2Pattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
+        public new static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
 
-        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern2 nativePattern)
+        public Text2Pattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextPattern2 nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
             this.ExtendedNativePattern = nativePattern;
         }
 
-        public UIA.IUIAutomationTextPattern2 ExtendedNativePattern { get; }
+        public Interop.UIAutomationClient.IUIAutomationTextPattern2 ExtendedNativePattern { get; }
 
         public ITextRange GetCaretRange(out bool isActive)
         {

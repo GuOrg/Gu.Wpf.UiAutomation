@@ -2,21 +2,20 @@
 {
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
     public class TextEditPattern : TextPattern, ITextEditPattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit", AutomationObjectIds.IsTextEditPatternAvailableProperty);
-        public static readonly EventId ConversionTargetChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
-        public static readonly EventId TextChangedEvent2 = EventId.Register(UIA.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
+        public new static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit", AutomationObjectIds.IsTextEditPatternAvailableProperty);
+        public static readonly EventId ConversionTargetChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
+        public static readonly EventId TextChangedEvent2 = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
-        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextEditPattern nativePattern)
+        public TextEditPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextEditPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
             this.ExtendedNativePattern = nativePattern;
         }
 
-        public UIA.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
+        public Interop.UIAutomationClient.IUIAutomationTextEditPattern ExtendedNativePattern { get; }
 
         ITextEditPatternEvents ITextEditPattern.Events => this.Automation.EventLibrary.TextEdit;
 

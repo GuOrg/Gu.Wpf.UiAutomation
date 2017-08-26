@@ -7,11 +7,10 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
-    using UIA = Interop.UIAutomationClient;
 
     public class UIA3BasicAutomationElement : BasicAutomationElementBase
     {
-        public UIA3BasicAutomationElement(UIA3Automation automation, UIA.IUIAutomationElement nativeElement)
+        public UIA3BasicAutomationElement(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationElement nativeElement)
             : base(automation)
         {
             this.Automation = automation;
@@ -29,17 +28,17 @@
         /// <summary>
         /// Native object for the ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement { get; }
+        public Interop.UIAutomationClient.IUIAutomationElement NativeElement { get; }
 
         /// <summary>
         /// Native object for Windows 8 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement2 => this.GetAutomationElementAs<UIA.IUIAutomationElement2>();
+        public Interop.UIAutomationClient.IUIAutomationElement NativeElement2 => this.GetAutomationElementAs<Interop.UIAutomationClient.IUIAutomationElement2>();
 
         /// <summary>
         /// Native object for Windows 8.1 ui element
         /// </summary>
-        public UIA.IUIAutomationElement NativeElement3 => this.GetAutomationElementAs<UIA.IUIAutomationElement3>();
+        public Interop.UIAutomationClient.IUIAutomationElement NativeElement3 => this.GetAutomationElementAs<Interop.UIAutomationClient.IUIAutomationElement3>();
 
         public override void SetFocus()
         {
@@ -49,22 +48,22 @@
         public override IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
-                ? this.NativeElement.FindAllBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
-                : this.NativeElement.FindAll((UIA.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
+                ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
             return AutomationElementConverter.NativeArrayToManaged(this.Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = CacheRequest.IsCachingActive
-                ? this.NativeElement.FindFirstBuildCache((UIA.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
-                : this.NativeElement.FindFirst((UIA.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
+                ? this.NativeElement.FindFirstBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindFirst((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
             return AutomationElementConverter.NativeToManaged(this.Automation, nativeFoundElement);
         }
 
         public override bool TryGetClickablePoint(out Point point)
         {
-            var tagPoint = new UIA.tagPOINT { x = 0, y = 0 };
+            var tagPoint = new Interop.UIAutomationClient.tagPOINT { x = 0, y = 0 };
             var success = ComCallWrapper.Call(() => this.NativeElement.GetClickablePoint(out tagPoint)) != 0;
             if (success)
             {
@@ -81,7 +80,7 @@
         public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3BasicEventHandler(this.Automation, action);
-            this.Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, this.NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);
+            this.Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, this.NativeElement, (Interop.UIAutomationClient.TreeScope)treeScope, null, eventHandler);
             return eventHandler;
         }
 
@@ -91,7 +90,7 @@
             var propertyIds = properties.Select(p => p.Id).ToArray();
             this.Automation.NativeAutomation.AddPropertyChangedEventHandler(
                 this.NativeElement,
-                (UIA.TreeScope)treeScope,
+                (Interop.UIAutomationClient.TreeScope)treeScope,
                 null,
                 eventHandler,
                 propertyIds);
@@ -101,7 +100,7 @@
         public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             var eventHandler = new UIA3StructureChangedEventHandler(this.Automation, action);
-            this.Automation.NativeAutomation.AddStructureChangedEventHandler(this.NativeElement, (UIA.TreeScope)treeScope, null, eventHandler);
+            this.Automation.NativeAutomation.AddStructureChangedEventHandler(this.NativeElement, (Interop.UIAutomationClient.TreeScope)treeScope, null, eventHandler);
             return eventHandler;
         }
 
@@ -182,7 +181,7 @@
         /// Throws an exception if that is not possible.
         /// </summary>
         private T GetAutomationElementAs<T>()
-            where T : class, UIA.IUIAutomationElement
+            where T : class, Interop.UIAutomationClient.IUIAutomationElement
         {
             var element = this.NativeElement as T;
             if (element == null)

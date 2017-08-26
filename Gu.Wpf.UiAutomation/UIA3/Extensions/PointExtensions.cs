@@ -1,16 +1,15 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Extensions
 {
     using System.Windows;
-    using UIA = Interop.UIAutomationClient;
 
     public static class PointExtensions
     {
-        public static UIA.tagPOINT ToTagPoint(this Point p)
+        public static Interop.UIAutomationClient.tagPOINT ToTagPoint(this Point p)
         {
-            return new UIA.tagPOINT { x = p.X.ToInt(), y = p.Y.ToInt() };
+            return new Interop.UIAutomationClient.tagPOINT { x = p.X.ToInt(), y = p.Y.ToInt() };
         }
 
-        public static Point ToPoint(this UIA.tagPOINT p)
+        public static Point ToPoint(this Interop.UIAutomationClient.tagPOINT p)
         {
             return new Point(p.x, p.y);
         }

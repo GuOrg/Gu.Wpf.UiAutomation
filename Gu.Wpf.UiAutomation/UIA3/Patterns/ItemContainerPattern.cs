@@ -2,13 +2,12 @@
 {
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class ItemContainerPattern : PatternBase<UIA.IUIAutomationItemContainerPattern>, IItemContainerPattern
+    public class ItemContainerPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationItemContainerPattern>, IItemContainerPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
 
-        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationItemContainerPattern nativePattern)
+        public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationItemContainerPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

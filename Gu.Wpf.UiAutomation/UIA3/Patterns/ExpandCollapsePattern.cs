@@ -1,14 +1,13 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class ExpandCollapsePattern : ExpandCollapsePatternBase<UIA.IUIAutomationExpandCollapsePattern>
+    public class ExpandCollapsePattern : ExpandCollapsePatternBase<Interop.UIAutomationClient.IUIAutomationExpandCollapsePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_ExpandCollapsePatternId, "ExpandCollapse", AutomationObjectIds.IsExpandCollapsePatternAvailableProperty);
-        public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId, "ExpandCollapseState");
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_ExpandCollapsePatternId, "ExpandCollapse", AutomationObjectIds.IsExpandCollapsePatternAvailableProperty);
+        public static readonly PropertyId ExpandCollapseStateProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId, "ExpandCollapseState");
 
-        public ExpandCollapsePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationExpandCollapsePattern nativePattern)
+        public ExpandCollapsePattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationExpandCollapsePattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

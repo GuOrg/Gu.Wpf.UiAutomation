@@ -6,7 +6,6 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
-    using UIA = Interop.UIAutomationClient;
 
     /// <summary>
     /// Automation implementation for UIA3
@@ -27,17 +26,17 @@
         /// <summary>
         /// Native object for the ui automation
         /// </summary>
-        public UIA.IUIAutomation NativeAutomation { get; }
+        public Interop.UIAutomationClient.IUIAutomation NativeAutomation { get; }
 
         /// <summary>
         /// Native object for Windows 8 automation
         /// </summary>
-        public UIA.IUIAutomation2 NativeAutomation2 => this.GetAutomationAs<UIA.IUIAutomation2>();
+        public Interop.UIAutomationClient.IUIAutomation2 NativeAutomation2 => this.GetAutomationAs<Interop.UIAutomationClient.IUIAutomation2>();
 
         /// <summary>
         /// Native object for Windows 8.1 automation
         /// </summary>
-        public UIA.IUIAutomation3 NativeAutomation3 => this.GetAutomationAs<UIA.IUIAutomation3>();
+        public Interop.UIAutomationClient.IUIAutomation3 NativeAutomation3 => this.GetAutomationAs<Interop.UIAutomationClient.IUIAutomation3>();
 
         public override AutomationElement GetDesktop()
         {
@@ -114,7 +113,7 @@
             }
         }
 
-        public AutomationElement WrapNativeElement(UIA.IUIAutomationElement nativeElement)
+        public AutomationElement WrapNativeElement(Interop.UIAutomationClient.IUIAutomationElement nativeElement)
         {
             return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
         }
@@ -127,19 +126,19 @@
         /// <summary>
         /// Initializes the automation object with the correct instance
         /// </summary>
-        private UIA.IUIAutomation InitializeAutomation()
+        private Interop.UIAutomationClient.IUIAutomation InitializeAutomation()
         {
-            UIA.IUIAutomation nativeAutomation;
+            Interop.UIAutomationClient.IUIAutomation nativeAutomation;
 
             // Try CUIAutomation8 (Windows 8)
             try
             {
-                nativeAutomation = new UIA.CUIAutomation8();
+                nativeAutomation = new Interop.UIAutomationClient.CUIAutomation8();
             }
             catch (COMException)
             {
                 // Fall back to CUIAutomation
-                nativeAutomation = new UIA.CUIAutomation();
+                nativeAutomation = new Interop.UIAutomationClient.CUIAutomation();
             }
 
             return nativeAutomation;
@@ -150,7 +149,7 @@
         /// Throws an exception if that is not possible.
         /// </summary>
         private T GetAutomationAs<T>()
-            where T : class, UIA.IUIAutomation
+            where T : class, Interop.UIAutomationClient.IUIAutomation
         {
             var element = this.NativeAutomation as T;
             if (element == null)

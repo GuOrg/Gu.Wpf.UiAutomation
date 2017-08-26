@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using UIA = Interop.UIAutomationClient;
 
     public static class AnnotationTypeConverter
     {
@@ -10,23 +9,23 @@
         {
             switch ((int)nativeAnnotationType)
             {
-                case UIA.UIA_AnnotationTypes.AnnotationType_Comment:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Comment:
                     return AnnotationType.Comment;
-                case UIA.UIA_AnnotationTypes.AnnotationType_Footer:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Footer:
                     return AnnotationType.Footer;
-                case UIA.UIA_AnnotationTypes.AnnotationType_FormulaError:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_FormulaError:
                     return AnnotationType.FormulaError;
-                case UIA.UIA_AnnotationTypes.AnnotationType_GrammarError:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_GrammarError:
                     return AnnotationType.GrammarError;
-                case UIA.UIA_AnnotationTypes.AnnotationType_Header:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Header:
                     return AnnotationType.Header;
-                case UIA.UIA_AnnotationTypes.AnnotationType_Highlighted:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Highlighted:
                     return AnnotationType.Highlighted;
-                case UIA.UIA_AnnotationTypes.AnnotationType_SpellingError:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_SpellingError:
                     return AnnotationType.SpellingError;
-                case UIA.UIA_AnnotationTypes.AnnotationType_TrackChanges:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_TrackChanges:
                     return AnnotationType.TrackChanges;
-                case UIA.UIA_AnnotationTypes.AnnotationType_Unknown:
+                case Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Unknown:
                     return AnnotationType.Unknown;
                 default:
                     throw new NotSupportedException();
@@ -38,23 +37,23 @@
             switch (annotationType)
             {
                 case AnnotationType.Comment:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_Comment;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Comment;
                 case AnnotationType.Footer:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_Footer;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Footer;
                 case AnnotationType.FormulaError:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_FormulaError;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_FormulaError;
                 case AnnotationType.GrammarError:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_GrammarError;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_GrammarError;
                 case AnnotationType.Header:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_Header;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Header;
                 case AnnotationType.Highlighted:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_Highlighted;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Highlighted;
                 case AnnotationType.SpellingError:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_SpellingError;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_SpellingError;
                 case AnnotationType.TrackChanges:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_TrackChanges;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_TrackChanges;
                 case AnnotationType.Unknown:
-                    return UIA.UIA_AnnotationTypes.AnnotationType_Unknown;
+                    return Interop.UIAutomationClient.UIA_AnnotationTypes.AnnotationType_Unknown;
                 default:
                     throw new NotSupportedException();
             }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using UIA = Interop.UIAutomationClient;
 
     public static class AutomationElementConverter
     {
@@ -14,7 +13,7 @@
             }
 
             var uia3Automation = (UIA3Automation)automation;
-            var nativeElementsCasted = (UIA.IUIAutomationElementArray)nativeElements;
+            var nativeElementsCasted = (Interop.UIAutomationClient.IUIAutomationElementArray)nativeElements;
             var retArray = new AutomationElement[nativeElementsCasted.Length];
             for (var i = 0; i < nativeElementsCasted.Length; i++)
             {
@@ -29,10 +28,10 @@
         public static AutomationElement NativeToManaged(AutomationBase automation, object nativeElement)
         {
             var uia3Automation = (UIA3Automation)automation;
-            return uia3Automation.WrapNativeElement((UIA.IUIAutomationElement)nativeElement);
+            return uia3Automation.WrapNativeElement((Interop.UIAutomationClient.IUIAutomationElement)nativeElement);
         }
 
-        public static UIA.IUIAutomationElement ToNative(this AutomationElement automationElement)
+        public static Interop.UIAutomationClient.IUIAutomationElement ToNative(this AutomationElement automationElement)
         {
             if (automationElement == null)
             {

@@ -2,13 +2,12 @@
 {
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class SpreadsheetPattern : PatternBase<UIA.IUIAutomationSpreadsheetPattern>, ISpreadsheetPattern
+    public class SpreadsheetPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationSpreadsheetPattern>, ISpreadsheetPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet", AutomationObjectIds.IsSpreadsheetPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet", AutomationObjectIds.IsSpreadsheetPatternAvailableProperty);
 
-        public SpreadsheetPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationSpreadsheetPattern nativePattern)
+        public SpreadsheetPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationSpreadsheetPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

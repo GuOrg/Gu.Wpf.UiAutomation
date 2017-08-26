@@ -2,15 +2,14 @@
 {
     using System;
     using System.Linq;
-    using UIA = Interop.UIAutomationClient;
 
     public static class ConditionConverter
     {
-        public static UIA.IUIAutomationCondition ToNative(UIA3Automation automation, ConditionBase condition)
+        public static Interop.UIAutomationClient.IUIAutomationCondition ToNative(UIA3Automation automation, ConditionBase condition)
         {
             if (condition is PropertyCondition propCond)
             {
-                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, ValueConverter.ToNative(propCond.Value), (UIA.PropertyConditionFlags)propCond.PropertyConditionFlags);
+                return automation.NativeAutomation.CreatePropertyConditionEx(propCond.Property.Id, ValueConverter.ToNative(propCond.Value), (Interop.UIAutomationClient.PropertyConditionFlags)propCond.PropertyConditionFlags);
             }
 
             if (condition is BoolCondition boolCond)

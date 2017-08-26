@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// Returns the rows which are currently visible to UIA. Might not be the full list (eg. in virtualized lists)!
+        /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
         /// </summary>
         public virtual IReadOnlyList<GridRow> Rows

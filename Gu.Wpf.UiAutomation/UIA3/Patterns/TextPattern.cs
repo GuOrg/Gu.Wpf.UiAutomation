@@ -4,15 +4,14 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class TextPattern : TextPatternBase<UIA.IUIAutomationTextPattern>
+    public class TextPattern : TextPatternBase<Interop.UIAutomationClient.IUIAutomationTextPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TextPatternId, "Text", AutomationObjectIds.IsTextPatternAvailableProperty);
-        public static readonly EventId TextChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
-        public static readonly EventId TextSelectionChangedEvent = EventId.Register(UIA.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextPatternId, "Text", AutomationObjectIds.IsTextPatternAvailableProperty);
+        public static readonly EventId TextChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
+        public static readonly EventId TextSelectionChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
-        public TextPattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTextPattern nativePattern)
+        public TextPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

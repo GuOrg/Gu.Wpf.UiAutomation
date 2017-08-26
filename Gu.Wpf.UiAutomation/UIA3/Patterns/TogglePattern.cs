@@ -1,14 +1,13 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class TogglePattern : TogglePatternBase<UIA.IUIAutomationTogglePattern>
+    public class TogglePattern : TogglePatternBase<Interop.UIAutomationClient.IUIAutomationTogglePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TogglePatternId, "Toggle", AutomationObjectIds.IsTogglePatternAvailableProperty);
-        public static readonly PropertyId ToggleStateProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TogglePatternId, "Toggle", AutomationObjectIds.IsTogglePatternAvailableProperty);
+        public static readonly PropertyId ToggleStateProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ToggleToggleStatePropertyId, "ToggleState");
 
-        public TogglePattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTogglePattern nativePattern)
+        public TogglePattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTogglePattern nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
         }

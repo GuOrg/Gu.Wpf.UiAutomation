@@ -15,7 +15,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="Interop.UIAutomationClient">
-      <HintPath>..\libs\Interop\4.5\Interop.UIAutomationClient.dll</HintPath>
+      <HintPath>..\Interop\Interop.UIAutomationClient.dll</HintPath>
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <SpecificVersion>false</SpecificVersion>
     </Reference>

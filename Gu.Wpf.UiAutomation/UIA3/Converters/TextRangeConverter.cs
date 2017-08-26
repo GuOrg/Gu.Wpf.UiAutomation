@@ -1,10 +1,8 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Converters
 {
-    using UIA = Interop.UIAutomationClient;
-
     public static class TextRangeConverter
     {
-        public static ITextRange[] NativeArrayToManaged(UIA3Automation automation, UIA.IUIAutomationTextRangeArray nativeTextRangeArray)
+        public static ITextRange[] NativeArrayToManaged(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationTextRangeArray nativeTextRangeArray)
         {
             if (nativeTextRangeArray == null)
             {
@@ -20,12 +18,12 @@
             return retArray;
         }
 
-        public static UIA3TextRange NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange nativeTextRange)
+        public static UIA3TextRange NativeToManaged(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationTextRange nativeTextRange)
         {
             return nativeTextRange == null ? null : new UIA3TextRange(automation, nativeTextRange);
         }
 
-        public static UIA3TextRange2 NativeToManaged(UIA3Automation automation, UIA.IUIAutomationTextRange2 nativeTextRange2)
+        public static UIA3TextRange2 NativeToManaged(UIA3Automation automation, Interop.UIAutomationClient.IUIAutomationTextRange2 nativeTextRange2)
         {
             return nativeTextRange2 == null ? null : new UIA3TextRange2(automation, nativeTextRange2);
         }

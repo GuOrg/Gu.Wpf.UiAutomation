@@ -1,19 +1,18 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3.Patterns
 {
     using Gu.Wpf.UiAutomation.UIA3.Identifiers;
-    using UIA = Interop.UIAutomationClient;
 
-    public class Transform2Pattern : Transform2PatternBase<UIA.IUIAutomationTransformPattern2>
+    public class Transform2Pattern : Transform2PatternBase<Interop.UIAutomationClient.IUIAutomationTransformPattern2>
     {
-        public static readonly PatternId Pattern = PatternId.Register(UIA.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2", AutomationObjectIds.IsTransformPattern2AvailableProperty);
-        public static readonly PropertyId CanZoomProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
-        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
-        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
-        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(UIA.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
+        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2", AutomationObjectIds.IsTransformPattern2AvailableProperty);
+        public static readonly PropertyId CanZoomProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
+        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
+        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
+        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
 
         private readonly TransformPattern transformPattern;
 
-        public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, UIA.IUIAutomationTransformPattern2 nativePattern)
+        public Transform2Pattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTransformPattern2 nativePattern)
             : base(basicAutomationElement, nativePattern)
         {
             this.transformPattern = new TransformPattern(basicAutomationElement, nativePattern);
@@ -26,7 +25,7 @@
 
         public override void ZoomByUnit(ZoomUnit zoomUnit)
         {
-            ComCallWrapper.Call(() => this.NativePattern.ZoomByUnit((UIA.ZoomUnit)zoomUnit));
+            ComCallWrapper.Call(() => this.NativePattern.ZoomByUnit((Interop.UIAutomationClient.ZoomUnit)zoomUnit));
         }
 
         public override void Move(double x, double y)
