@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UnitTests.Logging
 {
     using System;
-    using Gu.Wpf.UiAutomation.Logging;
     using Moq;
     using NUnit.Framework;
 
