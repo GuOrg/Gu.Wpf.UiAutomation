@@ -1,5 +1,17 @@
-﻿type project
+﻿type file
+id Gu.Wpf.UiAutomation
+title Gu.Wpf.UiAutomation
+version 0.0.1.0-dev
+authors Johan Larsson
+owners Johan Larsson
+copyright Copyright Johan Larsson 2017
+description Library for writing UI-tests for WPF.
+tags UI Automation WPF Test UIA3 UIA System.Windows.Automation
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
-tags UI Automation WPF Test UIA3 UIA System.Windows.Automation
+files
+  bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
+  bin/Release/net45/Gu.Wpf.UiAutomation.pdb ==> lib/net45
+  bin/Release/net45/Gu.Wpf.UiAutomation.xml ==> lib/net45
+  bin/Release/net45/Interop.UIAutomationClient.dll ==> lib/net45 
