@@ -164,17 +164,17 @@
             this.Log(LogLevel.Fatal, message, exception, args);
         }
 
-        protected internal abstract void GatedTrace(string message);
+        protected abstract void GatedTrace(string message);
 
-        protected internal abstract void GatedDebug(string message);
+        protected abstract void GatedDebug(string message);
 
-        protected internal abstract void GatedInfo(string message);
+        protected abstract void GatedInfo(string message);
 
-        protected internal abstract void GatedWarn(string message);
+        protected abstract void GatedWarn(string message);
 
-        protected internal abstract void GatedError(string message);
+        protected abstract void GatedError(string message);
 
-        protected internal abstract void GatedFatal(string message);
+        protected abstract void GatedFatal(string message);
 
         private string GetFormattedMessage(string message, Exception exception, params object[] args)
         {

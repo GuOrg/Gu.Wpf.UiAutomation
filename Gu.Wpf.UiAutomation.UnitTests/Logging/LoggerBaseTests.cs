@@ -5,14 +5,16 @@
     using Moq;
     using NUnit.Framework;
 
-    [TestFixture]
-    public class LoggerBaseTests
+    public class TestLoggerTests
     {
         [Test]
         public void IsTraceEnabled_False_TraceLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -26,14 +28,17 @@
             instance.Trace("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedTrace(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicTrace(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsTraceEnabled_True_TraceLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -47,14 +52,17 @@
             instance.Trace("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedTrace(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicTrace(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test]
         public void IsDebugEnabled_False_DebugLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -68,14 +76,17 @@
             instance.Debug("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedDebug(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicDebug(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsDebugEnabled_True_DebugLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -89,14 +100,17 @@
             instance.Debug("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedDebug(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicDebug(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test]
         public void IsInfoEnabled_False_InfoLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -110,14 +124,17 @@
             instance.Info("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedInfo(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicInfo(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsInfoEnabled_True_InfoLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -131,14 +148,17 @@
             instance.Info("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedInfo(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicInfo(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test]
         public void IsWarnEnabled_False_WarnLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -152,14 +172,17 @@
             instance.Warn("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedWarn(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicWarn(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsWarnEnabled_True_WarnLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -173,14 +196,17 @@
             instance.Warn("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedWarn(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicWarn(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test]
         public void IsErrorEnabled_False_ErrorLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -194,14 +220,17 @@
             instance.Error("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedError(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicError(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsErrorEnabled_True_ErrorLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -215,14 +244,17 @@
             instance.Error("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedError(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicError(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test]
         public void IsFatalEnabled_False_FatalLoggingIsDisabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -236,14 +268,17 @@
             instance.Fatal("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedFatal(It.IsAny<string>()), Times.Never);
+            mock.Verify(x => x.PublicFatal(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
         public void IsFatalEnabled_True_FatalLoggingIsEnabled()
         {
             // Arrange
-            var mock = new Mock<LoggerBase> { CallBase = true };
+            var mock = new Mock<TestLogger>
+            {
+                CallBase = true
+            };
 
             // This gets us an instance of AbstractBase which has instrumentation
             // on the abstract trace/debug/info...etc methods.
@@ -257,7 +292,7 @@
             instance.Fatal("{0}", new Exception(), 1);
 
             // Assert
-            mock.Verify(x => x.GatedFatal(It.IsAny<string>()), Times.Exactly(4));
+            mock.Verify(x => x.PublicFatal(It.IsAny<string>()), Times.Exactly(4));
         }
     }
 }

@@ -3,32 +3,32 @@
     public class NullLogger : LoggerBase
     {
         /// <inheritdoc/>
-        protected internal override void GatedTrace(string message)
+        protected override void GatedTrace(string message)
         {
         }
 
         /// <inheritdoc/>
-        protected internal override void GatedDebug(string message)
+        protected override void GatedDebug(string message)
         {
         }
 
         /// <inheritdoc/>
-        protected internal override void GatedInfo(string message)
+        protected override void GatedInfo(string message)
         {
         }
 
         /// <inheritdoc/>
-        protected internal override void GatedWarn(string message)
+        protected override void GatedWarn(string message)
         {
         }
 
         /// <inheritdoc/>
-        protected internal override void GatedError(string message)
+        protected override void GatedError(string message)
         {
         }
 
         /// <inheritdoc/>
-        protected internal override void GatedFatal(string message)
+        protected override void GatedFatal(string message)
         {
         }
     }
