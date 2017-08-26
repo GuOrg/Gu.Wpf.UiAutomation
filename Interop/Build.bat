@@ -9,8 +9,8 @@ mkdir %TEMP%
 @REM Create Type Libraries
 midl.exe /nologo /out %TEMP% /char signed /tlb UIAutomationClient.tlb /h UIAutomationClient_h.h "%WINSDK%UIAutomationClient.idl"
 @REM Create the original dlls from the tlbs
-REM tlbimp.exe /machine:Agnostic /silent /asmversion:%%A /out:%%A\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb
-tlbimp.exe /machine:Agnostic /silent /asmversion:1.0.0.0 /out:%TEMP%\Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb /keyfile:..\Gu.Wpf.UiAutomation.snk"	
+REM tlbimp.exe /machine:Agnostic /silent /asmversion:1.0.0.0 /out:Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb
+tlbimp.exe /machine:Agnostic /silent /asmversion:1.0.0.0 /out:Interop.UIAutomationClient.dll %TEMP%\UIAutomationClient.tlb /keyfile:..\Gu.Wpf.UiAutomation.snk"	
 
 RMDIR /S /Q %TEMP%
 pause
