@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Gu.Wpf.UiAutomation")]
@@ -18,4 +17,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.0.1.0")]
 [assembly: AssemblyFileVersion("0.0.1.0")]
 [assembly: AssemblyInformationalVersion("0.0.1.0-dev")]
-[assembly: InternalsVisibleTo("Gu.Wpf.UiAutomation.UnitTests")]
