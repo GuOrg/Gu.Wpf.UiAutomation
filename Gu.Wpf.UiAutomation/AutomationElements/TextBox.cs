@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Linq;
     using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -68,14 +69,17 @@
             }
 
             // give some time to process input.
-            for (var i = 0; i < 100; i++)
+            var stopTime = DateTime.Now.AddSeconds(1);
+            while (DateTime.Now < stopTime)
             {
-                if (this.Text != value)
+                if (this.Text == value)
                 {
-                    if (!Thread.Yield())
-                    {
-                        Thread.Sleep(10);
-                    }
+                    return;
+                }
+
+                if (!Thread.Yield())
+                {
+                    Thread.Sleep(10);
                 }
             }
         }

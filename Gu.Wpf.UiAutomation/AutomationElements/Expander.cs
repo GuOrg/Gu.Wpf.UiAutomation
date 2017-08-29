@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using System.Threading;
+    using System;
 
     public class Expander : Control
     {
@@ -50,19 +50,19 @@
             {
                 // WPF
                 var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                if (ecp != null)
-                {
-                    ecp.Expand();
-                    for (int i = 0; i < 5; i++)
-                    {
-                        if (!this.IsExpanded)
-                        {
-                            // Wait a bit in case there is an open animation
-                            Thread.Sleep(50);
-                        }
-                    }
-                }
+                ecp?.Expand();
             }
+        }
+
+        /// <summary>
+        /// Invokes <see cref="Expand()"/>.
+        /// Then waits for <paramref name="delay"/>, useful if there is an animation.
+        /// </summary>
+        /// <param name="delay">The time to wait after the click. Useful if there is an animation for example.</param>
+        public void Expand(TimeSpan delay)
+        {
+            this.Expand();
+            Wait.For(delay);
         }
 
         public void Collapse()

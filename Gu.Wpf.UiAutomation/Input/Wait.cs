@@ -11,16 +11,34 @@
     {
         private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
 
+        public static void For(TimeSpan time)
+        {
+            var stopTime = DateTime.Now + time;
+            while (DateTime.Now < stopTime)
+            {
+                if (!Thread.Yield())
+                {
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
         /// <summary>
-        /// Waits for a generic time which was found to be sufficient to allow
+        /// Waits 100 ms for a generic time which was found to be sufficient to allow
         /// input (mouse, keyboard, ...) do be processed
         /// </summary>
         public static void UntilInputIsProcessed()
         {
-            // Let the thread some time to process the system's hardware input queue.
-            // For details see this post: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
-            // TODO: Should this be configurable?
-            Thread.Sleep(100);
+            Wait.For(TimeSpan.FromMilliseconds(100));
+        }
+
+        /// <summary>
+        /// Waits for a generic time which was found to be sufficient to allow
+        /// input (mouse, keyboard, ...) do be processed
+        /// </summary>
+        public static void UntilInputIsProcessed(TimeSpan delay)
+        {
+            Wait.For(delay);
         }
 
         public static bool UntilResponsive(AutomationElement automationElement)

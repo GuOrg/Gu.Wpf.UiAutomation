@@ -30,6 +30,17 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Performs a left click on the element.
+        /// </summary>
+        /// <param name="delay">The time to wait after the click. Useful if there is an animation for example.</param>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
+        public void Click(TimeSpan delay, bool moveMouse = false)
+        {
+            this.PerformMouseAction(moveMouse, Mouse.LeftClick);
+            Wait.For(delay);
+        }
+
+        /// <summary>
         /// Performs a double left click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
