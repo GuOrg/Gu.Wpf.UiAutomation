@@ -3,7 +3,6 @@
     using System.Diagnostics;
     using System.IO;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
@@ -15,28 +14,16 @@
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
-        public void Type()
+        public void TypeKeysThenBackspace()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
                 var mainWindow = app.MainWindow();
-
-                Keyboard.Type("ééééééööööö aaa | ");
-
-                Keyboard.Type(VirtualKeyShort.KEY_Z);
-                Keyboard.Type(VirtualKeyShort.LEFT);
-                Keyboard.Type(VirtualKeyShort.DELETE);
-                Keyboard.Type(VirtualKeyShort.KEY_Y);
+                Keyboard.Type("abc");
+                Thread.Sleep(50);
                 Keyboard.Type(VirtualKeyShort.BACK);
-                Keyboard.Type(VirtualKeyShort.KEY_X);
-
-                Keyboard.Type(" | ");
-
-                Keyboard.Type("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ");
-
-                Thread.Sleep(500);
-
-                TestUtilities.CloseWindowWithDontSave(mainWindow);
+                var textBox = mainWindow.FindTextBox();
+                Assert.AreEqual("ab", textBox.Text);
             }
         }
 
@@ -54,6 +41,7 @@
         }
 
         [TestCase("abc")]
+        [TestCase("ééééééööööö aaa | ")]
         [TestCase("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ")]
         public void TypeString(string text)
         {
