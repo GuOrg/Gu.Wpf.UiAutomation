@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
@@ -18,7 +19,7 @@
 
         public TitleBar TitleBar => this.FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
-        public Window[] ModalWindows
+        public IReadOnlyList<Window> ModalWindows
         {
             get
             {
