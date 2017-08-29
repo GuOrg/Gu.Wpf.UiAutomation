@@ -6,5 +6,7 @@ namespace Gu.Wpf.UiAutomation
             : base(basicAutomationElement)
         {
         }
+
+        public GridCell this[int row, int col] => this.Rows[row].Cells[col];
     }
 }

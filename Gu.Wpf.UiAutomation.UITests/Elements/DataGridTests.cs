@@ -53,6 +53,30 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
+        public void Indexer()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid();
+                Assert.AreEqual(4, dataGrid.RowCount);
+                var rows = dataGrid.Rows;
+                Assert.AreEqual(4, rows.Count);
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
+            }
+        }
+
+        [Test]
         public void SelectByIndexTest()
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
