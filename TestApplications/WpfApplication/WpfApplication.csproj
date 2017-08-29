@@ -67,6 +67,12 @@
     <Compile Include="Windows\DataGridWindowViewModel.cs">
       <DependentUpon>DataGridWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +89,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\EmptyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

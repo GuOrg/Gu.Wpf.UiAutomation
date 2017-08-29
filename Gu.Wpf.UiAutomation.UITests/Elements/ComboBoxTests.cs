@@ -78,22 +78,5 @@
                 Assert.AreEqual("Item 3", combo.SelectedItem.Text);
             }
         }
-
-        [Test]
-        public void AssertMessageBoxCanBeRetrievedInSelection()
-        {
-            using (var app = Application.Launch(ExeFileName))
-            {
-                var window = app.MainWindow();
-                var combo = window.FindComboBox("NonEditableCombo");
-                combo.Items[3].Click();
-                var dialog = Retry.While(
-                    () => window.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow(),
-                    w => w == null,
-                    TimeSpan.FromMilliseconds(1000));
-                Assert.NotNull(dialog, "Expected a window that was shown when combobox item was selected");
-                dialog.FindFirstDescendant(cf => cf.ByAutomationId("Close")).AsButton().Invoke();
-            }
-        }
     }
 }

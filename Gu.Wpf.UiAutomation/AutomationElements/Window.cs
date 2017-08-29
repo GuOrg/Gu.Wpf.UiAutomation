@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -57,6 +58,10 @@
         /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
         /// </summary>
         internal bool IsMainWindow { get; set; }
+
+        public Window FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow() ?? throw new InvalidOperationException("Did not find a message box");
+
+        public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
         public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
