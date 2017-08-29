@@ -2,7 +2,6 @@
 {
     using System;
     using System.Globalization;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class Slider : Control
     {
@@ -18,6 +17,8 @@
         public double Minimum => this.Patterns.RangeValue.Pattern.Minimum;
 
         public double Maximum => this.Patterns.RangeValue.Pattern.Maximum;
+
+        public double SmallChange => this.Patterns.RangeValue.Pattern.SmallChange;
 
         public double LargeChange => this.Patterns.RangeValue.Pattern.LargeChange;
 
@@ -62,28 +63,22 @@
 
         public void SmallIncrement()
         {
-            using (Keyboard.Pressing(VirtualKeyShort.RIGHT))
-            {
-                Wait.UntilInputIsProcessed();
-            }
+            this.RangeValuePattern.SetValue((this.Value + this.SmallChange).Clamp(this.Minimum, this.Maximum));
         }
 
         public void SmallDecrement()
         {
-            using (Keyboard.Pressing(VirtualKeyShort.LEFT))
-            {
-                Wait.UntilInputIsProcessed();
-            }
+            this.RangeValuePattern.SetValue((this.Value - this.SmallChange).Clamp(this.Minimum, this.Maximum));
         }
 
         public void LargeIncrement()
         {
-            this.LargeIncreaseButton.Invoke();
+            this.RangeValuePattern.SetValue((this.Value + this.LargeChange).Clamp(this.Minimum, this.Maximum));
         }
 
         public void LargeDecrement()
         {
-            this.LargeDecreaseButton.Invoke();
+            this.RangeValuePattern.SetValue((this.Value - this.LargeChange).Clamp(this.Minimum, this.Maximum));
         }
 
         private Button GetLargeIncreaseButton()

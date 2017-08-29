@@ -7,8 +7,8 @@
         Height="300"
         mc:Ignorable="d">
     <StackPanel>
-        <Slider Width="150"
-                AutomationProperties.AutomationId="Slider"
+        <Slider x:Name="Slider"
+                Width="150"
                 LargeChange="4"
                 Maximum="10"
                 Minimum="0"

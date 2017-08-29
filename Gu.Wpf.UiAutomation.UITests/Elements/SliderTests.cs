@@ -1,8 +1,10 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
     using System.IO;
+    using System.Threading;
     using NUnit.Framework;
 
+    [Apartment(ApartmentState.STA)]
     public class SliderTests
     {
         private static readonly string ExeFileName = Path.Combine(
@@ -41,91 +43,73 @@
         }
 
         [Test]
-        public void SetValueTest()
+        public void Value()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
                 var window = app.MainWindow();
                 var slider = window.FindSlider("Slider");
-                var number1 = this.AdjustNumberIfOnlyValue(slider, 6);
-                slider.Value = number1;
-                Assert.AreEqual(number1, slider.Value);
+                slider.Value = 6;
+                Assert.AreEqual(6, slider.Value);
 
-                var number2 = this.AdjustNumberIfOnlyValue(slider, 4);
-                slider.Value = number2;
-                Assert.AreEqual(number2, slider.Value);
+                slider.Value = 4;
+                Assert.AreEqual(4, slider.Value);
             }
         }
 
         [Test]
-        public void SmallIncrementTest()
+        public void SmallIncrement()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
                 var window = app.MainWindow();
                 var slider = window.FindSlider("Slider");
-                this.ResetToCenter(slider);
+                Assert.AreEqual(5, slider.Value);
                 slider.SmallIncrement();
-                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 6), slider.Value);
+                Assert.AreEqual(6, slider.Value);
             }
         }
 
         [Test]
-        public void SmallDecrementTest()
+        public void SmallDecrement()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
                 var window = app.MainWindow();
                 var slider = window.FindSlider("Slider");
-                this.ResetToCenter(slider);
+                Assert.AreEqual(5, slider.Value);
                 slider.SmallDecrement();
-                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 4), slider.Value);
+                Assert.AreEqual(4, slider.Value);
             }
         }
 
         [Test]
-        public void LargeIncrementTest()
+        public void LargeIncrement()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
                 var window = app.MainWindow();
                 var slider = window.FindSlider("Slider");
-                this.ResetToCenter(slider);
+                Assert.AreEqual(5, slider.Value);
                 slider.LargeIncrement();
-                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 9), slider.Value);
+                Assert.AreEqual(9, slider.Value);
             }
         }
 
         [Test]
-        public void LargeDecrementTest()
+        public void LargeDecrement()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
                 var window = app.MainWindow();
                 var slider = window.FindSlider("Slider");
-                this.ResetToCenter(slider);
+                Assert.AreEqual(5, slider.Value);
                 slider.LargeDecrement();
-                Assert.AreEqual(this.AdjustNumberIfOnlyValue(slider, 1), slider.Value);
+                Assert.AreEqual(1, slider.Value);
+
+                slider.LargeDecrement();
+                Assert.AreEqual(0, slider.Value);
             }
-        }
-
-        /// <summary>
-        /// The range of the test slider is set to 0-10, but in UIA3 WinForms,
-        /// the range is always 0-100, so we fix this here
-        /// </summary>
-        private double AdjustNumberIfOnlyValue(Slider slider, double number)
-        {
-            if (slider.IsOnlyValue)
-            {
-                return number * 10;
-            }
-
-            return number;
-        }
-
-        private void ResetToCenter(Slider slider)
-        {
-            slider.Value = this.AdjustNumberIfOnlyValue(slider, 5);
         }
     }
 }
