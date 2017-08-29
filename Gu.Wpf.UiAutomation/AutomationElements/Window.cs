@@ -92,6 +92,8 @@
             return null;
         }
 
+        public void WaitUntilResponsive() => Wait.UntilResponsive(this);
+
         public void Close()
         {
             if (!OperatingSystem.IsWindows7())

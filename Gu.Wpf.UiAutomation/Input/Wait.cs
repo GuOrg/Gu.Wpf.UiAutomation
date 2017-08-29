@@ -80,7 +80,7 @@
 
             // There might be other things going on so do a small sleep anyway...
             // Other sources: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
-            Thread.Sleep(20);
+            Wait.For(TimeSpan.FromMilliseconds(20));
             return ret != new IntPtr(0);
         }
     }
