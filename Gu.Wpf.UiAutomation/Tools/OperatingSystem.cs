@@ -12,6 +12,11 @@
             return CurrentProductName.Contains(name);
         }
 
+        public static bool IsWindows7()
+        {
+            return CurrentContains("Windows 7");
+        }
+
         public static bool IsWindows8_1()
         {
             return CurrentContains("Windows 8.1");

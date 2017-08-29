@@ -94,11 +94,14 @@
 
         public void Close()
         {
-            var closeButton = this.TitleBar?.CloseButton;
-            if (closeButton != null)
+            if (!OperatingSystem.IsWindows7())
             {
-                closeButton.Invoke();
-                return;
+                var closeButton = this.TitleBar?.CloseButton;
+                if (closeButton != null)
+                {
+                    closeButton.Invoke();
+                    return;
+                }
             }
 
             var windowPattern = this.Patterns.Window.PatternOrDefault;
