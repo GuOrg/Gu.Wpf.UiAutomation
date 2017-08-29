@@ -19,7 +19,7 @@
         /// <summary>
         /// Property which can be used to check for the patterns availability on an element
         /// </summary>
-        public PropertyId AvailabilityProperty { get; private set; }
+        public PropertyId AvailabilityProperty { get; }
 
         public static PatternId Register(int id, string name, PropertyId availabilityProperty)
         {

@@ -94,10 +94,10 @@
 
         public void Close()
         {
-            var titleBar = this.TitleBar;
-            if (titleBar?.CloseButton != null)
+            var closeButton = this.TitleBar?.CloseButton;
+            if (closeButton != null)
             {
-                titleBar.CloseButton.Invoke();
+                closeButton.Invoke();
                 return;
             }
 

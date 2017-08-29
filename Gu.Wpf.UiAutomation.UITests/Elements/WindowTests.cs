@@ -28,5 +28,15 @@
                 Assert.That(innerItem.Text, Is.EqualTo("Inner Context"));
             }
         }
+
+        [Test]
+        public void Close()
+        {
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            {
+                var window = app.MainWindow();
+                window.Close();
+            }
+        }
     }
 }
