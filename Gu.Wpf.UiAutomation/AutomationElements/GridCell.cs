@@ -37,7 +37,12 @@ namespace Gu.Wpf.UiAutomation
                     return valuePattern.IsReadOnly;
                 }
 
-                return this.IsOffscreen;
+                if (this.IsOffscreen)
+                {
+                    return true;
+                }
+
+                return false;
             }
         }
 
@@ -60,12 +65,10 @@ namespace Gu.Wpf.UiAutomation
                 if (valuePattern != null)
                 {
                     valuePattern.SetValue(value);
-                    Wait.For(TimeSpan.FromMilliseconds(50));
                     return;
                 }
 
                 this.Enter(value);
-                Wait.For(TimeSpan.FromMilliseconds(50));
                 Keyboard.Type(VirtualKeyShort.ENTER);
             }
         }

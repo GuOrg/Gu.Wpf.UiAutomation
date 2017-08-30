@@ -1,7 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
     using System.IO;
-    using System.Linq;
     using NUnit.Framework;
 
     public class DataGridTests
@@ -10,23 +9,89 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
-        [TestCase("DataGrid", 4)]
-        [TestCase("DataGridNoHeaders", 4)]
-        [TestCase("ReadonlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
-        public void GridPatternTest(string name, int expectedRows)
+        [TestCase("DataGrid")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void ColumnCount(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(2, dataGrid.ColumnCount);
-                Assert.AreEqual(2, dataGrid.ColumnHeaders.Count);
+            }
+        }
+
+        [TestCase("DataGrid", 2)]
+        [TestCase("DataGridNoHeaders", 0)]
+        [TestCase("ReadonlyDataGrid", 2)]
+        [TestCase("ReadonlyColumnsDataGrid", 2)]
+        public void ColumnHeadersCount(string name, int expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(expected, dataGrid.ColumnHeaders.Count);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void RowCellsCount(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(2, dataGrid.Rows[0].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[1].Cells.Count);
+                Assert.AreEqual(2, dataGrid.Rows[2].Cells.Count);
+                Assert.AreEqual(2, dataGrid.Rows[3].Cells.Count);
+            }
+        }
 
-                Assert.AreEqual(expectedRows, dataGrid.Rows.Count);
+        [TestCase("DataGrid", 4)]
+        [TestCase("DataGridNoHeaders", 4)]
+        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        public void RowCount(string name, int expectedRows)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expectedRows, dataGrid.RowCount);
+            }
+        }
+
+        [TestCase("DataGrid", 4)]
+        [TestCase("DataGridNoHeaders", 4)]
+        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        public void RowsCount(string name, int expectedRows)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(expectedRows, dataGrid.Rows.Count);
+            }
+        }
+
+        [TestCase("DataGrid", 4)]
+        [TestCase("DataGridNoHeaders", 4)]
+        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        public void RowHeadersCount(string name, int expectedRows)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expectedRows, dataGrid.RowHeaders.Count);
             }
         }
@@ -55,14 +120,16 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                for (var r = 0; r < dataGrid.Rows.Count; r++)
+                Assert.AreEqual(expected, dataGrid[0, 0].IsReadOnly);
+                Assert.AreEqual(expected, dataGrid[0, 1].IsReadOnly);
+                Assert.AreEqual(expected, dataGrid[1, 0].IsReadOnly);
+                Assert.AreEqual(expected, dataGrid[1, 1].IsReadOnly);
+                Assert.AreEqual(expected, dataGrid[2, 0].IsReadOnly);
+                Assert.AreEqual(expected, dataGrid[2, 1].IsReadOnly);
+                if (name != "ReadonlyDataGrid")
                 {
-                    var row = dataGrid.Rows[r];
-                    for (var c = 0; c < row.Cells.Count; c++)
-                    {
-                        var cell = row.Cells[c];
-                        Assert.AreEqual(expected, cell.IsReadOnly, $"[{r}, {c}]");
-                    }
+                    Assert.AreEqual(expected, dataGrid[3, 0].IsReadOnly);
+                    Assert.AreEqual(expected, dataGrid[3, 1].IsReadOnly);
                 }
             }
         }
