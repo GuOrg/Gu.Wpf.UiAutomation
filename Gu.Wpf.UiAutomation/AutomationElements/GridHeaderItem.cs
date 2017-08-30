@@ -1,5 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Linq;
+
     /// <summary>
     /// Header item for grids and tables.
     /// </summary>
@@ -10,6 +12,21 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public string Text => this.Properties.Name.Value;
+        public string Text
+        {
+            get
+            {
+                var children = this.FindAllChildren()
+                                   .Where(c => c.ControlType != ControlType.Thumb)
+                                   .ToArray();
+                if (children.Length == 1 &&
+                    children[0].ControlType == ControlType.Text)
+                {
+                    return children[0].Properties.Name.Value;
+                }
+
+                return this.Properties.Name.Value;
+            }
+        }
     }
 }

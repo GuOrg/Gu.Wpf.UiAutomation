@@ -11,7 +11,7 @@
         <windows:DataGridWindowViewModel />
     </Window.DataContext>
     <DataGrid x:Name="DataGrid"
-              AlternationCount="{Binding Items.Count}"
+              AlternationCount="4"
               AutoGenerateColumns="False"
               ItemsSource="{Binding Items}">
         <DataGrid.RowHeaderStyle>

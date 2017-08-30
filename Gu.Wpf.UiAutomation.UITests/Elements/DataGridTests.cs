@@ -50,10 +50,10 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(4, dataGrid.RowHeaders.Count);
                 Assert.AreEqual(4, dataGrid.RowCount);
 
-                Assert.AreEqual("0", dataGrid.RowHeaders[0].Text);
-                Assert.AreEqual("1", dataGrid.RowHeaders[1].Text);
-                Assert.AreEqual("2", dataGrid.RowHeaders[2].Text);
-                Assert.AreEqual("3", dataGrid.RowHeaders[3].Text);
+                Assert.AreEqual("Row 0", dataGrid.RowHeaders[0].Text);
+                Assert.AreEqual("Row 1", dataGrid.RowHeaders[1].Text);
+                Assert.AreEqual("Row 2", dataGrid.RowHeaders[2].Text);
+                Assert.AreEqual("Row 3", dataGrid.RowHeaders[3].Text);
             }
         }
 
