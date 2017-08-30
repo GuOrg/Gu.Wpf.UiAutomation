@@ -79,8 +79,7 @@
                     </Button>
                     <Button AutomationProperties.AutomationId="InvokableButton"
                             Command="{Binding InvokeButtonCommand}"
-                            Content="{Binding InvokeButtonText,
-                                              FallbackValue=InvokableButton}" />
+                            Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}" />
                     <ScrollViewer Width="80"
                                   Height="80"
                                   HorizontalScrollBarVisibility="Auto"
@@ -90,8 +89,7 @@
                                 Content="BigButton" />
                     </ScrollViewer>
                     <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
-                    <Popup IsOpen="{Binding IsChecked,
-                                            ElementName=PopupToggleButton1}"
+                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}"
                            Placement="Bottom"
                            PlacementTarget="{Binding ElementName=PopupToggleButton1}"
                            StaysOpen="False">
@@ -105,8 +103,7 @@
                     </Popup>
                     <ToggleButton Name="PopupToggleButton2">Popup Toggle 2</ToggleButton>
                     <Popup Child="{DynamicResource ViewsMenu}"
-                           IsOpen="{Binding IsChecked,
-                                            ElementName=PopupToggleButton2}"
+                           IsOpen="{Binding IsChecked, ElementName=PopupToggleButton2}"
                            Placement="Top"
                            PlacementTarget="{Binding ElementName=PopupToggleButton2}"
                            StaysOpen="False" />

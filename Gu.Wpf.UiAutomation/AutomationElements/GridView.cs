@@ -91,7 +91,15 @@
         public GridRow Select(int rowIndex)
         {
             var gridRow = this.GetRowByIndex(rowIndex);
-            gridRow.Select();
+            if (OperatingSystem.IsWindows7())
+            {
+                gridRow.Cells[0].Click();
+            }
+            else
+            {
+                gridRow.Select();
+            }
+
             return gridRow;
         }
 
@@ -101,7 +109,15 @@
         public GridRow Select(int columnIndex, string textToFind)
         {
             var gridRow = this.GetRowByValue(columnIndex, textToFind);
-            gridRow.Select();
+            if (OperatingSystem.IsWindows7())
+            {
+                gridRow.Cells[0].Click();
+            }
+            else
+            {
+                gridRow.Select();
+            }
+
             return gridRow;
         }
 

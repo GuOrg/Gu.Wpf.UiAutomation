@@ -11,7 +11,7 @@
         <TextBox x:Name="XName" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
         <TextBox IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" Text="Content" />
 
-        <TextBox AutomationProperties.AutomationId="TextBox" Text="Test TextBox" />
+        <TextBox AutomationProperties.AutomationId="TestTextBox" Text="Test TextBox" />
 
         <CheckBox x:Name="IsEnabled"
                   Content="IsEnabled"

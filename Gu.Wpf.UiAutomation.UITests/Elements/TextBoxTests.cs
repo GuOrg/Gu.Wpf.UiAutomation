@@ -23,11 +23,11 @@
         [Test]
         public void DirectSetTest()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow();
-                var textBox = window.FindTextBox("TextBox");
-                Assert.AreEqual(string.Empty, textBox.Text);
+                var textBox = window.FindTextBox("TestTextBox");
+                Assert.AreEqual("Test TextBox", textBox.Text);
 
                 textBox.Text = "Hello World";
                 Assert.AreEqual("Hello World", textBox.Text);
@@ -43,11 +43,10 @@
         [TestCase("Hello World")]
         public void EnterTest(string text)
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow();
-                var textBox = window.FindTextBox("TextBox");
-
+                var textBox = window.FindTextBox("TestTextBox");
                 textBox.Enter(text);
                 Assert.AreEqual(text, textBox.Text);
             }
