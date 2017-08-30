@@ -27,6 +27,20 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
+                if (valuePattern != null)
+                {
+                    return valuePattern.IsReadOnly;
+                }
+
+                return this.IsOffscreen;
+            }
+        }
+
         public string Value
         {
             get
@@ -46,10 +60,12 @@ namespace Gu.Wpf.UiAutomation
                 if (valuePattern != null)
                 {
                     valuePattern.SetValue(value);
+                    Wait.For(TimeSpan.FromMilliseconds(50));
                     return;
                 }
 
                 this.Enter(value);
+                Wait.For(TimeSpan.FromMilliseconds(50));
                 Keyboard.Type(VirtualKeyShort.ENTER);
             }
         }

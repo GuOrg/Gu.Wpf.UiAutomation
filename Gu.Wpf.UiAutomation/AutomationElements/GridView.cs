@@ -64,6 +64,7 @@
             get
             {
                 return this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)))
+                           .Where(x => !x.IsOffscreen)
                            .Select(x => x.AsGridRow())
                            .ToArray();
             }
