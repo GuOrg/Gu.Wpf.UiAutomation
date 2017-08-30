@@ -3,7 +3,7 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Header item for grids and tables.
     /// </summary>
-    public class GridHeaderItem : AutomationElement
+    public class GridHeaderItem : Control
     {
         public GridHeaderItem(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

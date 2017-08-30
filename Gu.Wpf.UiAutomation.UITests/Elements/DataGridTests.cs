@@ -22,7 +22,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
-        public void HeaderAndColumnsTest()
+        public void ColumnHeaders()
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
@@ -30,8 +30,30 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 var dataGrid = window.FindDataGrid();
                 var columns = dataGrid.Header.Columns;
                 Assert.AreEqual(2, columns.Count);
+                Assert.AreEqual(2, dataGrid.ColumnCount);
                 Assert.AreEqual("Id", columns[0].Text);
                 Assert.AreEqual("Name", columns[1].Text);
+
+                Assert.AreEqual("Id", dataGrid.ColumnHeaders[0].Text);
+                Assert.AreEqual("Name", dataGrid.ColumnHeaders[1].Text);
+            }
+        }
+
+        [Test]
+        public void RowHeaders()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid();
+                Assert.AreEqual(4, dataGrid.Rows.Count);
+                Assert.AreEqual(4, dataGrid.RowHeaders.Count);
+                Assert.AreEqual(4, dataGrid.RowCount);
+
+                Assert.AreEqual("0", dataGrid.RowHeaders[0].Text);
+                Assert.AreEqual("1", dataGrid.RowHeaders[1].Text);
+                Assert.AreEqual("2", dataGrid.RowHeaders[2].Text);
+                Assert.AreEqual("3", dataGrid.RowHeaders[4].Text);
             }
         }
 

@@ -11,8 +11,15 @@
         <windows:DataGridWindowViewModel />
     </Window.DataContext>
     <DataGrid x:Name="DataGrid"
+              AlternationCount="{Binding Items.Count}"
               AutoGenerateColumns="False"
               ItemsSource="{Binding Items}">
+        <DataGrid.RowHeaderStyle>
+            <Style TargetType="{x:Type DataGridRowHeader}">
+                <Setter Property="Content" Value="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+                <Setter Property="ContentStringFormat" Value="Row {0}" />
+            </Style>
+        </DataGrid.RowHeaderStyle>
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
             <DataGridTextColumn Binding="{Binding Name}" Header="Name" />

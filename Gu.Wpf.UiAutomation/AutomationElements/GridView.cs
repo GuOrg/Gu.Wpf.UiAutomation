@@ -27,12 +27,16 @@
         /// <summary>
         /// Gets all column header elements.
         /// </summary>
-        public IReadOnlyList<AutomationElement> ColumnHeaders => this.TablePattern.ColumnHeaders.Value;
+        public IReadOnlyList<ColumnHeader> ColumnHeaders => this.TablePattern.ColumnHeaders.Value
+                                                                .Select(x => new ColumnHeader(x.BasicAutomationElement))
+                                                                .ToArray();
 
         /// <summary>
         /// Gets all row header elements.
         /// </summary>
-        public IReadOnlyList<AutomationElement> RowHeaders => this.TablePattern.RowHeaders.Value;
+        public IReadOnlyList<RowHeader> RowHeaders => this.TablePattern.RowHeaders.Value
+                                                          .Select(x => new RowHeader(x.BasicAutomationElement))
+                                                          .ToArray();
 
         /// <summary>
         /// Gets whether the data should be read primarily by row or by column.
