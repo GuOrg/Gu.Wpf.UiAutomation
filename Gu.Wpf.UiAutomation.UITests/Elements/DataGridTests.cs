@@ -53,7 +53,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("0", dataGrid.RowHeaders[0].Text);
                 Assert.AreEqual("1", dataGrid.RowHeaders[1].Text);
                 Assert.AreEqual("2", dataGrid.RowHeaders[2].Text);
-                Assert.AreEqual("3", dataGrid.RowHeaders[4].Text);
+                Assert.AreEqual("3", dataGrid.RowHeaders[3].Text);
             }
         }
 
