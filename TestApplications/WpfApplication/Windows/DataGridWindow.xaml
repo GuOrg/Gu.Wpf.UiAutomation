@@ -16,11 +16,29 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <DataGrid x:Name="DataGrid"
                   AlternationCount="4"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding Items}">
+                  ItemsSource="{Binding ThreeItems}">
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Content" Value="{Binding Path=AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+                    <Setter Property="ContentStringFormat" Value="Row {0}" />
+                </Style>
+            </DataGrid.RowHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DataGrid100"
+                  Grid.Row="1"
+                  AlternationCount="101"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding HundredItems}">
             <DataGrid.RowHeaderStyle>
                 <Style TargetType="{x:Type DataGridRowHeader}">
                     <Setter Property="Content" Value="{Binding Path=AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
@@ -34,10 +52,10 @@
         </DataGrid>
 
         <DataGrid x:Name="DataGridNoHeaders"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   AutoGenerateColumns="False"
                   HeadersVisibility="None"
-                  ItemsSource="{Binding Items}">
+                  ItemsSource="{Binding ThreeItems}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
@@ -45,11 +63,11 @@
         </DataGrid>
 
         <DataGrid x:Name="ReadonlyDataGrid"
-                  Grid.Row="2"
+                  Grid.Row="3"
                   AlternationCount="4"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  ItemsSource="{Binding Items}">
+                  ItemsSource="{Binding ThreeItems}">
             <DataGrid.RowHeaderStyle>
                 <Style TargetType="{x:Type DataGridRowHeader}">
                     <Setter Property="Content" Value="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
@@ -63,10 +81,10 @@
         </DataGrid>
 
         <DataGrid x:Name="ReadonlyColumnsDataGrid"
-                  Grid.Row="3"
+                  Grid.Row="4"
                   AlternationCount="4"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding Items}">
+                  ItemsSource="{Binding ThreeItems}">
             <DataGrid.RowHeaderStyle>
                 <Style TargetType="{x:Type DataGridRowHeader}">
                     <Setter Property="Content" Value="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=DataGridRow}}" />

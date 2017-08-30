@@ -9,11 +9,11 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public GridCell this[int row, int col] => this.Rows[row].Cells[col];
-
         public bool IsReadOnly => this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)))
                                       .LastOrDefault()
                                       ?.Properties.IsOffscreen ??
                                   true;
+
+        public GridCell this[int row, int col] => this.Rows[row].Cells[col];
     }
 }

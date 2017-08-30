@@ -10,6 +10,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
@@ -24,6 +25,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", 2)]
+        [TestCase("DataGrid100", 2)]
         [TestCase("DataGridNoHeaders", 0)]
         [TestCase("ReadonlyDataGrid", 2)]
         [TestCase("ReadonlyColumnsDataGrid", 2)]
@@ -38,6 +40,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
@@ -55,6 +58,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", 4)]
+        [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 4)]
@@ -69,6 +73,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", 4)]
+        [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 4)]
@@ -83,6 +88,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", 4)]
+        [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 4)]
@@ -97,6 +103,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", false)]
+        [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadonlyDataGrid", true)]
         [TestCase("ReadonlyColumnsDataGrid", false)]
@@ -111,6 +118,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", false)]
+        [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadonlyDataGrid", true)]
         [TestCase("ReadonlyColumnsDataGrid", true)]
@@ -135,6 +143,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void ColumnHeaders(string name)
@@ -156,6 +165,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", 4)]
+        [TestCase("DataGrid100", 101)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 4)]
         public void RowHeaders(string name, int expectedRows)
@@ -177,6 +187,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
@@ -193,15 +204,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", rows[1].Cells[1].Value);
                 Assert.AreEqual("3", rows[2].Cells[0].Value);
                 Assert.AreEqual("Item 3", rows[2].Cells[1].Value);
-                if (name != "ReadonlyDataGrid")
-                {
-                    Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", rows[3].Cells[0].Value);
-                    Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", rows[3].Cells[1].Value);
-                }
             }
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
@@ -219,16 +226,26 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-
-                if (name != "ReadonlyDataGrid")
-                {
-                    Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
-                    Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
-                }
             }
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void NewItemPlaceholder(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[dataGrid.RowCount - 1, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[dataGrid.RowCount - 1, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         public void SetCellValue(string name)
         {
@@ -243,8 +260,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
 
                 dataGrid[0, 0].Value = "11";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
@@ -253,8 +268,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
 
                 dataGrid[3, 0].Value = "5";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
@@ -265,12 +278,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
                 Assert.AreEqual("5", dataGrid[3, 0].Value);
                 Assert.AreEqual(string.Empty, dataGrid[3, 1].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[4, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[4, 1].Value);
             }
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         public void Enter(string name)
         {
@@ -285,8 +297,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
 
                 dataGrid[0, 0].Enter("11");
                 Assert.AreEqual("1", dataGrid[0, 0].Value);
@@ -298,12 +308,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
             }
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         public void SelectByIndexTest(string name)
         {
@@ -330,6 +339,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
         public void SelectByTextTest(string name)
         {
