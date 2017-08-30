@@ -99,16 +99,50 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
+        public void Enter()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid();
+
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
+
+                dataGrid[0, 0].Enter("11");
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
+            }
+        }
+
+        [Test]
         public void SelectByIndexTest()
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid();
-                dataGrid.Select(1);
-                var selectedRow = dataGrid.SelectedItem;
+                var selectedRow = dataGrid.Select(1);
                 this.CheckRow(selectedRow, "2", "Item 2");
-                dataGrid.Select(2);
+
+                selectedRow = dataGrid.SelectedItem;
+                this.CheckRow(selectedRow, "2", "Item 2");
+
+                selectedRow = dataGrid.Select(2);
+                this.CheckRow(selectedRow, "3", "Item 3");
+
                 selectedRow = dataGrid.SelectedItem;
                 this.CheckRow(selectedRow, "3", "Item 3");
             }

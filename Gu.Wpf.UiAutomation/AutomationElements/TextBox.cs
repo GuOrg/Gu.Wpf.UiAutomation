@@ -50,6 +50,9 @@
             }
         }
 
+        /// <summary>
+        /// Simulate typing in text. This is slower than setting Text but raises more events.
+        /// </summary>
         public void Enter(string value)
         {
             this.Focus();
