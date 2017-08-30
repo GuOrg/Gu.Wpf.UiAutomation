@@ -10,6 +10,12 @@ tags UI Automation WPF Test UIA3 UIA System.Windows.Automation
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
+releasenotes
+* FEATURE: GridCell.Value
+* BUGFIX: GridCell.Select on Win 7
+* BUGFIX: Handle RowHeader.Text with ContentStringFormat
+* Feature GridView.RowHeaders & ColumnHeaders.
+
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
   bin/Release/net45/Gu.Wpf.UiAutomation.pdb ==> lib/net45
