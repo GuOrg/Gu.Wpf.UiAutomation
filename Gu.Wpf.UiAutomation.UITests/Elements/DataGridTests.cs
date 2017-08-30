@@ -99,6 +99,47 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
+        public void CellValue()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid();
+
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
+
+                dataGrid[0, 0].Value = "11";
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
+
+                dataGrid[3, 0].Value = "5";
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("5", dataGrid[3, 0].Value);
+                Assert.AreEqual(string.Empty, dataGrid[3, 1].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[4, 0].Value);
+                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[4, 1].Value);
+            }
+        }
+
+        [Test]
         public void Enter()
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -116,6 +157,9 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[3, 1].Value);
 
                 dataGrid[0, 0].Enter("11");
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+
+                dataGrid[1, 0].Click();
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);

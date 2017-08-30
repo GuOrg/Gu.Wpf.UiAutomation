@@ -27,7 +27,32 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public string Value => this.Properties.Name.Value;
+        public string Value
+        {
+            get
+            {
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
+                if (valuePattern != null)
+                {
+                    return valuePattern.Value;
+                }
+
+                return this.Properties.Name.Value;
+            }
+
+            set
+            {
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
+                if (valuePattern != null)
+                {
+                    valuePattern.SetValue(value);
+                    return;
+                }
+
+                this.Enter(value);
+                Keyboard.Type(VirtualKeyShort.ENTER);
+            }
+        }
 
         protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
 
@@ -36,7 +61,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Simulate typing in text. This is slower than setting Text but raises more events.
         /// </summary>
-        public void Enter(string value)
+        public void Enter(string value, TimeSpan? delay = null)
         {
             this.Click();
             var lines = value.Replace("\r\n", "\n").Split('\n');
@@ -47,18 +72,21 @@ namespace Gu.Wpf.UiAutomation
                 Keyboard.Type(line);
             }
 
-            // give some time to process input.
-            var stopTime = DateTime.Now.AddSeconds(1);
-            while (DateTime.Now < stopTime)
+            if (delay != null)
             {
-                if (this.Value == value)
+                // give some time to process input.
+                var stopTime = DateTime.Now + delay.Value;
+                while (DateTime.Now < stopTime)
                 {
-                    return;
-                }
+                    if (this.Value == value)
+                    {
+                        return;
+                    }
 
-                if (!Thread.Yield())
-                {
-                    Thread.Sleep(10);
+                    if (!Thread.Yield())
+                    {
+                        Thread.Sleep(10);
+                    }
                 }
             }
         }
