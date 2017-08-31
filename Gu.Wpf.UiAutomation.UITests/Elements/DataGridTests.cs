@@ -82,7 +82,14 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(expectedRows, dataGrid.Rows.Count);
+                var rows = dataGrid.Rows;
+                Assert.AreEqual(expectedRows, rows.Count);
+                Assert.AreEqual("1", rows[0].Cells[0].Value);
+                Assert.AreEqual("Item 1", rows[0].Cells[1].Value);
+                Assert.AreEqual("2", rows[1].Cells[0].Value);
+                Assert.AreEqual("Item 2", rows[1].Cells[1].Value);
+                Assert.AreEqual("3", rows[2].Cells[0].Value);
+                Assert.AreEqual("Item 3", rows[2].Cells[1].Value);
             }
         }
 
