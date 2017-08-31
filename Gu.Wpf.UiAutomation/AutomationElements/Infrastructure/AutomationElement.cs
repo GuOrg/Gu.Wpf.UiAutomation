@@ -40,17 +40,28 @@
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public double ActualWidth => this.Properties.BoundingRectangle.Value.Width;
+        public double ActualWidth => this.BoundingRectangle.Width;
 
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public double ActualHeight => this.Properties.BoundingRectangle.Value.Height;
+        public double ActualHeight => this.BoundingRectangle.Height;
 
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public Rect BoundingRectangle => this.Properties.BoundingRectangle.Value;
+        public Rect BoundingRectangle
+        {
+            get
+            {
+                if (this.Properties.BoundingRectangle.TryGetValue(out var rect))
+                {
+                    return rect;
+                }
+
+                return Rect.Empty;
+            }
+        }
 
         /// <summary>
         /// The current used automation object.
