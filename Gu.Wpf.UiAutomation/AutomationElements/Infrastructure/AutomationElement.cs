@@ -40,6 +40,21 @@
         /// <summary>
         /// The current used automation object.
         /// </summary>
+        public double ActualWidth => this.Properties.BoundingRectangle.Value.Width;
+
+        /// <summary>
+        /// The current used automation object.
+        /// </summary>
+        public double ActualHeight => this.Properties.BoundingRectangle.Value.Height;
+
+        /// <summary>
+        /// The current used automation object.
+        /// </summary>
+        public Rect BoundingRectangle => this.Properties.BoundingRectangle.Value;
+
+        /// <summary>
+        /// The current used automation object.
+        /// </summary>
         public AutomationBase Automation => this.BasicAutomationElement.Automation;
 
         /// <summary>
