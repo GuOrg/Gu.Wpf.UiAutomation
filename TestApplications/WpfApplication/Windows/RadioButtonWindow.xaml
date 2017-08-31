@@ -12,6 +12,8 @@
         <RadioButton Content="Content" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
 
         <RadioButton AutomationProperties.AutomationId="SimpleRadioButton" Content="Test RadioButton" />
+        <RadioButton x:Name="RadioButton1" Content="Test RadioButton" />
+        <RadioButton x:Name="RadioButton2" Content="Test RadioButton" />
         <RadioButton AutomationProperties.AutomationId="ThreeStateRadioButton"
                      Content="3-Way Test RadioButton"
                      IsThreeState="True" />
