@@ -16,29 +16,15 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.IsOffscreen)
+                if (this.FindAllChildren()
+                        .Where(c => c.ControlType != ControlType.Thumb)
+                        .TryGetSingle(out var child) &&
+                    child.ControlType == ControlType.Text)
                 {
-                    this.Realize();
-                }
-
-                var children = this.FindAllChildren()
-                                   .Where(c => c.ControlType != ControlType.Thumb)
-                                   .ToArray();
-                if (children.Length == 1 &&
-                    children[0].ControlType == ControlType.Text)
-                {
-                    return children[0].Properties.Name.Value;
+                    return child.AsTextBlock().Text;
                 }
 
                 return this.Properties.Name.Value;
-            }
-        }
-
-        protected void Realize()
-        {
-            if (this.Parent.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
-            {
-                pattern.Realize();
             }
         }
     }
