@@ -10,18 +10,21 @@
         [Test]
         public void Items()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow();
                 var tab = window.FindTabControl();
-                Assert.AreEqual(2, tab.Items.Count);
+                Assert.AreEqual(3, tab.Items.Count);
+                Assert.AreEqual("x:Name", tab.Items[0].Text);
+                Assert.AreEqual("Header", tab.Items[1].Text);
+                Assert.AreEqual("AutomationProperties.AutomationId", tab.Items[2].Text);
             }
         }
 
         [Test]
         public void SelectedIndex()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow();
                 var tab = window.FindTabControl();
@@ -43,7 +46,7 @@
         [Test]
         public void SelectIndex()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow();
                 var tab = window.FindTabControl();
@@ -65,19 +68,19 @@
         [Test]
         public void SelectText()
         {
-            using (var app = Application.Launch(ExeFileName))
+            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow();
                 var tab = window.FindTabControl();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
-                tab.Select("Complex Controls");
+                tab.Select("Header");
                 Wait.UntilInputIsProcessed();
                 Assert.AreEqual(1, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
-                tab.Select("Simple Controls");
+                tab.Select("x:Name");
                 Wait.UntilInputIsProcessed();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
