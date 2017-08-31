@@ -192,12 +192,12 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual("1", dataGrid[0].Cells[0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0].Cells[1].Value);
-                Assert.AreEqual("2", dataGrid[1].Cells[0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1].Cells[1].Value);
-                Assert.AreEqual("3", dataGrid[2].Cells[0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2].Cells[1].Value);
+                Assert.AreEqual("1", dataGrid.Row(0).Cells[0].Value);
+                Assert.AreEqual("Item 1", dataGrid.Row(0).Cells[1].Value);
+                Assert.AreEqual("2", dataGrid.Row(1).Cells[0].Value);
+                Assert.AreEqual("Item 2", dataGrid.Row(1).Cells[1].Value);
+                Assert.AreEqual("3", dataGrid.Row(2).Cells[0].Value);
+                Assert.AreEqual("Item 3", dataGrid.Row(2).Cells[1].Value);
             }
         }
 
