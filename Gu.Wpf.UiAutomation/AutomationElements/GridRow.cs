@@ -17,18 +17,19 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                return this.FindAllChildren(cf => cf.ByControlType(ControlType.HeaderItem).Not())
+                return this.FindAllChildren()
+                           .Where(x => x.Patterns.TableItem.IsSupported)
                            .Select(x => x.AsGridCell())
                            .ToArray();
             }
         }
 
-        public GridHeaderItem Header
+        public RowHeader Header
         {
             get
             {
                 var headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
-                return headerItem?.AsGridHeaderItem();
+                return new RowHeader(headerItem.BasicAutomationElement);
             }
         }
 
@@ -39,7 +40,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public GridCell FindCellByText(string textToFind)
         {
-            return Enumerable.FirstOrDefault(this.Cells, cell => cell.Value.Equals(textToFind));
+            return this.Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
         }
 
         public GridRow ScrollIntoView()

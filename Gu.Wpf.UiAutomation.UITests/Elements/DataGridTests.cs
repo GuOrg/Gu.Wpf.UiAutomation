@@ -53,7 +53,10 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(2, dataGrid.Rows[0].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[1].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[2].Cells.Count);
-                Assert.AreEqual(2, dataGrid.Rows[3].Cells.Count);
+                if (name != "ReadonlyDataGrid")
+                {
+                    Assert.AreEqual(2, dataGrid.Rows[3].Cells.Count);
+                }
             }
         }
 
