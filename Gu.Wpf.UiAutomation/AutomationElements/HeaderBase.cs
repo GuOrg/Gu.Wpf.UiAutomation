@@ -16,6 +16,11 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
+                if (this.IsOffscreen)
+                {
+                    this.Realize();
+                }
+
                 var children = this.FindAllChildren()
                                    .Where(c => c.ControlType != ControlType.Thumb)
                                    .ToArray();
@@ -26,6 +31,14 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 return this.Properties.Name.Value;
+            }
+        }
+
+        protected void Realize()
+        {
+            if (this.Parent.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
+            {
+                pattern.Realize();
             }
         }
     }

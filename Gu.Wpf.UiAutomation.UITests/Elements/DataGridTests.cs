@@ -88,7 +88,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
         [TestCase("DataGrid", 4)]
         [TestCase("DataGrid100", 101)]
-        [TestCase("DataGridNoHeaders", 4)]
+        [TestCase("DataGridNoHeaders", 0)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeadersCount(string name, int expectedRows)

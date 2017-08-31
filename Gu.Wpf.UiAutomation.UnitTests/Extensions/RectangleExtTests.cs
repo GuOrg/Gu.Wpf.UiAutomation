@@ -1,10 +1,10 @@
-﻿namespace Gu.Wpf.UiAutomation.UnitTests
+﻿namespace Gu.Wpf.UiAutomation.UnitTests.Extensions
 {
     using System.Windows;
     using NUnit.Framework;
 
     [TestFixture]
-    public class RectangleTests
+    public class RectangleExtTests
     {
         [Test]
         public void EmptyTest()

@@ -10,19 +10,19 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
         [Test]
-        public void GridPatternTest()
+        public void RowAndColumnCount()
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow();
                 var listView = window.FindListView();
-                Assert.AreEqual(2, listView.ColumnCount);
                 Assert.AreEqual(3, listView.RowCount);
+                Assert.AreEqual(2, listView.ColumnCount);
             }
         }
 
         [Test]
-        public void HeaderAndColumnsTest()
+        public void HeaderAndColumns()
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
@@ -36,7 +36,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
-        public void RowsAndCellsTest()
+        public void RowsAndCells()
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
@@ -45,25 +45,44 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(3, listView.RowCount);
                 var rows = listView.Rows;
                 Assert.AreEqual(3, rows.Count);
-                this.CheckRow(rows[0], "1", "10");
-                this.CheckRow(rows[1], "2", "20");
-                this.CheckRow(rows[2], "3", "30");
+                Assert.AreEqual(2, rows[0].Cells.Count);
+                Assert.AreEqual("1", rows[0].Cells[0].Value);
+                Assert.AreEqual("10", rows[0].Cells[1].Value);
+                Assert.AreEqual(2, rows[1].Cells.Count);
+                Assert.AreEqual("2", rows[1].Cells[0].Value);
+                Assert.AreEqual("20", rows[1].Cells[1].Value);
+                Assert.AreEqual(2, rows[2].Cells.Count);
+                Assert.AreEqual("3", rows[2].Cells[0].Value);
+                Assert.AreEqual("30", rows[2].Cells[1].Value);
             }
         }
 
         [Test]
-        public void SelectByIndexTest()
+        public void SelectByIndex()
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow();
                 var listView = window.FindListView();
-                listView.Select(1);
-                var selectedRow = listView.SelectedItem;
-                this.CheckRow(selectedRow, "2", "20");
-                listView.Select(2);
+                var selectedRow = listView.Select(1);
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("2", selectedRow.Cells[0].Value);
+                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+
                 selectedRow = listView.SelectedItem;
-                this.CheckRow(selectedRow, "3", "30");
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("2", selectedRow.Cells[0].Value);
+                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+
+                selectedRow = listView.Select(2);
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("3", selectedRow.Cells[0].Value);
+                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+
+                selectedRow = listView.SelectedItem;
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("3", selectedRow.Cells[0].Value);
+                Assert.AreEqual("30", selectedRow.Cells[1].Value);
             }
         }
 
@@ -74,21 +93,26 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var listView = window.FindListView();
-                listView.Select(1, "20");
-                var selectedRow = listView.SelectedItem;
-                this.CheckRow(selectedRow, "2", "20");
-                listView.Select(1, "30");
-                selectedRow = listView.SelectedItem;
-                this.CheckRow(selectedRow, "3", "30");
-            }
-        }
+                var selectedRow = listView.Select(1, "20");
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("2", selectedRow.Cells[0].Value);
+                Assert.AreEqual("20", selectedRow.Cells[1].Value);
 
-        private void CheckRow(GridRow listViewRow, string cell1Value, string cell2Value)
-        {
-            var cells = listViewRow.Cells;
-            Assert.AreEqual(2, cells.Count);
-            Assert.AreEqual(cell1Value, cells[0].Value);
-            Assert.AreEqual(cell2Value, cells[1].Value);
+                selectedRow = listView.SelectedItem;
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("2", selectedRow.Cells[0].Value);
+                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+
+                selectedRow = listView.Select(1, "30");
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("3", selectedRow.Cells[0].Value);
+                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+
+                selectedRow = listView.SelectedItem;
+                Assert.AreEqual(2, selectedRow.Cells.Count);
+                Assert.AreEqual("3", selectedRow.Cells[0].Value);
+                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+            }
         }
     }
 }
