@@ -143,16 +143,15 @@
 
         public bool TryGetNativePattern<T>(PatternId pattern, out T nativePattern)
         {
-            try
+            nativePattern = default(T);
+            if (Equals(pattern, PatternId.NotSupportedByFramework))
             {
-                nativePattern = this.GetNativePattern<T>(pattern);
-                return true;
-            }
-            catch (PatternNotSupportedException)
-            {
-                nativePattern = default(T);
                 return false;
             }
+
+            var isCacheActive = CacheRequest.IsCachingActive;
+            nativePattern = (T)this.InternalGetPattern(pattern.Id, isCacheActive);
+            return nativePattern != null;
         }
 
         public Point GetClickablePoint()

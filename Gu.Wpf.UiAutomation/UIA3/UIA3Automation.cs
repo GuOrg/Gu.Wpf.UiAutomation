@@ -6,6 +6,7 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
+    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     /// <summary>
     /// Automation implementation for UIA3
@@ -128,20 +129,21 @@
         /// </summary>
         private Interop.UIAutomationClient.IUIAutomation InitializeAutomation()
         {
-            Interop.UIAutomationClient.IUIAutomation nativeAutomation;
-
-            // Try CUIAutomation8 (Windows 8)
-            try
+            if (OperatingSystem.IsWindows8_1())
             {
-                nativeAutomation = new Interop.UIAutomationClient.CUIAutomation8();
-            }
-            catch (COMException)
-            {
-                // Fall back to CUIAutomation
-                nativeAutomation = new Interop.UIAutomationClient.CUIAutomation();
+                // Try CUIAutomation8 (Windows 8)
+                try
+                {
+                    return new Interop.UIAutomationClient.CUIAutomation8();
+                }
+                catch (COMException)
+                {
+                    // Fall back to CUIAutomation
+                    return new Interop.UIAutomationClient.CUIAutomation();
+                }
             }
 
-            return nativeAutomation;
+            return new Interop.UIAutomationClient.CUIAutomation();
         }
 
         /// <summary>

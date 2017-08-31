@@ -17,6 +17,11 @@
             return CurrentContains("Windows 7");
         }
 
+        public static bool IsWindows8()
+        {
+            return CurrentContains("Windows 8");
+        }
+
         public static bool IsWindows8_1()
         {
             return CurrentContains("Windows 8.1");
