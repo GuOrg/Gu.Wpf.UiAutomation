@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowCount(string name, int expectedRows)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -79,7 +79,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowsCount(string name, int expectedRows)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))

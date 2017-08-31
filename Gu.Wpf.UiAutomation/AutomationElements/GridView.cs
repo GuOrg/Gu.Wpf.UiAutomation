@@ -17,7 +17,27 @@
         /// <summary>
         /// Gets the total row count.
         /// </summary>
-        public int RowCount => this.GridPattern.RowCount.Value;
+        public int RowCount
+        {
+            get
+            {
+                var gridPattern = this.GridPattern;
+                var rowCount = gridPattern.RowCount;
+                if (rowCount == 0)
+                {
+                    return 0;
+                }
+
+                var cell = new GridCell(gridPattern.GetItem(rowCount - 1, 0).BasicAutomationElement);
+                if (cell.IsNewItemPlaceholder &&
+                    cell.IsReadOnly)
+                {
+                    return rowCount - 1;
+                }
+
+                return rowCount.Value;
+            }
+        }
 
         /// <summary>
         /// Gets the total column count.
@@ -81,10 +101,15 @@
         {
             get
             {
-                return this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)))
-                           .Where(x => !x.IsOffscreen)
-                           .Select(x => x.AsGridRow())
-                           .ToArray();
+                var rowCount = this.RowCount;
+                var rows = new GridRow[rowCount];
+                var gridPattern = this.Patterns.Grid.Pattern;
+                for (var i = 0; i < rowCount; i++)
+                {
+                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).Parent.BasicAutomationElement);
+                }
+
+                return rows;
             }
         }
 
