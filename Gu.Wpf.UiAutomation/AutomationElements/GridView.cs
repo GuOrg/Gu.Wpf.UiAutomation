@@ -27,9 +27,27 @@
         /// <summary>
         /// Gets all column header elements.
         /// </summary>
-        public IReadOnlyList<ColumnHeader> ColumnHeaders => this.TablePattern.ColumnHeaders.Value
-                                                                .Select(x => new ColumnHeader(x.BasicAutomationElement))
-                                                                .ToArray();
+        public IReadOnlyList<ColumnHeader> ColumnHeaders
+        {
+            get
+            {
+                if (OperatingSystem.IsWindows7())
+                {
+                    // ReSharper disable once UnusedVariable for some reason this warmup is needed.
+                    // Nasty but the only way I could get it to work.
+                    var columnHeaderItems = this.Rows.FirstOrDefault()
+                                                ?.Cells.FirstOrDefault()
+                                                ?.Patterns
+                                                .TableItem
+                                                .PatternOrDefault
+                                                ?.ColumnHeaderItems;
+                }
+
+                return this.TablePattern.ColumnHeaders.Value
+                           .Select(x => new ColumnHeader(x.BasicAutomationElement))
+                           .ToArray();
+            }
+        }
 
         /// <summary>
         /// Gets all row header elements.
