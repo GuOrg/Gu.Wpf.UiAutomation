@@ -13,17 +13,14 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var firstRow = this.Rows.FirstOrDefault();
-                if (firstRow == null)
-                {
-                    return true;
-                }
-
+                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).Parent.BasicAutomationElement);
                 return firstRow.Cells.Where(x => x.IsKeyboardFocusable)
                                      .All(x => x.IsReadOnly);
             }
         }
 
         public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col).BasicAutomationElement);
+
+        public GridRow this[int row] => new GridRow(this.GridPattern.GetItem(row, 0).Parent.BasicAutomationElement);
     }
 }

@@ -53,10 +53,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(2, dataGrid.Rows[0].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[1].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[2].Cells.Count);
-                if (name != "ReadonlyDataGrid")
-                {
-                    Assert.AreEqual(2, dataGrid.Rows[3].Cells.Count);
-                }
             }
         }
 
@@ -80,7 +76,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
-        public void RowsCount(string name, int expectedRows)
+        public void Rows(string name, int expectedRows)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
@@ -190,7 +186,27 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadonlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
-        public void Indexer(string name)
+        public void RowIndexer(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual("1", dataGrid[0].Cells[0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0].Cells[1].Value);
+                Assert.AreEqual("2", dataGrid[1].Cells[0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1].Cells[1].Value);
+                Assert.AreEqual("3", dataGrid[2].Cells[0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2].Cells[1].Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void CellIndexer(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
@@ -280,7 +296,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyColumnsDataGrid")]
         public void NewItemPlaceholder(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
