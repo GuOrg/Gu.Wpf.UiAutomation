@@ -653,10 +653,6 @@
 
         public GridCell AsGridCell() => new GridCell(this.BasicAutomationElement);
 
-        public GridHeader AsGridHeader() => new GridHeader(this.BasicAutomationElement);
-
-        public GridHeaderItem AsGridHeaderItem() => new GridHeaderItem(this.BasicAutomationElement);
-
         public Menu AsMenu() => new Menu(this.BasicAutomationElement);
 
         public MenuItem AsMenuItem() => new MenuItem(this.BasicAutomationElement);

@@ -29,6 +29,18 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 var headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
+                if (headerItem == null &&
+                    this.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
+                {
+                    pattern.Realize();
+                    headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
+                }
+
+                if (headerItem == null || headerItem.IsOffscreen)
+                {
+                    return null;
+                }
+
                 return new RowHeader(headerItem.BasicAutomationElement);
             }
         }

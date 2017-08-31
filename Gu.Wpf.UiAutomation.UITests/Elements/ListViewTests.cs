@@ -28,7 +28,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var listView = window.FindListView();
-                var columns = listView.Header.Columns;
+                var columns = listView.ColumnHeaders;
                 Assert.AreEqual(2, columns.Count);
                 Assert.AreEqual("Key", columns[0].Text);
                 Assert.AreEqual("Value", columns[1].Text);

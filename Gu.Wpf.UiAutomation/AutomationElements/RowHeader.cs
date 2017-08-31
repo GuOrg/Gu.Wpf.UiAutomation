@@ -1,6 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
-    public class RowHeader : GridHeaderItem
+    public class RowHeader : HeaderBase
     {
         public RowHeader(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)

@@ -9,6 +9,9 @@
         Height="450"
         ResizeMode="CanResize"
         mc:Ignorable="d">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <Menu x:Key="ViewsMenu">

@@ -90,7 +90,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
         [TestCase("ReadonlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeadersCount(string name, int expectedRows)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -116,23 +116,25 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
-        [TestCase("ReadonlyDataGrid")]
-        [TestCase("ReadonlyColumnsDataGrid")]
-        public void ColumnHeaders(string name)
+        [TestCase("DataGrid", 2)]
+        [TestCase("DataGrid100", 2)]
+        [TestCase("DataGridNoHeaders", 0)]
+        [TestCase("ReadonlyDataGrid", 2)]
+        [TestCase("ReadonlyColumnsDataGrid", 2)]
+        public void ColumnHeaders(string name, int expectedCount)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                var columns = dataGrid.Header.Columns;
-                Assert.AreEqual(2, columns.Count);
-                Assert.AreEqual("Id", columns[0].Text);
-                Assert.AreEqual("Name", columns[1].Text);
+                Assert.AreEqual(expectedCount, dataGrid.ColumnHeaders.Count);
+                if (expectedCount == 0)
+                {
+                    return;
+                }
 
-                Assert.AreEqual(2, dataGrid.ColumnCount);
-                Assert.AreEqual(2, dataGrid.ColumnHeaders.Count);
+                Assert.AreEqual(expectedCount, dataGrid.ColumnCount);
+                Assert.AreEqual(expectedCount, dataGrid.ColumnHeaders.Count);
                 Assert.AreEqual("Id", dataGrid.ColumnHeaders[0].Text);
                 Assert.AreEqual("Name", dataGrid.ColumnHeaders[1].Text);
             }
@@ -140,8 +142,9 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
         [TestCase("DataGrid", 4)]
         [TestCase("DataGrid100", 101)]
+        [TestCase("DataGridNoHeaders", 0)]
         [TestCase("ReadonlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
+        [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeaders(string name, int expectedRows)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -150,13 +153,15 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 var dataGrid = window.FindDataGrid(name);
                 var rowHeaders = dataGrid.RowHeaders;
                 Assert.AreEqual(expectedRows, rowHeaders.Count);
-                Assert.AreEqual("Row 0", rowHeaders[0].Text);
-                Assert.AreEqual("Row 1", rowHeaders[1].Text);
-                Assert.AreEqual("Row 2", rowHeaders[2].Text);
-                if (expectedRows == 4)
+                if (expectedRows == 0)
                 {
-                    Assert.AreEqual("Row 3", rowHeaders[3].Text);
+                    return;
                 }
+
+                Assert.AreEqual("Row 1", rowHeaders[0].Text);
+                Assert.AreEqual("Row 2", rowHeaders[1].Text);
+                Assert.AreEqual("Row 3", rowHeaders[2].Text);
+                Assert.AreEqual($"Row {dataGrid.RowCount - 1}", rowHeaders[dataGrid.RowCount - 2].Text);
             }
         }
 
@@ -178,6 +183,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", rows[1].Cells[1].Value);
                 Assert.AreEqual("3", rows[2].Cells[0].Value);
                 Assert.AreEqual("Item 3", rows[2].Cells[1].Value);
+                if (!dataGrid.IsReadOnly)
+                {
+                    Assert.AreEqual(string.Empty, rows[dataGrid.RowCount - 1].Cells[0].Value);
+                    Assert.AreEqual(string.Empty, rows[dataGrid.RowCount - 1].Cells[1].Value);
+                }
             }
         }
 

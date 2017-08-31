@@ -72,26 +72,32 @@
         /// <summary>
         /// Gets all row header elements.
         /// </summary>
-        public IReadOnlyList<RowHeader> RowHeaders => this.TablePattern.RowHeaders.Value
-                                                          .Select(x => new RowHeader(x.BasicAutomationElement))
-                                                          .ToArray();
+        public IReadOnlyList<RowHeader> RowHeaders
+        {
+            get
+            {
+                var rowCount = this.RowCount;
+                var rows = new RowHeader[rowCount];
+                var gridPattern = this.Patterns.Grid.Pattern;
+                for (var i = 0; i < rowCount; i++)
+                {
+                    var header = new GridRow(gridPattern.GetItem(i, 0).Parent.BasicAutomationElement).Header;
+                    if (header == null)
+                    {
+                        return new RowHeader[0];
+                    }
+
+                    rows[i] = header;
+                }
+
+                return rows;
+            }
+        }
 
         /// <summary>
         /// Gets whether the data should be read primarily by row or by column.
         /// </summary>
         public RowOrColumnMajor RowOrColumnMajor => this.TablePattern.RowOrColumnMajor.Value;
-
-        /// <summary>
-        /// Gets the header item.
-        /// </summary>
-        public virtual GridHeader Header
-        {
-            get
-            {
-                var header = this.FindFirstChild(cf => cf.ByControlType(ControlType.Header));
-                return header?.AsGridHeader();
-            }
-        }
 
         /// <summary>
         /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!

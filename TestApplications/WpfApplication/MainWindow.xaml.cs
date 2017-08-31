@@ -11,8 +11,6 @@
         public MainWindow()
         {
             this.InitializeComponent();
-            var vm = new MainViewModel();
-            this.DataContext = vm;
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
