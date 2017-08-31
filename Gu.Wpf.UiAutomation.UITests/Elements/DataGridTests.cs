@@ -229,15 +229,13 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
-                dataGrid[3, 1].Value = "Item 5";
+                dataGrid[2, 1].Value = "Item 5";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item 5", dataGrid[3, 1].Value);
+                Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
 
                 dataGrid[0, 0].Value = "111";
                 Assert.AreEqual("111", dataGrid[0, 0].Value);
@@ -245,22 +243,22 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("0", dataGrid[3, 0].Value);
-                Assert.AreEqual("Item 5", dataGrid[3, 1].Value);
+                Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
             }
         }
 
-        [TestCase("DataGrid100")]
-        public void IndexerSetCellValueWhenOffScreen(string name)
+        [TestCase("DataGrid100", 99)]
+        [TestCase("DataGrid100", 100)]
+        public void IndexerSetCellValueWhenOffScreen(string name, int row)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                dataGrid[100, 0].Value = "1100";
-                Assert.AreEqual("1100", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 100", dataGrid[0, 1].Value);
+                dataGrid[row, 0].Value = "-1";
+                dataGrid[row, 1].Value = "Item -1";
+                Assert.AreEqual("-1", dataGrid[row, 0].Value);
+                Assert.AreEqual("Item -1", dataGrid[row, 1].Value);
             }
         }
 
