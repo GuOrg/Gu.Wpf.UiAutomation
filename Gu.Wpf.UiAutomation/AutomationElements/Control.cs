@@ -74,6 +74,17 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Performs a right click on the element.
+        /// </summary>
+        /// <param name="delay">The time to wait after the click. Useful if there is an animation for example.</param>
+        /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
+        public void RightClick(TimeSpan delay, bool moveMouse = false)
+        {
+            this.PerformMouseAction(moveMouse, Mouse.RightClick);
+            Wait.For(delay);
+        }
+
+        /// <summary>
         /// Performs a double right click on the element.
         /// </summary>
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
