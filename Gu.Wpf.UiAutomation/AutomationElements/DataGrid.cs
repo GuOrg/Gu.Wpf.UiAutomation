@@ -24,18 +24,6 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public GridCell this[int row, int col]
-        {
-            get
-            {
-                var gridRow = this.Rows[row];
-                if (gridRow.IsOffscreen)
-                {
-                    gridRow.Patterns.ScrollItem.Pattern.ScrollIntoView();
-                }
-
-                return gridRow.Cells[col];
-            }
-        }
+        public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col).BasicAutomationElement);
     }
 }

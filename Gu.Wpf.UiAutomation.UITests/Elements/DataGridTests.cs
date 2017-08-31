@@ -271,8 +271,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual("100", dataGrid[100, 0].Value);
-                Assert.AreEqual("Item 100", dataGrid[100, 1].Value);
+                Assert.AreEqual("100", dataGrid[99, 0].Value);
+                Assert.AreEqual("Item 100", dataGrid[99, 1].Value);
             }
         }
 
