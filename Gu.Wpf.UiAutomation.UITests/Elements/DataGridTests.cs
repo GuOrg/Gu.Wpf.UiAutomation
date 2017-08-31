@@ -106,7 +106,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadonlyDataGrid", true)]
-        [TestCase("ReadonlyColumnsDataGrid", false)]
+        [TestCase("ReadonlyColumnsDataGrid", true)]
         public void IsReadOnly(string name, bool expected)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -114,31 +114,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 var window = app.MainWindow();
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expected, dataGrid.IsReadOnly);
-            }
-        }
-
-        [TestCase("DataGrid", false)]
-        [TestCase("DataGrid100", false)]
-        [TestCase("DataGridNoHeaders", false)]
-        [TestCase("ReadonlyDataGrid", true)]
-        [TestCase("ReadonlyColumnsDataGrid", true)]
-        public void CellsIsReadOnly(string name, bool expected)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow();
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(expected, dataGrid[0, 0].IsReadOnly);
-                Assert.AreEqual(expected, dataGrid[0, 1].IsReadOnly);
-                Assert.AreEqual(expected, dataGrid[1, 0].IsReadOnly);
-                Assert.AreEqual(expected, dataGrid[1, 1].IsReadOnly);
-                Assert.AreEqual(expected, dataGrid[2, 0].IsReadOnly);
-                Assert.AreEqual(expected, dataGrid[2, 1].IsReadOnly);
-                if (name != "ReadonlyDataGrid")
-                {
-                    Assert.AreEqual(expected, dataGrid[3, 0].IsReadOnly);
-                    Assert.AreEqual(expected, dataGrid[3, 1].IsReadOnly);
-                }
             }
         }
 

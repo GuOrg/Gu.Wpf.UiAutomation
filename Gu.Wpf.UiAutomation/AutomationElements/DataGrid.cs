@@ -19,7 +19,8 @@ namespace Gu.Wpf.UiAutomation
                     return true;
                 }
 
-                return firstRow.Cells.All(x => x.IsReadOnly);
+                return firstRow.Cells.Where(x => x.IsKeyboardFocusable)
+                                     .All(x => x.IsReadOnly);
             }
         }
 
