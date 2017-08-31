@@ -40,7 +40,16 @@ namespace Gu.Wpf.UiAutomation
                     return valuePattern.IsReadOnly;
                 }
 
-                if (this.IsOffscreen)
+                if (this.IsNewItemPlaceholder)
+                {
+                    if (this.GridItemPattern.Row.Value > 0)
+                    {
+                        return this.GridItemPattern.ContainingGrid.Value.AsDataGrid()[0, this.GridItemPattern.Column.Value]
+                                   .IsReadOnly;
+                    }
+                }
+
+                if (!this.IsOffscreen)
                 {
                     return true;
                 }
