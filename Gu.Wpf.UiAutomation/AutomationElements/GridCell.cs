@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -10,6 +11,8 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public class GridCell : Control
     {
+        private static readonly Regex NewItemPlaceHolderRegex = new Regex("^Item: {NewItemPlaceholder}, Column Display Index: \\d$", RegexOptions.Singleline|RegexOptions.Compiled);
+
         public GridCell(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
@@ -46,17 +49,28 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public bool IsNewItemPlaceholder
+        {
+            get
+            {
+                var valuePattern = this.Patterns.Value.PatternOrDefault;
+                var value = valuePattern != null
+                    ? valuePattern.Value
+                    : this.Properties.Name.Value;
+
+                return NewItemPlaceHolderRegex.IsMatch(value);
+            }
+        }
+
         public string Value
         {
             get
             {
                 var valuePattern = this.Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
-                {
-                    return valuePattern.Value;
-                }
-
-                return this.Properties.Name.Value;
+                var value = valuePattern != null
+                    ? valuePattern.Value
+                    : this.Properties.Name.Value;
+                return NewItemPlaceHolderRegex.IsMatch(value) ? string.Empty : value;
             }
 
             set

@@ -9,11 +9,32 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public bool IsReadOnly => this.FindAllChildren(cf => cf.ByControlType(ControlType.DataItem).Or(cf.ByControlType(ControlType.ListItem)))
-                                      .LastOrDefault()
-                                      ?.Properties.IsOffscreen ??
-                                  true;
+        public bool IsReadOnly
+        {
+            get
+            {
+                var firstRow = this.Rows.FirstOrDefault();
+                if (firstRow == null)
+                {
+                    return true;
+                }
 
-        public GridCell this[int row, int col] => this.Rows[row].Cells[col];
+                return firstRow.Cells.All(x => x.IsReadOnly);
+            }
+        }
+
+        public GridCell this[int row, int col]
+        {
+            get
+            {
+                var gridRow = this.Rows[row];
+                if (gridRow.IsOffscreen)
+                {
+                    gridRow.Patterns.ScrollItem.Pattern.ScrollIntoView();
+                }
+
+                return gridRow.Cells[col];
+            }
+        }
     }
 }

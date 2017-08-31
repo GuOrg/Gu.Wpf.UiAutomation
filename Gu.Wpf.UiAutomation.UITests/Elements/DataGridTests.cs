@@ -232,22 +232,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyColumnsDataGrid")]
-        public void NewItemPlaceholder(string name)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow();
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 0", dataGrid[dataGrid.RowCount - 1, 0].Value);
-                Assert.AreEqual("Item: {NewItemPlaceholder}, Column Display Index: 1", dataGrid[dataGrid.RowCount - 1, 1].Value);
-            }
-        }
-
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
-        [TestCase("DataGridNoHeaders")]
-        public void SetCellValue(string name)
+        public void IndexerSetCellValue(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
@@ -269,15 +254,68 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
-                dataGrid[3, 0].Value = "5";
+                dataGrid[3, 1].Value = "Item 5";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-                Assert.AreEqual("5", dataGrid[3, 0].Value);
-                Assert.AreEqual(string.Empty, dataGrid[3, 1].Value);
+                Assert.AreEqual("0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item 5", dataGrid[3, 1].Value);
+
+                dataGrid[0, 0].Value = "111";
+                Assert.AreEqual("111", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+                Assert.AreEqual("0", dataGrid[3, 0].Value);
+                Assert.AreEqual("Item 5", dataGrid[3, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid100")]
+        public void IndexerSetCellValueWhenOffScreen(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                dataGrid[100, 0].Value = "1100";
+                Assert.AreEqual("1100", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 100", dataGrid[0, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid100")]
+        public void IndexerGetCellValueWhenOffScreen(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual("100", dataGrid[100, 0].Value);
+                Assert.AreEqual("Item 100", dataGrid[100, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void NewItemPlaceholder(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow();
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(false, dataGrid[0, 0].IsNewItemPlaceholder);
+                Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 0].IsNewItemPlaceholder);
+                Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 0].Value);
+                Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 1].IsNewItemPlaceholder);
+                Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 1].Value);
             }
         }
 
