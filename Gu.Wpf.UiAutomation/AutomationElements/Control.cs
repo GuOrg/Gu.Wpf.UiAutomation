@@ -16,9 +16,24 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Flag if the element is enabled or not.
+        /// Get a value indicating if the element is enabled or not.
         /// </summary>
         public bool IsEnabled => this.Properties.IsEnabled.Value;
+
+        /// <summary>
+        /// Get a value indicating if the element can recieve keyboard focus.
+        /// </summary>
+        public bool IsKeyboardFocusable => this.Properties.IsKeyboardFocusable.Value;
+
+        /// <summary>
+        /// Get a value indicating if the element has keyboard focus.
+        /// </summary>
+        public bool HasKeyboardFocus => this.Properties.HasKeyboardFocus.Value;
+
+        /// <summary>
+        /// Gets a string containing the accelerator key combinations for the element.
+        /// </summary>
+        public string AcceleratorKey => this.Properties.AcceleratorKey.Value;
 
         /// <summary>
         /// Performs a left click on the element.
