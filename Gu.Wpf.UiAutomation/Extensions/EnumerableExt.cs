@@ -5,14 +5,14 @@
 
     public static class EnumerableExt
     {
-        public static bool TryGetSingle<T>(this IEnumerable<T> self, out T result)
+        public static bool TryGetSingle<T>(this IEnumerable<T> source, out T result)
         {
-            if (self == null)
+            if (source == null)
             {
-                throw new ArgumentNullException(nameof(self));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            using (var enumerator = self.GetEnumerator())
+            using (var enumerator = source.GetEnumerator())
             {
                 if (enumerator.MoveNext())
                 {
@@ -31,36 +31,41 @@
             return false;
         }
 
-        public static bool TryGetSingle<T>(this IEnumerable<T> self, Func<T, bool> selector, out T result)
+        public static bool TryGetSingle<T>(this IEnumerable<T> source, Func<T, bool> predicate, out T result)
         {
-            if (self == null)
+            if (source == null)
             {
-                throw new ArgumentNullException(nameof(self));
+                throw new ArgumentNullException(nameof(source));
             }
 
-            if (selector == null)
+            if (predicate == null)
             {
-                throw new ArgumentNullException(nameof(selector));
+                throw new ArgumentNullException(nameof(predicate));
             }
 
-            result = default(T);
-            var found = false;
-            foreach (var item in self)
+            using (var e = source.GetEnumerator())
             {
-                if (selector(item))
+                while (e.MoveNext())
                 {
-                    if (found)
+                    result = e.Current;
+                    if (predicate(result))
                     {
-                        result = default(T);
-                        return false;
-                    }
+                        while (e.MoveNext())
+                        {
+                            if (predicate(e.Current))
+                            {
+                                result = default(T);
+                                return false;
+                            }
+                        }
 
-                    result = item;
-                    found = true;
+                        return true;
+                    }
                 }
             }
 
-            return found;
+            result = default(T);
+            return false;
         }
     }
 }
