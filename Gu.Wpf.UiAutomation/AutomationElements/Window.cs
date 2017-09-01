@@ -152,7 +152,9 @@
                 return this;
             }
 
-            var mainWindow = this.Automation.GetDesktop().FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value)).AsWindow();
+            var mainWindow = this.Automation.GetDesktop()
+                                 .FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value))
+                                 .AsWindow();
             return mainWindow ?? this;
         }
     }

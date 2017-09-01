@@ -15,11 +15,8 @@
             using (var app = Application.Launch(ExeFileName, "ContextMenuWindow"))
             {
                 var window = app.MainWindow();
-                var btn = window.FindButton("ContextMenu");
-                //// btn.RightClick();
-                //// Wait.For(TimeSpan.FromMilliseconds(100));
-                Mouse.Click(MouseButton.Right, btn.GetClickablePoint());
-                Wait.UntilInputIsProcessed();
+                var btn = window.FindButton("With ContextMenu");
+                btn.RightClick();
                 var ctxMenu = window.ContextMenu;
                 var subMenuLevel1 = ctxMenu.Items;
                 Assert.AreEqual(2, subMenuLevel1.Count);
