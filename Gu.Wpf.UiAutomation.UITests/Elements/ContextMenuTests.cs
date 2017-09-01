@@ -18,6 +18,7 @@
                 var btn = window.FindButton("ContextMenu");
                 btn.RightClick();
                 window.WaitUntilResponsive();
+                app.WaitWhileBusy();
                 var ctxMenu = window.ContextMenu;
                 var subMenuLevel1 = ctxMenu.Items;
                 Assert.AreEqual(2, subMenuLevel1.Count);
