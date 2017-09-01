@@ -83,10 +83,15 @@
             }
 
             var mainWindow = this.GetMainWindow();
+            if (mainWindow == null)
+            {
+                throw new InvalidOperationException("Could not find MainWindow");
+            }
+
             if (frameworkType == FrameworkType.WinForms)
             {
                 var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
-                return ctxMenu.AsContextMenu();
+                return ctxMenu?.AsContextMenu() ?? throw new InvalidOperationException("Could not find ControlType.Menu with name DropDown");
             }
 
             if (frameworkType == FrameworkType.Wpf)

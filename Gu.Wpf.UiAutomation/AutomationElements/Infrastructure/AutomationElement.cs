@@ -705,7 +705,7 @@
         public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindFirstChild(condition);
+            return this.FindFirstChild(condition) ?? throw new InvalidOperationException($"No match for {condition}");
         }
 
         public IReadOnlyList<AutomationElement> FindAllChildren()
