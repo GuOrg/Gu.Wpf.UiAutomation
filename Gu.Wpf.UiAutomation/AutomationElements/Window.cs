@@ -35,7 +35,7 @@
         /// <summary>
         /// Gets the current WPF popup window
         /// </summary>
-        public Window Popup
+        public Popup Popup
         {
             get
             {
@@ -43,7 +43,12 @@
                 var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window)
                                                               .And(cf.ByText(string.Empty)
                                                               .And(cf.ByClassName("Popup"))));
-                return popup?.AsWindow();
+                if (popup == null)
+                {
+                    throw new InvalidOperationException("Did not find a popup");
+                }
+
+                return new Popup(popup.BasicAutomationElement);
             }
         }
 
