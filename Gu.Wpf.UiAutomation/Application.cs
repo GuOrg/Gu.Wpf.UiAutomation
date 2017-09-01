@@ -158,10 +158,9 @@
                 new FileInfo(processStartInfo.FileName).FullName,
                 Environment.CurrentDirectory);
 
-            Process process;
             try
             {
-                process = Process.Start(processStartInfo);
+                return new Application(new ProcessReference(Process.Start(processStartInfo), dispose: true));
             }
             catch (Win32Exception ex)
             {
@@ -169,8 +168,6 @@
                 Logger.Default.Error(error, ex);
                 throw;
             }
-
-            return new Application(new ProcessReference(process, dispose: true));
         }
 
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null)

@@ -16,7 +16,24 @@
         public UIA3Automation()
             : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
         {
-            this.NativeAutomation = this.InitializeAutomation();
+            if (OperatingSystem.IsWindows8_1())
+            {
+                // Try CUIAutomation8 (Windows 8)
+                try
+                {
+                    this.NativeAutomation = new Interop.UIAutomationClient.CUIAutomation8();
+                }
+                catch (COMException)
+                {
+                    // Fall back to CUIAutomation
+                    this.NativeAutomation = new Interop.UIAutomationClient.CUIAutomation();
+                }
+            }
+            else
+            {
+                this.NativeAutomation = new Interop.UIAutomationClient.CUIAutomation();
+            }
+
             this.TreeWalkerFactory = new UIA3TreeWalkerFactory(this);
         }
 
@@ -122,28 +139,6 @@
         public override bool Compare(AutomationElement element1, AutomationElement element2)
         {
             return this.NativeAutomation.CompareElements(element1.ToNative(), element2.ToNative()) != 0;
-        }
-
-        /// <summary>
-        /// Initializes the automation object with the correct instance
-        /// </summary>
-        private Interop.UIAutomationClient.IUIAutomation InitializeAutomation()
-        {
-            if (OperatingSystem.IsWindows8_1())
-            {
-                // Try CUIAutomation8 (Windows 8)
-                try
-                {
-                    return new Interop.UIAutomationClient.CUIAutomation8();
-                }
-                catch (COMException)
-                {
-                    // Fall back to CUIAutomation
-                    return new Interop.UIAutomationClient.CUIAutomation();
-                }
-            }
-
-            return new Interop.UIAutomationClient.CUIAutomation();
         }
 
         /// <summary>

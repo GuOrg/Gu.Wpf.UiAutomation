@@ -157,8 +157,7 @@
             {
                 var mainWindow = this.app.MainWindow();
                 var property = mainWindow.Automation.PropertyLibrary.ExpandCollapse.ExpandCollapseState;
-                var exception = Assert.Throws<PropertyNotSupportedException>(() =>
-                    mainWindow.BasicAutomationElement.GetPropertyValue(property));
+                var exception = Assert.Throws<PropertyNotSupportedException>(() => mainWindow.BasicAutomationElement.GetPropertyValue(property));
                 StringAssert.Contains("ExpandCollapseState", exception.Message);
             }
         }
@@ -176,9 +175,7 @@
             {
                 var window = this.app.MainWindow();
                 var property = window.Automation.PropertyLibrary.Window.CanMaximize;
-                var exception =
-                    Assert.Throws<PropertyNotCachedException>(() =>
-                        window.BasicAutomationElement.GetPropertyValue(property));
+                var exception = Assert.Throws<PropertyNotCachedException>(() => window.BasicAutomationElement.GetPropertyValue(property));
                 StringAssert.Contains("CanMaximize", exception.Message);
             }
         }

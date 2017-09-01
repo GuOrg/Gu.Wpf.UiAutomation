@@ -63,13 +63,13 @@
         /// <inheritdoc/>
         public bool Equals(TVal other)
         {
-            return this.Value.Equals(other);
+            return object.Equals(this.Value, other);
         }
 
         /// <inheritdoc/>
         public bool Equals(AutomationProperty<TVal> other)
         {
-            return other != null && this.Value.Equals(other.Value);
+            return other != null && object.Equals(this.Value, other.Value);
         }
 
         /// <inheritdoc/>
