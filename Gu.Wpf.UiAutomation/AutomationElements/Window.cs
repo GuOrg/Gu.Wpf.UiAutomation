@@ -12,7 +12,7 @@
         public Window(BasicAutomationElementBase basicAutomationElement, bool isMainWindow)
             : base(basicAutomationElement)
         {
-            IsMainWindow = isMainWindow;
+            this.IsMainWindow = isMainWindow;
         }
 
         /// <summary>
@@ -158,7 +158,7 @@
 
             var mainWindow = this.Automation.GetDesktop()
                                  .FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value))
-                                 .AsWindow();
+                                 .AsWindow(isMainWindow: true);
             return mainWindow ?? this;
         }
     }
