@@ -3,5 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.StartupUri>MainWindow.xaml</Application.StartupUri>
     <!--<Application.StartupUri>Windows/DataGridWindow.xaml</Application.StartupUri>-->
+    <!--<Application.StartupUri>Windows/ContextMenuWindow.xaml</Application.StartupUri>-->
     <Application.Resources />
 </Application>
