@@ -26,7 +26,7 @@
         [TestCase("1, 2, 2", true, 1)]
         [TestCase("1, 2", true, 1)]
         [TestCase("1", true, 1)]
-        public void TryGetSingleWithSelector(string text, bool expected, int match)
+        public void TryGetSingleWithPredicate(string text, bool expected, int match)
         {
             var ints = text.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                             .Select(int.Parse)
