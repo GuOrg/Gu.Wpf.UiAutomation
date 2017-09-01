@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -17,8 +16,10 @@
             {
                 var window = app.MainWindow();
                 var btn = window.FindButton("ContextMenu");
-                btn.RightClick();
-                Wait.For(TimeSpan.FromMilliseconds(100));
+                //// btn.RightClick();
+                //// Wait.For(TimeSpan.FromMilliseconds(100));
+                Mouse.Click(MouseButton.Right, btn.GetClickablePoint());
+                Wait.UntilInputIsProcessed();
                 var ctxMenu = window.ContextMenu;
                 var subMenuLevel1 = ctxMenu.Items;
                 Assert.AreEqual(2, subMenuLevel1.Count);
