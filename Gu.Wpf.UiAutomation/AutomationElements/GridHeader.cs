@@ -5,9 +5,9 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Header item for grids and tables.
     /// </summary>
-    public abstract class HeaderBase : Control
+    public abstract class GridHeader : Control
     {
-        public HeaderBase(BasicAutomationElementBase basicAutomationElement)
+        protected GridHeader(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
