@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "MenuWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var menu = window.FindMenu();
                 Assert.That(menu, Is.Not.Null);
                 var items = menu.Items;
@@ -43,7 +43,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "MenuWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var menu = window.FindMenu();
                 var edit = menu.Items["Edit"];
                 Assert.AreEqual("Edit", edit.Properties.Name.Value);

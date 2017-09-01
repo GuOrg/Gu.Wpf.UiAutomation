@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var itemsControl = window.FindListBox();
                 Assert.AreEqual(2, itemsControl.Items.Count);
             }

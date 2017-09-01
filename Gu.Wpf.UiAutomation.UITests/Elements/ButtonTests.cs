@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var button = window.FindButton(key);
                 Assert.NotNull(button);
             }
@@ -31,7 +31,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
                 Assert.AreEqual($"Did not find a Button with name {key}.", exception.Message);
             }
@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var button = window.FindButton("Test Button");
                 var textBlock = window.FindTextBlock("CountTextBlock");
                 Assert.AreEqual("0", textBlock.Text);

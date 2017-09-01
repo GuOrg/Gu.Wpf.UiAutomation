@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var expander = window.FindExpander();
                 Assert.NotNull(expander);
                 var ecp = expander.Patterns.ExpandCollapse.Pattern;

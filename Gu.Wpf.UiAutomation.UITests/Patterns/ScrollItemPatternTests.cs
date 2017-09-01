@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "LargeListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 Assert.That(listView, Is.Not.Null);
                 var gridPattern = listView.Patterns.Grid.Pattern;

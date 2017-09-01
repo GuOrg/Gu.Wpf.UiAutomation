@@ -16,7 +16,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 Assert.AreEqual(0, slider.Minimum);
                 Assert.AreEqual(10, slider.Maximum);
@@ -30,7 +30,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 var thumb = slider.Thumb;
                 var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
@@ -47,7 +47,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 slider.Value = 6;
                 Assert.AreEqual(6, slider.Value);
@@ -62,7 +62,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 Assert.AreEqual(5, slider.Value);
                 slider.SmallIncrement();
@@ -75,7 +75,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 Assert.AreEqual(5, slider.Value);
                 slider.SmallDecrement();
@@ -88,7 +88,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 Assert.AreEqual(5, slider.Value);
                 slider.LargeIncrement();
@@ -101,7 +101,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var slider = window.FindSlider("Slider");
                 Assert.AreEqual(5, slider.Value);
                 slider.LargeDecrement();

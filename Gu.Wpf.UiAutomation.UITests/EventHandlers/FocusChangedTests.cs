@@ -15,7 +15,7 @@
             using (var app = Application.Launch("mspaint"))
             {
                 var focusChangedElements = new List<string>();
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 var x = app.Automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
                 Thread.Sleep(100);
                 var button1 = mainWindow.FindButton(this.GetResizeText());

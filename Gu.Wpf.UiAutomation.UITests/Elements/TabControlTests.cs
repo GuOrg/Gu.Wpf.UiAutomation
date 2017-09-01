@@ -12,7 +12,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 Assert.AreEqual(3, tab.Items.Count);
                 Assert.AreEqual("x:Name", tab.Items[0].Text);
@@ -26,7 +26,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
@@ -48,7 +48,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
@@ -70,7 +70,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);

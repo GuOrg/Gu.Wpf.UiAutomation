@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton(key);
                 Assert.NotNull(toggleButton);
             }
@@ -25,7 +25,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("Test ToggleButton");
                 toggleButton.IsChecked = true;
                 Assert.AreEqual(true, toggleButton.IsChecked);
@@ -48,7 +48,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
                 toggleButton.IsChecked = true;
                 Assert.AreEqual(true, toggleButton.IsChecked);
@@ -69,7 +69,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("Test ToggleButton");
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
@@ -89,7 +89,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
                 Assert.AreEqual(false, toggleButton.IsChecked);
 

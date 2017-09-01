@@ -16,7 +16,7 @@
         {
             using (var app = Application.Launch(ExeFileName))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 var tabItem = tab.Items[0];
                 var button = tabItem.FindButton("InvokableButton");

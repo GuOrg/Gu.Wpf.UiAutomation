@@ -18,9 +18,9 @@
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
                 var launch = sw.Elapsed;
-                var window1 = app.MainWindow();
+                var window1 = app.MainWindow;
                 var firstWindow = sw.Elapsed;
-                var window2 = app.MainWindow();
+                var window2 = app.MainWindow;
                 sw.Stop();
                 Assert.NotNull(window1);
                 Assert.AreNotSame(window1, window2);
@@ -35,7 +35,7 @@
         {
             using (var app = Application.Launch(ExeFileName))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var sw = Stopwatch.StartNew();
                 var checkBox = window.FindCheckBox("Test Checkbox");
                 var find = sw.Elapsed;

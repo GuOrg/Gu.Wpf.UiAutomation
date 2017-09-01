@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var bar = window.FindProgressBar();
                 Assert.AreEqual(0, bar.Minimum);
             }
@@ -25,7 +25,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var bar = window.FindProgressBar();
                 Assert.AreEqual(100, bar.Maximum);
             }
@@ -36,7 +36,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ProgressBarWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var bar = window.FindProgressBar();
                 Assert.AreEqual(50, bar.Value);
             }

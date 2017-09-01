@@ -15,7 +15,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 window.Close();
             }
         }
@@ -25,7 +25,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "DialogWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 window.FindButton("Show MessageBox").Click();
                 var dialog = window.FindMessageBox();
                 Assert.AreEqual("Message", dialog.FindLabel().Text);
@@ -38,7 +38,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "DialogWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 window.FindButton("Show Dialog").Click();
                 var dialog = window.ModalWindows.Single();
                 Assert.AreEqual("Message", dialog.FindTextBlock().Text);

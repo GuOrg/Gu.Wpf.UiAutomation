@@ -16,7 +16,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var expander = window.FindExpander(key);
                 Assert.AreEqual(header, expander.Text);
                 Assert.NotNull(expander.FindTextBlock());
@@ -28,7 +28,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");
                 Assert.AreEqual(true, expander.IsExpanded);
 
@@ -45,7 +45,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");
                 Assert.AreEqual(true, expander.IsExpanded);
 

@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "PopupWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var btn = window.FindToggleButton("PopupToggleButton1");
                 btn.Click();
                 Wait.UntilInputIsProcessed();
@@ -32,7 +32,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "PopupWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var btn = window.FindToggleButton("PopupToggleButton2");
                 btn.Click();
                 Wait.UntilInputIsProcessed();

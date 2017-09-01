@@ -16,7 +16,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "TextBlockWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var textBlock = window.FindTextBlock(key);
                 Assert.NotNull(textBlock?.Text);
             }

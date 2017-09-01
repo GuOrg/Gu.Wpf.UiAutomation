@@ -17,7 +17,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var checkBox = window.FindCheckBox(key);
                 Assert.NotNull(checkBox);
             }
@@ -31,7 +31,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
                 var expected = key == null
                     ? $"Did not find a CheckBox."
@@ -45,7 +45,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("Test Checkbox");
                 checkBox.IsChecked = true;
                 Assert.AreEqual(true, checkBox.IsChecked);
@@ -68,7 +68,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("3-Way Test Checkbox");
                 checkBox.IsChecked = true;
                 Assert.AreEqual(true, checkBox.IsChecked);
@@ -89,7 +89,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("Test Checkbox");
                 Assert.AreEqual(false, checkBox.IsChecked);
 
@@ -109,7 +109,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("3-Way Test Checkbox");
                 Assert.AreEqual(false, checkBox.IsChecked);
 

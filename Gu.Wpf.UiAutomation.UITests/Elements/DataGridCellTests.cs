@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expected, dataGrid[0, 0].IsReadOnly);
                 Assert.AreEqual(expected, dataGrid[0, 1].IsReadOnly);

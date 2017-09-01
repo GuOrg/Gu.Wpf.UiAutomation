@@ -18,7 +18,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 Keyboard.Type("abc");
                 Thread.Sleep(50);
                 Keyboard.Type(VirtualKeyShort.BACK);
@@ -32,7 +32,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 Keyboard.Type(key);
                 Thread.Sleep(50);
                 var textBox = mainWindow.FindTextBox();
@@ -47,7 +47,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 Keyboard.Type(text);
                 var textBox = mainWindow.FindTextBox();
                 var sw = Stopwatch.StartNew();
@@ -70,7 +70,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 using (Keyboard.Pressing(VirtualKeyShort.SHIFT))
                 {
                     Keyboard.Type(key);
@@ -87,7 +87,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow();
+                var mainWindow = app.MainWindow;
                 Keyboard.PressScanCode(scancode, isExtendedKey);
                 Keyboard.ReleaseScanCode(scancode, isExtendedKey);
                 Thread.Sleep(50);

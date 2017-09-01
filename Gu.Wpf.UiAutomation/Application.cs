@@ -18,6 +18,9 @@
         /// The process of this application.
         /// </summary>
         private readonly ProcessReference processReference;
+        private readonly object gate = new object();
+
+        private volatile Window mainWindow;
         private bool disposed;
 
         /// <summary>
@@ -49,6 +52,11 @@
         /// Flag to indicate, if the application is a windows store app.
         /// </summary>
         public bool IsStoreApp { get; }
+
+        /// <summary>
+        /// Calls <see cref="GetMainWindow"/> with a timeout of ten seconds.
+        /// </summary>
+        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(10));
 
         /// <summary>
         /// The proces Id of the application.
@@ -260,23 +268,35 @@
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         /// <returns>The main window object as <see cref="Window" /> or null if no main window was found within the timeout.</returns>
-        public Window MainWindow(TimeSpan? waitTimeout = null)
+        public Window GetMainWindow(TimeSpan? waitTimeout = null)
         {
             this.ThrowIfDisposed();
+            if (this.mainWindow != null)
+            {
+                return this.mainWindow;
+            }
+
             this.WaitWhileMainHandleIsMissing(waitTimeout);
-            var mainWindowHandle = this.MainWindowHandle;
-            if (mainWindowHandle == IntPtr.Zero)
+            if (this.mainWindow != null)
             {
-                return null;
+                return this.mainWindow;
             }
 
-            var mainWindow = this.Automation.FromHandle(mainWindowHandle).AsWindow();
-            if (mainWindow != null)
+            lock (this.gate)
             {
-                mainWindow.IsMainWindow = true;
-            }
+                if (this.mainWindow != null)
+                {
+                    return this.mainWindow;
+                }
 
-            return mainWindow;
+                var mainWindowHandle = this.MainWindowHandle;
+                if (mainWindowHandle == IntPtr.Zero)
+                {
+                    return null;
+                }
+
+                return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement) { IsMainWindow = true };
+            }
         }
 
         /// <summary>

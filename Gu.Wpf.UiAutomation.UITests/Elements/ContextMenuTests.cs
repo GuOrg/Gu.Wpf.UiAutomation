@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ContextMenuWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var btn = window.FindButton("With ContextMenu");
                 btn.RightClick();
                 var ctxMenu = window.ContextMenu;

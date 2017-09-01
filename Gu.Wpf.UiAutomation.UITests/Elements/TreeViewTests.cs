@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TreeViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var tree = window.FindTreeView();
                 Assert.IsNull(tree.SelectedTreeViewItem);
                 Assert.AreEqual(2, tree.Items.Count);

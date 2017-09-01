@@ -16,7 +16,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "GroupBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var groupBox = window.FindGroupBox(key);
                 Assert.AreEqual(header, groupBox.Text);
                 Assert.NotNull(groupBox.FindTextBlock());

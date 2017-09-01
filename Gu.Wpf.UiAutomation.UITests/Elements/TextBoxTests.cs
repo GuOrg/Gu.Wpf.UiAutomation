@@ -13,7 +13,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var textBox = window.FindTextBox(key);
                 Assert.AreEqual(true, textBox.IsEnabled);
                 Assert.NotNull(textBox);
@@ -25,7 +25,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var textBox = window.FindTextBox("TestTextBox");
                 Assert.AreEqual("Test TextBox", textBox.Text);
 
@@ -45,7 +45,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var textBox = window.FindTextBox("TestTextBox");
                 textBox.Enter(text);
                 Assert.AreEqual(text, textBox.Text);

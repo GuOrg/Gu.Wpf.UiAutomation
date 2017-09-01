@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(2, dataGrid.ColumnCount);
             }
@@ -33,7 +33,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expected, dataGrid.ColumnHeaders.Count);
             }
@@ -48,7 +48,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(2, dataGrid.Rows[0].Cells.Count);
                 Assert.AreEqual(2, dataGrid.Rows[1].Cells.Count);
@@ -65,7 +65,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expectedRows, dataGrid.RowCount);
             }
@@ -80,7 +80,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 var rows = dataGrid.Rows;
                 Assert.AreEqual(expectedRows, rows.Count);
@@ -102,7 +102,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expectedRows, dataGrid.RowHeaders.Count);
             }
@@ -117,7 +117,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expected, dataGrid.IsReadOnly);
             }
@@ -132,7 +132,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(expectedCount, dataGrid.ColumnHeaders.Count);
                 if (expectedCount == 0)
@@ -156,7 +156,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 var rowHeaders = dataGrid.RowHeaders;
                 Assert.AreEqual(expectedRows, rowHeaders.Count);
@@ -181,7 +181,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 var rows = dataGrid.Rows;
                 Assert.AreEqual("1", rows[0].Cells[0].Value);
@@ -207,7 +207,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual("1", dataGrid.Row(0).Cells[0].Value);
                 Assert.AreEqual("Item 1", dataGrid.Row(0).Cells[1].Value);
@@ -227,7 +227,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual("1", dataGrid[0, 0].Value);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
@@ -247,7 +247,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
 
                 Assert.AreEqual("1", dataGrid[0, 0].Value);
@@ -289,7 +289,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 dataGrid[row, 0].Value = "-1";
                 dataGrid[row, 1].Value = "Item -1";
@@ -303,7 +303,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual("100", dataGrid[99, 0].Value);
                 Assert.AreEqual("Item 100", dataGrid[99, 1].Value);
@@ -317,7 +317,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 Assert.AreEqual(false, dataGrid[0, 0].IsNewItemPlaceholder);
                 Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 0].IsNewItemPlaceholder);
@@ -334,7 +334,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
 
                 Assert.AreEqual("1", dataGrid[0, 0].Value);
@@ -370,7 +370,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 var selectedRow = dataGrid.Select(index1);
                 Assert.AreEqual($"{index1 + 1}", selectedRow.Cells[0].Value);
@@ -397,7 +397,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 var selectedRow = dataGrid.Select(1, "Item 2");
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);

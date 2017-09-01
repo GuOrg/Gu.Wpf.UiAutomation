@@ -13,7 +13,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
                 combo.Items[1].Select();
                 var selectedItem = combo.SelectedItem;
@@ -27,7 +27,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
                 combo.Select(1);
                 var selectedItem = combo.SelectedItem;
@@ -41,7 +41,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
                 combo.Select("Item 2");
                 var selectedItem = combo.SelectedItem;
@@ -55,7 +55,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
 
                 combo.Expand();
@@ -71,7 +71,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var combo = window.FindComboBox("EditableCombo");
                 combo.EditableText = "Item 3";
                 Assert.AreEqual("Item 3", combo.SelectedItem.Text);

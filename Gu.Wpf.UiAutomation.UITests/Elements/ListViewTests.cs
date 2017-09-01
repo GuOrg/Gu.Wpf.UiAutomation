@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 Assert.AreEqual(3, listView.RowCount);
                 Assert.AreEqual(2, listView.ColumnCount);
@@ -26,7 +26,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 var columns = listView.ColumnHeaders;
                 Assert.AreEqual(2, columns.Count);
@@ -40,7 +40,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 Assert.AreEqual(3, listView.RowCount);
                 var rows = listView.Rows;
@@ -62,7 +62,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 var selectedRow = listView.Select(1);
                 Assert.AreEqual(2, selectedRow.Cells.Count);
@@ -91,7 +91,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         {
             using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var listView = window.FindListView();
                 var selectedRow = listView.Select(1, "20");
                 Assert.AreEqual(2, selectedRow.Cells.Count);

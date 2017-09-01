@@ -13,7 +13,7 @@
         {
             using (var app = StartApplication())
             {
-                var window = app.MainWindow(TimeSpan.FromSeconds(1));
+                var window = app.GetMainWindow(TimeSpan.FromSeconds(1));
                 var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
 
                 // Switch to default mode

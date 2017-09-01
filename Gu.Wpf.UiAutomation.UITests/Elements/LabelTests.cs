@@ -16,7 +16,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "LabelWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var label = window.FindLabel(key);
                 Assert.AreEqual(header, label.Text);
                 Assert.NotNull(label.FindTextBlock());

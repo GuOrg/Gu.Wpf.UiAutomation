@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var radioButton = window.FindRadioButton(key);
                 Assert.AreEqual(true, radioButton.IsEnabled);
                 Assert.NotNull(radioButton);
@@ -26,7 +26,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var radioButton1 = window.FindRadioButton("Test RadioButton");
                 var radioButton2 = window.FindRadioButton("AutomationId");
                 radioButton1.IsChecked = true;
@@ -48,7 +48,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var radioButton1 = window.FindRadioButton("Test RadioButton");
                 var radioButton2 = window.FindRadioButton("AutomationId");
 
@@ -71,7 +71,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var radioButton = window.FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
                 Assert.AreEqual(false, radioButton.IsChecked);
 
@@ -85,7 +85,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var radioButton1 = window.FindFirstDescendant(cf => cf.ByAutomationId("RadioButton1")).AsRadioButton();
                 var radioButton2 = window.FindFirstDescendant(cf => cf.ByAutomationId("RadioButton2")).AsRadioButton();
 

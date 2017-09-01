@@ -14,7 +14,7 @@
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid();
                 Assert.NotNull(dataGrid);
                 var gridPattern = dataGrid.Patterns.Grid.Pattern;
