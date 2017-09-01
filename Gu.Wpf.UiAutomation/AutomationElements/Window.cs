@@ -9,10 +9,17 @@
 
     public class Window : AutomationElement
     {
-        public Window(BasicAutomationElementBase basicAutomationElement)
+        public Window(BasicAutomationElementBase basicAutomationElement, bool isMainWindow)
             : base(basicAutomationElement)
         {
+            IsMainWindow = isMainWindow;
         }
+
+        /// <summary>
+        /// Flag to indicate, if the window is the application's main window.
+        /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
+        /// </summary>
+        public bool IsMainWindow { get; }
 
         public string Title => this.Properties.Name.Value;
 
@@ -24,11 +31,9 @@
         {
             get
             {
-                return this.FindAllChildren(cf =>
-                    cf.ByControlType(ControlType.Window).
-                    And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true)))
-                    .Select(e => e.AsWindow())
-                    .ToArray();
+                return this.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true)))
+                           .Select(e => new Window(e.BasicAutomationElement, isMainWindow: false))
+                           .ToArray();
             }
         }
 
@@ -57,12 +62,6 @@
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
         public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
-
-        /// <summary>
-        /// Flag to indicate, if the window is the application's main window.
-        /// Is used so that it does not need to be looked up again in some cases (e.g. Context Menu).
-        /// </summary>
-        internal bool IsMainWindow { get; set; }
 
         public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
 

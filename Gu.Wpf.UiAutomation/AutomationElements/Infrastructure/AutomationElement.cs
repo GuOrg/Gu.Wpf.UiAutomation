@@ -683,7 +683,7 @@
 
         public VerticalScrollBar AsVerticalScrollBar() => new VerticalScrollBar(this.BasicAutomationElement);
 
-        public Window AsWindow() => new Window(this.BasicAutomationElement);
+        public Window AsWindow(bool isMainWindow) => new Window(this.BasicAutomationElement, isMainWindow);
 
         public MessageBox AsMessageBox() => new MessageBox(this.BasicAutomationElement);
 

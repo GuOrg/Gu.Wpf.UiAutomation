@@ -295,7 +295,7 @@
                     return null;
                 }
 
-                return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement) { IsMainWindow = true };
+                return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement, isMainWindow: true);
             }
         }
 
@@ -306,7 +306,7 @@
         {
             var desktop = this.Automation.GetDesktop();
             var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
-            return foundElements.Select(x => x.AsWindow()).ToArray();
+            return foundElements.Select((x, i) => x.AsWindow(i == 0)).ToArray();
         }
 
         public void Dispose()
