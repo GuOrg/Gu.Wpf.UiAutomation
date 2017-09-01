@@ -705,7 +705,7 @@
         public AutomationElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindFirstChild(condition) ?? throw new InvalidOperationException($"No match for {condition}");
+            return this.FindFirstChild(condition);
         }
 
         public IReadOnlyList<AutomationElement> FindAllChildren()
@@ -820,17 +820,29 @@
         {
             if (string.IsNullOrEmpty(name))
             {
-                return this.Find(controlType) ??
-                       throw new InvalidOperationException($"Did not find a {controlType}.");
+                try
+                {
+                    return this.Find(controlType);
+                }
+                catch (TimeoutException e)
+                {
+                    throw new InvalidOperationException($"Did not find a {controlType}.", e);
+                }
             }
 
-            return this.FindFirstDescendant(
-                new AndCondition(
-                    this.ConditionFactory.ByControlType(controlType),
-                    new OrCondition(
-                        this.ConditionFactory.ByName(name),
-                        this.ConditionFactory.ByAutomationId(name)))) ??
-                        throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
+            try
+            {
+                return this.FindFirstDescendant(
+                    new AndCondition(
+                        this.ConditionFactory.ByControlType(controlType),
+                        new OrCondition(
+                            this.ConditionFactory.ByName(name),
+                            this.ConditionFactory.ByAutomationId(name))));
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException($"Did not find a {controlType} with name {name}.", e);
+            }
         }
     }
 }

@@ -5,9 +5,12 @@
 
     public class TreeView : Control
     {
+        private readonly ConditionBase treeViewItemCondition;
+
         public TreeView(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
+            this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
         }
 
         /// <summary>
@@ -18,7 +21,7 @@
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeView" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
+        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(TreeScope.Children, this.treeViewItemCondition)
                                                         .Select(e => e.AsTreeViewItem())
                                                         .ToArray();
 

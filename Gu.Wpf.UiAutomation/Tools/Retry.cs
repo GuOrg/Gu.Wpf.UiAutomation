@@ -64,10 +64,10 @@
 
                 if (IsTimeouted(startTime, timeout))
                 {
-                    return obj;
+                    throw new TimeoutException();
                 }
 
-                Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                Wait.For(retryInterval ?? DefaultRetryInterval);
             }
         }
 

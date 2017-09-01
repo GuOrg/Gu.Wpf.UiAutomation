@@ -7,18 +7,22 @@
     {
         private readonly SelectionItemAutomationElement selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
+        private readonly ConditionBase treeViewItemCondition;
 
         public TreeViewItem(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
         }
 
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.GetTreeItems();
+        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(TreeScope.Children, this.treeViewItemCondition)
+                                                        .Select(e => e.AsTreeViewItem())
+                                                        .ToArray();
 
         /// <summary>
         /// The text of the <see cref="TreeViewItem" />
@@ -57,16 +61,6 @@
         public void Select()
         {
             this.selectionItemAutomationElement.Select();
-        }
-
-        /// <summary>
-        /// Gets all the <see cref="TreeViewItem" /> objects for this <see cref="TreeViewItem" />
-        /// </summary>
-        private IReadOnlyList<TreeViewItem> GetTreeItems()
-        {
-            return this.FindAllChildren(cf => cf.ByControlType(ControlType.TreeItem))
-                       .Select(e => e.AsTreeViewItem())
-                       .ToArray();
         }
     }
 }
