@@ -70,7 +70,7 @@
                             Minimum="0"
                             SmallChange="1"
                             Value="5" />
-                    <Button AutomationProperties.AutomationId="ContextMenu" Content="ContextMenu">
+                    <Button AutomationProperties.AutomationId="ContextMenu" Content="With ContextMenu">
                         <Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Context 1" />
