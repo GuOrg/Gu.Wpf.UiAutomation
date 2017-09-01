@@ -23,27 +23,31 @@
                 var window2 = app.MainWindow;
                 sw.Stop();
                 Assert.NotNull(window1);
-                Assert.AreNotSame(window1, window2);
+                Assert.AreSame(window1, window2);
                 Console.WriteLine($"Launch:       {launch.TotalMilliseconds:F0} ms");
                 Console.WriteLine($"MainWindow 1: {firstWindow.TotalMilliseconds - launch.TotalMilliseconds:F0} ms ({firstWindow.TotalMilliseconds:F0})");
-                Console.WriteLine($"MainWindow 2: {sw.ElapsedMilliseconds - firstWindow.TotalMilliseconds:F0} ms ({sw.ElapsedMilliseconds:F0})");
+                Console.WriteLine($"MainWindow 2: {sw.ElapsedMilliseconds - firstWindow.TotalMilliseconds:F0} ms   ({sw.ElapsedMilliseconds:F0})");
             }
         }
 
         [Test]
         public void CheckBox()
         {
+            var sw = Stopwatch.StartNew();
             using (var app = Application.Launch(ExeFileName))
             {
+                var launch = sw.Elapsed;
                 var window = app.MainWindow;
-                var sw = Stopwatch.StartNew();
+                var mainWindow = sw.Elapsed;
                 var checkBox = window.FindCheckBox("Test Checkbox");
-                var find = sw.Elapsed;
+                var findCheckBox = sw.Elapsed;
                 var isChecked = checkBox.IsChecked;
                 sw.Stop();
                 Assert.AreEqual(false, isChecked);
-                Console.WriteLine($"FindCheckBox: {find.TotalMilliseconds:F0} ms");
-                Console.WriteLine($"MainWindow 1: {sw.ElapsedMilliseconds - find.TotalMilliseconds:F0} ms ({sw.ElapsedMilliseconds:F0})");
+                Console.WriteLine($"Launch:       {launch.TotalMilliseconds:F0} ms");
+                Console.WriteLine($"MainWindow:   {mainWindow.TotalMilliseconds - launch.TotalMilliseconds:F0} ms ({mainWindow.TotalMilliseconds:F0})");
+                Console.WriteLine($"FindCheckBox: {findCheckBox.TotalMilliseconds - mainWindow.TotalMilliseconds:F0} ms  ({findCheckBox.TotalMilliseconds:F0})");
+                Console.WriteLine($"IsChecked:    {sw.ElapsedMilliseconds - findCheckBox.TotalMilliseconds:F0} ms   ({sw.ElapsedMilliseconds:F0})");
             }
         }
     }
