@@ -51,7 +51,7 @@
         /// Gets the contest menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
-        public Menu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
+        public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
         /// <summary>
         /// Flag to indicate, if the window is the application's main window.
@@ -63,14 +63,14 @@
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
-        public Menu GetContextMenuByFrameworkType(FrameworkType frameworkType)
+        public ContextMenu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
             if (frameworkType == FrameworkType.Win32)
             {
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
                 var desktop = this.BasicAutomationElement.Automation.GetDesktop();
                 var nameCondition = this.ConditionFactory.ByName("Context").Or(this.ConditionFactory.ByName("System"));
-                var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsMenu();
+                var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(nameCondition)).AsContextMenu();
                 if (ctxMenu != null)
                 {
                     ctxMenu.IsWin32Menu = true;
@@ -82,7 +82,7 @@
             if (frameworkType == FrameworkType.WinForms)
             {
                 var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
-                return ctxMenu.AsMenu();
+                return ctxMenu.AsContextMenu();
             }
 
             if (frameworkType == FrameworkType.Wpf)
@@ -90,7 +90,7 @@
                 // In WPF, there is a window (Popup) where the menu is inside
                 var popup = this.Popup;
                 var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
-                return ctxMenu.AsMenu();
+                return ctxMenu.AsContextMenu();
             }
 
             // No menu found

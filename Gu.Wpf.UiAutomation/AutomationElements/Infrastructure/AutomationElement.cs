@@ -655,6 +655,8 @@
 
         public Menu AsMenu() => new Menu(this.BasicAutomationElement);
 
+        public ContextMenu AsContextMenu() => new ContextMenu(this.BasicAutomationElement);
+
         public MenuItem AsMenuItem() => new MenuItem(this.BasicAutomationElement);
 
         public ProgressBar AsProgressBar() => new ProgressBar(this.BasicAutomationElement);
