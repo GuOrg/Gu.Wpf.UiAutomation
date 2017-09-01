@@ -119,13 +119,13 @@
             this.Automation.NativeAutomation.RemoveStructureChangedEventHandler(this.NativeElement, (UIA3StructureChangedEventHandler)eventHandler);
         }
 
-        public override PatternId[] GetSupportedPatterns()
+        public override IReadOnlyList<PatternId> GetSupportedPatterns()
         {
             this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
             return rawIds.Select(id => PatternId.Find(id)).ToArray();
         }
 
-        public override PropertyId[] GetSupportedProperties()
+        public override IReadOnlyList<PropertyId> GetSupportedProperties()
         {
             this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
             return rawIds.Select(id => PropertyId.Find(id)).ToArray();
@@ -162,18 +162,18 @@
         protected override object InternalGetPropertyValue(int propertyId, bool cached, bool useDefaultIfNotSupported)
         {
             var ignoreDefaultValue = useDefaultIfNotSupported ? 0 : 1;
-            var returnValue = cached ?
+            var result = cached ?
                 this.NativeElement.GetCachedPropertyValueEx(propertyId, ignoreDefaultValue) :
                 this.NativeElement.GetCurrentPropertyValueEx(propertyId, ignoreDefaultValue);
-            return returnValue;
+            return result;
         }
 
         protected override object InternalGetPattern(int patternId, bool cached)
         {
-            var returnedValue = cached
+            var result = cached
                 ? this.NativeElement.GetCachedPattern(patternId)
                 : this.NativeElement.GetCurrentPattern(patternId);
-            return returnedValue;
+            return result;
         }
 
         /// <summary>

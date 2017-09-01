@@ -184,9 +184,9 @@
 
         public abstract void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler);
 
-        public abstract PatternId[] GetSupportedPatterns();
+        public abstract IReadOnlyList<PatternId> GetSupportedPatterns();
 
-        public abstract PropertyId[] GetSupportedProperties();
+        public abstract IReadOnlyList<PropertyId> GetSupportedProperties();
 
         public abstract AutomationElement GetUpdatedCache();
 
