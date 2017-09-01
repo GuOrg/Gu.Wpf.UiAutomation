@@ -683,6 +683,8 @@
 
         public Window AsWindow() => new Window(this.BasicAutomationElement);
 
+        public MessageBox AsMessageBox() => new MessageBox(this.BasicAutomationElement);
+
         public AutomationElement FindFirstChild()
         {
             return this.FindFirst(TreeScope.Children, TrueCondition.Default);

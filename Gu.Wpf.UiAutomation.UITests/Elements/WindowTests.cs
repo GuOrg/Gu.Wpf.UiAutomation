@@ -21,19 +21,6 @@
         }
 
         [Test]
-        public void MessageBox()
-        {
-            using (var app = Application.Launch(ExeFileName, "DialogWindow"))
-            {
-                var window = app.MainWindow;
-                window.FindButton("Show MessageBox").Click();
-                var dialog = window.FindMessageBox();
-                Assert.AreEqual("Message", dialog.FindLabel().Text);
-                dialog.Close();
-            }
-        }
-
-        [Test]
         public void Dialog()
         {
             using (var app = Application.Launch(ExeFileName, "DialogWindow"))

@@ -59,7 +59,7 @@
         /// </summary>
         internal bool IsMainWindow { get; set; }
 
-        public Window FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName("#32770"))?.AsWindow() ?? throw new InvalidOperationException("Did not find a message box");
+        public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
