@@ -170,7 +170,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(WpfColor color)
         {
-            return this.DrawHighlight(blocking: true, color: color, durationInMs: 2000);
+            return this.DrawHighlight(blocking: true, color: color, duration: TimeSpan.FromMilliseconds(2000));
         }
 
         /// <summary>
@@ -178,7 +178,7 @@
         /// </summary>
         public AutomationElement DrawHighlight(GdiColor color)
         {
-            return this.DrawHighlight(blocking: true, color: color, durationInMs: 2000);
+            return this.DrawHighlight(blocking: true, color: color, duration: TimeSpan.FromMilliseconds(2000));
         }
 
         /// <summary>
@@ -186,11 +186,11 @@
         /// </summary>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
         /// <param name="color">The color to draw the highlight.</param>
-        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown.</param>
+        /// <param name="duration">The duration (im ms) how long the highlight is shown.</param>
         /// <remarks>Override for winforms color.</remarks>
-        public AutomationElement DrawHighlight(bool blocking, GdiColor color, int durationInMs)
+        public AutomationElement DrawHighlight(bool blocking, GdiColor color, TimeSpan duration)
         {
-            return this.DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), durationInMs);
+            return this.DrawHighlight(blocking, WpfColor.FromArgb(color.A, color.R, color.G, color.B), duration);
         }
 
         /// <summary>
@@ -198,19 +198,19 @@
         /// </summary>
         /// <param name="blocking">Flag to indicate if further execution waits until the highlight is removed.</param>
         /// <param name="color">The color to draw the highlight.</param>
-        /// <param name="durationInMs">The duration (im ms) how long the highlight is shown.</param>
-        public AutomationElement DrawHighlight(bool blocking, WpfColor color, int durationInMs)
+        /// <param name="duration">The duration (im ms) how long the highlight is shown.</param>
+        public AutomationElement DrawHighlight(bool blocking, WpfColor color, TimeSpan duration)
         {
             var rectangle = this.Properties.BoundingRectangle.Value;
             if (!rectangle.IsZeroes())
             {
                 if (blocking)
                 {
-                    this.BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, durationInMs);
+                    this.BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, (int)duration.TotalMilliseconds);
                 }
                 else
                 {
-                    this.BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, durationInMs);
+                    this.BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, (int)duration.TotalMilliseconds);
                 }
             }
 
