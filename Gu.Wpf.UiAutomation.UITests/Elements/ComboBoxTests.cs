@@ -77,5 +77,17 @@
                 Assert.AreEqual("Item 3", combo.SelectedItem.Text);
             }
         }
+
+        [Test]
+        public void Enter()
+        {
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var combo = window.FindComboBox("EditableCombo");
+                combo.Enter("Item 3");
+                Assert.AreEqual("Item 3", combo.SelectedItem.Text);
+            }
+        }
     }
 }

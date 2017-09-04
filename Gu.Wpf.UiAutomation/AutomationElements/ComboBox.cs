@@ -8,7 +8,7 @@
     /// <summary>
     /// Element which can be used for combobox elements.
     /// </summary>
-    public class ComboBox : AutomationElement
+    public class ComboBox : Control
     {
         public ComboBox(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
@@ -123,6 +123,43 @@
                 }
 
                 throw new Exception("ComboBox is not editable.");
+            }
+        }
+
+        /// <summary>
+        /// Simulate typing in text. This is slower than setting Text but raises more events.
+        /// </summary>
+        public void Enter(string value)
+        {
+            this.Focus();
+            var valuePattern = this.Patterns.Value.PatternOrDefault;
+            valuePattern?.SetValue(string.Empty);
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+
+            var lines = value.Replace("\r\n", "\n").Split('\n');
+            Keyboard.Type(lines[0]);
+            foreach (var line in lines.Skip(1))
+            {
+                Keyboard.Type(Key.RETURN);
+                Keyboard.Type(line);
+            }
+
+            // give some time to process input.
+            var stopTime = DateTime.Now.AddSeconds(1);
+            while (DateTime.Now < stopTime)
+            {
+                if (this.EditableText == value)
+                {
+                    return;
+                }
+
+                if (!Thread.Yield())
+                {
+                    Thread.Sleep(10);
+                }
             }
         }
 
