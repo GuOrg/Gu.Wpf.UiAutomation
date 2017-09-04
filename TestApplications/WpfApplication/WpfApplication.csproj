@@ -73,6 +73,12 @@
     <Compile Include="Windows\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ListBoxItemViewModel.cs">
+      <DependentUpon>ListBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ListBoxWindowViewModel.cs">
+      <DependentUpon>ListBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

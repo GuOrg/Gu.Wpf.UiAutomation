@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -12,13 +11,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Gets the total row count.
-        /// </summary>
-        public int RowCount => this.GridPattern.RowCount.Value;
-
-        /// <summary>
         /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
-        /// Use <see cref="GetItemByIndex" /> to make sure to get the correct row.
         /// </summary>
         public virtual IReadOnlyList<ListBoxItem> Items
         {
@@ -36,11 +29,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public ListBoxItem SelectedItem => this.SelectedItems?.FirstOrDefault();
-
-        protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
-
-        protected ITablePattern TablePattern => this.Patterns.Table.Pattern;
+        public ListBoxItem SelectedItem => this.SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
 
         protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
 
@@ -49,7 +38,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem Select(int rowIndex)
         {
-            var item = this.GetItemByIndex(rowIndex);
+            var item = this.Items.ElementAt(rowIndex);
             item.Select();
             return item;
         }
@@ -59,7 +48,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem AddToSelection(int rowIndex)
         {
-            var item = this.GetItemByIndex(rowIndex);
+            var item = this.Items.ElementAt(rowIndex);
             item.AddToSelection();
             return item;
         }
@@ -69,27 +58,9 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem RemoveFromSelection(int rowIndex)
         {
-            var item = this.GetItemByIndex(rowIndex);
+            var item = this.Items.ElementAt(rowIndex);
             item.RemoveFromSelection();
             return item;
-        }
-
-        /// <summary>
-        /// Get a row by index.
-        /// </summary>
-        public ListBoxItem GetItemByIndex(int rowIndex)
-        {
-            this.PreCheckRow(rowIndex);
-            var item = this.GridPattern.GetItem(rowIndex, 0).AsListBoxItem();
-            return item;
-        }
-
-        private void PreCheckRow(int rowIndex)
-        {
-            if (this.RowCount <= rowIndex)
-            {
-                throw new Exception($"GridView contains only {this.RowCount} row(s) but index {rowIndex} was requested");
-            }
         }
     }
 }
