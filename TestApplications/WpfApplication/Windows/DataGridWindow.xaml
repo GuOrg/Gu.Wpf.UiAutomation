@@ -63,7 +63,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="ReadonlyDataGrid"
+        <DataGrid x:Name="ReadOnlyDataGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding ThreeItems}"

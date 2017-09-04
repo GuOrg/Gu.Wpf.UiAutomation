@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", false)]
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
-        [TestCase("ReadonlyDataGrid", true)]
+        [TestCase("ReadOnlyDataGrid", true)]
         [TestCase("ReadonlyColumnsDataGrid", true)]
         public void CellsIsReadOnly(string name, bool expected)
         {
@@ -26,7 +26,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(expected, dataGrid[1, 1].IsReadOnly);
                 Assert.AreEqual(expected, dataGrid[2, 0].IsReadOnly);
                 Assert.AreEqual(expected, dataGrid[2, 1].IsReadOnly);
-                if (name != "ReadonlyDataGrid")
+                if (name != "ReadOnlyDataGrid")
                 {
                     Assert.AreEqual(expected, dataGrid[3, 0].IsReadOnly);
                     Assert.AreEqual(expected, dataGrid[3, 1].IsReadOnly);

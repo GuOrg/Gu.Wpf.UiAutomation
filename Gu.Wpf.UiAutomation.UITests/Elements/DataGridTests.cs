@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void ColumnCount(string name)
         {
@@ -27,7 +27,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 2)]
         [TestCase("DataGrid100", 2)]
         [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadonlyDataGrid", 2)]
+        [TestCase("ReadOnlyDataGrid", 2)]
         [TestCase("ReadonlyColumnsDataGrid", 2)]
         public void ColumnHeadersCount(string name, int expected)
         {
@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void RowCellsCount(string name)
         {
@@ -59,7 +59,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 4)]
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
-        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadOnlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowCount(string name, int expectedRows)
         {
@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 4)]
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 4)]
-        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadOnlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void Rows(string name, int expectedRows)
         {
@@ -96,7 +96,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 4)]
         [TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadOnlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeadersCount(string name, int expectedRows)
         {
@@ -111,7 +111,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", false)]
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
-        [TestCase("ReadonlyDataGrid", true)]
+        [TestCase("ReadOnlyDataGrid", true)]
         [TestCase("ReadonlyColumnsDataGrid", true)]
         public void IsReadOnly(string name, bool expected)
         {
@@ -126,7 +126,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 2)]
         [TestCase("DataGrid100", 2)]
         [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadonlyDataGrid", 2)]
+        [TestCase("ReadOnlyDataGrid", 2)]
         [TestCase("ReadonlyColumnsDataGrid", 2)]
         public void ColumnHeaders(string name, int expectedCount)
         {
@@ -150,7 +150,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", 4)]
         ////[TestCase("DataGrid100", 101)]
         [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadonlyDataGrid", 3)]
+        [TestCase("ReadOnlyDataGrid", 3)]
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeaders(string name, int expectedRows)
         {
@@ -175,7 +175,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void RowsAndCells(string name)
         {
@@ -201,7 +201,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void RowIndexer(string name)
         {
@@ -221,7 +221,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadonlyDataGrid")]
+        [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
         public void CellIndexer(string name)
         {
@@ -280,6 +280,25 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
+            }
+        }
+
+        [Test]
+        public void IndexerSetCellValueUpdatesBinding()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid("DataGrid");
+                var readOnly = window.FindDataGrid("ReadOnlyDataGrid");
+
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("1", readOnly[0, 0].Value);
+
+                dataGrid[0, 0].Value = "11";
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.Inconclusive("Figure out the least ugly way here.");
+                Assert.AreEqual("11", readOnly[0, 0].Value);
             }
         }
 
