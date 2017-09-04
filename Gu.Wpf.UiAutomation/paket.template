@@ -11,8 +11,8 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  BUGFIX: FindListBox
-  FEATURE: HelpText property.
+* BUGFIX: FindListBox
+* FEATURE: HelpText property.
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
