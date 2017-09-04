@@ -72,7 +72,7 @@
             if (frameworkType == FrameworkType.Win32)
             {
                 this.WaitUntilResponsive();
-                
+
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
                 var desktop = this.BasicAutomationElement.Automation.GetDesktop();
                 var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu)
