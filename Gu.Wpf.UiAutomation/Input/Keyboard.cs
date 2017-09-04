@@ -197,6 +197,11 @@
             return new KeyPressingActivation(virtualKey);
         }
 
+        public static void ClearFocus()
+        {
+            User32.SetFocus(IntPtr.Zero);
+        }
+
         /// <summary>
         /// Checks if a given byte has a specific VkKeyScan-modifier set.
         /// </summary>

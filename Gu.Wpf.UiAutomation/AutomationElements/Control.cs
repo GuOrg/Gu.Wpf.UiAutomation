@@ -103,6 +103,14 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Clear keyboard focus. Useful for updating bindings when UpdateSOurceTrigger=LostFocus.
+        /// </summary>
+        public virtual void ClearFocus()
+        {
+            Keyboard.ClearFocus();
+        }
+
+        /// <summary>
         /// Sets the focus by using the Win32 SetFocus() method.
         /// </summary>
         public void FocusNative()
