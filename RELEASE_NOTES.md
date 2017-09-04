@@ -1,3 +1,7 @@
+# 0.1.5.0
+* BUGFIX: FindListBox
+* FEATURE: HelpText property.
+
 # 0.1.4.0
 * FEATURE: MessageBox
 * FEATURE: Popup
