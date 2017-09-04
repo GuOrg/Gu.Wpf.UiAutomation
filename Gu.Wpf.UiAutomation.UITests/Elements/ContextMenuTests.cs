@@ -12,7 +12,7 @@
         [Test]
         public void ContextMenuTest()
         {
-            using (var app = Application.Launch(ExeFileName, "ContextMenuWindow"))
+            using (var app = Application.Launch(ExeFileName))
             {
                 var window = app.MainWindow;
                 var btn = window.FindButton("With ContextMenu");
