@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.1.3.0-dev
+version 0.1.4.0-dev
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,10 +11,16 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-* FEATURE: GridCell.Value
-* BUGFIX: GridCell.Select on Win 7
-* BUGFIX: Handle RowHeader.Text with ContentStringFormat
-* Feature GridView.RowHeaders & ColumnHeaders.
+* FEATURE: MessageBox
+* FEATURE: Popup
+* FEATURE: ContextMenu
+* FEATURE: TabControl
+* Bugfixes DataGrid
+* FEATURE: ActualWidth & ActualHeight
+* FEATURE: IsKeyboardFocusable & HasKeyboardFocus
+* FEATURE: Better performance TreeView
+* FEATURE: Throw when child is not found.
+* FEATURE: Application.MainWindow, cached.
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
