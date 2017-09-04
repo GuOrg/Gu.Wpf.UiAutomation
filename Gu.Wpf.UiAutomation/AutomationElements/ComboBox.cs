@@ -131,7 +131,21 @@
         /// </summary>
         public void Enter(string value)
         {
-            this.Focus();
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
+            if (!this.IsKeyboardFocusable)
+            {
+                throw new InvalidOperationException("Cannot enter when not KeyboardFocusable.");
+            }
+
+            if (!this.HasKeyboardFocus)
+            {
+                this.Focus();
+            }
+
             var valuePattern = this.Patterns.Value.PatternOrDefault;
             valuePattern?.SetValue(string.Empty);
             if (string.IsNullOrEmpty(value))

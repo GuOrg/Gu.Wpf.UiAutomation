@@ -41,6 +41,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void Click(bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.LeftClick);
         }
 
@@ -51,6 +56,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void Click(TimeSpan delay, bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.LeftClick);
             Wait.For(delay);
         }
@@ -61,6 +71,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void DoubleClick(bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
         }
 
@@ -70,6 +85,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightClick(bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.RightClick);
         }
 
@@ -80,6 +100,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightClick(TimeSpan delay, bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.RightClick);
             Wait.For(delay);
         }
@@ -90,6 +115,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="moveMouse">Flag to indicate, if the mouse should move slowly (true) or instantly (false).</param>
         public void RightDoubleClick(bool moveMouse = false)
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
         }
 
@@ -99,6 +129,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public virtual void Focus()
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             this.BasicAutomationElement.SetFocus();
         }
 
@@ -115,6 +150,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public void FocusNative()
         {
+            if (this.IsOffscreen)
+            {
+                throw new InvalidOperationException("Cannot click when off screen.");
+            }
+
             var windowHandle = this.Properties.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
