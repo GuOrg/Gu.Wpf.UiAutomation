@@ -4,7 +4,6 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// Cell element for grids and tables.
@@ -92,7 +91,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 this.Enter(value);
-                Keyboard.Type(VirtualKeyShort.ENTER);
+                Keyboard.Type(Key.ENTER);
             }
         }
 
@@ -110,7 +109,7 @@ namespace Gu.Wpf.UiAutomation
             Keyboard.Type(lines[0]);
             foreach (var line in lines.Skip(1))
             {
-                Keyboard.Type(VirtualKeyShort.RETURN);
+                Keyboard.Type(Key.RETURN);
                 Keyboard.Type(line);
             }
 

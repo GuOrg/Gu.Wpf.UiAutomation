@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
     [TestFixture]
@@ -24,7 +23,7 @@
                 var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
                 Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                 Thread.Sleep(100);
-                using (Keyboard.Pressing(VirtualKeyShort.ESCAPE))
+                using (Keyboard.Pressing(Key.ESCAPE))
                 {
                     Thread.Sleep(100);
                     app.Automation.UnRegisterFocusChangedEvent(x);

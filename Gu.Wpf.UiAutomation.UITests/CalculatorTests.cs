@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
     using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
@@ -18,7 +17,7 @@
 
                 // Switch to default mode
                 System.Threading.Thread.Sleep(1000);
-                Keyboard.TypeSimultaneously(VirtualKeyShort.ALT, VirtualKeyShort.KEY_1);
+                Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
                 Wait.UntilInputIsProcessed();
                 app.WaitWhileBusy();
                 System.Threading.Thread.Sleep(1000);
@@ -39,9 +38,9 @@
                 Assert.That(result, Is.EqualTo("6912"));
 
                 // Date comparison
-                using (Keyboard.Pressing(VirtualKeyShort.CONTROL))
+                using (Keyboard.Pressing(Key.CONTROL))
                 {
-                    Keyboard.Type(VirtualKeyShort.KEY_E);
+                    Keyboard.Type(Key.KEY_E);
                 }
             }
         }

@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Threading;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class TextBox : Control
     {
@@ -67,7 +66,7 @@
             Keyboard.Type(lines[0]);
             foreach (var line in lines.Skip(1))
             {
-                Keyboard.Type(VirtualKeyShort.RETURN);
+                Keyboard.Type(Key.RETURN);
                 Keyboard.Type(line);
             }
 

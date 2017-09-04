@@ -44,20 +44,20 @@
                 var low = (byte)(code & 0xff);
 
                 // Check if there are any modifiers
-                var modifiers = new List<VirtualKeyShort>();
+                var modifiers = new List<Key>();
                 if (HasScanModifier(high, VkKeyScanModifiers.SHIFT))
                 {
-                    modifiers.Add(VirtualKeyShort.SHIFT);
+                    modifiers.Add(Key.SHIFT);
                 }
 
                 if (HasScanModifier(high, VkKeyScanModifiers.CONTROL))
                 {
-                    modifiers.Add(VirtualKeyShort.CONTROL);
+                    modifiers.Add(Key.CONTROL);
                 }
 
                 if (HasScanModifier(high, VkKeyScanModifiers.ALT))
                 {
-                    modifiers.Add(VirtualKeyShort.ALT);
+                    modifiers.Add(Key.ALT);
                 }
 
                 // Press the modifiers
@@ -83,14 +83,14 @@
         /// <summary>
         /// Types the given keys, one by one.
         /// </summary>
-        public static void Type(params VirtualKeyShort[] virtualKeys)
+        public static void Type(params Key[] keys)
         {
-            if (virtualKeys == null)
+            if (keys == null)
             {
                 return;
             }
 
-            foreach (var key in virtualKeys)
+            foreach (var key in keys)
             {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
@@ -102,21 +102,21 @@
         /// <summary>
         /// Types the given keys simultaneously (starting with the first).
         /// </summary>
-        public static void TypeSimultaneously(params VirtualKeyShort[] virtualKeys)
+        public static void TypeSimultaneously(params Key[] keys)
         {
-            if (virtualKeys == null)
+            if (keys == null)
             {
                 return;
             }
 
-            foreach (var key in virtualKeys)
+            foreach (var key in keys)
             {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
 #pragma warning restore CS0618 // Type or member is obsolete
             }
 
-            foreach (var key in virtualKeys.Reverse())
+            foreach (var key in keys.Reverse())
             {
                 Release(key);
             }
@@ -144,9 +144,9 @@
         /// Presses the given key.
         /// </summary>
         [Obsolete("Prefer pressing")]
-        public static void Press(VirtualKeyShort virtualKey)
+        public static void Press(Key key)
         {
-            PressVirtualKeyCode((ushort)virtualKey);
+            PressVirtualKeyCode((ushort)key);
         }
 
         /// <summary>
@@ -168,9 +168,9 @@
         /// <summary>
         /// Releases the given key.
         /// </summary>
-        public static void Release(VirtualKeyShort virtualKey)
+        public static void Release(Key key)
         {
-            ReleaseVirtualKeyCode((ushort)virtualKey);
+            ReleaseVirtualKeyCode((ushort)key);
         }
 
         /// <summary>
@@ -192,9 +192,9 @@
         /// <summary>
         /// Presses the given key and releases it when the returned object is disposed.
         /// </summary>
-        public static IDisposable Pressing(VirtualKeyShort virtualKey)
+        public static IDisposable Pressing(Key key)
         {
-            return new KeyPressingActivation(virtualKey);
+            return new KeyPressingActivation(key);
         }
 
         public static void ClearFocus()
@@ -273,19 +273,19 @@
         /// </summary>
         private class KeyPressingActivation : IDisposable
         {
-            private readonly VirtualKeyShort virtualKey;
+            private readonly Key key;
 
-            public KeyPressingActivation(VirtualKeyShort virtualKey)
+            public KeyPressingActivation(Key key)
             {
-                this.virtualKey = virtualKey;
+                this.key = key;
 #pragma warning disable CS0618 // Type or member is obsolete
-                Press(this.virtualKey);
+                Press(this.key);
 #pragma warning restore CS0618 // Type or member is obsolete
             }
 
             public void Dispose()
             {
-                Release(this.virtualKey);
+                Release(this.key);
             }
         }
     }

@@ -21,14 +21,14 @@
                 var mainWindow = app.MainWindow;
                 Keyboard.Type("abc");
                 Thread.Sleep(50);
-                Keyboard.Type(VirtualKeyShort.BACK);
+                Keyboard.Type(Key.BACK);
                 var textBox = mainWindow.FindTextBox();
                 Assert.AreEqual("ab", textBox.Text);
             }
         }
 
-        [TestCase(VirtualKeyShort.KEY_Z, "z")]
-        public void TypeKey(VirtualKeyShort key, string expected)
+        [TestCase(Key.KEY_Z, "z")]
+        public void TypeKey(Key key, string expected)
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
@@ -65,13 +65,13 @@
             }
         }
 
-        [TestCase(VirtualKeyShort.KEY_Z, "Z")]
-        public void TypeKeyWhilePressingShift(VirtualKeyShort key, string expected)
+        [TestCase(Key.KEY_Z, "Z")]
+        public void TypeKeyWhilePressingShift(Key key, string expected)
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
                 var mainWindow = app.MainWindow;
-                using (Keyboard.Pressing(VirtualKeyShort.SHIFT))
+                using (Keyboard.Pressing(Key.SHIFT))
                 {
                     Keyboard.Type(key);
                 }

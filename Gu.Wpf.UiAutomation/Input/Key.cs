@@ -1,6 +1,8 @@
-namespace Gu.Wpf.UiAutomation.WindowsAPI
+#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning disable SA1600 // Elements must be documented
+namespace Gu.Wpf.UiAutomation
 {
-    public enum VirtualKeyShort : ushort
+    public enum Key : ushort
     {
         /// <summary>
         /// Left mouse button
