@@ -9,13 +9,14 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
-        [Test]
-        public void Items()
+        [TestCase("ListBox")]
+        [TestCase("AutomationId")]
+        public void Items(string key)
         {
             using (var app = Application.Launch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
-                var itemsControl = window.FindListBox();
+                var itemsControl = window.FindListBox(key);
                 Assert.AreEqual(2, itemsControl.Items.Count);
             }
         }

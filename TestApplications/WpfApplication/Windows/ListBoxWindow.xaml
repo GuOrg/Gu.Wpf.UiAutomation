@@ -6,11 +6,21 @@
         Width="300"
         Height="300"
         mc:Ignorable="d">
-    <ListBox x:Name="ListBox">
-        <GroupBox Header="1">
-            <TextBlock Text="1.1" />
-        </GroupBox>
+    <StackPanel>
+        <ListBox x:Name="ListBox">
+            <GroupBox Header="1">
+                <TextBlock Text="1.1" />
+            </GroupBox>
 
-        <TextBlock Text="2" />
-    </ListBox>
+            <TextBlock Text="2" />
+        </ListBox>
+
+        <ListBox AutomationProperties.AutomationId="AutomationId">
+            <GroupBox Header="1">
+                <TextBlock Text="1.1" />
+            </GroupBox>
+
+            <TextBlock Text="2" />
+        </ListBox>
+    </StackPanel>
 </Window>

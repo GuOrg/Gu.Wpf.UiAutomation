@@ -318,7 +318,7 @@
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ListBox FindListBox(string name = null) => this.Find(ControlType.Group, name).AsListBox();
+        public ListBox FindListBox(string name = null) => this.Find(ControlType.List, name).AsListBox();
 
         /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
