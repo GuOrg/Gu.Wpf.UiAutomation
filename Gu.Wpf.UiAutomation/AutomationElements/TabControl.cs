@@ -31,9 +31,18 @@
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public IReadOnlyList<TabItem> Items => this.GetTabItems();
+        public IReadOnlyList<TabItem> Items => this.FindAll(TreeScope.Children, this.ConditionFactory.ByControlType(ControlType.TabItem))
+                                                   .Select(e => e.AsTabItem())
+                                                   .ToArray();
 
-        public AutomationElement Content => this.SelectedItem?.Content;
+        public AutomationElement Content
+        {
+            get
+            {
+                var selectedItem = this.SelectedItem ?? throw new InvalidOperationException("TabControl must have a selected item to get Content");
+                return selectedItem.Content;
+            }
+        }
 
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
@@ -64,16 +73,6 @@
             }
 
             return tabItem;
-        }
-
-        /// <summary>
-        /// Gets all the <see cref="TabItem" /> objects for this <see cref="TabControl" />
-        /// </summary>
-        private IReadOnlyList<TabItem> GetTabItems()
-        {
-            return this.FindAll(TreeScope.Children, this.ConditionFactory.ByControlType(ControlType.TabItem))
-                       .Select(e => e.AsTabItem())
-                       .ToArray();
         }
 
         private int GetIndexOfSelectedTabItem()

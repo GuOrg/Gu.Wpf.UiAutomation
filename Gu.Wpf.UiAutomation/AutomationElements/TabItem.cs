@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Linq;
 
     public class TabItem : SelectionItemAutomationElement
@@ -29,6 +30,17 @@
 
         public AutomationElement Header => this.FindAllChildren().FirstOrDefault();
 
-        public AutomationElement Content => this.FindAllChildren().ElementAtOrDefault(1);
+        public AutomationElement Content
+        {
+            get
+            {
+                if (!this.IsSelected)
+                {
+                    throw new InvalidOperationException("TabItem must have be selected to get Content");
+                }
+
+                return this.FindAllChildren().ElementAtOrDefault(1);
+            }
+        }
     }
 }

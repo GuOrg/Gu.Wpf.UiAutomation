@@ -66,6 +66,7 @@
     <Compile Include="Elements\RadioButtonTests.cs" />
     <Compile Include="Elements\SliderTests.cs" />
     <Compile Include="Elements\TabControlTests.cs" />
+    <Compile Include="Elements\TabItemTests.cs" />
     <Compile Include="Elements\TextBlockTests.cs" />
     <Compile Include="Elements\TextBoxTests.cs" />
     <Compile Include="Elements\ToggleButtonTests.cs" />
