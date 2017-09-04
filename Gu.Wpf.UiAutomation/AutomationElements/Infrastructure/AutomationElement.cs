@@ -85,6 +85,8 @@
 
         public string ItemStatus => this.Properties.ItemStatus;
 
+        public string HelpText => this.Properties.HelpText;
+
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
