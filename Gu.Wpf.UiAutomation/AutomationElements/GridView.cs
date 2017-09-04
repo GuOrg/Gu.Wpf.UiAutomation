@@ -122,12 +122,12 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public IReadOnlyList<GridRow> SelectedItems => this.SelectionPattern.Selection.Value.Select(x => new GridRow(x.BasicAutomationElement)).ToArray();
+        public IReadOnlyList<AutomationElement> SelectedItems => this.SelectionPattern.Selection.Value;
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public GridRow SelectedItem => this.SelectedItems?.FirstOrDefault();
+        public AutomationElement SelectedItem => this.SelectedItems?.FirstOrDefault();
 
         protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
 
@@ -135,22 +135,26 @@
 
         protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
 
+        public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col).BasicAutomationElement);
+
         /// <summary>
         /// Select a row by index.
         /// </summary>
         public GridRow Select(int rowIndex)
         {
             var gridRow = this.GetRowByIndex(rowIndex);
-            if (OperatingSystem.IsWindows7())
-            {
-                gridRow.Cells[0].Click();
-            }
-            else
-            {
-                gridRow.Select();
-            }
-
+            gridRow.Select();
             return gridRow;
+        }
+
+        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.BasicAutomationElement);
+
+        /// <summary>
+        /// Select a row by index.
+        /// </summary>
+        public GridCell Select(int row, int column)
+        {
+            return this[row, column].Select().AsGridCell();
         }
 
         /// <summary>
@@ -168,46 +172,6 @@
                 gridRow.Select();
             }
 
-            return gridRow;
-        }
-
-        /// <summary>
-        /// Add a row to the selection by index.
-        /// </summary>
-        public GridRow AddToSelection(int rowIndex)
-        {
-            var gridRow = this.GetRowByIndex(rowIndex);
-            gridRow.AddToSelection();
-            return gridRow;
-        }
-
-        /// <summary>
-        /// Add a row to the selection by text in the given column.
-        /// </summary>
-        public GridRow AddToSelection(int columnIndex, string textToFind)
-        {
-            var gridRow = this.GetRowByValue(columnIndex, textToFind);
-            gridRow.AddToSelection();
-            return gridRow;
-        }
-
-        /// <summary>
-        /// Remove a row from the selection by index.
-        /// </summary>
-        public GridRow RemoveFromSelection(int rowIndex)
-        {
-            var gridRow = this.GetRowByIndex(rowIndex);
-            gridRow.RemoveFromSelection();
-            return gridRow;
-        }
-
-        /// <summary>
-        /// Remove a row from the selection by text in the given column.
-        /// </summary>
-        public GridRow RemoveFromSelection(int columnIndex, string textToFind)
-        {
-            var gridRow = this.GetRowByValue(columnIndex, textToFind);
-            gridRow.RemoveFromSelection();
             return gridRow;
         }
 

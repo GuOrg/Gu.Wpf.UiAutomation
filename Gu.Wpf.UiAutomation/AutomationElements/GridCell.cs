@@ -9,7 +9,7 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Cell element for grids and tables.
     /// </summary>
-    public class GridCell : Control
+    public class GridCell : SelectionItemAutomationElement
     {
         private static readonly Regex NewItemPlaceHolderRegex = new Regex("^Item: {NewItemPlaceholder}, Column Display Index: \\d$", RegexOptions.Singleline | RegexOptions.Compiled);
 

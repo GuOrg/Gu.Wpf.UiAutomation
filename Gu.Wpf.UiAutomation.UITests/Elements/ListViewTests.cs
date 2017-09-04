@@ -69,7 +69,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem;
+                selectedRow = listView.SelectedItem.AsGridRow();
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
@@ -79,7 +79,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem;
+                selectedRow = listView.SelectedItem.AsGridRow();
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
@@ -98,7 +98,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem;
+                selectedRow = listView.SelectedItem.AsGridRow();
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
@@ -108,7 +108,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem;
+                selectedRow = listView.SelectedItem.AsGridRow();
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);

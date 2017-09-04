@@ -18,9 +18,5 @@ namespace Gu.Wpf.UiAutomation
                                      .All(x => x.IsReadOnly);
             }
         }
-
-        public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col).BasicAutomationElement);
-
-        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.BasicAutomationElement);
     }
 }

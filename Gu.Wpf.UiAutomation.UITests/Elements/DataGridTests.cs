@@ -366,17 +366,17 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders", 0, 1)]
         [TestCase("DataGridNoHeaders", 1, 0)]
         [TestCase("DataGridNoHeaders", 2, 0)]
-        public void SelectByIndexTest(string name, int index1, int index2)
+        public void SelectRowByIndex(string name, int index1, int index2)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                var selectedRow = dataGrid.Select(index1);
+                var selectedRow = dataGrid.Select(index1).AsGridRow();
                 Assert.AreEqual($"{index1 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index1 + 1}", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem;
+                selectedRow = dataGrid.SelectedItem.AsGridRow();
                 Assert.AreEqual($"{index1 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index1 + 1}", selectedRow.Cells[1].Value);
 
@@ -384,9 +384,24 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual($"{index2 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index2 + 1}", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem;
+                selectedRow = dataGrid.SelectedItem.AsGridRow();
                 Assert.AreEqual($"{index2 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index2 + 1}", selectedRow.Cells[1].Value);
+            }
+        }
+
+        [TestCase("SelectCellDataGrid", 2, 0)]
+        public void SelectCellByIndex(string name, int index1, int index2)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+                var selectedCell = dataGrid.Select(index1, index2);
+                Assert.AreEqual($"{index1 + 1}", selectedCell.Value);
+
+                selectedCell = dataGrid.SelectedItem.AsGridCell();
+                Assert.AreEqual($"{index1 + 1}", selectedCell.Value);
             }
         }
 
@@ -403,7 +418,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 2", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem;
+                selectedRow = dataGrid.SelectedItem.AsGridRow();
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 2", selectedRow.Cells[1].Value);
 
@@ -411,7 +426,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 3", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem;
+                selectedRow = dataGrid.SelectedItem.AsGridRow();
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 3", selectedRow.Cells[1].Value);
             }

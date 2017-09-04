@@ -21,14 +21,7 @@
     <Window.DataContext>
         <windows:DataGridWindowViewModel />
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <UniformGrid Columns="2">
         <DataGrid x:Name="DataGrid"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding ThreeItems}"
@@ -39,8 +32,18 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <DataGrid x:Name="SelectCellDataGrid"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding ThreeItems}"
+                  RowHeaderStyle="{StaticResource RowNumberStyle}"
+                  SelectionUnit="Cell">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+            </DataGrid.Columns>
+        </DataGrid>
+
         <DataGrid x:Name="DataGrid100"
-                  Grid.Row="1"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding HundredItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
@@ -51,7 +54,6 @@
         </DataGrid>
 
         <DataGrid x:Name="DataGridNoHeaders"
-                  Grid.Row="2"
                   AutoGenerateColumns="False"
                   HeadersVisibility="None"
                   ItemsSource="{Binding ThreeItems}">
@@ -62,7 +64,6 @@
         </DataGrid>
 
         <DataGrid x:Name="ReadonlyDataGrid"
-                  Grid.Row="3"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding ThreeItems}"
@@ -74,7 +75,6 @@
         </DataGrid>
 
         <DataGrid x:Name="ReadonlyColumnsDataGrid"
-                  Grid.Row="4"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding ThreeItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
@@ -87,5 +87,5 @@
                                     IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-    </Grid>
+    </UniformGrid>
 </Window>
