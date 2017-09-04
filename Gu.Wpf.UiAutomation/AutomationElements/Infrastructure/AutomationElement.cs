@@ -30,7 +30,7 @@
         public BasicAutomationElementBase BasicAutomationElement { get; }
 
         /// <summary>
-        /// The current used automation object.
+        /// Get the parent <see cref="AutomationElement"/>
         /// </summary>
         public AutomationElement Parent => this.Automation
                                                .TreeWalkerFactory
