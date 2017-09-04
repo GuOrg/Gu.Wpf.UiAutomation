@@ -19,5 +19,16 @@
                 Assert.AreEqual("Window", checkBox.Parent.ClassName);
             }
         }
+
+        [Test]
+        public void Window()
+        {
+            using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var checkBox = window.FindCheckBox();
+                Assert.AreEqual("Window", checkBox.Window.ClassName);
+            }
+        }
     }
 }

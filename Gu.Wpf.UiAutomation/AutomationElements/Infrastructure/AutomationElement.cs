@@ -38,6 +38,28 @@
                                                .GetParent(this);
 
         /// <summary>
+        /// Get the parent <see cref="AutomationElement"/>
+        /// </summary>
+        public Window Window
+        {
+            get
+            {
+                var parent = this.Parent;
+                while (parent != null)
+                {
+                    if (parent.ControlType == ControlType.Window)
+                    {
+                        return parent.AsWindow(parent.Parent == null);
+                    }
+
+                    parent = parent.Parent;
+                }
+
+                throw new InvalidOperationException("Did not find a parent window.");
+            }
+        }
+
+        /// <summary>
         /// The current used automation object.
         /// </summary>
         public double ActualWidth => this.BoundingRectangle.Width;
