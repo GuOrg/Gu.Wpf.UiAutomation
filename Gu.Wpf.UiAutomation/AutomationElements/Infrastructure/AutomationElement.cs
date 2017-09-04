@@ -62,17 +62,17 @@
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public double ActualWidth => this.BoundingRectangle.Width;
+        public double ActualWidth => this.Bounds.Width;
 
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public double ActualHeight => this.BoundingRectangle.Height;
+        public double ActualHeight => this.Bounds.Height;
 
         /// <summary>
         /// The current used automation object.
         /// </summary>
-        public Rect BoundingRectangle
+        public Rect Bounds
         {
             get
             {
