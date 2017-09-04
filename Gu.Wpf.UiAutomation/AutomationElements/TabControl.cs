@@ -33,6 +33,8 @@
         /// </summary>
         public IReadOnlyList<TabItem> Items => this.GetTabItems();
 
+        public AutomationElement Content => this.SelectedItem?.Content;
+
         /// <summary>
         /// Selects a <see cref="TabItem" /> by index
         /// </summary>

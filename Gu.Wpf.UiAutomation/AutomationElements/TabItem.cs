@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Linq;
+
     public class TabItem : SelectionItemAutomationElement
     {
         public TabItem(BasicAutomationElementBase basicAutomationElement)
@@ -7,6 +9,9 @@
         {
         }
 
+        /// <summary>
+        /// The header text.
+        /// </summary>
         public string Text
         {
             get
@@ -21,5 +26,9 @@
                 return this.Properties.Name.Value;
             }
         }
+
+        public AutomationElement Header => this.FindAllChildren().FirstOrDefault();
+
+        public AutomationElement Content => this.FindAllChildren().ElementAtOrDefault(1);
     }
 }
