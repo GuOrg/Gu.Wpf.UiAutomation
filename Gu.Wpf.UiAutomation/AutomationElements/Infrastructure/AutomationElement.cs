@@ -390,7 +390,7 @@
         /// </summary>
         public IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            return this.FindAll(treeScope, condition, Retry.DefaultRetryFor);
+            return this.BasicAutomationElement.FindAll(treeScope, condition);
         }
 
         /// <summary>
@@ -417,9 +417,10 @@
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            Predicate<AutomationElement> whilePredicate = element => element == null;
-            Func<AutomationElement> retryMethod = () => this.BasicAutomationElement.FindFirst(treeScope, condition);
-            return Retry.While(retryMethod, whilePredicate, timeOut);
+            return Retry.While(
+                () => this.BasicAutomationElement.FindFirst(treeScope, condition),
+                element => element == null, 
+                timeOut);
         }
 
         /// <summary>
