@@ -1,3 +1,13 @@
+# 0.1.6.0
+* BREAKING: Don't thow in FindAll
+* BREAKING: Use TimeSpan in Draw.
+* BREAKING: Throw if click or enter when off screen.
+* BREAKING: Rename bounds.
+* FEATURE: ComboBox.Enter
+* FEATURE: GridView cell selection
+* FEATIRE: ClearFocus
+* FEATURE: AutomationElement.Window
+
 # 0.1.5.0
 * BUGFIX: FindListBox
 * FEATURE: HelpText property.
