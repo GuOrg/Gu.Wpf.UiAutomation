@@ -325,8 +325,8 @@
             {
                 this.Close();
                 this.disposed = true;
-                this.processReference.Dispose();
                 this.Automation.Dispose();
+                this.processReference.Dispose();
             }
 
             this.disposed = true;

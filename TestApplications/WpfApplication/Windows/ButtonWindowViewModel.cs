@@ -1,7 +1,9 @@
 ﻿namespace WpfApplication.Windows
 {
+    using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Windows.Input;
 
     public class ButtonWindowViewModel : INotifyPropertyChanged
@@ -11,18 +13,22 @@
         public ButtonWindowViewModel()
         {
             this.IncreaseCommand = new RelayCommand(_ => this.Count++);
+            this.SleepCommand = new RelayCommand(_ =>
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(200));
+                this.Count++;
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand IncreaseCommand { get; }
 
+        public ICommand SleepCommand { get; }
+
         public int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get => this.count;
 
             set
             {
