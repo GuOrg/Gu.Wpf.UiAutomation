@@ -2,16 +2,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windows="clr-namespace:WpfApplication.Windows"
         Title="Window"
         Width="300"
         Height="300"
         mc:Ignorable="d">
+    <Window.DataContext>
+        <windows:TextBoxWindowViewModel />
+    </Window.DataContext>
     <StackPanel>
         <TextBox AutomationProperties.AutomationId="AutomationId" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
         <TextBox x:Name="XName" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
         <TextBox IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" Text="Content" />
 
         <TextBox AutomationProperties.AutomationId="TestTextBox" Text="Test TextBox" />
+        <TextBox AutomationProperties.AutomationId="TestTextBox1" Text="{Binding Text}" />
+        <TextBox AutomationProperties.AutomationId="TestTextBox2" Text="{Binding Text}" />
 
         <CheckBox x:Name="IsEnabled"
                   Content="IsEnabled"

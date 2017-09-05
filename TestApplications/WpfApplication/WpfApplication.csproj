@@ -79,6 +79,9 @@
     <Compile Include="Windows\ListBoxWindowViewModel.cs">
       <DependentUpon>ListBoxWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TextBoxWindowViewModel.cs">
+      <DependentUpon>TextBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
