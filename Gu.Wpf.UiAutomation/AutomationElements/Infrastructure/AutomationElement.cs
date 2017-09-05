@@ -660,7 +660,7 @@
         /// </summary>
         public override string ToString()
         {
-            return $"AutomationId:{this.Properties.AutomationId.ValueOrDefault}, Name:{this.Properties.Name.ValueOrDefault}, ControlType:{this.Properties.LocalizedControlType.ValueOrDefault}, FrameworkId:{this.Properties.FrameworkId.ValueOrDefault}";
+            return $"AutomationId:{this.Properties.AutomationId.ValueOrDefault("MISSING")}, Name:{this.Properties.Name.ValueOrDefault("MISSING")}, ControlType:{this.Properties.LocalizedControlType.ValueOrDefault("MISSING")}, FrameworkId:{this.Properties.FrameworkId.ValueOrDefault("MISSING")}";
         }
 
         public Button AsButton() => new Button(this.BasicAutomationElement);

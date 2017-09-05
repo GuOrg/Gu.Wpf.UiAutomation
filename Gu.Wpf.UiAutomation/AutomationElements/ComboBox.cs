@@ -82,7 +82,7 @@
 
                 // WPF
                 var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                return ecp?.ExpandCollapseState.ValueOrDefault == ExpandCollapseState.Expanded;
+                return ecp?.ExpandCollapseState.ValueOrDefault() == ExpandCollapseState.Expanded;
             }
         }
 

@@ -15,7 +15,7 @@
         /// </summary>
         public bool IsSelected
         {
-            get => this.SelectionItemPattern.IsSelected;
+            get => this.SelectionItemPattern.IsSelected.ValueOrDefault();
             set
             {
                 if (this.IsSelected == value)

@@ -23,13 +23,14 @@
         public TVal Value => this.BasicAutomationElement.GetPropertyValue<TVal>(this.PropertyId);
 
         /// <inheritdoc />
-        public TVal ValueOrDefault
+        public TVal ValueOrDefault(TVal @default = default(TVal))
         {
-            get
+            if (this.TryGetValue(out TVal value))
             {
-                this.TryGetValue(out TVal value);
                 return value;
             }
+
+            return @default;
         }
 
         /// <inheritdoc />
@@ -75,7 +76,7 @@
         /// <inheritdoc/>
         public override string ToString()
         {
-            return Convert.ToString(this.ValueOrDefault);
+            return this.ValueOrDefault()?.ToString() ?? "null";
         }
     }
 }

@@ -110,12 +110,28 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentException("Only single line allowed for now.");
             }
 
-            if (!this.HasKeyboardFocus)
+            if (this.Patterns.SelectionItem.IsSupported)
             {
+                if (!this.IsSelected)
+                {
+                    this.Select();
+                }
+            }
+            else if (!this.HasKeyboardFocus)
+            {
+                this.Click();
                 this.Click();
             }
 
-            Keyboard.Type(value);
+            var child = this.FindFirstChild();
+            if (child.ControlType == ControlType.Edit)
+            {
+                child.AsTextBox().Enter(value);
+            }
+            else
+            {
+                Keyboard.Type(value);
+            }
             if (delay != null)
             {
                 // give some time to process input.
@@ -132,6 +148,10 @@ namespace Gu.Wpf.UiAutomation
                         Thread.Sleep(10);
                     }
                 }
+            }
+            else
+            {
+                Wait.UntilResponsive(this);
             }
         }
     }

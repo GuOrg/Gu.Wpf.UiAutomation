@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -83,6 +84,30 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("SelectCellDataGrid")]
+        public void EnterInvalidValue(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+
+                var cell = dataGrid[0, 0];
+                Assert.AreEqual("1", cell.Value);
+
+                cell.Enter("a");
+                Keyboard.Type(Key.TAB);
+                Assert.AreEqual("1", cell.Value);
+                Assert.AreEqual("a", cell.FindTextBox().Text);
+
+                cell.Enter("11");
+                Keyboard.Type(Key.TAB);
+                Assert.AreEqual("11", cell.Value);
+                Assert.AreEqual("11", cell.FindTextBlock().Text);
             }
         }
 
