@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using System;
     using NUnit.Framework;
-    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     [TestFixture]
     public class CalculatorTests
@@ -12,15 +10,14 @@
         {
             using (var app = StartApplication())
             {
-                var window = app.GetMainWindow(TimeSpan.FromSeconds(1));
-                var calc = OperatingSystem.IsWindows10() ? (ICalculator)new Win10Calc(window) : new LegacyCalc(window);
+                var window = app.MainWindow;
+                var calc = Gu.Wpf.UiAutomation.OperatingSystem.IsWindows10()
+                    ? (ICalculator)new Win10Calc(window)
+                    : new LegacyCalc(window);
 
                 // Switch to default mode
-                System.Threading.Thread.Sleep(1000);
                 Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
-                Wait.UntilInputIsProcessed();
-                app.WaitWhileBusy();
-                System.Threading.Thread.Sleep(1000);
+                window.WaitUntilResponsive();
 
                 // Simple addition
                 calc.Button1.Click();
@@ -35,7 +32,7 @@
                 calc.ButtonEquals.Click();
                 app.WaitWhileBusy();
                 var result = calc.Result;
-                Assert.That(result, Is.EqualTo("6912"));
+                Assert.AreEqual("6912", result);
 
                 // Date comparison
                 using (Keyboard.Pressing(Key.CONTROL))
@@ -47,13 +44,13 @@
 
         private static Application StartApplication()
         {
-            if (OperatingSystem.IsWindows10())
+            if (Gu.Wpf.UiAutomation.OperatingSystem.IsWindows10())
             {
                 // Use the store application on those systems
                 return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
             }
 
-            if (OperatingSystem.IsWindowsServer2016())
+            if (Gu.Wpf.UiAutomation.OperatingSystem.IsWindowsServer2016())
             {
                 // The calc.exe on this system is just a stub which launches win32calc.exe
                 return Application.Launch("win32calc.exe");

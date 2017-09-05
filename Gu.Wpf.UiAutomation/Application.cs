@@ -292,7 +292,7 @@
                 var mainWindowHandle = this.MainWindowHandle;
                 if (mainWindowHandle == IntPtr.Zero)
                 {
-                    return null;
+                    throw new InvalidOperationException($"Did not find main window for {this.processReference.Process.ProcessName}. If startup is slow try with a longer wait.");
                 }
 
                 return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement, isMainWindow: true);
