@@ -419,7 +419,7 @@
         {
             return Retry.While(
                 () => this.BasicAutomationElement.FindFirst(treeScope, condition),
-                element => element == null, 
+                element => element == null,
                 timeOut);
         }
 
