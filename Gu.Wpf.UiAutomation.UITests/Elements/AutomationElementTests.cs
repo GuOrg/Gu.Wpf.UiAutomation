@@ -28,6 +28,7 @@
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox();
                 Assert.AreEqual("Window", checkBox.Window.ClassName);
+                Assert.AreEqual(true, checkBox.Window.IsMainWindow);
             }
         }
 

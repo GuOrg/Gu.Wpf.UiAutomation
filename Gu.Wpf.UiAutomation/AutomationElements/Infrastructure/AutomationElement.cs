@@ -44,15 +44,9 @@
         {
             get
             {
-                var parent = this.Parent;
-                while (parent != null)
+                if (this.TryGetWindow(out var window))
                 {
-                    if (parent.ControlType == ControlType.Window)
-                    {
-                        return parent.AsWindow(parent.Parent == null);
-                    }
-
-                    parent = parent.Parent;
+                    return window;
                 }
 
                 throw new InvalidOperationException("Did not find a parent window.");
@@ -156,6 +150,24 @@
         /// Flag if the element off-screen or on-screen(visible).
         /// </summary>
         public bool IsOffscreen => this.Properties.IsOffscreen.Value;
+
+        public bool TryGetWindow(out Window window)
+        {
+            var parent = this.Parent;
+            while (parent != null)
+            {
+                if (parent.ControlType == ControlType.Window)
+                {
+                    window = parent.AsWindow(parent.Parent == null);
+                    return true;
+                }
+
+                parent = parent.Parent;
+            }
+
+            window = null;
+            return false;
+        }
 
         /// <summary>
         /// Draws a red highlight around the element.
