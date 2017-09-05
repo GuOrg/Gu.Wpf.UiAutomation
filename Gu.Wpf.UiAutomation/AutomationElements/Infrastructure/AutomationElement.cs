@@ -159,7 +159,7 @@
                 if (parent.Properties.ControlType.TryGetValue(out var controlType) &&
                     controlType == ControlType.Window)
                 {
-                    window = parent.AsWindow(parent.Parent?.Name == "Desktop");
+                    window = parent.AsWindow(parent.Parent?.Name?.StartsWith("Desktop") == true);
                     return true;
                 }
 
