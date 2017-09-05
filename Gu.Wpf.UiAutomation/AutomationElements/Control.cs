@@ -47,6 +47,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.LeftClick);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -91,6 +93,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.RightClick);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -121,6 +124,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
+            Wait.UntilResponsive(this);
         }
 
         /// <summary>

@@ -12,6 +12,7 @@
         public void Invoke()
         {
             this.InvokePattern.Invoke();
+            Wait.UntilResponsive(this);
         }
     }
 }
