@@ -63,6 +63,8 @@
         /// </summary>
         public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
+        public IntPtr NativeWindowHandle => this.Properties.NativeWindowHandle.Value;
+
         public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");

@@ -48,14 +48,12 @@
 
         public static bool UntilResponsive(AutomationElement automationElement, TimeSpan timeout)
         {
-            var currentElement = automationElement;
-            var treeWalker = automationElement.Automation.TreeWalkerFactory.GetControlViewWalker();
-            while (currentElement.Properties.NativeWindowHandle.ValueOrDefault == new IntPtr(0))
+            if (automationElement.TryGetWindow(out var window))
             {
-                currentElement = treeWalker.GetParent(currentElement);
+                return UntilResponsive(window.NativeWindowHandle, timeout);
             }
 
-            return UntilResponsive(currentElement.Properties.NativeWindowHandle, timeout);
+            return false;
         }
 
         public static bool UntilResponsive(IntPtr hWnd)
