@@ -177,6 +177,22 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
+        [Explicit("Dunno if this is possible.")]
+        [TestCase("DataGrid")]
+        [TestCase("SelectCellDataGrid")]
+        public void SetInvalidValueThrows(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+
+                var cell = dataGrid[0, 0];
+                var exception = Assert.Throws<InvalidOperationException>(() => cell.Value = "a");
+                Assert.AreEqual("Failed setting value.", exception.Message);
+            }
+        }
+
         [Test]
         public void SetValueUpdatesBinding()
         {
