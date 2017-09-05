@@ -243,95 +243,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        public void IndexerSetCellValue(string name)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-
-                Assert.AreEqual("1", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-
-                dataGrid[0, 0].Value = "11";
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-
-                dataGrid[2, 1].Value = "Item 5";
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
-
-                dataGrid[0, 0].Value = "111";
-                Assert.AreEqual("111", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
-            }
-        }
-
-        [Test]
-        public void IndexerSetCellValueUpdatesBinding()
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid("DataGrid");
-                var readOnly = window.FindDataGrid("ReadOnlyDataGrid");
-
-                Assert.AreEqual("1", dataGrid[0, 0].Value);
-                Assert.AreEqual("1", readOnly[0, 0].Value);
-
-                dataGrid[0, 0].Value = "11";
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.Inconclusive("Figure out the least ugly way here.");
-                Assert.AreEqual("11", readOnly[0, 0].Value);
-            }
-        }
-
-        [TestCase("DataGrid100", 99)]
-        [TestCase("DataGrid100", 100)]
-        public void IndexerSetCellValueWhenOffScreen(string name, int row)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-                dataGrid[row, 0].Value = "-1";
-                dataGrid[row, 1].Value = "Item -1";
-                Assert.AreEqual("-1", dataGrid[row, 0].Value);
-                Assert.AreEqual("Item -1", dataGrid[row, 1].Value);
-            }
-        }
-
-        [TestCase("DataGrid100")]
-        public void IndexerGetCellValueWhenOffScreen(string name)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual("100", dataGrid[99, 0].Value);
-                Assert.AreEqual("Item 100", dataGrid[99, 1].Value);
-            }
-        }
-
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
-        [TestCase("DataGridNoHeaders")]
         public void NewItemPlaceholder(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -343,36 +254,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 0].Value);
                 Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 1].IsNewItemPlaceholder);
                 Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 1].Value);
-            }
-        }
-
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
-        [TestCase("DataGridNoHeaders")]
-        public void Enter(string name)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-
-                Assert.AreEqual("1", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-
-                dataGrid[0, 0].Enter("11");
-                Assert.AreEqual("1", dataGrid[0, 0].Value);
-
-                dataGrid[1, 0].Click();
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
             }
         }
 
