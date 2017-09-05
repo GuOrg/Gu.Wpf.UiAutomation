@@ -17,7 +17,7 @@ releasenotes
 * BREAKING: Rename bounds.
 * FEATURE: ComboBox.Enter
 * FEATURE: GridView cell selection
-* FEATIRE: ClearFocus
+* FEATURE: ClearFocus
 * FEATURE: AutomationElement.Window
 
 files

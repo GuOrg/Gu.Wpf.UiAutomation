@@ -5,7 +5,7 @@
 * BREAKING: Rename bounds.
 * FEATURE: ComboBox.Enter
 * FEATURE: GridView cell selection
-* FEATIRE: ClearFocus
+* FEATURE: ClearFocus
 * FEATURE: AutomationElement.Window
 
 # 0.1.5.0
