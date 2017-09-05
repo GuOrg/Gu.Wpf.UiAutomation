@@ -24,6 +24,32 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
+        [TestCase("AutomationId", "AutomationProperties.AutomationId")]
+        [TestCase("XName", "x:Name")]
+        [TestCase("Content", "Content")]
+        public void Text(string key, string expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton(key);
+                Assert.AreEqual(expected, button.Text);
+            }
+        }
+
+        [TestCase("AutomationId", "AutomationProperties.AutomationId")]
+        [TestCase("XName", "x:Name")]
+        [TestCase("Content", "Content")]
+        public void Content(string key, string expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton(key);
+                Assert.AreEqual(expected, button.Content.AsTextBlock().Text);
+            }
+        }
+
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]

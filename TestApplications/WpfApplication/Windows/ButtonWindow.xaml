@@ -11,13 +11,17 @@
         <windows:ButtonWindowViewModel />
     </Window.DataContext>
     <StackPanel>
-        <Button AutomationProperties.AutomationId="AutomationId" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
-        <Button x:Name="XName" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
+        <Button AutomationProperties.AutomationId="AutomationId"
+                Content="AutomationProperties.AutomationId"
+                IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
+        <Button x:Name="XName"
+                Content="x:Name"
+                IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
         <Button Content="Content" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
 
-        <Button AutomationProperties.AutomationId="Button"
-                Command="{Binding IncreaseCommand}"
-                Content="Test Button" />
+        <Button Command="{Binding IncreaseCommand}" Content="Test Button" />
+
+        <Button Command="{Binding SleepCommand}" Content="Sleep Button" />
 
         <TextBlock x:Name="CountTextBlock" Text="{Binding Count}" />
 
