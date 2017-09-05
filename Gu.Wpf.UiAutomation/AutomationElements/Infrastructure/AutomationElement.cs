@@ -158,7 +158,7 @@
             {
                 if (parent.ControlType == ControlType.Window)
                 {
-                    window = parent.AsWindow(parent.Parent == null);
+                    window = parent.AsWindow(parent.Parent?.Name == "Desktop");
                     return true;
                 }
 
