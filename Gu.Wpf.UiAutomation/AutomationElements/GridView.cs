@@ -143,7 +143,15 @@
         public GridRow Select(int rowIndex)
         {
             var gridRow = this.GetRowByIndex(rowIndex);
-            gridRow.Select();
+            if (OperatingSystem.IsWindows7())
+            {
+                gridRow.Cells[0].Click();
+            }
+            else
+            {
+                gridRow.Select();
+            }
+
             return gridRow;
         }
 
