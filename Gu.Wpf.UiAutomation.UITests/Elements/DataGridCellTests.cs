@@ -61,6 +61,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 dataGrid[1, 0].Click();
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
@@ -104,6 +105,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 dataGrid[0, 0].Value = "11";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
@@ -112,19 +114,41 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 dataGrid[2, 1].Value = "Item 5";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item 5", dataGrid[2, 1].FindTextBlock().Text);
 
                 dataGrid[0, 0].Value = "111";
                 Assert.AreEqual("111", dataGrid[0, 0].Value);
+                Assert.AreEqual("111", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
+        [TestCase("DataGridNoHeaders")]
+        public void SetValueWhenFocused(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+
+                var cell = dataGrid[0, 0];
+                Assert.AreEqual("1", cell.Value);
+
+                cell.Click();
+                cell.Value = "11";
+                Assert.AreEqual("11", cell.Value);
             }
         }
 

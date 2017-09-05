@@ -104,15 +104,18 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public void Enter(string value, TimeSpan? delay = null)
         {
-            this.Click();
-            var lines = value.Replace("\r\n", "\n").Split('\n');
-            Keyboard.Type(lines[0]);
-            foreach (var line in lines.Skip(1))
+            if (value != null &&
+                value.Contains('\n'))
             {
-                Keyboard.Type(Key.RETURN);
-                Keyboard.Type(line);
+                throw new ArgumentException("Only single line allowed for now.");
             }
 
+            if (!this.HasKeyboardFocus)
+            {
+                this.Click();
+            }
+
+            Keyboard.Type(value);
             if (delay != null)
             {
                 // give some time to process input.
