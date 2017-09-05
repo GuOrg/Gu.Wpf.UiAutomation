@@ -1,8 +1,8 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.EventHandlers
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Threading;
     using NUnit.Framework;
 
     [TestFixture]
@@ -16,16 +16,16 @@
                 var focusChangedElements = new List<string>();
                 var mainWindow = app.MainWindow;
                 var x = app.Automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
-                Thread.Sleep(100);
+                Wait.For(TimeSpan.FromMilliseconds(100));
                 var button1 = mainWindow.FindButton(this.GetResizeText());
-                button1.AsButton().Invoke();
-                Thread.Sleep(100);
+                button1.Invoke();
+                Wait.For(TimeSpan.FromMilliseconds(100));
                 var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
                 Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
-                Thread.Sleep(100);
+                Wait.For(TimeSpan.FromMilliseconds(100));
                 using (Keyboard.Pressing(Key.ESCAPE))
                 {
-                    Thread.Sleep(100);
+                    Wait.For(TimeSpan.FromMilliseconds(100));
                     app.Automation.UnRegisterFocusChangedEvent(x);
                     mainWindow.Close();
                     Assert.That(focusChangedElements.Count, Is.GreaterThan(0));

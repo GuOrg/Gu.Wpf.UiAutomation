@@ -156,7 +156,8 @@
             var parent = this.Parent;
             while (parent != null)
             {
-                if (parent.ControlType == ControlType.Window)
+                if (parent.Properties.ControlType.TryGetValue(out var controlType) &&
+                    controlType == ControlType.Window)
                 {
                     window = parent.AsWindow(parent.Parent?.Name == "Desktop");
                     return true;
