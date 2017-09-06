@@ -855,7 +855,12 @@
             {
                 try
                 {
-                    return this.Find(controlType);
+                    return Retry.While(
+                        () => this.BasicAutomationElement.FindFirst(
+                            TreeScope.Descendants,
+                            this.ConditionFactory.ByControlType(controlType)),
+                        element => element == null,
+                        Retry.DefaultRetryFor);
                 }
                 catch (TimeoutException e)
                 {
@@ -865,12 +870,16 @@
 
             try
             {
-                return this.FindFirstDescendant(
-                    new AndCondition(
-                        this.ConditionFactory.ByControlType(controlType),
-                        new OrCondition(
-                            this.ConditionFactory.ByName(name),
-                            this.ConditionFactory.ByAutomationId(name))));
+                return Retry.While(
+                    () => this.BasicAutomationElement.FindFirst(
+                        TreeScope.Descendants,
+                        new AndCondition(
+                            this.ConditionFactory.ByControlType(controlType),
+                            new OrCondition(
+                                this.ConditionFactory.ByName(name),
+                                this.ConditionFactory.ByAutomationId(name)))),
+                    element => element == null,
+                    Retry.DefaultRetryFor);
             }
             catch (Exception e)
             {
