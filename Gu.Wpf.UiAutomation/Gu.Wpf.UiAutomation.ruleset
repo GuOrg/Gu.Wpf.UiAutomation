@@ -4,8 +4,21 @@
     <Name Resource="MinimumRecommendedRules_Name" />
     <Description Resource="MinimumRecommendedRules_Description" />
   </Localization>
+  <Rules AnalyzerId="Gu.Analyzers.Analyzers" RuleNamespace="Gu.Analyzers.Analyzers">
+    <Rule Id="GU0030" Action="Error" />
+    <Rule Id="GU0031" Action="Error" />
+    <Rule Id="GU0032" Action="Error" />
+    <Rule Id="GU0033" Action="Error" />
+    <Rule Id="GU0034" Action="Error" />
+    <Rule Id="GU0035" Action="Error" />
+    <Rule Id="GU0036" Action="Error" />
+    <Rule Id="GU0037" Action="Error" />
+  </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
     <Rule Id="CS1591" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+    <Rule Id="IDE0003" Action="None" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA1118" Action="None" />
@@ -14,20 +27,10 @@
     <Rule Id="SA1601" Action="None" />
     <Rule Id="SA1602" Action="None" />
     <Rule Id="SA1611" Action="None" />
-    <Rule Id="SA1618" Action="None" />
     <Rule Id="SA1615" Action="None" />
+    <Rule Id="SA1618" Action="None" />
     <Rule Id="SA1623" Action="None" />
     <Rule Id="SA1633" Action="None" />
     <Rule Id="SA1642" Action="None" />
-  </Rules>
-  <Rules AnalyzerId="Gu.Analyzers.Analyzers" RuleNamespace="Gu.Analyzers.Analyzers">
-    <Rule Id="GU0033" Action="Error" />
-    <Rule Id="GU0034" Action="Error" />
-    <Rule Id="GU0035" Action="Error" />
-    <Rule Id="GU0036" Action="Error" />
-    <Rule Id="GU0037" Action="Error" />
-    <Rule Id="GU0030" Action="Error" />
-    <Rule Id="GU0031" Action="Error" />
-    <Rule Id="GU0032" Action="Error" />
   </Rules>
 </RuleSet>

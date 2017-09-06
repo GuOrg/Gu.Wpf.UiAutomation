@@ -13,7 +13,7 @@
             window.Close();
             Wait.UntilInputIsProcessed();
             var modal = window.ModalWindows;
-            var dontSaveButton = modal[0].FindFirstDescendant(cf => cf.ByAutomationId("CommandButton_7")).AsButton();
+            var dontSaveButton = modal[0].FindButton("CommandButton_7");
             dontSaveButton.Invoke();
         }
     }

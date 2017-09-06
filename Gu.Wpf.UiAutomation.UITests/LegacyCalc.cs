@@ -11,25 +11,25 @@ namespace Gu.Wpf.UiAutomation.UITests
             this.mainWindow = mainWindow;
         }
 
-        public Button Button1 => this.FindElement("1").AsButton();
+        public Button Button1 => this.mainWindow.FindButton("1");
 
-        public Button Button2 => this.FindElement("2").AsButton();
+        public Button Button2 => this.mainWindow.FindButton("2");
 
-        public Button Button3 => this.FindElement("3").AsButton();
+        public Button Button3 => this.mainWindow.FindButton("3");
 
-        public Button Button4 => this.FindElement("4").AsButton();
+        public Button Button4 => this.mainWindow.FindButton("4");
 
-        public Button Button5 => this.FindElement("5").AsButton();
+        public Button Button5 => this.mainWindow.FindButton("5");
 
-        public Button Button6 => this.FindElement("6").AsButton();
+        public Button Button6 => this.mainWindow.FindButton("6");
 
-        public Button Button7 => this.FindElement("7").AsButton();
+        public Button Button7 => this.mainWindow.FindButton("7");
 
-        public Button Button8 => this.FindElement("8").AsButton();
+        public Button Button8 => this.mainWindow.FindButton("8");
 
-        public Button ButtonAdd => this.FindElement("Add").AsButton();
+        public Button ButtonAdd => this.mainWindow.FindButton("Add");
 
-        public Button ButtonEquals => this.FindElement("Equals").AsButton();
+        public Button ButtonEquals => this.mainWindow.FindButton("Equals");
 
         public string Result
         {
@@ -39,12 +39,6 @@ namespace Gu.Wpf.UiAutomation.UITests
                 var value = resultElement.Properties.Name;
                 return Regex.Replace(value.Value, "[^0-9]", string.Empty);
             }
-        }
-
-        private AutomationElement FindElement(string text)
-        {
-            var element = this.mainWindow.FindFirstDescendant(cf => cf.ByText(text));
-            return element;
         }
     }
 }

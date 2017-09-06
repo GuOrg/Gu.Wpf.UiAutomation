@@ -156,7 +156,7 @@
 
         public Point GetClickablePoint()
         {
-            if (!this.TryGetClickablePoint(out Point point))
+            if (!this.TryGetClickablePoint(out var point))
             {
                 throw new NoClickablePointException();
             }

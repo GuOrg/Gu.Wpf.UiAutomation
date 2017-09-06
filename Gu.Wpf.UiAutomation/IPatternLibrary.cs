@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Collections.Generic;
+
     public interface IPatternLibrary
     {
         PatternId AnnotationPattern { get; }
@@ -68,6 +70,6 @@
 
         PatternId WindowPattern { get; }
 
-        PatternId[] AllForCurrentFramework { get; }
+        IReadOnlyList<PatternId> AllForCurrentFramework { get; }
     }
 }

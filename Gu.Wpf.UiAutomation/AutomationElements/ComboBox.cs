@@ -188,7 +188,7 @@
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = this.FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
+                var openButton = this.FindButton();
                 openButton.Invoke();
             }
             else
@@ -216,7 +216,7 @@
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
-                var openButton = this.FindFirstChild(cf => cf.ByControlType(ControlType.Button)).AsButton();
+                var openButton = this.FindButton();
                 if (this.IsEditable)
                 {
                     // WinForms editable combo box only closes on click and not on invoke

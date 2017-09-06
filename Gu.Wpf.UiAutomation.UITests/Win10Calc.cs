@@ -11,40 +11,34 @@ namespace Gu.Wpf.UiAutomation.UITests
             this.mainWindow = mainWindow;
         }
 
-        public Button Button1 => this.FindElement("num1Button").AsButton();
+        public Button Button1 => this.mainWindow.FindButton("num1Button");
 
-        public Button Button2 => this.FindElement("num2Button").AsButton();
+        public Button Button2 => this.mainWindow.FindButton("num2Button");
 
-        public Button Button3 => this.FindElement("num3Button").AsButton();
+        public Button Button3 => this.mainWindow.FindButton("num3Button");
 
-        public Button Button4 => this.FindElement("num4Button").AsButton();
+        public Button Button4 => this.mainWindow.FindButton("num4Button");
 
-        public Button Button5 => this.FindElement("num5Button").AsButton();
+        public Button Button5 => this.mainWindow.FindButton("num5Button");
 
-        public Button Button6 => this.FindElement("num6Button").AsButton();
+        public Button Button6 => this.mainWindow.FindButton("num6Button");
 
-        public Button Button7 => this.FindElement("num7Button").AsButton();
+        public Button Button7 => this.mainWindow.FindButton("num7Button");
 
-        public Button Button8 => this.FindElement("num8Button").AsButton();
+        public Button Button8 => this.mainWindow.FindButton("num8Button");
 
-        public Button ButtonAdd => this.FindElement("plusButton").AsButton();
+        public Button ButtonAdd => this.mainWindow.FindButton("plusButton");
 
-        public Button ButtonEquals => this.FindElement("equalButton").AsButton();
+        public Button ButtonEquals => this.mainWindow.FindButton("equalButton");
 
         public string Result
         {
             get
             {
-                var resultElement = this.FindElement("CalculatorResults");
+                var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("CalculatorResults"));
                 var value = resultElement.Properties.Name;
                 return Regex.Replace(value.Value, "[^0-9]", string.Empty);
             }
-        }
-
-        private AutomationElement FindElement(string text)
-        {
-            var element = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId(text));
-            return element;
         }
     }
 }

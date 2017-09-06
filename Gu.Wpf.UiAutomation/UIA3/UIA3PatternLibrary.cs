@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using System.Collections.Generic;
+
     public class UIA3PatternLibrary : IPatternLibrary
     {
         public PatternId AnnotationPattern => Patterns.AnnotationPattern.Pattern;
@@ -68,7 +70,7 @@
 
         public PatternId WindowPattern => Patterns.WindowPattern.Pattern;
 
-        public PatternId[] AllForCurrentFramework => new[]
+        public IReadOnlyList<PatternId> AllForCurrentFramework => new[]
         {
             this.AnnotationPattern,
             this.DockPattern,

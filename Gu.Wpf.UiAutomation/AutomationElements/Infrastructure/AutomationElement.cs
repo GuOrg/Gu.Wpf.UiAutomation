@@ -272,7 +272,7 @@
         /// Find the first button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Button FindButton(string name = null) => this.Find(ControlType.Button, name).AsButton();
+        public Button FindButton(string name = null) => new Button(this.Find(ControlType.Button, name).BasicAutomationElement);
 
         /// <summary>
         /// Find the first slider by x:Name, Content or AutomationID
