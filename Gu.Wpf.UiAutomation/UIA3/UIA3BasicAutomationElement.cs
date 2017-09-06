@@ -48,16 +48,16 @@
         public override IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElements = CacheRequest.IsCachingActive
-                ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
-                : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
+                ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
             return AutomationElementConverter.NativeArrayToManaged(this.Automation, nativeFoundElements);
         }
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeFoundElement = CacheRequest.IsCachingActive
-                ? this.NativeElement.FindFirstBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition), CacheRequest.Current.ToNative(this.Automation))
-                : this.NativeElement.FindFirst((Interop.UIAutomationClient.TreeScope)treeScope, ConditionConverter.ToNative(this.Automation, condition));
+                ? this.NativeElement.FindFirstBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindFirst((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
             return AutomationElementConverter.NativeToManaged(this.Automation, nativeFoundElement);
         }
 

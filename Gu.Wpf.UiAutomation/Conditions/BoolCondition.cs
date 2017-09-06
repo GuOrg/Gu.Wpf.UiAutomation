@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class BoolCondition : ConditionBase
+    public abstract class BoolCondition : ConditionBase
     {
         public BoolCondition(bool booleanValue)
         {

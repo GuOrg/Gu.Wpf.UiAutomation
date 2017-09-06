@@ -1,5 +1,8 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using Interop.UIAutomationClient;
+
     public class PropertyCondition : ConditionBase
     {
         public PropertyCondition(PropertyId property, object value)
@@ -16,7 +19,7 @@
 
         public PropertyId Property { get; }
 
-        public PropertyConditionFlags PropertyConditionFlags { get; private set; }
+        public PropertyConditionFlags PropertyConditionFlags { get; }
 
         public object Value { get; }
 
@@ -24,6 +27,11 @@
         public override string ToString()
         {
             return $"{this.Property}: {this.Value}";
+        }
+
+        public override IUIAutomationCondition ToNative(IUIAutomation automation)
+        {
+            return automation.CreatePropertyConditionEx(this.Property.Id, ValueConverter.ToNative(this.Value), (Interop.UIAutomationClient.PropertyConditionFlags)this.PropertyConditionFlags);
         }
     }
 }

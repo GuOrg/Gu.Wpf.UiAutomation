@@ -1,5 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using Interop.UIAutomationClient;
+
     public sealed class TrueCondition : BoolCondition
     {
         private TrueCondition()
@@ -8,5 +10,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         public static TrueCondition Default { get; } = new TrueCondition();
+
+        public override IUIAutomationCondition ToNative(IUIAutomation automation) => automation.CreateTrueCondition();
     }
 }

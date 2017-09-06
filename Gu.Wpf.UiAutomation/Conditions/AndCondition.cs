@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Interop.UIAutomationClient;
 
     public class AndCondition : JunctionConditionBase
     {
@@ -19,6 +20,11 @@
         public override string ToString()
         {
             return $"({string.Join(" AND ", this.Conditions.Select(c => c.ToString()))})";
+        }
+
+        public override IUIAutomationCondition ToNative(IUIAutomation automation)
+        {
+            return automation.CreateAndConditionFromArray(this.Conditions.Select(c => c.ToNative(automation)).ToArray());
         }
     }
 }
