@@ -14,7 +14,7 @@
 
         public AutomationElement GetItemByName(string name)
         {
-            var nativeElement = ComCallWrapper.Call(() => this.NativePattern.GetItemByName(name));
+            var nativeElement = Com.Call(() => this.NativePattern.GetItemByName(name));
             return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeElement);
         }
     }

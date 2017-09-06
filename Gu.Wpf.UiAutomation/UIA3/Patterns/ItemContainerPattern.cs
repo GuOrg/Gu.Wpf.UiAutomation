@@ -14,7 +14,7 @@
 
         public AutomationElement FindItemByProperty(AutomationElement startAfter, PropertyId property, object value)
         {
-            var foundNativeElement = ComCallWrapper.Call(
+            var foundNativeElement = Com.Call(
                 () =>
                     this.NativePattern.FindItemByProperty(
                         startAfter?.ToNative(),

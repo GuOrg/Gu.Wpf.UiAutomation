@@ -14,7 +14,7 @@
 
         public override void Toggle()
         {
-            ComCallWrapper.Call(() => this.NativePattern.Toggle());
+            Com.Call(() => this.NativePattern.Toggle());
         }
     }
 }

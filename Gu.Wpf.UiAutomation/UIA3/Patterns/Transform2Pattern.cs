@@ -20,12 +20,12 @@
 
         public override void Zoom(double zoom)
         {
-            ComCallWrapper.Call(() => this.NativePattern.Zoom(zoom));
+            Com.Call(() => this.NativePattern.Zoom(zoom));
         }
 
         public override void ZoomByUnit(ZoomUnit zoomUnit)
         {
-            ComCallWrapper.Call(() => this.NativePattern.ZoomByUnit((Interop.UIAutomationClient.ZoomUnit)zoomUnit));
+            Com.Call(() => this.NativePattern.ZoomByUnit((Interop.UIAutomationClient.ZoomUnit)zoomUnit));
         }
 
         public override void Move(double x, double y)

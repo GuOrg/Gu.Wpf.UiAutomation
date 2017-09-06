@@ -21,13 +21,13 @@
 
         public ITextRange GetActiveComposition()
         {
-            var nativeRange = ComCallWrapper.Call(() => this.ExtendedNativePattern.GetActiveComposition());
+            var nativeRange = Com.Call(() => this.ExtendedNativePattern.GetActiveComposition());
             return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
 
         public ITextRange GetConversionTarget()
         {
-            var nativeRange = ComCallWrapper.Call(() => this.ExtendedNativePattern.GetConversionTarget());
+            var nativeRange = Com.Call(() => this.ExtendedNativePattern.GetConversionTarget());
             return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
         }
     }

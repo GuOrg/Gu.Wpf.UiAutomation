@@ -15,7 +15,7 @@
 
         public override void SetValue(string value)
         {
-            ComCallWrapper.Call(() => this.NativePattern.SetValue(value));
+            Com.Call(() => this.NativePattern.SetValue(value));
         }
     }
 }

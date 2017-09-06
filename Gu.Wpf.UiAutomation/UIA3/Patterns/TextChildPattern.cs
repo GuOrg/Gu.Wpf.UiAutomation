@@ -16,7 +16,7 @@
         {
             get
             {
-                var nativeElement = ComCallWrapper.Call(() => this.NativePattern.TextContainer);
+                var nativeElement = Com.Call(() => this.NativePattern.TextContainer);
                 return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeElement);
             }
         }
@@ -25,7 +25,7 @@
         {
             get
             {
-                var nativeRange = ComCallWrapper.Call(() => this.NativePattern.TextRange);
+                var nativeRange = Com.Call(() => this.NativePattern.TextRange);
                 return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeRange);
             }
         }

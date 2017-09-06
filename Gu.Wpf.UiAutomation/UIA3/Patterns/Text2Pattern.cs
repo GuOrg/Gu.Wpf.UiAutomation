@@ -18,7 +18,7 @@
         public ITextRange GetCaretRange(out bool isActive)
         {
             var rawIsActive = 0;
-            var nativeTextRange = ComCallWrapper.Call(() => this.ExtendedNativePattern.GetCaretRange(out rawIsActive));
+            var nativeTextRange = Com.Call(() => this.ExtendedNativePattern.GetCaretRange(out rawIsActive));
             isActive = rawIsActive != 0;
             return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeTextRange);
         }
@@ -26,7 +26,7 @@
         public ITextRange RangeFromAnnotation(AutomationElement annotation)
         {
             var nativeInputElement = annotation.ToNative();
-            var nativeElement = ComCallWrapper.Call(() => this.ExtendedNativePattern.RangeFromAnnotation(nativeInputElement));
+            var nativeElement = Com.Call(() => this.ExtendedNativePattern.RangeFromAnnotation(nativeInputElement));
             return TextRangeConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeElement);
         }
     }

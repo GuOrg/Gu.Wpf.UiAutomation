@@ -19,17 +19,17 @@
 
         public override void AddToSelection()
         {
-            ComCallWrapper.Call(() => this.NativePattern.AddToSelection());
+            Com.Call(() => this.NativePattern.AddToSelection());
         }
 
         public override void RemoveFromSelection()
         {
-            ComCallWrapper.Call(() => this.NativePattern.RemoveFromSelection());
+            Com.Call(() => this.NativePattern.RemoveFromSelection());
         }
 
         public override void Select()
         {
-            ComCallWrapper.Call(() => this.NativePattern.Select());
+            Com.Call(() => this.NativePattern.Select());
         }
     }
 }

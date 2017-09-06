@@ -16,7 +16,7 @@
 
         public override AutomationElement GetItem(int row, int column)
         {
-            var nativeItem = ComCallWrapper.Call(() => this.NativePattern.GetItem(row, column));
+            var nativeItem = Com.Call(() => this.NativePattern.GetItem(row, column));
             return AutomationElementConverter.NativeToManaged((UIA3Automation)this.BasicAutomationElement.Automation, nativeItem);
         }
     }

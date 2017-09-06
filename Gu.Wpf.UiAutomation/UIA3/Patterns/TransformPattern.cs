@@ -16,17 +16,17 @@
 
         public override void Move(double x, double y)
         {
-            ComCallWrapper.Call(() => this.NativePattern.Move(x, y));
+            Com.Call(() => this.NativePattern.Move(x, y));
         }
 
         public override void Resize(double width, double height)
         {
-            ComCallWrapper.Call(() => this.NativePattern.Resize(width, height));
+            Com.Call(() => this.NativePattern.Resize(width, height));
         }
 
         public override void Rotate(double degrees)
         {
-            ComCallWrapper.Call(() => this.NativePattern.Rotate(degrees));
+            Com.Call(() => this.NativePattern.Rotate(degrees));
         }
     }
 }

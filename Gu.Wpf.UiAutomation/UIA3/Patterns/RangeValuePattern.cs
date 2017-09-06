@@ -19,7 +19,7 @@
 
         public override void SetValue(double val)
         {
-            ComCallWrapper.Call(() => this.NativePattern.SetValue(val));
+            Com.Call(() => this.NativePattern.SetValue(val));
         }
     }
 }

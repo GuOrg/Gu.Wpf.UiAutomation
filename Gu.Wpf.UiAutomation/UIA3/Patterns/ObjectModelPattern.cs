@@ -13,7 +13,7 @@
 
         public object GetUnderlyingObjectModel()
         {
-            return ComCallWrapper.Call(() => this.NativePattern.GetUnderlyingObjectModel());
+            return Com.Call(() => this.NativePattern.GetUnderlyingObjectModel());
         }
     }
 }

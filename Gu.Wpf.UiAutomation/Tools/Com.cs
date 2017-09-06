@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation
     /// Wrapper for com calls
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "To keep the original Win32 names")]
-    public static class ComCallWrapper
+    public static class Com
     {
                               /// <summary>
                               /// Indicates that a method that requires an enabled element, such as ISelectionItemProvider::Select or IExpandCollapseProvider::Expand, was called on an element that was disabled.

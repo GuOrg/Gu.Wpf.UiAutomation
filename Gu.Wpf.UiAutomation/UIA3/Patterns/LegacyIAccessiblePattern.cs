@@ -27,23 +27,23 @@
 
         public override void DoDefaultAction()
         {
-            ComCallWrapper.Call(() => this.NativePattern.DoDefaultAction());
+            Com.Call(() => this.NativePattern.DoDefaultAction());
         }
 
         public override IAccessible GetIAccessible()
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
-            return ComCallWrapper.Call(() => (IAccessible)this.NativePattern.GetIAccessible());
+            return Com.Call(() => (IAccessible)this.NativePattern.GetIAccessible());
         }
 
         public override void Select(int flagsSelect)
         {
-            ComCallWrapper.Call(() => this.NativePattern.Select(flagsSelect));
+            Com.Call(() => this.NativePattern.Select(flagsSelect));
         }
 
         public override void SetValue(string value)
         {
-            ComCallWrapper.Call(() => this.NativePattern.SetValue(value));
+            Com.Call(() => this.NativePattern.SetValue(value));
         }
     }
 }

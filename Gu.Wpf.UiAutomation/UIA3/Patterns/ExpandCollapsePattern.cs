@@ -14,12 +14,12 @@
 
         public override void Collapse()
         {
-            ComCallWrapper.Call(() => this.NativePattern.Collapse());
+            Com.Call(() => this.NativePattern.Collapse());
         }
 
         public override void Expand()
         {
-            ComCallWrapper.Call(() => this.NativePattern.Expand());
+            Com.Call(() => this.NativePattern.Expand());
         }
     }
 }

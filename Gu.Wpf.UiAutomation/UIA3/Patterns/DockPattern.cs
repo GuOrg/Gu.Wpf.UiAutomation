@@ -14,7 +14,7 @@
 
         public override void SetDockPosition(DockPosition dockPos)
         {
-            ComCallWrapper.Call(() => this.NativePattern.SetDockPosition((Interop.UIAutomationClient.DockPosition)dockPos));
+            Com.Call(() => this.NativePattern.SetDockPosition((Interop.UIAutomationClient.DockPosition)dockPos));
         }
     }
 }

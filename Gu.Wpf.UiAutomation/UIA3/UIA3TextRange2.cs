@@ -12,7 +12,7 @@
 
         public void ShowContextMenu()
         {
-            ComCallWrapper.Call(() => this.NativeRange2.ShowContextMenu());
+            Com.Call(() => this.NativeRange2.ShowContextMenu());
         }
     }
 }

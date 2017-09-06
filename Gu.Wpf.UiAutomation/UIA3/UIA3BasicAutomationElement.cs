@@ -7,6 +7,9 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
+    using Interop.UIAutomationClient;
+    using StructureChangeType = Gu.Wpf.UiAutomation.StructureChangeType;
+    using TreeScope = Gu.Wpf.UiAutomation.TreeScope;
 
     public class UIA3BasicAutomationElement : BasicAutomationElementBase
     {
@@ -55,16 +58,37 @@
 
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
-            var nativeFoundElement = CacheRequest.IsCachingActive
-                ? this.NativeElement.FindFirstBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
-                : this.NativeElement.FindFirst((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
-            return AutomationElementConverter.NativeToManaged(this.Automation, nativeFoundElement);
+            var nativeElement = this.FindFirstNative(
+                treeScope,
+                condition.ToNative(this.Automation.NativeAutomation));
+            return AutomationElementConverter.NativeToManaged(this.Automation, nativeElement);
+        }
+
+        public override T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+        {
+            var nativeElement = this.FindFirstNative(
+                treeScope,
+                condition.ToNative(this.Automation.NativeAutomation));
+            if (nativeElement == null)
+            {
+                return null;
+            }
+
+            var basicElement = new UIA3BasicAutomationElement(this.Automation, nativeElement);
+            return wrap(basicElement);
+        }
+
+        public IUIAutomationElement FindFirstNative(TreeScope treeScope, IUIAutomationCondition condition)
+        {
+            return CacheRequest.IsCachingActive
+                ? this.NativeElement.FindFirstBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition, CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindFirst((Interop.UIAutomationClient.TreeScope)treeScope, condition);
         }
 
         public override bool TryGetClickablePoint(out Point point)
         {
             var tagPoint = new Interop.UIAutomationClient.tagPOINT { x = 0, y = 0 };
-            var success = ComCallWrapper.Call(() => this.NativeElement.GetClickablePoint(out tagPoint)) != 0;
+            var success = Com.Call(() => this.NativeElement.GetClickablePoint(out tagPoint)) != 0;
             if (success)
             {
                 point = new Point(tagPoint.x, tagPoint.y);
