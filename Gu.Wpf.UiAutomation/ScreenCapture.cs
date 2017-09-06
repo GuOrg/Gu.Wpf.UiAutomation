@@ -30,27 +30,6 @@
             return CaptureScreen().ToWpf();
         }
 
-        /// <summary>
-        /// Captures a specific area from the screen
-        /// </summary>
-        public static Bitmap CaptureArea(Rect rectangle)
-        {
-            var width = rectangle.Width.ToInt();
-            var height = rectangle.Height.ToInt();
-            var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            using (var graphics = Graphics.FromImage(bmp))
-            {
-                graphics.CopyFromScreen(
-                sourceX: rectangle.Left.ToInt(),
-                sourceY: rectangle.Top.ToInt(),
-                destinationX: 0,
-                destinationY: 0,
-                blockRegionSize: new System.Drawing.Size(width, height),
-                copyPixelOperation: CopyPixelOperation.SourceCopy);
-                return bmp;
-            }
-        }
-
         public static BitmapImage CaptureAreaWpf(Rect rectangle)
         {
             return CaptureArea(rectangle).ToWpf();
@@ -89,6 +68,27 @@
             {
                 Logger.Default.Info($"CaptureAreaToFile: {rectangle} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
+            }
+        }
+
+        /// <summary>
+        /// Captures a specific area from the screen
+        /// </summary>
+        public static Bitmap CaptureArea(Rect rectangle)
+        {
+            var width = rectangle.Width.ToInt();
+            var height = rectangle.Height.ToInt();
+            var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+            using (var graphics = Graphics.FromImage(bmp))
+            {
+                graphics.CopyFromScreen(
+                    sourceX: rectangle.Left.ToInt(),
+                    sourceY: rectangle.Top.ToInt(),
+                    destinationX: 0,
+                    destinationY: 0,
+                    blockRegionSize: new System.Drawing.Size(width, height),
+                    copyPixelOperation: CopyPixelOperation.SourceCopy);
+                return bmp;
             }
         }
 
