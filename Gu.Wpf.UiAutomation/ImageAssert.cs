@@ -9,6 +9,7 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Image = System.Drawing.Image;
     using Size = System.Windows.Size;
 
     public static class ImageAssert
@@ -55,6 +56,11 @@
         {
             if (expected.Size != actual.Size)
             {
+                if (Debugger.IsAttached)
+                {
+                    ImageDiffWindow.Show(expected, actual);
+                }
+
                 throw AssertException.Create(
                     "Sizes did not match\r\n" +
                     $"Expected: {expected.Size}\r\n" +
@@ -80,12 +86,7 @@
 
                     if (Debugger.IsAttached)
                     {
-                        ////var window = new Window
-                        ////             {
-                        ////                 SizeToContent = SizeToContent.WidthAndHeight,
-                        ////                 Content = new ImageCompareView(expected, actual)
-                        ////             };
-                        ////window.ShowDialog();
+                        ImageDiffWindow.Show(expected, actual);
                     }
 
                     throw AssertException.Create("Images do not match.");

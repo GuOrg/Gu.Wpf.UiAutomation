@@ -8,5 +8,13 @@
         mc:Ignorable="d">
     <Button x:Name="SizeButton"
             Width="200"
-            Height="100" />
+            Height="100">
+        <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <Border Background="Lavender"
+                        BorderBrush="Black"
+                        BorderThickness="1" />
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
 </Window>
