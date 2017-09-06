@@ -1,12 +1,10 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using System;
-
     /// <summary>
     /// Implementation of the property object.
     /// </summary>
     /// <typeparam name="TVal">The type of the value of the property.</typeparam>
-    public class AutomationProperty<TVal> : IAutomationProperty<TVal>, IEquatable<TVal>, IEquatable<AutomationProperty<TVal>>
+    public class AutomationProperty<TVal> : IAutomationProperty<TVal>
     {
         /// <summary>
         /// Create the property object.
@@ -35,19 +33,10 @@
         /// </summary>
         protected BasicAutomationElementBase BasicAutomationElement { get; }
 
-        /// <summary>
-        /// Implicit operator to convert the property object directly to its value.
-        /// </summary>
-        /// <param name="automationProperty">The property object which should be converted.</param>
-        public static implicit operator TVal(AutomationProperty<TVal> automationProperty)
-        {
-            return automationProperty == null ? default(TVal) : automationProperty.Value;
-        }
-
         /// <inheritdoc />
         public TVal ValueOrDefault(TVal @default = default(TVal))
         {
-            if (this.TryGetValue(out TVal value))
+            if (this.TryGetValue(out var value))
             {
                 return value;
             }
@@ -59,18 +48,6 @@
         public bool TryGetValue(out TVal value)
         {
             return this.BasicAutomationElement.TryGetPropertyValue(this.PropertyId, out value);
-        }
-
-        /// <inheritdoc/>
-        public bool Equals(TVal other)
-        {
-            return object.Equals(this.Value, other);
-        }
-
-        /// <inheritdoc/>
-        public bool Equals(AutomationProperty<TVal> other)
-        {
-            return other != null && object.Equals(this.Value, other.Value);
         }
 
         /// <inheritdoc/>

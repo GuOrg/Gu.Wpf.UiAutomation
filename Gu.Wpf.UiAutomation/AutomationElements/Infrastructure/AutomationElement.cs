@@ -99,9 +99,9 @@
         /// </summary>
         public AutomationElementPropertyValues Properties => this.BasicAutomationElement.Properties;
 
-        public string ItemStatus => this.Properties.ItemStatus;
+        public string ItemStatus => this.Properties.ItemStatus.Value;
 
-        public string HelpText => this.Properties.HelpText;
+        public string HelpText => this.Properties.HelpText.Value;
 
         /// <summary>
         /// Gets the cached children for this element.
@@ -235,7 +235,7 @@
         /// </summary>
         public System.Drawing.Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(this.Properties.BoundingRectangle);
+            return ScreenCapture.CaptureArea(this.Bounds);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(this.Properties.BoundingRectangle);
+            return ScreenCapture.CaptureAreaWpf(this.Bounds);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(this.Properties.BoundingRectangle, filePath);
+            ScreenCapture.CaptureAreaToFile(this.Bounds, filePath);
         }
 
         /// <summary>

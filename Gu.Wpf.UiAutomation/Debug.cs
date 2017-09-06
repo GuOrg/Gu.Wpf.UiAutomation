@@ -65,7 +65,7 @@
             }
 
             // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType));
+            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType.Value));
             var currentItemText = $"{element.Properties.ControlType.Value}";
             if (allChildren.Count > 1)
             {

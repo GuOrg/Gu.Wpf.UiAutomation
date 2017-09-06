@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
     using System.IO;
+    using System.Windows;
     using NUnit.Framework;
 
     public class AutomationElementTests
@@ -56,6 +57,19 @@
                 Assert.AreEqual(true, textBox.HasKeyboardFocus);
 
                 Keyboard.ClearFocus();
+            }
+        }
+
+        [Test]
+        public void Size()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                Assert.AreEqual(200, button.ActualWidth);
+                Assert.AreEqual(100, button.ActualHeight);
+                Assert.IsInstanceOf<Rect>(button.Bounds);
             }
         }
     }

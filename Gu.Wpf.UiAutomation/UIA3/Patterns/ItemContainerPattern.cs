@@ -5,7 +5,7 @@
 
     public class ItemContainerPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationItemContainerPattern>, IItemContainerPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_ItemContainerPatternId, "ItemContainer", AutomationObjectIds.IsItemContainerPatternAvailableProperty);
 
         public ItemContainerPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationItemContainerPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

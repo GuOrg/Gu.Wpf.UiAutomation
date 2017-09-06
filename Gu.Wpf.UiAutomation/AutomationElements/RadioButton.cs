@@ -12,7 +12,7 @@
         /// </summary>
         public bool IsChecked
         {
-            get => this.SelectionItemPattern.IsSelected;
+            get => this.SelectionItemPattern.IsSelected.Value;
             set
             {
                 if (this.IsChecked == value)

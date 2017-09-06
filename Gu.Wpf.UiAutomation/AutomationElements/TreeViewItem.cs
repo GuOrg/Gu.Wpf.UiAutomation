@@ -35,7 +35,7 @@
                 if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? string.Empty : textElement.Properties.Name;
+                    return textElement == null ? string.Empty : textElement.Properties.Name.Value;
                 }
 
                 return value;

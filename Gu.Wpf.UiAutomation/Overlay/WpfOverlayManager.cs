@@ -19,9 +19,7 @@
             this.uiThread = new Thread(() =>
             {
                 // Create and install a new dispatcher context
-                SynchronizationContext.SetSynchronizationContext(
-                    new DispatcherSynchronizationContext(
-                        Dispatcher.CurrentDispatcher));
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
                 this.dispatcher = Dispatcher.CurrentDispatcher;
 

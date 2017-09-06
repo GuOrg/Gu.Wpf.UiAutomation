@@ -7,9 +7,6 @@
         {
         }
 
-        /// <summary>
-        /// The header text.
-        /// </summary>
         public string Text
         {
             get

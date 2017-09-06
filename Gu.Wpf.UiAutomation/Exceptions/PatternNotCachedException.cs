@@ -15,7 +15,7 @@
         }
 
         public PatternNotCachedException(PatternId pattern)
-            : base(string.Format(DefaultMessageWithData, pattern))
+            : base(string.Format(DefaultMessageWithData, pattern.Name))
         {
             this.Pattern = pattern;
         }
@@ -27,7 +27,7 @@
         }
 
         public PatternNotCachedException(PatternId pattern, Exception innerException)
-            : base(string.Format(DefaultMessageWithData, pattern), innerException)
+            : base(string.Format(DefaultMessageWithData, pattern.Name), innerException)
         {
             this.Pattern = pattern;
         }

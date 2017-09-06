@@ -240,23 +240,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
-        [TestCase("DataGridNoHeaders")]
-        public void NewItemPlaceholder(string name)
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(false, dataGrid[0, 0].IsNewItemPlaceholder);
-                Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 0].IsNewItemPlaceholder);
-                Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 0].Value);
-                Assert.AreEqual(true, dataGrid[dataGrid.RowCount - 1, 1].IsNewItemPlaceholder);
-                Assert.AreEqual(string.Empty, dataGrid[dataGrid.RowCount - 1, 1].Value);
-            }
-        }
-
         [TestCase("DataGrid", 0, 1)]
         [TestCase("DataGrid", 1, 2)]
         [TestCase("DataGrid", 2, 0)]

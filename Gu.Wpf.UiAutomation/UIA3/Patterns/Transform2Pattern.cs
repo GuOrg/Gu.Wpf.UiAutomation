@@ -4,11 +4,11 @@
 
     public class Transform2Pattern : Transform2PatternBase<Interop.UIAutomationClient.IUIAutomationTransformPattern2>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2", AutomationObjectIds.IsTransformPattern2AvailableProperty);
-        public static readonly PropertyId CanZoomProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
-        public static readonly PropertyId ZoomLevelProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
-        public static readonly PropertyId ZoomMaximumProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
-        public static readonly PropertyId ZoomMinimumProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TransformPattern2Id, "Transform2", AutomationObjectIds.IsTransformPattern2AvailableProperty);
+        public static readonly PropertyId CanZoomProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2CanZoomPropertyId, "CanZoom");
+        public static readonly PropertyId ZoomLevelProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomLevelPropertyId, "ZoomLevel");
+        public static readonly PropertyId ZoomMaximumProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMaximumPropertyId, "ZoomMaximum");
+        public static readonly PropertyId ZoomMinimumProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_Transform2ZoomMinimumPropertyId, "ZoomMinimum");
 
         private readonly TransformPattern transformPattern;
 

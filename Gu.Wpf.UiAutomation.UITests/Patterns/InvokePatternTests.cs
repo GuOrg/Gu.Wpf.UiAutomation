@@ -22,7 +22,7 @@
                 var button = tabItem.FindButton("InvokableButton");
                 Assert.NotNull(button);
                 var invokePattern = button.Patterns.Invoke.Pattern;
-                Assert.That(invokePattern, Is.Not.Null);
+                Assert.NotNull(invokePattern);
                 var invokeFired = false;
                 using (var waitHandle = new ManualResetEventSlim(initialState: false))
                 {
@@ -37,7 +37,7 @@
                     invokePattern.Invoke();
                     var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
                     Assert.AreEqual(true, waitResult);
-                    Assert.AreEqual("Invoked!", button.Properties.Name);
+                    Assert.AreEqual("Invoked!", button.Text);
                     Assert.AreEqual(true, invokeFired);
                     button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
                 }

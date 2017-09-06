@@ -4,15 +4,15 @@
 
     public class WindowPattern : WindowPatternBase<Interop.UIAutomationClient.IUIAutomationWindowPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_WindowPatternId, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
-        public static readonly PropertyId CanMaximizeProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
-        public static readonly PropertyId CanMinimizeProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMinimizePropertyId, "CanMinimize");
-        public static readonly PropertyId IsModalProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsModalPropertyId, "IsModal");
-        public static readonly PropertyId IsTopmostProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsTopmostPropertyId, "IsTopmost");
-        public static readonly PropertyId WindowInteractionStateProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId, "WindowInteractionState");
-        public static readonly PropertyId WindowVisualStateProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
-        public static readonly EventId WindowClosedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
-        public static readonly EventId WindowOpenedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_WindowPatternId, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
+        public static readonly PropertyId CanMaximizeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
+        public static readonly PropertyId CanMinimizeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMinimizePropertyId, "CanMinimize");
+        public static readonly PropertyId IsModalProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsModalPropertyId, "IsModal");
+        public static readonly PropertyId IsTopmostProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsTopmostPropertyId, "IsTopmost");
+        public static readonly PropertyId WindowInteractionStateProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId, "WindowInteractionState");
+        public static readonly PropertyId WindowVisualStateProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
+        public static readonly EventId WindowClosedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
+        public static readonly EventId WindowOpenedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
 
         public WindowPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationWindowPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

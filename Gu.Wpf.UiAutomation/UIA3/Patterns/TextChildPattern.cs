@@ -5,7 +5,7 @@
 
     public class TextChildPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationTextChildPattern>, ITextChildPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextChildPatternId, "TextChild", AutomationObjectIds.IsTextChildPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextChildPatternId, "TextChild", AutomationObjectIds.IsTextChildPatternAvailableProperty);
 
         public TextChildPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextChildPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

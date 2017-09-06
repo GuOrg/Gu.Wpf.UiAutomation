@@ -4,10 +4,10 @@
 
     public class TransformPattern : TransformPatternBase<Interop.UIAutomationClient.IUIAutomationTransformPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TransformPatternId, "Transform", AutomationObjectIds.IsTransformPatternAvailableProperty);
-        public static readonly PropertyId CanMoveProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
-        public static readonly PropertyId CanResizeProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
-        public static readonly PropertyId CanRotateProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TransformPatternId, "Transform", AutomationObjectIds.IsTransformPatternAvailableProperty);
+        public static readonly PropertyId CanMoveProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanMovePropertyId, "CanMove");
+        public static readonly PropertyId CanResizeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanResizePropertyId, "CanResize");
+        public static readonly PropertyId CanRotateProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TransformCanRotatePropertyId, "CanRotate");
 
         public TransformPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTransformPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

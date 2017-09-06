@@ -4,9 +4,9 @@
 
     public class ValuePattern : ValuePatternBase<Interop.UIAutomationClient.IUIAutomationValuePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_ValuePatternId, "Value", AutomationObjectIds.IsValuePatternAvailableProperty);
-        public static readonly PropertyId IsReadOnlyProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
-        public static readonly PropertyId ValueProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_ValuePatternId, "Value", AutomationObjectIds.IsValuePatternAvailableProperty);
+        public static readonly PropertyId IsReadOnlyProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId, "IsReadOnly");
+        public static readonly PropertyId ValueProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_ValueValuePropertyId, "Value");
 
         public ValuePattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationValuePattern nativePattern)
             : base(basicAutomationElement, nativePattern)

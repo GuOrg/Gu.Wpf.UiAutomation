@@ -5,9 +5,9 @@
 
     public class TextEditPattern : TextPattern, ITextEditPattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit", AutomationObjectIds.IsTextEditPatternAvailableProperty);
-        public static readonly EventId ConversionTargetChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
-        public static readonly EventId TextChangedEvent2 = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
+        public new static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextEditPatternId, "TextEdit", AutomationObjectIds.IsTextEditPatternAvailableProperty);
+        public static readonly EventId ConversionTargetChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_ConversionTargetChangedEventId, "ConversionTargetChanged");
+        public static readonly EventId TextChangedEvent2 = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_TextEdit_TextChangedEventId, "TextChanged");
 
         public TextEditPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextEditPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

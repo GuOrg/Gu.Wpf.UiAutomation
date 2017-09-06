@@ -14,13 +14,13 @@
 
         public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
 
-        public double Minimum => this.Patterns.RangeValue.Pattern.Minimum;
+        public double Minimum => this.Patterns.RangeValue.Pattern.Minimum.Value;
 
-        public double Maximum => this.Patterns.RangeValue.Pattern.Maximum;
+        public double Maximum => this.Patterns.RangeValue.Pattern.Maximum.Value;
 
-        public double SmallChange => this.Patterns.RangeValue.Pattern.SmallChange;
+        public double SmallChange => this.Patterns.RangeValue.Pattern.SmallChange.Value;
 
-        public double LargeChange => this.Patterns.RangeValue.Pattern.LargeChange;
+        public double LargeChange => this.Patterns.RangeValue.Pattern.LargeChange.Value;
 
         public double Value
         {

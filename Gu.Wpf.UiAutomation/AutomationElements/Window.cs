@@ -146,12 +146,12 @@
         /// </summary>
         public void SetTransparency(byte alpha)
         {
-            if (User32.SetWindowLong(this.Properties.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
+            if (User32.SetWindowLong(this.NativeWindowHandle, WindowLongParam.GWL_EXSTYLE, WindowStyles.WS_EX_LAYERED) == 0)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
-            if (!User32.SetLayeredWindowAttributes(this.Properties.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
+            if (!User32.SetLayeredWindowAttributes(this.NativeWindowHandle, 0, alpha, LayeredWindowAttributes.LWA_ALPHA))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }

@@ -4,7 +4,7 @@
 
     public class ScrollItemPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationScrollItemPattern>, IScrollItemPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_ScrollItemPatternId, "ScrollItem", AutomationObjectIds.IsScrollItemPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_ScrollItemPatternId, "ScrollItem", AutomationObjectIds.IsScrollItemPatternAvailableProperty);
 
         public ScrollItemPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationScrollItemPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

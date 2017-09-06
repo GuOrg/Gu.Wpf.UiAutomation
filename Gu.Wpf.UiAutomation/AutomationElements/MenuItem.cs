@@ -32,7 +32,7 @@ namespace Gu.Wpf.UiAutomation
 
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
-                    var appWindow = this.BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.Properties.ProcessId)));
+                    var appWindow = this.BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.Properties.ProcessId.Value)));
 
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(this.Text))).AsMenu();
