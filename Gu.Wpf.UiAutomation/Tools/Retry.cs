@@ -6,7 +6,7 @@
     public static class Retry
     {
         public static readonly TimeSpan DefaultRetryFor = TimeSpan.FromMilliseconds(1000);
-        private static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
+        public static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
 
         public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
@@ -90,7 +90,7 @@
             }
         }
 
-        private static bool IsTimeouted(DateTime startTime, TimeSpan timeout)
+        public static bool IsTimeouted(DateTime startTime, TimeSpan timeout)
         {
             // Check for infinite timeout
             if (timeout.TotalMilliseconds < 0)

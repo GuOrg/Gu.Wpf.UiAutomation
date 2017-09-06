@@ -382,7 +382,49 @@
 
         public AutomationElement Find(ControlType controlType)
         {
-            return this.FindFirstDescendant(this.ConditionFactory.ByControlType(controlType));
+            var condition = this.ConditionFactory.ByControlType(controlType);
+
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType}.");
+        }
+
+        public AutomationElement Find(ControlType controlType, string name)
+        {
+            if (name == null)
+            {
+                return this.Find(controlType);
+            }
+
+            var condition = new AndCondition(
+                this.ConditionFactory.ByControlType(controlType),
+                new OrCondition(
+                    this.ConditionFactory.ByName(name),
+                    this.ConditionFactory.ByAutomationId(name)));
+
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
         }
 
         public AutomationElement FindByNameOrId(string name)
@@ -847,44 +889,6 @@
 
             action();
             Wait.UntilInputIsProcessed();
-        }
-
-        protected AutomationElement Find(ControlType controlType, string name = null)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                try
-                {
-                    return Retry.While(
-                        () => this.BasicAutomationElement.FindFirst(
-                            TreeScope.Descendants,
-                            this.ConditionFactory.ByControlType(controlType)),
-                        element => element == null,
-                        Retry.DefaultRetryFor);
-                }
-                catch (TimeoutException e)
-                {
-                    throw new InvalidOperationException($"Did not find a {controlType}.", e);
-                }
-            }
-
-            try
-            {
-                return Retry.While(
-                    () => this.BasicAutomationElement.FindFirst(
-                        TreeScope.Descendants,
-                        new AndCondition(
-                            this.ConditionFactory.ByControlType(controlType),
-                            new OrCondition(
-                                this.ConditionFactory.ByName(name),
-                                this.ConditionFactory.ByAutomationId(name)))),
-                    element => element == null,
-                    Retry.DefaultRetryFor);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException($"Did not find a {controlType} with name {name}.", e);
-            }
         }
     }
 }
