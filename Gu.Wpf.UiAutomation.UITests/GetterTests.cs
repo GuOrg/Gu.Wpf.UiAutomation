@@ -204,8 +204,7 @@
                 {
                     var window = app.MainWindow;
                     var property = window.Automation.PropertyLibrary.Window.CanMaximize;
-                    var exception = Assert.Throws<PropertyNotCachedException>(
-                        () => window.BasicAutomationElement.GetPropertyValue(property));
+                    var exception = Assert.Throws<PropertyNotCachedException>(() => window.BasicAutomationElement.GetPropertyValue(property));
                     StringAssert.Contains("CanMaximize", exception.Message);
                 }
             }

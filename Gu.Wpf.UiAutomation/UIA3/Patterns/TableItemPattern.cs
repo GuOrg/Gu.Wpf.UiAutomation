@@ -6,8 +6,8 @@
     public class TableItemPattern : TableItemPatternBase<Interop.UIAutomationClient.IUIAutomationTableItemPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TableItemPatternId, "TableItem", AutomationObjectIds.IsTableItemPatternAvailableProperty);
-        public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems").SetConverter(AutomationElementConverter.NativeArrayToManaged);
-        public static readonly PropertyId RowHeaderItemsProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId, "RowHeaderItems").SetConverter(AutomationElementConverter.NativeArrayToManaged);
+        public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems", AutomationElementConverter.NativeArrayToManaged);
+        public static readonly PropertyId RowHeaderItemsProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId, "RowHeaderItems", AutomationElementConverter.NativeArrayToManaged);
 
         public TableItemPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTableItemPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

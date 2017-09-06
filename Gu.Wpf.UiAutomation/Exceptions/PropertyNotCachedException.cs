@@ -27,7 +27,7 @@
         }
 
         public PropertyNotCachedException(PropertyId property, Exception innerException)
-            : base(string.Format(DefaultMessageWithData, property), innerException)
+            : base(string.Format(DefaultMessageWithData, property.Name), innerException)
         {
             this.Property = property;
         }

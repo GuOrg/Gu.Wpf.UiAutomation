@@ -1,35 +1,57 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
 
     /// <summary>
     /// A wrapper around the property ids
     /// </summary>
-    public class PropertyId : ConvertibleIdentifierBase
+    public sealed class PropertyId
     {
         /// <summary>
         /// Fixed PropertyId which is used for patterns that are not supported by the framework.
         /// </summary>
-        public static readonly PropertyId NotSupportedByFramework = new PropertyId(-1, "Not supported");
+        public static readonly PropertyId NotSupportedByFramework = new PropertyId(-1, "Not supported", null);
 
-        public PropertyId(int id, string name)
-            : base(id, name)
+        private static readonly ConcurrentDictionary<int, PropertyId> Cache = new ConcurrentDictionary<int, PropertyId>();
+
+        private readonly Func<AutomationBase, object, object> converter;
+
+        private PropertyId(int id, string name, Func<AutomationBase, object, object> converter)
         {
+            this.converter = converter;
+            this.Id = id;
+            this.Name = name;
         }
 
-        public static PropertyId Register(int id, string name)
+        public int Id { get; }
+
+        public string Name { get; }
+
+        public static PropertyId GetOrCreate(int id, string name)
         {
-            return RegisterProperty(id, name);
+            return Cache.GetOrAdd(id, x => new PropertyId(id, name, null));
+        }
+
+        public static PropertyId GetOrCreate(int id, string name, Func<object, object> converter)
+        {
+            return Cache.GetOrAdd(id, x => new PropertyId(id, name, (a, o) => converter(o)));
+        }
+
+        public static PropertyId GetOrCreate(int id, string name, Func<AutomationBase, object, object> converter)
+        {
+            return Cache.GetOrAdd(id, x => new PropertyId(id, name, converter));
         }
 
         public static PropertyId Find(int id)
         {
-            return FindProperty(id);
-        }
+            if (Cache.TryGetValue(id, out var property))
+            {
+                return property;
+            }
 
-        public PropertyId SetConverter(Func<AutomationBase, object, object> convertMethod)
-        {
-            return this.SetConverter<PropertyId>(convertMethod);
+            throw new KeyNotFoundException($"Did not find a property with id: {id}");
         }
 
         /// <summary>
@@ -38,6 +60,16 @@
         public PropertyCondition GetCondition(object value)
         {
             return new PropertyCondition(this, value);
+        }
+
+        public T Convert<T>(AutomationBase automation, object value)
+        {
+            if (this.converter == null)
+            {
+                return (T)value;
+            }
+
+            return (T)this.converter(automation, value);
         }
     }
 }

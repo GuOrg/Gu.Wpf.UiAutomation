@@ -6,8 +6,8 @@
     public class SelectionItemPattern : SelectionItemPatternBase<Interop.UIAutomationClient.IUIAutomationSelectionItemPattern>
     {
         public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
-        public static readonly PropertyId IsSelectedProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
-        public static readonly PropertyId SelectionContainerProperty = PropertyId.Register(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer").SetConverter(AutomationElementConverter.NativeToManaged);
+        public static readonly PropertyId IsSelectedProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
+        public static readonly PropertyId SelectionContainerProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer", AutomationElementConverter.NativeToManaged);
         public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
         public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
         public static readonly EventId ElementSelectedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
