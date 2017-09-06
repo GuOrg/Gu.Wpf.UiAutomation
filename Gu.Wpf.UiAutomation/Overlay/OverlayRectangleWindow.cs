@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.Overlay
 {
     using System;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
@@ -11,7 +12,9 @@
 
     public class OverlayRectangleWindow : Window
     {
-        public OverlayRectangleWindow(Rect rectangle, Color color, int durationInMs)
+        private static OverlayRectangleWindow window;
+
+        private OverlayRectangleWindow(Rect rectangle, Color color, TimeSpan duration)
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
             AutomationProperties.SetName(this, "Gu.Wpf.UiAutomationOverlayWindow");
@@ -28,7 +31,34 @@
             var borderBrush = new SolidColorBrush(color);
             borderBrush.Freeze();
             this.Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
-            this.StartCloseTimer(TimeSpan.FromMilliseconds(durationInMs));
+            var timer = new DispatcherTimer { Interval = duration };
+            timer.Tick += this.TimerTick;
+            timer.Start();
+        }
+
+        public static void Show(Rect rectangle, Color color, TimeSpan duration)
+        {
+            Show(() =>
+            {
+                window?.Close();
+                window = new OverlayRectangleWindow(rectangle, color, duration);
+                window.Show();
+            });
+        }
+
+        public static void ShowBlocking(Rect rectangle, Color color, TimeSpan duration)
+        {
+            Show(() =>
+            {
+                window?.Close();
+                window = new OverlayRectangleWindow(rectangle, color, duration);
+                window.ShowDialog();
+            });
+        }
+
+        public static void CloseCurrent()
+        {
+            window?.Dispatcher.Invoke(() => window.Close());
         }
 
         /// <inheritdoc/>
@@ -40,18 +70,43 @@
             this.SetWindowTransparent();
         }
 
+        private static void Show(Action action)
+        {
+            var startedEvent = new ManualResetEventSlim(initialState: false);
+            System.Windows.Threading.Dispatcher dispatcher = null;
+            var uiThread = new Thread(() =>
+            {
+                // Create and install a new dispatcher context
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                dispatcher = Dispatcher.CurrentDispatcher;
+
+                // Signal that it is initialized
+                startedEvent.Set();
+
+                // Start the dispatcher processing
+                Dispatcher.Run();
+            });
+
+            // Set the apartment state
+            uiThread.SetApartmentState(ApartmentState.STA);
+
+            // Make the thread a background thread
+            uiThread.IsBackground = true;
+
+            // Start the thread
+            uiThread.Start();
+            startedEvent.Wait();
+            dispatcher.Invoke(action);
+            dispatcher.InvokeShutdown();
+            uiThread.Join(1000);
+            startedEvent.Dispose();
+        }
+
         private void SetWindowTransparent()
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             var extendedStyle = User32.GetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE);
             User32.SetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE, extendedStyle | WindowStyles.WS_EX_TRANSPARENT);
-        }
-
-        private void StartCloseTimer(TimeSpan closeTimeout)
-        {
-            var timer = new DispatcherTimer { Interval = closeTimeout };
-            timer.Tick += this.TimerTick;
-            timer.Start();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -60,6 +115,7 @@
             timer.Tick -= this.TimerTick;
             timer.Stop();
             this.Close();
+            window = null;
         }
     }
 }

@@ -22,10 +22,5 @@
       <SpecificVersion>false</SpecificVersion>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Overlay\OverlayRectangleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -17,7 +17,6 @@
             this.EventLibrary = eventLibrary;
             this.PatternLibrary = patternLibrary;
             this.ConditionFactory = new ConditionFactory(propertyLibrary);
-            this.OverlayManager = new WpfOverlayManager();
 
             // Make sure all pattern ids are initialized
             var unused = this.PatternLibrary.AllForCurrentFramework;
@@ -32,8 +31,6 @@
         public abstract ITreeWalkerFactory TreeWalkerFactory { get; }
 
         public ConditionFactory ConditionFactory { get; }
-
-        public IOverlayManager OverlayManager { get; }
 
         /// <summary>
         /// Object which represents the "Not Supported" value
@@ -84,7 +81,7 @@
             if (disposing)
             {
                 this.UnregisterAllEvents();
-                this.OverlayManager.Dispose();
+                OverlayRectangleWindow.CloseCurrent();
             }
         }
 

@@ -6,6 +6,7 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.Overlay;
     using GdiColor = System.Drawing.Color;
     using WpfColor = System.Windows.Media.Color;
 
@@ -214,11 +215,11 @@
             {
                 if (blocking)
                 {
-                    this.BasicAutomationElement.Automation.OverlayManager.ShowBlocking(rectangle, color, (int)duration.TotalMilliseconds);
+                    OverlayRectangleWindow.ShowBlocking(rectangle, color, duration);
                 }
                 else
                 {
-                    this.BasicAutomationElement.Automation.OverlayManager.Show(rectangle, color, (int)duration.TotalMilliseconds);
+                    OverlayRectangleWindow.Show(rectangle, color, duration);
                 }
             }
 

@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
+    using System;
+    using System.Drawing;
     using System.IO;
     using System.Windows;
     using NUnit.Framework;
@@ -70,6 +72,29 @@
                 Assert.AreEqual(200, button.ActualWidth);
                 Assert.AreEqual(100, button.ActualHeight);
                 Assert.IsInstanceOf<Rect>(button.Bounds);
+            }
+        }
+
+        [Test]
+        public void DrawHighlight()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                button.DrawHighlight();
+                Wait.For(TimeSpan.FromMilliseconds(1000));
+            }
+        }
+
+        [Test]
+        public void DrawHighlightBlocking()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(1000));
             }
         }
     }
