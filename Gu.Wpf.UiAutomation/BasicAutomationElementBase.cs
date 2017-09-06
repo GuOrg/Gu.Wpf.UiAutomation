@@ -173,6 +173,8 @@
         public abstract T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
             where T : AutomationElement;
 
+        public abstract AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index);
+
         public abstract bool TryGetClickablePoint(out Point point);
 
         public abstract IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action);

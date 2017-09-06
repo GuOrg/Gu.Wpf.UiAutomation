@@ -254,121 +254,121 @@
         /// Find the first checkbox by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public CheckBox FindCheckBox(string name = null) => this.Find(ControlType.CheckBox, name).AsCheckBox();
+        public CheckBox FindCheckBox(string name = null) => this.Find(ControlType.CheckBox, name, x => new CheckBox(x));
 
         /// <summary>
         /// Find the first toggle button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ToggleButton FindToggleButton(string name = null) => this.Find(ControlType.Button, name).AsToggleButton();
+        public ToggleButton FindToggleButton(string name = null) => this.Find(ControlType.Button, name, x => new ToggleButton(x));
 
         /// <summary>
         /// Find the first radio button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public RadioButton FindRadioButton(string name) => this.Find(ControlType.RadioButton, name).AsRadioButton();
+        public RadioButton FindRadioButton(string name) => this.Find(ControlType.RadioButton, name, x => new RadioButton(x));
 
         /// <summary>
         /// Find the first button by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Button FindButton(string name = null) => new Button(this.Find(ControlType.Button, name).BasicAutomationElement);
+        public Button FindButton(string name = null) => this.Find(ControlType.Button, name, x => new Button(x));
 
         /// <summary>
         /// Find the first slider by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Slider FindSlider(string name = null) => this.Find(ControlType.Slider, name).AsSlider();
+        public Slider FindSlider(string name = null) => this.Find(ControlType.Slider, name, x => new Slider(x));
 
         /// <summary>
         /// Find the first ProgressBar by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ProgressBar FindProgressBar(string name = null) => this.Find(ControlType.ProgressBar, name).AsProgressBar();
+        public ProgressBar FindProgressBar(string name = null) => this.Find(ControlType.ProgressBar, name, x => new ProgressBar(x));
 
         /// <summary>
         /// Find the first combo box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name).AsComboBox();
+        public ComboBox FindComboBox(string name = null) => this.Find(ControlType.ComboBox, name, x => new ComboBox(x));
 
         /// <summary>
         /// Find the first text block by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBlock FindTextBlock(string name = null) => this.Find(ControlType.Text, name).AsTextBlock();
+        public TextBlock FindTextBlock(string name = null) => this.Find(ControlType.Text, name, x => new TextBlock(x));
 
         /// <summary>
         /// Find the first label by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Label FindLabel(string name = null) => this.Find(ControlType.Text, name).AsLabel();
+        public Label FindLabel(string name = null) => this.Find(ControlType.Text, name, x => new Label(x));
 
         /// <summary>
         /// Find the first text box by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBox FindTextBox(string name = null) => this.Find(ControlType.Edit, name).AsTextBox();
+        public TextBox FindTextBox(string name = null) => this.Find(ControlType.Edit, name, x => new TextBox(x));
 
         /// <summary>
         /// Find the first tab control by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name).AsTabControl();
+        public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name, x => new TabControl(x));
 
         /// <summary>
         /// Find the first group box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public GroupBox FindGroupBox(string name = null) => this.Find(ControlType.Group, name).AsGroupBox();
+        public GroupBox FindGroupBox(string name = null) => this.Find(ControlType.Group, name, x => new GroupBox(x));
 
         /// <summary>
         /// Find the first expander by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name).AsExpander();
+        public Expander FindExpander(string name = null) => this.Find(ControlType.Group, name, x => new Expander(x));
 
         /// <summary>
         /// Find the first menu by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Menu FindMenu(string name = null) => this.Find(ControlType.Menu, name).AsMenu();
+        public Menu FindMenu(string name = null) => this.Find(ControlType.Menu, name, x => new Menu(x));
 
         /// <summary>
         /// Find the first horizontal scroll bar by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name).AsHorizontalScrollBar();
+        public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name, x => new HorizontalScrollBar(x));
 
         /// <summary>
         /// Find the first vertical scroll bar by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name).AsVerticalScrollBar();
+        public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.Find(ControlType.ScrollBar, name, x => new VerticalScrollBar(x));
 
         /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ListBox FindListBox(string name = null) => this.Find(ControlType.List, name).AsListBox();
+        public ListBox FindListBox(string name = null) => this.Find(ControlType.List, name, x => new ListBox(x));
 
         /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ListView FindListView(string name = null) => this.Find(ControlType.DataGrid, name).AsListView();
+        public ListView FindListView(string name = null) => this.Find(ControlType.DataGrid, name, x => new ListView(x));
 
         /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public DataGrid FindDataGrid(string name = null) => this.Find(ControlType.DataGrid, name).AsDataGrid();
+        public DataGrid FindDataGrid(string name = null) => this.Find(ControlType.DataGrid, name, x => new DataGrid(x));
 
         /// <summary>
         /// Find the first list box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TreeView FindTreeView(string name = null) => this.Find(ControlType.Tree, name).AsTreeView();
+        public TreeView FindTreeView(string name = null) => this.Find(ControlType.Tree, name, x => new TreeView(x));
 
         public AutomationElement FindByNameOrId(string name, ControlType controlType)
         {
@@ -399,6 +399,44 @@
             throw new InvalidOperationException($"Did not find a {controlType}.");
         }
 
+        public T Find<T>(ControlType controlType, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            var condition = this.ConditionFactory.ByControlType(controlType);
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition, wrap);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType}.");
+        }
+
+        public AutomationElement Find(ControlType controlType, int index)
+        {
+            var condition = this.ConditionFactory.ByControlType(controlType);
+
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindIndexed(TreeScope.Descendants, condition, index);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType}.");
+        }
+
         public AutomationElement Find(ControlType controlType, string name)
         {
             if (name == null)
@@ -416,6 +454,35 @@
             while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
             {
                 var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
+        }
+
+        public T Find<T>(ControlType controlType, string name, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            if (name == null)
+            {
+                return this.Find(controlType, wrap);
+            }
+
+            var condition = new AndCondition(
+                this.ConditionFactory.ByControlType(controlType),
+                new OrCondition(
+                    this.ConditionFactory.ByName(name),
+                    this.ConditionFactory.ByAutomationId(name)));
+
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition, wrap);
                 if (element != null)
                 {
                     return element;
