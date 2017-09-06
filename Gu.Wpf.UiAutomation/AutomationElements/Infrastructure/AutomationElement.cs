@@ -421,7 +421,6 @@
         public AutomationElement Find(ControlType controlType, int index)
         {
             var condition = this.ConditionFactory.ByControlType(controlType);
-
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
             {
@@ -435,6 +434,25 @@
             }
 
             throw new InvalidOperationException($"Did not find a {controlType}.");
+        }
+
+        public T Find<T>(ControlType controlType, int index, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            var condition = this.ConditionFactory.ByControlType(controlType);
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, Retry.DefaultRetryFor))
+            {
+                var element = this.BasicAutomationElement.FindIndexed(TreeScope.Descendants, condition, index, wrap);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find a {controlType} with index {index}.");
         }
 
         public AutomationElement Find(ControlType controlType, string name)
@@ -511,6 +529,15 @@
         }
 
         /// <summary>
+        /// Finds all elements in the given treescope and with the given condition.
+        /// </summary>
+        public IReadOnlyList<T> FindAll<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            return this.BasicAutomationElement.FindAll(treeScope, condition, wrap);
+        }
+
+        /// <summary>
         /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
         public IReadOnlyList<AutomationElement> FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
@@ -534,10 +561,19 @@
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
         {
-            return Retry.While(
-                () => this.BasicAutomationElement.FindFirst(treeScope, condition),
-                element => element == null,
-                timeOut);
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, timeOut))
+            {
+                var element = this.BasicAutomationElement.FindFirst(treeScope, condition);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find an element matching {condition}.");
         }
 
         /// <summary>

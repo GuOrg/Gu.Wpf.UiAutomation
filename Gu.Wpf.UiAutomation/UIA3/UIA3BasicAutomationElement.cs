@@ -56,12 +56,42 @@
             return AutomationElementConverter.NativeArrayToManaged(this.Automation, nativeFoundElements);
         }
 
+        public override IReadOnlyList<T> FindAll<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+        {
+            var nativeFoundElements = CacheRequest.IsCachingActive
+                ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
+            var result = new T[nativeFoundElements.Length];
+            for (var i = 0; i < nativeFoundElements.Length; i++)
+            {
+                var nativeElement = nativeFoundElements.GetElement(i);
+                var basicElement = new UIA3BasicAutomationElement(this.Automation, nativeElement);
+                result[i] = wrap(basicElement);
+            }
+
+            return result;
+        }
+
         public override AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
         {
             var nativeElement = this.FindFirstNative(
                 treeScope,
                 condition.ToNative(this.Automation.NativeAutomation));
             return AutomationElementConverter.NativeToManaged(this.Automation, nativeElement);
+        }
+
+        public override T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+        {
+            var nativeElement = this.FindFirstNative(
+                treeScope,
+                condition.ToNative(this.Automation.NativeAutomation));
+            if (nativeElement == null)
+            {
+                return null;
+            }
+
+            var basicElement = new UIA3BasicAutomationElement(this.Automation, nativeElement);
+            return wrap(basicElement);
         }
 
         public override AutomationElement FindIndexed(TreeScope treeScope, ConditionBase condition, int index)
@@ -78,11 +108,12 @@
             return AutomationElementConverter.NativeToManaged(this.Automation, nativeElement);
         }
 
-        public override T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+        public override T FindIndexed<T>(TreeScope treeScope, ConditionBase condition, int index, Func<BasicAutomationElementBase, T> wrap)
         {
-            var nativeElement = this.FindFirstNative(
-                treeScope,
-                condition.ToNative(this.Automation.NativeAutomation));
+            var nativeFoundElements = CacheRequest.IsCachingActive
+                ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
+                : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
+            var nativeElement = nativeFoundElements.GetElement(index);
             if (nativeElement == null)
             {
                 return null;

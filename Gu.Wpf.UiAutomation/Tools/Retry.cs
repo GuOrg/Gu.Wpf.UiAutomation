@@ -51,6 +51,7 @@
             }
         }
 
+        [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static T While<T>(Func<T> retryMethod, Predicate<T> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
@@ -71,6 +72,7 @@
             }
         }
 
+        [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static void While(Func<bool> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
