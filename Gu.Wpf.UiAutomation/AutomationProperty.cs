@@ -36,7 +36,7 @@
         /// <inheritdoc />
         public TVal ValueOrDefault(TVal @default = default(TVal))
         {
-            if (this.TryGetValue(out TVal value))
+            if (this.TryGetValue(out var value))
             {
                 return value;
             }

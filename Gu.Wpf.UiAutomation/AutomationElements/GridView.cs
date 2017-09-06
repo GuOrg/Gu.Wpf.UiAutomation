@@ -17,31 +17,7 @@
         /// <summary>
         /// Gets the total row count.
         /// </summary>
-        public int RowCount
-        {
-            get
-            {
-                var gridPattern = this.GridPattern;
-                if (!this.GridPattern.RowCount.TryGetValue(out var rowCount))
-                {
-                    return 0;
-                }
-
-                if (rowCount == 0)
-                {
-                    return 0;
-                }
-
-                var cell = new GridCell(gridPattern.GetItem(rowCount - 1, 0).BasicAutomationElement);
-                if (cell.IsNewItemPlaceholder &&
-                    cell.IsReadOnly)
-                {
-                    return rowCount - 1;
-                }
-
-                return rowCount;
-            }
-        }
+        public virtual int RowCount => this.GridPattern.RowCount.ValueOrDefault();
 
         /// <summary>
         /// Gets the total column count.

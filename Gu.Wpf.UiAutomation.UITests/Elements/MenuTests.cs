@@ -19,22 +19,22 @@
                 Assert.That(menu, Is.Not.Null);
                 var items = menu.Items;
                 Assert.AreEqual(2, items.Count);
-                Assert.AreEqual("File", items[0].Properties.Name);
-                Assert.AreEqual("Edit", items[1].Properties.Name);
+                Assert.AreEqual("File", items[0].Text);
+                Assert.AreEqual("Edit", items[1].Text);
 
                 var subitems1 = items[0].Items;
                 Assert.AreEqual(1, subitems1.Count);
-                Assert.AreEqual("Exit", subitems1[0].Properties.Name);
+                Assert.AreEqual("Exit", subitems1[0].Text);
 
                 var subitems2 = items[1].Items;
                 Assert.AreEqual(2, subitems2.Count);
-                Assert.AreEqual("Copy", subitems2[0].Properties.Name);
-                Assert.AreEqual("Paste", subitems2[1].Properties.Name);
+                Assert.AreEqual("Copy", subitems2[0].Text);
+                Assert.AreEqual("Paste", subitems2[1].Text);
 
                 var subsubitems1 = subitems2[0].Items;
                 Assert.AreEqual(2, subsubitems1.Count);
-                Assert.AreEqual("Plain", subsubitems1[0].Properties.Name);
-                Assert.AreEqual("Fancy", subsubitems1[1].Properties.Name);
+                Assert.AreEqual("Plain", subsubitems1[0].Text);
+                Assert.AreEqual("Fancy", subsubitems1[1].Text);
             }
         }
 
@@ -46,13 +46,13 @@
                 var window = app.MainWindow;
                 var menu = window.FindMenu();
                 var edit = menu.Items["Edit"];
-                Assert.AreEqual("Edit", edit.Properties.Name.Value);
+                Assert.AreEqual("Edit", edit.Text);
 
                 var copy = edit.Items["Copy"];
-                Assert.AreEqual("Copy", copy.Properties.Name.Value);
+                Assert.AreEqual("Copy", copy.Text);
 
                 var fancy = copy.Items["Fancy"];
-                Assert.AreEqual("Fancy", fancy.Properties.Name.Value);
+                Assert.AreEqual("Fancy", fancy.Text);
             }
         }
     }
