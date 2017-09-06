@@ -16,13 +16,9 @@
         {
             get
             {
-                var childItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem))
-                                     .Select(e =>
-                                     {
-                                         var mi = e.AsMenuItem();
-                                         mi.IsWin32Menu = this.IsWin32Menu;
-                                         return mi;
-                                     }).ToArray();
+                var childItems = this.FindAllChildren(
+                    cf => cf.ByControlType(ControlType.MenuItem),
+                    x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }
         }

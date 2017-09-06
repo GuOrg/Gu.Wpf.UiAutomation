@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using System.Linq;
 
     public class TabItem : SelectionItemAutomationElement
     {

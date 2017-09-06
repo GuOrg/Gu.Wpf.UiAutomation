@@ -50,20 +50,17 @@
             get
             {
                 this.Expand();
-                IReadOnlyList<AutomationElement> items;
                 if (this.FrameworkType == FrameworkType.WinForms || this.FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32
                     var listElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
-                    items = listElement.FindAllChildren();
-                }
-                else
-                {
-                    // WPF
-                    items = this.FindAllChildren(cf => cf.ByControlType(ControlType.ListItem));
+                    return listElement.FindAllChildren(x => new ComboBoxItem(x));
                 }
 
-                return items.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+                // WPF
+                return this.FindAllChildren(
+                    cf => cf.ByControlType(ControlType.ListItem),
+                    x => new ComboBoxItem(x));
             }
         }
 

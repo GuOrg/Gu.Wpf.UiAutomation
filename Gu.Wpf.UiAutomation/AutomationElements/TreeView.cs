@@ -21,9 +21,10 @@
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeView" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(TreeScope.Children, this.treeViewItemCondition)
-                                                        .Select(e => e.AsTreeViewItem())
-                                                        .ToArray();
+        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(
+            TreeScope.Children,
+            this.treeViewItemCondition,
+            x => new TreeViewItem(x));
 
         private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)
         {

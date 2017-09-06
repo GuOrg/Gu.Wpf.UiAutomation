@@ -59,9 +59,9 @@ namespace Gu.Wpf.UiAutomation
                     while (state != ExpandCollapseState.Expanded);
                 }
 
-                var childItems = this.FindAllChildren(cf => cf.ByControlType(ControlType.MenuItem))
-                                     .Select(e => e.AsMenuItem())
-                                     .ToArray();
+                var childItems = this.FindAllChildren(
+                    cf => cf.ByControlType(ControlType.MenuItem),
+                    x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }
         }

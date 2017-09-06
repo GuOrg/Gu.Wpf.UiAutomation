@@ -31,9 +31,7 @@
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public IReadOnlyList<TabItem> Items => this.FindAll(TreeScope.Children, this.ConditionFactory.ByControlType(ControlType.TabItem))
-                                                   .Select(e => e.AsTabItem())
-                                                   .ToArray();
+        public IReadOnlyList<TabItem> Items => this.FindAllChildren(this.ConditionFactory.ByControlType(ControlType.TabItem), x => new TabItem(x));
 
         public AutomationElement Content
         {

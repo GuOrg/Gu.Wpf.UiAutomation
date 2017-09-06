@@ -916,15 +916,34 @@
             return this.FindAll(TreeScope.Children, TrueCondition.Default);
         }
 
+        public IReadOnlyList<T> FindAllChildren<T>(Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            return this.BasicAutomationElement.FindAll(TreeScope.Children, TrueCondition.Default, wrap);
+        }
+
         public IReadOnlyList<AutomationElement> FindAllChildren(ConditionBase condition)
         {
-            return this.FindAll(TreeScope.Children, condition);
+            return this.BasicAutomationElement.FindAll(TreeScope.Children, condition);
+        }
+
+        public IReadOnlyList<T> FindAllChildren<T>(ConditionBase condition, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            return this.BasicAutomationElement.FindAll(TreeScope.Children, condition, wrap);
         }
 
         public IReadOnlyList<AutomationElement> FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindAllChildren(condition);
+            return this.BasicAutomationElement.FindAll(TreeScope.Children, condition);
+        }
+
+        public IReadOnlyList<T> FindAllChildren<T>(Func<ConditionFactory, ConditionBase> newConditionFunc, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            var condition = newConditionFunc(this.ConditionFactory);
+            return this.FindAllChildren(condition, wrap);
         }
 
         public AutomationElement FindFirstDescendant()

@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                return this.FindAllChildren().Select(x => x.AsListBoxItem()).ToArray();
+                return this.FindAllChildren(x => new ListBoxItem(x));
             }
         }
 

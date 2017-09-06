@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     public class TreeViewItem : Control
     {
@@ -20,9 +19,10 @@
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(TreeScope.Children, this.treeViewItemCondition)
-                                                        .Select(e => e.AsTreeViewItem())
-                                                        .ToArray();
+        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(
+            TreeScope.Children,
+            this.treeViewItemCondition,
+            x => new TreeViewItem(x));
 
         /// <summary>
         /// The text of the <see cref="TreeViewItem" />
