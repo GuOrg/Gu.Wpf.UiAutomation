@@ -10,11 +10,6 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public Control(AutomationElement automationElement)
-            : base(automationElement)
-        {
-        }
-
         /// <summary>
         /// Get a value indicating if the element is enabled or not.
         /// </summary>

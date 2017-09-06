@@ -19,11 +19,6 @@
             this.BasicAutomationElement = basicAutomationElement ?? throw new ArgumentNullException(nameof(basicAutomationElement));
         }
 
-        public AutomationElement(AutomationElement automationElement)
-            : this(automationElement?.BasicAutomationElement)
-        {
-        }
-
         /// <summary>
         /// Object which contains the native wrapper element (UIA2 or UIA3) for this element.
         /// </summary>
