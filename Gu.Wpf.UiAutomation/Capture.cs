@@ -53,13 +53,23 @@
         }
 
         /// <summary>
-        /// Captures an element and saves it to a file
+        /// Captures an element and returns the image.
+        /// Note that a sleep may be required before if the control is newly loaded.
         /// </summary>
-        public static void ToFile(AutomationElement element, string filePath)
+        public static Bitmap Element(AutomationElement element)
+        {
+            return Rectangle(element.Properties.BoundingRectangle.Value);
+        }
+
+        /// <summary>
+        /// Captures an element and saves it to a file.
+        /// Note that a sleep may be required before if the control is newly loaded.
+        /// </summary>
+        public static void ElementToFile(AutomationElement element, string filePath)
         {
             using (var bmp = Rectangle(element.Properties.BoundingRectangle.Value))
             {
-                Logger.Default.Info($"Capture.ToFile: {element} {filePath}");
+                Logger.Default.Info($"Capture.ElementToFile: {element} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }

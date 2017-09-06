@@ -29,7 +29,7 @@ namespace Gu.Wpf.UiAutomation.UITests
                 }
                 catch
                 {
-                    Capture.ToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
                     Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
                     throw;
                 }
