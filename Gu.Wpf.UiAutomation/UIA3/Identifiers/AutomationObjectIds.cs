@@ -79,19 +79,19 @@
         public static readonly PropertyId IsVirtualizedItemPatternAvailableProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId, "IsVirtualizedItemPatternAvailable");
         public static readonly PropertyId IsWindowPatternAvailableProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId, "IsWindowPatternAvailable");
 
-        public static readonly EventId AsyncContentLoadedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
-        public static readonly EventId FocusChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
-        public static readonly EventId PropertyChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
-        public static readonly EventId HostedFragmentRootsInvalidatedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_HostedFragmentRootsInvalidatedEventId, "HostedFragmentRootsInvalidated");
-        public static readonly EventId LayoutInvalidatedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_LayoutInvalidatedEventId, "LayoutInvalidated");
-        public static readonly EventId LiveRegionChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_LiveRegionChangedEventId, "LiveRegionChanged");
-        public static readonly EventId MenuClosedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuClosedEventId, "MenuClosed");
-        public static readonly EventId MenuModeEndEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuModeEndEventId, "MenuModeEnd");
-        public static readonly EventId MenuModeStartEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuModeStartEventId, "MenuModeStart");
-        public static readonly EventId MenuOpenedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuOpenedEventId, "MenuOpened");
-        public static readonly EventId StructureChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_StructureChangedEventId, "StructureChanged");
-        public static readonly EventId SystemAlertEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
-        public static readonly EventId ToolTipClosedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
-        public static readonly EventId ToolTipOpenedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
+        public static readonly EventId AsyncContentLoadedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_AsyncContentLoadedEventId, "AsyncContentLoaded");
+        public static readonly EventId FocusChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_AutomationFocusChangedEventId, "AutomationFocusChanged");
+        public static readonly EventId PropertyChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_AutomationPropertyChangedEventId, "AutomationPropertyChanged");
+        public static readonly EventId HostedFragmentRootsInvalidatedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_HostedFragmentRootsInvalidatedEventId, "HostedFragmentRootsInvalidated");
+        public static readonly EventId LayoutInvalidatedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_LayoutInvalidatedEventId, "LayoutInvalidated");
+        public static readonly EventId LiveRegionChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_LiveRegionChangedEventId, "LiveRegionChanged");
+        public static readonly EventId MenuClosedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuClosedEventId, "MenuClosed");
+        public static readonly EventId MenuModeEndEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuModeEndEventId, "MenuModeEnd");
+        public static readonly EventId MenuModeStartEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuModeStartEventId, "MenuModeStart");
+        public static readonly EventId MenuOpenedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_MenuOpenedEventId, "MenuOpened");
+        public static readonly EventId StructureChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_StructureChangedEventId, "StructureChanged");
+        public static readonly EventId SystemAlertEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_SystemAlertEventId, "SystemAlert");
+        public static readonly EventId ToolTipClosedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_ToolTipClosedEventId, "ToolTipClosed");
+        public static readonly EventId ToolTipOpenedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_ToolTipOpenedEventId, "ToolTipOpened");
     }
 }

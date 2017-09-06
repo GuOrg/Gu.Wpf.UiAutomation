@@ -44,16 +44,16 @@
             return Cache.GetOrAdd(id, x => new PropertyId(id, name, converter));
         }
 
-        public static bool TryGet(int id, out PropertyId patternId)
+        public static bool TryGet(int id, out PropertyId result)
         {
-            return Cache.TryGetValue(id, out patternId);
+            return Cache.TryGetValue(id, out result);
         }
 
         public static PropertyId Find(int id)
         {
-            if (Cache.TryGetValue(id, out var property))
+            if (Cache.TryGetValue(id, out var result))
             {
-                return property;
+                return result;
             }
 
             throw new KeyNotFoundException($"Did not find a property with id: {id}");

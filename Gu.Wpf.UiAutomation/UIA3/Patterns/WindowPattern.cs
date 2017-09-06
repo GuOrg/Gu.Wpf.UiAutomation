@@ -11,8 +11,8 @@
         public static readonly PropertyId IsTopmostProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsTopmostPropertyId, "IsTopmost");
         public static readonly PropertyId WindowInteractionStateProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId, "WindowInteractionState");
         public static readonly PropertyId WindowVisualStateProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId, "WindowVisualState");
-        public static readonly EventId WindowClosedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
-        public static readonly EventId WindowOpenedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
+        public static readonly EventId WindowClosedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowClosedEventId, "WindowClosed");
+        public static readonly EventId WindowOpenedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Window_WindowOpenedEventId, "WindowOpened");
 
         public WindowPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationWindowPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

@@ -8,8 +8,8 @@
     public class TextPattern : TextPatternBase<Interop.UIAutomationClient.IUIAutomationTextPattern>
     {
         public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextPatternId, "Text", AutomationObjectIds.IsTextPatternAvailableProperty);
-        public static readonly EventId TextChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
-        public static readonly EventId TextSelectionChangedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
+        public static readonly EventId TextChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextChangedEventId, "TextChanged");
+        public static readonly EventId TextSelectionChangedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_Text_TextSelectionChangedEventId, "TextSelectionChanged");
 
         public TextPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

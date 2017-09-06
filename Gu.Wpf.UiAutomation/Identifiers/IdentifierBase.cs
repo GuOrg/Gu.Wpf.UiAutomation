@@ -9,11 +9,6 @@
     public abstract class IdentifierBase : IEquatable<IdentifierBase>
     {
         /// <summary>
-        /// Dictionary which holds all known events
-        /// </summary>
-        private static readonly ConcurrentDictionary<int, EventId> EventCache = new ConcurrentDictionary<int, EventId>();
-
-        /// <summary>
         /// Dictionary which holds all known text attributes
         /// </summary>
         private static readonly ConcurrentDictionary<int, TextAttributeId> TextAttributeCache = new ConcurrentDictionary<int, TextAttributeId>();
@@ -61,24 +56,9 @@
             return $"{this.Name} [#{this.Id}]";
         }
 
-        protected static EventId RegisterEvent(int id, string name)
-        {
-            return EventCache.GetOrAdd(id, x => new EventId(id, name));
-        }
-
         protected static TextAttributeId RegisterTextAttribute(int id, string name)
         {
             return TextAttributeCache.GetOrAdd(id, x => new TextAttributeId(x, name));
-        }
-
-        protected static EventId FindEvent(int id)
-        {
-            if (EventCache.TryGetValue(id, out var eventId))
-            {
-                return eventId;
-            }
-
-            return new EventId(id, $"Event#{id}");
         }
 
         protected static TextAttributeId FindTextAttribute(int id)

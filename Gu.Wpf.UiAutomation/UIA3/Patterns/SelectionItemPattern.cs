@@ -8,9 +8,9 @@
         public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_SelectionItemPatternId, "SelectionItem", AutomationObjectIds.IsSelectionItemPatternAvailableProperty);
         public static readonly PropertyId IsSelectedProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId, "IsSelected");
         public static readonly PropertyId SelectionContainerProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId, "SelectionContainer", AutomationElementConverter.NativeToManaged);
-        public static readonly EventId ElementAddedToSelectionEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
-        public static readonly EventId ElementRemovedFromSelectionEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
-        public static readonly EventId ElementSelectedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
+        public static readonly EventId ElementAddedToSelectionEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId, "ElementAddedToSelection");
+        public static readonly EventId ElementRemovedFromSelectionEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId, "ElementRemovedFromSelection");
+        public static readonly EventId ElementSelectedEvent = EventId.GetOrCreate(Interop.UIAutomationClient.UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId, "ElementSelected");
 
         public SelectionItemPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationSelectionItemPattern nativePattern)
             : base(basicAutomationElement, nativePattern)
