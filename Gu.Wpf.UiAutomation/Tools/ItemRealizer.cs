@@ -13,8 +13,8 @@
             double currVScroll = 0;
             if (scrollPattern != null)
             {
-                currHScroll = scrollPattern.HorizontalScrollPercent;
-                currVScroll = scrollPattern.VerticalScrollPercent;
+                currHScroll = scrollPattern.HorizontalScrollPercent.ValueOrDefault();
+                currVScroll = scrollPattern.VerticalScrollPercent.ValueOrDefault();
             }
 
             // First we try with the item container pattern and realize each item
@@ -47,7 +47,7 @@
                 {
                     scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
                 }
-                while (scrollPattern.VerticalScrollPercent < 100);
+                while (scrollPattern.VerticalScrollPercent.Value < 100);
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }

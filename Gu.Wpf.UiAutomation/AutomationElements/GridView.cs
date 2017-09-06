@@ -22,7 +22,11 @@
             get
             {
                 var gridPattern = this.GridPattern;
-                var rowCount = gridPattern.RowCount;
+                if (!this.GridPattern.RowCount.TryGetValue(out var rowCount))
+                {
+                    return 0;
+                }
+
                 if (rowCount == 0)
                 {
                     return 0;
@@ -35,7 +39,7 @@
                     return rowCount - 1;
                 }
 
-                return rowCount.Value;
+                return rowCount;
             }
         }
 

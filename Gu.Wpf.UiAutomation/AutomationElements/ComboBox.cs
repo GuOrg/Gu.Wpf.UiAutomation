@@ -77,7 +77,7 @@
                     var itemsList = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
 
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList != null && !itemsList.Properties.IsOffscreen;
+                    return itemsList != null && !itemsList.Properties.IsOffscreen.Value;
                 }
 
                 // WPF
@@ -207,7 +207,7 @@
 
         public void Collapse()
         {
-            if (!this.Properties.IsEnabled ||
+            if (!this.IsEnabled ||
                 !this.IsDropDownOpen)
             {
                 return;

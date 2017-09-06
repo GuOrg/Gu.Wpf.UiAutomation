@@ -34,9 +34,10 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 var valuePattern = this.Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (valuePattern != null &&
+                    valuePattern.IsReadOnly.TryGetValue(out var isReadonly))
                 {
-                    return valuePattern.IsReadOnly;
+                    return isReadonly;
                 }
 
                 if (this.IsNewItemPlaceholder)
@@ -61,10 +62,12 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var valuePattern = this.Patterns.Value.PatternOrDefault;
-                var value = valuePattern != null
-                    ? valuePattern.Value
-                    : this.Properties.Name.Value;
+                var value = this.Patterns.Value.PatternOrDefault?.Value.ValueOrDefault(
+                    this.Properties.Name.ValueOrDefault());
+                if (string.IsNullOrEmpty(value))
+                {
+                    return false;
+                }
 
                 return NewItemPlaceHolderRegex.IsMatch(value);
             }
@@ -74,10 +77,13 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var valuePattern = this.Patterns.Value.PatternOrDefault;
-                var value = valuePattern != null
-                    ? valuePattern.Value
-                    : this.Properties.Name.Value;
+                var value = this.Patterns.Value.PatternOrDefault?.Value.ValueOrDefault(
+                    this.Properties.Name.ValueOrDefault());
+                if (string.IsNullOrEmpty(value))
+                {
+                    return value;
+                }
+
                 return NewItemPlaceHolderRegex.IsMatch(value) ? string.Empty : value;
             }
 

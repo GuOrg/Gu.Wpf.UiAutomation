@@ -53,6 +53,6 @@
             }
         }
 
-        private ToggleState State => this.TogglePattern.ToggleState;
+        private ToggleState State => this.TogglePattern.ToggleState.Value;
     }
 }

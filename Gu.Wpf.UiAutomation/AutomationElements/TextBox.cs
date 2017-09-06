@@ -15,30 +15,29 @@
         {
             get
             {
-                if (this.Properties.IsPassword)
+                if (this.Properties.IsPassword.TryGetValue(out var isPassword) &&
+                    isPassword)
                 {
-                    throw new MethodNotSupportedException($"Text from element '{this.ToString()}' cannot be retrieved because it is set as password.");
+                    throw new MethodNotSupportedException($"Text from element '{this}' cannot be retrieved because it is set as password.");
                 }
 
-                var valuePattern = this.Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.Value.TryGetValue(out var value))
                 {
-                    return valuePattern.Value;
+                    return value;
                 }
 
-                var textPattern = this.Patterns.Text.PatternOrDefault;
-                if (textPattern != null)
+                if (this.Patterns.Text.TryGetPattern(out var textPattern))
                 {
                     return textPattern.DocumentRange.GetText(int.MaxValue);
                 }
 
-                throw new MethodNotSupportedException($"AutomationElement '{this.ToString()}' supports neither ValuePattern or TextPattern");
+                throw new MethodNotSupportedException($"AutomationElement '{this}' supports neither ValuePattern or TextPattern");
             }
 
             set
             {
-                var valuePattern = this.Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (this.Patterns.Value.TryGetPattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
                 }
@@ -69,8 +68,11 @@
                 this.Focus();
             }
 
-            var valuePattern = this.Patterns.Value.PatternOrDefault;
-            valuePattern?.SetValue(string.Empty);
+            if (this.Patterns.Value.TryGetPattern(out var valuePattern))
+            {
+                valuePattern?.SetValue(string.Empty);
+            }
+
             if (string.IsNullOrEmpty(value))
             {
                 return;

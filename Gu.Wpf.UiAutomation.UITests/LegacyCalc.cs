@@ -37,7 +37,7 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
                 var value = resultElement.Properties.Name;
-                return Regex.Replace(value, "[^0-9]", string.Empty);
+                return Regex.Replace(value.Value, "[^0-9]", string.Empty);
             }
         }
 

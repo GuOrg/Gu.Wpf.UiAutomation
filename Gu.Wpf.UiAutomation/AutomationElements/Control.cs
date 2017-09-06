@@ -159,8 +159,8 @@ namespace Gu.Wpf.UiAutomation
                 throw new InvalidOperationException("Cannot click when off screen.");
             }
 
-            var windowHandle = this.Properties.NativeWindowHandle;
-            if (windowHandle != new IntPtr(0))
+            if (this.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
+                windowHandle != new IntPtr(0))
             {
                 User32.SetFocus(windowHandle);
                 Wait.UntilResponsive(this);
@@ -177,8 +177,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public void SetForeground()
         {
-            var windowHandle = this.Properties.NativeWindowHandle;
-            if (windowHandle != new IntPtr(0))
+            if (this.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
+                windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
                 Wait.UntilResponsive(this);

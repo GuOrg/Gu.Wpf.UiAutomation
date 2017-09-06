@@ -67,7 +67,7 @@
 
         public void Collapse()
         {
-            if (!this.Properties.IsEnabled ||
+            if (!this.IsEnabled ||
                 !this.IsExpanded)
             {
                 return;
