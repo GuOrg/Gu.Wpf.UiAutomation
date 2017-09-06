@@ -8,7 +8,8 @@
         mc:Ignorable="d">
     <Button x:Name="SizeButton"
             Width="200"
-            Height="100">
+            Height="100"
+            SnapsToDevicePixels="True">
         <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
                 <Rectangle Fill="Lavender"
