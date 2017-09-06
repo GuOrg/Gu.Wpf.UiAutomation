@@ -1,12 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     /// <summary>
     /// A wrapper around the event ids
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("{this.Name} [#{this.Id}]")]
     public sealed class EventId
     {
         /// <summary>

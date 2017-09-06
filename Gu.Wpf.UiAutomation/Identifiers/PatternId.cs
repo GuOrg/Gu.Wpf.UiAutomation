@@ -6,6 +6,7 @@
     /// <summary>
     /// A wrapper around the pattern ids
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("{this.Name} [#{this.Id}]")]
     public sealed class PatternId
     {
         /// <summary>

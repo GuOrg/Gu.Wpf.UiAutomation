@@ -1,30 +1,73 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
 
     /// <summary>
     /// A wrapper around text attribute ids
     /// </summary>
-    public class TextAttributeId : ConvertibleIdentifierBase
+    [System.Diagnostics.DebuggerDisplay("{this.Name} [#{this.Id}]")]
+    public sealed class TextAttributeId
     {
-        public TextAttributeId(int id, string name)
-            : base(id, name)
+        /// <summary>
+        /// Fixed TextAttributeId which is used for patterns that are not supported by the framework.
+        /// </summary>
+        public static readonly TextAttributeId NotSupportedByFramework = new TextAttributeId(-1, "Not supported", null);
+
+        private static readonly ConcurrentDictionary<int, TextAttributeId> Cache = new ConcurrentDictionary<int, TextAttributeId>();
+
+        private readonly Func<AutomationBase, object, object> converter;
+
+        private TextAttributeId(int id, string name, Func<AutomationBase, object, object> converter)
         {
+            this.converter = converter;
+            this.Id = id;
+            this.Name = name;
         }
 
-        public static TextAttributeId Register(int id, string name)
+        public int Id { get; }
+
+        public string Name { get; }
+
+        public static TextAttributeId GetOrCreate(int id, string name)
         {
-            return RegisterTextAttribute(id, name);
+            return Cache.GetOrAdd(id, x => new TextAttributeId(id, name, null));
+        }
+
+        public static TextAttributeId GetOrCreate(int id, string name, Func<object, object> converter)
+        {
+            return Cache.GetOrAdd(id, x => new TextAttributeId(id, name, (a, o) => converter(o)));
+        }
+
+        public static TextAttributeId GetOrCreate(int id, string name, Func<AutomationBase, object, object> converter)
+        {
+            return Cache.GetOrAdd(id, x => new TextAttributeId(id, name, converter));
+        }
+
+        public static bool TryGet(int id, out TextAttributeId result)
+        {
+            return Cache.TryGetValue(id, out result);
         }
 
         public static TextAttributeId Find(int id)
         {
-            return FindTextAttribute(id);
+            if (Cache.TryGetValue(id, out var result))
+            {
+                return result;
+            }
+
+            throw new KeyNotFoundException($"Did not find a property with id: {id}");
         }
 
-        public TextAttributeId SetConverter(Func<AutomationBase, object, object> convertMethod)
+        public T Convert<T>(AutomationBase automation, object value)
         {
-            return this.SetConverter<TextAttributeId>(convertMethod);
+            if (this.converter == null)
+            {
+                return (T)value;
+            }
+
+            return (T)this.converter(automation, value);
         }
     }
 }

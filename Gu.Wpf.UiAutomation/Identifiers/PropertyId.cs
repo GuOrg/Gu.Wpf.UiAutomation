@@ -7,6 +7,7 @@
     /// <summary>
     /// A wrapper around the property ids
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("{this.Name} [#{this.Id}]")]
     public sealed class PropertyId
     {
         /// <summary>
@@ -62,7 +63,7 @@
         /// <summary>
         /// Returns a condition for this property with the given value
         /// </summary>
-        public PropertyCondition GetCondition(object value)
+        public PropertyCondition CreateCondition(object value)
         {
             return new PropertyCondition(this, value);
         }
