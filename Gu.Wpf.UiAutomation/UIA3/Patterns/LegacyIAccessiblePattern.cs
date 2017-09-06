@@ -8,7 +8,7 @@
 
     public class LegacyIAccessiblePattern : LegacyIAccessiblePatternBase<Interop.UIAutomationClient.IUIAutomationLegacyIAccessiblePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_LegacyIAccessiblePatternId, "LegacyIAccessible", AutomationObjectIds.IsLegacyIAccessiblePatternAvailableProperty);
         public static readonly PropertyId ChildIdProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId, "ChildId");
         public static readonly PropertyId DefaultActionProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId, "DefaultAction");
         public static readonly PropertyId DescriptionProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId, "Description");

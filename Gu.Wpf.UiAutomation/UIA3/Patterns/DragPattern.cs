@@ -5,7 +5,7 @@
 
     public class DragPattern : DragPatternBase<Interop.UIAutomationClient.IUIAutomationDragPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_DragPatternId, "Drag", AutomationObjectIds.IsDragPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_DragPatternId, "Drag", AutomationObjectIds.IsDragPatternAvailableProperty);
         public static readonly PropertyId DropEffectProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_DragDropEffectPropertyId, "DropEffect");
         public static readonly PropertyId DropEffectsProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_DragDropEffectsPropertyId, "DropEffects");
         public static readonly PropertyId IsGrabbedProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_DragIsGrabbedPropertyId, "IsGrabbed");

@@ -121,14 +121,38 @@
 
         public override IReadOnlyList<PatternId> GetSupportedPatterns()
         {
-            this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
-            return rawIds.Select(id => PatternId.Find(id)).ToArray();
+            this.Automation.NativeAutomation.PollForPotentialSupportedPatterns(this.NativeElement, out int[] rawIds, out string[] rawNames);
+            var patterns = new List<PatternId>(rawIds.Length);
+            for (var i = 0; i < rawIds.Length; i++)
+            {
+                var id = rawIds[i];
+                if (!PatternId.TryGet(id, out var patternId))
+                {
+                    patternId = PatternId.GetOrCreate(id, rawNames[i] + "_NOT_HANDLED", null);
+                }
+
+                patterns.Add(patternId);
+            }
+
+            return patterns;
         }
 
         public override IReadOnlyList<PropertyId> GetSupportedProperties()
         {
-            this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out int[] rawIds, out string[] rawPatternNames);
-            return rawIds.Select(id => PropertyId.Find(id)).ToArray();
+            this.Automation.NativeAutomation.PollForPotentialSupportedProperties(this.NativeElement, out int[] rawIds, out string[] rawNames);
+            var patterns = new List<PropertyId>(rawIds.Length);
+            for (var i = 0; i < rawIds.Length; i++)
+            {
+                var id = rawIds[i];
+                if (!PropertyId.TryGet(id, out var propertyId))
+                {
+                    propertyId = PropertyId.GetOrCreate(id, rawNames[i] + "_NOT_HANDLED");
+                }
+
+                patterns.Add(propertyId);
+            }
+
+            return patterns;
         }
 
         public override AutomationElement GetUpdatedCache()

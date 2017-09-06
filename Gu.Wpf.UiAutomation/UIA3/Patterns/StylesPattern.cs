@@ -5,7 +5,7 @@
 
     public class StylesPattern : StylesPatternBase<Interop.UIAutomationClient.IUIAutomationStylesPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_StylesPatternId, "Styles", AutomationObjectIds.IsStylesPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_StylesPatternId, "Styles", AutomationObjectIds.IsStylesPatternAvailableProperty);
         public static readonly PropertyId ExtendedPropertiesProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_StylesExtendedPropertiesPropertyId, "ExtendedProperties");
         public static readonly PropertyId FillColorProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_StylesFillColorPropertyId, "FillColor");
         public static readonly PropertyId FillPatternColorProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_StylesFillPatternColorPropertyId, "FillPatternColor");

@@ -44,6 +44,11 @@
             return Cache.GetOrAdd(id, x => new PropertyId(id, name, converter));
         }
 
+        public static bool TryGet(int id, out PropertyId patternId)
+        {
+            return Cache.TryGetValue(id, out patternId);
+        }
+
         public static PropertyId Find(int id)
         {
             if (Cache.TryGetValue(id, out var property))

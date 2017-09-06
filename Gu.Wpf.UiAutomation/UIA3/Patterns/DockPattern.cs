@@ -4,7 +4,7 @@
 
     public class DockPattern : DockPatternBase<Interop.UIAutomationClient.IUIAutomationDockPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_DockPatternId, "Dock", AutomationObjectIds.IsDockPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_DockPatternId, "Dock", AutomationObjectIds.IsDockPatternAvailableProperty);
         public static readonly PropertyId DockPositionProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_DockDockPositionPropertyId, "DockPosition");
 
         public DockPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationDockPattern nativePattern)

@@ -4,7 +4,7 @@
 
     public class WindowPattern : WindowPatternBase<Interop.UIAutomationClient.IUIAutomationWindowPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_WindowPatternId, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_WindowPatternId, "Window", AutomationObjectIds.IsWindowPatternAvailableProperty);
         public static readonly PropertyId CanMaximizeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMaximizePropertyId, "CanMaximize");
         public static readonly PropertyId CanMinimizeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowCanMinimizePropertyId, "CanMinimize");
         public static readonly PropertyId IsModalProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_WindowIsModalPropertyId, "IsModal");

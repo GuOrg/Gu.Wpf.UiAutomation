@@ -4,7 +4,7 @@
 
     public class RangeValuePattern : RangeValuePatternBase<Interop.UIAutomationClient.IUIAutomationRangeValuePattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue", AutomationObjectIds.IsRangeValuePatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_RangeValuePatternId, "RangeValue", AutomationObjectIds.IsRangeValuePatternAvailableProperty);
         public static readonly PropertyId IsReadOnlyProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId, "IsReadOnly");
         public static readonly PropertyId LargeChangeProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId, "LargeChange");
         public static readonly PropertyId MaximumProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_RangeValueMaximumPropertyId, "Maximum");

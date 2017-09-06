@@ -4,7 +4,7 @@
 
     public class VirtualizedItemPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationVirtualizedItemPattern>, IVirtualizedItemPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_VirtualizedItemPatternId, "VirtualizedItem", AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_VirtualizedItemPatternId, "VirtualizedItem", AutomationObjectIds.IsVirtualizedItemPatternAvailableProperty);
 
         public VirtualizedItemPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationVirtualizedItemPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

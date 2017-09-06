@@ -5,7 +5,7 @@
 
     public class Text2Pattern : TextPattern, IText2Pattern
     {
-        public new static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
+        public new static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TextPattern2Id, "Text2", AutomationObjectIds.IsTextPattern2AvailableProperty);
 
         public Text2Pattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationTextPattern2 nativePattern)
             : base(basicAutomationElement, nativePattern)

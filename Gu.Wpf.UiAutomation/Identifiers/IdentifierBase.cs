@@ -14,11 +14,6 @@
         private static readonly ConcurrentDictionary<int, EventId> EventCache = new ConcurrentDictionary<int, EventId>();
 
         /// <summary>
-        /// Dictionary which holds all known patterns
-        /// </summary>
-        private static readonly ConcurrentDictionary<int, PatternId> PatternCache = new ConcurrentDictionary<int, PatternId>();
-
-        /// <summary>
         /// Dictionary which holds all known text attributes
         /// </summary>
         private static readonly ConcurrentDictionary<int, TextAttributeId> TextAttributeCache = new ConcurrentDictionary<int, TextAttributeId>();
@@ -71,11 +66,6 @@
             return EventCache.GetOrAdd(id, x => new EventId(id, name));
         }
 
-        protected static PatternId RegisterPattern(int id, string name, PropertyId availabilityProperty)
-        {
-            return PatternCache.GetOrAdd(id, x => new PatternId(x, name, availabilityProperty));
-        }
-
         protected static TextAttributeId RegisterTextAttribute(int id, string name)
         {
             return TextAttributeCache.GetOrAdd(id, x => new TextAttributeId(x, name));
@@ -89,16 +79,6 @@
             }
 
             return new EventId(id, $"Event#{id}");
-        }
-
-        protected static PatternId FindPattern(int id)
-        {
-            if (PatternCache.TryGetValue(id, out var patternId))
-            {
-                return patternId;
-            }
-
-            return new PatternId(id, $"Pattern#{id}", null);
         }
 
         protected static TextAttributeId FindTextAttribute(int id)

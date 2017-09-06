@@ -5,7 +5,7 @@
 
     public class GridItemPattern : GridItemPatternBase<Interop.UIAutomationClient.IUIAutomationGridItemPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_GridItemPatternId, "GridItem", AutomationObjectIds.IsGridItemPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_GridItemPatternId, "GridItem", AutomationObjectIds.IsGridItemPatternAvailableProperty);
         public static readonly PropertyId ColumnProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_GridItemColumnPropertyId, "Column");
         public static readonly PropertyId ColumnSpanProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_GridItemColumnSpanPropertyId, "ColumnSpan");
         public static readonly PropertyId ContainingGridProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_GridItemContainingGridPropertyId, "ContainingGrid", AutomationElementConverter.NativeToManaged);

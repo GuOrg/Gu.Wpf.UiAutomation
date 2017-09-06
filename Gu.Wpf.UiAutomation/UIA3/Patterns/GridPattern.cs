@@ -5,7 +5,7 @@
 
     public class GridPattern : GridPatternBase<Interop.UIAutomationClient.IUIAutomationGridPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_GridPatternId, "Grid", AutomationObjectIds.IsGridPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_GridPatternId, "Grid", AutomationObjectIds.IsGridPatternAvailableProperty);
         public static readonly PropertyId ColumnCountProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_GridColumnCountPropertyId, "ColumnCount");
         public static readonly PropertyId RowCountProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_GridRowCountPropertyId, "RowCount");
 

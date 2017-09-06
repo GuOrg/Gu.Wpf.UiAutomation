@@ -5,7 +5,7 @@
 
     public class SpreadsheetPattern : PatternBase<Interop.UIAutomationClient.IUIAutomationSpreadsheetPattern>, ISpreadsheetPattern
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet", AutomationObjectIds.IsSpreadsheetPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_SpreadsheetPatternId, "Spreadsheet", AutomationObjectIds.IsSpreadsheetPatternAvailableProperty);
 
         public SpreadsheetPattern(BasicAutomationElementBase basicAutomationElement, Interop.UIAutomationClient.IUIAutomationSpreadsheetPattern nativePattern)
             : base(basicAutomationElement, nativePattern)

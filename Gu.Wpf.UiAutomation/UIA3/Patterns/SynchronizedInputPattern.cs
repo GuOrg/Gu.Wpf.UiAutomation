@@ -4,7 +4,7 @@
 
     public class SynchronizedInputPattern : SynchronizedInputPatternBase<Interop.UIAutomationClient.IUIAutomationSynchronizedInputPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput", AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_SynchronizedInputPatternId, "SynchronizedInput", AutomationObjectIds.IsSynchronizedInputPatternAvailableProperty);
         public static readonly EventId DiscardedEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_InputDiscardedEventId, "Discarded");
         public static readonly EventId ReachedOtherElementEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_InputReachedOtherElementEventId, "ReachedOtherElement");
         public static readonly EventId ReachedTargetEvent = EventId.Register(Interop.UIAutomationClient.UIA_EventIds.UIA_InputReachedTargetEventId, "ReachedTarget");

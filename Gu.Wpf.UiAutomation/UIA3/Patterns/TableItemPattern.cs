@@ -5,7 +5,7 @@
 
     public class TableItemPattern : TableItemPatternBase<Interop.UIAutomationClient.IUIAutomationTableItemPattern>
     {
-        public static readonly PatternId Pattern = PatternId.Register(Interop.UIAutomationClient.UIA_PatternIds.UIA_TableItemPatternId, "TableItem", AutomationObjectIds.IsTableItemPatternAvailableProperty);
+        public static readonly PatternId Pattern = PatternId.GetOrCreate(Interop.UIAutomationClient.UIA_PatternIds.UIA_TableItemPatternId, "TableItem", AutomationObjectIds.IsTableItemPatternAvailableProperty);
         public static readonly PropertyId ColumnHeaderItemsProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId, "ColumnHeaderItems", AutomationElementConverter.NativeArrayToManaged);
         public static readonly PropertyId RowHeaderItemsProperty = PropertyId.GetOrCreate(Interop.UIAutomationClient.UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId, "RowHeaderItems", AutomationElementConverter.NativeArrayToManaged);
 
