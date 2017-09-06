@@ -23,17 +23,6 @@
         public TVal Value => this.BasicAutomationElement.GetPropertyValue<TVal>(this.PropertyId);
 
         /// <inheritdoc />
-        public TVal ValueOrDefault(TVal @default = default(TVal))
-        {
-            if (this.TryGetValue(out TVal value))
-            {
-                return value;
-            }
-
-            return @default;
-        }
-
-        /// <inheritdoc />
         public bool IsSupported => this.TryGetValue(out TVal _);
 
         /// <summary>
@@ -53,6 +42,17 @@
         public static implicit operator TVal(AutomationProperty<TVal> automationProperty)
         {
             return automationProperty == null ? default(TVal) : automationProperty.Value;
+        }
+
+        /// <inheritdoc />
+        public TVal ValueOrDefault(TVal @default = default(TVal))
+        {
+            if (this.TryGetValue(out TVal value))
+            {
+                return value;
+            }
+
+            return @default;
         }
 
         /// <inheritdoc />

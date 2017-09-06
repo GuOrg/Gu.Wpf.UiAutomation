@@ -132,6 +132,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 Keyboard.Type(value);
             }
+
             if (delay != null)
             {
                 // give some time to process input.

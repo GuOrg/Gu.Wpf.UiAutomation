@@ -48,19 +48,45 @@
             set => this.selectionItemAutomationElement.IsSelected = value;
         }
 
+        public bool IsExpanded
+        {
+            get
+            {
+                if (this.Patterns.ExpandCollapse.TryGetPattern(out var pattern) &&
+                    pattern.ExpandCollapseState.TryGetValue(out var state))
+                {
+                    return state == ExpandCollapseState.Expanded;
+                }
+
+                return true;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    this.Expand();
+                }
+                else
+                {
+                    this.Collapse();
+                }
+            }
+        }
+
         public void Expand()
         {
-            this.expandCollapseAutomationElement.Expand();
+            this.Patterns.ExpandCollapse.Pattern.Expand();
         }
 
         public void Collapse()
         {
-            this.expandCollapseAutomationElement.Collapse();
+            this.Patterns.ExpandCollapse.Pattern.Collapse();
         }
 
         public void Select()
         {
-            this.selectionItemAutomationElement.Select();
+            this.Patterns.SelectionItem.Pattern.Select();
         }
     }
 }
