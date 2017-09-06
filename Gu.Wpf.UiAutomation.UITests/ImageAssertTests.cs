@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -22,12 +23,14 @@ namespace Gu.Wpf.UiAutomation.UITests
                 var button = window.FindButton("SizeButton");
                 try
                 {
+                    // Not sure why this pause is needed on win 10.
+                    Wait.For(TimeSpan.FromMilliseconds(200));
                     ImageAssert.AreEqual(ImageFileName, button);
                 }
                 catch
                 {
-                    ScreenCapture.CaptureToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
-                    ScreenCapture.CaptureScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
+                    Capture.ToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
                     throw;
                 }
             }

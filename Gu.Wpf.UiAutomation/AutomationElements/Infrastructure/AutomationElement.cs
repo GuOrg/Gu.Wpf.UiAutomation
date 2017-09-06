@@ -231,7 +231,7 @@
         /// </summary>
         public System.Drawing.Bitmap Capture()
         {
-            return ScreenCapture.CaptureArea(this.Bounds);
+            return UiAutomation.Capture.Rectangle(this.Bounds);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@
         /// </summary>
         public BitmapImage CaptureWpf()
         {
-            return ScreenCapture.CaptureAreaWpf(this.Bounds);
+            return UiAutomation.Capture.RectangleWpf(this.Bounds);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@
         /// <param name="filePath">The filepath where the screenshot should be saved.</param>
         public void CaptureToFile(string filePath)
         {
-            ScreenCapture.CaptureAreaToFile(this.Bounds, filePath);
+            UiAutomation.Capture.RectangleToFile(this.Bounds, filePath);
         }
 
         /// <summary>

@@ -38,7 +38,7 @@
 
         public static void AreEqual(Bitmap expected, AutomationElement actual)
         {
-            using (var actualBmp = ScreenCapture.CaptureArea(actual.Bounds))
+            using (var actualBmp = Capture.Rectangle(actual.Bounds))
             {
                 AreEqual(expected, actualBmp);
             }
