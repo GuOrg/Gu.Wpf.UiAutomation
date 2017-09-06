@@ -1,5 +1,5 @@
 set WINSDK=C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\um\
-set ASMVERSION=0.1.6.0
+set ASMVERSION=0.1.7.0
 set TEMP=tmp
 call "%VS140COMNTOOLS%vsvars32.bat"
 

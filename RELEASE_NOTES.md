@@ -1,5 +1,15 @@
 # 0.1.6.0
-* BREAKING: Don't thow in FindAll
+* BREAKING: Rename capture.
+* BREAKING: Refactor overlay API.
+* FEATURE: ImageAssert & ImageDiffWindow
+* FEATURE: FindChildAt
+* FEATURE: FindXx with func overloads.
+* FEATURE: TreeViewItem.IsExpanded
+* FEATURE: GridCell.Enter handle invalid value.
+* FEATURE: Button.Text & Content.
+
+# 0.1.6.0
+* BREAKING: Don't throw in FindAll
 * BREAKING: Use TimeSpan in Draw.
 * BREAKING: Throw if click or enter when off screen.
 * BREAKING: Rename bounds.
