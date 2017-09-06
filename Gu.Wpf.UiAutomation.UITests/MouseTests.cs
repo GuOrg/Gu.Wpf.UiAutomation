@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System;
     using System.Threading;
     using System.Windows;
     using Gu.Wpf.UiAutomation.UITests.TestFramework;
@@ -30,8 +31,8 @@
                 Mouse.MoveBy(100, 10);
                 Mouse.MoveBy(10, 50);
                 Mouse.Up(MouseButton.Left);
-                Thread.Sleep(500);
                 TestUtilities.CloseWindowWithDontSave(mainWindow);
+                Wait.For(TimeSpan.FromMilliseconds(100));
             }
         }
     }

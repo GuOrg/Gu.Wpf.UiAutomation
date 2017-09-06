@@ -1,6 +1,8 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
+    using System;
     using NUnit.Framework;
+    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     [TestFixture]
     public class CalculatorTests
@@ -14,6 +16,10 @@
                 var calc = Gu.Wpf.UiAutomation.OperatingSystem.IsWindows10()
                     ? (ICalculator)new Win10Calc(window)
                     : new LegacyCalc(window);
+                if (OperatingSystem.IsWindows7())
+                {
+                    Wait.For(TimeSpan.FromMilliseconds(200));
+                }
 
                 // Switch to default mode
                 Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);

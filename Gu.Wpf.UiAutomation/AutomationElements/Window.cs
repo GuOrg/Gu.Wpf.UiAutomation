@@ -63,7 +63,18 @@
         /// </summary>
         public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
-        public IntPtr NativeWindowHandle => this.Properties.NativeWindowHandle.Value;
+        public IntPtr NativeWindowHandle
+        {
+            get
+            {
+                if (this.Properties.NativeWindowHandle.TryGetValue(out var value))
+                {
+                    return value;
+                }
+
+                return IntPtr.Zero;
+            }
+        }
 
         public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
 

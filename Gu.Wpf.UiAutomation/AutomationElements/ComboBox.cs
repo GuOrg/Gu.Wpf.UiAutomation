@@ -197,7 +197,7 @@
                     ecp.Expand();
 
                     // Wait a bit in case there is an open animation
-                    Thread.Sleep(50);
+                    Wait.For(TimeSpan.FromMilliseconds(50));
                 }
             }
         }

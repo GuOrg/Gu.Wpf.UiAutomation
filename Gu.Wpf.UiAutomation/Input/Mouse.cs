@@ -138,7 +138,7 @@
             foreach (var point in movements)
             {
                 Position = point;
-                Thread.Sleep(interval);
+                Wait.For(TimeSpan.FromMilliseconds(interval));
             }
 
             Wait.UntilInputIsProcessed();
@@ -170,7 +170,7 @@
                 // Wait the needed time to prevent the double click
                 if (timeout > 0)
                 {
-                    Thread.Sleep(timeout + ExtraMillisecondsBecauseOfBugInWindows);
+                    Wait.For(TimeSpan.FromMilliseconds(timeout + ExtraMillisecondsBecauseOfBugInWindows));
                 }
             }
 
@@ -403,14 +403,14 @@
 
             // Build the mouse input object
             var mouseInput = new MOUSEINPUT
-                             {
-                                 dx = x,
-                                 dy = y,
-                                 mouseData = data,
-                                 dwExtraInfo = User32.GetMessageExtraInfo(),
-                                 time = 0,
-                                 dwFlags = flags
-                             };
+            {
+                dx = x,
+                dy = y,
+                mouseData = data,
+                dwExtraInfo = User32.GetMessageExtraInfo(),
+                time = 0,
+                dwFlags = flags
+            };
 
             // Build the input object
             var input = INPUT.MouseInput(mouseInput);

@@ -20,7 +20,6 @@
             {
                 var mainWindow = app.MainWindow;
                 Keyboard.Type("abc");
-                Thread.Sleep(50);
                 Keyboard.Type(Key.BACK);
                 var textBox = mainWindow.FindTextBox();
                 Assert.AreEqual("ab", textBox.Text);
@@ -34,7 +33,6 @@
             {
                 var mainWindow = app.MainWindow;
                 Keyboard.Type(key);
-                Thread.Sleep(50);
                 var textBox = mainWindow.FindTextBox();
                 Assert.AreEqual(expected, textBox.Text);
             }
@@ -76,7 +74,6 @@
                     Keyboard.Type(key);
                 }
 
-                Thread.Sleep(50);
                 var textBox = mainWindow.FindTextBox();
                 Assert.AreEqual(expected, textBox.Text);
             }
@@ -90,7 +87,6 @@
                 var mainWindow = app.MainWindow;
                 Keyboard.PressScanCode(scancode, isExtendedKey);
                 Keyboard.ReleaseScanCode(scancode, isExtendedKey);
-                Thread.Sleep(50);
                 var textBox = mainWindow.FindTextBox();
                 var sw = Stopwatch.StartNew();
                 while (sw.ElapsedMilliseconds < 1000)
