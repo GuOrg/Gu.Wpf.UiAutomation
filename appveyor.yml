@@ -9,4 +9,4 @@ build:
   verbosity: minimal
 
 on_failure:
-  - appveyor PushArtifact %Temp%\*.png
+  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
