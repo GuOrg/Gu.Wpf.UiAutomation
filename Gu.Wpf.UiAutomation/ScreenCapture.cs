@@ -5,6 +5,7 @@
     using System.IO;
     using System.Windows;
     using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.Logging;
 
     /// <summary>
     /// Provides methods to capture screenshots or partially screenshots
@@ -62,6 +63,7 @@
         {
             using (var bmp = CaptureScreen())
             {
+                Logger.Default.Info($"CaptureScreenToFile: {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }
@@ -73,6 +75,7 @@
         {
             using (var bmp = CaptureArea(element.Properties.BoundingRectangle.Value))
             {
+                Logger.Default.Info($"CaptureToFile: {element} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }
@@ -84,6 +87,7 @@
         {
             using (var bmp = CaptureArea(rectangle))
             {
+                Logger.Default.Info($"CaptureAreaToFile: {rectangle} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }

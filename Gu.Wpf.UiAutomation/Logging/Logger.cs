@@ -9,15 +9,7 @@
         public static ILogger Default
         {
             get => @default;
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-
-                @default = value;
-            }
+            set => @default = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

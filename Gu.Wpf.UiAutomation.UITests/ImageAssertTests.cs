@@ -27,6 +27,7 @@ namespace Gu.Wpf.UiAutomation.UITests
                 catch
                 {
                     ScreenCapture.CaptureToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    ScreenCapture.CaptureScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
                     throw;
                 }
             }
