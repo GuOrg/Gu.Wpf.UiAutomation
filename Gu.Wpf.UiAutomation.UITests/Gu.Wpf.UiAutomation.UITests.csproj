@@ -33,8 +33,10 @@
     <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UITests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +77,7 @@
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="GetterTests.cs" />
     <Compile Include="ICalculator.cs" />
+    <Compile Include="ImageAssertTests.cs" />
     <Compile Include="KeyboardTests.cs" />
     <Compile Include="LegacyCalc.cs" />
     <Compile Include="MouseTests.cs" />
@@ -190,6 +193,11 @@
     <Analyzer Include="..\packages\analyzers\StyleCop.Analyzers\analyzers\dotnet\cs\StyleCop.Analyzers.dll">
       <Paket>True</Paket>
     </Analyzer>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1')">

@@ -67,6 +67,17 @@
         }
 
         /// <summary>
+        /// Captures an element and saves it to a file
+        /// </summary>
+        public static void CaptureToFile(AutomationElement element, string filePath)
+        {
+            using (var bmp = CaptureArea(element.Properties.BoundingRectangle.Value))
+            {
+                bmp.Save(filePath, ImageFormat.Png);
+            }
+        }
+
+        /// <summary>
         /// Captures a specific area and saves it to a file
         /// </summary>
         public static void CaptureAreaToFile(Rect rectangle, string filePath)
