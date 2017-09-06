@@ -37,13 +37,12 @@
                 btn.Click();
                 Wait.UntilInputIsProcessed();
                 var popup = window.Popup;
-                Assert.That(popup, Is.Not.Null);
                 var popupChildren = popup.FindAllChildren();
-                Assert.That(popupChildren, Has.Length.EqualTo(1));
+                Assert.AreEqual(1, popupChildren.Count);
                 var menu = popupChildren[0].AsMenu();
                 Assert.AreEqual(1, menu.Items.Count);
                 var menuItem = menu.Items[0];
-                Assert.That(menuItem.Text, Is.EqualTo("Some MenuItem"));
+                Assert.AreEqual("Some MenuItem", menuItem.Text);
             }
         }
     }

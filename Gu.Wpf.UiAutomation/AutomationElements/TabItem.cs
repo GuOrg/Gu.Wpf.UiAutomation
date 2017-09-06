@@ -17,18 +17,17 @@
         {
             get
             {
-                var children = this.FindAllChildren();
-                if (children.Count == 1 &&
-                    children[0].ControlType == ControlType.Text)
+                var header = this.Header;
+                if (header != null)
                 {
-                    return children[0].Properties.Name.Value;
+                    return header.Properties.Name.Value;
                 }
 
                 return this.Properties.Name.Value;
             }
         }
 
-        public AutomationElement Header => this.FindAllChildren().FirstOrDefault();
+        public AutomationElement Header => this.FindFirstChild();
 
         public AutomationElement Content
         {
@@ -39,7 +38,7 @@
                     throw new InvalidOperationException("TabItem must have be selected to get Content");
                 }
 
-                return this.FindAllChildren().ElementAtOrDefault(1);
+                return this.FindChildAt(1);
             }
         }
     }

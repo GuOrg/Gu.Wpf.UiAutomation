@@ -577,6 +577,26 @@
         }
 
         /// <summary>
+        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// </summary>
+        public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
+        {
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, timeOut))
+            {
+                var element = this.BasicAutomationElement.FindIndexed(treeScope, condition, index);
+                if (element != null)
+                {
+                    return element;
+                }
+
+                Wait.For(Retry.DefaultRetryInterval);
+            }
+
+            throw new InvalidOperationException($"Did not find an element matching {condition}.");
+        }
+
+        /// <summary>
         /// Finds the first element by looping thru all conditions.
         /// </summary>
         public AutomationElement FindFirstNested(params ConditionBase[] nestedConditions)
@@ -868,6 +888,11 @@
         public AutomationElement FindFirstChild()
         {
             return this.FindFirst(TreeScope.Children, TrueCondition.Default);
+        }
+
+        public AutomationElement FindChildAt(int index)
+        {
+            return this.FindAt(TreeScope.Children, TrueCondition.Default, index, Retry.DefaultRetryFor);
         }
 
         public AutomationElement FindFirstChild(string automationId)

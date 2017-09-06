@@ -8,12 +8,10 @@
         mc:Ignorable="d">
     <StackPanel>
         <TextBlock AutomationProperties.AutomationId="AutomationId"
-                   IsEnabled="{Binding ElementName=IsEnabled,
-                                       Path=IsChecked}"
+                   IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                    Text="1" />
         <TextBlock x:Name="XName"
-                   IsEnabled="{Binding ElementName=IsEnabled,
-                                       Path=IsChecked}"
+                   IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                    Text="2" />
         <TextBlock IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" Text="Content" />
 
