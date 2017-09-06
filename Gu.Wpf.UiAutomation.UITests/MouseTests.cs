@@ -1,13 +1,16 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using System;
+    using System.IO;
     using System.Windows;
-    using Gu.Wpf.UiAutomation.UITests.TestFramework;
     using NUnit.Framework;
 
     [TestFixture]
     public class MouseTests
     {
+        private static readonly string ExeFileName = Path.Combine(
+            TestContext.CurrentContext.TestDirectory,
+            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
         [Test]
         public void MoveTest()
         {
@@ -20,7 +23,7 @@
         [Test]
         public void ClickTest()
         {
-            using (var app = Application.Launch("mspaint"))
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
                 var mainWindow = app.MainWindow;
                 var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 50;
@@ -30,8 +33,6 @@
                 Mouse.MoveBy(100, 10);
                 Mouse.MoveBy(10, 50);
                 Mouse.Up(MouseButton.Left);
-                TestUtilities.CloseWindowWithDontSave(mainWindow);
-                Wait.For(TimeSpan.FromMilliseconds(100));
             }
         }
     }

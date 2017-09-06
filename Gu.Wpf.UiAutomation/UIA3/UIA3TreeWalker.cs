@@ -17,17 +17,29 @@
 
         public AutomationElement GetParent(AutomationElement element)
         {
+            var native = element.ToNative();
+            if (native == null)
+            {
+                return null;
+            }
+
             var parent = CacheRequest.Current == null ?
-                this.NativeTreeWalker.GetParentElement(element.ToNative()) :
-                this.NativeTreeWalker.GetParentElementBuildCache(element.ToNative(), CacheRequest.Current.ToNative(this.Automation));
+                this.NativeTreeWalker.GetParentElement(native) :
+                this.NativeTreeWalker.GetParentElementBuildCache(native, CacheRequest.Current.ToNative(this.Automation));
             return this.Automation.WrapNativeElement(parent);
         }
 
         public AutomationElement GetFirstChild(AutomationElement element)
         {
+            var native = element.ToNative();
+            if (native == null)
+            {
+                return null;
+            }
+
             var child = CacheRequest.Current == null ?
-                this.NativeTreeWalker.GetFirstChildElement(element.ToNative()) :
-                this.NativeTreeWalker.GetFirstChildElementBuildCache(element.ToNative(), CacheRequest.Current.ToNative(this.Automation));
+                this.NativeTreeWalker.GetFirstChildElement(native) :
+                this.NativeTreeWalker.GetFirstChildElementBuildCache(native, CacheRequest.Current.ToNative(this.Automation));
             return this.Automation.WrapNativeElement(child);
         }
 

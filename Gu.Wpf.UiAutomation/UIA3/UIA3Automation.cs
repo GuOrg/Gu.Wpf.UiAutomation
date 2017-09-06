@@ -133,7 +133,9 @@
 
         public AutomationElement WrapNativeElement(Interop.UIAutomationClient.IUIAutomationElement nativeElement)
         {
-            return nativeElement == null ? null : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
+            return nativeElement == null
+                ? null
+                : new AutomationElement(new UIA3BasicAutomationElement(this, nativeElement));
         }
 
         public override bool Compare(AutomationElement element1, AutomationElement element2)

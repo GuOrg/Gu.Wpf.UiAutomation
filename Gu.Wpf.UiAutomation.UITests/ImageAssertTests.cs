@@ -20,7 +20,15 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                ImageAssert.AreEqual(ImageFileName, button);
+                try
+                {
+                    ImageAssert.AreEqual(ImageFileName, button);
+                }
+                catch
+                {
+                    ScreenCapture.CaptureToFile(button, @"%Temp%\button.png");
+                    throw;
+                }
             }
         }
 

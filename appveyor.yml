@@ -7,3 +7,6 @@ configuration: Release
 platform: Any CPU
 build:
   verbosity: minimal
+
+on_failure:
+  - appveyor PushArtifact %Temp%\*.png
