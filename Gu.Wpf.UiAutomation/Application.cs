@@ -14,6 +14,7 @@
     /// </summary>
     public sealed class Application : IDisposable
     {
+        private static readonly List<Process> Launched = new List<Process>();
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
 
@@ -129,10 +130,23 @@
         /// </summary>
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            var processes = FindProcess(processStartInfo.FileName).FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
-            return processes == null
-                ? Launch(processStartInfo, onDispose)
-                : Attach(processes, onDispose);
+            var exeFileName = Path.GetFullPath(processStartInfo.FileName);
+            var running = Launched.FirstOrDefault(x => x.MainModule.FileName == exeFileName &&
+                                                         x.StartInfo.Arguments == processStartInfo.Arguments);
+            if (running != null)
+            {
+                return Attach(running, onDispose);
+            }
+
+            running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
+                             .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
+
+            if (running != null)
+            {
+                return Attach(running, onDispose);
+            }
+
+            return Launch(processStartInfo, onDispose);
         }
 
         /// <summary>
@@ -174,7 +188,13 @@
 
             try
             {
-                return new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
+                var app = new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
+                if (onDispose == OnDispose.LeaveOpen)
+                {
+                    Launched.Add(app.processReference.Process);
+                }
+
+                return app;
             }
             catch (Win32Exception ex)
             {
@@ -223,10 +243,11 @@
         public static void Kill(string exeFileName)
         {
             exeFileName = System.IO.Path.GetFullPath(exeFileName);
-            var processesByName = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName));
-            foreach (var process in processesByName.Where(x => x.MainModule.FileName == exeFileName))
+            var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
+            foreach (var process in launched)
             {
                 process.Kill();
+                Launched.Remove(process);
             }
         }
 
@@ -236,6 +257,7 @@
         /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
         public bool Close()
         {
+            Launched.Remove(this.processReference.Process);
             Logger.Default.Debug("Closing application");
             if (this.disposed ||
                 this.processReference.Process.HasExited)
@@ -266,6 +288,7 @@
         /// </summary>
         public void Kill()
         {
+            Launched.Remove(this.processReference.Process);
             try
             {
                 if (this.processReference.Process.HasExited)
@@ -355,15 +378,15 @@
                 return;
             }
 
-            this.disposed = true;
             if (this.processReference.OnDispose == OnDispose.KillProcess)
             {
                 this.Close();
                 this.processReference.Dispose();
+                Launched.Remove(this.processReference.Process);
             }
 
-            this.disposed = true;
             this.Automation.Dispose();
+            this.disposed = true;
         }
 
         private static Process FindProcess(int processId)

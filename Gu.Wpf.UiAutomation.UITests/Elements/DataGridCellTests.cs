@@ -10,6 +10,12 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.Kill(ExeFileName);
+        }
+
         [TestCase("DataGrid", false)]
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
@@ -18,7 +24,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("TemplateColumnDataGrid", false)]
         public void IsReadOnly(string name, bool expected)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -265,7 +271,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100")]
         public void GetValueWhenOffScreen(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
