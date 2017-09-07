@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -17,7 +18,10 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                return this.FindAllChildren(x => new ListBoxItem(x));
+                return this.FindAll(
+                    TreeScope.Children,
+                    this.CreateCondition(ControlType.ListItem),
+                    x => new ListBoxItem(x));
             }
         }
 
@@ -38,9 +42,29 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem Select(int rowIndex)
         {
-            var item = this.Items.ElementAt(rowIndex);
+            var item = this.FindAt(
+                TreeScope.Children,
+                this.CreateCondition(ControlType.ListItem),
+                rowIndex,
+                x => new ListBoxItem(x),
+                Retry.Time);
             item.Select();
             return item;
+        }
+
+        public ListBoxItem Select(string text)
+        {
+            var match = this.FindFirst(
+                TreeScope.Children,
+                this.CreateCondition(ControlType.ListItem, text),
+                x => new ListBoxItem(x));
+            if (match == null)
+            {
+                throw new InvalidOperationException($"Did not find an item by text {text}");
+            }
+
+            match.Select();
+            return match;
         }
 
         /// <summary>

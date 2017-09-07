@@ -9,11 +9,17 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("ListBox")]
         [TestCase("AutomationId")]
         public void Items(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "ListBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
                 var itemsControl = window.FindListBox(key);
@@ -24,7 +30,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void SelectByIndex()
         {
-            using (var app = Application.Launch(ExeFileName, "ListBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
                 var listBox = window.FindListBox("BoundListBox");
@@ -33,11 +39,34 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.IsInstanceOf<ListBoxItem>(listBox.Items[1]);
                 Assert.IsNull(listBox.SelectedItem);
 
-                listBox.Select(0);
+                var item = listBox.Select(0);
+                Assert.AreEqual("Johan", item.FindTextBlock().Text);
                 Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
 
-                listBox.Select(1);
+                item = listBox.Select(1);
+                Assert.AreEqual("Erik", item.FindTextBlock().Text);
                 Assert.AreEqual("Erik", listBox.SelectedItem.FindTextBlock().Text);
+            }
+        }
+
+        [Test]
+        public void SelectByTextTest()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var listBox = window.FindListBox("BoundListBox");
+                var item = listBox.Select("Johan");
+                Assert.AreEqual("Johan", item.FindTextBlock().Text);
+                Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
+
+                item = listBox.Select("Erik");
+                Assert.AreEqual("Erik", item.FindTextBlock().Text);
+                Assert.AreEqual("Erik", listBox.SelectedItem.FindTextBlock().Text);
+
+                item = listBox.Select("Johan");
+                Assert.AreEqual("Johan", item.FindTextBlock().Text);
+                Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
             }
         }
     }

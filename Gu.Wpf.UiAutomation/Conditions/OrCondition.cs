@@ -11,6 +11,11 @@
         {
         }
 
+        public OrCondition(ConditionBase condition1, ConditionBase condition2, ConditionBase condition3)
+            : this(new[] { condition1, condition2, condition3 })
+        {
+        }
+
         public OrCondition(IEnumerable<ConditionBase> conditions)
         {
             this.Conditions.AddRange(conditions);
