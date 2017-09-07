@@ -3,7 +3,7 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    public class DataGridItem : INotifyPropertyChanged
+    public class DataGridItemViewModel : INotifyPropertyChanged
     {
         private int id;
         private string name;

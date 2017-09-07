@@ -14,7 +14,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadOnlyDataGrid", true)]
-        [TestCase("ReadonlyColumnsDataGrid", true)]
+        [TestCase("ReadOnlyDataGrid", true)]
+        [TestCase("TemplateColumnDataGrid", false)]
         public void IsReadOnly(string name, bool expected)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -38,6 +39,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
+        [TestCase("TemplateColumnDataGrid")]
         public void NewItemPlaceholder(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -55,6 +57,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
+        [TestCase("TemplateColumnDataGrid")]
         public void Enter(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -70,14 +73,15 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
                 dataGrid[0, 0].Enter("11");
-                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].FindTextBox().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
-                dataGrid[1, 0].Click();
+                dataGrid[1, 1].Click();
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
@@ -87,14 +91,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
                 dataGrid[0, 0].Enter("111");
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
-                Assert.AreEqual("2", dataGrid[1, 0].Value);
-                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
-                Assert.AreEqual("3", dataGrid[2, 0].Value);
-                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
-
-                dataGrid[1, 0].Click();
                 Assert.AreEqual("111", dataGrid[0, 0].Value);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
@@ -106,6 +102,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
         [TestCase("DataGrid")]
         [TestCase("SelectCellDataGrid")]
+        [TestCase("TemplateColumnDataGrid")]
         public void EnterInvalidValue(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -118,7 +115,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 cell.Enter("a");
                 Keyboard.Type(Key.TAB);
-                Assert.AreEqual("1", cell.Value);
+                Assert.AreEqual("a", cell.Value);
                 Assert.AreEqual("a", cell.FindTextBox().Text);
 
                 cell.Enter("11");
@@ -131,6 +128,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
+        [TestCase("TemplateColumnDataGrid")]
         public void SetValue(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -147,7 +145,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 dataGrid[0, 0].Value = "11";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
-                Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
@@ -162,23 +159,23 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
-                Assert.AreEqual("Item 5", dataGrid[2, 1].FindTextBlock().Text);
 
                 dataGrid[0, 0].Value = "111";
                 Assert.AreEqual("111", dataGrid[0, 0].Value);
-                Assert.AreEqual("111", dataGrid[0, 0].FindTextBlock().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
                 Assert.AreEqual("3", dataGrid[2, 0].Value);
                 Assert.AreEqual("Item 5", dataGrid[2, 1].Value);
+                Assert.AreEqual("Item 5", dataGrid[2, 1].FindTextBlock().Text);
             }
         }
 
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
-        public void SetValueWhenFocused(string name)
+        [TestCase("TemplateColumnDataGrid")]
+        public void SetValueWhenClickedOnce(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
@@ -188,6 +185,27 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 var cell = dataGrid[0, 0];
                 Assert.AreEqual("1", cell.Value);
 
+                cell.Click();
+                cell.Value = "11";
+                Assert.AreEqual("11", cell.Value);
+            }
+        }
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid100")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("TemplateColumnDataGrid")]
+        public void SetValueWhenClickedTwice(string name)
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+
+                var cell = dataGrid[0, 0];
+                Assert.AreEqual("1", cell.Value);
+
+                cell.Click();
                 cell.Click();
                 cell.Value = "11";
                 Assert.AreEqual("11", cell.Value);

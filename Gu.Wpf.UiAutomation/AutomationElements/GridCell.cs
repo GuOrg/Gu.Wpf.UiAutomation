@@ -61,9 +61,18 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var value = this.Patterns.Value.PatternOrDefault?.Value.ValueOrDefault(
-                                this.Properties.Name.ValueOrDefault()) ??
-                            this.Properties.Name.ValueOrDefault();
+                string GetValue()
+                {
+                    if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                        valuePattern.Value.TryGetValue(out var v))
+                    {
+                        return v;
+                    }
+
+                    return this.Properties.Name.ValueOrDefault();
+                }
+
+                var value = GetValue();
                 if (value == null)
                 {
                     return true;
@@ -82,9 +91,38 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var value = this.Patterns.Value.PatternOrDefault?.Value.ValueOrDefault(
-                                this.Properties.Name.ValueOrDefault()) ??
-                            this.Properties.Name.ValueOrDefault();
+                string GetValue()
+                {
+                    if (this.TryFindFirst(
+                        TreeScope.Children,
+                        this.CreateCondition(ControlType.Text),
+                        x => new TextBlock(x),
+                        TimeSpan.Zero,
+                        out var textBlock))
+                    {
+                        return textBlock.Text;
+                    }
+
+                    if (this.TryFindFirst(
+                        TreeScope.Children,
+                        this.CreateCondition(ControlType.Edit),
+                        x => new TextBox(x),
+                        TimeSpan.Zero,
+                        out var textBox))
+                    {
+                        return textBox.Text;
+                    }
+
+                    if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                        valuePattern.Value.TryGetValue(out var text))
+                    {
+                        return text;
+                    }
+
+                    return this.Properties.Name.ValueOrDefault();
+                }
+
+                var value = GetValue();
                 if (string.IsNullOrEmpty(value))
                 {
                     return value ?? string.Empty;
@@ -95,10 +133,25 @@ namespace Gu.Wpf.UiAutomation
 
             set
             {
-                var valuePattern = this.Patterns.Value.PatternOrDefault;
-                if (valuePattern != null)
+                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.Value.IsSupported)
                 {
                     valuePattern.SetValue(value);
+                    Wait.UntilResponsive(this);
+                    if (this.TryFindFirst(
+                        TreeScope.Children,
+                        this.CreateCondition(ControlType.Edit),
+                        x => new TextBox(x),
+                        TimeSpan.Zero,
+                        out var textBox))
+                    {
+                        if (textBox.Patterns.Value.TryGetPattern(out valuePattern) &&
+                            !valuePattern.IsReadOnly.ValueOrDefault())
+                        {
+                            valuePattern.SetValue(value);
+                        }
+                    }
+
                     return;
                 }
 

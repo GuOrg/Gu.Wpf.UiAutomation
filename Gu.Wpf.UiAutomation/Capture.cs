@@ -157,9 +157,9 @@
         private static extern IntPtr SelectObject(IntPtr hdc, IntPtr bmp);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr GetDesktopWindow();
+        private static extern IntPtr GetDesktopWindow();
 
         [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowDC(IntPtr ptr);
+        private static extern IntPtr GetWindowDC(IntPtr ptr);
     }
 }

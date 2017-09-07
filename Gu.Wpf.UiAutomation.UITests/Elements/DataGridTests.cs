@@ -111,6 +111,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGrid", false)]
         [TestCase("DataGrid100", false)]
         [TestCase("DataGridNoHeaders", false)]
+        [TestCase("TemplateColumnDataGrid", false)]
         [TestCase("ReadOnlyDataGrid", true)]
         [TestCase("ReadonlyColumnsDataGrid", true)]
         public void IsReadOnly(string name, bool expected)
@@ -177,6 +178,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
+        [TestCase("TemplateColumnDataGrid")]
         public void RowsAndCells(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -203,6 +205,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
+        [TestCase("TemplateColumnDataGrid")]
         public void RowIndexer(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -223,6 +226,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
+        [TestCase("TemplateColumnDataGrid")]
         public void CellIndexer(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))

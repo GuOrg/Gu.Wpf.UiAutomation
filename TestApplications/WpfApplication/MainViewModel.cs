@@ -11,11 +11,11 @@
 
         public MainViewModel()
         {
-            this.DataGridItems = new ObservableCollection<DataGridItem>
+            this.DataGridItems = new ObservableCollection<DataGridItemViewModel>
             {
-                new DataGridItem { Id = 1, Name = "Spongebob" },
-                new DataGridItem { Id = 2, Name = "Patrick" },
-                new DataGridItem { Id = 3, Name = "Tadeus" }
+                new DataGridItemViewModel { Id = 1, Name = "Spongebob" },
+                new DataGridItemViewModel { Id = 2, Name = "Patrick" },
+                new DataGridItemViewModel { Id = 3, Name = "Tadeus" }
             };
 
             this.invokeButtonText = "Invoke me!";
@@ -24,7 +24,7 @@
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<DataGridItem> DataGridItems { get; }
+        public ObservableCollection<DataGridItemViewModel> DataGridItems { get; }
 
         public ICommand InvokeButtonCommand { get; }
 

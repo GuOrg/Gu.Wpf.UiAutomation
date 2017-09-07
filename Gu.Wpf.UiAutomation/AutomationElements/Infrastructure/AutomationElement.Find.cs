@@ -241,6 +241,7 @@
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         /// <param name="controlType">The control type</param>
+        /// <param name="wrap">The function to produce a T from the match. Normally x => new Foo(x)</param>
         public T FindDescendant<T>(string name, ControlType controlType, Func<BasicAutomationElementBase, T> wrap)
             where T : AutomationElement => this.FindFirst(
             TreeScope.Descendants,
@@ -416,7 +417,7 @@
         {
             result = null;
             var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, timeOut))
+            do
             {
                 result = this.BasicAutomationElement.FindFirst(treeScope, condition, wrap);
                 if (result != null)
@@ -426,6 +427,7 @@
 
                 Wait.For(Retry.PollInterval);
             }
+            while (!Retry.IsTimeouted(start, timeOut));
 
             return result != null;
         }

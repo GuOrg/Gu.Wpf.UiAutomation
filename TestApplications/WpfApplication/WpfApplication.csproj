@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataGridItem.cs" />
+    <Compile Include="DataGridItemViewModel.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="ListViewItem.cs" />
     <Compile Include="MainViewModel.cs" />

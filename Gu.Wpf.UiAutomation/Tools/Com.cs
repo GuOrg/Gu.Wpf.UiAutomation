@@ -60,7 +60,7 @@ namespace Gu.Wpf.UiAutomation
             }
             catch (COMException ex)
             {
-                if (ConvertException(ex, out Exception newEx))
+                if (ConvertException(ex, out var newEx))
                 {
                     throw newEx;
                 }
