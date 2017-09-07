@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("TemplateColumnDataGrid")]
         public void NewItemPlaceholder(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
