@@ -6,9 +6,9 @@
     using System.Windows;
     using NUnit.Framework;
 
-    public class AutomationElementTests
+    public partial class AutomationElementTests
     {
-        private static readonly string ExeFileName = Path.Combine(
+        public static readonly string ExeFileName = Path.Combine(
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 

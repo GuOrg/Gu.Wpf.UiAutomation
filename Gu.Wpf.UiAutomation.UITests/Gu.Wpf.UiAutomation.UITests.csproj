@@ -50,6 +50,7 @@
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="Converters\ValueConverterTests.cs" />
     <Compile Include="Elements\AutomationElementTests.cs" />
+    <Compile Include="Elements\AutomationElementTests.Find.cs" />
     <Compile Include="Elements\ButtonTests.cs" />
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />

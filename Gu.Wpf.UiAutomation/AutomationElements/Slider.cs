@@ -10,7 +10,7 @@
         {
         }
 
-        public Thumb Thumb => this.FindFirstChild(cf => cf.ByControlType(ControlType.Thumb))?.AsThumb();
+        public Thumb Thumb => this.FindFirstDescendant(ControlType.Thumb, x => new Thumb(x));
 
         public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
 
