@@ -318,6 +318,12 @@
         public TabControl FindTabControl(string name = null) => this.Find(ControlType.Tab, name, x => new TabControl(x));
 
         /// <summary>
+        /// Find the first expander by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public UserControl FindUserControl(string name = null) => this.Find(ControlType.Custom, name, x => new UserControl(x));
+
+        /// <summary>
         /// Find the first group box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

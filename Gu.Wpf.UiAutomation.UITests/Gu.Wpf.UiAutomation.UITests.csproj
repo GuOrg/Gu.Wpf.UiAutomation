@@ -73,6 +73,7 @@
     <Compile Include="Elements\TextBoxTests.cs" />
     <Compile Include="Elements\ToggleButtonTests.cs" />
     <Compile Include="Elements\TreeViewTests.cs" />
+    <Compile Include="Elements\UserControlTests.cs" />
     <Compile Include="Elements\WindowTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="GetterTests.cs" />
