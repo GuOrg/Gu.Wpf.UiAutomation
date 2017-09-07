@@ -18,7 +18,8 @@
         /// <summary>
         /// Flag which indicates, if the combobox is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.GetEditableElement() != null;
+        public virtual bool IsEditable => this.FindAllChildren().Any(c => c.ControlType == ControlType.Edit &&
+                                                                          c.Patterns.Value.PatternOrDefault?.IsReadOnly.ValueOrDefault() == false);
 
         /// <summary>
         /// Gets all selected items.

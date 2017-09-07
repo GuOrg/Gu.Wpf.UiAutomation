@@ -7,6 +7,19 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [TestCase("EditableComboBox", true)]
+        [TestCase("NonEditableComboBox", false)]
+        [TestCase("ReadOnlyComboBox", false)]
+        public void IsEditable(string comboBoxId, bool expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var combo = window.FindComboBox(comboBoxId);
+                Assert.AreEqual(expected, combo.IsEditable);
+            }
+        }
+
         [TestCase("EditableComboBox")]
         [TestCase("NonEditableComboBox")]
         public void SelectedItemTest(string comboBoxId)

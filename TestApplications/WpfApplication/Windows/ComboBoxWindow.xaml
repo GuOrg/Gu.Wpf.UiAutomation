@@ -25,8 +25,7 @@
             <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
         </ComboBox>
 
-        <ComboBox x:Name="NonEditableComboBox"
-                  IsEditable="False">
+        <ComboBox x:Name="NonEditableComboBox" IsEditable="False">
             <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
             <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
             <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
@@ -39,7 +38,7 @@
             <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
             <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
         </ComboBox>
-        
+
         <CheckBox x:Name="IsEnabled"
                   Content="IsEnabled"
                   IsChecked="True" />
