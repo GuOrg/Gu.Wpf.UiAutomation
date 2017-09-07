@@ -9,10 +9,16 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void RowAndColumnCount()
         {
-            using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
@@ -24,7 +30,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void HeaderAndColumns()
         {
-            using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
@@ -38,7 +44,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void RowsAndCells()
         {
-            using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
@@ -60,7 +66,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void SelectByIndex()
         {
-            using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
@@ -89,7 +95,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void SelectByTextTest()
         {
-            using (var app = Application.Launch(ExeFileName, "ListViewWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();

@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation
                     return 0;
                 }
 
-                var cell = new GridCell(gridPattern.GetItem(rowCount - 1, 0).BasicAutomationElement);
+                var cell = gridPattern.GetItem(rowCount - 1, 0, x => new GridCell(x));
                 if (cell.IsNewItemPlaceholder &&
                     cell.IsReadOnly)
                 {

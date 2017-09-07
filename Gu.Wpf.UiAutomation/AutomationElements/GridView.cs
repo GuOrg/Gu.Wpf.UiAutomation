@@ -115,7 +115,7 @@
 
         protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
 
-        public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col).BasicAutomationElement);
+        public GridCell this[int row, int col] => this.GridPattern.GetItem(row, col, x => new GridCell(x));
 
         /// <summary>
         /// Select a row by index.
@@ -169,7 +169,7 @@
         public GridRow GetRowByIndex(int rowIndex)
         {
             this.PreCheckRow(rowIndex);
-            var gridCell = this.GridPattern.GetItem(rowIndex, 0).AsGridCell();
+            var gridCell = this.GridPattern.GetItem(rowIndex, 0, x => new GridCell(x));
             return gridCell.ContainingRow;
         }
 
@@ -195,7 +195,7 @@
             var returnList = new List<GridRow>();
             for (var rowIndex = 0; rowIndex < this.RowCount; rowIndex++)
             {
-                var currentCell = gridPattern.GetItem(rowIndex, columnIndex).AsGridCell();
+                var currentCell = gridPattern.GetItem(rowIndex, columnIndex, x => new GridCell(x));
                 if (currentCell.Value == value)
                 {
                     returnList.Add(currentCell.ContainingRow);

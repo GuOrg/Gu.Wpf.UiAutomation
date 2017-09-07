@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+
     public abstract class GridPatternBase<TNativePattern> : PatternBase<TNativePattern>, IGridPattern
         where TNativePattern : class
     {
@@ -22,5 +24,8 @@
 
         /// <inheritdoc/>
         public abstract AutomationElement GetItem(int row, int column);
+
+        public abstract T GetItem<T>(int row, int column, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement;
     }
 }
