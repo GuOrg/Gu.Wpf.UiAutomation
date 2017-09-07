@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            Application.Kill(ExeFileName);
+            Application.KillLaunched(ExeFileName);
         }
 
         [TestCase("DataGrid")]

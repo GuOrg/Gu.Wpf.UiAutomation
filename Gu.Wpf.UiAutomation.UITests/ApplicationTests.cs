@@ -28,7 +28,7 @@ namespace Gu.Wpf.UiAutomation.UITests
                 Application.WaitForMainWindow(Process.GetProcessById(app.ProcessId));
                 CollectionAssert.IsNotEmpty(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExeFileName)));
 
-                Application.Kill(ExeFileName);
+                Application.KillLaunched(ExeFileName);
                 Wait.For(TimeSpan.FromMilliseconds(100));
                 CollectionAssert.IsEmpty(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExeFileName)));
             }

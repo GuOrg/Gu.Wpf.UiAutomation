@@ -191,7 +191,10 @@
                 var app = new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
                 if (onDispose == OnDispose.LeaveOpen)
                 {
-                    Launched.Add(app.processReference.Process);
+                    lock (Launched)
+                    {
+                        Launched.Add(app.processReference.Process);
+                    }
                 }
 
                 return app;
@@ -206,7 +209,16 @@
 
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
         {
-            return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
+            var app = new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
+            if (onDispose == OnDispose.LeaveOpen)
+            {
+                lock (Launched)
+                {
+                    Launched.Add(app.processReference.Process);
+                }
+            }
+
+            return app;
         }
 
         /// <summary>
@@ -237,17 +249,36 @@
         }
 
         /// <summary>
-        /// Start the application.
+        /// Kill any launced processes.
+        /// </summary>
+        public static void KillLaunched()
+        {
+            lock (Launched)
+            {
+                foreach (var process in Launched)
+                {
+                    process.Kill();
+                }
+
+                Launched.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Kill any launced processes.
         /// </summary>
         /// <param name="exeFileName">The full file name of the exeFileName.</param>
-        public static void Kill(string exeFileName)
+        public static void KillLaunched(string exeFileName)
         {
-            exeFileName = System.IO.Path.GetFullPath(exeFileName);
-            var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
-            foreach (var process in launched)
+            lock (Launched)
             {
-                process.Kill();
-                Launched.Remove(process);
+                exeFileName = System.IO.Path.GetFullPath(exeFileName);
+                var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
+                foreach (var process in launched)
+                {
+                    process.Kill();
+                    Launched.Remove(process);
+                }
             }
         }
 
