@@ -7,10 +7,16 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void Items()
         {
-            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
@@ -32,10 +38,11 @@
         [Test]
         public void SelectedIndex()
         {
-            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
+                tab.SelectedIndex = 0;
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
@@ -54,10 +61,11 @@
         [Test]
         public void SelectIndex()
         {
-            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
+                tab.SelectedIndex = 0;
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
@@ -76,10 +84,11 @@
         [Test]
         public void SelectText()
         {
-            using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
+                tab.SelectedIndex = 0;
                 Assert.AreEqual(0, tab.SelectedIndex);
                 Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 

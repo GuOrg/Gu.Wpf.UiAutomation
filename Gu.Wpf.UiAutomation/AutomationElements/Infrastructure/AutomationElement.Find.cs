@@ -289,7 +289,7 @@
 
         public AutomationElement FindDescendant(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateNameOrIdOrTextCondition(name),
+            this.CreateNameOrIdCondition(name),
             Retry.Time);
 
         /// <summary>
@@ -714,7 +714,7 @@
 
             return new AndCondition(
                 this.CreateCondition(controlType),
-                this.CreateNameOrIdOrTextCondition(name));
+                this.CreateNameOrIdCondition(name));
         }
 
         public PropertyCondition CreateCondition(ControlType controlType)
@@ -722,12 +722,11 @@
             return this.ConditionFactory.ByControlType(controlType);
         }
 
-        public OrCondition CreateNameOrIdOrTextCondition(string key)
+        public OrCondition CreateNameOrIdCondition(string key)
         {
             return new OrCondition(
                 this.ConditionFactory.ByName(key),
-                this.ConditionFactory.ByAutomationId(key),
-                this.ConditionFactory.ByText(key));
+                this.ConditionFactory.ByAutomationId(key));
         }
     }
 }

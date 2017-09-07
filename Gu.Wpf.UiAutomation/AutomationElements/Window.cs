@@ -46,7 +46,7 @@
             {
                 var mainWindow = this.GetMainWindow();
                 var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window)
-                                                              .And(cf.ByText(string.Empty)
+                                                              .And(cf.ByName(string.Empty)
                                                               .And(cf.ByClassName("Popup"))));
                 if (popup == null)
                 {

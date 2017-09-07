@@ -7,12 +7,18 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]
         public void FindRadioButton(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow;
                 var radioButton = window.FindRadioButton(key);
@@ -24,7 +30,7 @@
         [Test]
         public void IsChecked()
         {
-            using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow;
                 var radioButton1 = window.FindRadioButton("Test RadioButton");
@@ -46,7 +52,7 @@
         [Test]
         public void Click()
         {
-            using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow;
                 var radioButton1 = window.FindRadioButton("Test RadioButton");

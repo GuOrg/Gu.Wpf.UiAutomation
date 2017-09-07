@@ -32,9 +32,9 @@
             return new PropertyCondition(this.propertyLibrary.Element.Name, name);
         }
 
-        public PropertyCondition ByText(string text)
+        public PropertyCondition ByValue(string text)
         {
-            return this.ByName(text);
+            return new PropertyCondition(this.propertyLibrary.Value.Value, text);
         }
 
         public PropertyCondition ByProcessId(int processId)
