@@ -5,8 +5,15 @@
 
     public static class Retry
     {
-        public static readonly TimeSpan DefaultRetryFor = TimeSpan.FromMilliseconds(1000);
-        public static readonly TimeSpan DefaultRetryInterval = TimeSpan.FromMilliseconds(200);
+        /// <summary>
+        /// The time to retyr when searching for elements. Default is one second.
+        /// </summary>
+        public static TimeSpan Time { get; set; } = TimeSpan.FromMilliseconds(1000);
+
+        /// <summary>
+        /// The poll interval, default 100 ms.
+        /// </summary>
+        public static TimeSpan PollInterval { get; set; } = TimeSpan.FromMilliseconds(100);
 
         public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
@@ -25,7 +32,7 @@
                         throw new Exception("Timeout occurred in retry", ex);
                     }
 
-                    Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                    Thread.Sleep(retryInterval ?? PollInterval);
                 }
             }
         }
@@ -46,7 +53,7 @@
                         throw new Exception("Timeout occurred in retry", ex);
                     }
 
-                    Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                    Thread.Sleep(retryInterval ?? PollInterval);
                 }
             }
         }
@@ -68,7 +75,7 @@
                     throw new TimeoutException();
                 }
 
-                Wait.For(retryInterval ?? DefaultRetryInterval);
+                Wait.For(retryInterval ?? PollInterval);
             }
         }
 
@@ -88,7 +95,7 @@
                     return;
                 }
 
-                Thread.Sleep(retryInterval ?? DefaultRetryInterval);
+                Thread.Sleep(retryInterval ?? PollInterval);
             }
         }
 

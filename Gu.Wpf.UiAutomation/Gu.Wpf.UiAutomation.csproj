@@ -22,5 +22,19 @@
       <SpecificVersion>false</SpecificVersion>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="AutomationElements\Infrastructure\AutomationElement.FindControl.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AutomationElement.FindControl.txt</LastGenOutput>
+    </None>
+    <None Update="AutomationElements\Infrastructure\AutomationElement.FindControl.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AutomationElement.FindControl.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

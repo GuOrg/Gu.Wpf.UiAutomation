@@ -26,7 +26,7 @@
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"{this.Property}: {this.Value}";
+            return $"{this.Property.Name}: {this.Value}";
         }
 
         public override IUIAutomationCondition ToNative(IUIAutomation automation)
