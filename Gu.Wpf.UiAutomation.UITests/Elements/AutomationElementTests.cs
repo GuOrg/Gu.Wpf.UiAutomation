@@ -12,10 +12,16 @@
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void Parent()
         {
-            using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
             {
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox();
@@ -26,7 +32,7 @@
         [Test]
         public void Window()
         {
-            using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
             {
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox();
@@ -38,7 +44,7 @@
         [Test]
         public void IsKeyboardFocusable()
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow;
                 var textBox = window.FindTextBox();
@@ -49,7 +55,7 @@
         [Test]
         public void HasKeyboardFocus()
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow;
                 var textBox = window.FindTextBox();
@@ -65,7 +71,7 @@
         [Test]
         public void Size()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
@@ -78,23 +84,23 @@
         [Test]
         public void DrawHighlight()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
                 button.DrawHighlight();
-                Wait.For(TimeSpan.FromMilliseconds(1000));
+                Wait.For(TimeSpan.FromMilliseconds(500));
             }
         }
 
         [Test]
         public void DrawHighlightBlocking()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(1000));
+                button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(500));
             }
         }
     }

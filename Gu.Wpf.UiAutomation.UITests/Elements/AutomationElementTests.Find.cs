@@ -7,10 +7,17 @@
     {
         public class Find
         {
+            [OneTimeTearDown]
+            public void OneTimeTearDown()
+            {
+                Application.KillLaunched(ExeFileName);
+                Retry.ResetTime();
+            }
+
             [Test]
             public void FindCheckBox()
             {
-                using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
                 {
                     var window = app.MainWindow;
                     var checkBox = window.FindCheckBox();
@@ -24,7 +31,8 @@
             [TestCase("Content")]
             public void FindCheckBoxThrowsWhenNotFound(string key)
             {
-                using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+                Retry.Time = TimeSpan.FromMilliseconds(100);
+                using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
                 {
                     var window = app.MainWindow;
                     var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
@@ -38,7 +46,7 @@
             [Test]
             public void FindFirstChild()
             {
-                using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
                 {
                     var window = app.MainWindow;
                     var child = window.FindFirstChild();
@@ -49,7 +57,7 @@
             [Test]
             public void FindFirstChildWithWrap()
             {
-                using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
                 {
                     var window = app.MainWindow;
                     var child = window.FindFirstChild(x => new CheckBox(x));
@@ -62,7 +70,7 @@
             [TestCase(2, ControlType.MenuItem)]
             public void FindAt(int index, ControlType expected)
             {
-                using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
                 {
                     var window = app.MainWindow;
                     var child = window.FindAt(TreeScope.Descendants, TrueCondition.Default, index, TimeSpan.FromMilliseconds(100));

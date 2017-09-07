@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System.Linq;
     using System.Threading;
 
     /// <summary>

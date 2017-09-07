@@ -6,7 +6,6 @@
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Threading;
     using System.Windows;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;

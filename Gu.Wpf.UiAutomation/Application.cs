@@ -8,31 +8,19 @@
     using System.Linq;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.UIA3;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// Wrapper for an application which should be automated.
     /// </summary>
-    public class Application : IDisposable
+    public sealed class Application : IDisposable
     {
-        /// <summary>
-        /// The process of this application.
-        /// </summary>
+        private static readonly List<Process> Launched = new List<Process>();
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
 
         private volatile Window mainWindow;
         private bool disposed;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Application"/> class.
-        /// Creates an application object with the given process id.
-        /// </summary>
-        /// <param name="processId">The process id.</param>
-        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        public Application(int processId, bool isStoreApp = false)
-            : this(new ProcessReference(FindProcess(processId), dispose: false), isStoreApp)
-        {
-        }
 
         /// <summary>
         /// Creates an application object with the given process.
@@ -97,62 +85,106 @@
         /// <summary>
         /// Attach to a running process
         /// </summary>
-        public static Application Attach(Process process, bool dispose = false)
+        public static Application Attach(string exeFileName, int index = 0)
         {
-            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
-            return new Application(new ProcessReference(process, dispose));
-        }
-
-        /// <summary>
-        /// Attach to a running process
-        /// </summary>
-        public static Application Attach(string executable, int index = 0)
-        {
-            var processes = FindProcess(executable);
+            var processes = FindProcess(exeFileName);
             if (processes.Count == 0)
             {
-                throw new ArgumentException($"Unable to find process with name: {executable}");
+                throw new ArgumentException($"Unable to find process with name: {exeFileName}");
             }
 
             if (processes.Count <= index)
             {
-                throw new ArgumentException($"Unable to find process with name: {executable} and index: {index}");
+                throw new ArgumentException($"Unable to find process with name: {exeFileName} and index: {index}");
             }
 
             return Attach(processes[index]);
         }
 
         /// <summary>
+        /// Attach to a running process
+        /// </summary>
+        public static Application Attach(Process process, OnDispose dispose = OnDispose.LeaveOpen)
+        {
+            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
+            var app = new Application(new ProcessReference(process, dispose));
+            if (app.MainWindow.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
+                windowHandle != new IntPtr(0))
+            {
+                User32.SetForegroundWindow(windowHandle);
+                Wait.UntilResponsive(app.MainWindow);
+            }
+
+            return app;
+        }
+
+        /// <summary>
         /// Attach to a running process or start a new if not found.
         /// </summary>
-        public static Application AttachOrLaunch(ProcessStartInfo processStartInfo)
+        public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            var processes = FindProcess(processStartInfo.FileName);
-            return processes.Count == 0 ? Launch(processStartInfo) : Attach(processes[0]);
+            return AttachOrLaunch(new ProcessStartInfo(exeFileName), onDispose);
+        }
+
+        /// <summary>
+        /// Attach to a running process or start a new if not found.
+        /// </summary>
+        public static Application AttachOrLaunch(string exeFileName, string args, OnDispose onDispose = OnDispose.LeaveOpen)
+        {
+            return AttachOrLaunch(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose);
+        }
+
+        /// <summary>
+        /// Attach to a running process or start a new if not found.
+        /// </summary>
+        public static Application AttachOrLaunch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.LeaveOpen)
+        {
+            var exeFileName = Path.GetFullPath(processStartInfo.FileName);
+            lock (Launched)
+            {
+                var launched = Launched.FirstOrDefault(x => x.MainModule.FileName == exeFileName &&
+                                                           x.StartInfo.Arguments == processStartInfo.Arguments);
+                if (launched != null)
+                {
+                    return Attach(launched, onDispose);
+                }
+            }
+
+            var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
+                              .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
+
+            if (running != null)
+            {
+                return Attach(running, onDispose);
+            }
+
+            return Launch(processStartInfo, onDispose);
         }
 
         /// <summary>
         /// Start the application.
         /// </summary>
-        /// <param name="executable">The full file name of the executable.</param>
-        public static Application Launch(string executable)
+        /// <param name="exeFileName">The full file name of the exeFileName.</param>
+        /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
+        public static Application Launch(string exeFileName, OnDispose onDispose = OnDispose.KillProcess)
         {
-            var processStartInfo = new ProcessStartInfo(executable);
-            return Launch(processStartInfo);
+            var processStartInfo = new ProcessStartInfo(exeFileName);
+            return Launch(processStartInfo, onDispose);
         }
 
         /// <summary>
         /// Start the application.
         /// </summary>
-        /// <param name="executable">The full file name of the executable.</param>
+        /// <param name="exeFileName">The full file name of the exeFileName.</param>
         /// <param name="args">The start arguments.</param>
-        public static Application Launch(string executable, string args)
+        /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
+        public static Application Launch(string exeFileName, string args, OnDispose onDispose = OnDispose.KillProcess)
         {
-            var processStartInfo = new ProcessStartInfo(executable) { Arguments = args };
-            return Launch(processStartInfo);
+            var processStartInfo = new ProcessStartInfo(exeFileName) { Arguments = args };
+            return Launch(processStartInfo, onDispose);
         }
 
-        public static Application Launch(ProcessStartInfo processStartInfo)
+        public static Application Launch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.KillProcess)
         {
             if (string.IsNullOrEmpty(processStartInfo.WorkingDirectory))
             {
@@ -168,7 +200,16 @@
 
             try
             {
-                return new Application(new ProcessReference(Process.Start(processStartInfo), dispose: true));
+                var app = new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
+                if (onDispose == OnDispose.LeaveOpen)
+                {
+                    lock (Launched)
+                    {
+                        Launched.Add(app.processReference.Process);
+                    }
+                }
+
+                return app;
             }
             catch (Win32Exception ex)
             {
@@ -178,9 +219,81 @@
             }
         }
 
-        public static Application LaunchStoreApp(string appUserModelId, string arguments = null)
+        public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
         {
-            return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), dispose: true), isStoreApp: true);
+            var app = new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
+            if (onDispose == OnDispose.LeaveOpen)
+            {
+                lock (Launched)
+                {
+                    Launched.Add(app.processReference.Process);
+                }
+            }
+
+            return app;
+        }
+
+        /// <summary>
+        /// Waits until the main handle is set.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
+        public static void WaitForMainWindow(Process process, TimeSpan? waitTimeout = null)
+        {
+            var start = DateTime.Now;
+            do
+            {
+                if (process.HasExited)
+                {
+                    throw new InvalidOperationException("Process has exited.");
+                }
+
+                process.Refresh();
+                if (process.MainWindowHandle != IntPtr.Zero)
+                {
+                    return;
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+            while (!Retry.IsTimeouted(start, waitTimeout ?? TimeSpan.MaxValue));
+            throw new TimeoutException("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.");
+        }
+
+        /// <summary>
+        /// Kill any launced processes.
+        /// </summary>
+        public static void KillLaunched()
+        {
+            lock (Launched)
+            {
+                foreach (var process in Launched)
+                {
+                    process.Kill();
+                    process.Dispose();
+                }
+
+                Launched.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Kill any launced processes.
+        /// </summary>
+        /// <param name="exeFileName">The full file name of the exeFileName.</param>
+        public static void KillLaunched(string exeFileName)
+        {
+            lock (Launched)
+            {
+                exeFileName = System.IO.Path.GetFullPath(exeFileName);
+                var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
+                foreach (var process in launched)
+                {
+                    process.Kill();
+                    process.Dispose();
+                    Launched.Remove(process);
+                }
+            }
         }
 
         /// <summary>
@@ -189,6 +302,11 @@
         /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
         public bool Close()
         {
+            lock (Launched)
+            {
+                Launched.Remove(this.processReference.Process);
+            }
+
             Logger.Default.Debug("Closing application");
             if (this.disposed ||
                 this.processReference.Process.HasExited)
@@ -219,6 +337,11 @@
         /// </summary>
         public void Kill()
         {
+            lock (Launched)
+            {
+                Launched.Remove(this.processReference.Process);
+            }
+
             try
             {
                 if (this.processReference.Process.HasExited)
@@ -250,21 +373,9 @@
         /// Waits until the main handle is set.
         /// </summary>
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
-        public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
+        public void WaitForMainWindow(TimeSpan? waitTimeout = null)
         {
-            var start = DateTime.Now;
-            do
-            {
-                this.processReference.Process.Refresh();
-                if (this.processReference.Process.MainWindowHandle != IntPtr.Zero)
-                {
-                    return;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-            while (!Retry.IsTimeouted(start, waitTimeout ?? TimeSpan.MaxValue));
-            throw new TimeoutException("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.");
+            WaitForMainWindow(this.processReference.Process, waitTimeout);
         }
 
         /// <summary>
@@ -280,7 +391,7 @@
                 return this.mainWindow;
             }
 
-            this.WaitWhileMainHandleIsMissing(waitTimeout);
+            this.WaitForMainWindow(waitTimeout);
             if (this.mainWindow != null)
             {
                 return this.mainWindow;
@@ -315,33 +426,20 @@
 
         public void Dispose()
         {
-            this.Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
             if (this.disposed)
             {
                 return;
             }
 
-            if (disposing)
+            if (this.processReference.OnDispose == OnDispose.KillProcess)
             {
                 this.Close();
-                this.disposed = true;
-                this.Automation.Dispose();
                 this.processReference.Dispose();
+                Launched.Remove(this.processReference.Process);
             }
 
+            this.Automation.Dispose();
             this.disposed = true;
-        }
-
-        protected void ThrowIfDisposed()
-        {
-            if (this.disposed)
-            {
-                throw new ObjectDisposedException(this.GetType().FullName);
-            }
         }
 
         private static Process FindProcess(int processId)
@@ -357,27 +455,36 @@
             }
         }
 
-        private static IReadOnlyList<Process> FindProcess(string executable)
+        private static IReadOnlyList<Process> FindProcess(string exeFileName)
         {
-            return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable));
+            return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName));
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
         }
 
         private sealed class ProcessReference : IDisposable
         {
-            private readonly bool dispose;
-
-            public ProcessReference(Process process, bool dispose)
+            public ProcessReference(Process process, OnDispose onDispose)
             {
                 this.Process = process;
-                this.dispose = dispose;
+                this.OnDispose = onDispose;
             }
 
             internal Process Process { get; }
 
+            internal OnDispose OnDispose { get; private set; }
+
             public void Dispose()
             {
-                if (this.dispose)
+                if (this.OnDispose == OnDispose.KillProcess)
                 {
+                    this.OnDispose = OnDispose.LeaveOpen;
 #pragma warning disable GU0036 // Don't dispose injected.
                     this.Process.Dispose();
 #pragma warning restore GU0036 // Don't dispose injected.

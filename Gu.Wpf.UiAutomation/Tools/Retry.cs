@@ -109,5 +109,10 @@
 
             return DateTime.Now.Subtract(startTime) >= timeout;
         }
+
+        public static void ResetTime()
+        {
+            Time = TimeSpan.FromMilliseconds(1000);
+        }
     }
 }

@@ -10,12 +10,19 @@
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+            Retry.ResetTime();
+        }
+
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]
         public void FindCheckBox(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "CheckBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
             {
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox(key);
@@ -29,7 +36,8 @@
         [TestCase("Content")]
         public void FindCheckBoxThrowsWhenNotFound(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            Retry.Time = TimeSpan.FromMilliseconds(10);
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
             {
                 var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));

@@ -7,12 +7,18 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("EditableComboBox", true)]
         [TestCase("NonEditableComboBox", false)]
         [TestCase("ReadOnlyComboBox", false)]
         public void IsEditable(string comboBoxId, bool expected)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
@@ -26,7 +32,7 @@
         [TestCase("ReadOnlyEditableComboBox", true)]
         public void IsReadOnly(string comboBoxId, bool expected)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
@@ -38,7 +44,7 @@
         [TestCase("NonEditableComboBox")]
         public void SelectedItemTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
@@ -50,9 +56,9 @@
 
         [TestCase("EditableComboBox")]
         [TestCase("NonEditableComboBox")]
-        public void SelectByIndexTest(string comboBoxId)
+        public void SelectByIndex(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
@@ -64,9 +70,9 @@
 
         [TestCase("EditableComboBox")]
         [TestCase("NonEditableComboBox")]
-        public void SelectByTextTest(string comboBoxId)
+        public void SelectByText(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);
@@ -80,7 +86,7 @@
         [TestCase("NonEditableComboBox")]
         public void ExpandCollapseTest(string comboBoxId)
         {
-            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
                 var combo = window.FindComboBox(comboBoxId);

@@ -10,13 +10,20 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+            Retry.ResetTime();
+        }
+
         [TestCase(null)]
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]
         public void FindButton(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton(key);
@@ -29,7 +36,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("Content", "Content")]
         public void Text(string key, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton(key);
@@ -42,7 +49,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("Content", "Content")]
         public void Content(string key, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton(key);
@@ -55,7 +62,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("Content")]
         public void FindButtonThrowsWhenNotFound(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            Retry.Time = TimeSpan.FromMilliseconds(10);
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
             {
                 var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));

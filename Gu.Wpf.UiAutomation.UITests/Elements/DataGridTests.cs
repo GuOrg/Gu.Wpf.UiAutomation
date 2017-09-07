@@ -9,6 +9,12 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("DataGrid")]
         [TestCase("DataGrid100")]
         [TestCase("DataGridNoHeaders")]
@@ -16,7 +22,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid")]
         public void ColumnCount(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -31,7 +37,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 2)]
         public void ColumnHeadersCount(string name, int expected)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -46,7 +52,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid")]
         public void RowCellsCount(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -63,7 +69,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowCount(string name, int expectedRows)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -78,7 +84,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void Rows(string name, int expectedRows)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -100,7 +106,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeadersCount(string name, int expectedRows)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -116,7 +122,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", true)]
         public void IsReadOnly(string name, bool expected)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -131,7 +137,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 2)]
         public void ColumnHeaders(string name, int expectedCount)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -155,7 +161,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("ReadonlyColumnsDataGrid", 3)]
         public void RowHeaders(string name, int expectedRows)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -181,7 +187,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("TemplateColumnDataGrid")]
         public void RowsAndCells(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -208,7 +214,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("TemplateColumnDataGrid")]
         public void RowIndexer(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -229,7 +235,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("TemplateColumnDataGrid")]
         public void CellIndexer(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -255,7 +261,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders", 2, 0)]
         public void SelectRowByIndex(string name, int index1, int index2)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -280,7 +286,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("SelectCellDataGrid", 2, 0)]
         public void SelectCellByIndex(string name, int index1, int index2)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
@@ -297,7 +303,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         public void SelectByTextTest(string name)
         {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
