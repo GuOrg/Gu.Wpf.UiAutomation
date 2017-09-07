@@ -12,27 +12,13 @@
     /// <summary>
     /// Wrapper for an application which should be automated.
     /// </summary>
-    public class Application : IDisposable
+    public sealed class Application : IDisposable
     {
-        /// <summary>
-        /// The process of this application.
-        /// </summary>
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
 
         private volatile Window mainWindow;
         private bool disposed;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Application"/> class.
-        /// Creates an application object with the given process id.
-        /// </summary>
-        /// <param name="processId">The process id.</param>
-        /// <param name="isStoreApp">Flag to define if it's a store app or not.</param>
-        public Application(int processId, bool isStoreApp = false)
-            : this(new ProcessReference(FindProcess(processId), OnDispose.LeaveOpen), isStoreApp)
-        {
-        }
 
         /// <summary>
         /// Creates an application object with the given process.
@@ -388,37 +374,20 @@
 
         public void Dispose()
         {
-            this.Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
             if (this.disposed)
             {
                 return;
             }
 
-            if (disposing)
+            this.disposed = true;
+            if (this.processReference.OnDispose == OnDispose.KillProcess)
             {
-                if (this.processReference.OnDispose == OnDispose.KillProcess)
-                {
-                    this.Close();
-                }
-
-                this.disposed = true;
-                this.Automation.Dispose();
+                this.Close();
                 this.processReference.Dispose();
             }
 
             this.disposed = true;
-        }
-
-        protected void ThrowIfDisposed()
-        {
-            if (this.disposed)
-            {
-                throw new ObjectDisposedException(this.GetType().FullName);
-            }
+            this.Automation.Dispose();
         }
 
         private static Process FindProcess(int processId)
@@ -437,6 +406,14 @@
         private static IReadOnlyList<Process> FindProcess(string exeFileName)
         {
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName));
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
         }
 
         private sealed class ProcessReference : IDisposable
