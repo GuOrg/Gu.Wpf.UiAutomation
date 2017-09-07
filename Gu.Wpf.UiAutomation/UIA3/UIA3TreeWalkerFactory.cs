@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
-    using Gu.Wpf.UiAutomation.UIA3.Converters;
-
     public class UIA3TreeWalkerFactory : ITreeWalkerFactory
     {
         private readonly UIA3Automation automation;

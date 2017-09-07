@@ -160,35 +160,6 @@
 
         public static Application Launch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.KillProcess)
         {
-            return new Application(new ProcessReference(Start(processStartInfo), onDispose));
-        }
-
-        public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
-        {
-            return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
-        }
-
-        /// <summary>
-        /// Start the application.
-        /// </summary>
-        /// <param name="exeFileName">The full file name of the exeFileName.</param>
-        public static Process Start(string exeFileName)
-        {
-            return Start(new ProcessStartInfo(exeFileName));
-        }
-
-        /// <summary>
-        /// Start the application.
-        /// </summary>
-        /// <param name="exeFileName">The full file name of the exeFileName.</param>
-        /// <param name="args">The start arguments.</param>
-        public static Process Start(string exeFileName, string args)
-        {
-            return Start(new ProcessStartInfo(exeFileName) { Arguments = args });
-        }
-
-        public static Process Start(ProcessStartInfo processStartInfo)
-        {
             if (string.IsNullOrEmpty(processStartInfo.WorkingDirectory))
             {
                 processStartInfo.WorkingDirectory = ".";
@@ -203,7 +174,7 @@
 
             try
             {
-                return Process.Start(processStartInfo);
+                return new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
             }
             catch (Win32Exception ex)
             {
@@ -211,6 +182,11 @@
                 Logger.Default.Error(error, ex);
                 throw;
             }
+        }
+
+        public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
+        {
+            return new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
         }
 
         /// <summary>

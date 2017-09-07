@@ -3,7 +3,6 @@ namespace Gu.Wpf.UiAutomation.UITests
     using System;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using NUnit.Framework;
 
     public class ApplicationTests
@@ -24,9 +23,9 @@ namespace Gu.Wpf.UiAutomation.UITests
         [Test]
         public void StartWaitForMainWindowAndClose()
         {
-            using (var process = Application.Start(ExeFileName, "EmptyWindow"))
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
-                Application.WaitForMainWindow(process);
+                Application.WaitForMainWindow(Process.GetProcessById(app.ProcessId));
                 CollectionAssert.IsNotEmpty(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExeFileName)));
 
                 Application.Kill(ExeFileName);
