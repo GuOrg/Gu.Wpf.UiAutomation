@@ -20,6 +20,20 @@
             }
         }
 
+        [TestCase("EditableComboBox", false)]
+        [TestCase("NonEditableComboBox", false)]
+        [TestCase("ReadOnlyComboBox", false)]
+        [TestCase("ReadOnlyEditableComboBox", true)]
+        public void IsReadOnly(string comboBoxId, bool expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var combo = window.FindComboBox(comboBoxId);
+                Assert.AreEqual(expected, combo.IsReadOnly);
+            }
+        }
+
         [TestCase("EditableComboBox")]
         [TestCase("NonEditableComboBox")]
         public void SelectedItemTest(string comboBoxId)

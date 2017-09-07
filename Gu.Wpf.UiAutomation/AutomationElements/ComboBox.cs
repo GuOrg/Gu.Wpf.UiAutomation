@@ -22,6 +22,29 @@
                                                                           c.Patterns.Value.PatternOrDefault?.IsReadOnly.ValueOrDefault() == false);
 
         /// <summary>
+        /// Flag which indicates, if the combobox is editable or not.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                {
+                    return value;
+                }
+
+                if (this.Patterns.Selection.TryGetPattern(out var selectPattern) &&
+                    selectPattern.Selection.IsSupported)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Gets all selected items.
         /// </summary>
         public IReadOnlyList<ComboBoxItem> SelectedItems
