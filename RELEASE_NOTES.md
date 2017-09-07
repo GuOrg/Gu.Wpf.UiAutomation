@@ -1,4 +1,4 @@
-# 0.1.6.0
+# 0.1.7.0
 * BREAKING: Rename capture.
 * BREAKING: Refactor overlay API.
 * FEATURE: ImageAssert & ImageDiffWindow
