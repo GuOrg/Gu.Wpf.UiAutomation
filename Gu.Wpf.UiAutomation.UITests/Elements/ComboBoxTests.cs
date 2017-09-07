@@ -7,8 +7,8 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
-        [TestCase("EditableCombo")]
-        [TestCase("NonEditableCombo")]
+        [TestCase("EditableComboBox")]
+        [TestCase("NonEditableComboBox")]
         public void SelectedItemTest(string comboBoxId)
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
@@ -21,8 +21,8 @@
             }
         }
 
-        [TestCase("EditableCombo")]
-        [TestCase("NonEditableCombo")]
+        [TestCase("EditableComboBox")]
+        [TestCase("NonEditableComboBox")]
         public void SelectByIndexTest(string comboBoxId)
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
@@ -35,8 +35,8 @@
             }
         }
 
-        [TestCase("EditableCombo")]
-        [TestCase("NonEditableCombo")]
+        [TestCase("EditableComboBox")]
+        [TestCase("NonEditableComboBox")]
         public void SelectByTextTest(string comboBoxId)
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
@@ -49,8 +49,8 @@
             }
         }
 
-        [TestCase("EditableCombo")]
-        [TestCase("NonEditableCombo")]
+        [TestCase("EditableComboBox")]
+        [TestCase("NonEditableComboBox")]
         public void ExpandCollapseTest(string comboBoxId)
         {
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
@@ -72,7 +72,7 @@
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
-                var combo = window.FindComboBox("EditableCombo");
+                var combo = window.FindComboBox("EditableComboBox");
                 combo.EditableText = "Item 3";
                 Assert.AreEqual("Item 3", combo.SelectedItem.Text);
             }
@@ -84,7 +84,7 @@
             using (var app = Application.Launch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
-                var combo = window.FindComboBox("EditableCombo");
+                var combo = window.FindComboBox("EditableComboBox");
                 combo.Enter("Item 3");
                 Assert.AreEqual("Item 3", combo.SelectedItem.Text);
             }
