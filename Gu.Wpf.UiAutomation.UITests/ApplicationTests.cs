@@ -23,14 +23,14 @@ namespace Gu.Wpf.UiAutomation.UITests
         [Test]
         public void StartWaitForMainWindowAndClose()
         {
-            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
             {
-                Application.WaitForMainWindow(Process.GetProcessById(app.ProcessId));
-                CollectionAssert.IsNotEmpty(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExeFileName)));
+                var id = app.ProcessId;
+                Assert.NotNull(Process.GetProcessById(id));
+                Application.WaitForMainWindow(Process.GetProcessById(id));
 
                 Application.KillLaunched(ExeFileName);
-                Wait.For(TimeSpan.FromMilliseconds(100));
-                CollectionAssert.IsEmpty(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExeFileName)));
+                Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
             }
         }
     }

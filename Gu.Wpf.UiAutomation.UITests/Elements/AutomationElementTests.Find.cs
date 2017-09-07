@@ -11,6 +11,7 @@
             public void OneTimeTearDown()
             {
                 Application.KillLaunched(ExeFileName);
+                Retry.ResetTime();
             }
 
             [Test]
@@ -40,8 +41,6 @@
                         : $"Did not find a CheckBox matching (ControlType: CheckBox AND (Name: {key} OR AutomationId: {key})).";
                     Assert.AreEqual(expected, exception.Message);
                 }
-
-                Retry.ResetTime();
             }
 
             [Test]

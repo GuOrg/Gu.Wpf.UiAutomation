@@ -8,6 +8,7 @@
     using System.Linq;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.UIA3;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// Wrapper for an application which should be automated.
@@ -84,15 +85,6 @@
         /// <summary>
         /// Attach to a running process
         /// </summary>
-        public static Application Attach(Process process, OnDispose dispose = OnDispose.LeaveOpen)
-        {
-            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
-            return new Application(new ProcessReference(process, dispose));
-        }
-
-        /// <summary>
-        /// Attach to a running process
-        /// </summary>
         public static Application Attach(string exeFileName, int index = 0)
         {
             var processes = FindProcess(exeFileName);
@@ -107,6 +99,23 @@
             }
 
             return Attach(processes[index]);
+        }
+
+        /// <summary>
+        /// Attach to a running process
+        /// </summary>
+        public static Application Attach(Process process, OnDispose dispose = OnDispose.LeaveOpen)
+        {
+            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
+            var app = new Application(new ProcessReference(process, dispose));
+            if (app.MainWindow.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
+                windowHandle != new IntPtr(0))
+            {
+                User32.SetForegroundWindow(windowHandle);
+                Wait.UntilResponsive(app.MainWindow);
+            }
+
+            return app;
         }
 
         /// <summary>
@@ -131,15 +140,18 @@
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.LeaveOpen)
         {
             var exeFileName = Path.GetFullPath(processStartInfo.FileName);
-            var running = Launched.FirstOrDefault(x => x.MainModule.FileName == exeFileName &&
-                                                         x.StartInfo.Arguments == processStartInfo.Arguments);
-            if (running != null)
+            lock (Launched)
             {
-                return Attach(running, onDispose);
+                var launched = Launched.FirstOrDefault(x => x.MainModule.FileName == exeFileName &&
+                                                           x.StartInfo.Arguments == processStartInfo.Arguments);
+                if (launched != null)
+                {
+                    return Attach(launched, onDispose);
+                }
             }
 
-            running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
-                             .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
+            var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
+                              .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
 
             if (running != null)
             {
@@ -258,6 +270,7 @@
                 foreach (var process in Launched)
                 {
                     process.Kill();
+                    process.Dispose();
                 }
 
                 Launched.Clear();
@@ -277,6 +290,7 @@
                 foreach (var process in launched)
                 {
                     process.Kill();
+                    process.Dispose();
                     Launched.Remove(process);
                 }
             }
@@ -288,7 +302,11 @@
         /// <returns>Returns true if the application was closed normally and false if it was force-closed.</returns>
         public bool Close()
         {
-            Launched.Remove(this.processReference.Process);
+            lock (Launched)
+            {
+                Launched.Remove(this.processReference.Process);
+            }
+
             Logger.Default.Debug("Closing application");
             if (this.disposed ||
                 this.processReference.Process.HasExited)
@@ -319,7 +337,11 @@
         /// </summary>
         public void Kill()
         {
-            Launched.Remove(this.processReference.Process);
+            lock (Launched)
+            {
+                Launched.Remove(this.processReference.Process);
+            }
+
             try
             {
                 if (this.processReference.Process.HasExited)
