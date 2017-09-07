@@ -48,6 +48,20 @@
             }
         }
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
+                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                {
+                    return value;
+                }
+
+                return true;
+            }
+        }
+
         /// <summary>
         /// Simulate typing in text. This is slower than setting Text but raises more events.
         /// </summary>

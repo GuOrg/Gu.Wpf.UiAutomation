@@ -18,6 +18,9 @@
         <TextBox AutomationProperties.AutomationId="TestTextBox" Text="Test TextBox" />
         <TextBox AutomationProperties.AutomationId="TestTextBox1" Text="{Binding Text}" />
         <TextBox AutomationProperties.AutomationId="TestTextBox2" Text="{Binding Text}" />
+        <TextBox x:Name="ReadOnlyTextBox"
+                 IsReadOnly="True"
+                 Text="{Binding Text}" />
 
         <CheckBox x:Name="IsEnabled"
                   Content="IsEnabled"

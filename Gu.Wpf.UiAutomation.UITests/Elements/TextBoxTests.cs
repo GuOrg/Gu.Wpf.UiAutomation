@@ -20,8 +20,21 @@
             }
         }
 
+        [TestCase("AutomationId", false)]
+        [TestCase("XName", false)]
+        [TestCase("ReadOnlyTextBox", true)]
+        public void IsReadOnly(string key, bool expected)
+        {
+            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var textBox = window.FindTextBox(key);
+                Assert.AreEqual(expected, textBox.IsReadOnly);
+            }
+        }
+
         [Test]
-        public void DirectSetTest()
+        public void DirectSetText()
         {
             using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
             {
