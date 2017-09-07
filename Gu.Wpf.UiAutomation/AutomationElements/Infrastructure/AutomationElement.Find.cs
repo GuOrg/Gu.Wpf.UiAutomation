@@ -226,150 +226,70 @@
             x => new TreeView(x),
             Retry.Time);
 
-        public AutomationElement FindByNameOrId(string name, ControlType controlType) => this.FindFirst(
+        /// <summary>
+        /// Find the first descendant by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        /// <param name="controlType">The control type</param>
+        public AutomationElement FindDescendant(string name, ControlType controlType) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(controlType, name),
             Retry.Time);
 
-        public AutomationElement FindDescendant(ControlType controlType)
-        {
-            var condition = this.ConditionFactory.ByControlType(controlType);
+        /// <summary>
+        /// Find the first element by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        /// <param name="controlType">The control type</param>
+        public T FindDescendant<T>(string name, ControlType controlType, Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType, name),
+            wrap,
+            Retry.Time);
 
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition);
-                if (element != null)
-                {
-                    return element;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType}.");
-        }
+        public AutomationElement FindDescendant(ControlType controlType) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType),
+            Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, Func<BasicAutomationElementBase, T> wrap)
-            where T : AutomationElement
-        {
-            var condition = this.ConditionFactory.ByControlType(controlType);
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition, wrap);
-                if (element != null)
-                {
-                    return element;
-                }
+            where T : AutomationElement => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType),
+            wrap,
+            Retry.Time);
 
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType}.");
-        }
-
-        public AutomationElement FindDescendant(ControlType controlType, int index)
-        {
-            var condition = this.ConditionFactory.ByControlType(controlType);
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindIndexed(TreeScope.Descendants, condition, index);
-                if (element != null)
-                {
-                    return element;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType}.");
-        }
+        public AutomationElement FindDescendant(ControlType controlType, int index) => this.FindAt(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType),
+            index,
+            Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, int index, Func<BasicAutomationElementBase, T> wrap)
-            where T : AutomationElement
-        {
-            var condition = this.ConditionFactory.ByControlType(controlType);
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindIndexed(TreeScope.Descendants, condition, index, wrap);
-                if (element != null)
-                {
-                    return element;
-                }
+            where T : AutomationElement => this.FindAt(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType),
+            index,
+            wrap,
+            Retry.Time);
 
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType} with index {index}.");
-        }
-
-        public AutomationElement FindDescendant(ControlType controlType, string name)
-        {
-            if (name == null)
-            {
-                return this.FindDescendant(controlType);
-            }
-
-            var condition = new AndCondition(
-                this.ConditionFactory.ByControlType(controlType),
-                new OrCondition(
-                    this.ConditionFactory.ByName(name),
-                    this.ConditionFactory.ByAutomationId(name)));
-
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition);
-                if (element != null)
-                {
-                    return element;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
-        }
+        public AutomationElement FindDescendant(ControlType controlType, string name) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType, name),
+            Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, string name, Func<BasicAutomationElementBase, T> wrap)
-            where T : AutomationElement
-        {
-            if (name == null)
-            {
-                return this.FindDescendant(controlType, wrap);
-            }
+            where T : AutomationElement => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(controlType),
+            wrap,
+            Retry.Time);
 
-            var condition = new AndCondition(
-                this.ConditionFactory.ByControlType(controlType),
-                new OrCondition(
-                    this.ConditionFactory.ByName(name),
-                    this.ConditionFactory.ByAutomationId(name)));
-
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, Retry.Time))
-            {
-                var element = this.BasicAutomationElement.FindFirst(TreeScope.Descendants, condition, wrap);
-                if (element != null)
-                {
-                    return element;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            throw new InvalidOperationException($"Did not find a {controlType} with name {name}.");
-        }
-
-        public AutomationElement FindByNameOrId(string name)
-        {
-            return this.FindFirstDescendant(
-                new OrCondition(
-                    this.ConditionFactory.ByName(name),
-                    this.ConditionFactory.ByAutomationId(name)));
-        }
+        public AutomationElement FindDescendant(string name) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateNameOrIdCondition(name),
+            Retry.Time);
 
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition.
@@ -515,19 +435,69 @@
         /// </summary>
         public AutomationElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
         {
+            if (this.TryFindAt(treeScope, condition, index, timeOut, out var result))
+            {
+                return result;
+            }
+
+            throw new InvalidOperationException($"Did not find an element matching {condition} at index {index}.");
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// </summary>
+        public bool TryFindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut, out AutomationElement result)
+        {
+            result = null;
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                var element = this.BasicAutomationElement.FindIndexed(treeScope, condition, index);
-                if (element != null)
+                result = this.BasicAutomationElement.FindIndexed(treeScope, condition, index);
+                if (result != null)
                 {
-                    return element;
+                    return true;
                 }
 
                 Wait.For(Retry.PollInterval);
             }
 
-            throw new InvalidOperationException($"Did not find an element matching {condition}.");
+            return result != null;
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// </summary>
+        public T FindAt<T>(TreeScope treeScope, ConditionBase condition, int index, Func<BasicAutomationElementBase, T> wrap, TimeSpan timeOut)
+            where T : AutomationElement
+        {
+            if (this.TryFindAt(treeScope, condition, index, wrap, timeOut, out var result))
+            {
+                return result;
+            }
+
+            throw new InvalidOperationException($"Did not find an element matching {condition} at index {index}.");
+        }
+
+        /// <summary>
+        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// </summary>
+        public bool TryFindAt<T>(TreeScope treeScope, ConditionBase condition, int index, Func<BasicAutomationElementBase, T> wrap, TimeSpan timeOut, out T result)
+            where T : AutomationElement
+        {
+            result = null;
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, timeOut))
+            {
+                result = this.BasicAutomationElement.FindIndexed(treeScope, condition, index, wrap);
+                if (result != null)
+                {
+                    return true;
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+
+            return result != null;
         }
 
         public AutomationElement FindFirstChild()
@@ -737,14 +707,24 @@
         {
             if (name == null)
             {
-                return this.ConditionFactory.ByControlType(controlType);
+                return this.CreateCondition(controlType);
             }
 
             return new AndCondition(
-                this.ConditionFactory.ByControlType(controlType),
-                new OrCondition(
-                    this.ConditionFactory.ByName(name),
-                    this.ConditionFactory.ByAutomationId(name)));
+                this.CreateCondition(controlType),
+                this.CreateNameOrIdCondition(name));
+        }
+
+        public PropertyCondition CreateCondition(ControlType controlType)
+        {
+            return this.ConditionFactory.ByControlType(controlType);
+        }
+
+        public OrCondition CreateNameOrIdCondition(string key)
+        {
+            return new OrCondition(
+                this.ConditionFactory.ByName(key),
+                this.ConditionFactory.ByAutomationId(key));
         }
     }
 }

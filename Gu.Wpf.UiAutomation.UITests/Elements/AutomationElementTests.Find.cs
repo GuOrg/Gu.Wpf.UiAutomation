@@ -18,6 +18,23 @@
                 }
             }
 
+            [TestCase(null)]
+            [TestCase("AutomationId")]
+            [TestCase("XName")]
+            [TestCase("Content")]
+            public void FindCheckBoxThrowsWhenNotFound(string key)
+            {
+                using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+                {
+                    var window = app.MainWindow;
+                    var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
+                    var expected = key == null
+                        ? $"Did not find a CheckBox matching ControlType: CheckBox."
+                        : $"Did not find a CheckBox matching (ControlType: CheckBox AND (Name: {key} OR AutomationId: {key})).";
+                    Assert.AreEqual(expected, exception.Message);
+                }
+            }
+
             [Test]
             public void FindFirstChild()
             {
