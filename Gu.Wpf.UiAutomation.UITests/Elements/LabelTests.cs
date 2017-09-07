@@ -9,12 +9,18 @@
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("AutomationId", "1")]
         [TestCase("XName", "2")]
         [TestCase("Content", "Content")]
         public void FindLabel(string key, string header)
         {
-            using (var app = Application.Launch(ExeFileName, "LabelWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "LabelWindow"))
             {
                 var window = app.MainWindow;
                 var label = window.FindLabel(key);

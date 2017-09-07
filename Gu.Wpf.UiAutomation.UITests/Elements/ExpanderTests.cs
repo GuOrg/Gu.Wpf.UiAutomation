@@ -9,12 +9,18 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [TestCase("AutomationId", "1")]
         [TestCase("XName", "2")]
         [TestCase("Header", "Header")]
         public void FindExpander(string key, string header)
         {
-            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander(key);
@@ -26,10 +32,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void IsExpanded()
         {
-            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");
+                expander.IsExpanded = true;
                 Assert.AreEqual(true, expander.IsExpanded);
 
                 expander.IsExpanded = false;
@@ -43,10 +50,11 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void ExpandCollapse()
         {
-            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");
+                expander.IsExpanded = true;
                 Assert.AreEqual(true, expander.IsExpanded);
 
                 expander.Collapse();
