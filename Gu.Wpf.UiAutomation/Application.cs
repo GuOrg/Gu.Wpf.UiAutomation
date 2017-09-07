@@ -252,15 +252,19 @@
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public void WaitWhileMainHandleIsMissing(TimeSpan? waitTimeout = null)
         {
-            var waitTime = waitTimeout ?? TimeSpan.FromMilliseconds(-1);
-            Retry.While(
-                () =>
+            var start = DateTime.Now;
+            do
+            {
+                this.processReference.Process.Refresh();
+                if (this.processReference.Process.MainWindowHandle != IntPtr.Zero)
                 {
-                    this.processReference.Process.Refresh();
-                    return this.processReference.Process.MainWindowHandle == IntPtr.Zero;
-                },
-                waitTime,
-                TimeSpan.FromMilliseconds(50));
+                    return;
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+            while (!Retry.IsTimeouted(start, waitTimeout ?? TimeSpan.MaxValue));
+            throw new TimeoutException("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.");
         }
 
         /// <summary>
