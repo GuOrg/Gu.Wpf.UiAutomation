@@ -69,6 +69,18 @@ private static readonly string ExeFileName = Path.Combine(
     TestContext.CurrentContext.TestDirectory,
     @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+[SetUp]
+public void SetUp()
+{
+    if (Application.TryAttach(ExeFileName, "ButtonWindow", out var app))
+    {
+        using (app)
+        {
+            app.MainWindow.FindButton("Reset").Invoke();
+        }
+    }
+}
+
 [OneTimeTearDown]
 public void OneTimeTearDown()
 {

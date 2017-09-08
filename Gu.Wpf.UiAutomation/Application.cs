@@ -119,6 +119,76 @@
         }
 
         /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(string exeFileName, out Application result)
+        {
+            return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(string exeFileName, OnDispose onDispose, out Application result)
+        {
+            return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(string exeFileName, string args, out Application result)
+        {
+            return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, out Application result)
+        {
+            return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(ProcessStartInfo processStartInfo, out Application result)
+        {
+            return TryAttach(processStartInfo, OnDispose.LeaveOpen, out result);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found.
+        /// </summary>
+        public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, out Application result)
+        {
+            var exeFileName = Path.GetFullPath(processStartInfo.FileName);
+            lock (Launched)
+            {
+                var launched = Launched.FirstOrDefault(x => Path.GetFullPath(x.StartInfo.FileName) == exeFileName &&
+                                                            x.StartInfo.Arguments == processStartInfo.Arguments);
+                if (launched != null)
+                {
+                    result = Attach(launched, onDispose);
+                    return true;
+                }
+            }
+
+            var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
+                                 .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
+
+            if (running != null)
+            {
+                result = Attach(running, onDispose);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
+        /// <summary>
         /// Attach to a running process or start a new if not found.
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
@@ -139,23 +209,9 @@
         /// </summary>
         public static Application AttachOrLaunch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            var exeFileName = Path.GetFullPath(processStartInfo.FileName);
-            lock (Launched)
+            if (TryAttach(processStartInfo, onDispose, out var app))
             {
-                var launched = Launched.FirstOrDefault(x => Path.GetFullPath(x.StartInfo.FileName) == exeFileName &&
-                                                            x.StartInfo.Arguments == processStartInfo.Arguments);
-                if (launched != null)
-                {
-                    return Attach(launched, onDispose);
-                }
-            }
-
-            var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
-                              .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
-
-            if (running != null)
-            {
-                return Attach(running, onDispose);
+                return app;
             }
 
             return Launch(processStartInfo, onDispose);

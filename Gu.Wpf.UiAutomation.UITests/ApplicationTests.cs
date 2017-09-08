@@ -33,5 +33,25 @@ namespace Gu.Wpf.UiAutomation.UITests
                 Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
             }
         }
+
+        [Test]
+        public void TryAttach()
+        {
+            using (Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                if (Application.TryAttach(ExeFileName, "EmptyWindow", out var app1))
+                {
+                    using (app1)
+                    {
+                        Assert.NotNull(app1.MainWindow);
+                    }
+                }
+                else
+                {
+                    // Wrote it like this to see what the api looks like.
+                    Assert.Fail("Failed to attach");
+                }
+            }
+        }
     }
 }
