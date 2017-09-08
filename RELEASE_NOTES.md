@@ -1,3 +1,9 @@
+# 0.1.9.0
+* FEATURE: HeaderedContentControl
+* FEATURE: Expander : HeaderedContentControl
+* FEATURE: GroupBox : HeaderedContentControl
+* FEATURE: Application.TryAttach
+
 # 0.1.8.0
 * FEATURE: Datagrid handle input in template columns.
 * FEATURE: Find overloads.

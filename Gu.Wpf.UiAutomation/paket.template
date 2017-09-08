@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.1.8.0-dev
+version 0.1.9.0-dev
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,14 +11,10 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-* FEATURE: Datagrid handle input in template columns.
-* FEATURE: Find overloads.
-* FEATURE: ComboBox.IsEditable & IsReadOnly
-* FEATURE: UserControl
-* FEATURE: TextBox.IsReadOnly
-* FEATURE: Application.Kill
-* FEATURE: Application.AttachOrLaunch with argument.
-* FEATURE: ListBox.Select by text.
+* FEATURE: HeaderedContentControl
+* FEATURE: Expander : HeaderedContentControl
+* FEATURE: GroupBox : HeaderedContentControl
+* FEATURE: Application.TryAttach
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
