@@ -15,20 +15,21 @@
             {
                 var focusChangedElements = new List<string>();
                 var mainWindow = app.MainWindow;
-                var x = app.Automation.RegisterFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); });
-                Wait.For(TimeSpan.FromMilliseconds(100));
-                var button1 = mainWindow.FindButton(this.GetResizeText());
-                button1.Invoke();
-                Wait.For(TimeSpan.FromMilliseconds(100));
-                var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
-                Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
-                Wait.For(TimeSpan.FromMilliseconds(100));
-                using (Keyboard.Pressing(Key.ESCAPE))
+                using (app.Automation.SubscribeToFocusChangedEvent(element => { focusChangedElements.Add(element.ToString()); }))
                 {
                     Wait.For(TimeSpan.FromMilliseconds(100));
-                    app.Automation.UnRegisterFocusChangedEvent(x);
-                    mainWindow.Close();
-                    Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+                    var button1 = mainWindow.FindButton(this.GetResizeText());
+                    button1.Invoke();
+                    Wait.For(TimeSpan.FromMilliseconds(100));
+                    var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
+                    Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
+                    Wait.For(TimeSpan.FromMilliseconds(100));
+                    using (Keyboard.Pressing(Key.ESCAPE))
+                    {
+                        Wait.For(TimeSpan.FromMilliseconds(100));
+                        mainWindow.Close();
+                        Assert.That(focusChangedElements.Count, Is.GreaterThan(0));
+                    }
                 }
             }
         }

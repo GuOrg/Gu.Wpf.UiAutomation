@@ -273,54 +273,30 @@
         /// <summary>
         /// Registers the given event
         /// </summary>
-        public IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        public IDisposable SubscribeToEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             if (Equals(@event, EventId.NotSupportedByFramework))
             {
                 throw new NotSupportedByFrameworkException();
             }
 
-            return this.BasicAutomationElement.RegisterEvent(@event, treeScope, action);
+            return this.BasicAutomationElement.SubscribeToEvent(@event, treeScope, action);
         }
 
         /// <summary>
         /// Registers a property changed event with the given property
         /// </summary>
-        public IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
+        public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, params PropertyId[] properties)
         {
-            return this.BasicAutomationElement.RegisterPropertyChangedEvent(treeScope, action, properties);
+            return this.BasicAutomationElement.SubscribeToPropertyChangedEvent(treeScope, action, properties);
         }
 
         /// <summary>
         /// Registers a structure changed event
         /// </summary>
-        public IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
+        public IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
-            return this.BasicAutomationElement.RegisterStructureChangedEvent(treeScope, action);
-        }
-
-        /// <summary>
-        /// Removes the given event handler for the event
-        /// </summary>
-        public void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
-        {
-            this.BasicAutomationElement.RemoveAutomationEventHandler(@event, eventHandler);
-        }
-
-        /// <summary>
-        /// Removes the given property changed event handler
-        /// </summary>
-        public void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
-        {
-            this.BasicAutomationElement.RemovePropertyChangedEventHandler(eventHandler);
-        }
-
-        /// <summary>
-        /// Removes the given structure changed event handler
-        /// </summary>
-        public void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
-        {
-            this.BasicAutomationElement.RemoveStructureChangedEventHandler(eventHandler);
+            return this.BasicAutomationElement.SubscribeToStructureChangedEvent(treeScope, action);
         }
 
         /// <summary>

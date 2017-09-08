@@ -107,16 +107,11 @@
             });
         }
 
-        public override IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action)
+        public override IDisposable SubscribeToFocusChangedEvent(Action<AutomationElement> action)
         {
             var eventHandler = new UIA3FocusChangedEventHandler(this, action);
             Com.Call(() => this.NativeAutomation.AddFocusChangedEventHandler(null, eventHandler));
-            return eventHandler;
-        }
-
-        public override void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler)
-        {
-            this.NativeAutomation.RemoveFocusChangedEventHandler((UIA3FocusChangedEventHandler)eventHandler);
+            return Disposable.Create(() => this.NativeAutomation.RemoveFocusChangedEventHandler(eventHandler));
         }
 
         public override void UnregisterAllEvents()

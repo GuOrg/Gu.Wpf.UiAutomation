@@ -54,9 +54,7 @@
 
         public abstract AutomationElement FocusedElement();
 
-        public abstract IAutomationFocusChangedEventHandler RegisterFocusChangedEvent(Action<AutomationElement> action);
-
-        public abstract void UnRegisterFocusChangedEvent(IAutomationFocusChangedEventHandler eventHandler);
+        public abstract IDisposable SubscribeToFocusChangedEvent(Action<AutomationElement> action);
 
         /// <summary>
         /// Removes all registered event handlers

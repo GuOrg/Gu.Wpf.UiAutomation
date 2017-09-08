@@ -146,14 +146,14 @@
             return success;
         }
 
-        public override IAutomationEventHandler RegisterEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
+        public override IDisposable SubscribeToEvent(EventId @event, TreeScope treeScope, Action<AutomationElement, EventId> action)
         {
             var eventHandler = new UIA3BasicEventHandler(this.Automation, action);
             this.Automation.NativeAutomation.AddAutomationEventHandler(@event.Id, this.NativeElement, (Interop.UIAutomationClient.TreeScope)treeScope, null, eventHandler);
-            return eventHandler;
+            return Disposable.Create(() => this.Automation.NativeAutomation.RemoveAutomationEventHandler(@event.Id, this.NativeElement, eventHandler));
         }
 
-        public override IAutomationPropertyChangedEventHandler RegisterPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
+        public override IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<AutomationElement, PropertyId, object> action, PropertyId[] properties)
         {
             var eventHandler = new UIA3PropertyChangedEventHandler(this.Automation, action);
             var propertyIds = properties.Select(p => p.Id).ToArray();
@@ -163,29 +163,14 @@
                 null,
                 eventHandler,
                 propertyIds);
-            return eventHandler;
+            return Disposable.Create(() => this.Automation.NativeAutomation.RemovePropertyChangedEventHandler(this.NativeElement, (UIA3PropertyChangedEventHandler)eventHandler));
         }
 
-        public override IAutomationStructureChangedEventHandler RegisterStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
+        public override IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<AutomationElement, StructureChangeType, int[]> action)
         {
             var eventHandler = new UIA3StructureChangedEventHandler(this.Automation, action);
             this.Automation.NativeAutomation.AddStructureChangedEventHandler(this.NativeElement, (Interop.UIAutomationClient.TreeScope)treeScope, null, eventHandler);
-            return eventHandler;
-        }
-
-        public override void RemoveAutomationEventHandler(EventId @event, IAutomationEventHandler eventHandler)
-        {
-            this.Automation.NativeAutomation.RemoveAutomationEventHandler(@event.Id, this.NativeElement, (UIA3BasicEventHandler)eventHandler);
-        }
-
-        public override void RemovePropertyChangedEventHandler(IAutomationPropertyChangedEventHandler eventHandler)
-        {
-            this.Automation.NativeAutomation.RemovePropertyChangedEventHandler(this.NativeElement, (UIA3PropertyChangedEventHandler)eventHandler);
-        }
-
-        public override void RemoveStructureChangedEventHandler(IAutomationStructureChangedEventHandler eventHandler)
-        {
-            this.Automation.NativeAutomation.RemoveStructureChangedEventHandler(this.NativeElement, (UIA3StructureChangedEventHandler)eventHandler);
+            return Disposable.Create(() => this.Automation.NativeAutomation.RemoveStructureChangedEventHandler(this.NativeElement, (UIA3StructureChangedEventHandler)eventHandler));
         }
 
         public override IReadOnlyList<PatternId> GetSupportedPatterns()

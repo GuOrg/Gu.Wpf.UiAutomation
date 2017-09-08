@@ -26,20 +26,21 @@
                 var invokeFired = false;
                 using (var waitHandle = new ManualResetEventSlim(initialState: false))
                 {
-                    var registeredEvent = button.RegisterEvent(
+                    using (button.SubscribeToEvent(
                         invokePattern.Events.InvokedEvent,
                         TreeScope.Element,
                         (element, id) =>
                         {
                             invokeFired = true;
                             waitHandle.Set();
-                        });
-                    invokePattern.Invoke();
-                    var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
-                    Assert.AreEqual(true, waitResult);
-                    Assert.AreEqual("Invoked!", button.Text);
-                    Assert.AreEqual(true, invokeFired);
-                    button.RemoveAutomationEventHandler(invokePattern.Events.InvokedEvent, registeredEvent);
+                        }))
+                    {
+                        invokePattern.Invoke();
+                        var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
+                        Assert.AreEqual(true, waitResult);
+                        Assert.AreEqual("Invoked!", button.Text);
+                        Assert.AreEqual(true, invokeFired);
+                    }
                 }
             }
         }
