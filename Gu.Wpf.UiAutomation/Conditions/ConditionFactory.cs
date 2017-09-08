@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
+
     /// <summary>
     /// Helper class with some commonly used conditions
     /// </summary>
@@ -30,6 +32,12 @@
         public PropertyCondition ByName(string name)
         {
             return new PropertyCondition(this.propertyLibrary.Element.Name, name);
+        }
+
+        [Obsolete("Not sure about keeping it as it does return this.ByName(text);")]
+        public PropertyCondition ByText(string text)
+        {
+            return this.ByName(text);
         }
 
         public PropertyCondition ByValue(string text)
