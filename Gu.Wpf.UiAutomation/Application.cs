@@ -106,7 +106,7 @@
         /// </summary>
         public static Application Attach(Process process, OnDispose dispose = OnDispose.LeaveOpen)
         {
-            Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
+            //// Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
             var app = new Application(new ProcessReference(process, dispose));
             if (app.MainWindow.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
                 windowHandle != new IntPtr(0))
@@ -142,8 +142,8 @@
             var exeFileName = Path.GetFullPath(processStartInfo.FileName);
             lock (Launched)
             {
-                var launched = Launched.FirstOrDefault(x => x.MainModule.FileName == exeFileName &&
-                                                           x.StartInfo.Arguments == processStartInfo.Arguments);
+                var launched = Launched.FirstOrDefault(x => Path.GetFullPath(x.StartInfo.FileName) == exeFileName &&
+                                                            x.StartInfo.Arguments == processStartInfo.Arguments);
                 if (launched != null)
                 {
                     return Attach(launched, onDispose);
@@ -191,12 +191,12 @@
                 processStartInfo.WorkingDirectory = ".";
             }
 
-            Logger.Default.Debug(
-                "[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
-                processStartInfo.FileName,
-                new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
-                new FileInfo(processStartInfo.FileName).FullName,
-                Environment.CurrentDirectory);
+            ////Logger.Default.Debug(
+            ////    "[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
+            ////    processStartInfo.FileName,
+            ////    new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
+            ////    new FileInfo(processStartInfo.FileName).FullName,
+            ////    Environment.CurrentDirectory);
 
             try
             {

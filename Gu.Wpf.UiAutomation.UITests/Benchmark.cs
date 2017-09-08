@@ -14,9 +14,12 @@
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            using (Application.AttachOrLaunch(ExeFileName))
+            using (var app = Application.AttachOrLaunch(ExeFileName))
             {
                 // for side effect of having the app open.
+                var window = app.MainWindow;
+                var checkBox = window.FindCheckBox("Test Checkbox");
+                var isChecked = checkBox.IsChecked;
             }
         }
 
