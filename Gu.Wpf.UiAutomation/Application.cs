@@ -289,7 +289,12 @@
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
                 foreach (var process in launched)
                 {
-                    process.Kill();
+                    if (!process.HasExited)
+                    {
+                        process.Kill();
+                        process.WaitForExit(1000);
+                    }
+
                     process.Dispose();
                     Launched.Remove(process);
                 }
