@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [Test]
-        public void ItemsControlContent()
+        public void ContentCollection()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -74,6 +74,23 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                 Assert.AreEqual("WithItemsControl", groupBox.Header.AsTextBlock().Text);
                 Assert.Throws<InvalidOperationException>(() => _ = groupBox.Content);
                 var content = groupBox.ContentCollection;
+                Assert.AreEqual(2, content.Count);
+                Assert.AreEqual("1", content[0].AsTextBlock().Text);
+                Assert.AreEqual("2", content[1].AsTextBlock().Text);
+            }
+        }
+
+        [Test]
+        public void ContentElements()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var groupBox = window.FindGroupBox("WithItemsControl");
+                Assert.AreEqual("WithItemsControl", groupBox.Text);
+                Assert.AreEqual("WithItemsControl", groupBox.Header.AsTextBlock().Text);
+                Assert.Throws<InvalidOperationException>(() => _ = groupBox.Content);
+                var content = groupBox.ContentElements(x => new TextBlock(x));
                 Assert.AreEqual(2, content.Count);
                 Assert.AreEqual("1", content[0].AsTextBlock().Text);
                 Assert.AreEqual("2", content[1].AsTextBlock().Text);

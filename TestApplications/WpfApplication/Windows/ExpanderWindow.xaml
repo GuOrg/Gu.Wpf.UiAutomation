@@ -9,25 +9,29 @@
     <StackPanel>
         <Expander AutomationProperties.AutomationId="AutomationId"
                   Header="1"
-                  IsEnabled="{Binding ElementName=IsEnabled,
-                                      Path=IsChecked}"
+                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                   IsExpanded="True">
             <TextBlock Text="1" />
         </Expander>
 
-        <Expander x:Name="XName"
+        <Expander x:Name="xName"
                   Header="2"
-                  IsEnabled="{Binding ElementName=IsEnabled,
-                                      Path=IsChecked}"
+                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                   IsExpanded="True">
             <TextBlock Text="2" />
         </Expander>
 
         <Expander Header="Header"
-                  IsEnabled="{Binding ElementName=IsEnabled,
-                                      Path=IsChecked}"
+                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                   IsExpanded="True">
-            <TextBlock Text="2" />
+            <TextBlock Text="3" />
+        </Expander>
+
+        <Expander Header="WithItemsControl">
+            <ItemsControl>
+                <TextBlock Text="1" />
+                <TextBlock Text="2" />
+            </ItemsControl>
         </Expander>
 
         <CheckBox x:Name="IsEnabled"

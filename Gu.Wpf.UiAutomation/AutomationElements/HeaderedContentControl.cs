@@ -63,5 +63,16 @@
         /// So it assumes there is exactly one element in the header.
         /// </summary>
         public IReadOnlyList<AutomationElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
+
+        /// <summary>
+        /// When the content is an ItemsControl.
+        /// This returns this.FindAllChildren().Skip(1).ToArray();
+        /// So it assumes there is exactly one element in the header.
+        /// </summary>
+        public IReadOnlyList<T> ContentElements<T>(Func<BasicAutomationElementBase, T> wrap)
+            where T : AutomationElement
+        {
+            return this.FindAllChildren(TrueCondition.Default, wrap).Skip(1).ToArray();
+        }
     }
 }

@@ -2,14 +2,12 @@
 {
     using System;
 
-    public class Expander : Control
+    public class Expander : HeaderedContentControl
     {
         public Expander(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
-
-        public string Text => this.Properties.Name.Value;
 
         public bool IsExpanded
         {
