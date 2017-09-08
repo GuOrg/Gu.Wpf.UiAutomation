@@ -1,3 +1,13 @@
+# 0.1.8.0
+* FEATURE: Datagrid handle input in template columns.
+* FEATURE: Find overloads.
+* FEATURE: ComboBox.IsEditable & IsReadOnly
+* FEATURE: UserControl
+* FEATURE: TextBox.IsReadOnly
+* FEATURE: Application.Kill
+* FEATURE: Application.AttachOrLaunch with argument.
+* FEATURE: ListBox.Select by text.
+
 # 0.1.7.0
 * BREAKING: Rename capture.
 * BREAKING: Refactor overlay API.
