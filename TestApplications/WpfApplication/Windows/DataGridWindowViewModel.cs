@@ -7,13 +7,13 @@
     {
         public ObservableCollection<DataGridItemViewModel> ThreeItems { get; } = new ObservableCollection<DataGridItemViewModel>
         {
-            new DataGridItemViewModel { Id = 1, Name = "Item 1" },
-            new DataGridItemViewModel { Id = 2, Name = "Item 2" },
-            new DataGridItemViewModel { Id = 3, Name = "Item 3" },
+            new DataGridItemViewModel { IntValue = 1, StringValue = "Item 1" },
+            new DataGridItemViewModel { IntValue = 2, StringValue = "Item 2" },
+            new DataGridItemViewModel { IntValue = 3, StringValue = "Item 3" },
         };
 
         public ObservableCollection<DataGridItemViewModel> HundredItems { get; } = new ObservableCollection<DataGridItemViewModel>(
             Enumerable.Range(1, 100)
-                      .Select(x => new DataGridItemViewModel { Id = x, Name = $"Item {x}" }));
+                      .Select(x => new DataGridItemViewModel { IntValue = x, StringValue = $"Item {x}" }));
     }
 }

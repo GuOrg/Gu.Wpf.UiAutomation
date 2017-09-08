@@ -56,9 +56,9 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(2, dataGrid.Rows[0].Cells.Count);
-                Assert.AreEqual(2, dataGrid.Rows[1].Cells.Count);
-                Assert.AreEqual(2, dataGrid.Rows[2].Cells.Count);
+                Assert.AreEqual(2, dataGrid.Row(0).Cells.Count);
+                Assert.AreEqual(2, dataGrid.Row(1).Cells.Count);
+                Assert.AreEqual(2, dataGrid.Row(2).Cells.Count);
             }
         }
 
@@ -149,8 +149,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
                 Assert.AreEqual(expectedCount, dataGrid.ColumnCount);
                 Assert.AreEqual(expectedCount, dataGrid.ColumnHeaders.Count);
-                Assert.AreEqual("Id", dataGrid.ColumnHeaders[0].Text);
-                Assert.AreEqual("Name", dataGrid.ColumnHeaders[1].Text);
+                Assert.AreEqual("IntValue", dataGrid.ColumnHeaders[0].Text);
+                Assert.AreEqual("StringValue", dataGrid.ColumnHeaders[1].Text);
             }
         }
 

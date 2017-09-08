@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:windows="clr-namespace:WpfApplication.Windows"
         Title="Window"
-        Width="300"
+        Width="600"
         Height="500"
         mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate x:Key="RowNumberTemplate" DataType="{x:Type local:DataGridItemViewModel}">
-            <TextBlock Text="{Binding Id, StringFormat='Row {0}'}" />
+            <TextBlock Text="{Binding IntValue, StringFormat='Row {0}'}" />
         </DataTemplate>
 
         <Style x:Key="RowNumberStyle" TargetType="{x:Type DataGridRowHeader}">
@@ -27,8 +27,8 @@
                   ItemsSource="{Binding ThreeItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -38,8 +38,8 @@
                   RowHeaderStyle="{StaticResource RowNumberStyle}"
                   SelectionUnit="Cell">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -48,27 +48,27 @@
                   ItemsSource="{Binding ThreeItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Id">
+                <DataGridTemplateColumn Header="IntValue">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBox Text="{Binding Id}" />
+                            <TextBox Text="{Binding IntValue}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="{Binding IntValue}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Name">
+                <DataGridTemplateColumn Header="StringValue">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBox Text="{Binding Name}" />
+                            <TextBox Text="{Binding StringValue}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding StringValue}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -80,8 +80,8 @@
                   ItemsSource="{Binding HundredItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -90,8 +90,8 @@
                   HeadersVisibility="None"
                   ItemsSource="{Binding ThreeItems}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -101,8 +101,8 @@
                   ItemsSource="{Binding ThreeItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -111,11 +111,11 @@
                   ItemsSource="{Binding ThreeItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}"
-                                    Header="Id"
+                <DataGridTextColumn Binding="{Binding IntValue}"
+                                    Header="IntValue"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Name}"
-                                    Header="Name"
+                <DataGridTextColumn Binding="{Binding StringValue}"
+                                    Header="StringValue"
                                     IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>

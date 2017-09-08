@@ -5,39 +5,56 @@
 
     public class DataGridItemViewModel : INotifyPropertyChanged
     {
-        private int id;
-        private string name;
+        private int intValue;
+        private string stringValue;
+        private bool boolValue;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Id
+        public int IntValue
         {
-            get => this.id;
+            get => this.intValue;
 
             set
             {
-                if (value == this.id)
+                if (value == this.intValue)
                 {
                     return;
                 }
 
-                this.id = value;
+                this.intValue = value;
                 this.OnPropertyChanged();
             }
         }
 
-        public string Name
+        public string StringValue
         {
-            get => this.name;
+            get => this.stringValue;
 
             set
             {
-                if (value == this.name)
+                if (value == this.stringValue)
                 {
                     return;
                 }
 
-                this.name = value;
+                this.stringValue = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public bool BoolValue
+        {
+            get => this.boolValue;
+
+            set
+            {
+                if (value == this.boolValue)
+                {
+                    return;
+                }
+
+                this.boolValue = value;
                 this.OnPropertyChanged();
             }
         }

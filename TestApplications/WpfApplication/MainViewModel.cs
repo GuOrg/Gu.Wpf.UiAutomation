@@ -13,9 +13,9 @@
         {
             this.DataGridItems = new ObservableCollection<DataGridItemViewModel>
             {
-                new DataGridItemViewModel { Id = 1, Name = "Spongebob" },
-                new DataGridItemViewModel { Id = 2, Name = "Patrick" },
-                new DataGridItemViewModel { Id = 3, Name = "Tadeus" }
+                new DataGridItemViewModel { IntValue = 1, StringValue = "Spongebob" },
+                new DataGridItemViewModel { IntValue = 2, StringValue = "Patrick" },
+                new DataGridItemViewModel { IntValue = 3, StringValue = "Tadeus" }
             };
 
             this.invokeButtonText = "Invoke me!";
