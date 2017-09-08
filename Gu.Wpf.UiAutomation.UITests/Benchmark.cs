@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using NUnit.Framework;
@@ -87,6 +88,30 @@
                 Console.WriteLine($"MainWindow:     {mainWindow.TotalMilliseconds - launch.TotalMilliseconds:F0} ms  ({mainWindow.TotalMilliseconds:F0})");
                 Console.WriteLine($"FindCheckBox:   {findCheckBox.TotalMilliseconds - mainWindow.TotalMilliseconds:F0} ms ({findCheckBox.TotalMilliseconds:F0})");
                 Console.WriteLine($"IsChecked:      {sw.ElapsedMilliseconds - findCheckBox.TotalMilliseconds:F0} ms  ({sw.ElapsedMilliseconds:F0})");
+            }
+        }
+
+        [TestCase(100)]
+        public void FindCheckBox(int n)
+        {
+            var sw = Stopwatch.StartNew();
+            using (var app = Application.Launch(ExeFileName))
+            {
+                var launch = sw.Elapsed;
+                var window = app.MainWindow;
+                var mainWindow = sw.Elapsed;
+                var results = new List<CheckBox>(n);
+                for (var i = 0; i < n; i++)
+                {
+                    results.Add(window.FindCheckBox("Test Checkbox"));
+                }
+
+                var findCheckBox = sw.Elapsed;
+                sw.Stop();
+                Assert.AreEqual(100, results.Count);
+                Console.WriteLine($"Launch:       {launch.TotalMilliseconds:F0} ms");
+                Console.WriteLine($"MainWindow:   {mainWindow.TotalMilliseconds - launch.TotalMilliseconds:F0} ms ({mainWindow.TotalMilliseconds:F0})");
+                Console.WriteLine($"FindCheckBox: {findCheckBox.TotalMilliseconds - mainWindow.TotalMilliseconds:F0} ms  ({findCheckBox.TotalMilliseconds:F0})");
             }
         }
     }
