@@ -54,10 +54,7 @@ namespace Gu.Wpf.UiAutomation
 
         public ListBoxItem Select(string text)
         {
-            var match = this.FindFirst(
-                TreeScope.Children,
-                this.CreateCondition(ControlType.ListItem, text),
-                x => new ListBoxItem(x));
+            var match = this.Items.FirstOrDefault(item => item.Text.Equals(text));
             if (match == null)
             {
                 throw new InvalidOperationException($"Did not find an item by text {text}");
