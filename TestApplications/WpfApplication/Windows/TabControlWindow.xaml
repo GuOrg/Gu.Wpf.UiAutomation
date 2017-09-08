@@ -16,5 +16,12 @@
         <TabItem AutomationProperties.AutomationId="AutomationId" Header="AutomationProperties.AutomationId">
             <TextBlock Text="3" />
         </TabItem>
+
+        <TabItem Header="WithItemsControl">
+            <ItemsControl>
+                <TextBlock Text="1" />
+                <TextBlock Text="2" />
+            </ItemsControl>
+        </TabItem>
     </TabControl>
 </Window>

@@ -1,12 +1,10 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class GroupBox : Control
+    public class GroupBox : HeaderedContentControl
     {
         public GroupBox(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
-
-        public string Text => this.Properties.Name.Value;
     }
 }

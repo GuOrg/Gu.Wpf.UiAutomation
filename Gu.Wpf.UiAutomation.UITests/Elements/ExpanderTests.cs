@@ -9,6 +9,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        private static readonly string WindowName = "ExpanderWindow";
+
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
@@ -20,7 +22,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("Header", "Header")]
         public void FindExpander(string key, string header)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander(key);
@@ -32,7 +34,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void IsExpanded()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");
@@ -50,7 +52,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [Test]
         public void ExpandCollapse()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander("AutomationId");

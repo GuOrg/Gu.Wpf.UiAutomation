@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class TabItem : SelectionItemAutomationElement
+    public class HeaderedContentControl : Control
     {
-        public TabItem(BasicAutomationElementBase basicAutomationElement)
+        public HeaderedContentControl(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -28,17 +28,20 @@
             }
         }
 
+        /// <summary>
+        /// The first child so it assumes there is exactly one element in the header.
+        /// </summary>
         public AutomationElement Header => this.FindFirstChild();
 
+        /// <summary>
+        /// When the content is a single item.
+        /// This returns this.FindAllChildren().Skip(1).Single();
+        /// So it assumes there is exactly one element in the header.
+        /// </summary>
         public AutomationElement Content
         {
             get
             {
-                if (!this.IsSelected)
-                {
-                    throw new InvalidOperationException("TabItem must have be selected to get Content");
-                }
-
                 var children = this.FindAllChildren();
                 if (children.Count < 2)
                 {
@@ -47,7 +50,7 @@
 
                 if (children.Count > 2)
                 {
-                    throw new InvalidOperationException($"{this.GetType().Name} has an itemscontrol as content. Use ContentCollection");
+                    throw new InvalidOperationException($"{this.GetType().Name} has an ItemsControl as content. Use ContentCollection");
                 }
 
                 return children[1];
@@ -55,7 +58,9 @@
         }
 
         /// <summary>
-        /// When the content is an itemscontrol.
+        /// When the content is an ItemsControl.
+        /// This returns this.FindAllChildren().Skip(1).ToArray();
+        /// So it assumes there is exactly one element in the header.
         /// </summary>
         public IReadOnlyList<AutomationElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
     }

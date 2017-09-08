@@ -6,6 +6,7 @@
     public class TabControlTests
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string WindowName = "TabControlWindow";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
@@ -16,21 +17,25 @@
         [Test]
         public void Items()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
-                Assert.AreEqual(3, tab.Items.Count);
+                Assert.AreEqual(4, tab.Items.Count);
                 Assert.AreEqual("x:Name", tab.Items[0].Text);
                 Assert.AreEqual("Header", tab.Items[1].Text);
                 Assert.AreEqual("AutomationProperties.AutomationId", tab.Items[2].Text);
+                Assert.AreEqual("WithItemsControl", tab.Items[3].Text);
 
                 for (var i = 0; i < tab.Items.Count; i++)
                 {
                     var tabItem = tab.Items[i];
                     tabItem.Click();
-                    Assert.AreEqual($"{i + 1}", tabItem.Content.AsTextBlock().Text);
-                    Assert.AreEqual($"{i + 1}", tab.Content.AsTextBlock().Text);
+                    if (tabItem.ContentCollection.Count == 1)
+                    {
+                        Assert.AreEqual($"{i + 1}", tabItem.Content.AsTextBlock().Text);
+                        Assert.AreEqual($"{i + 1}", tab.Content.AsTextBlock().Text);
+                    }
                 }
             }
         }
@@ -38,7 +43,7 @@
         [Test]
         public void SelectedIndex()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
@@ -61,7 +66,7 @@
         [Test]
         public void SelectIndex()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
@@ -84,7 +89,7 @@
         [Test]
         public void SelectText()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TabControlWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();

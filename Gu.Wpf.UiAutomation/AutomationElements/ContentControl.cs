@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class TabItem : SelectionItemAutomationElement
+    public class ContentControl : Control
     {
-        public TabItem(BasicAutomationElementBase basicAutomationElement)
+        public ContentControl(BasicAutomationElementBase basicAutomationElement)
             : base(basicAutomationElement)
         {
         }
@@ -18,7 +18,7 @@
         {
             get
             {
-                var header = this.Header;
+                var header = this.Content;
                 if (header != null)
                 {
                     return header.Properties.Name.Value;
@@ -28,29 +28,22 @@
             }
         }
 
-        public AutomationElement Header => this.FindFirstChild();
-
         public AutomationElement Content
         {
             get
             {
-                if (!this.IsSelected)
-                {
-                    throw new InvalidOperationException("TabItem must have be selected to get Content");
-                }
-
                 var children = this.FindAllChildren();
-                if (children.Count < 2)
+                if (children.Count < 1)
                 {
                     throw new InvalidOperationException($"{this.GetType().Name} does not have content.");
                 }
 
-                if (children.Count > 2)
+                if (children.Count > 1)
                 {
                     throw new InvalidOperationException($"{this.GetType().Name} has an itemscontrol as content. Use ContentCollection");
                 }
 
-                return children[1];
+                return children[0];
             }
         }
 

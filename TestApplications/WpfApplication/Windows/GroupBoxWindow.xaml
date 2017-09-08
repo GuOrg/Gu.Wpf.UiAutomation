@@ -9,20 +9,25 @@
     <StackPanel>
         <GroupBox AutomationProperties.AutomationId="AutomationId"
                   Header="1"
-                  IsEnabled="{Binding ElementName=IsEnabled,
-                                      Path=IsChecked}">
+                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}">
             <TextBlock Text="1" />
         </GroupBox>
 
-        <GroupBox x:Name="XName"
+        <GroupBox x:Name="xName"
                   Header="2"
-                  IsEnabled="{Binding ElementName=IsEnabled,
-                                      Path=IsChecked}">
+                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}">
             <TextBlock Text="2" />
         </GroupBox>
 
         <GroupBox Header="Header" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}">
-            <TextBlock Text="2" />
+            <TextBlock Text="3" />
+        </GroupBox>
+
+        <GroupBox Header="WithItemsControl">
+            <ItemsControl>
+                <TextBlock Text="1" />
+                <TextBlock Text="2" />
+            </ItemsControl>
         </GroupBox>
 
         <CheckBox x:Name="IsEnabled"
