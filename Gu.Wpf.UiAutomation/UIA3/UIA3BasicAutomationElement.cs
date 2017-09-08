@@ -113,6 +113,12 @@
             var nativeFoundElements = CacheRequest.IsCachingActive
                 ? this.NativeElement.FindAllBuildCache((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation), CacheRequest.Current.ToNative(this.Automation))
                 : this.NativeElement.FindAll((Interop.UIAutomationClient.TreeScope)treeScope, condition.ToNative(this.Automation.NativeAutomation));
+            if (nativeFoundElements == null ||
+                index >= nativeFoundElements.Length)
+            {
+                return null;
+            }
+
             var nativeElement = nativeFoundElements.GetElement(index);
             if (nativeElement == null)
             {

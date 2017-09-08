@@ -77,6 +77,50 @@
                     Assert.AreEqual(expected, child.ControlType);
                 }
             }
+
+            [Test]
+            public void FindAtWithWrap()
+            {
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
+                {
+                    var window = app.MainWindow;
+                    var child = window.FindAt(
+                        TreeScope.Descendants,
+                        window.CreateCondition(ControlType.CheckBox),
+                        1,
+                        x => new CheckBox(x),
+                        TimeSpan.FromMilliseconds(100));
+                    Assert.IsInstanceOf<CheckBox>(child);
+                    Assert.AreEqual("1", child.AutomationId);
+                }
+            }
+
+            [Test]
+            public void TryFindAtWithWrap()
+            {
+                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
+                {
+                    var window = app.MainWindow;
+                    Assert.AreEqual(true, window.TryFindAt(
+                        TreeScope.Descendants,
+                        window.CreateCondition(ControlType.CheckBox),
+                        1,
+                        x => new CheckBox(x),
+                        TimeSpan.FromMilliseconds(100),
+                        out var child));
+                    Assert.IsInstanceOf<CheckBox>(child);
+                    Assert.AreEqual("1", child.AutomationId);
+
+                    Assert.AreEqual(false, window.TryFindAt(
+                        TreeScope.Descendants,
+                        window.CreateCondition(ControlType.CheckBox),
+                        100,
+                        x => new CheckBox(x),
+                        TimeSpan.FromMilliseconds(100),
+                        out child));
+                    Assert.IsNull(child);
+                }
+            }
         }
     }
 }
