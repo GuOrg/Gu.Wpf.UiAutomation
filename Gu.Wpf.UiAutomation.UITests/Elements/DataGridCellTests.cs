@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid", false)]
-        [TestCase("DataGrid100", false)]
+        [TestCase("DataGrid10", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadOnlyDataGrid", true)]
         [TestCase("ReadOnlyDataGrid", true)]
@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("TemplateColumnDataGrid")]
         public void NewItemPlaceholder(string name)
@@ -61,7 +61,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("TemplateColumnDataGrid")]
         public void Enter(string name)
@@ -132,7 +132,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("TemplateColumnDataGrid")]
         public void SetValue(string name)
@@ -178,7 +178,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("TemplateColumnDataGrid")]
         public void SetValueWhenClickedOnce(string name)
@@ -198,7 +198,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         }
 
         [TestCase("DataGrid")]
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
         [TestCase("TemplateColumnDataGrid")]
         public void SetValueWhenClickedTwice(string name)
@@ -253,8 +253,8 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
-        [TestCase("DataGrid100", 99)]
-        [TestCase("DataGrid100", 100)]
+        [TestCase("DataGrid10", 9)]
+        [TestCase("DataGrid10", 10)]
         public void SetValueWhenOffScreen(string name, int row)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -268,15 +268,15 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
-        [TestCase("DataGrid100")]
+        [TestCase("DataGrid10")]
         public void GetValueWhenOffScreen(string name)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual("100", dataGrid[99, 0].Value);
-                Assert.AreEqual("Item 100", dataGrid[99, 1].Value);
+                Assert.AreEqual("10", dataGrid[9, 0].Value);
+                Assert.AreEqual("Item 10", dataGrid[9, 1].Value);
             }
         }
     }

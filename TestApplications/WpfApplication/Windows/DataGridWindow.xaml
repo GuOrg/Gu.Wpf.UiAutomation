@@ -75,9 +75,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="DataGrid100"
+        <DataGrid x:Name="DataGrid10"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding HundredItems}"
+                  ItemsSource="{Binding TenItems}"
                   RowHeaderStyle="{StaticResource RowNumberStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />

@@ -12,8 +12,8 @@
             new DataGridItemViewModel { IntValue = 3, StringValue = "Item 3" },
         };
 
-        public ObservableCollection<DataGridItemViewModel> HundredItems { get; } = new ObservableCollection<DataGridItemViewModel>(
-            Enumerable.Range(1, 100)
+        public ObservableCollection<DataGridItemViewModel> TenItems { get; } = new ObservableCollection<DataGridItemViewModel>(
+            Enumerable.Range(1, 10)
                       .Select(x => new DataGridItemViewModel { IntValue = x, StringValue = $"Item {x}" }));
     }
 }
