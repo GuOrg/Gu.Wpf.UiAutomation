@@ -11,6 +11,12 @@ namespace Gu.Wpf.UiAutomation.UITests
             TestContext.CurrentContext.TestDirectory,
             @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void DisposeWhenClosed()
         {
