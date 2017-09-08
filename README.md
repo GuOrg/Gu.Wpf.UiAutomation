@@ -35,6 +35,103 @@ public void IsChecked()
 }
 ```
 
+### Application
+The application class iss the way to start an application to test. There are a couple of factory methods.
+
+#### Launch
+Starts a new instance of the application and closes it on dispose. There is a flag to leave the app open but the default is close on dispose.
+Launch is useful for tests that mutate state where resetting can be slow and painful.
+
+```csharp
+private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+[Test]
+public void IsChecked()
+{
+    using (var app = Application.Launch(ExeFileName))
+    {
+        var window = app.MainWindow;
+        var checkBox = window.FindCheckBox("Test Checkbox");
+        checkBox.IsChecked = true;
+        Assert.AreEqual(true, checkBox.IsChecked);
+    }
+}
+```
+
+#### Attach
+Attaches to a running process and leaves it open when disposing disposing by default.
+
+#### AttachOrLaunch
+Attaches to a running process or launches a new if not found and leaves it open when disposing by default.
+
+```cs
+private static readonly string ExeFileName = Path.Combine(
+    TestContext.CurrentContext.TestDirectory,
+    @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+[OneTimeTearDown]
+public void OneTimeTearDown()
+{
+    Application.KillLaunched(ExeFileName);
+}
+
+[TestCase("AutomationId")]
+[TestCase("XName")]
+[TestCase("Content")]
+public void FindCheckBox(string key)
+{
+    using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
+    {
+        var window = app.MainWindow;
+        var checkBox = window.FindCheckBox(key);
+        Assert.NotNull(checkBox);
+    }
+}
+```
+
+#### Arguments
+Launch and AttachOrLaunch has an overload that takes an argument string. It can be used like this:
+
+```cs
+private static readonly string ExeFileName = Path.Combine(
+    TestContext.CurrentContext.TestDirectory,
+    @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+
+[OneTimeTearDown]
+public void OneTimeTearDown()
+{
+    Application.KillLaunched(ExeFileName);
+}
+
+[Test]
+public void FindCheckBox()
+{
+    using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
+    {
+        var window = app.MainWindow;
+        var checkBox = window.FindCheckBox(key);
+        Assert.NotNull(checkBox);
+    }
+}
+```
+
+```cs
+    public partial class App
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            if (e.Args.Length == 1)
+            {
+                var window = e.Args[0];
+                this.StartupUri = new Uri($"Windows/{window}.xaml", UriKind.Relative);
+            }
+
+            base.OnStartup(e);
+        }
+    }
+```
+
+
 ### Contribution
 Feel free to fork Gu.Wpf.UiAutomation and send pull requests of your modifications.<br />
 You can also create issues if you find problems or have ideas on how to further improve Gu.Wpf.UiAutomation.
