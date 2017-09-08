@@ -1,7 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     /// <summary>
-    /// Represents an item in a combobox
+    /// Represents an item in a <see cref="ComboBox"/>
     /// </summary>
     public class ComboBoxItem : SelectionItemAutomationElement
     {

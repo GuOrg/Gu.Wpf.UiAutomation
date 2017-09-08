@@ -16,13 +16,14 @@
         }
 
         /// <summary>
-        /// Flag which indicates, if the combobox is editable or not.
+        /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
         public virtual bool IsEditable => this.FindAllChildren().Any(c => c.ControlType == ControlType.Edit &&
                                                                           c.Patterns.Value.PatternOrDefault?.IsReadOnly.ValueOrDefault() == false);
 
         /// <summary>
-        /// Flag which indicates, if the combobox is editable or not.
+        /// Flag which indicates, if the <see cref="ComboBox"/> is readonly or not.
+        /// Note that readonly only affects text input.
         /// </summary>
         public bool IsReadOnly
         {
