@@ -8,9 +8,7 @@
         mc:Ignorable="d">
     <StackPanel>
         <CheckBox AutomationProperties.AutomationId="AutomationId" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
-        <CheckBox x:Name="XName"
-                  AutomationProperties.AutomationId="1"
-                  IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
+        <CheckBox x:Name="XName" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
         <CheckBox Content="Content" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
 
         <CheckBox AutomationProperties.AutomationId="SimpleCheckBox" Content="Test Checkbox" />

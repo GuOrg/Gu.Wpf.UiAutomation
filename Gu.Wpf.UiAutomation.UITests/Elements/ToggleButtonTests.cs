@@ -7,12 +7,19 @@
     {
         private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+            Retry.ResetTime();
+        }
+
         [TestCase("AutomationId")]
         [TestCase("XName")]
         [TestCase("Content")]
         public void FindToggleButton(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton(key);
@@ -23,7 +30,7 @@
         [Test]
         public void IsChecked()
         {
-            using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("Test ToggleButton");
@@ -46,7 +53,7 @@
         [Test]
         public void ThreeStateIsChecked()
         {
-            using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
@@ -67,10 +74,11 @@
         [Test]
         public void Click()
         {
-            using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("Test ToggleButton");
+                toggleButton.IsChecked = false;
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
                 toggleButton.Click();
@@ -87,10 +95,11 @@
         [Test]
         public void ThreeStateClick()
         {
-            using (var app = Application.Launch(ExeFileName, "ToggleButtonWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
+                toggleButton.IsChecked = false;
                 Assert.AreEqual(false, toggleButton.IsChecked);
 
                 toggleButton.Click();

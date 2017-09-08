@@ -25,6 +25,19 @@
                 }
             }
 
+            //// [TestCase("CheckBoxXName")]
+            [TestCase("CheckBoxAutomationId")]
+            [TestCase("CheckBoxXNameAndAutomationId")]
+            public void FindCheckBoxWithXNameAndAutomationId(string key)
+            {
+                using (var app = Application.AttachOrLaunch(ExeFileName, "FindWindow"))
+                {
+                    var window = app.MainWindow;
+                    var checkBox = window.FindCheckBox(key);
+                    Assert.NotNull(checkBox);
+                }
+            }
+
             [TestCase(null)]
             [TestCase("AutomationId")]
             [TestCase("XName")]
@@ -91,7 +104,7 @@
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100));
                     Assert.IsInstanceOf<CheckBox>(child);
-                    Assert.AreEqual("1", child.AutomationId);
+                    Assert.AreEqual("XName", child.AutomationId);
                 }
             }
 
@@ -109,7 +122,7 @@
                         TimeSpan.FromMilliseconds(100),
                         out var child));
                     Assert.IsInstanceOf<CheckBox>(child);
-                    Assert.AreEqual("1", child.AutomationId);
+                    Assert.AreEqual("XName", child.AutomationId);
 
                     Assert.AreEqual(false, window.TryFindAt(
                         TreeScope.Descendants,
