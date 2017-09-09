@@ -149,6 +149,12 @@
 
         public bool TryGetWindow(out Window window)
         {
+            if (this is Window w)
+            {
+                window = w;
+                return true;
+            }
+
             var parent = this.Parent;
             while (parent != null)
             {
