@@ -31,14 +31,22 @@
         {
             get
             {
-                if (OperatingSystem.IsWindows7() ||
-                    OperatingSystem.IsWindowsServer2016())
+                IReadOnlyList<AutomationElement> headers = null;
+                var start = DateTime.Now;
+                do
                 {
-                    Wait.UntilResponsive(this);
-                }
+                    if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
+                        tablePattern.ColumnHeaders.TryGetValue(out headers) &&
+                        headers.Count > 0)
+                    {
+                        return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
+                    }
 
-                if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
-                    tablePattern.ColumnHeaders.TryGetValue(out var headers))
+                    Wait.For(Retry.PollInterval);
+                }
+                while (Retry.IsTimeouted(start, TimeSpan.FromMilliseconds(1000)));
+
+                if (headers != null)
                 {
                     return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
                 }
