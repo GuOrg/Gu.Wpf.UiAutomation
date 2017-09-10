@@ -20,36 +20,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
         [TestCase("DataGridNoHeaders")]
         [TestCase("ReadOnlyDataGrid")]
         [TestCase("ReadonlyColumnsDataGrid")]
-        public void ColumnCount(string name)
-        {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(2, dataGrid.ColumnCount);
-            }
-        }
-
-        [TestCase("DataGrid", 2)]
-        [TestCase("DataGrid10", 2)]
-        [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadOnlyDataGrid", 2)]
-        [TestCase("ReadonlyColumnsDataGrid", 2)]
-        public void ColumnHeadersCount(string name, int expected)
-        {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(expected, dataGrid.ColumnHeaders.Count);
-            }
-        }
-
-        [TestCase("DataGrid")]
-        [TestCase("DataGrid10")]
-        [TestCase("DataGridNoHeaders")]
-        [TestCase("ReadOnlyDataGrid")]
-        [TestCase("ReadonlyColumnsDataGrid")]
         public void RowCellsCount(string name)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
@@ -130,6 +100,38 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
+
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid10")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadOnlyDataGrid")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        public void ColumnCount(string name)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(2, dataGrid.ColumnCount);
+            }
+        }
+
+        [TestCase("DataGrid", 2)]
+        [TestCase("DataGrid10", 2)]
+        [TestCase("DataGridNoHeaders", 0)]
+        [TestCase("ReadOnlyDataGrid", 2)]
+        [TestCase("ReadonlyColumnsDataGrid", 2)]
+        public void ColumnHeadersCount(string name, int expected)
+        {
+            // We want launch here to repro a bug.
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(expected, dataGrid.ColumnHeaders.Count);
+            }
+        }
+
         [TestCase("DataGrid", 2)]
         [TestCase("DataGrid10", 2)]
         [TestCase("DataGridNoHeaders", 0)]
@@ -147,8 +149,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
                     return;
                 }
 
-                Assert.AreEqual(expectedCount, dataGrid.ColumnCount);
-                Assert.AreEqual(expectedCount, dataGrid.ColumnHeaders.Count);
                 Assert.AreEqual("IntValue", dataGrid.ColumnHeaders[0].Text);
                 Assert.AreEqual("StringValue", dataGrid.ColumnHeaders[1].Text);
             }
