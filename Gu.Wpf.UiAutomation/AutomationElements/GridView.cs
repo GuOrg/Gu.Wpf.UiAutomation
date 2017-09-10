@@ -34,9 +34,10 @@
                 if (OperatingSystem.IsWindows7() ||
                     OperatingSystem.IsWindowsServer2016())
                 {
-                    if (this.Patterns.Grid.TryGetPattern(out var gridPattern))
+                    if (this.Patterns.Grid.TryGetPattern(out var gridPattern) &&
+                        gridPattern.ColumnCount.TryGetValue(out var columnCount))
                     {
-                        var cell = gridPattern.GetItem(0, 0);
+                        var cell = gridPattern.GetItem(0, columnCount);
                         if (cell != null &&
                             cell.Patterns.TableItem.TryGetPattern(out var tableItemPattern) &&
                             tableItemPattern.ColumnHeaderItems.TryGetValue(out var headerItems))
