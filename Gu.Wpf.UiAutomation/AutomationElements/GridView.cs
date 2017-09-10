@@ -31,19 +31,16 @@
         {
             get
             {
+                if (OperatingSystem.IsWindows7() ||
+                    OperatingSystem.IsWindowsServer2016())
+                {
+                    Wait.UntilResponsive(this);
+                }
+
                 if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
                     tablePattern.ColumnHeaders.TryGetValue(out var headers))
                 {
                     return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
-                }
-
-                // hack for win 7
-                if (this[0, 0].Patterns.TableItem.TryGetPattern(out var tableItemPattern))
-                {
-                    if (tableItemPattern.ColumnHeaderItems.TryGetValue(out headers))
-                    {
-                        return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
-                    }
                 }
 
                 throw new InvalidOperationException("Could not find ColumnHeaders");

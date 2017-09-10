@@ -100,7 +100,6 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
             }
         }
 
-
         [TestCase("DataGrid")]
         [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
