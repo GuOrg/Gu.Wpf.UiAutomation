@@ -381,6 +381,29 @@
         }
 
         /// <summary>
+        /// Finds all elements in the given treescope and with the given condition within the given timeout.
+        /// </summary>
+        public bool TryFindAll<T>(TreeScope treeScope, ConditionBase condition, Func<BasicAutomationElementBase, T> wrap, TimeSpan timeOut, out IReadOnlyList<T> result)
+            where T : AutomationElement
+        {
+            result = null;
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, timeOut))
+            {
+                result = this.BasicAutomationElement.FindAll(treeScope, condition, wrap);
+                if (result != null &&
+                    result.Count > 0)
+                {
+                    return true;
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+
+            return result != null;
+        }
+
+        /// <summary>
         /// Finds the first element which is in the given treescope with the given condition.
         /// </summary>
         public AutomationElement FindFirst(TreeScope treeScope, ConditionBase condition)
