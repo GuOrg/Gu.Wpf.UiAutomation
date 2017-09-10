@@ -31,20 +31,16 @@
         {
             get
             {
-                if (OperatingSystem.IsWindows7() ||
-                    OperatingSystem.IsWindowsServer2016())
+                if (this.TryFindFirst(
+                    TreeScope.Children,
+                    this.CreateCondition(ControlType.Header),
+                    x => new AutomationElement(x),
+                    Retry.Time,
+                    out var header))
                 {
-                    if (this.Patterns.Grid.TryGetPattern(out var gridPattern) &&
-                        gridPattern.ColumnCount.TryGetValue(out var columnCount))
-                    {
-                        var cell = gridPattern.GetItem(0, columnCount);
-                        if (cell != null &&
-                            cell.Patterns.TableItem.TryGetPattern(out var tableItemPattern) &&
-                            tableItemPattern.ColumnHeaderItems.TryGetValue(out var headerItems))
-                        {
-                            return headerItems.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
-                        }
-                    }
+                    return header.FindAllChildren(
+                        this.CreateCondition(ControlType.HeaderItem),
+                        x => new ColumnHeader(x));
                 }
 
                 if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
