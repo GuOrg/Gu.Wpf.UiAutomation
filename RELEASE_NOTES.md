@@ -1,3 +1,9 @@
+# 0.1.10.0
+* FEATURE: Find TextBlock in template
+* FEATURE: GridView.RowHeader(index)
+* BUGFIX: GridView.ColumnHeaders on Windows 7.
+* FEATURE: Application.TryWithAttahced
+
 # 0.1.9.0
 * FEATURE: HeaderedContentControl
 * FEATURE: Expander : HeaderedContentControl

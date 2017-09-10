@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.1.9.0-dev
+version 0.1.10.0-dev
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,10 +11,10 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-* FEATURE: HeaderedContentControl
-* FEATURE: Expander : HeaderedContentControl
-* FEATURE: GroupBox : HeaderedContentControl
-* FEATURE: Application.TryAttach
+* FEATURE: Find TextBlock in template
+* FEATURE: GridView.RowHeader(index)
+* BUGFIX: GridView.ColumnHeaders on Windows 7.
+* FEATURE: Application.TryWithAttahced
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
