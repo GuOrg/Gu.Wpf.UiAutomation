@@ -56,6 +56,7 @@
     <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\ComboBoxTests.cs" />
     <Compile Include="Elements\ContextMenuTests.cs" />
+    <Compile Include="Elements\ControlTemplateTests.cs" />
     <Compile Include="Elements\DataGridCellTests.cs" />
     <Compile Include="Elements\DataGridTests.cs" />
     <Compile Include="Elements\ExpanderTests.cs" />

@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UIA3
 {
+    using System.Collections.Generic;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
 
@@ -27,6 +28,19 @@
                 this.NativeTreeWalker.GetParentElement(native) :
                 this.NativeTreeWalker.GetParentElementBuildCache(native, CacheRequest.Current.ToNative(this.Automation));
             return this.Automation.WrapNativeElement(parent);
+        }
+
+        public IReadOnlyList<AutomationElement> GetChildren(AutomationElement element)
+        {
+            var children = new List<AutomationElement>();
+            var child = this.GetFirstChild(element);
+            while (child != null)
+            {
+                children.Add(child);
+                child = this.GetNextSibling(child);
+            }
+
+            return children;
         }
 
         public AutomationElement GetFirstChild(AutomationElement element)

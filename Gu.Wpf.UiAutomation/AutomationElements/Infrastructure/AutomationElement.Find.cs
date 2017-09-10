@@ -80,11 +80,47 @@
         /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBlock FindTextBlock(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(ControlType.Text, name),
-            x => new TextBlock(x),
-            Retry.Time);
+        public TextBlock FindTextBlock(string name = null)
+        {
+            var condition = this.CreateCondition(ControlType.Text, name);
+            if (this.TryFindFirst(
+                TreeScope.Descendants,
+                condition,
+                x => new TextBlock(x),
+                Retry.Time,
+                out var textBlock))
+            {
+                return textBlock;
+            }
+
+            foreach (var child in this.Automation.TreeWalkerFactory.GetRawViewWalker().GetChildren(this))
+            {
+                if (child.ControlType == ControlType.Text)
+                {
+                    textBlock = child.AsTextBlock();
+                    if (textBlock.AutomationId == name ||
+                        textBlock.Text == name)
+                    {
+                        return textBlock;
+                    }
+                }
+                else if (this.TryFindFirst(
+                    TreeScope.Descendants,
+                    condition,
+                    x => new TextBlock(x),
+                    Retry.Time,
+                    out textBlock))
+                {
+                    return textBlock;
+                }
+            }
+
+            return this.FindFirst(
+                TreeScope.Descendants,
+                condition,
+                x => new TextBlock(x),
+                Retry.Time);
+        }
 
         /// <summary>
         /// Find the first <see cref="Label"/> by x:Name, Content or AutomationID
