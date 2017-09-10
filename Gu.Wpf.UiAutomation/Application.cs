@@ -10,6 +10,7 @@
     using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
+    /// <inheritdoc />
     /// <summary>
     /// Wrapper for an application which should be automated.
     /// </summary>
@@ -341,8 +342,34 @@
         {
             lock (Launched)
             {
-                exeFileName = System.IO.Path.GetFullPath(exeFileName);
+                exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
+                foreach (var process in launched)
+                {
+                    if (!process.HasExited)
+                    {
+                        process.Kill();
+                        process.WaitForExit(1000);
+                    }
+
+                    process.Dispose();
+                    Launched.Remove(process);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Kill any launced processes.
+        /// </summary>
+        /// <param name="exeFileName">The full file name of the exeFileName.</param>
+        /// <param name="args">Startup arguments.</param>
+        public static void KillLaunched(string exeFileName, string args)
+        {
+            lock (Launched)
+            {
+                exeFileName = Path.GetFullPath(exeFileName);
+                var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName) &&
+                                                   x.StartInfo.Arguments == args).ToArray();
                 foreach (var process in launched)
                 {
                     if (!process.HasExited)
@@ -452,6 +479,7 @@
                 return this.mainWindow;
             }
 
+            var start = DateTime.Now;
             this.WaitForMainWindow(waitTimeout);
             if (this.mainWindow != null)
             {
@@ -471,7 +499,12 @@
                     throw new InvalidOperationException($"Did not find main window for {this.processReference.Process.ProcessName}. If startup is slow try with a longer wait.");
                 }
 
-                Wait.UntilResponsive(mainWindowHandle);
+                if (waitTimeout != null)
+                {
+                    waitTimeout = waitTimeout - (DateTime.Now - start);
+                }
+
+                Wait.UntilResponsive(mainWindowHandle, waitTimeout ?? TimeSpan.MaxValue);
                 return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement, isMainWindow: true);
             }
         }

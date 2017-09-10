@@ -79,6 +79,9 @@
     <Compile Include="Windows\ListBoxWindowViewModel.cs">
       <DependentUpon>ListBoxWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SlowWindow.xaml.cs">
+      <DependentUpon>SlowWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TextBoxWindowViewModel.cs">
       <DependentUpon>TextBoxWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
     <Page Include="Windows\FindWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\SlowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\UserControl1.xaml">
       <SubType>Designer</SubType>

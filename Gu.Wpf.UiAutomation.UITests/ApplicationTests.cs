@@ -27,6 +27,86 @@ namespace Gu.Wpf.UiAutomation.UITests
         }
 
         [Test]
+        public void Properties()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                Assert.AreEqual(app.MainWindow.NativeWindowHandle, app.MainWindowHandle);
+                Assert.AreNotEqual(IntPtr.Zero, app.MainWindowHandle);
+                Assert.NotZero(app.ProcessId);
+                Assert.AreEqual("WpfApplication", app.Name);
+                Assert.AreEqual(false, app.HasExited);
+                app.Close();
+                Assert.AreEqual(true, app.HasExited);
+                Assert.AreEqual(0, app.ExitCode);
+            }
+        }
+
+        [Test]
+        public void KillLaunched()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                app.WaitForMainWindow();
+                Application.KillLaunched();
+                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
+            }
+        }
+
+        [Test]
+        public void KillLaunchedExeFileName()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                app.WaitForMainWindow();
+                Application.KillLaunched(ExeFileName);
+                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
+            }
+        }
+
+        [Test]
+        public void KillLaunchedExeFileNameAndArgs()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                app.WaitForMainWindow();
+                Application.KillLaunched(ExeFileName, "EmptyWindow");
+                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
+            }
+        }
+
+        [Test]
+        public void Kill()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                app.WaitForMainWindow();
+                app.Kill();
+                Assert.AreEqual(-1, app.ExitCode);
+            }
+        }
+
+        [Test]
+        public void GetAllTopLevelWindows()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                app.WaitForMainWindow();
+                Assert.AreEqual(1, app.GetAllTopLevelWindows().Count);
+            }
+        }
+
+        [Test]
+        public void GetMainWindowThrowsWithTimeOut()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SlowWindow"))
+            {
+                var exception = Assert.Throws<TimeoutException>(() => app.GetMainWindow(TimeSpan.FromMilliseconds(10)));
+                Assert.AreEqual("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.", exception.Message);
+            }
+        }
+
+        [Test]
         public void StartWaitForMainWindowAndClose()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
@@ -57,6 +137,13 @@ namespace Gu.Wpf.UiAutomation.UITests
                     // Wrote it like this to see what the api looks like.
                     Assert.Fail("Failed to attach");
                 }
+
+                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "EmptyWindow" }, out _));
+                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "EmptyWindow" }, OnDispose.LeaveOpen, out _));
+                Assert.AreEqual(true, Application.TryAttach(ExeFileName, "EmptyWindow", OnDispose.LeaveOpen, out _));
+                Assert.AreEqual(true, Application.TryAttach(ExeFileName, out _));
+                Assert.AreEqual(true, Application.TryAttach(ExeFileName, OnDispose.LeaveOpen, out _));
+                Assert.AreEqual(false, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "MehWindow" }, out _));
             }
         }
     }
