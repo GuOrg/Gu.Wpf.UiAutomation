@@ -60,21 +60,17 @@
         {
             get
             {
-                var rowCount = this.RowCount;
-                var rows = new RowHeader[rowCount];
-                var gridPattern = this.Patterns.Grid.Pattern;
-                for (var i = 0; i < rowCount; i++)
+                var headers = new List<RowHeader>();
+                foreach (var row in this.Rows)
                 {
-                    var header = new GridRow(gridPattern.GetItem(i, 0).Parent.BasicAutomationElement).Header;
-                    if (header == null)
+                    var header = row.Header;
+                    if (header?.Bounds.IsEmpty == false)
                     {
-                        return new RowHeader[0];
+                        headers.Add(header);
                     }
-
-                    rows[i] = header;
                 }
 
-                return rows;
+                return headers;
             }
         }
 
@@ -140,6 +136,8 @@
         }
 
         public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.BasicAutomationElement);
+
+        public RowHeader RowHeader(int row) => this.Row(row).Header;
 
         /// <summary>
         /// Select a row by index.

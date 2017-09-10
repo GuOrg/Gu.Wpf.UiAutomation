@@ -28,20 +28,31 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
-                if (headerItem == null &&
-                    this.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
+                if (this.TryFindFirst(
+                    TreeScope.Children,
+                    this.CreateCondition(ControlType.HeaderItem),
+                    x => new RowHeader(x),
+                    Retry.Time,
+                    out var header))
+                {
+                    return header;
+                }
+
+                if (this.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
                 {
                     pattern.Realize();
-                    headerItem = this.FindFirstChild(this.ConditionFactory.ByControlType(ControlType.HeaderItem));
+                    if (this.TryFindFirst(
+                        TreeScope.Children,
+                        this.CreateCondition(ControlType.HeaderItem),
+                        x => new RowHeader(x),
+                        Retry.Time,
+                        out header))
+                    {
+                        return header;
+                    }
                 }
 
-                if (headerItem == null || headerItem.IsOffscreen)
-                {
-                    return null;
-                }
-
-                return new RowHeader(headerItem.BasicAutomationElement);
+                return null;
             }
         }
 
