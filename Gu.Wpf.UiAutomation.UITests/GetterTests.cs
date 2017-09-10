@@ -24,13 +24,14 @@
         [Test]
         public void CorrectPatternCached()
         {
-            var cacheRequest = new CacheRequest
-            {
-                AutomationElementMode = AutomationElementMode.None,
-                TreeScope = TreeScope.Element
-            };
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
+                var cacheRequest = new CacheRequest
+                {
+                    AutomationElementMode = AutomationElementMode.None,
+                    TreeScope = TreeScope.Element
+                };
+
                 cacheRequest.Patterns.Add(app.Automation.PatternLibrary.WindowPattern);
                 using (cacheRequest.Activate())
                 {
