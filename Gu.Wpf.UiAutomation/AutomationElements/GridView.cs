@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets the total row count.
         /// </summary>
-        public virtual int RowCount => this.GridPattern.RowCount.ValueOrDefault();
+        public virtual int RowCount => this.GridPattern.RowCount.Value;
 
         /// <summary>
         /// Gets the total column count.
@@ -31,21 +31,22 @@
         {
             get
             {
-                if (OperatingSystem.IsWindows7())
+                if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
+                    tablePattern.ColumnHeaders.TryGetValue(out var headers))
                 {
-                    // ReSharper disable once UnusedVariable for some reason this warmup is needed.
-                    // Nasty but the only way I could get it to work.
-                    var columnHeaderItems = this.Rows.FirstOrDefault()
-                                                ?.Cells.FirstOrDefault()
-                                                ?.Patterns
-                                                .TableItem
-                                                .PatternOrDefault
-                                                ?.ColumnHeaderItems;
+                    return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
                 }
 
-                return this.TablePattern.ColumnHeaders.Value
-                           .Select(x => new ColumnHeader(x.BasicAutomationElement))
-                           .ToArray();
+                // hack for win 7
+                if (this[0, 0].Patterns.TableItem.TryGetPattern(out var tableItemPattern))
+                {
+                    if (tableItemPattern.ColumnHeaderItems.TryGetValue(out headers))
+                    {
+                        return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
+                    }
+                }
+
+                throw new InvalidOperationException("Could not find ColumnHeaders");
             }
         }
 
