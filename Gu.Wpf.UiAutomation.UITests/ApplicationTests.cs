@@ -146,5 +146,27 @@ namespace Gu.Wpf.UiAutomation.UITests
                 Assert.AreEqual(false, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "MehWindow" }, out _));
             }
         }
+
+        [Test]
+        public void TryWithAttached()
+        {
+            using (Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
+            {
+                Assert.AreEqual(true, Application.TryWithAttached(ExeFileName, "EmptyWindow", app =>
+                {
+                    Assert.NotNull(app.MainWindow);
+                }));
+
+                Assert.AreEqual(true, Application.TryWithAttached(ExeFileName, app =>
+                {
+                    Assert.NotNull(app.MainWindow);
+                }));
+
+                Assert.AreEqual(true, Application.TryWithAttached(new ProcessStartInfo(ExeFileName), app =>
+               {
+                   Assert.NotNull(app.MainWindow);
+               }));
+            }
+        }
     }
 }

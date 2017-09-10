@@ -190,6 +190,36 @@
         }
 
         /// <summary>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// </summary>
+        public static bool TryWithAttached(string exeFileName, Action<Application> onAttached)
+        {
+            return TryWithAttached(new ProcessStartInfo(exeFileName), onAttached);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// </summary>
+        public static bool TryWithAttached(string exeFileName, string args, Action<Application> onAttached)
+        {
+            return TryWithAttached(new ProcessStartInfo(exeFileName) { Arguments = args }, onAttached);
+        }
+
+        /// <summary>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// </summary>
+        public static bool TryWithAttached(ProcessStartInfo processStartInfo, Action<Application> onAttached)
+        {
+            if (TryAttach(processStartInfo, OnDispose.LeaveOpen, out var app))
+            {
+                onAttached(app);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Attach to a running process or start a new if not found.
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
