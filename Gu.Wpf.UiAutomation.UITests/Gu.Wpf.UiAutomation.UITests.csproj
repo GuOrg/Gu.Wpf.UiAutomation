@@ -78,10 +78,8 @@
     <Compile Include="Elements\WindowTests.cs" />
     <Compile Include="EventHandlers\FocusChangedTests.cs" />
     <Compile Include="GetterTests.cs" />
-    <Compile Include="ICalculator.cs" />
     <Compile Include="ImageAssertTests.cs" />
     <Compile Include="KeyboardTests.cs" />
-    <Compile Include="LegacyCalc.cs" />
     <Compile Include="MouseTests.cs" />
     <Compile Include="NotepadTests.cs" />
     <Compile Include="Patterns\AnnotationPatternTests.cs" />
@@ -100,7 +98,6 @@
     <Compile Include="Patterns\ScrollItemPatternTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFramework\TestUtilities.cs" />
-    <Compile Include="Win10Calc.cs" />
     <Compile Include="XPathTests.cs" />
   </ItemGroup>
   <ItemGroup>
