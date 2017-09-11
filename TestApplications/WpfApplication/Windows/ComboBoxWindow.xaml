@@ -20,32 +20,29 @@
         </ComboBox>
 
         <ComboBox x:Name="EditableComboBox" IsEditable="True">
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
+            <TextBlock Text="Item 1" />
+            <TextBlock Text="Item 2" />
+            <TextBlock Text="Item 3" />
         </ComboBox>
 
         <ComboBox x:Name="NonEditableComboBox" IsEditable="False">
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
+            <TextBlock Text="Item 1" />
+            <TextBlock Text="Item 2" />
+            <TextBlock Text="Item 3" />
         </ComboBox>
 
         <ComboBox x:Name="ReadOnlyComboBox" IsReadOnly="True">
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
+            <TextBlock Text="Item 1" />
+            <TextBlock Text="Item 2" />
+            <TextBlock Text="Item 3" />
         </ComboBox>
 
         <ComboBox x:Name="ReadOnlyEditableComboBox"
                   IsEditable="True"
                   IsReadOnly="True">
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
-            <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
+            <TextBlock Text="Item 1" />
+            <TextBlock Text="Item 2" />
+            <TextBlock Text="Item 3" />
         </ComboBox>
 
         <CheckBox x:Name="IsEnabled"

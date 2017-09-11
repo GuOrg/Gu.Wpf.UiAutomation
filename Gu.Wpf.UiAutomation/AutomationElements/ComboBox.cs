@@ -84,7 +84,7 @@
 
                 // WPF
                 return this.FindAllChildren(
-                    cf => cf.ByControlType(ControlType.ListItem),
+                    this.CreateCondition(ControlType.ListItem),
                     x => new ComboBoxItem(x));
             }
         }
