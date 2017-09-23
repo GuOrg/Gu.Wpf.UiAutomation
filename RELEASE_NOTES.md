@@ -1,3 +1,6 @@
+# 0.1.11.0
+* FEATURE: Application.FindExe
+
 # 0.1.10.0
 * FEATURE: Find TextBlock in template
 * FEATURE: GridView.RowHeader(index)
