@@ -2,15 +2,12 @@
 {
     using System;
     using System.Drawing;
-    using System.IO;
     using System.Windows;
     using NUnit.Framework;
 
     public partial class AutomationElementTests
     {
-        public static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

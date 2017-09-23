@@ -1,15 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
 {
     using System;
-    using System.IO;
     using System.Threading;
     using NUnit.Framework;
 
     public class InvokePatternTests
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [Test]
         public void InvokeWithEventTest()

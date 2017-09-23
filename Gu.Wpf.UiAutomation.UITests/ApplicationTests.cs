@@ -2,14 +2,11 @@ namespace Gu.Wpf.UiAutomation.UITests
 {
     using System;
     using System.Diagnostics;
-    using System.IO;
     using NUnit.Framework;
 
     public class ApplicationTests
     {
-        public static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

@@ -6,6 +6,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -72,6 +73,50 @@
         /// Gets the value that the associated process specified when it terminated.
         /// </summary>
         public int ExitCode => this.processReference.Process.ExitCode;
+
+        /// <summary>
+        /// File name without path.
+        /// Searches:
+        /// 1. Current directory
+        /// 2. First directory containing a sln file. Then finds newest file matching <paramref name="exeFileName"/> in sub-directories.
+        ///  </summary>
+        public static string FindExe(string exeFileName)
+        {
+            var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), exeFileName, SearchOption.AllDirectories)
+                                 .FirstOrDefault();
+            if (match != null)
+            {
+                return match;
+            }
+
+            var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
+            while (dir?.Parent != null)
+            {
+                if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+                {
+                    var files = dir.EnumerateFiles(exeFileName, SearchOption.AllDirectories).ToArray();
+                    if (files.Length == 0)
+                    {
+                        throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
+                    }
+
+                    var latest = files[0];
+                    foreach (var file in files)
+                    {
+                        if (file.LastWriteTime > latest.LastWriteTime)
+                        {
+                            latest = file;
+                        }
+                    }
+
+                    return latest.FullName;
+                }
+
+                dir = dir.Parent;
+            }
+
+            throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
+        }
 
         /// <summary>
         /// Attach to a running process

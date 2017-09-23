@@ -1,13 +1,10 @@
 namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using System.IO;
     using NUnit.Framework;
 
     public class ListViewTests
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

@@ -1,15 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
-    using System.IO;
     using System.Windows;
     using NUnit.Framework;
 
     [TestFixture]
     public class MouseTests
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [Test]
         public void MoveTest()

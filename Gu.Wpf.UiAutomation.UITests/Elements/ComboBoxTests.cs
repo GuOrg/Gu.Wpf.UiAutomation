@@ -1,12 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
 {
-    using System.IO;
     using System.Linq;
     using NUnit.Framework;
 
     public class ComboBoxTests
     {
-        private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

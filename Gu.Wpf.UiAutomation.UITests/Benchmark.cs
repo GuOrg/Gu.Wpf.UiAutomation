@@ -3,14 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using NUnit.Framework;
 
     public class Benchmark
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [OneTimeSetUp]
         public void OneTimeSetUp()

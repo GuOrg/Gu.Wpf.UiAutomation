@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UITests
 {
     using System.Diagnostics;
-    using System.IO;
     using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
@@ -9,9 +8,7 @@
     [TestFixture]
     public class KeyboardTests
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         [Test]
         public void TypeKeysThenBackspace()

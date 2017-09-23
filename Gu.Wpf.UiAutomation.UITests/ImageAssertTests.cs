@@ -6,9 +6,7 @@ namespace Gu.Wpf.UiAutomation.UITests
 
     public class ImageAssertTests
     {
-        private static readonly string ExeFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
         private static readonly string ImageFileName = Path.Combine(
             TestContext.CurrentContext.TestDirectory,

@@ -20,7 +20,7 @@ There is a helper class to launch, attach or close applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 
 ```csharp
-private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
 [Test]
 public void IsChecked()
@@ -43,7 +43,7 @@ Starts a new instance of the application and closes it on dispose. There is a fl
 Launch is useful for tests that mutate state where resetting can be slow and painful.
 
 ```csharp
-private static readonly string ExeFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
 [Test]
 public void IsChecked()
@@ -65,9 +65,7 @@ Attaches to a running process and leaves it open when disposing disposing by def
 Attaches to a running process or launches a new if not found and leaves it open when disposing by default.
 
 ```cs
-private static readonly string ExeFileName = Path.Combine(
-    TestContext.CurrentContext.TestDirectory,
-    @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
 [SetUp]
 public void SetUp()
@@ -105,9 +103,7 @@ public void Content(string key, string expected)
 Launch and AttachOrLaunch has an overload that takes an argument string. It can be used like this:
 
 ```cs
-private static readonly string ExeFileName = Path.Combine(
-    TestContext.CurrentContext.TestDirectory,
-    @"..\..\TestApplications\WpfApplication\bin\WpfApplication.exe");
+private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
 [OneTimeTearDown]
 public void OneTimeTearDown()
