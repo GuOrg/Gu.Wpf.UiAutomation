@@ -1,3 +1,6 @@
+# 0.1.13.0
+* FEATURE: ImageAssert with onerror overloads.
+
 # 0.1.12.0
 * BUGFIX: ImageAssert relative paths and resources.
 
