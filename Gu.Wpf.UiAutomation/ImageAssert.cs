@@ -19,6 +19,11 @@
 
     public static class ImageAssert
     {
+        /// <summary>
+        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
+        /// </summary>
+        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
+        /// <param name="element">The UIElement.</param>
         public static void AreEqual(string fileName, UIElement element)
         {
             using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
@@ -30,13 +35,77 @@
             }
         }
 
+        /// <summary>
+        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
+        /// </summary>
+        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
+        /// <param name="element">The UIElement.</param>
+        /// <param name="onFail">Useful for saving the actual image on error for example.</param>
+        public static void AreEqual(string fileName, UIElement element, Action<Exception, Bitmap> onFail)
+        {
+            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            {
+                using (var expected = (Bitmap)Image.FromStream(stream))
+                {
+                    using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
+                    {
+                        try
+                        {
+                            AreEqual(expected, actual);
+                        }
+                        catch (Exception e)
+                        {
+                            onFail(e, actual);
+                            throw;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
+        /// </summary>
+        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
+        /// <param name="element">The automation element.</param>
         public static void AreEqual(string fileName, AutomationElement element)
         {
             using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
             {
                 using (var expected = (Bitmap)Image.FromStream(stream))
                 {
-                    AreEqual(expected, element);
+                    using (var actual = Capture.Rectangle(element.Bounds))
+                    {
+                        AreEqual(expected, actual);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
+        /// </summary>
+        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
+        /// <param name="element">The automation element.</param>
+        /// <param name="onFail">Useful for saving the actual image on error for example.</param>
+        public static void AreEqual(string fileName, AutomationElement element, Action<Exception, Bitmap> onFail)
+        {
+            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            {
+                using (var expected = (Bitmap)Image.FromStream(stream))
+                {
+                    using (var actual = Capture.Rectangle(element.Bounds))
+                    {
+                        try
+                        {
+                            AreEqual(expected, actual);
+                        }
+                        catch (Exception e)
+                        {
+                            onFail(e, actual);
+                            throw;
+                        }
+                    }
                 }
             }
         }
@@ -98,58 +167,6 @@
                 }
             }
         }
-
-        /////// <summary>
-        /////// https://stackoverflow.com/a/21648083/1069200
-        /////// This was only marginally faster.
-        /////// </summary>
-        /////// <param name="expected"></param>
-        /////// <param name="actual"></param>
-        /////// <returns></returns>
-        ////public static unsafe bool AreEqualUnsafe(Bitmap expected, Bitmap actual)
-        ////{
-        ////    if (expected.Size != actual.Size)
-        ////    {
-        ////        Assert.Fail("Sizes did not match\r\n" +
-        ////                    $"Expected: {expected.Size}\r\n" +
-        ////                    $"Actual:   {actual.Size}");
-        ////    }
-
-        ////    if (expected.PixelFormat != actual.PixelFormat)
-        ////    {
-        ////        Assert.Fail("PixelFormats did not match\r\n" +
-        ////                    $"Expected: {expected.PixelFormat}\r\n" +
-        ////                    $"Actual:   {actual.PixelFormat}");
-        ////    }
-
-        ////    if (expected.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
-        ////    {
-        ////        Assert.Fail("PixelFormat must be System.Drawing.Imaging.PixelFormat.Format32bppArgb");
-        ////    }
-
-        ////    var rect = new Rectangle(0, 0, expected.Width, expected.Height);
-        ////    var expectedData = expected.LockBits(rect, ImageLockMode.ReadOnly, expected.PixelFormat);
-        ////    var actualData = actual.LockBits(rect, ImageLockMode.ReadOnly, expected.PixelFormat);
-
-        ////    var p1 = (int*)expectedData.Scan0;
-        ////    var p2 = (int*)actualData.Scan0;
-        ////    var byteCount = expected.Height * expectedData.Stride / 4; // only Format32bppArgb
-
-        ////    var result = true;
-        ////    for (var i = 0; i < byteCount; ++i)
-        ////    {
-        ////        if (*p1++ != *p2++)
-        ////        {
-        ////            result = false;
-        ////            break;
-        ////        }
-        ////    }
-
-        ////    expected.UnlockBits(expectedData);
-        ////    actual.UnlockBits(actualData);
-
-        ////    return result;
-        ////}
 
         public static Bitmap ToBitmap(this UIElement element, Size size, PixelFormat pixelFormat)
         {

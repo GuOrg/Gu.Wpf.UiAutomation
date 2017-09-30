@@ -107,5 +107,18 @@ namespace Gu.Wpf.UiAutomation.UITests
                 Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
             }
         }
+
+        [Test]
+        public void WhenNotEqualWithAction()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
+                var count = 0;
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window, (exception, bitmap) => count++));
+                Assert.AreEqual(1, count);
+            }
+        }
     }
 }
