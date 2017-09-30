@@ -1,3 +1,6 @@
+# 0.1.12.0
+* BUGFIX: ImageAssert relative paths and resources.
+
 # 0.1.11.0
 * FEATURE: Application.FindExe
 
