@@ -157,13 +157,25 @@ For asserting using an expected image of how the control will render.
 [Test]
 public void DefaultAdornerWhenNotFocused()
 {
-    using (var app = Application.Launch(Info.ExeFileName, WindowName))
+    using (var app = Application.Launch(Application.FindExe("Gu.Wpf.Adorners.Demo.exe"), "WatermarkWindow"))
     {
         var window = app.MainWindow;
         var textBox = window.FindTextBox("WithDefaultAdorner");
         ImageAssert.AreEqual(".\\Images\\WithDefaultAdorner_not_focused.png", textBox);
     }
 }
+```
+
+For image asserts to work on build servers forcing a theme may be needed:
+
+```xml
+<Window.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Classic;V4.0.0.0;31bf3856ad364e35;component/themes/Classic.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Window.Resources>
 ```
 
 ### Contribution
