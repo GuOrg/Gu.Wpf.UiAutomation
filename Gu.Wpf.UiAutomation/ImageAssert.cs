@@ -1,11 +1,16 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using System.Resources;
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
@@ -16,7 +21,7 @@
     {
         public static void AreEqual(string fileName, UIElement element)
         {
-            using (var stream = GetStream(fileName))
+            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
             {
                 using (var expected = (Bitmap)Image.FromStream(stream))
                 {
@@ -27,7 +32,7 @@
 
         public static void AreEqual(string fileName, AutomationElement element)
         {
-            using (var stream = GetStream(fileName))
+            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
             {
                 using (var expected = (Bitmap)Image.FromStream(stream))
                 {
@@ -237,22 +242,96 @@
             }
         }
 
-        private static Stream GetStream(string fileName)
+        private static Stream GetStream(string fileName, Assembly callingAssembly)
         {
             if (File.Exists(fileName))
             {
                 return File.OpenRead(fileName);
             }
 
-            var assembly = typeof(ImageAssert).Assembly;
-            var name = assembly.GetManifestResourceNames()
-                               .SingleOrDefault(x => x.EndsWith(fileName, ignoreCase: true, culture: CultureInfo.InvariantCulture));
-            if (name != null)
+            if (!Path.IsPathRooted(fileName))
             {
-                return assembly.GetManifestResourceStream(name);
+                var candidate = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                if (File.Exists(candidate))
+                {
+                    return File.OpenRead(candidate);
+                }
+
+                candidate = Path.Combine(
+                    Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath),
+                    fileName);
+
+                if (File.Exists(candidate))
+                {
+                    return File.OpenRead(candidate);
+                }
+
+                candidate = Path.Combine(
+                    Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().Location).LocalPath),
+                    fileName);
+
+                if (File.Exists(candidate))
+                {
+                    return File.OpenRead(candidate);
+                }
+            }
+
+            foreach (var name in callingAssembly.GetManifestResourceNames())
+            {
+                if (name.EndsWith(fileName, ignoreCase: true, culture: CultureInfo.InvariantCulture))
+                {
+                    return callingAssembly.GetManifestResourceStream(name);
+                }
+            }
+
+            if (ResourceChache.TryFind(callingAssembly, fileName, out var bitmap))
+            {
+                var stream = new MemoryStream();
+                bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                return stream;
             }
 
             throw AssertException.Create($"Did not find a file nor resource named {fileName}");
+        }
+
+        private static class ResourceChache
+        {
+            private static readonly ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>> Cache = new ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>>();
+
+            public static bool TryFind(Assembly assembly, string resourceName, out Bitmap result)
+            {
+                var map = Cache.GetOrAdd(assembly, CreateMergedDictionary);
+                result = map.FirstOrDefault(x => x.Key.EndsWith(resourceName)).Value;
+                return result != null;
+            }
+
+            private static List<KeyValuePair<string, Bitmap>> CreateMergedDictionary(Assembly assembly)
+            {
+                var map = new List<KeyValuePair<string, Bitmap>>();
+                foreach (var name in assembly.GetManifestResourceNames())
+                {
+                    if (name.EndsWith(".resources", ignoreCase: true, culture: CultureInfo.InvariantCulture))
+                    {
+                        using (var stream = assembly.GetManifestResourceStream(name))
+                        {
+                            using (var reader = new ResourceReader(stream))
+                            {
+                                foreach (var item in reader)
+                                {
+                                    if (item is DictionaryEntry entry &&
+                                        entry.Key is string key &&
+                                        entry.Value is Bitmap bitmap)
+                                    {
+                                        map.Add(new KeyValuePair<string, Bitmap>(key, bitmap));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return map;
+            }
         }
     }
 }

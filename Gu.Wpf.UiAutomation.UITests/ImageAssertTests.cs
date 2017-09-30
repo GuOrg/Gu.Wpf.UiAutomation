@@ -8,12 +8,8 @@ namespace Gu.Wpf.UiAutomation.UITests
     {
         private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
-        private static readonly string ImageFileName = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            @"Images\button.png");
-
         [Test]
-        public void WhenEqual()
+        public void WhenEqualExplicitPath()
         {
             using (var app = Application.Launch(ExeFileName, "SizeWindow"))
             {
@@ -23,7 +19,74 @@ namespace Gu.Wpf.UiAutomation.UITests
                 {
                     // Not sure why this pause is needed on win 10.
                     Wait.For(TimeSpan.FromMilliseconds(200));
-                    ImageAssert.AreEqual(ImageFileName, button);
+                    var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
+                    ImageAssert.AreEqual(fileName, button);
+                }
+                catch
+                {
+                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
+                    throw;
+                }
+            }
+        }
+
+        [Test]
+        public void WhenEqualRelativePath()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                try
+                {
+                    // Not sure why this pause is needed on win 10.
+                    Wait.For(TimeSpan.FromMilliseconds(200));
+                    ImageAssert.AreEqual(@".\Images\button.png", button);
+                }
+                catch
+                {
+                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
+                    throw;
+                }
+            }
+        }
+
+        [Test]
+        public void WhenEqualResourceName()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                try
+                {
+                    // Not sure why this pause is needed on win 10.
+                    Wait.For(TimeSpan.FromMilliseconds(200));
+                    ImageAssert.AreEqual(@"button_resource", button);
+                }
+                catch
+                {
+                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
+                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
+                    throw;
+                }
+            }
+        }
+
+        [Test]
+        public void WhenEqualResource()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                try
+                {
+                    // Not sure why this pause is needed on win 10.
+                    Wait.For(TimeSpan.FromMilliseconds(200));
+                    ImageAssert.AreEqual(Properties.Resources.button_resource, button);
                 }
                 catch
                 {
@@ -40,7 +103,8 @@ namespace Gu.Wpf.UiAutomation.UITests
             using (var app = Application.Launch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(ImageFileName, window));
+                var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
             }
         }
     }
