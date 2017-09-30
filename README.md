@@ -153,7 +153,6 @@ public partial class App
 ## ImageAssert
 For asserting using an expected image of how the control will render.
 
-
 ```cs
 [Test]
 public void DefaultAdornerWhenNotFocused()
@@ -161,7 +160,7 @@ public void DefaultAdornerWhenNotFocused()
     using (var app = Application.Launch(Info.ExeFileName, WindowName))
     {
         var window = app.MainWindow;
-        AutomationElement textBox = window.FindTextBox("WithDefaultAdorner");
+        var textBox = window.FindTextBox("WithDefaultAdorner");
         ImageAssert.AreEqual(".\\Images\\WithDefaultAdorner_not_focused.png", textBox);
     }
 }
