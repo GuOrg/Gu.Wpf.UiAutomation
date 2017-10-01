@@ -19,6 +19,8 @@
 
     public static class ImageAssert
     {
+        public static OnFail OnFail { get; set; }
+
         /// <summary>
         /// Compare Capture.Rectangle(element.Bounds) to the expected image.
         /// </summary>
@@ -30,7 +32,21 @@
             {
                 using (var expected = (Bitmap)Image.FromStream(stream))
                 {
-                    AreEqual(expected, element);
+                    switch (OnFail)
+                    {
+                        case OnFail.DoNothing:
+                            AreEqual(expected, element);
+                            break;
+                        case OnFail.SaveImageToTemp:
+                            using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
+                            {
+                                AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                            }
+
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
         }
@@ -76,7 +92,17 @@
                 {
                     using (var actual = Capture.Rectangle(element.Bounds))
                     {
-                        AreEqual(expected, actual);
+                        switch (OnFail)
+                        {
+                            case OnFail.DoNothing:
+                                AreEqual(expected, actual);
+                                break;
+                            case OnFail.SaveImageToTemp:
+                                AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     }
                 }
             }
@@ -168,6 +194,50 @@
             }
         }
 
+        public static void AreEqual(Bitmap expected, Bitmap actual, Action<Bitmap> onFail)
+        {
+            if (expected.Size != actual.Size)
+            {
+                if (Debugger.IsAttached)
+                {
+                    ImageDiffWindow.Show(expected, actual);
+                }
+
+                onFail(actual);
+                throw AssertException.Create(
+                    "Sizes did not match\r\n" +
+                    $"Expected: {expected.Size}\r\n" +
+                    $"Actual:   {actual.Size}");
+            }
+
+            if (expected.PixelFormat != actual.PixelFormat)
+            {
+                throw AssertException.Create(
+                    "PixelFormats did not match\r\n" +
+                    $"Expected: {expected.PixelFormat}\r\n" +
+                    $"Actual:   {actual.PixelFormat}");
+            }
+
+            for (var x = 0; x < expected.Size.Width; x++)
+            {
+                for (var y = 0; y < expected.Size.Height; y++)
+                {
+                    if (expected.GetPixel(x, y).Name == actual.GetPixel(x, y).Name)
+                    {
+                        continue;
+                    }
+
+                    if (Debugger.IsAttached)
+                    {
+                        ImageDiffWindow.Show(expected, actual);
+                    }
+
+                    onFail(actual);
+                    throw AssertException.Create("Images do not match.");
+                }
+            }
+        }
+
         public static Bitmap ToBitmap(this UIElement element, Size size, PixelFormat pixelFormat)
         {
             return element.ToRenderTargetBitmap(size, pixelFormat)
@@ -221,6 +291,17 @@
                 encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
                 encoder.Save(stream);
             }
+        }
+
+        private static string TempFileName(string fileName)
+        {
+            var extension = Path.GetExtension(fileName);
+            if (string.IsNullOrEmpty(extension))
+            {
+                extension = ".png";
+            }
+
+            return Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + extension);
         }
 
         private static BitmapEncoder GetEncoder(string fileName)

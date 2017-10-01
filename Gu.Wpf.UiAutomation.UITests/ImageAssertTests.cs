@@ -8,6 +8,12 @@ namespace Gu.Wpf.UiAutomation.UITests
     {
         private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
 
+        [SetUp]
+        public void SetUp()
+        {
+            ImageAssert.OnFail = OnFail.DoNothing;
+        }
+
         [Test]
         public void WhenEqualExplicitPath()
         {
@@ -105,6 +111,58 @@ namespace Gu.Wpf.UiAutomation.UITests
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
                 Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+            }
+        }
+
+        [Test]
+        public void WhenNotEqualSaveFileToTempRootedPath()
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
+                var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
+                File.Delete(tempFile);
+                ImageAssert.OnFail = OnFail.SaveImageToTemp;
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.AreEqual(true, File.Exists(tempFile));
+            }
+        }
+
+        [TestCase(@".\Images\button.png")]
+        [TestCase(@"Images\button.png")]
+        public void WhenNotEqualSaveFileToTempRelativePath(string fileName)
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
+                if (File.Exists(tempFile))
+                {
+                    File.Delete(tempFile);
+                }
+
+                ImageAssert.OnFail = OnFail.SaveImageToTemp;
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.AreEqual(true, File.Exists(tempFile));
+            }
+        }
+
+        [TestCase("button_resource")]
+        public void WhenNotEqualSaveFileToResourceName(string fileName)
+        {
+            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var tempFile = Path.Combine(Path.GetTempPath(), "button_resource.png");
+                if (File.Exists(tempFile))
+                {
+                    File.Delete(tempFile);
+                }
+
+                ImageAssert.OnFail = OnFail.SaveImageToTemp;
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.AreEqual(true, File.Exists(tempFile));
             }
         }
 
