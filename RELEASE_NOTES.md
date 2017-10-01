@@ -1,3 +1,6 @@
+# 0.1.14.0
+* FEATURE: ImageAssert.OnFail.
+
 # 0.1.13.0
 * FEATURE: ImageAssert with onerror overloads.
 
