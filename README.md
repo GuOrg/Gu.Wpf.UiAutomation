@@ -177,6 +177,22 @@ For image asserts to work on build servers forcing a theme may be needed:
     </ResourceDictionary>
 </Window.Resources>
 ```
+### OnFail
+Convenience property for saving the actual image to %Temp%
+
+```cs
+[OneTimeSetUp]
+public void OneTimeSetUp()
+{
+    ImageAssert.OnFail = OnFail.SaveImageToTemp;
+}
+```
+
+And in `appveyor.yml`
+```
+on_failure:
+  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+```
 
 ### Contribution
 Feel free to fork Gu.Wpf.UiAutomation and send pull requests of your modifications.<br />
