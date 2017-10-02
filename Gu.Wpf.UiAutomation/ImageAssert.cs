@@ -28,26 +28,38 @@
         /// <param name="element">The UIElement.</param>
         public static void AreEqual(string fileName, UIElement element)
         {
-            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
-                using (var expected = (Bitmap)Image.FromStream(stream))
+                using (stream)
                 {
-                    switch (OnFail)
+                    using (var expected = (Bitmap)Image.FromStream(stream))
                     {
-                        case OnFail.DoNothing:
-                            AreEqual(expected, element);
-                            break;
-                        case OnFail.SaveImageToTemp:
-                            using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
-                            {
-                                AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
-                            }
+                        switch (OnFail)
+                        {
+                            case OnFail.DoNothing:
+                                AreEqual(expected, element);
+                                break;
+                            case OnFail.SaveImageToTemp:
+                                using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
+                                {
+                                    AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                                }
 
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     }
                 }
+            }
+            else
+            {
+                using (var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName)))
+                {
+                    actual.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png);
+                }
+
+                throw AssertException.Create($"Did not find a file nor resource named {fileName}");
             }
         }
 
@@ -59,23 +71,36 @@
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, UIElement element, Action<Exception, Bitmap> onFail)
         {
-            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
-                using (var expected = (Bitmap)Image.FromStream(stream))
+                using (stream)
                 {
-                    using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
+                    using (var expected = (Bitmap)Image.FromStream(stream))
                     {
-                        try
+                        using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
                         {
-                            AreEqual(expected, actual);
-                        }
-                        catch (Exception e)
-                        {
-                            onFail(e, actual);
-                            throw;
+                            try
+                            {
+                                AreEqual(expected, actual);
+                            }
+                            catch (Exception e)
+                            {
+                                onFail(e, actual);
+                                throw;
+                            }
                         }
                     }
                 }
+            }
+            else
+            {
+                var exception = AssertException.Create($"Did not find a file nor resource named {fileName}");
+                using (var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName)))
+                {
+                    onFail(exception, actual);
+                }
+
+                throw exception;
             }
         }
 
@@ -86,25 +111,36 @@
         /// <param name="element">The automation element.</param>
         public static void AreEqual(string fileName, AutomationElement element)
         {
-            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
-                using (var expected = (Bitmap)Image.FromStream(stream))
+                using (stream)
                 {
-                    using (var actual = Capture.Rectangle(element.Bounds))
+                    using (var expected = (Bitmap)Image.FromStream(stream))
                     {
-                        switch (OnFail)
+                        using (var actual = Capture.Rectangle(element.Bounds))
                         {
-                            case OnFail.DoNothing:
-                                AreEqual(expected, actual);
-                                break;
-                            case OnFail.SaveImageToTemp:
-                                AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
+                            switch (OnFail)
+                            {
+                                case OnFail.DoNothing:
+                                    AreEqual(expected, actual);
+                                    break;
+                                case OnFail.SaveImageToTemp:
+                                    AreEqual(
+                                        expected,
+                                        actual,
+                                        (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
                         }
                     }
                 }
+            }
+            else
+            {
+                Capture.ElementToFile(element, TempFileName(fileName));
+                throw AssertException.Create($"Did not find a file nor resource named {fileName}");
             }
         }
 
@@ -116,23 +152,36 @@
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, AutomationElement element, Action<Exception, Bitmap> onFail)
         {
-            using (var stream = GetStream(fileName, Assembly.GetCallingAssembly()))
+            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
-                using (var expected = (Bitmap)Image.FromStream(stream))
+                using (stream)
                 {
-                    using (var actual = Capture.Rectangle(element.Bounds))
+                    using (var expected = (Bitmap)Image.FromStream(stream))
                     {
-                        try
+                        using (var actual = Capture.Rectangle(element.Bounds))
                         {
-                            AreEqual(expected, actual);
-                        }
-                        catch (Exception e)
-                        {
-                            onFail(e, actual);
-                            throw;
+                            try
+                            {
+                                AreEqual(expected, actual);
+                            }
+                            catch (Exception e)
+                            {
+                                onFail(e, actual);
+                                throw;
+                            }
                         }
                     }
                 }
+            }
+            else
+            {
+                var exception = AssertException.Create($"Did not find a file nor resource named {fileName}");
+                using (var actual = Capture.Rectangle(element.Bounds))
+                {
+                    onFail(exception, actual);
+                }
+
+                throw exception;
             }
         }
 
@@ -340,11 +389,12 @@
             }
         }
 
-        private static Stream GetStream(string fileName, Assembly callingAssembly)
+        private static bool TryGetStream(string fileName, Assembly callingAssembly, out Stream result)
         {
             if (File.Exists(fileName))
             {
-                return File.OpenRead(fileName);
+                result = File.OpenRead(fileName);
+                return true;
             }
 
             if (!Path.IsPathRooted(fileName))
@@ -352,7 +402,8 @@
                 var candidate = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                 if (File.Exists(candidate))
                 {
-                    return File.OpenRead(candidate);
+                    result = File.OpenRead(candidate);
+                    return true;
                 }
 
                 candidate = Path.Combine(
@@ -361,7 +412,8 @@
 
                 if (File.Exists(candidate))
                 {
-                    return File.OpenRead(candidate);
+                    result = File.OpenRead(candidate);
+                    return true;
                 }
 
                 candidate = Path.Combine(
@@ -370,7 +422,8 @@
 
                 if (File.Exists(candidate))
                 {
-                    return File.OpenRead(candidate);
+                    result = File.OpenRead(candidate);
+                    return true;
                 }
             }
 
@@ -378,18 +431,20 @@
             {
                 if (name.EndsWith(fileName, ignoreCase: true, culture: CultureInfo.InvariantCulture))
                 {
-                    return callingAssembly.GetManifestResourceStream(name);
+                    result = callingAssembly.GetManifestResourceStream(name);
+                    return true;
                 }
             }
 
             if (ResourceChache.TryFind(callingAssembly, fileName, out var bitmap))
             {
-                var stream = new MemoryStream();
-                bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                return stream;
+                result = new MemoryStream();
+                bitmap.Save(result, System.Drawing.Imaging.ImageFormat.Png);
+                return true;
             }
 
-            throw AssertException.Create($"Did not find a file nor resource named {fileName}");
+            result = null;
+            return false;
         }
 
         private static class ResourceChache

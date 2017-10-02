@@ -96,21 +96,19 @@
         /// </summary>
         public static Bitmap Rectangle(Rect bounds)
         {
-            var width = bounds.Width.ToInt();
-            var height = bounds.Height.ToInt();
-            var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            using (var graphics = Graphics.FromImage(bmp))
-            {
-                using (var screen = Screen())
-                {
-                    graphics.DrawImage(
-                        screen,
-                        new Rectangle(0, 0, width, height),
-                        new Rectangle((int)bounds.X, (int)bounds.Y, (int)bounds.Width, (int)bounds.Height),
-                        GraphicsUnit.Pixel);
-                }
-            }
-
+            // https://stackoverflow.com/a/3072580/1069200
+            var sz = new System.Drawing.Size((int)bounds.Width, (int)bounds.Height);
+            var hDesk = GetDesktopWindow();
+            var hSrce = GetWindowDC(hDesk);
+            var hDest = CreateCompatibleDC(hSrce);
+            var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
+            var hOldBmp = SelectObject(hDest, hBmp);
+            BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, (int)bounds.X, (int)bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            var bmp = Image.FromHbitmap(hBmp);
+            SelectObject(hDest, hOldBmp);
+            DeleteObject(hBmp);
+            DeleteDC(hDest);
+            ReleaseDC(hDesk, hSrce);
             return bmp;
         }
 
