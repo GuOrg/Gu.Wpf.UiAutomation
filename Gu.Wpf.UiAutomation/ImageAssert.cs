@@ -251,14 +251,6 @@
                     $"Actual:   {actual.Size}");
             }
 
-            if (expected.PixelFormat != actual.PixelFormat)
-            {
-                throw AssertException.Create(
-                    "PixelFormats did not match\r\n" +
-                    $"Expected: {expected.PixelFormat}\r\n" +
-                    $"Actual:   {actual.PixelFormat}");
-            }
-
             for (var x = 0; x < expected.Size.Width; x++)
             {
                 for (var y = 0; y < expected.Size.Height; y++)

@@ -68,19 +68,23 @@ namespace Gu.Wpf.UiAutomation.UITests
         public void WhenEqualBmp()
         {
             ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquareBmp);
+            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquareBmp, _ => { });
         }
 
         [Test]
         public void WhenEqualPng()
         {
             ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquarePng);
+            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquarePng, _ => { });
         }
 
         [Test]
         public void WhenEqualBmpPng()
         {
             ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquarePng);
+            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquarePng, _ => { });
             ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquareBmp);
+            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquareBmp, _ => { });
         }
 
         [Test]
@@ -90,7 +94,8 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                var exception = Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.AreEqual("Sizes did not match\r\nExpected: {Width=200, Height=100}\r\nActual:   {Width=300, Height=300}", exception.Message);
             }
         }
 
