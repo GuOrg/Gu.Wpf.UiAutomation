@@ -1,3 +1,7 @@
+# 0.1.15.0
+* FEATURE: ImageAssert.OnFail save when not found.
+* FEATURE: ImageAssert handle bmp.
+
 # 0.1.14.0
 * FEATURE: ImageAssert.OnFail.
 
