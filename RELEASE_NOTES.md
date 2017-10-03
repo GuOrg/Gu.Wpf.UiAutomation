@@ -1,3 +1,6 @@
+# 0.1.16.0
+* BUGFIX: ImageAssert handle bmp.
+
 # 0.1.15.0
 * FEATURE: ImageAssert.OnFail save when not found.
 * FEATURE: ImageAssert handle bmp.

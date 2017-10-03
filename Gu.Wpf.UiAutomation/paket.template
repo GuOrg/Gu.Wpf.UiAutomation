@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.1.15.0
+version 0.1.16.0
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,7 +11,9 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: ImageAssert.OnFail.
+  BUGFIX: ImageAssert handle bmp.
+  FEATURE: ImageAssert.OnFail save when not found.
+  FEATURE: ImageAssert handle bmp.
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
