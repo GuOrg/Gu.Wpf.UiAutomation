@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation.UITests
 {
-    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -14,6 +13,12 @@ namespace Gu.Wpf.UiAutomation.UITests
             ImageAssert.OnFail = OnFail.DoNothing;
         }
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void WhenEqualExplicitPath()
         {
@@ -21,19 +26,8 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                try
-                {
-                    // Not sure why this pause is needed on win 10.
-                    Wait.For(TimeSpan.FromMilliseconds(200));
-                    var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
-                    ImageAssert.AreEqual(fileName, button);
-                }
-                catch
-                {
-                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
-                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
-                    throw;
-                }
+                var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
+                ImageAssert.AreEqual(fileName, button);
             }
         }
 
@@ -44,18 +38,7 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                try
-                {
-                    // Not sure why this pause is needed on win 10.
-                    Wait.For(TimeSpan.FromMilliseconds(200));
-                    ImageAssert.AreEqual(@".\Images\button.png", button);
-                }
-                catch
-                {
-                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
-                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
-                    throw;
-                }
+                ImageAssert.AreEqual(@".\Images\button.png", button);
             }
         }
 
@@ -66,18 +49,7 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                try
-                {
-                    // Not sure why this pause is needed on win 10.
-                    Wait.For(TimeSpan.FromMilliseconds(200));
-                    ImageAssert.AreEqual(@"button_resource", button);
-                }
-                catch
-                {
-                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
-                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
-                    throw;
-                }
+                ImageAssert.AreEqual(@"button_resource", button);
             }
         }
 
@@ -88,19 +60,27 @@ namespace Gu.Wpf.UiAutomation.UITests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                try
-                {
-                    // Not sure why this pause is needed on win 10.
-                    Wait.For(TimeSpan.FromMilliseconds(200));
-                    ImageAssert.AreEqual(Properties.Resources.button_resource, button);
-                }
-                catch
-                {
-                    Capture.ElementToFile(button, Path.Combine(Path.GetTempPath(), "button.png"));
-                    Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "screen.png"));
-                    throw;
-                }
+                ImageAssert.AreEqual(Properties.Resources.button_resource, button);
             }
+        }
+
+        [Test]
+        public void WhenEqualBmp()
+        {
+            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquareBmp);
+        }
+
+        [Test]
+        public void WhenEqualPng()
+        {
+            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquarePng);
+        }
+
+        [Test]
+        public void WhenEqualBmpPng()
+        {
+            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquarePng);
+            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquareBmp);
         }
 
         [Test]

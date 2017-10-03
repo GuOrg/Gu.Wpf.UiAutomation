@@ -204,6 +204,8 @@
     <Content Include="Images\button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\SquareBmp.bmp" />
+    <Content Include="Images\SquarePng.png" />
     <None Include="Images\button_resource.png" />
   </ItemGroup>
   <ItemGroup>

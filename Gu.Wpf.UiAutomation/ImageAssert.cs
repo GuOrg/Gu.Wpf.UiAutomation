@@ -42,7 +42,7 @@
                             case OnFail.SaveImageToTemp:
                                 using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
                                 {
-                                    AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                                    AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), GetImageFormat(fileName)));
                                 }
 
                                 break;
@@ -56,7 +56,7 @@
             {
                 using (var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName)))
                 {
-                    actual.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png);
+                    actual.Save(TempFileName(fileName), GetImageFormat(fileName));
                 }
 
                 throw AssertException.Create($"Did not find a file nor resource named {fileName}");
@@ -128,7 +128,7 @@
                                     AreEqual(
                                         expected,
                                         actual,
-                                        (bitmap) => bitmap.Save(TempFileName(fileName), System.Drawing.Imaging.ImageFormat.Png));
+                                        (bitmap) => bitmap.Save(TempFileName(fileName), GetImageFormat(fileName)));
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -214,14 +214,6 @@
                     "Sizes did not match\r\n" +
                     $"Expected: {expected.Size}\r\n" +
                     $"Actual:   {actual.Size}");
-            }
-
-            if (expected.PixelFormat != actual.PixelFormat)
-            {
-                throw AssertException.Create(
-                    "PixelFormats did not match\r\n" +
-                    $"Expected: {expected.PixelFormat}\r\n" +
-                    $"Actual:   {actual.PixelFormat}");
             }
 
             for (var x = 0; x < expected.Size.Width; x++)
@@ -370,6 +362,31 @@
                 return PixelFormats.Pbgra32;
             }
 
+            if (string.Equals(Path.GetExtension(fileName), ".bmp", StringComparison.OrdinalIgnoreCase))
+            {
+                return PixelFormats.Bgr24;
+            }
+
+            throw new ArgumentException($"Cannot save {Path.GetExtension(fileName)}");
+        }
+
+        private static System.Drawing.Imaging.ImageFormat GetImageFormat(string fileName)
+        {
+            if (!Path.HasExtension(fileName))
+            {
+                return System.Drawing.Imaging.ImageFormat.Png;
+            }
+
+            if (string.Equals(Path.GetExtension(fileName), ".png", StringComparison.OrdinalIgnoreCase))
+            {
+                return System.Drawing.Imaging.ImageFormat.Png;
+            }
+
+            if (string.Equals(Path.GetExtension(fileName), ".bmp", StringComparison.OrdinalIgnoreCase))
+            {
+                return System.Drawing.Imaging.ImageFormat.Bmp;
+            }
+
             throw new ArgumentException($"Cannot save {Path.GetExtension(fileName)}");
         }
 
@@ -439,7 +456,7 @@
             if (ResourceChache.TryFind(callingAssembly, fileName, out var bitmap))
             {
                 result = new MemoryStream();
-                bitmap.Save(result, System.Drawing.Imaging.ImageFormat.Png);
+                bitmap.Save(result, GetImageFormat(fileName));
                 return true;
             }
 
