@@ -4,7 +4,7 @@
 
     public class UserControlTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [TestCase("UserControl1", "1")]
         [TestCase("UserControl2", "2")]

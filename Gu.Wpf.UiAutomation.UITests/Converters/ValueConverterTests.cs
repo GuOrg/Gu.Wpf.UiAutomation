@@ -5,7 +5,7 @@
 
     public class ValueConverterTests
     {
-        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [Test]
         public void CheckBoxControlType()

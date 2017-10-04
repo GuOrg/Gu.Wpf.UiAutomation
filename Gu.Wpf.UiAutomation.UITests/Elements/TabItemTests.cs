@@ -5,7 +5,7 @@
 
     public class TabItemTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
         private static readonly string WindowName = "TabControlWindow";
 
         [OneTimeTearDown]

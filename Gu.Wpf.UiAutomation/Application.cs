@@ -19,8 +19,7 @@
     public sealed class Application : IDisposable
     {
         private static readonly List<Process> Launched = new List<Process>();
-        private static readonly ConcurrentDictionary<string,string> ExeNames = new ConcurrentDictionary<string, string>();
-
+        private static readonly ConcurrentDictionary<string, string> ExeNames = new ConcurrentDictionary<string, string>();
 
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
@@ -121,10 +120,10 @@
                     dir = dir.Parent;
                 }
 
-                throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
+                return null;
             }
 
-            return ExeNames.GetOrAdd(exeFileName, Create);
+            return ExeNames.GetOrAdd(exeFileName, Create) ?? throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
         }
 
         /// <summary>
@@ -142,6 +141,7 @@
         /// </summary>
         public static Application Attach(string exeFileName, int index = 0)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             var processes = FindProcess(exeFileName);
             if (processes.Count == 0)
             {
@@ -178,6 +178,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, out Application result)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
         }
 
@@ -186,6 +187,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, OnDispose onDispose, out Application result)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
         }
 
@@ -194,6 +196,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, out Application result)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
         }
 
@@ -202,6 +205,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, out Application result)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
         }
 
@@ -248,6 +252,7 @@
         /// </summary>
         public static bool TryWithAttached(string exeFileName, Action<Application> onAttached)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryWithAttached(new ProcessStartInfo(exeFileName), onAttached);
         }
 
@@ -256,6 +261,7 @@
         /// </summary>
         public static bool TryWithAttached(string exeFileName, string args, Action<Application> onAttached)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return TryWithAttached(new ProcessStartInfo(exeFileName) { Arguments = args }, onAttached);
         }
 
@@ -278,6 +284,7 @@
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return AttachOrLaunch(new ProcessStartInfo(exeFileName), onDispose);
         }
 
@@ -286,6 +293,7 @@
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, string args, OnDispose onDispose = OnDispose.LeaveOpen)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             return AttachOrLaunch(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose);
         }
 
@@ -309,6 +317,7 @@
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, OnDispose onDispose = OnDispose.KillProcess)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             var processStartInfo = new ProcessStartInfo(exeFileName);
             return Launch(processStartInfo, onDispose);
         }
@@ -321,6 +330,7 @@
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, string args, OnDispose onDispose = OnDispose.KillProcess)
         {
+            exeFileName = FindExe(exeFileName) ?? exeFileName;
             var processStartInfo = new ProcessStartInfo(exeFileName) { Arguments = args };
             return Launch(processStartInfo, onDispose);
         }
@@ -331,13 +341,6 @@
             {
                 processStartInfo.WorkingDirectory = ".";
             }
-
-            ////Logger.Default.Debug(
-            ////    "[Launching process:{0}] [Working directory:{1}] [Process full path:{2}] [Current Directory:{3}]",
-            ////    processStartInfo.FileName,
-            ////    new DirectoryInfo(processStartInfo.WorkingDirectory).FullName,
-            ////    new FileInfo(processStartInfo.FileName).FullName,
-            ////    Environment.CurrentDirectory);
 
             try
             {
@@ -402,7 +405,7 @@
         }
 
         /// <summary>
-        /// Kill any launced processes.
+        /// Kill any launched processes.
         /// </summary>
         public static void KillLaunched()
         {
@@ -419,13 +422,14 @@
         }
 
         /// <summary>
-        /// Kill any launced processes.
+        /// Kill any launched processes.
         /// </summary>
         /// <param name="exeFileName">The full file name of the exeFileName.</param>
         public static void KillLaunched(string exeFileName)
         {
             lock (Launched)
             {
+                exeFileName = FindExe(exeFileName) ?? exeFileName;
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
                 foreach (var process in launched)
@@ -443,7 +447,7 @@
         }
 
         /// <summary>
-        /// Kill any launced processes.
+        /// Kill any launched processes.
         /// </summary>
         /// <param name="exeFileName">The full file name of the exeFileName.</param>
         /// <param name="args">Startup arguments.</param>
@@ -451,6 +455,7 @@
         {
             lock (Launched)
             {
+                exeFileName = FindExe(exeFileName) ?? exeFileName;
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName) &&
                                                    x.StartInfo.Arguments == args).ToArray();

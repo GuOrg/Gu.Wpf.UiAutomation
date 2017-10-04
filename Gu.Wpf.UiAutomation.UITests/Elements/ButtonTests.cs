@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
     public class ButtonTests
     {
-        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

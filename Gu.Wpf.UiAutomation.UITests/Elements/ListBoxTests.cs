@@ -4,7 +4,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Elements
 
     public class ListBoxTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

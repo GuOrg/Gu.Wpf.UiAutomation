@@ -4,7 +4,7 @@
 
     public class TextBoxTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [TestCase("AutomationId")]
         [TestCase("XName")]

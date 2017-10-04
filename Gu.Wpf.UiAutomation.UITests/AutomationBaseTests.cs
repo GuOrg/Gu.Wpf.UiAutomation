@@ -4,7 +4,7 @@
 
     public class AutomationBaseTests
     {
-        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

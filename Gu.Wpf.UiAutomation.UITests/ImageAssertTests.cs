@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation.UITests
 
     public class ImageAssertTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [SetUp]
         public void SetUp()

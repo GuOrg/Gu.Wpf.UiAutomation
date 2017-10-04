@@ -7,7 +7,7 @@
 
     public class Benchmark
     {
-        public static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [OneTimeSetUp]
         public void OneTimeSetUp()

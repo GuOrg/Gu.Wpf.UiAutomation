@@ -6,7 +6,7 @@
 
     public class InvokePatternTests
     {
-        private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
+        private const string ExeFileName = "WpfApplication.exe";
 
         [Test]
         public void InvokeWithEventTest()
