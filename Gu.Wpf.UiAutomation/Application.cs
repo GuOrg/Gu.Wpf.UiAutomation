@@ -85,45 +85,7 @@
         ///  </summary>
         public static string FindExe(string exeFileName)
         {
-            string Create(string fileName)
-            {
-                var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
-                                     .FirstOrDefault();
-                if (match != null)
-                {
-                    return match;
-                }
-
-                var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
-                while (dir?.Parent != null)
-                {
-                    if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
-                    {
-                        var files = dir.EnumerateFiles(fileName, SearchOption.AllDirectories).ToArray();
-                        if (files.Length == 0)
-                        {
-                            throw new ArgumentException($"Did not find a file named {fileName}, try building?");
-                        }
-
-                        var latest = files[0];
-                        foreach (var file in files)
-                        {
-                            if (file.LastWriteTime > latest.LastWriteTime)
-                            {
-                                latest = file;
-                            }
-                        }
-
-                        return latest.FullName;
-                    }
-
-                    dir = dir.Parent;
-                }
-
-                return null;
-            }
-
-            return ExeNames.GetOrAdd(exeFileName, Create) ?? throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
+            return FindExeOrDefault(exeFileName, null) ?? throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
         }
 
         /// <summary>
@@ -141,7 +103,7 @@
         /// </summary>
         public static Application Attach(string exeFileName, int index = 0)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             var processes = FindProcess(exeFileName);
             if (processes.Count == 0)
             {
@@ -178,7 +140,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, out Application result)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
         }
 
@@ -187,7 +149,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, OnDispose onDispose, out Application result)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
         }
 
@@ -196,7 +158,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, out Application result)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
         }
 
@@ -205,7 +167,7 @@
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, out Application result)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
         }
 
@@ -252,7 +214,7 @@
         /// </summary>
         public static bool TryWithAttached(string exeFileName, Action<Application> onAttached)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryWithAttached(new ProcessStartInfo(exeFileName), onAttached);
         }
 
@@ -261,7 +223,7 @@
         /// </summary>
         public static bool TryWithAttached(string exeFileName, string args, Action<Application> onAttached)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryWithAttached(new ProcessStartInfo(exeFileName) { Arguments = args }, onAttached);
         }
 
@@ -284,7 +246,7 @@
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return AttachOrLaunch(new ProcessStartInfo(exeFileName), onDispose);
         }
 
@@ -293,7 +255,7 @@
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, string args, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return AttachOrLaunch(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose);
         }
 
@@ -317,7 +279,7 @@
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, OnDispose onDispose = OnDispose.KillProcess)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             var processStartInfo = new ProcessStartInfo(exeFileName);
             return Launch(processStartInfo, onDispose);
         }
@@ -330,7 +292,7 @@
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, string args, OnDispose onDispose = OnDispose.KillProcess)
         {
-            exeFileName = FindExe(exeFileName) ?? exeFileName;
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             var processStartInfo = new ProcessStartInfo(exeFileName) { Arguments = args };
             return Launch(processStartInfo, onDispose);
         }
@@ -429,7 +391,7 @@
         {
             lock (Launched)
             {
-                exeFileName = FindExe(exeFileName) ?? exeFileName;
+                exeFileName = FindExeOrDefault(exeFileName, exeFileName);
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
                 foreach (var process in launched)
@@ -455,7 +417,7 @@
         {
             lock (Launched)
             {
-                exeFileName = FindExe(exeFileName) ?? exeFileName;
+                exeFileName = FindExeOrDefault(exeFileName, exeFileName);
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName) &&
                                                    x.StartInfo.Arguments == args).ToArray();
@@ -642,6 +604,59 @@
         private static IReadOnlyList<Process> FindProcess(string exeFileName)
         {
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName));
+        }
+
+        private static string FindExeOrDefault(string exeFileName, string @default)
+        {
+            string Create(string fileName)
+            {
+                if (Path.GetExtension(fileName) != ".exe")
+                {
+                    return null;
+                }
+
+                if (Path.IsPathRooted(fileName))
+                {
+                    return fileName;
+                }
+
+                var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
+                                     .FirstOrDefault();
+                if (match != null)
+                {
+                    return match;
+                }
+
+                var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
+                while (dir?.Parent != null)
+                {
+                    if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+                    {
+                        var files = dir.EnumerateFiles(fileName, SearchOption.AllDirectories).ToArray();
+                        if (files.Length == 0)
+                        {
+                            return null;
+                        }
+
+                        var latest = files[0];
+                        foreach (var file in files)
+                        {
+                            if (file.LastWriteTime > latest.LastWriteTime)
+                            {
+                                latest = file;
+                            }
+                        }
+
+                        return latest.FullName;
+                    }
+
+                    dir = dir.Parent;
+                }
+
+                return null;
+            }
+
+            return ExeNames.GetOrAdd(exeFileName, Create) ?? @default;
         }
 
         private void ThrowIfDisposed()

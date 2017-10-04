@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation.UITests
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using NUnit.Framework;
 
     public class ApplicationTests
@@ -37,6 +38,12 @@ namespace Gu.Wpf.UiAutomation.UITests
                 Assert.AreEqual(true, app.HasExited);
                 Assert.AreEqual(0, app.ExitCode);
             }
+        }
+
+        [Test]
+        public void FindExe()
+        {
+            Assert.AreEqual(ExeFileName, Path.GetFileName(Application.FindExe(ExeFileName)));
         }
 
         [Test]
@@ -135,12 +142,12 @@ namespace Gu.Wpf.UiAutomation.UITests
                     Assert.Fail("Failed to attach");
                 }
 
-                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "EmptyWindow" }, out _));
-                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "EmptyWindow" }, OnDispose.LeaveOpen, out _));
+                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(Application.FindExe(ExeFileName)) { Arguments = "EmptyWindow" }, out _));
+                Assert.AreEqual(true, Application.TryAttach(new ProcessStartInfo(Application.FindExe(ExeFileName)) { Arguments = "EmptyWindow" }, OnDispose.LeaveOpen, out _));
                 Assert.AreEqual(true, Application.TryAttach(ExeFileName, "EmptyWindow", OnDispose.LeaveOpen, out _));
                 Assert.AreEqual(true, Application.TryAttach(ExeFileName, out _));
                 Assert.AreEqual(true, Application.TryAttach(ExeFileName, OnDispose.LeaveOpen, out _));
-                Assert.AreEqual(false, Application.TryAttach(new ProcessStartInfo(ExeFileName) { Arguments = "MehWindow" }, out _));
+                Assert.AreEqual(false, Application.TryAttach(new ProcessStartInfo(Application.FindExe(ExeFileName)) { Arguments = "MehWindow" }, out _));
             }
         }
 

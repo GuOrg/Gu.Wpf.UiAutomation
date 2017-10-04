@@ -70,6 +70,7 @@
                     var window = app.MainWindow;
                     Assert.NotNull(window);
                     Assert.NotNull(window.Title);
+                    app.Close();
                 }
             }
         }
