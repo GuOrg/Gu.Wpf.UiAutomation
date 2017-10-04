@@ -57,6 +57,11 @@
         public int ProcessId => this.processReference.Process.Id;
 
         /// <summary>
+        /// Process.StartTime
+        /// </summary>
+        public DateTime StartTime => this.processReference.Process.StartTime;
+
+        /// <summary>
         /// The name of the application's process.
         /// </summary>
         public string Name => this.processReference.Process.ProcessName;
