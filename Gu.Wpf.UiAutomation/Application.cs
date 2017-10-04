@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -18,6 +19,9 @@
     public sealed class Application : IDisposable
     {
         private static readonly List<Process> Launched = new List<Process>();
+        private static readonly ConcurrentDictionary<string,string> ExeNames = new ConcurrentDictionary<string, string>();
+
+
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
 
@@ -82,40 +86,45 @@
         ///  </summary>
         public static string FindExe(string exeFileName)
         {
-            var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), exeFileName, SearchOption.AllDirectories)
-                                 .FirstOrDefault();
-            if (match != null)
+            string Create(string fileName)
             {
-                return match;
-            }
-
-            var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
-            while (dir?.Parent != null)
-            {
-                if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+                var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
+                                     .FirstOrDefault();
+                if (match != null)
                 {
-                    var files = dir.EnumerateFiles(exeFileName, SearchOption.AllDirectories).ToArray();
-                    if (files.Length == 0)
-                    {
-                        throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
-                    }
-
-                    var latest = files[0];
-                    foreach (var file in files)
-                    {
-                        if (file.LastWriteTime > latest.LastWriteTime)
-                        {
-                            latest = file;
-                        }
-                    }
-
-                    return latest.FullName;
+                    return match;
                 }
 
-                dir = dir.Parent;
+                var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
+                while (dir?.Parent != null)
+                {
+                    if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+                    {
+                        var files = dir.EnumerateFiles(fileName, SearchOption.AllDirectories).ToArray();
+                        if (files.Length == 0)
+                        {
+                            throw new ArgumentException($"Did not find a file named {fileName}, try building?");
+                        }
+
+                        var latest = files[0];
+                        foreach (var file in files)
+                        {
+                            if (file.LastWriteTime > latest.LastWriteTime)
+                            {
+                                latest = file;
+                            }
+                        }
+
+                        return latest.FullName;
+                    }
+
+                    dir = dir.Parent;
+                }
+
+                throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
             }
 
-            throw new ArgumentException($"Did not find a file named {exeFileName}, try building?");
+            return ExeNames.GetOrAdd(exeFileName, Create);
         }
 
         /// <summary>
