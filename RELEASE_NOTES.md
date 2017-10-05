@@ -1,3 +1,6 @@
+# 0.1.17.0
+* FEATURE: Wait for Aero animation.
+
 # 0.1.16.0
 * BUGFIX: ImageAssert handle bmp.
 

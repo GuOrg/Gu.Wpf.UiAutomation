@@ -14,5 +14,5 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("0.1.16.0")]
-[assembly: AssemblyFileVersion("0.1.16.0")]
+[assembly: AssemblyVersion("0.1.17.0")]
+[assembly: AssemblyFileVersion("0.1.17.0")]
