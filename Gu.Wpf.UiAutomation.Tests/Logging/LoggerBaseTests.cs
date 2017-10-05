@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UnitTests.Logging
+﻿namespace Gu.Wpf.UiAutomation.Tests.Logging
 {
     using System;
     using Moq;

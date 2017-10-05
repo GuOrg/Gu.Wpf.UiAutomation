@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UITests.Converters
+﻿namespace Gu.Wpf.UiAutomation.UiTests.Converters
 {
     using System.Windows;
     using NUnit.Framework;

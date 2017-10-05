@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gu.Wpf.UiAutomation.UITests.Properties {
+namespace Gu.Wpf.UiAutomation.UiTests.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Gu.Wpf.UiAutomation.UITests.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gu.Wpf.UiAutomation.UITests.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gu.Wpf.UiAutomation.UiTests.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

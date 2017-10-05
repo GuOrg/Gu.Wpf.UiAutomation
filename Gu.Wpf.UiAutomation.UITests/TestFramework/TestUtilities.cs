@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UITests.TestFramework
+﻿namespace Gu.Wpf.UiAutomation.UiTests.TestFramework
 {
     /// <summary>
     /// Various helpful methods

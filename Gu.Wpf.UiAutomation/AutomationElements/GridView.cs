@@ -123,7 +123,7 @@
         public GridRow Select(int rowIndex)
         {
             var gridRow = this.GetRowByIndex(rowIndex);
-            if (OperatingSystem.IsWindows7())
+            if (WindowsVersion.IsWindows7())
             {
                 gridRow.Cells[0].Click();
             }
@@ -153,7 +153,7 @@
         public GridRow Select(int columnIndex, string textToFind)
         {
             var gridRow = this.GetRowByValue(columnIndex, textToFind);
-            if (OperatingSystem.IsWindows7())
+            if (WindowsVersion.IsWindows7())
             {
                 gridRow.Cells[0].Click();
             }

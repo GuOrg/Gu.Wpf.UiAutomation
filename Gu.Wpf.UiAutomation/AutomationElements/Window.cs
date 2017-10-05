@@ -127,7 +127,7 @@
         public void Close()
         {
             this.WaitUntilResponsive();
-            if (!OperatingSystem.IsWindows7())
+            if (!WindowsVersion.IsWindows7())
             {
                 var closeButton = this.TitleBar?.CloseButton;
                 if (closeButton != null)

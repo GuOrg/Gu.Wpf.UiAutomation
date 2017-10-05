@@ -22,9 +22,9 @@
     {
         public static OnFail OnFail { get; set; }
 
-        public static TimeSpan StartAnimation { get; set; } = OperatingSystem.IsWindows10() ||
-                                                              OperatingSystem.IsWindows8() ||
-                                                              OperatingSystem.IsWindows8_1()
+        public static TimeSpan StartAnimation { get; set; } = WindowsVersion.IsWindows10() ||
+                                                              WindowsVersion.IsWindows8() ||
+                                                              WindowsVersion.IsWindows8_1()
             ? TimeSpan.FromMilliseconds(1000)
             : TimeSpan.Zero;
 

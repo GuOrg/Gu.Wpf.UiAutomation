@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UnitTests.Extensions
+﻿namespace Gu.Wpf.UiAutomation.Tests.Extensions
 {
     using System;
     using System.Linq;

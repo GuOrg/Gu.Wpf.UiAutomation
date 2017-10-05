@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.UITests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
     using NUnit.Framework;

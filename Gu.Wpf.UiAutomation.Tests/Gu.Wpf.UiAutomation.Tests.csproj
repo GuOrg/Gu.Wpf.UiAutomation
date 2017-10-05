@@ -7,8 +7,8 @@
     <ProjectGuid>{AFE453D1-C9B6-43D0-835F-BAE465063453}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gu.Wpf.UiAutomation.UnitTests</RootNamespace>
-    <AssemblyName>Gu.Wpf.UiAutomation.UnitTests</AssemblyName>
+    <RootNamespace>Gu.Wpf.UiAutomation.Tests</RootNamespace>
+    <AssemblyName>Gu.Wpf.UiAutomation.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -37,6 +37,12 @@
             <TextBlock Text="Item 3" />
         </ComboBox>
 
+        <ComboBox x:Name="DisabledComboBox" IsEnabled="False">
+            <TextBlock Text="Item 1" />
+            <TextBlock Text="Item 2" />
+            <TextBlock Text="Item 3" />
+        </ComboBox>
+
         <ComboBox x:Name="ReadOnlyEditableComboBox"
                   IsEditable="True"
                   IsReadOnly="True">

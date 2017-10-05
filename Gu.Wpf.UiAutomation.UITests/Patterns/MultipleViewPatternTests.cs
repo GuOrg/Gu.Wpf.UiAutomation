@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UITests.Patterns
+﻿namespace Gu.Wpf.UiAutomation.UiTests.Patterns
 {
     using NUnit.Framework;
 

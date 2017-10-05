@@ -3,7 +3,7 @@
     using System;
     using Microsoft.Win32;
 
-    public static class OperatingSystem
+    public static class WindowsVersion
     {
         private static readonly string CurrentProductName = GetCurrentProductName();
 

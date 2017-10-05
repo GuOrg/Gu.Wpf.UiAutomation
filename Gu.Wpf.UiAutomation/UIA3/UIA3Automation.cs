@@ -6,7 +6,6 @@
     using Gu.Wpf.UiAutomation.UIA3.Converters;
     using Gu.Wpf.UiAutomation.UIA3.EventHandlers;
     using Gu.Wpf.UiAutomation.UIA3.Extensions;
-    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     /// <summary>
     /// Automation implementation for UIA3
@@ -16,7 +15,7 @@
         public UIA3Automation()
             : base(new UIA3PropertyLibrary(), new UIA3EventLibrary(), new UIA3PatternLibrary())
         {
-            if (OperatingSystem.IsWindows8_1())
+            if (WindowsVersion.IsWindows8_1())
             {
                 // Try CUIAutomation8 (Windows 8)
                 try

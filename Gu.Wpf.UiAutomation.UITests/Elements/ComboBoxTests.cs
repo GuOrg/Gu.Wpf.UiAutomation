@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UITests.Elements
+﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System.Linq;
     using NUnit.Framework;
@@ -16,6 +16,7 @@
         [TestCase("EditableComboBox", true)]
         [TestCase("NonEditableComboBox", false)]
         [TestCase("ReadOnlyComboBox", false)]
+        [TestCase("DisabledComboBox", false)]
         public void IsEditable(string comboBoxId, bool expected)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
@@ -40,17 +41,17 @@
             }
         }
 
-        [TestCase("EditableComboBox", false)]
-        [TestCase("NonEditableComboBox", false)]
-        [TestCase("ReadOnlyComboBox", false)]
-        [TestCase("ReadOnlyEditableComboBox", true)]
-        public void Items(string comboBoxId, bool expected)
+        [TestCase("EditableComboBox")]
+        [TestCase("NonEditableComboBox")]
+        [TestCase("ReadOnlyComboBox")]
+        [TestCase("ReadOnlyEditableComboBox")]
+        ////[TestCase("DisabledComboBox")]
+        public void Items(string id)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
-                var comboBox = window.FindComboBox(comboBoxId);
-                Assert.AreEqual(3, comboBox.Items.Count);
+                var comboBox = window.FindComboBox(id);
                 CollectionAssert.AllItemsAreInstancesOfType(comboBox.Items, typeof(ComboBoxItem));
                 Assert.AreEqual(new[] { "Item 1", "Item 2", "Item 3" }, comboBox.Items.Select(x => x.Text));
             }

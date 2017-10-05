@@ -1,9 +1,8 @@
-﻿namespace Gu.Wpf.UiAutomation.UITests
+﻿namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Text.RegularExpressions;
     using NUnit.Framework;
-    using OperatingSystem = Gu.Wpf.UiAutomation.OperatingSystem;
 
     [TestFixture]
     public class CalculatorTests
@@ -39,10 +38,10 @@
             using (var app = StartApplication())
             {
                 var window = app.MainWindow;
-                var calc = OperatingSystem.IsWindows10()
+                var calc = WindowsVersion.IsWindows10()
                     ? (ICalculator)new Win10Calc(window)
                     : new LegacyCalc(window);
-                if (OperatingSystem.IsWindows7())
+                if (WindowsVersion.IsWindows7())
                 {
                     Wait.For(TimeSpan.FromMilliseconds(200));
                 }
@@ -76,13 +75,13 @@
 
         private static Application StartApplication()
         {
-            if (OperatingSystem.IsWindows10())
+            if (WindowsVersion.IsWindows10())
             {
                 // Use the store application on those systems
                 return Application.LaunchStoreApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
             }
 
-            if (OperatingSystem.IsWindowsServer2016())
+            if (WindowsVersion.IsWindowsServer2016())
             {
                 // The calc.exe on this system is just a stub which launches win32calc.exe
                 return Application.Launch("win32calc.exe");
