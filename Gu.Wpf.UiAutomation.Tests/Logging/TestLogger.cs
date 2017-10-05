@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.Tests.Logging
 {
+    using Gu.Wpf.UiAutomation.Logging;
+
     public class TestLogger : LoggerBase
     {
         public virtual void PublicTrace(string message)
