@@ -61,6 +61,9 @@
 
         public AutomationProperty<string> AutomationId => this.GetOrCreate(ref this.automationId, this.Properties.AutomationId);
 
+        /// <summary>
+        /// The bounding rectangle relative to the screen.
+        /// </summary>
         public AutomationProperty<Rect> BoundingRectangle => this.GetOrCreate(ref this.boundingRectangle, this.Properties.BoundingRectangle);
 
         public AutomationProperty<string> ClassName => this.GetOrCreate(ref this.className, this.Properties.ClassName);

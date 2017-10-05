@@ -60,7 +60,7 @@
         public double ActualHeight => this.Bounds.Height;
 
         /// <summary>
-        /// The current used automation object.
+        /// The bounding rectangle relative to the screen.
         /// </summary>
         public Rect Bounds
         {
@@ -68,6 +68,24 @@
             {
                 if (this.Properties.BoundingRectangle.TryGetValue(out var rect))
                 {
+                    return rect;
+                }
+
+                return Rect.Empty;
+            }
+        }
+
+        /// <summary>
+        /// The bounding rectangle relative to the window.
+        /// </summary>
+        public Rect RenderBounds
+        {
+            get
+            {
+                if (this.Properties.BoundingRectangle.TryGetValue(out var rect))
+                {
+                    var windowBounds = this.Window.Bounds;
+                    rect.Offset(-windowBounds.X, -windowBounds.Y);
                     return rect;
                 }
 
