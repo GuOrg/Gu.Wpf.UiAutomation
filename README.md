@@ -20,12 +20,10 @@ There is a helper class to launch, attach or close applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 
 ```csharp
-private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
-
 [Test]
 public void IsChecked()
 {
-    using (var app = Application.Launch(ExeFileName))
+    using (var app = Application.Launch("WpfApplication.exe"))
     {
         var window = app.MainWindow;
         var checkBox = window.FindCheckBox("Test Checkbox");
@@ -43,12 +41,10 @@ Starts a new instance of the application and closes it on dispose. There is a fl
 Launch is useful for tests that mutate state where resetting can be slow and painful.
 
 ```csharp
-private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
-
 [Test]
 public void IsChecked()
 {
-    using (var app = Application.Launch(ExeFileName))
+    using (var app = Application.Launch("WpfApplication.exe"))
     {
         var window = app.MainWindow;
         var checkBox = window.FindCheckBox("Test Checkbox");
@@ -65,12 +61,10 @@ Attaches to a running process and leaves it open when disposing disposing by def
 Attaches to a running process or launches a new if not found and leaves it open when disposing by default.
 
 ```cs
-private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
-
 [SetUp]
 public void SetUp()
 {
-    if (Application.TryAttach(ExeFileName, "ButtonWindow", out var app))
+    if (Application.TryAttach("WpfApplication.exe", "ButtonWindow", out var app))
     {
         using (app)
         {
@@ -82,7 +76,7 @@ public void SetUp()
 [OneTimeTearDown]
 public void OneTimeTearDown()
 {
-    Application.KillLaunched(ExeFileName);
+    Application.KillLaunched("WpfApplication.exe");
 }
 
 [TestCase("AutomationId", "AutomationProperties.AutomationId")]
@@ -90,7 +84,7 @@ public void OneTimeTearDown()
 [TestCase("Content", "Content")]
 public void Content(string key, string expected)
 {
-    using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
+    using (var app = Application.AttachOrLaunch("WpfApplication.exe", "ButtonWindow"))
     {
         var window = app.MainWindow;
         var button = window.FindButton(key);
@@ -103,18 +97,16 @@ public void Content(string key, string expected)
 Launch and AttachOrLaunch has an overload that takes an argument string. It can be used like this:
 
 ```cs
-private static readonly string ExeFileName = Application.FindExe("WpfApplication.exe");
-
 [OneTimeTearDown]
 public void OneTimeTearDown()
 {
-    Application.KillLaunched(ExeFileName);
+    Application.KillLaunched("WpfApplication.exe");
 }
 
 [Test]
 public void SelectByIndex()
 {
-    using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
+    using (var app = Application.AttachOrLaunch("WpfApplication.exe", "ListBoxWindow"))
     {
         var window = app.MainWindow;
         var listBox = window.FindListBox("BoundListBox");
@@ -157,7 +149,7 @@ For asserting using an expected image of how the control will render.
 [Test]
 public void DefaultAdornerWhenNotFocused()
 {
-    using (var app = Application.Launch(Application.FindExe("Gu.Wpf.Adorners.Demo.exe"), "WatermarkWindow"))
+    using (var app = Application.Launch("Gu.Wpf.Adorners.Demo.exe", "WatermarkWindow"))
     {
         var window = app.MainWindow;
         var textBox = window.FindTextBox("WithDefaultAdorner");
