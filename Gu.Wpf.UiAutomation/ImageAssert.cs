@@ -14,12 +14,19 @@
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
     using Image = System.Drawing.Image;
     using Size = System.Windows.Size;
 
     public static class ImageAssert
     {
         public static OnFail OnFail { get; set; }
+
+        public static TimeSpan StartAnimation { get; set; } = OperatingSystem.IsWindows10() ||
+                                                              OperatingSystem.IsWindows8() ||
+                                                              OperatingSystem.IsWindows8_1()
+            ? TimeSpan.FromMilliseconds(1000)
+            : TimeSpan.Zero;
 
         /// <summary>
         /// Compare Capture.Rectangle(element.Bounds) to the expected image.
@@ -111,6 +118,7 @@
         /// <param name="element">The automation element.</param>
         public static void AreEqual(string fileName, AutomationElement element)
         {
+            WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
@@ -152,6 +160,7 @@
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, AutomationElement element, Action<Exception, Bitmap> onFail)
         {
+            WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
@@ -185,9 +194,10 @@
             }
         }
 
-        public static void AreEqual(Bitmap expected, AutomationElement actual)
+        public static void AreEqual(Bitmap expected, AutomationElement element)
         {
-            using (var actualBmp = Capture.Rectangle(actual.Bounds))
+            WaitForStartAnimation(element);
+            using (var actualBmp = Capture.Rectangle(element.Bounds))
             {
                 AreEqual(expected, actualBmp);
             }
@@ -323,6 +333,25 @@
                 var encoder = GetEncoder(fileName);
                 encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
                 encoder.Save(stream);
+            }
+        }
+
+        private static void WaitForStartAnimation(AutomationElement element)
+        {
+            if (StartAnimation <= TimeSpan.Zero)
+            {
+                return;
+            }
+
+            var window = element.Window;
+            User32.GetWindowThreadProcessId(window.NativeWindowHandle, out var id);
+            using (var process = Process.GetProcessById((int)id))
+            {
+                var upTime = DateTime.Now - process.StartTime;
+                if (upTime < StartAnimation)
+                {
+                    Wait.For(StartAnimation - upTime);
+                }
             }
         }
 
