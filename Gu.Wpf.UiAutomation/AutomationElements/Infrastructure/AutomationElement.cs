@@ -84,7 +84,7 @@
             {
                 if (this.Properties.BoundingRectangle.TryGetValue(out var rect))
                 {
-                    var windowBounds = this.Window.Bounds;
+                    var windowBounds = this.Window?.Bounds ?? Rect.Empty;
                     rect.Offset(-windowBounds.X, -windowBounds.Y);
                     return rect;
                 }
