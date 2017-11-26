@@ -1,5 +1,7 @@
 # Gu.Wpf.UiAutomation
 
+[![Join the chat at https://gitter.im/JohanLarsson/Gu.Wpf.UiAutomation](https://badges.gitter.im/JohanLarsson/Gu.Wpf.UiAutomation.svg)](https://gitter.im/JohanLarsson/Gu.Wpf.UiAutomation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![NuGet](https://img.shields.io/nuget/v/Gu.Wpf.UiAutomation.svg)](https://www.nuget.org/packages/Gu.Wpf.UiAutomation/)
 [![Build status](https://ci.appveyor.com/api/projects/status/wpxtooew9wicyuqa/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-uiautomation/branch/master)
