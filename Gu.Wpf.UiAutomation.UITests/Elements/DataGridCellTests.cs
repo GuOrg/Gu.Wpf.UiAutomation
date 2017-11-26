@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("DataGrid10", false)]
         [TestCase("DataGridNoHeaders", false)]
         [TestCase("ReadOnlyDataGrid", true)]
-        [TestCase("ReadOnlyDataGrid", true)]
+        [TestCase("ReadonlyColumnsDataGrid", true)]
         [TestCase("TemplateColumnDataGrid", false)]
         public void IsReadOnly(string name, bool expected)
         {
