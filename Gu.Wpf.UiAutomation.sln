@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 15.0.26730.3
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1C84389-441E-4870-9EAC-F241B568B204}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,6 +34,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interop", "Interop", "{4DC0FBAA-0BBE-46D8-B9BF-D685E799D32D}"
 	ProjectSection(SolutionItems) = preProject
 		Interop\Build.bat = Interop\Build.bat
+		Interop\Interop.UIAutomationClient.dll = Interop\Interop.UIAutomationClient.dll
 	EndProjectSection
 EndProject
 Global

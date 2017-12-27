@@ -135,7 +135,7 @@
         {
             get
             {
-                var hasProperty = this.Properties.FrameworkId.TryGetValue(out string currentFrameworkId);
+                var hasProperty = this.Properties.FrameworkId.TryGetValue(out var currentFrameworkId);
                 return hasProperty ? FrameworkIds.ConvertToFrameworkType(currentFrameworkId) : FrameworkType.Unknown;
             }
         }
