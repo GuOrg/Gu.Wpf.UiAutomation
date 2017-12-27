@@ -689,9 +689,9 @@
                 if (this.OnDispose == OnDispose.KillProcess)
                 {
                     this.OnDispose = OnDispose.LeaveOpen;
-#pragma warning disable GU0036 // Don't dispose injected.
+#pragma warning disable IDISP007 // Don't dispose injected.
                     this.Process.Dispose();
-#pragma warning restore GU0036 // Don't dispose injected.
+#pragma warning restore IDISP007 // Don't dispose injected.
                 }
             }
         }

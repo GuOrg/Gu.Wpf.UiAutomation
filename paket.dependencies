@@ -9,5 +9,6 @@ group Analyzers
   nuget StyleCop.Analyzers
   nuget AsyncUsageAnalyzers
   nuget Gu.Analyzers
+  nuget IDisposableAnalyzers
   nuget WpfAnalyzers
   nuget JetBrains.Annotations

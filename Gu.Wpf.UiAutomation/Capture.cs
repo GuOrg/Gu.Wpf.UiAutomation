@@ -37,7 +37,10 @@
 
         public static BitmapImage ScreenWpf()
         {
-            return Screen().ToWpf();
+            using (var screen = Screen())
+            {
+                return screen.ToWpf();
+            }
         }
 
         /// <summary>
@@ -88,7 +91,10 @@
 
         public static BitmapImage RectangleWpf(Rect bounds)
         {
-            return Rectangle(bounds).ToWpf();
+            using (var rectangle = Rectangle(bounds))
+            {
+                return rectangle.ToWpf();
+            }
         }
 
         /// <summary>

@@ -116,11 +116,14 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
             {
                 var id = app.ProcessId;
-                Assert.NotNull(Process.GetProcessById(id));
-                Application.WaitForMainWindow(Process.GetProcessById(id));
+                using (var process = Process.GetProcessById(id))
+                {
+                    Assert.NotNull(process);
+                    Application.WaitForMainWindow(process);
 
-                Application.KillLaunched(ExeFileName);
-                Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
+                    Application.KillLaunched(ExeFileName);
+                    Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
+                }
             }
         }
 
