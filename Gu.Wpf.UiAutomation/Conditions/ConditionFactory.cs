@@ -16,8 +16,7 @@
 
         public PropertyCondition ByAutomationId(string automationId)
         {
-            throw new NotImplementedException();
-            // return new PropertyCondition(this.propertyLibrary.Element.AutomationId, automationId);
+            return new PropertyCondition(AutomationElementIdentifiers.AutomationIdProperty, automationId);
         }
 
         public PropertyCondition ByControlType(ControlType controlType)
