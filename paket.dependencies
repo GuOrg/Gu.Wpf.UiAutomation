@@ -3,7 +3,6 @@ nuget SourceLink.Create.CommandLine
 nuget NUnit
 nuget Moq
 
-
 group Analyzers
   source http://www.nuget.org/api/v2/
   nuget StyleCop.Analyzers
