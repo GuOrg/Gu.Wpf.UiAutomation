@@ -19,8 +19,9 @@
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.FindAllChildren().Any(c => c.ControlType == ControlType.Edit &&
-                                                                          c.Patterns.Value.PatternOrDefault?.IsReadOnly.ValueOrDefault() == false);
+        public virtual bool IsEditable => this.FindAllChildren(ConditionFactory.Instance.ByControlType(ControlType.Edit))
+                                              .Any(c => c.AutomationElement.TryGetValuePattern(out var pattern) &&
+                                                        !pattern.Current.IsReadOnly);
 
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is readonly or not.
@@ -30,19 +31,12 @@
         {
             get
             {
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
-                    return value;
+                    return valuePattern.Current.IsReadOnly;
                 }
 
-                if (this.Patterns.Selection.TryGetPattern(out var selectPattern) &&
-                    selectPattern.Selection.IsSupported)
-                {
-                    return false;
-                }
-
-                return true;
+                return !this.AutomationElement.TryGetSelectionPattern(out _);
             }
         }
 
@@ -54,19 +48,24 @@
             get
             {
                 // In WinForms, there is no selection pattern, so search the items which are selected.
-                if (this.SelectionPattern == null)
+                if (this.FrameworkType == FrameworkType.WinForms)
                 {
                     return this.Items.Where(x => x.IsSelected).ToArray();
                 }
 
-                return this.SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.AutomationElement)).ToArray();
+                if (this.AutomationElement.TryGetSelectionPattern(out var pattern))
+                {
+                    return pattern.Current.GetSelection().Select(x => new ComboBoxItem(x)).ToArray();
+                }
+
+                return new ComboBoxItem[0];
             }
         }
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public ComboBoxItem SelectedItem => this.SelectedItems?.FirstOrDefault();
+        public ComboBoxItem SelectedItem => this.SelectedItems?.SingleOrDefault();
 
         /// <summary>
         /// Gets all items.
@@ -76,7 +75,8 @@
             get
             {
                 this.Expand();
-                if (this.FrameworkType == FrameworkType.WinForms || this.FrameworkType == FrameworkType.Win32)
+                if (this.FrameworkType == FrameworkType.WinForms ||
+                    this.FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32
                     var listElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
@@ -100,12 +100,16 @@
                     var itemsList = this.FindFirstChild(cf => cf.ByControlType(ControlType.List));
 
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList != null && !itemsList.Properties.IsOffscreen.Value;
+                    return itemsList != null && !itemsList.IsOffscreen;
                 }
 
                 // WPF
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                return ecp?.ExpandCollapseState.ValueOrDefault() == ExpandCollapseState.Expanded;
+                if (this.AutomationElement.TryGetExpandCollapsePattern(out var pattern))
+                {
+                    return pattern.Current.ExpandCollapseState == System.Windows.Automation.ExpandCollapseState.Expanded;
+                }
+
+                return false;
             }
         }
 
@@ -124,13 +128,13 @@
         /// </summary>
         public string Value
         {
-            get => this.ValuePattern.Value.Value;
+            get => this.ValuePattern.Current.Value;
             set => this.ValuePattern.SetValue(value);
         }
 
-        protected IValuePattern ValuePattern => this.Patterns.Value.Pattern;
+        protected ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
 
-        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.PatternOrDefault;
+        protected SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
 
         /// <summary>
         /// Gets the editable element
@@ -169,8 +173,7 @@
                 this.Focus();
             }
 
-            var valuePattern = this.Patterns.Value.PatternOrDefault;
-            valuePattern?.SetValue(string.Empty);
+            this.ValuePattern.SetValue(string.Empty);
             if (string.IsNullOrEmpty(value))
             {
                 return;
@@ -202,8 +205,7 @@
 
         public void Expand()
         {
-            if (!this.Properties.IsEnabled.Value ||
-                this.IsDropDownOpen)
+            if (this.IsDropDownOpen)
             {
                 return;
             }
@@ -211,27 +213,27 @@
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
+                if (!this.IsEnabled)
+                {
+                    throw new InvalidOperationException("Combobox must be enabled for expanding");
+                }
+
                 var openButton = this.FindButton();
                 openButton.Invoke();
             }
             else
             {
                 // WPF
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                if (ecp != null)
-                {
-                    ecp.Expand();
+                this.AutomationElement.ExpandCollapsePattern().Expand();
 
-                    // Wait a bit in case there is an open animation
-                    Wait.For(TimeSpan.FromMilliseconds(50));
-                }
+                // Wait a bit in case there is an open animation
+                Wait.For(TimeSpan.FromMilliseconds(50));
             }
         }
 
         public void Collapse()
         {
-            if (!this.IsEnabled ||
-                !this.IsDropDownOpen)
+            if (!this.IsDropDownOpen)
             {
                 return;
             }
@@ -239,6 +241,11 @@
             if (this.FrameworkType == FrameworkType.WinForms)
             {
                 // WinForms
+                if (!this.IsEnabled)
+                {
+                    throw new InvalidOperationException("Combobox must be enabled for expanding");
+                }
+
                 var openButton = this.FindButton();
                 if (this.IsEditable)
                 {
@@ -253,8 +260,7 @@
             else
             {
                 // WPF
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                ecp?.Collapse();
+                this.AutomationElement.ExpandCollapsePattern().Collapse();
             }
 
             Wait.UntilResponsive(this);

@@ -21,14 +21,6 @@
         }
 
         /// <summary>
-        /// Converts a boolean to an int
-        /// </summary>
-        public static int ToInt(this bool value)
-        {
-            return value ? 1 : 0;
-        }
-
-        /// <summary>
         /// Converts a double to the nearest int32
         /// </summary>
         public static int ToInt(this double value)

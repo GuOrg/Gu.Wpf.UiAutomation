@@ -8,9 +8,9 @@
     /// <summary>
     /// Element for grids and tables.
     /// </summary>
-    public abstract class GridView : Control
+    public class GridView : Control
     {
-        protected GridView(AutomationElement automationElement)
+        public GridView(AutomationElement automationElement)
             : base(automationElement)
         {
         }
@@ -18,12 +18,12 @@
         /// <summary>
         /// Gets the total row count.
         /// </summary>
-        public virtual int RowCount => this.GridPattern.RowCount.Value;
+        public virtual int RowCount => this.GridPattern.Current.RowCount;
 
         /// <summary>
         /// Gets the total column count.
         /// </summary>
-        public int ColumnCount => this.GridPattern.ColumnCount.Value;
+        public int ColumnCount => this.GridPattern.Current.ColumnCount;
 
         /// <summary>
         /// Gets all column header elements.
@@ -44,10 +44,12 @@
                         x => new ColumnHeader(x));
                 }
 
-                if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
-                    tablePattern.ColumnHeaders.TryGetValue(out var headers))
+                if (this.AutomationElement.TryGetTablePattern(out var tablePattern))
                 {
-                    return headers.Select(x => new ColumnHeader(x.AutomationElement)).ToArray();
+                    return tablePattern.Current
+                                       .GetColumnHeaders()
+                                       .Select(x => new ColumnHeader(x))
+                                       .ToArray();
                 }
 
                 throw new InvalidOperationException("Could not find ColumnHeaders");
@@ -78,7 +80,7 @@
         /// <summary>
         /// Gets whether the data should be read primarily by row or by column.
         /// </summary>
-        public RowOrColumnMajor RowOrColumnMajor => this.TablePattern.RowOrColumnMajor.Value;
+        public RowOrColumnMajor RowOrColumnMajor => this.TablePattern.Current.RowOrColumnMajor;
 
         /// <summary>
         /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
@@ -103,20 +105,24 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public IReadOnlyList<UiElement> SelectedItems => this.SelectionPattern.Selection.Value;
+        public IReadOnlyList<UiElement> SelectedItems => this.SelectionPattern
+                                                             .Current
+                                                             .GetSelection()
+                                                             .Select(x => new UiElement(x))
+                                                             .ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
         public UiElement SelectedItem => this.SelectedItems?.FirstOrDefault();
 
-        protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
+        protected GridPattern GridPattern => this.AutomationElement.GridPattern();
 
-        protected ITablePattern TablePattern => this.Patterns.Table.Pattern;
+        protected TablePattern TablePattern => this.AutomationElement.TablePattern();
 
-        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
+        protected SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
 
-        public GridCell this[int row, int col] => this.GridPattern.GetItem(row, col, x => new GridCell(x));
+        public GridCell this[int row, int col] => new GridCell(this.GridPattern.GetItem(row, col));
 
         /// <summary>
         /// Select a row by index.

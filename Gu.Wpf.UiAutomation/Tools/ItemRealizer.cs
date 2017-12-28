@@ -1,5 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
     /// Helper class which tries to load all items for an item container
     /// </summary>
@@ -8,46 +10,41 @@
         public static void RealizeItems(UiElement itemContainerElement)
         {
             // We save the scroll value to restore it afterwards
-            var scrollPattern = itemContainerElement.Patterns.Scroll.PatternOrDefault;
-            double currHScroll = 0;
-            double currVScroll = 0;
-            if (scrollPattern != null)
+            if (itemContainerElement.AutomationElement.TryGetScrollPattern(out var scrollPattern))
             {
-                currHScroll = scrollPattern.HorizontalScrollPercent.ValueOrDefault();
-                currVScroll = scrollPattern.VerticalScrollPercent.ValueOrDefault();
-            }
+                var currHScroll = scrollPattern.Current.HorizontalScrollPercent;
+                var currVScroll = scrollPattern.Current.VerticalScrollPercent;
 
-            // First we try with the item container pattern and realize each item
-            var itemContainerPattern = itemContainerElement.Patterns.ItemContainer.PatternOrDefault;
-            if (itemContainerPattern != null)
-            {
-                // There's the item container pattern so we can go thru all elements and just realize them
-                UiElement currElement = null;
-                while (true)
+                // First we try with the item container pattern and realize each item
+                if (itemContainerElement.AutomationElement.TryGetItemContainerPattern(out var itemContainerPattern))
                 {
-                    currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);
-                    if (currElement == null)
+                    // There's the item container pattern so we can go thru all elements and just realize them
+                    AutomationElement currElement = null;
+                    while (true)
                     {
-                        break;
+                        currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);
+                        if (currElement == null)
+                        {
+                            break;
+                        }
+
+                        if (currElement.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+                        {
+                            virtualizedItemPattern.Realize();
+                        }
                     }
-
-                    var vp = currElement.Patterns.VirtualizedItem.PatternOrDefault;
-                    vp?.Realize();
                 }
-
-                ResetScroll(scrollPattern, currHScroll, currVScroll);
-                return;
-            }
-
-            // Second we use the scroll pattern to scroll from top to bottom
-            if (scrollPattern != null)
-            {
-                scrollPattern.SetScrollPercent(0, 0);
-                do
+                else
                 {
-                    scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
+                    // Second we use the scroll pattern to scroll from top to bottom
+                    scrollPattern.SetScrollPercent(0, 0);
+                    do
+                    {
+                        scrollPattern.Scroll(ScrollAmount.NoAmount, ScrollAmount.SmallIncrement);
+                    }
+                    while (scrollPattern.Current.VerticalScrollPercent < 100);
                 }
-                while (scrollPattern.VerticalScrollPercent.Value < 100);
+
                 ResetScroll(scrollPattern, currHScroll, currVScroll);
                 return;
             }
@@ -58,9 +55,9 @@
             }
         }
 
-        private static void ResetScroll(IScrollPattern scrollPattern, double hScrollPercentage, double vScrollPercentage)
+        private static void ResetScroll(ScrollPattern scrollPattern, double hScrollPercentage, double vScrollPercentage)
         {
-            scrollPattern?.SetScrollPercent(hScrollPercentage, vScrollPercentage);
+            scrollPattern.SetScrollPercent(hScrollPercentage, vScrollPercentage);
         }
     }
 }

@@ -334,7 +334,7 @@
         /// </summary>
         public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, ConditionBase condition)
         {
-            return this.AutomationElement.FindAll(treeScope, condition);
+            return this.AutomationElement.FindAll(treeScope, condition, x => new UiElement(x));
         }
 
         /// <summary>
@@ -364,21 +364,7 @@
         /// </summary>
         public bool TryFindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
         {
-            result = null;
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, timeOut))
-            {
-                result = this.AutomationElement.FindAll(treeScope, condition);
-                if (result != null &&
-                    result.Count > 0)
-                {
-                    return true;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            return result != null;
+            return this.TryFindAll(treeScope, condition, x => new UiElement(x), timeOut, out result);
         }
 
         /// <summary>
@@ -607,7 +593,7 @@
 
         public IReadOnlyList<UiElement> FindAllChildren(ConditionBase condition)
         {
-            return this.AutomationElement.FindAll(TreeScope.Children, condition);
+            return this.AutomationElement.FindAll(TreeScope.Children, condition, x => new UiElement(x));
         }
 
         public IReadOnlyList<T> FindAllChildren<T>(ConditionBase condition, Func<AutomationElement, T> wrap)
@@ -619,7 +605,7 @@
         public IReadOnlyList<UiElement> FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
         {
             var condition = newConditionFunc(this.ConditionFactory);
-            return this.AutomationElement.FindAll(TreeScope.Children, condition);
+            return this.AutomationElement.FindAll(TreeScope.Children, condition, x => new UiElement(x));
         }
 
         public IReadOnlyList<T> FindAllChildren<T>(Func<ConditionFactory, ConditionBase> newConditionFunc, Func<AutomationElement, T> wrap)
