@@ -6,6 +6,11 @@
 
     public static partial class AutomationElementExt
     {
+        public static AutomationElement Parent(this AutomationElement element)
+        {
+            return TreeWalker.RawViewWalker.GetParent(element);
+        }
+
         public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, ConditionBase condition, out AutomationElement match)
         {
             match = element.FindFirst(treeScope, condition.ToNative());

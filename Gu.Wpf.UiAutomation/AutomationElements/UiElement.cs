@@ -124,26 +124,16 @@
         /// <summary>
         /// Gets the cached children for this element.
         /// </summary>
-        public IReadOnlyList<UiElement> CachedChildren
-        {
-            get
-            {
-                throw new NotImplementedException();
-                //return this.AutomationElement.GetCachedChildren();
-            }
-        }
+        public IReadOnlyList<UiElement> CachedChildren => this.AutomationElement
+                                                              .CachedChildren
+                                                              .OfType<AutomationElement>()
+                                                              .Select(x => new UiElement(x))
+                                                              .ToArray();
 
         /// <summary>
         /// Gets the cached parent for this element.
         /// </summary>
-        public UiElement CachedParent
-        {
-            get
-            {
-                throw new NotImplementedException();
-                //return this.AutomationElement.GetCachedParent();
-            }
-        }
+        public UiElement CachedParent => new UiElement(this.AutomationElement.CachedParent);
 
         public bool TryGetWindow(out Window window)
         {

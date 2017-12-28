@@ -95,7 +95,7 @@
                 var gridPattern = this.AutomationElement.GridPattern();
                 for (var i = 0; i < rowCount; i++)
                 {
-                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).CachedParent);
+                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).Parent());
                 }
 
                 return rows;
@@ -142,7 +142,7 @@
             return gridRow;
         }
 
-        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).CachedParent);
+        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent());
 
         public RowHeader RowHeader(int row) => this.Row(row).Header;
 

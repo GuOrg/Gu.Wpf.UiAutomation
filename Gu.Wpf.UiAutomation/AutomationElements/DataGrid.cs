@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).CachedParent);
+                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).Parent());
                 return firstRow.Cells.Where(x => x.IsKeyboardFocusable)
                                      .All(x => x.IsReadOnly);
             }

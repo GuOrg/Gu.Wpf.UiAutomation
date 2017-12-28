@@ -13,7 +13,6 @@
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                Assert.That(listView, Is.Not.Null);
                 var gridPattern = listView.AutomationElement.GridPattern();
                 Assert.AreEqual(2, gridPattern.Current.ColumnCount);
                 Assert.AreEqual(7, gridPattern.Current.RowCount);

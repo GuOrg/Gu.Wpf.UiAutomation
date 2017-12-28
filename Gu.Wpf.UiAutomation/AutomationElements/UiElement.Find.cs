@@ -465,9 +465,9 @@
             var start = DateTime.Now;
             do
             {
-                result = this.AutomationElement.FindFirst(treeScope, condition, wrap);
-                if (result != null)
+                if (this.AutomationElement.TryFindFirst(treeScope, condition, out var element))
                 {
+                    result = wrap(element);
                     return true;
                 }
 
