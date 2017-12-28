@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UITests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Gu.Wpf.UiAutomation.Tests\Gu.Wpf.UiAutomation.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UITests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Gu.Wpf.UiAutomation.Tests\Gu.Wpf.UiAutomation.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
