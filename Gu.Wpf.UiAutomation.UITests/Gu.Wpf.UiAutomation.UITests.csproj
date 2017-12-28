@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
     <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.UiTests.ruleset</CodeAnalysisRuleSet>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
@@ -13,17 +12,16 @@
     <None Remove="Images\SquareBmp.bmp" />
     <None Remove="Images\SquarePng.png" />
   </ItemGroup>
+
   <ItemGroup>
+    <EmbeddedResource Include="Images\button_resource.png" />
+    <Content Include="Images\SquareBmp.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SquarePng.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\button_resource.png" />
-    <Content Include="Images\SquareBmp.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -36,6 +34,18 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <Import Project="..\.paket\Paket.Restore.targets" />
