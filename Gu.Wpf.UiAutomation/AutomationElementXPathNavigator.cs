@@ -51,7 +51,7 @@
                     return XPathNodeType.Attribute;
                 }
 
-                if (this.currentElement.Equals(this.rootElement))
+                if (this.currentElement.Equals(this.rootElement.AutomationElement))
                 {
                     return XPathNodeType.Root;
                 }
@@ -61,7 +61,9 @@
         }
 
         /// <inheritdoc/>
-        public override string LocalName => this.IsInAttribute ? this.GetAttributeName(this.attributeIndex) : this.currentElement.Properties.ControlType.Value.ToString();
+        public override string LocalName => this.IsInAttribute
+            ? this.GetAttributeName(this.attributeIndex)
+            : this.currentElement.ControlType().ToString();
 
         /// <inheritdoc/>
         public override string Name => this.LocalName;
@@ -175,7 +177,7 @@
         public override void MoveToRoot()
         {
             this.attributeIndex = NoAttributeValue;
-            this.currentElement = this.rootElement;
+            this.currentElement = this.rootElement.AutomationElement;
         }
 
         /// <inheritdoc/>

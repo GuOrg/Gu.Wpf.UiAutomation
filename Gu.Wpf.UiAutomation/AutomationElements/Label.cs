@@ -9,6 +9,6 @@
         {
         }
 
-        public string Text => this.Properties.Name.Value;
+        public string Text => this.Name;
     }
 }

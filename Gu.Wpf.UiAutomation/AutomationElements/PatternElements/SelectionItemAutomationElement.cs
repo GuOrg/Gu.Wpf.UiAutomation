@@ -17,7 +17,7 @@
         /// </summary>
         public bool IsSelected
         {
-            get => this.SelectionItemPattern.IsSelected.ValueOrDefault();
+            get => this.SelectionItemPattern.Current.IsSelected;
             set
             {
                 if (this.IsSelected == value)
@@ -32,7 +32,7 @@
             }
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
+        public SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
 
         /// <summary>
         /// Select this element.

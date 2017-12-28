@@ -9,9 +9,9 @@
         {
         }
 
-        public IExpandCollapsePattern ExpandCollapsePattern => this.Patterns.ExpandCollapse.Pattern;
+        public ExpandCollapsePattern ExpandCollapsePattern => this.AutomationElement.ExpandCollapsePattern();
 
-        public ExpandCollapseState ExpandCollapseState => this.ExpandCollapsePattern.ExpandCollapseState.Value;
+        public ExpandCollapseState ExpandCollapseState => this.ExpandCollapsePattern.Current.ExpandCollapseState;
 
         public void Expand()
         {

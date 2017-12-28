@@ -14,22 +14,22 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Get a value indicating if the element is enabled or not.
         /// </summary>
-        public bool IsEnabled => this.Properties.IsEnabled.Value;
+        public bool IsEnabled => this.AutomationElement.IsEnabled();
 
         /// <summary>
         /// Get a value indicating if the element can recieve keyboard focus.
         /// </summary>
-        public bool IsKeyboardFocusable => this.Properties.IsKeyboardFocusable.Value;
+        public bool IsKeyboardFocusable => this.AutomationElement.IsKeyboardFocusable();
 
         /// <summary>
         /// Get a value indicating if the element has keyboard focus.
         /// </summary>
-        public bool HasKeyboardFocus => this.Properties.HasKeyboardFocus.Value;
+        public bool HasKeyboardFocus => this.AutomationElement.HasKeyboardFocus();
 
         /// <summary>
         /// Gets a string containing the accelerator key combinations for the element.
         /// </summary>
-        public string AcceleratorKey => this.Properties.AcceleratorKey.Value;
+        public string AcceleratorKey => this.AutomationElement.AcceleratorKey();
 
         /// <summary>
         /// Performs a left click on the element.
@@ -155,10 +155,10 @@ namespace Gu.Wpf.UiAutomation
                 throw new InvalidOperationException("Cannot click when off screen.");
             }
 
-            if (this.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
-                windowHandle != new IntPtr(0))
+            var windowHandle = this.AutomationElement.NativeWindowHandle();
+            if (windowHandle != 0)
             {
-                User32.SetFocus(windowHandle);
+                User32.SetFocus(new IntPtr(windowHandle));
                 Wait.UntilResponsive(this);
             }
             else
@@ -173,10 +173,10 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public void SetForeground()
         {
-            if (this.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
-                windowHandle != new IntPtr(0))
+            var nativeWindowHandle = this.AutomationElement.NativeWindowHandle();
+            if (nativeWindowHandle != 0)
             {
-                User32.SetForegroundWindow(windowHandle);
+                User32.SetForegroundWindow(new IntPtr(nativeWindowHandle));
                 Wait.UntilResponsive(this);
             }
             else

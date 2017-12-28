@@ -429,7 +429,7 @@
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                result = this.AutomationElement.FindFirst(treeScope, condition);
+                result = this.AutomationElement.FindFirst(treeScope, condition, x => new UiElement(x));
                 if (result != null)
                 {
                     return true;
@@ -500,7 +500,7 @@
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                result = this.AutomationElement.FindIndexed(treeScope, condition, index);
+                result = this.AutomationElement.FindIndexed(treeScope, condition, index, x => new UiElement(x));
                 if (result != null)
                 {
                     return true;

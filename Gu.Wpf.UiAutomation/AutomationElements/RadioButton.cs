@@ -14,7 +14,7 @@
         /// </summary>
         public bool IsChecked
         {
-            get => this.SelectionItemPattern.IsSelected.Value;
+            get => this.SelectionItemPattern.Current.IsSelected;
             set
             {
                 if (this.IsChecked == value)
@@ -34,6 +34,6 @@
             }
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
+        protected SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
     }
 }

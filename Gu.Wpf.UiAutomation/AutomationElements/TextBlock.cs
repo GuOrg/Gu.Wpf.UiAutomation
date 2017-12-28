@@ -9,6 +9,6 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public string Text => this.Properties.Name.Value;
+        public string Text => this.Name;
     }
 }

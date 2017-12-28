@@ -25,7 +25,7 @@ namespace Gu.Wpf.UiAutomation
                     return child.AsTextBlock().Text;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
     }

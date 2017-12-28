@@ -10,7 +10,7 @@
         {
         }
 
-        public ITogglePattern TogglePattern => this.Patterns.Toggle.Pattern;
+        public TogglePattern TogglePattern => this.AutomationElement.TogglePattern();
 
         public string Text
         {
@@ -18,12 +18,12 @@
             {
                 var children = this.FindAllChildren();
                 if (children.Count == 1 &&
-                    children[0].ControlType == ControlType.Text)
+                    children[0].ControlType.Id == ControlType.Text.Id)
                 {
-                    return children[0].Properties.Name.Value;
+                    return children[0].Name;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
 
@@ -67,6 +67,6 @@
             }
         }
 
-        private ToggleState State => this.TogglePattern.ToggleState.Value;
+        private ToggleState State => this.TogglePattern.Current.ToggleState;
     }
 }

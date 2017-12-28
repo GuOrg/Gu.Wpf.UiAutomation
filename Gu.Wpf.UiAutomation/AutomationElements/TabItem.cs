@@ -22,10 +22,10 @@
                 var header = this.Header;
                 if (header != null)
                 {
-                    return header.Properties.Name.Value;
+                    return header.Name;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
 

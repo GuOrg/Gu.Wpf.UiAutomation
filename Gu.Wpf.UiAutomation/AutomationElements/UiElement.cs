@@ -7,6 +7,7 @@
     using System.Windows.Automation;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using Gu.Wpf.UiAutomation.Converters;
     using Gu.Wpf.UiAutomation.Overlay;
     using GdiColor = System.Drawing.Color;
     using WpfColor = System.Windows.Media.Color;
@@ -299,9 +300,9 @@
         /// <summary>
         /// Gets the available patterns for an element via properties
         /// </summary>
-        public IReadOnlyList<PatternId> GetSupportedPatterns()
+        public IReadOnlyList<AutomationPattern> GetSupportedPatterns()
         {
-            return this.Automation.PatternLibrary.AllForCurrentFramework.Where(this.IsPatternSupported).ToArray();
+            return this.AutomationElement.GetSupportedPatterns();
         }
 
         /// <summary>
@@ -325,7 +326,7 @@
         /// Checks if the given pattern is available for the element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public bool IsPatternSupportedDirect(PatternId pattern)
+        public bool IsPatternSupportedDirect(AutomationPattern pattern)
         {
             return this.GetSupportedPatternsDirect().Contains(pattern);
         }
@@ -334,7 +335,7 @@
         /// Gets the available properties for an element via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public IReadOnlyList<PropertyId> GetSupportedPropertiesDirect()
+        public IReadOnlyList<AutomationProperty> GetSupportedPropertiesDirect()
         {
             return this.AutomationElement.GetSupportedProperties();
         }
@@ -343,7 +344,7 @@
         /// Method to check if the element supports the given property via UIA method.
         /// Does not work with cached elements and might be unreliable.
         /// </summary>
-        public bool IsPropertySupportedDirect(PropertyId property)
+        public bool IsPropertySupportedDirect(AutomationProperty property)
         {
             return this.GetSupportedPropertiesDirect().Contains(property);
         }

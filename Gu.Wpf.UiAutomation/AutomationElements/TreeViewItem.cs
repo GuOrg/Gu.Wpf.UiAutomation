@@ -32,11 +32,11 @@
         {
             get
             {
-                var value = this.Properties.Name.Value;
+                var value = this.Name;
                 if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
                     var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? string.Empty : textElement.Properties.Name.Value;
+                    return textElement == null ? string.Empty : textElement.Name;
                 }
 
                 return value;
@@ -53,10 +53,9 @@
         {
             get
             {
-                if (this.Patterns.ExpandCollapse.TryGetPattern(out var pattern) &&
-                    pattern.ExpandCollapseState.TryGetValue(out var state))
+                if (this.AutomationElement.TryGetExpandCollapsePattern(out var pattern))
                 {
-                    return state == ExpandCollapseState.Expanded;
+                    return pattern.Current.ExpandCollapseState == ExpandCollapseState.Expanded;
                 }
 
                 return true;
@@ -77,17 +76,17 @@
 
         public void Expand()
         {
-            this.Patterns.ExpandCollapse.Pattern.Expand();
+            this.AutomationElement.ExpandCollapsePattern().Expand();
         }
 
         public void Collapse()
         {
-            this.Patterns.ExpandCollapse.Pattern.Collapse();
+            this.AutomationElement.ExpandCollapsePattern().Collapse();
         }
 
         public void Select()
         {
-            this.Patterns.SelectionItem.Pattern.Select();
+            this.AutomationElement.SelectionItemPattern().Select();
         }
     }
 }

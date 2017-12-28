@@ -9,7 +9,7 @@
         {
         }
 
-        public IInvokePattern InvokePattern => this.Patterns.Invoke.Pattern;
+        public InvokePattern InvokePattern => this.AutomationElement.InvokePattern();
 
         public void Invoke()
         {

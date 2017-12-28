@@ -92,10 +92,10 @@
             {
                 var rowCount = this.RowCount;
                 var rows = new GridRow[rowCount];
-                var gridPattern = this.Patterns.Grid.Pattern;
+                var gridPattern = this.AutomationElement.GridPattern();
                 for (var i = 0; i < rowCount; i++)
                 {
-                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).Parent.AutomationElement);
+                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).CachedParent);
                 }
 
                 return rows;
@@ -142,7 +142,7 @@
             return gridRow;
         }
 
-        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.AutomationElement);
+        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).CachedParent);
 
         public RowHeader RowHeader(int row) => this.Row(row).Header;
 
@@ -178,7 +178,7 @@
         public GridRow GetRowByIndex(int rowIndex)
         {
             this.PreCheckRow(rowIndex);
-            var gridCell = this.GridPattern.GetItem(rowIndex, 0, x => new GridCell(x));
+            var gridCell = new GridCell(this.GridPattern.GetItem(rowIndex, 0));
             return gridCell.ContainingRow;
         }
 
@@ -204,7 +204,7 @@
             var returnList = new List<GridRow>();
             for (var rowIndex = 0; rowIndex < this.RowCount; rowIndex++)
             {
-                var currentCell = gridPattern.GetItem(rowIndex, columnIndex, x => new GridCell(x));
+                var currentCell = new GridCell(gridPattern.GetItem(rowIndex, columnIndex));
                 if (currentCell.Value == value)
                 {
                     returnList.Add(currentCell.ContainingRow);

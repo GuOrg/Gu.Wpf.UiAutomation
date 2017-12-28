@@ -16,19 +16,17 @@
         {
             get
             {
-                if (this.Properties.IsPassword.TryGetValue(out var isPassword) &&
-                    isPassword)
+                if (this.AutomationElement.IsPassword())
                 {
                     throw new MethodNotSupportedException($"Text from element '{this}' cannot be retrieved because it is set as password.");
                 }
 
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                    valuePattern.Value.TryGetValue(out var value))
+                if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
-                    return value;
+                    return valuePattern.Current.Value;
                 }
 
-                if (this.Patterns.Text.TryGetPattern(out var textPattern))
+                if (this.AutomationElement.TryGetTextPattern(out var textPattern))
                 {
                     return textPattern.DocumentRange.GetText(int.MaxValue);
                 }
@@ -38,7 +36,7 @@
 
             set
             {
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern))
+                if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
                 }
@@ -53,10 +51,9 @@
         {
             get
             {
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                    valuePattern.IsReadOnly.TryGetValue(out var value))
+                if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
-                    return value;
+                    return valuePattern.Current.IsReadOnly;
                 }
 
                 return true;
@@ -83,7 +80,7 @@
                 this.Focus();
             }
 
-            if (this.Patterns.Value.TryGetPattern(out var valuePattern))
+            if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
             {
                 valuePattern?.SetValue(string.Empty);
             }

@@ -61,7 +61,7 @@
         /// </summary>
         public static Bitmap Element(UiElement element)
         {
-            return Rectangle(element.Properties.BoundingRectangle.Value);
+            return Rectangle(element.Bounds);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@
         /// </summary>
         public static void ElementToFile(UiElement element, string filePath)
         {
-            using (var bmp = Rectangle(element.Properties.BoundingRectangle.Value))
+            using (var bmp = Rectangle(element.Bounds))
             {
                 Logger.Default.Info($"Capture.ElementToFile: {element} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);

@@ -1,8 +1,8 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using System.Linq;
     using System.Text;
+    using System.Windows.Automation;
 
     public static class Debug
     {
@@ -12,8 +12,7 @@
         /// </summary>
         public static string GetXPathToElement(UiElement element, UiElement rootElement = null)
         {
-            var treeWalker = element.Automation.TreeWalkerFactory.GetControlViewWalker();
-            return GetXPathToElement(element, treeWalker, rootElement);
+            return GetXPathToElement(element.AutomationElement, TreeWalker.ControlViewWalker, rootElement);
         }
 
         public static string Details(UiElement uiElement)
@@ -22,22 +21,41 @@
             {
                 var stringBuilder = new StringBuilder();
                 var cr = new CacheRequest { AutomationElementMode = AutomationElementMode.None };
-
                 // Add the element properties
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.AutomationId);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.ControlType);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.Name);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.HelpText);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.BoundingRectangle);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.ClassName);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.IsOffscreen);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.FrameworkId);
-                cr.Add(uiElement.Automation.PropertyLibrary.Element.ProcessId);
+                cr.Add(AutomationElementIdentifiers.AutomationIdProperty);
+                cr.Add(AutomationElementIdentifiers.ControlTypeProperty);
+                cr.Add(AutomationElementIdentifiers.NameProperty);
+                cr.Add(AutomationElementIdentifiers.HelpTextProperty);
+                cr.Add(AutomationElementIdentifiers.BoundingRectangleProperty);
+                cr.Add(AutomationElementIdentifiers.ClassNameProperty);
+                cr.Add(AutomationElementIdentifiers.IsOffscreenProperty);
+                cr.Add(AutomationElementIdentifiers.FrameworkIdProperty);
+                cr.Add(AutomationElementIdentifiers.ProcessIdProperty);
 
                 // Add the pattern availability properties
-                uiElement.Automation.PropertyLibrary.PatternAvailability.AllForCurrentFramework.ToList().ForEach(x => cr.Add(x));
+                cr.Add(AutomationElementIdentifiers.IsDockPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsExpandCollapsePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsGridPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsGridItemPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsInvokePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsItemContainerPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsMultipleViewPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsRangeValuePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsScrollItemPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsScrollPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsSelectionItemPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsSynchronizedInputPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsTablePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsTableItemPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsTextPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsTogglePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsTransformPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsValuePatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsVirtualizedItemPatternAvailableProperty);
+                cr.Add(AutomationElementIdentifiers.IsWindowPatternAvailableProperty);
+
                 cr.TreeScope = TreeScope.Subtree;
-                cr.TreeFilter = TrueCondition.Default;
+                cr.TreeFilter = Condition.TrueCondition;
 
                 // Activate the cache request
                 using (cr.Activate())
@@ -56,7 +74,7 @@
             }
         }
 
-        private static string GetXPathToElement(UiElement element, ITreeWalker treeWalker, UiElement rootElement = null)
+        private static string GetXPathToElement(AutomationElement element, TreeWalker treeWalker, UiElement rootElement = null)
         {
             var parent = treeWalker.GetParent(element);
             if (parent == null || (rootElement != null && parent.Equals(rootElement)))
@@ -65,8 +83,8 @@
             }
 
             // Get the index
-            var allChildren = parent.FindAllChildren(cf => cf.ByControlType(element.Properties.ControlType.Value));
-            var currentItemText = $"{element.Properties.ControlType.Value}";
+            var allChildren = parent.FindAllChildren(ConditionFactory.Instance.ByControlType(element.Current.ControlType));
+            var currentItemText = $"{element.Current.ControlType}";
             if (allChildren.Count > 1)
             {
                 // There is more than one matching child, find out the index
@@ -101,15 +119,15 @@
 
         private static void WriteDetail(UiElement uiElement, StringBuilder stringBuilder, string displayPadding)
         {
-            WriteWithPadding(stringBuilder, "AutomationId: " + uiElement.Properties.AutomationId, displayPadding);
-            WriteWithPadding(stringBuilder, "ControlType: " + uiElement.Properties.ControlType, displayPadding);
-            WriteWithPadding(stringBuilder, "Name: " + uiElement.Properties.Name, displayPadding);
-            WriteWithPadding(stringBuilder, "HelpText: " + uiElement.Properties.HelpText, displayPadding);
-            WriteWithPadding(stringBuilder, "Bounding rectangle: " + uiElement.Properties.BoundingRectangle, displayPadding);
-            WriteWithPadding(stringBuilder, "ClassName: " + uiElement.Properties.ClassName, displayPadding);
-            WriteWithPadding(stringBuilder, "IsOffScreen: " + uiElement.Properties.IsOffscreen, displayPadding);
-            WriteWithPadding(stringBuilder, "FrameworkId: " + uiElement.Properties.FrameworkId, displayPadding);
-            WriteWithPadding(stringBuilder, "ProcessId: " + uiElement.Properties.ProcessId, displayPadding);
+            WriteWithPadding(stringBuilder, "AutomationId: " + uiElement.AutomationId, displayPadding);
+            WriteWithPadding(stringBuilder, "ControlType: " + uiElement.ControlType, displayPadding);
+            WriteWithPadding(stringBuilder, "Name: " + uiElement.Name, displayPadding);
+            WriteWithPadding(stringBuilder, "HelpText: " + uiElement.HelpText, displayPadding);
+            WriteWithPadding(stringBuilder, "Bounding rectangle: " + uiElement.Bounds, displayPadding);
+            WriteWithPadding(stringBuilder, "ClassName: " + uiElement.ClassName, displayPadding);
+            WriteWithPadding(stringBuilder, "IsOffScreen: " + uiElement.IsOffscreen, displayPadding);
+            WriteWithPadding(stringBuilder, "FrameworkId: " + uiElement.FrameworkType, displayPadding);
+            WriteWithPadding(stringBuilder, "ProcessId: " + uiElement.ProcessId, displayPadding);
         }
 
         private static void WritePattern(UiElement uiElement, StringBuilder stringBuilder, string displayPadding)

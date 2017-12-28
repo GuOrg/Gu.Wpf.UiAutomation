@@ -48,10 +48,9 @@
 
         public static bool UntilResponsive(UiElement uiElement, TimeSpan timeout)
         {
-            if (uiElement.TryGetWindow(out var window) &&
-                window.Properties.NativeWindowHandle.TryGetValue(out var handle))
+            if (uiElement.TryGetWindow(out var window))
             {
-                return UntilResponsive(handle, timeout);
+                return UntilResponsive(window.NativeWindowHandle, timeout);
             }
 
             return false;

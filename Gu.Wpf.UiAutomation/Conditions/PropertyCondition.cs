@@ -1,7 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
-    using Gu.Wpf.UiAutomation.UIA3.Converters;
+    using Gu.Wpf.UiAutomation.Converters;
 
     public class PropertyCondition : ConditionBase
     {
@@ -33,7 +33,7 @@
         {
             return new System.Windows.Automation.PropertyCondition(
                 this.Property,
-                ValueConverter.ToNative(this.Value),
+                this.Value,
                 this.PropertyConditionFlags);
         }
     }

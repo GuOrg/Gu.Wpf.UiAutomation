@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+﻿namespace Gu.Wpf.UiAutomation.Converters
 {
     public static class FrameworkIds
     {

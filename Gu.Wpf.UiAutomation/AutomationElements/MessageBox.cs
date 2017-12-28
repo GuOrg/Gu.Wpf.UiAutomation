@@ -13,14 +13,7 @@
 
         public void Close()
         {
-            var windowPattern = this.Patterns.Window.PatternOrDefault;
-            if (windowPattern != null)
-            {
-                windowPattern.Close();
-                return;
-            }
-
-            throw new MethodNotSupportedException("Close is not supported");
+            this.AutomationElement.WindowPattern().Close();
         }
     }
 }

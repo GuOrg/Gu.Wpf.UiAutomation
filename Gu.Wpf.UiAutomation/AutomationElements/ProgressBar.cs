@@ -9,12 +9,12 @@
         {
         }
 
-        public IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.Pattern;
+        public RangeValuePattern RangeValuePattern => this.AutomationElement.RangeValuePattern();
 
-        public double Minimum => this.RangeValuePattern.Minimum.Value;
+        public double Minimum => this.RangeValuePattern.Current.Minimum;
 
-        public double Maximum => this.RangeValuePattern.Maximum.Value;
+        public double Maximum => this.RangeValuePattern.Current.Maximum;
 
-        public double Value => this.RangeValuePattern.Value.Value;
+        public double Value => this.RangeValuePattern.Current.Value;
     }
 }
