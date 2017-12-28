@@ -25,7 +25,7 @@
                 using (var waitHandle = new ManualResetEventSlim(initialState: false))
                 {
                     using (button.SubscribeToEvent(
-                        invokePattern.Events.InvokedEvent,
+                        InvokePatternIdentifiers.InvokedEvent,
                         TreeScope.Element,
                         (element, id) =>
                         {

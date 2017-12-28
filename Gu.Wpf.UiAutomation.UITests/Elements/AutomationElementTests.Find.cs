@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Windows.Automation;
     using NUnit.Framework;
 

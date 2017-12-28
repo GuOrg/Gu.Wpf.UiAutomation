@@ -23,8 +23,8 @@
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
                 var mainWindow = app.MainWindow;
-                var mouseX = mainWindow.Properties.BoundingRectangle.Value.Left + 50;
-                var mouseY = mainWindow.Properties.BoundingRectangle.Value.Top + 200;
+                var mouseX = mainWindow.Bounds.Left + 50;
+                var mouseY = mainWindow.Bounds.Top + 200;
                 Mouse.Position = new Point(mouseX, mouseY);
                 Mouse.Down(MouseButton.Left);
                 Mouse.MoveBy(100, 10);

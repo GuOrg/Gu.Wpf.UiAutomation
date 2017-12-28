@@ -63,7 +63,7 @@
 
                 var exception = Assert.Throws<UiAutomationException>(() => checkBox.IsChecked = null);
                 Assert.AreEqual(
-                    $"Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:{checkBox.Properties.LocalizedControlType}, FrameworkId:WPF .IsChecked to null failed.",
+                    $"Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:{checkBox.LocalizedControlType}, FrameworkId:WPF .IsChecked to null failed.",
                     exception.Message);
             }
         }

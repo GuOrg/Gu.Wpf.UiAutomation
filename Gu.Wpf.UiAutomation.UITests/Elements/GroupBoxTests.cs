@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
+    using System.Windows.Automation;
     using NUnit.Framework;
 
     public class GroupBoxTests

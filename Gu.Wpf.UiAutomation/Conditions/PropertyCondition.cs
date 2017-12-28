@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
-    using Gu.Wpf.UiAutomation.Converters;
 
     public class PropertyCondition : ConditionBase
     {

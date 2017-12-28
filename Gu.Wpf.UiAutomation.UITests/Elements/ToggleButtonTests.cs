@@ -44,7 +44,7 @@
 
                 var exception = Assert.Throws<UiAutomationException>(() => toggleButton.IsChecked = null);
                 Assert.AreEqual(
-                    $"Setting AutomationId:SimpleToggleButton, Name:Test ToggleButton, ControlType:{toggleButton.Properties.LocalizedControlType}, FrameworkId:WPF .IsChecked to null failed.",
+                    $"Setting AutomationId:SimpleToggleButton, Name:Test ToggleButton, ControlType:{toggleButton.LocalizedControlType}, FrameworkId:WPF .IsChecked to null failed.",
                     exception.Message);
             }
         }

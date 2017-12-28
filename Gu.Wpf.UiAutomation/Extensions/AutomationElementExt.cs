@@ -1,7 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using System.Collections.Generic;
     using System.Windows.Automation;
 
     public static partial class AutomationElementExt

@@ -124,8 +124,8 @@
                 get
                 {
                     var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("CalculatorResults"));
-                    var value = resultElement.Properties.Name;
-                    return Regex.Replace(value.Value, "[^0-9]", string.Empty);
+                    var value = resultElement.Name;
+                    return Regex.Replace(value, "[^0-9]", string.Empty);
                 }
             }
         }
@@ -164,8 +164,8 @@
                 get
                 {
                     var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
-                    var value = resultElement.Properties.Name;
-                    return Regex.Replace(value.Value, "[^0-9]", string.Empty);
+                    var value = resultElement.Name;
+                    return Regex.Replace(value, "[^0-9]", string.Empty);
                 }
             }
         }
