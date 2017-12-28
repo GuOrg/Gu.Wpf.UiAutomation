@@ -1,12 +1,22 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices.WindowsRuntime;
+    using System.Windows.Automation;
     using NUnit.Framework;
 
     public partial class AutomationElementTests
     {
         public class Find
         {
+            private static readonly IReadOnlyList<TestCaseData> FindAtCases = new[]
+            {
+                new TestCaseData(0, ControlType.TitleBar),
+                new TestCaseData(1, ControlType.MenuBar),
+                new TestCaseData(2, ControlType.MenuItem),
+            };
+
             [OneTimeTearDown]
             public void OneTimeTearDown()
             {
@@ -78,9 +88,7 @@
                 }
             }
 
-            [TestCase(0, ControlType.TitleBar)]
-            [TestCase(1, ControlType.MenuBar)]
-            [TestCase(2, ControlType.MenuItem)]
+            [TestCaseSource(nameof(FindAtCases))]
             public void FindAt(int index, ControlType expected)
             {
                 using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))

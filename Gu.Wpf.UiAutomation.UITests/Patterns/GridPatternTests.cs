@@ -14,12 +14,12 @@
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid();
                 Assert.NotNull(dataGrid);
-                var gridPattern = dataGrid.Patterns.Grid.Pattern;
-                Assert.AreEqual(2, gridPattern.ColumnCount.Value);
-                Assert.AreEqual(4, gridPattern.RowCount.Value);
+                var gridPattern = dataGrid.AutomationElement.GridPattern();
+                Assert.AreEqual(2, gridPattern.Current.ColumnCount);
+                Assert.AreEqual(4, gridPattern.Current.RowCount);
 
                 var item = gridPattern.GetItem(1, 1);
-                Assert.AreEqual("Item 2", item.Properties.Name.Value);
+                Assert.AreEqual("Item 2", item.Name());
             }
         }
     }

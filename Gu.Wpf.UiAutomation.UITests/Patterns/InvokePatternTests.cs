@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using System.Windows.Automation;
     using NUnit.Framework;
 
     public class InvokePatternTests
@@ -18,7 +19,7 @@
                 var tabItem = tab.Items[0];
                 var button = tabItem.FindButton("InvokableButton");
                 Assert.NotNull(button);
-                var invokePattern = button.Patterns.Invoke.Pattern;
+                var invokePattern = button.AutomationElement.InvokePattern();
                 Assert.NotNull(invokePattern);
                 var invokeFired = false;
                 using (var waitHandle = new ManualResetEventSlim(initialState: false))

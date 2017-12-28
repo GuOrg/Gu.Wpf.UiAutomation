@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Patterns
 {
+    using System.Windows.Automation;
     using NUnit.Framework;
 
     public class ExpandCollapsePatternTests
@@ -14,14 +15,14 @@
                 var window = app.MainWindow;
                 var expander = window.FindExpander();
                 Assert.NotNull(expander);
-                var ecp = expander.Patterns.ExpandCollapse.Pattern;
-                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.ExpandCollapseState.Value);
+                var ecp = expander.AutomationElement.ExpandCollapsePattern();
+                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
 
                 ecp.Collapse();
-                Assert.AreEqual(ExpandCollapseState.Collapsed, ecp.ExpandCollapseState.Value);
+                Assert.AreEqual(ExpandCollapseState.Collapsed, ecp.Current.ExpandCollapseState);
 
                 ecp.Expand();
-                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.ExpandCollapseState.Value);
+                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
             }
         }
     }
