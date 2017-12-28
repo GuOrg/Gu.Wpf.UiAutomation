@@ -6,7 +6,7 @@
     public static class Retry
     {
         /// <summary>
-        /// The time to retyr when searching for elements. Default is one second.
+        /// The time to retry when searching for elements. Default is one second.
         /// </summary>
         public static TimeSpan Time { get; set; } = TimeSpan.FromMilliseconds(1000);
 
