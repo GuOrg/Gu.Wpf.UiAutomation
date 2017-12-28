@@ -3,11 +3,12 @@
     using System;
     using System.Linq;
     using System.Threading;
+    using System.Windows.Automation;
 
     public class TextBox : Control
     {
-        public TextBox(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TextBox(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

@@ -1,37 +1,38 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Helper class with some commonly used conditions
     /// </summary>
-    public class ConditionFactory
+    public sealed class ConditionFactory
     {
-        private readonly IPropertyLibray propertyLibrary;
-
-        public ConditionFactory(IPropertyLibray propertyLibrary)
+        private ConditionFactory()
         {
-            this.propertyLibrary = propertyLibrary;
         }
+
+        public static ConditionFactory Instance { get; } = new ConditionFactory();
 
         public PropertyCondition ByAutomationId(string automationId)
         {
-            return new PropertyCondition(this.propertyLibrary.Element.AutomationId, automationId);
+            throw new NotImplementedException();
+            // return new PropertyCondition(this.propertyLibrary.Element.AutomationId, automationId);
         }
 
         public PropertyCondition ByControlType(ControlType controlType)
         {
-            return new PropertyCondition(this.propertyLibrary.Element.ControlType, controlType);
+            return new PropertyCondition(AutomationElementIdentifiers.ControlTypeProperty, controlType);
         }
 
         public PropertyCondition ByClassName(string className)
         {
-            return new PropertyCondition(this.propertyLibrary.Element.ClassName, className);
+            return new PropertyCondition(AutomationElementIdentifiers.ClassNameProperty, className);
         }
 
         public PropertyCondition ByName(string name)
         {
-            return new PropertyCondition(this.propertyLibrary.Element.Name, name);
+            return new PropertyCondition(AutomationElementIdentifiers.NameProperty, name);
         }
 
         [Obsolete("Not sure about keeping it as it does return this.ByName(text);")]
@@ -42,22 +43,23 @@
 
         public PropertyCondition ByValue(string text)
         {
-            return new PropertyCondition(this.propertyLibrary.Value.Value, text);
+            throw new NotImplementedException();
+            // return new PropertyCondition(this.propertyLibrary.Value.Value, text);
         }
 
         public PropertyCondition ByProcessId(int processId)
         {
-            return new PropertyCondition(this.propertyLibrary.Element.ProcessId, processId);
+            return new PropertyCondition(AutomationElementIdentifiers.ProcessIdProperty, processId);
         }
 
         public PropertyCondition ByLocalizedControlType(string localizedControlType)
         {
-           return new PropertyCondition(this.propertyLibrary.Element.LocalizedControlType, localizedControlType);
+            return new PropertyCondition(AutomationElementIdentifiers.LocalizedControlTypeProperty, localizedControlType);
         }
 
         public PropertyCondition ByHelpTextProperty(string helpText)
         {
-           return new PropertyCondition(this.propertyLibrary.Element.HelpText, helpText);
+            return new PropertyCondition(AutomationElementIdentifiers.HelpTextProperty, helpText);
         }
 
         /// <summary>

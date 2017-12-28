@@ -1,26 +1,27 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
     using System.Xml;
     using System.Xml.XPath;
 
     /// <summary>
     /// Custom implementation of a <see cref="XPathNavigator" /> which allows
-    /// selecting items by xpath by using the <see cref="ITreeWalker" />.
+    /// selecting items by xpath by using the <see cref="TreeWalker" />.
     /// </summary>
     public class AutomationElementXPathNavigator : XPathNavigator
     {
         private const int NoAttributeValue = -1;
-        private readonly AutomationElement rootElement;
-        private readonly ITreeWalker treeWalker;
+        private readonly UiElement rootElement;
+        private readonly TreeWalker treeWalker;
         private AutomationElement currentElement;
         private int attributeIndex = NoAttributeValue;
 
-        public AutomationElementXPathNavigator(AutomationElement rootElement)
+        public AutomationElementXPathNavigator(UiElement rootElement)
         {
-            this.treeWalker = rootElement.Automation.TreeWalkerFactory.GetControlViewWalker();
+            this.treeWalker = TreeWalker.ControlViewWalker;
             this.rootElement = rootElement;
-            this.currentElement = rootElement;
+            this.currentElement = rootElement.AutomationElement;
         }
 
         private enum ElementAttributes
@@ -297,13 +298,13 @@
             switch ((ElementAttributes)attributeIndex)
             {
                 case ElementAttributes.AutomationId:
-                    return this.currentElement.Properties.AutomationId.Value;
+                    return this.currentElement.AutomationId();
                 case ElementAttributes.Name:
-                    return this.currentElement.Properties.Name.Value;
+                    return this.currentElement.Name();
                 case ElementAttributes.ClassName:
-                    return this.currentElement.Properties.ClassName.Value;
+                    return this.currentElement.ClassName();
                 case ElementAttributes.HelpText:
-                    return this.currentElement.Properties.HelpText.Value;
+                    return this.currentElement.HelpText();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(attributeIndex));
             }

@@ -1,6 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    using Interop.UIAutomationClient;
+    using System.Windows.Automation;
 
     public class NotCondition : ConditionBase
     {
@@ -17,9 +17,9 @@
             return $"NOT ({this.Condition})";
         }
 
-        public override IUIAutomationCondition ToNative(IUIAutomation automation)
+        public override Condition ToNative()
         {
-            return automation.CreateNotCondition(this.Condition.ToNative(automation));
+            return new System.Windows.Automation.NotCondition(this.Condition.ToNative());
         }
     }
 }

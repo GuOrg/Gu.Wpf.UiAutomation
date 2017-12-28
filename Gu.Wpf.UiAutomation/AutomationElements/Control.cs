@@ -1,12 +1,13 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
-    public class Control : AutomationElement
+    public class Control : UiElement
     {
-        public Control(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Control(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -133,7 +134,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new InvalidOperationException("Cannot click when off screen.");
             }
 
-            this.BasicAutomationElement.SetFocus();
+            this.AutomationElement.SetFocus();
         }
 
         /// <summary>

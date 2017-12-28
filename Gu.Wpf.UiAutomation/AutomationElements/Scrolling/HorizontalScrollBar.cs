@@ -1,11 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class HorizontalScrollBar : ScrollBarBase
     {
-        public HorizontalScrollBar(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public HorizontalScrollBar(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

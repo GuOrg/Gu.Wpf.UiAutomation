@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Interop.UIAutomationClient;
+    using System.Windows.Automation;
 
     public class OrCondition : JunctionConditionBase
     {
@@ -27,9 +27,9 @@
             return $"({string.Join(" OR ", this.Conditions.Select(c => c.ToString()))})";
         }
 
-        public override IUIAutomationCondition ToNative(IUIAutomation automation)
+        public override Condition ToNative()
         {
-            return automation.CreateOrConditionFromArray(this.Conditions.Select(c => c.ToNative(automation)).ToArray());
+            return new System.Windows.Automation.OrCondition(this.Conditions.Select(x => x.ToNative()).ToArray());
         }
     }
 }

@@ -5,7 +5,7 @@
     /// </summary>
     public static class ItemRealizer
     {
-        public static void RealizeItems(AutomationElement itemContainerElement)
+        public static void RealizeItems(UiElement itemContainerElement)
         {
             // We save the scroll value to restore it afterwards
             var scrollPattern = itemContainerElement.Patterns.Scroll.PatternOrDefault;
@@ -22,7 +22,7 @@
             if (itemContainerPattern != null)
             {
                 // There's the item container pattern so we can go thru all elements and just realize them
-                AutomationElement currElement = null;
+                UiElement currElement = null;
                 while (true)
                 {
                     currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);

@@ -92,9 +92,9 @@
 
         public class Win10Calc : ICalculator
         {
-            private readonly AutomationElement mainWindow;
+            private readonly UiElement mainWindow;
 
-            public Win10Calc(AutomationElement mainWindow)
+            public Win10Calc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
@@ -132,9 +132,9 @@
 
         private class LegacyCalc : ICalculator
         {
-            private readonly AutomationElement mainWindow;
+            private readonly UiElement mainWindow;
 
-            public LegacyCalc(AutomationElement mainWindow)
+            public LegacyCalc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }

@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class ExpandCollapseAutomationElement : Control
     {
-        public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ExpandCollapseAutomationElement(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

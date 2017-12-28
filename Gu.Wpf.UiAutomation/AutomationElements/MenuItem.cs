@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System.Threading;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Represents a menuitem which can also contain sub-menuitems
@@ -10,14 +11,14 @@ namespace Gu.Wpf.UiAutomation
         private readonly InvokeAutomationElement invokeAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
 
-        public MenuItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public MenuItem(AutomationElement automationElement)
+            : base(automationElement)
         {
-            this.invokeAutomationElement = new InvokeAutomationElement(basicAutomationElement);
-            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            this.invokeAutomationElement = new InvokeAutomationElement(automationElement);
+            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
         }
 
-        public string Text => this.Properties.Name.Value;
+        public string Text => this.AutomationElement.Name();
 
         public MenuItems Items
         {
@@ -28,10 +29,9 @@ namespace Gu.Wpf.UiAutomation
                 {
                     // Click the item to load the child items
                     this.Click();
-
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
-                    var appWindow = this.BasicAutomationElement.Automation.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.Properties.ProcessId.Value)));
+                    var appWindow = this.AutomationElement.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
 
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(this.Text))).AsMenu();
@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 // Expand if needed, WinForms does not have the expand pattern but all children are already visible so it works as well
-                if (this.Patterns.ExpandCollapse.IsSupported)
+                if (this.AutomationElement.TryGetExpandCollapsePattern(out _))
                 {
                     ExpandCollapseState state;
                     do

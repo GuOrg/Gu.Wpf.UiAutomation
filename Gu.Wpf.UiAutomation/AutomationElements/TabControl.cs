@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
-    public class TabControl : AutomationElement
+    public class TabControl : UiElement
     {
-        public TabControl(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TabControl(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -33,7 +34,7 @@
         /// </summary>
         public IReadOnlyList<TabItem> Items => this.FindAllChildren(this.ConditionFactory.ByControlType(ControlType.TabItem), x => new TabItem(x));
 
-        public AutomationElement Content
+        public UiElement Content
         {
             get
             {

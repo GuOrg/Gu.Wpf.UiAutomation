@@ -2,13 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     public class TreeView : Control
     {
         private readonly ConditionBase treeViewItemCondition;
 
-        public TreeView(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TreeView(AutomationElement automationElement)
+            : base(automationElement)
         {
             this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
         }
@@ -21,7 +22,7 @@
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeView" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(
+        public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
             this.treeViewItemCondition,
             x => new TreeViewItem(x));

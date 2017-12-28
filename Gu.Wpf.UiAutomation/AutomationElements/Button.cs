@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class Button : InvokeAutomationElement
     {
-        public Button(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Button(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -22,6 +24,6 @@
             }
         }
 
-        public AutomationElement Content => this.FindFirstChild();
+        public UiElement Content => this.FindFirstChild();
     }
 }

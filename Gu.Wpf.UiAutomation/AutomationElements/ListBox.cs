@@ -3,11 +3,12 @@ namespace Gu.Wpf.UiAutomation
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     public class ListBox : Control
     {
-        public ListBox(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ListBox(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -28,14 +29,21 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public IReadOnlyList<ListBoxItem> SelectedItems => this.SelectionPattern.Selection.Value.Select(x => new ListBoxItem(x.BasicAutomationElement)).ToArray();
+        public IReadOnlyList<ListBoxItem> SelectedItems => this.SelectionPattern.Current.GetSelection().Select(x => new ListBoxItem(x)).ToArray();
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public ListBoxItem SelectedItem => this.SelectionPattern.Selection.Value.FirstOrDefault()?.AsListBoxItem();
+        public ListBoxItem SelectedItem
+        {
+            get
+            {
+                var element = this.SelectionPattern.Current.GetSelection().SingleOrDefault();
+                return element != null ? new ListBoxItem(element) : null;
+            }
+        }
 
-        protected ISelectionPattern SelectionPattern => this.Patterns.Selection.Pattern;
+        protected SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
 
         /// <summary>
         /// Select a row by index.

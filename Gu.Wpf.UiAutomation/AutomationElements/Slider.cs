@@ -2,47 +2,46 @@
 {
     using System;
     using System.Globalization;
+    using System.Windows.Automation;
 
     public class Slider : Control
     {
-        public Slider(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Slider(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
         public Thumb Thumb => this.FindFirstDescendant(ControlType.Thumb, x => new Thumb(x));
 
-        public bool IsOnlyValue => !this.IsPatternSupported(this.Automation.PatternLibrary.RangeValuePattern);
+        public bool IsOnlyValue => !this.AutomationElement.TryGetRangeValuePattern(out _);
 
-        public double Minimum => this.Patterns.RangeValue.Pattern.Minimum.Value;
+        public double Minimum => this.RangeValuePattern.Current.Minimum;
 
-        public double Maximum => this.Patterns.RangeValue.Pattern.Maximum.Value;
+        public double Maximum => this.RangeValuePattern.Current.Maximum;
 
-        public double SmallChange => this.Patterns.RangeValue.Pattern.SmallChange.Value;
+        public double SmallChange => this.RangeValuePattern.Current.SmallChange;
 
-        public double LargeChange => this.Patterns.RangeValue.Pattern.LargeChange.Value;
+        public double LargeChange => this.RangeValuePattern.Current.LargeChange;
 
         public double Value
         {
             get
             {
-                var rangeValuePattern = this.RangeValuePattern;
-                if (rangeValuePattern != null)
+                if (this.AutomationElement.TryGetRangeValuePattern(out var rangeValuePattern))
                 {
-                    return this.RangeValuePattern.Value.Value;
+                    return rangeValuePattern.Current.Value;
                 }
 
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(this.ValuePattern.Value.Value);
+                return Convert.ToDouble(this.ValuePattern.Current.Value);
             }
 
             set
             {
-                var rangeValuePattern = this.RangeValuePattern;
-                if (rangeValuePattern != null)
+                if (this.AutomationElement.TryGetRangeValuePattern(out var rangeValuePattern))
                 {
-                    this.RangeValuePattern.SetValue(value);
+                    rangeValuePattern.SetValue(value);
                 }
                 else
                 {
@@ -53,9 +52,9 @@
             }
         }
 
-        private IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.PatternOrDefault;
+        private RangeValuePattern RangeValuePattern => this.AutomationElement.RangeValuePattern();
 
-        private IValuePattern ValuePattern => this.Patterns.Value.PatternOrDefault;
+        private ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
 
         private Button LargeIncreaseButton => this.GetLargeIncreaseButton();
 
@@ -93,7 +92,7 @@
             var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Left > this.Thumb.Properties.BoundingRectangle.Value.Left)
+                if (button.Bounds.Left > this.Thumb.Bounds.Left)
                 {
                     return button.AsButton();
                 }
@@ -114,7 +113,7 @@
             var buttons = this.FindAllChildren(cf => cf.ByControlType(ControlType.Button));
             foreach (var button in buttons)
             {
-                if (button.Properties.BoundingRectangle.Value.Right < this.Thumb.Properties.BoundingRectangle.Value.Right)
+                if (button.Bounds.Right < this.Thumb.Bounds.Right)
                 {
                     return button.AsButton();
                 }

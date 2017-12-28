@@ -1,23 +1,23 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
     using Gu.Wpf.UiAutomation.UIA3.Converters;
-    using Interop.UIAutomationClient;
 
     public class PropertyCondition : ConditionBase
     {
-        public PropertyCondition(PropertyId property, object value)
+        public PropertyCondition(AutomationProperty property, object value)
             : this(property, value, PropertyConditionFlags.None)
         {
         }
 
-        public PropertyCondition(PropertyId property, object value, PropertyConditionFlags propertyConditionFlags)
+        public PropertyCondition(AutomationProperty property, object value, PropertyConditionFlags propertyConditionFlags)
         {
             this.Property = property;
             this.Value = value;
             this.PropertyConditionFlags = propertyConditionFlags;
         }
 
-        public PropertyId Property { get; }
+        public AutomationProperty Property { get; }
 
         public PropertyConditionFlags PropertyConditionFlags { get; }
 
@@ -26,12 +26,15 @@
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"{this.Property.Name}: {this.Value}";
+            return $"{this.Property.ProgrammaticName}: {this.Value}";
         }
 
-        public override IUIAutomationCondition ToNative(IUIAutomation automation)
+        public override Condition ToNative()
         {
-            return automation.CreatePropertyConditionEx(this.Property.Id, ValueConverter.ToNative(this.Value), (Interop.UIAutomationClient.PropertyConditionFlags)this.PropertyConditionFlags);
+            return new System.Windows.Automation.PropertyCondition(
+                this.Property,
+                ValueConverter.ToNative(this.Value),
+                this.PropertyConditionFlags);
         }
     }
 }

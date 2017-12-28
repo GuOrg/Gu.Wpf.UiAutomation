@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class RadioButton : Control
     {
-        public RadioButton(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public RadioButton(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

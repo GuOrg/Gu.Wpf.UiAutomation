@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class MessageBox : AutomationElement
+    using System.Windows.Automation;
+
+    public class MessageBox : UiElement
     {
-        public MessageBox(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public MessageBox(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

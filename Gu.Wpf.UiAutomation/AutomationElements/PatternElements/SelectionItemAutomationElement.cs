@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
     /// An UI-item which supports the <see cref="ISelectionItemPattern" />
     /// </summary>
     public class SelectionItemAutomationElement : Control
     {
-        public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public SelectionItemAutomationElement(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
+    using System.Windows.Automation;
 
     public class TreeViewItem : Control
     {
@@ -8,18 +9,18 @@
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
         private readonly ConditionBase treeViewItemCondition;
 
-        public TreeViewItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TreeViewItem(AutomationElement automationElement)
+            : base(automationElement)
         {
-            this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
-            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
+            this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
+            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
             this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
         }
 
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(
+        public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
             this.treeViewItemCondition,
             x => new TreeViewItem(x));

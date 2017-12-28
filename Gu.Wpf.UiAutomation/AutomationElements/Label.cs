@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class Label : Control
     {
-        public Label(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Label(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

@@ -3,14 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Element for grids and tables.
     /// </summary>
     public abstract class GridView : Control
     {
-        protected GridView(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        protected GridView(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -34,7 +35,7 @@
                 if (this.TryFindFirst(
                     TreeScope.Children,
                     this.CreateCondition(ControlType.Header),
-                    x => new AutomationElement(x),
+                    x => new UiElement(x),
                     Retry.Time,
                     out var header))
                 {
@@ -46,7 +47,7 @@
                 if (this.Patterns.Table.TryGetPattern(out var tablePattern) &&
                     tablePattern.ColumnHeaders.TryGetValue(out var headers))
                 {
-                    return headers.Select(x => new ColumnHeader(x.BasicAutomationElement)).ToArray();
+                    return headers.Select(x => new ColumnHeader(x.AutomationElement)).ToArray();
                 }
 
                 throw new InvalidOperationException("Could not find ColumnHeaders");
@@ -92,7 +93,7 @@
                 var gridPattern = this.Patterns.Grid.Pattern;
                 for (var i = 0; i < rowCount; i++)
                 {
-                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).Parent.BasicAutomationElement);
+                    rows[i] = new GridRow(gridPattern.GetItem(i, 0).Parent.AutomationElement);
                 }
 
                 return rows;
@@ -102,12 +103,12 @@
         /// <summary>
         /// Gets all selected items.
         /// </summary>
-        public IReadOnlyList<AutomationElement> SelectedItems => this.SelectionPattern.Selection.Value;
+        public IReadOnlyList<UiElement> SelectedItems => this.SelectionPattern.Selection.Value;
 
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public AutomationElement SelectedItem => this.SelectedItems?.FirstOrDefault();
+        public UiElement SelectedItem => this.SelectedItems?.FirstOrDefault();
 
         protected IGridPattern GridPattern => this.Patterns.Grid.Pattern;
 
@@ -135,7 +136,7 @@
             return gridRow;
         }
 
-        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.BasicAutomationElement);
+        public GridRow Row(int row) => new GridRow(this.GridPattern.GetItem(row, 0).Parent.AutomationElement);
 
         public RowHeader RowHeader(int row) => this.Row(row).Header;
 

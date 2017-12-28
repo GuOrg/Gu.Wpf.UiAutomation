@@ -4,14 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Element which can be used for combobox elements.
     /// </summary>
     public class ComboBox : Control
     {
-        public ComboBox(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ComboBox(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -58,7 +59,7 @@
                     return this.Items.Where(x => x.IsSelected).ToArray();
                 }
 
-                return this.SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.BasicAutomationElement)).ToArray();
+                return this.SelectionPattern.Selection.Value.Select(x => new ComboBoxItem(x.AutomationElement)).ToArray();
             }
         }
 
@@ -281,7 +282,7 @@
             return foundItem;
         }
 
-        private AutomationElement GetEditableElement()
+        private UiElement GetEditableElement()
         {
             return this.FindFirstChild(cf => cf.ByControlType(ControlType.Edit));
         }

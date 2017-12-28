@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
 

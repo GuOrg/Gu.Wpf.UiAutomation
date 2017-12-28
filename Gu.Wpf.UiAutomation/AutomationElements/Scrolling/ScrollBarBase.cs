@@ -1,23 +1,25 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public abstract class ScrollBarBase : AutomationElement
+    using System.Windows.Automation;
+
+    public abstract class ScrollBarBase : UiElement
     {
-        protected ScrollBarBase(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        protected ScrollBarBase(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public double Value => this.RangeValuePattern.Value.Value;
+        public double Value => this.RangeValuePattern.Current.Value;
 
-        public double MinimumValue => this.RangeValuePattern.Minimum.Value;
+        public double MinimumValue => this.RangeValuePattern.Current.Minimum;
 
-        public double MaximumValue => this.RangeValuePattern.Maximum.Value;
+        public double MaximumValue => this.RangeValuePattern.Current.Maximum;
 
-        public double SmallChange => this.RangeValuePattern.SmallChange.Value;
+        public double SmallChange => this.RangeValuePattern.Current.SmallChange;
 
-        public double LargeChange => this.RangeValuePattern.LargeChange.Value;
+        public double LargeChange => this.RangeValuePattern.Current.LargeChange;
 
-        public bool IsReadOnly => this.RangeValuePattern.IsReadOnly.Value;
+        public bool IsReadOnly => this.RangeValuePattern.Current.IsReadOnly;
 
         protected abstract string SmallDecrementText { get; }
 
@@ -27,7 +29,7 @@
 
         protected abstract string LargeIncrementText { get; }
 
-        protected IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.Pattern;
+        protected RangeValuePattern RangeValuePattern => this.AutomationElement.RangeValuePattern();
 
         protected Button SmallDecrementButton => this.FindButton(this.SmallDecrementText);
 

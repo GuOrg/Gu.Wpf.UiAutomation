@@ -4,6 +4,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Cell element for grids and tables.
@@ -12,8 +13,8 @@ namespace Gu.Wpf.UiAutomation
     {
         private static readonly Regex NewItemPlaceHolderRegex = new Regex("^[^:]+: {NewItemPlaceholder}, [^:]+: \\d+$", RegexOptions.Singleline | RegexOptions.Compiled);
 
-        public GridCell(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public GridCell(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

@@ -1,6 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using Interop.UIAutomationClient;
+    using System.Windows.Automation;
 
     public sealed class FalseCondition : BoolCondition
     {
@@ -11,6 +11,6 @@ namespace Gu.Wpf.UiAutomation
 
         public static FalseCondition Default { get; } = new FalseCondition();
 
-        public override IUIAutomationCondition ToNative(IUIAutomation automation) => automation.CreateTrueCondition();
+        public override Condition ToNative() => Condition.FalseCondition;
     }
 }

@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class Thumb : AutomationElement
+    using System.Windows.Automation;
+
+    public class Thumb : UiElement
     {
-        public Thumb(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Thumb(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

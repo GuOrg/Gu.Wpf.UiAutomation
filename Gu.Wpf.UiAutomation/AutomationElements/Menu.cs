@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
     public class Menu : Control
     {
-        public Menu(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Menu(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

@@ -5,12 +5,13 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Windows.Automation;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
-    public class Window : AutomationElement
+    public class Window : UiElement
     {
-        public Window(BasicAutomationElementBase basicAutomationElement, bool isMainWindow)
-            : base(basicAutomationElement)
+        public Window(AutomationElement automationElement, bool isMainWindow)
+            : base(automationElement)
         {
             this.IsMainWindow = isMainWindow;
         }
@@ -32,7 +33,7 @@
             get
             {
                 return this.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true)))
-                           .Select(e => new Window(e.BasicAutomationElement, isMainWindow: false))
+                           .Select(e => new Window(e.AutomationElement, isMainWindow: false))
                            .ToArray();
             }
         }
@@ -53,7 +54,7 @@
                     throw new InvalidOperationException("Did not find a popup");
                 }
 
-                return new Popup(popup.BasicAutomationElement);
+                return new Popup(popup.AutomationElement);
             }
         }
 
@@ -87,7 +88,7 @@
                 this.WaitUntilResponsive();
 
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                var desktop = this.BasicAutomationElement.Automation.GetDesktop();
+                var desktop = this.AutomationElement.GetDesktop();
                 var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu)
                                                              .And(this.ConditionFactory.ByName("Context").Or(this.ConditionFactory.ByName("System"))))
                                      .AsContextMenu();

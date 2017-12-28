@@ -1,9 +1,11 @@
 namespace Gu.Wpf.UiAutomation
 {
-    public class TextBlock : AutomationElement
+    using System.Windows.Automation;
+
+    public class TextBlock : UiElement
     {
-        public TextBlock(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TextBlock(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

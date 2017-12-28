@@ -1,11 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class ToggleButton : Control
     {
-        public ToggleButton(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ToggleButton(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

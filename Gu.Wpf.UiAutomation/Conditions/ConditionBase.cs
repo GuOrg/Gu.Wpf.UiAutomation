@@ -1,14 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
-    using Interop.UIAutomationClient;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Base class for the conditions
     /// </summary>
     public abstract class ConditionBase
     {
-        public abstract Interop.UIAutomationClient.IUIAutomationCondition ToNative(IUIAutomation automation);
+        public abstract Condition ToNative();
 
         /// <summary>
         /// Adds the given condition with an "and"

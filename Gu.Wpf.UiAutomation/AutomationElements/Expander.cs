@@ -1,11 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class Expander : HeaderedContentControl
     {
-        public Expander(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Expander(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
