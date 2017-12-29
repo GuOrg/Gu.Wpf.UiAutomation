@@ -3,10 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Automation;
 
     public partial class UiElement
     {
+        public static UiElement FromPoint(Point point)
+        {
+            return new UiElement(AutomationElement.FromPoint(point));
+        }
+
         /// <summary>
         /// Find the first <see cref="CheckBox"/> by x:Name, Content or AutomationID
         /// </summary>

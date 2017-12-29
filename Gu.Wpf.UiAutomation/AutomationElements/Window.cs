@@ -153,6 +153,11 @@
             }
         }
 
+        public UiElement FocusedElement()
+        {
+            return new UiElement(AutomationElement.FocusedElement);
+        }
+
         /// <summary>
         /// Gets the main window (first window on desktop with the same process as this window)
         /// </summary>
