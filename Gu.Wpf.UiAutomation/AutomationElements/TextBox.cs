@@ -18,7 +18,7 @@
             {
                 if (this.AutomationElement.IsPassword())
                 {
-                    throw new MethodNotSupportedException($"Text from element '{this}' cannot be retrieved because it is set as password.");
+                    throw new NotSupportedException($"Text from element '{this}' cannot be retrieved because it is set as password.");
                 }
 
                 if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
@@ -31,7 +31,7 @@
                     return textPattern.DocumentRange.GetText(int.MaxValue);
                 }
 
-                throw new MethodNotSupportedException($"AutomationElement '{this}' supports neither ValuePattern or TextPattern");
+                throw new NotSupportedException($"AutomationElement '{this}' supports neither ValuePattern or TextPattern");
             }
 
             set

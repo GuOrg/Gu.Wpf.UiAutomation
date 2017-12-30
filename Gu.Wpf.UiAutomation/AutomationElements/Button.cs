@@ -13,7 +13,7 @@
         {
             get
             {
-                var children = this.AutomationElement.FindAllChildren( System.Windows.Automation.Condition.TrueCondition);
+                var children = this.AutomationElement.FindAllChildren(System.Windows.Automation.Condition.TrueCondition);
                 if (children.Count == 1 &&
                     children[0].Current.ControlType.Id == ControlType.Text.Id)
                 {

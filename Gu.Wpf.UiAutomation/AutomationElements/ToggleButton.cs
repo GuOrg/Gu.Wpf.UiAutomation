@@ -63,7 +63,7 @@
                     return;
                 }
 
-                throw new UiAutomationException($"Setting {this} .IsChecked to {value?.ToString() ?? "null failed."}");
+                throw new UiAutomationException($"Setting {this}.IsChecked to {value?.ToString() ?? "null"} failed.");
             }
         }
 

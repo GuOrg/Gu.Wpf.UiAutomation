@@ -29,7 +29,7 @@
 
                 if (this.IsChecked != value)
                 {
-                    throw new UiAutomationException($"Setting {this} .IsChecked to {value}");
+                    throw new UiAutomationException($"Setting {this}.IsChecked to {value} failed.");
                 }
             }
         }
