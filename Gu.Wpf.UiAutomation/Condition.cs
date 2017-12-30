@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Linq;
     using System.Windows.Automation;
 
     public static class Condition
@@ -124,6 +125,36 @@
         public static PropertyCondition ByValue(string value)
         {
             return new PropertyCondition(ValuePatternIdentifiers.ValueProperty, value);
+        }
+
+        public static string Description(this System.Windows.Automation.Condition condition)
+        {
+            if (condition is PropertyCondition propertyCondition)
+            {
+                if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
+                {
+                    return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.Split('.')[1]}";
+                }
+
+                return $"{propertyCondition.Property.ProgrammaticName.Split('.')[1].Replace("Property", string.Empty)} == {propertyCondition.Value}";
+            }
+
+            if (condition is AndCondition andCondition)
+            {
+                return $"({string.Join(" && ", andCondition.GetConditions().Select(x => x.Description()))})";
+            }
+
+            if (condition is OrCondition orCondition)
+            {
+                return $"({string.Join(" || ", orCondition.GetConditions().Select(x => x.Description()))})";
+            }
+
+            if (condition is NotCondition notCondition)
+            {
+                return $"!{notCondition.Condition.Description()}";
+            }
+
+            return condition.ToString();
         }
     }
 }

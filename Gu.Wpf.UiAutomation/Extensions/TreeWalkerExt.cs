@@ -5,7 +5,17 @@
 
     public static class TreeWalkerExt
     {
-        public static IEnumerable<AutomationElement> GetChildren(this TreeWalker walker, AutomationElement element)
+        public static IEnumerable<AutomationElement> Ancestors(this TreeWalker walker, AutomationElement element)
+        {
+            var parent = walker.GetParent(element);
+            while (parent != null)
+            {
+                yield return parent;
+                parent = walker.GetParent(parent);
+            }
+        }
+
+        public static IEnumerable<AutomationElement> Children(this TreeWalker walker, AutomationElement element)
         {
             var child = walker.GetFirstChild(element);
             while (child != null)

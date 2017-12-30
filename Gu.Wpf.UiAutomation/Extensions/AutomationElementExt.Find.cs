@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Automation;
 
     public static partial class AutomationElementExt
@@ -13,7 +14,9 @@
 
         public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, out AutomationElement match)
         {
-            match = element.FindFirst(treeScope, condition);
+            match = treeScope == TreeScope.Ancestors
+                ? new TreeWalker(condition).Ancestors(element).FirstOrDefault()
+                : element.FindFirst(treeScope, condition);
             return match != null;
         }
 

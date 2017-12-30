@@ -36,8 +36,8 @@
             }
 
             //// [TestCase("CheckBoxXName")]
-            [TestCase("CheckBoxAutomationId")]
-            [TestCase("CheckBoxXNameAndAutomationId")]
+            [TestCase("CheckBox1AutomationId")]
+            [TestCase("CheckBox1Content")]
             public void FindCheckBoxWithXNameAndAutomationId(string key)
             {
                 using (var app = Application.AttachOrLaunch(ExeFileName, "FindWindow"))
@@ -60,8 +60,8 @@
                     var window = app.MainWindow;
                     var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
                     var expected = key == null
-                        ? $"Did not find a CheckBox matching ControlType: CheckBox."
-                        : $"Did not find a CheckBox matching (ControlType: CheckBox AND (Name: {key} OR AutomationId: {key})).";
+                        ? $"Did not find a CheckBox matching ControlType == CheckBox."
+                        : $"Did not find a CheckBox matching (ControlType == CheckBox && (Name == {key} || AutomationId == {key})).";
                     Assert.AreEqual(expected, exception.Message);
                 }
             }

@@ -100,7 +100,7 @@
                 return textBlock;
             }
 
-            foreach (var child in TreeWalker.RawViewWalker.GetChildren(this.AutomationElement))
+            foreach (var child in TreeWalker.RawViewWalker.Children(this.AutomationElement))
             {
                 if (child.Current.ControlType.Id == ControlType.Text.Id)
                 {
@@ -458,7 +458,7 @@
                 return result;
             }
 
-            throw new InvalidOperationException($"Did not find a {typeof(T).Name} matching {condition}.");
+            throw new InvalidOperationException($"Did not find a {typeof(T).Name} matching {condition.Description()}.");
         }
 
         /// <summary>
@@ -494,7 +494,7 @@
                 return result;
             }
 
-            throw new InvalidOperationException($"Did not find an element matching {condition} at index {index}.");
+            throw new InvalidOperationException($"Did not find an element matching {condition.Description()} at index {index}.");
         }
 
         /// <summary>
@@ -529,7 +529,7 @@
                 return result;
             }
 
-            throw new InvalidOperationException($"Did not find an element matching {condition} at index {index}.");
+            throw new InvalidOperationException($"Did not find an element matching {condition.Description()} at index {index}.");
         }
 
         /// <summary>
@@ -542,9 +542,9 @@
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                result = this.AutomationElement.FindIndexed(treeScope, condition, index, wrap);
-                if (result != null)
+                if (this.AutomationElement.TryFindIndexed(treeScope, condition, index, out var element))
                 {
+                    result = wrap(element);
                     return true;
                 }
 
@@ -556,18 +556,18 @@
 
         public UiElement FindFirstChild()
         {
-            return this.FindFirst(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, Retry.Time);
+            return this.FindFirst(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition, Retry.Time);
         }
 
         public T FindFirstChild<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, wrap, Retry.Time);
+            return this.FindFirst(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition, wrap, Retry.Time);
         }
 
         public UiElement FindChildAt(int index)
         {
-            return this.FindAt(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, index, Retry.Time);
+            return this.FindAt(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition, index, Retry.Time);
         }
 
         public UiElement FindFirstChild(string automationId)
@@ -582,13 +582,13 @@
 
         public IReadOnlyList<UiElement> FindAllChildren()
         {
-            return this.FindAll(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition);
+            return this.FindAll(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition);
         }
 
         public IReadOnlyList<T> FindAllChildren<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.AutomationElement.FindAll(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, wrap);
+            return this.AutomationElement.FindAll(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition, wrap);
         }
 
         public IReadOnlyList<T> FindAllChildren<T>(System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
@@ -604,13 +604,13 @@
 
         public UiElement FindFirstDescendant()
         {
-            return this.FindFirst(TreeScope.Descendants,  System.Windows.Automation.Condition.TrueCondition);
+            return this.FindFirst(TreeScope.Descendants, System.Windows.Automation.Condition.TrueCondition);
         }
 
         public T FindFirstDescendant<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants,  System.Windows.Automation.Condition.TrueCondition, wrap);
+            return this.FindFirst(TreeScope.Descendants, System.Windows.Automation.Condition.TrueCondition, wrap);
         }
 
         public UiElement FindFirstDescendant(string automationId)

@@ -138,16 +138,10 @@
                 return true;
             }
 
-            var parent = this.Parent;
-            while (parent != null)
+            if (this.AutomationElement.TryFindFirst(TreeScope.Ancestors, Condition.Window, out var element))
             {
-                if (parent.ControlType.Id == ControlType.Window.Id)
-                {
-                    window = parent.AsWindow(parent.Parent?.Name?.StartsWith("Desktop") == true);
-                    return true;
-                }
-
-                parent = parent.Parent;
+                window = new Window(element, isMainWindow: Equals(element.Parent(), Desktop.AutomationElement));
+                return true;
             }
 
             window = null;

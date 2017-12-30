@@ -39,8 +39,8 @@
                 var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
                 var expected = key == null
-                    ? $"Did not find a CheckBox matching ControlType: CheckBox."
-                    : $"Did not find a CheckBox matching (ControlType: CheckBox AND (Name: {key} OR AutomationId: {key})).";
+                    ? $"Did not find a CheckBox matching ControlType == CheckBox."
+                    : $"Did not find a CheckBox matching (ControlType == CheckBox && (Name == {key} || AutomationId == {key})).";
                 Assert.AreEqual(expected, exception.Message);
             }
         }
@@ -62,9 +62,7 @@
                 Assert.AreEqual(true, checkBox.IsChecked);
 
                 var exception = Assert.Throws<UiAutomationException>(() => checkBox.IsChecked = null);
-                Assert.AreEqual(
-                    $"Setting AutomationId:SimpleCheckBox, Name:Test Checkbox, ControlType:{checkBox.LocalizedControlType}, FrameworkId:WPF .IsChecked to null failed.",
-                    exception.Message);
+                Assert.AreEqual($"Setting ToggleButton Test Checkbox.IsChecked to null failed.", exception.Message);
             }
         }
 

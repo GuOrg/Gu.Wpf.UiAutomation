@@ -23,8 +23,20 @@
                 Assert.AreEqual("#32769", parent.ClassName());
                 Assert.AreEqual(Desktop.AutomationElement, parent);
 
-                var checkbox = window.AutomationElement.FindFirst(TreeScope.Descendants, Gu.Wpf.UiAutomation.Condition.CheckBox);
+                var checkbox = window.AutomationElement.FindFirst(TreeScope.Descendants, Condition.CheckBox);
                 Assert.AreEqual(window.AutomationElement, checkbox.Parent());
+            }
+        }
+
+        [Test]
+        public void TryFindFirstAncestorWindow()
+        {
+            using (var app = Application.AttachOrLaunch("WpfApplication.exe", "FindWindow"))
+            {
+                var window = app.MainWindow;
+                var checkBox = window.FindTextBlock("TextBlock1");
+                Assert.AreEqual(true, checkBox.AutomationElement.TryFindFirst(TreeScope.Ancestors, Condition.Window, out var element));
+                Assert.AreEqual(window.AutomationElement, element);
             }
         }
 
