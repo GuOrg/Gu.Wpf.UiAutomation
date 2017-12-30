@@ -29,7 +29,7 @@
 
         public static IDisposable SubscribeToPropertyChangedEvent(this AutomationElement element, TreeScope treeScope, AutomationProperty property, Action<UiElement, AutomationProperty, object> action)
         {
-            return Subscribe.ToPropertyChanged(element, treeScope, property, action);
+            return Subscribe.ToPropertyChangedEvent(element, treeScope, property, action);
         }
     }
 }
