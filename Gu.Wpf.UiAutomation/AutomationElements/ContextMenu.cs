@@ -4,8 +4,8 @@
 
     public class ContextMenu : Menu
     {
-        public ContextMenu(AutomationElement automationElement)
-            : base(automationElement)
+        public ContextMenu(AutomationElement automationElement, bool isWin32Menu = false)
+            : base(automationElement, isWin32Menu)
         {
         }
     }

@@ -1,6 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Extensions
 {
-    using System;
     using System.Linq;
     using System.Windows.Automation;
     using NUnit.Framework;

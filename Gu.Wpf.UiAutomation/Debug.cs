@@ -21,6 +21,7 @@
             {
                 var stringBuilder = new StringBuilder();
                 var cr = new CacheRequest { AutomationElementMode = AutomationElementMode.None };
+
                 // Add the element properties
                 cr.Add(AutomationElementIdentifiers.AutomationIdProperty);
                 cr.Add(AutomationElementIdentifiers.ControlTypeProperty);

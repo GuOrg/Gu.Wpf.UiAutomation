@@ -84,18 +84,16 @@
                 this.WaitUntilResponsive();
 
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                var desktop = this.AutomationElement.GetDesktop();
-                var ctxMenu = desktop.FindFirstChild(
-                                         new AndCondition(
-                                             Condition.Menu,
-                                             new OrCondition(
-                                                 Condition.ByName("Context"),
-                                                 Condition.ByName("System"))))
-                                     .AsContextMenu();
-                if (ctxMenu != null)
+                if (Desktop.AutomationElement.TryFindFirst(
+                    TreeScope.Children,
+                    new AndCondition(
+                        Condition.Menu,
+                        new OrCondition(
+                            Condition.ByName("Context"),
+                            Condition.ByName("System"))),
+                    out var element))
                 {
-                    ctxMenu.IsWin32Menu = true;
-                    return ctxMenu;
+                    return new ContextMenu(element, isWin32Menu: true);
                 }
             }
 

@@ -39,7 +39,7 @@
         public override string Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
 
         /// <inheritdoc/>
-        public override object UnderlyingObject => this.currentElement;
+        public override object UnderlyingObject => new UiElement(this.currentElement);
 
         /// <inheritdoc/>
         public override XPathNodeType NodeType
@@ -51,7 +51,7 @@
                     return XPathNodeType.Attribute;
                 }
 
-                if (this.currentElement.Equals(this.rootElement.AutomationElement))
+                if (Equals(this.currentElement, this.rootElement.AutomationElement))
                 {
                     return XPathNodeType.Root;
                 }
@@ -63,13 +63,13 @@
         /// <inheritdoc/>
         public override string LocalName => this.IsInAttribute
             ? this.GetAttributeName(this.attributeIndex)
-            : this.currentElement.ControlType().ToString();
+            : this.currentElement.ControlType().ProgrammaticName.Split('.')[1];
 
         /// <inheritdoc/>
         public override string Name => this.LocalName;
 
         /// <inheritdoc/>
-        public override XmlNameTable NameTable => throw new NotImplementedException();
+        public override XmlNameTable NameTable => throw new NotSupportedException();
 
         /// <inheritdoc/>
         public override string NamespaceURI => string.Empty;
@@ -134,10 +134,10 @@
                 return string.Empty;
             }
 
-            var attributeIndex = this.GetAttributeIndexFromName(localName);
-            if (attributeIndex != NoAttributeValue)
+            var index = this.GetAttributeIndexFromName(localName);
+            if (index != NoAttributeValue)
             {
-                return this.GetAttributeValue(attributeIndex);
+                return this.GetAttributeValue(index);
             }
 
             return string.Empty;
@@ -151,10 +151,10 @@
                 return false;
             }
 
-            var attributeIndex = this.GetAttributeIndexFromName(localName);
-            if (attributeIndex != NoAttributeValue)
+            var index = this.GetAttributeIndexFromName(localName);
+            if (index != NoAttributeValue)
             {
-                this.attributeIndex = attributeIndex;
+                this.attributeIndex = index;
                 return true;
             }
 
@@ -164,13 +164,13 @@
         /// <inheritdoc/>
         public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <inheritdoc/>
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <inheritdoc/>
@@ -243,7 +243,7 @@
                 return true;
             }
 
-            if (this.currentElement.Equals(this.rootElement))
+            if (Equals(this.currentElement, this.rootElement.AutomationElement))
             {
                 return false;
             }
@@ -261,7 +261,7 @@
                 return false;
             }
 
-            if (!this.rootElement.Equals(specificNavigator.rootElement))
+            if (!Equals(this.rootElement.AutomationElement, specificNavigator.rootElement.AutomationElement))
             {
                 return false;
             }
@@ -295,9 +295,9 @@
                 && this.attributeIndex == specificNavigator.attributeIndex;
         }
 
-        private string GetAttributeValue(int attributeIndex)
+        private string GetAttributeValue(int index)
         {
-            switch ((ElementAttributes)attributeIndex)
+            switch ((ElementAttributes)index)
             {
                 case ElementAttributes.AutomationId:
                     return this.currentElement.AutomationId();
@@ -308,16 +308,16 @@
                 case ElementAttributes.HelpText:
                     return this.currentElement.HelpText();
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+                    throw new ArgumentOutOfRangeException(nameof(index));
             }
         }
 
-        private string GetAttributeName(int attributeIndex)
+        private string GetAttributeName(int index)
         {
-            var name = Enum.GetName(typeof(ElementAttributes), attributeIndex);
+            var name = Enum.GetName(typeof(ElementAttributes), index);
             if (name == null)
             {
-                throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             return name;

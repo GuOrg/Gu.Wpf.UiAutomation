@@ -12,9 +12,8 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window.Title, Is.Not.Null);
-                var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
-                Assert.NotNull(file);
+                var item = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
+                Assert.NotNull(item);
             }
         }
 
@@ -24,8 +23,6 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.NotNull(window);
-                Assert.NotNull(window.Title);
                 var items = window.FindAllByXPath("//MenuItem");
                 Assert.AreEqual(6, items.Count);
             }
@@ -37,8 +34,6 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.NotNull(window);
-                Assert.NotNull(window.Title);
                 var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
                 Assert.AreEqual(1, items.Count);
                 items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");

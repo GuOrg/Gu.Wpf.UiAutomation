@@ -7,9 +7,10 @@
     /// </summary>
     public class Menu : Control
     {
-        public Menu(AutomationElement automationElement)
+        public Menu(AutomationElement automationElement, bool isWin32Menu = false)
             : base(automationElement)
         {
+            this.IsWin32Menu = isWin32Menu;
         }
 
         public MenuItems Items

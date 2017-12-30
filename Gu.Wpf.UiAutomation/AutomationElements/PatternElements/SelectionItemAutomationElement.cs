@@ -3,7 +3,7 @@
     using System.Windows.Automation;
 
     /// <summary>
-    /// An UI-item which supports the <see cref="ISelectionItemPattern" />
+    /// An UI-item which supports the <see cref="SelectionItemPattern" />
     /// </summary>
     public class SelectionItemAutomationElement : Control
     {
