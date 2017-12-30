@@ -102,7 +102,7 @@ namespace Gu.Wpf.UiAutomation
                 {
                     if (this.TryFindFirst(
                         TreeScope.Children,
-                        Condition.ByControlType(ControlType.Text),
+                        Condition.ControlTypeText,
                         x => new TextBlock(x),
                         TimeSpan.Zero,
                         out var textBlock))
@@ -112,7 +112,7 @@ namespace Gu.Wpf.UiAutomation
 
                     if (this.TryFindFirst(
                         TreeScope.Children,
-                        Condition.ByControlType(ControlType.Edit),
+                        Condition.ControlTypeEdit,
                         x => new TextBox(x),
                         TimeSpan.Zero,
                         out var textBox))
@@ -145,7 +145,7 @@ namespace Gu.Wpf.UiAutomation
                     Wait.UntilResponsive(this);
                     if (this.AutomationElement.TryFindFirst(
                         TreeScope.Children,
-                        Condition.ByControlType(ControlType.Edit),
+                        Condition.ControlTypeEdit,
                         out var textBox))
                     {
                         if (textBox.TryGetValuePattern(out valuePattern) &&

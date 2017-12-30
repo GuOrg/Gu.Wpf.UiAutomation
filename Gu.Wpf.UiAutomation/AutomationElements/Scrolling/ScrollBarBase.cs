@@ -43,7 +43,7 @@
 
         private Thumb FindThumb()
         {
-            var thumb = this.FindFirstChild(Condition.ByControlType(ControlType.Thumb));
+            var thumb = this.FindFirstChild(Condition.Thumb);
             return thumb?.AsThumb();
         }
     }

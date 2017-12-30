@@ -21,7 +21,7 @@
                 Assert.AreEqual("#32769", parent.ClassName());
                 Assert.AreEqual(AutomationElement.RootElement, parent);
 
-                var checkbox = window.AutomationElement.FindFirst(TreeScope.Descendants, Gu.Wpf.UiAutomation.Condition.ByControlType(ControlType.CheckBox));
+                var checkbox = window.AutomationElement.FindFirst(TreeScope.Descendants, Gu.Wpf.UiAutomation.Condition.CheckBox);
                 Assert.AreEqual(window.AutomationElement, checkbox.Parent());
             }
         }

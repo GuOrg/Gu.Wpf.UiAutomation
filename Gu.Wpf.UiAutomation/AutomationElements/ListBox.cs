@@ -21,7 +21,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 return this.FindAll(
                     TreeScope.Children,
-                    Condition.ByControlType(ControlType.ListItem),
+                    Condition.ListItem,
                     x => new ListBoxItem(x));
             }
         }
@@ -52,7 +52,7 @@ namespace Gu.Wpf.UiAutomation
         {
             var item = this.FindAt(
                 TreeScope.Children,
-                Condition.ByControlType(ControlType.ListItem),
+                Condition.ListItem,
                 rowIndex,
                 x => new ListBoxItem(x),
                 Retry.Time);

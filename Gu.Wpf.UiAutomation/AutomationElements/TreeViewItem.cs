@@ -14,7 +14,7 @@
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
-            this.treeViewItemCondition = Condition.ByControlType(ControlType.TreeItem);
+            this.treeViewItemCondition = Condition.TreeItem;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@
                 var value = this.Name;
                 if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.FindFirstChild(Condition.ByControlType(ControlType.Text));
+                    var textElement = this.FindFirstChild(Condition.ControlTypeText);
                     return textElement == null ? string.Empty : textElement.Name;
                 }
 

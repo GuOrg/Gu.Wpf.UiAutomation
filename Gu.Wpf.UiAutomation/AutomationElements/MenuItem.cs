@@ -35,13 +35,13 @@ namespace Gu.Wpf.UiAutomation
                     var appWindow = this.AutomationElement.GetDesktop()
                                         .FindFirstChild(
                                             new AndCondition(
-                                                Condition.ByControlType(ControlType.Window),
+                                                Condition.Window,
                                                 Condition.ByProcessId(this.ProcessId)));
 
                     // Then search the menu below the window
                     var menu = appWindow.FindFirstChild(
                                             new AndCondition(
-                                                Condition.ByControlType(ControlType.Menu),
+                                                Condition.Menu,
                                                 Condition.ByName(this.Text)))
                                         .AsMenu();
                     menu.IsWin32Menu = true;
@@ -68,7 +68,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 var childItems = this.FindAllChildren(
-                    Condition.ByControlType(ControlType.MenuItem),
+                    Condition.MenuItem,
                     x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }

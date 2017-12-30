@@ -17,7 +17,7 @@
             get
             {
                 var childItems = this.FindAllChildren(
-                    Condition.ByControlType(ControlType.MenuItem),
+                    Condition.MenuItem,
                     x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }

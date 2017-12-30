@@ -21,7 +21,7 @@
         /// </summary>
         public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
-            Condition.ByControlType(ControlType.TreeItem),
+            Condition.TreeItem,
             x => new TreeViewItem(x));
 
         private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)

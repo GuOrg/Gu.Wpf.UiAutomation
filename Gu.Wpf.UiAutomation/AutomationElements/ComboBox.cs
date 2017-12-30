@@ -19,7 +19,7 @@
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.FindAllChildren(Condition.ByControlType(ControlType.Edit))
+        public virtual bool IsEditable => this.FindAllChildren(Condition.ControlTypeEdit)
                                               .Any(c => c.AutomationElement.TryGetValuePattern(out var pattern) &&
                                                         !pattern.Current.IsReadOnly);
 
@@ -79,13 +79,13 @@
                     this.FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32
-                    var listElement = this.FindFirstChild(Condition.ByControlType(ControlType.List));
+                    var listElement = this.FindFirstChild(Condition.List);
                     return listElement.FindAllChildren(x => new ComboBoxItem(x));
                 }
 
                 // WPF
                 return this.FindAllChildren(
-                    Condition.ByControlType(ControlType.ListItem),
+                    Condition.ListItem,
                     x => new ComboBoxItem(x));
             }
         }
@@ -97,7 +97,7 @@
                 if (this.FrameworkType == FrameworkType.WinForms)
                 {
                     // WinForms
-                    var itemsList = this.FindFirstChild(Condition.ByControlType(ControlType.List));
+                    var itemsList = this.FindFirstChild(Condition.List);
 
                     // UIA3 does not see the list if it is collapsed
                     return itemsList != null && !itemsList.IsOffscreen;
@@ -290,7 +290,7 @@
 
         private UiElement GetEditableElement()
         {
-            return this.FindFirstChild(Condition.ByControlType(ControlType.Edit));
+            return this.FindFirstChild(Condition.ControlTypeEdit);
         }
     }
 }

@@ -107,7 +107,7 @@
                     var window = app.MainWindow;
                     var child = window.FindAt(
                         TreeScope.Descendants,
-                        Condition.ByControlType(ControlType.CheckBox),
+                        Condition.CheckBox,
                         1,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100));
@@ -124,7 +124,7 @@
                     var window = app.MainWindow;
                     Assert.AreEqual(true, window.TryFindAt(
                         TreeScope.Descendants,
-                        Condition.ByControlType(ControlType.CheckBox),
+                        Condition.CheckBox,
                         1,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100),
@@ -134,7 +134,7 @@
 
                     Assert.AreEqual(false, window.TryFindAt(
                         TreeScope.Descendants,
-                        Condition.ByControlType(ControlType.CheckBox),
+                        Condition.CheckBox,
                         100,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100),
