@@ -73,6 +73,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HiglightedButton {
+            get {
+                object obj = ResourceManager.GetObject("HiglightedButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SquareBmp {
             get {
                 object obj = ResourceManager.GetObject("SquareBmp", resourceCulture);

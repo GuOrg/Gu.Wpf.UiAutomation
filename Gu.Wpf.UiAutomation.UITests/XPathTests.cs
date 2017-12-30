@@ -6,10 +6,16 @@
     [TestFixture]
     public class XPathTests
     {
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched("notepad.exe");
+        }
+
         [Test]
         public void NotepadFindFirst()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
                 var item = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
@@ -20,7 +26,7 @@
         [Test]
         public void NotePadFindAll()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
                 var items = window.FindAllByXPath("//MenuItem");
@@ -31,7 +37,7 @@
         [Test]
         public void NotePadFindAllIndexed()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
                 var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");

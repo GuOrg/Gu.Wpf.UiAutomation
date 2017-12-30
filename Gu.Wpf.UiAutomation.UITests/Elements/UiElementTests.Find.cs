@@ -6,7 +6,7 @@
     using NUnit.Framework;
     using Condition = Gu.Wpf.UiAutomation.Condition;
 
-    public partial class AutomationElementTests
+    public partial class UiElementTests
     {
         public class Find
         {
@@ -22,6 +22,32 @@
             {
                 Application.KillLaunched(ExeFileName);
                 Retry.ResetTime();
+            }
+
+            [Test]
+            public void FromPoint()
+            {
+                using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
+                {
+                    var window = app.MainWindow;
+                    var button = window.FindButton();
+                    var fromPoint = UiElement.FromPoint(button.GetClickablePoint()).AsButton();
+                    Assert.AreEqual(button.Text, fromPoint.Text);
+                }
+            }
+
+            [Test]
+            public void FocusedElement()
+            {
+                using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
+                {
+                    var window = app.MainWindow;
+                    var textBox = window.FindTextBox();
+                    textBox.Text = "focused";
+                    textBox.Focus();
+                    var fromPoint = window.FocusedElement().AsTextBox();
+                    Assert.AreEqual("focused", fromPoint.Text);
+                }
             }
 
             [Test]
@@ -73,7 +99,7 @@
                 {
                     var window = app.MainWindow;
                     var child = window.FindFirstChild();
-                    Assert.AreEqual(ControlType.TitleBar, child.ControlType);
+                    Assert.AreEqual("title bar", child.LocalizedControlType);
                 }
             }
 

@@ -8,7 +8,7 @@
     public class AutomationElementExtTests
     {
         [OneTimeTearDown]
-        public void OneTimeSetUp()
+        public void OneTimeTearDown()
         {
             Application.KillLaunched("WpfApplication.exe");
         }

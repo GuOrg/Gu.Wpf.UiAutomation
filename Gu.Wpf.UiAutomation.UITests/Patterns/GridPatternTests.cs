@@ -7,18 +7,18 @@
         private const string ExeFileName = "WpfApplication.exe";
 
         [Test]
-        public void GridTest()
+        public void DataGrid()
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid();
                 Assert.NotNull(dataGrid);
-                var gridPattern = dataGrid.AutomationElement.GridPattern();
-                Assert.AreEqual(2, gridPattern.Current.ColumnCount);
-                Assert.AreEqual(4, gridPattern.Current.RowCount);
+                var pattern = dataGrid.AutomationElement.GridPattern();
+                Assert.AreEqual(2, pattern.Current.ColumnCount);
+                Assert.AreEqual(4, pattern.Current.RowCount);
 
-                var item = gridPattern.GetItem(1, 1);
+                var item = pattern.GetItem(1, 1);
                 Assert.AreEqual("Item 2", item.Name());
             }
         }
