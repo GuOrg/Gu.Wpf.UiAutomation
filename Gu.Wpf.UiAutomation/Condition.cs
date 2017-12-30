@@ -22,7 +22,7 @@
 
         public static PropertyCondition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
-        public static PropertyCondition ControlTypeEdit { get; } = ByControlType(ControlType.Edit);
+        public static PropertyCondition TextBox { get; } = ByControlType(ControlType.Edit);
 
         public static PropertyCondition ControlTypeGroup { get; } = ByControlType(ControlType.Group);
 
@@ -30,9 +30,11 @@
 
         public static PropertyCondition HeaderItem { get; } = ByControlType(ControlType.HeaderItem);
 
-        public static PropertyCondition ControlTypeHyperlink { get; } = ByControlType(ControlType.Hyperlink);
+        public static PropertyCondition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
 
-        public static PropertyCondition ControlTypeImage { get; } = ByControlType(ControlType.Image);
+        public static PropertyCondition Image { get; } = ByControlType(ControlType.Image);
+
+        public static System.Windows.Automation.Condition Label { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("Text"));
 
         public static PropertyCondition List { get; } = ByControlType(ControlType.List);
 
@@ -68,7 +70,7 @@
 
         public static PropertyCondition ControlTypeTable { get; } = ByControlType(ControlType.Table);
 
-        public static PropertyCondition ControlTypeText { get; } = ByControlType(ControlType.Text);
+        public static System.Windows.Automation.Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("TextBlock"));
 
         public static PropertyCondition Thumb { get; } = ByControlType(ControlType.Thumb);
 

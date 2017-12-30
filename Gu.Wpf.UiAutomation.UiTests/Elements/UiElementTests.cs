@@ -2,7 +2,7 @@
 {
     using NUnit.Framework;
 
-    public class AutomationBaseTests
+    public class UiElementTests
     {
         private const string ExeFileName = "WpfApplication.exe";
 

@@ -12,10 +12,9 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
                 Assert.That(window.Title, Is.Not.Null);
                 var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
-                Assert.That(file, Is.Not.Null);
+                Assert.NotNull(file);
             }
         }
 
@@ -25,11 +24,10 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                Assert.NotNull(window);
+                Assert.NotNull(window.Title);
                 var items = window.FindAllByXPath("//MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(6));
+                Assert.AreEqual(6, items.Count);
             }
         }
 
@@ -39,14 +37,12 @@
             using (var app = Application.Launch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
+                Assert.NotNull(window);
+                Assert.NotNull(window.Title);
                 var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(1));
+                Assert.AreEqual(1, items.Count);
                 items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(5));
+                Assert.AreEqual(5, items.Count);
             }
         }
 

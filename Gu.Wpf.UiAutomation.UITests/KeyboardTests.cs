@@ -15,10 +15,11 @@
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
-                var mainWindow = app.MainWindow;
+                var window = app.MainWindow;
                 Keyboard.Type("abc");
                 Keyboard.Type(Key.BACK);
-                var textBox = mainWindow.FindTextBox();
+                var textBox = window.FindTextBox();
+                window.WaitUntilResponsive();
                 Assert.AreEqual("ab", textBox.Text);
             }
         }

@@ -19,7 +19,7 @@
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.FindAllChildren(Condition.ControlTypeEdit)
+        public virtual bool IsEditable => this.FindAllChildren(Condition.TextBox)
                                               .Any(c => c.AutomationElement.TryGetValuePattern(out var pattern) &&
                                                         !pattern.Current.IsReadOnly);
 
@@ -290,7 +290,7 @@
 
         private UiElement GetEditableElement()
         {
-            return this.FindFirstChild(Condition.ControlTypeEdit);
+            return this.FindFirstChild(Condition.TextBox);
         }
     }
 }
