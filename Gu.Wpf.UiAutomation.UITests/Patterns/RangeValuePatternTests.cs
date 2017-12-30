@@ -7,7 +7,7 @@
         private const string ExeFileName = "WpfApplication.exe";
 
         [Test]
-        public void RangeValuePatternTest()
+        public void Slider()
         {
             using (var app = Application.Launch(ExeFileName, "SliderWindow"))
             {

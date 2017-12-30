@@ -1,7 +1,5 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Patterns
 {
-    using System;
-    using System.Threading;
     using System.Windows.Automation;
     using NUnit.Framework;
 
@@ -22,23 +20,15 @@
                 var invokePattern = button.AutomationElement.InvokePattern();
                 Assert.NotNull(invokePattern);
                 var invokeFired = false;
-                using (var waitHandle = new ManualResetEventSlim(initialState: false))
+
+                using (button.SubscribeToEvent(
+                    InvokePatternIdentifiers.InvokedEvent,
+                    TreeScope.Element,
+                    (element, id) => invokeFired = true))
                 {
-                    using (button.SubscribeToEvent(
-                        InvokePatternIdentifiers.InvokedEvent,
-                        TreeScope.Element,
-                        (element, id) =>
-                        {
-                            invokeFired = true;
-                            waitHandle.Set();
-                        }))
-                    {
-                        invokePattern.Invoke();
-                        var waitResult = waitHandle.Wait(TimeSpan.FromSeconds(1));
-                        Assert.AreEqual(true, waitResult);
-                        Assert.AreEqual("Invoked!", button.Text);
-                        Assert.AreEqual(true, invokeFired);
-                    }
+                    invokePattern.Invoke();
+                    Assert.AreEqual("Invoked!", button.Text);
+                    Assert.AreEqual(true, invokeFired);
                 }
             }
         }

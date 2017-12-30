@@ -6,10 +6,16 @@
     {
         private const string ExeFileName = "WpfApplication.exe";
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void TestMenuWithSubMenus()
         {
-            using (var app = Application.Launch(ExeFileName, "MenuWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
             {
                 var window = app.MainWindow;
                 var menu = window.FindMenu();
@@ -38,7 +44,7 @@
         [Test]
         public void TestMenuWithSubMenusByName()
         {
-            using (var app = Application.Launch(ExeFileName, "MenuWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
             {
                 var window = app.MainWindow;
                 var menu = window.FindMenu();

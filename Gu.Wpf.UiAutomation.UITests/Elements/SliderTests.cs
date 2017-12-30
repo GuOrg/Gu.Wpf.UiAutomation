@@ -24,6 +24,7 @@
                 Assert.AreEqual(0, slider.Minimum);
                 Assert.AreEqual(10, slider.Maximum);
                 Assert.AreEqual(5, slider.Value);
+                Assert.AreEqual(1, slider.SmallChange);
                 Assert.AreEqual(4, slider.LargeChange);
             }
         }

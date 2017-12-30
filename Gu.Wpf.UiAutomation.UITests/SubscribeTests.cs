@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class FocusChangedTests
+    public class SubscribeTests
     {
         [Test]
         public void FocusChangedWithPaintTest()
