@@ -55,13 +55,13 @@
                 cr.Add(AutomationElementIdentifiers.IsWindowPatternAvailableProperty);
 
                 cr.TreeScope = TreeScope.Subtree;
-                cr.TreeFilter = Condition.TrueCondition;
+                cr.TreeFilter = System.Windows.Automation.Condition.TrueCondition;
 
                 // Activate the cache request
                 using (cr.Activate())
                 {
                     // Re-find the root element with caching activated
-                    uiElement = uiElement.FindFirst(TreeScope.Element, TrueCondition.Default);
+                    uiElement = uiElement.FindFirst(TreeScope.Element, System.Windows.Automation.Condition.TrueCondition);
                     Details(stringBuilder, uiElement, string.Empty);
                 }
 
@@ -83,7 +83,7 @@
             }
 
             // Get the index
-            var allChildren = parent.FindAllChildren(ConditionFactory.Instance.ByControlType(element.Current.ControlType));
+            var allChildren = parent.FindAllChildren(Condition.ByControlType(element.Current.ControlType));
             var currentItemText = $"{element.Current.ControlType}";
             if (allChildren.Count > 1)
             {

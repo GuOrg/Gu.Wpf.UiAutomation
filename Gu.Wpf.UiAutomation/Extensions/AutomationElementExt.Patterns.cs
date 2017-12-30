@@ -5,7 +5,7 @@
 
     public static partial class AutomationElementExt
     {
-        public static IReadOnlyList<AutomationPattern> Patterns = new[]
+        public static IReadOnlyList<AutomationPattern> Patterns { get; } = new[]
                 {
                     System.Windows.Automation.DockPattern.Pattern,
                     System.Windows.Automation.ExpandCollapsePattern.Pattern,

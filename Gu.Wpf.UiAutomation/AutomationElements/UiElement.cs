@@ -77,11 +77,6 @@
             }
         }
 
-        /// <summary>
-        /// Shortcut to the condition factory for the current automation.
-        /// </summary>
-        public ConditionFactory ConditionFactory => ConditionFactory.Instance;
-
         public string ItemStatus => this.AutomationElement.ItemStatus();
 
         public string HelpText => this.AutomationElement.HelpText();

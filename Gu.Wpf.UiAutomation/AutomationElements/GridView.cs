@@ -34,13 +34,13 @@
             {
                 if (this.TryFindFirst(
                     TreeScope.Children,
-                    this.CreateCondition(ControlType.Header),
+                    Condition.ByControlType(ControlType.Header),
                     x => new UiElement(x),
                     Retry.Time,
                     out var header))
                 {
                     return header.FindAllChildren(
-                        this.CreateCondition(ControlType.HeaderItem),
+                        Condition.ByControlType(ControlType.HeaderItem),
                         x => new ColumnHeader(x));
                 }
 

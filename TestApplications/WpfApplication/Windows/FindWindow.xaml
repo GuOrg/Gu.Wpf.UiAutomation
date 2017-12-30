@@ -10,5 +10,7 @@
         <CheckBox x:Name="CheckBoxXName"
                   AutomationProperties.AutomationId="CheckBoxAutomationId"
                   Content="CheckBoxXNameAndAutomationId" />
+        <TextBlock Text="1" />
+        <TextBlock Text="2" />
     </StackPanel>
 </Window>

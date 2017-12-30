@@ -29,12 +29,21 @@ namespace Gu.Wpf.UiAutomation
                 {
                     // Click the item to load the child items
                     this.Click();
+
                     // In Win32, the nested menu items are below a menu control which is below the application window
                     // So search the app window first
-                    var appWindow = this.AutomationElement.GetDesktop().FindFirstChild(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
+                    var appWindow = this.AutomationElement.GetDesktop()
+                                        .FindFirstChild(
+                                            new AndCondition(
+                                                Condition.ByControlType(ControlType.Window),
+                                                Condition.ByProcessId(this.ProcessId)));
 
                     // Then search the menu below the window
-                    var menu = appWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName(this.Text))).AsMenu();
+                    var menu = appWindow.FindFirstChild(
+                                            new AndCondition(
+                                                Condition.ByControlType(ControlType.Menu),
+                                                Condition.ByName(this.Text)))
+                                        .AsMenu();
                     menu.IsWin32Menu = true;
 
                     // Now return the menu items
@@ -59,7 +68,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 var childItems = this.FindAllChildren(
-                    cf => cf.ByControlType(ControlType.MenuItem),
+                    Condition.ByControlType(ControlType.MenuItem),
                     x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }

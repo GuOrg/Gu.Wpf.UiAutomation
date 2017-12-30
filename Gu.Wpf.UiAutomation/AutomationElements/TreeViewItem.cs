@@ -7,14 +7,14 @@
     {
         private readonly SelectionItemAutomationElement selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
-        private readonly ConditionBase treeViewItemCondition;
+        private readonly System.Windows.Automation.Condition treeViewItemCondition;
 
         public TreeViewItem(AutomationElement automationElement)
             : base(automationElement)
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
-            this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
+            this.treeViewItemCondition = Condition.ByControlType(ControlType.TreeItem);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@
                 var value = this.Name;
                 if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
+                    var textElement = this.FindFirstChild(Condition.ByControlType(ControlType.Text));
                     return textElement == null ? string.Empty : textElement.Name;
                 }
 

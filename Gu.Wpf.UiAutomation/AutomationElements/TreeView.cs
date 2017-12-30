@@ -6,12 +6,9 @@
 
     public class TreeView : Control
     {
-        private readonly ConditionBase treeViewItemCondition;
-
         public TreeView(AutomationElement automationElement)
             : base(automationElement)
         {
-            this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
         }
 
         /// <summary>
@@ -24,7 +21,7 @@
         /// </summary>
         public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
-            this.treeViewItemCondition,
+            Condition.ByControlType(ControlType.TreeItem),
             x => new TreeViewItem(x));
 
         private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)

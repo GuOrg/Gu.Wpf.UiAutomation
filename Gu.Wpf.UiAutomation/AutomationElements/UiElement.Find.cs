@@ -294,26 +294,26 @@
 
         public UiElement FindDescendant(ControlType controlType) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType),
+            Condition.ByControlType(controlType),
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType),
+            Condition.ByControlType(controlType),
             wrap,
             Retry.Time);
 
         public UiElement FindDescendant(ControlType controlType, int index) => this.FindAt(
             TreeScope.Descendants,
-            this.CreateCondition(controlType),
+            Condition.ByControlType(controlType),
             index,
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, int index, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindAt(
             TreeScope.Descendants,
-            this.CreateCondition(controlType),
+            Condition.ByControlType(controlType),
             index,
             wrap,
             Retry.Time);
@@ -326,7 +326,7 @@
         public T FindDescendant<T>(ControlType controlType, string name, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType),
+            Condition.ByControlType(controlType),
             wrap,
             Retry.Time);
 
@@ -338,7 +338,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
-        public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, ConditionBase condition)
+        public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
             return this.AutomationElement.FindAll(treeScope, condition, x => new UiElement(x));
         }
@@ -346,7 +346,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition.
         /// </summary>
-        public IReadOnlyList<T> FindAll<T>(TreeScope treeScope, ConditionBase condition, Func<AutomationElement, T> wrap)
+        public IReadOnlyList<T> FindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
             return this.AutomationElement.FindAll(treeScope, condition, wrap);
@@ -355,7 +355,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
-        public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut)
         {
             if (this.TryFindAll(treeScope, condition, timeOut, out var result))
             {
@@ -368,7 +368,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
-        public bool TryFindAll(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
+        public bool TryFindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
         {
             return this.TryFindAll(treeScope, condition, x => new UiElement(x), timeOut, out result);
         }
@@ -376,7 +376,7 @@
         /// <summary>
         /// Finds all elements in the given treescope and with the given condition within the given timeout.
         /// </summary>
-        public bool TryFindAll<T>(TreeScope treeScope, ConditionBase condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out IReadOnlyList<T> result)
+        public bool TryFindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out IReadOnlyList<T> result)
             where T : UiElement
         {
             result = null;
@@ -399,7 +399,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition.
         /// </summary>
-        public UiElement FindFirst(TreeScope treeScope, ConditionBase condition)
+        public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
             return this.FindFirst(treeScope, condition, Retry.Time);
         }
@@ -407,7 +407,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition.
         /// </summary>
-        public T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<AutomationElement, T> wrap)
+        public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
             return this.FindFirst(treeScope, condition, wrap, Retry.Time);
@@ -416,7 +416,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public UiElement FindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut)
+        public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut)
         {
             if (this.TryFindFirst(treeScope, condition, timeOut, out var result))
             {
@@ -429,7 +429,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindFirst(TreeScope treeScope, ConditionBase condition, TimeSpan timeOut, out UiElement result)
+        public bool TryFindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out UiElement result)
         {
             result = null;
             var start = DateTime.Now;
@@ -450,7 +450,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public T FindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<AutomationElement, T> wrap, TimeSpan timeOut)
+        public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
         {
             if (this.TryFindFirst(treeScope, condition, wrap, timeOut, out var result))
@@ -464,7 +464,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindFirst<T>(TreeScope treeScope, ConditionBase condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
+        public bool TryFindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
         {
             result = null;
@@ -487,7 +487,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public UiElement FindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut)
+        public UiElement FindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut)
         {
             if (this.TryFindAt(treeScope, condition, index, timeOut, out var result))
             {
@@ -500,7 +500,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindAt(TreeScope treeScope, ConditionBase condition, int index, TimeSpan timeOut, out UiElement result)
+        public bool TryFindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut, out UiElement result)
         {
             result = null;
             var start = DateTime.Now;
@@ -521,7 +521,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public T FindAt<T>(TreeScope treeScope, ConditionBase condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut)
+        public T FindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
         {
             if (this.TryFindAt(treeScope, condition, index, wrap, timeOut, out var result))
@@ -535,7 +535,7 @@
         /// <summary>
         /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindAt<T>(TreeScope treeScope, ConditionBase condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
+        public bool TryFindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
         {
             result = null;
@@ -556,147 +556,104 @@
 
         public UiElement FindFirstChild()
         {
-            return this.FindFirst(TreeScope.Children, TrueCondition.Default, Retry.Time);
+            return this.FindFirst(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, Retry.Time);
         }
 
         public T FindFirstChild<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Children, TrueCondition.Default, wrap, Retry.Time);
+            return this.FindFirst(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, wrap, Retry.Time);
         }
 
         public UiElement FindChildAt(int index)
         {
-            return this.FindAt(TreeScope.Children, TrueCondition.Default, index, Retry.Time);
+            return this.FindAt(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, index, Retry.Time);
         }
 
         public UiElement FindFirstChild(string automationId)
         {
-            return this.FindFirst(TreeScope.Children, this.ConditionFactory.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Children, Condition.ByAutomationId(automationId));
         }
 
-        public UiElement FindFirstChild(ConditionBase condition)
+        public UiElement FindFirstChild(System.Windows.Automation.Condition condition)
         {
             return this.FindFirst(TreeScope.Children, condition);
         }
 
-        public UiElement FindFirstChild(Func<ConditionFactory, ConditionBase> newConditionFunc)
-        {
-            var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindFirstChild(condition);
-        }
-
         public IReadOnlyList<UiElement> FindAllChildren()
         {
-            return this.FindAll(TreeScope.Children, TrueCondition.Default);
+            return this.FindAll(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition);
         }
 
         public IReadOnlyList<T> FindAllChildren<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.AutomationElement.FindAll(TreeScope.Children, TrueCondition.Default, wrap);
+            return this.AutomationElement.FindAll(TreeScope.Children,  System.Windows.Automation.Condition.TrueCondition, wrap);
         }
 
-        public IReadOnlyList<UiElement> FindAllChildren(ConditionBase condition)
-        {
-            return this.AutomationElement.FindAll(TreeScope.Children, condition, x => new UiElement(x));
-        }
-
-        public IReadOnlyList<T> FindAllChildren<T>(ConditionBase condition, Func<AutomationElement, T> wrap)
+        public IReadOnlyList<T> FindAllChildren<T>(System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
             return this.AutomationElement.FindAll(TreeScope.Children, condition, wrap);
         }
 
-        public IReadOnlyList<UiElement> FindAllChildren(Func<ConditionFactory, ConditionBase> newConditionFunc)
+        public IReadOnlyList<UiElement> FindAllChildren(System.Windows.Automation.Condition condition)
         {
-            var condition = newConditionFunc(this.ConditionFactory);
             return this.AutomationElement.FindAll(TreeScope.Children, condition, x => new UiElement(x));
-        }
-
-        public IReadOnlyList<T> FindAllChildren<T>(Func<ConditionFactory, ConditionBase> newConditionFunc, Func<AutomationElement, T> wrap)
-            where T : UiElement
-        {
-            var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindAllChildren(condition, wrap);
         }
 
         public UiElement FindFirstDescendant()
         {
-            return this.FindFirst(TreeScope.Descendants, TrueCondition.Default);
+            return this.FindFirst(TreeScope.Descendants,  System.Windows.Automation.Condition.TrueCondition);
         }
 
         public T FindFirstDescendant<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants, TrueCondition.Default, wrap);
+            return this.FindFirst(TreeScope.Descendants,  System.Windows.Automation.Condition.TrueCondition, wrap);
         }
 
         public UiElement FindFirstDescendant(string automationId)
         {
-            return this.FindFirst(TreeScope.Descendants, this.ConditionFactory.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Descendants, Condition.ByAutomationId(automationId));
         }
 
         public T FindFirstDescendant<T>(string automationId, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants, this.ConditionFactory.ByAutomationId(automationId), wrap);
+            return this.FindFirst(TreeScope.Descendants, Condition.ByAutomationId(automationId), wrap);
         }
 
         public UiElement FindFirstDescendant(ControlType controlType)
         {
-            return this.FindFirst(TreeScope.Descendants, this.ConditionFactory.ByControlType(controlType));
+            return this.FindFirst(TreeScope.Descendants, Condition.ByControlType(controlType));
         }
 
         public T FindFirstDescendant<T>(ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants, this.ConditionFactory.ByControlType(controlType), wrap);
+            return this.FindFirst(TreeScope.Descendants, Condition.ByControlType(controlType), wrap);
         }
 
-        public UiElement FindFirstDescendant(ConditionBase condition)
+        public UiElement FindFirstDescendant(System.Windows.Automation.Condition condition)
         {
             return this.FindFirst(TreeScope.Descendants, condition);
         }
 
-        public UiElement FindFirstDescendant(Func<ConditionFactory, ConditionBase> newConditionFunc)
-        {
-            var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindFirstDescendant(condition);
-        }
-
         public IReadOnlyList<UiElement> FindAllDescendants()
         {
-            return this.FindAll(TreeScope.Descendants, TrueCondition.Default);
+            return this.FindAll(TreeScope.Descendants, System.Windows.Automation.Condition.TrueCondition);
         }
 
-        public IReadOnlyList<UiElement> FindAllDescendants(ConditionBase condition)
+        public IReadOnlyList<UiElement> FindAllDescendants(System.Windows.Automation.Condition condition)
         {
             return this.FindAll(TreeScope.Descendants, condition);
-        }
-
-        public IReadOnlyList<UiElement> FindAllDescendants(Func<ConditionFactory, ConditionBase> newConditionFunc)
-        {
-            var condition = newConditionFunc(this.ConditionFactory);
-            return this.FindAllDescendants(condition);
-        }
-
-        public UiElement FindFirstNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
-        {
-            var conditions = nestedConditionsFunc(this.ConditionFactory);
-            return this.FindFirstNested(conditions.ToArray());
-        }
-
-        public IReadOnlyList<UiElement> FindAllNested(Func<ConditionFactory, IList<ConditionBase>> nestedConditionsFunc)
-        {
-            var conditions = nestedConditionsFunc(this.ConditionFactory);
-            return this.FindAllNested(conditions.ToArray());
         }
 
         /// <summary>
         /// Finds the first element by looping thru all conditions.
         /// </summary>
-        public UiElement FindFirstNested(params ConditionBase[] nestedConditions)
+        public UiElement FindFirstNested(params System.Windows.Automation.Condition[] nestedConditions)
         {
             var currentElement = this;
             foreach (var condition in nestedConditions)
@@ -714,7 +671,7 @@
         /// <summary>
         /// Finds all elements by looping thru all conditions.
         /// </summary>
-        public IReadOnlyList<UiElement> FindAllNested(params ConditionBase[] nestedConditions)
+        public IReadOnlyList<UiElement> FindAllNested(params System.Windows.Automation.Condition[] nestedConditions)
         {
             var currentElement = this;
             for (var i = 0; i < nestedConditions.Length - 1; i++)
@@ -757,28 +714,23 @@
             return itemList.ToArray();
         }
 
-        public ConditionBase CreateCondition(ControlType controlType, string name)
+        public System.Windows.Automation.Condition CreateCondition(ControlType controlType, string name)
         {
             if (name == null)
             {
-                return this.CreateCondition(controlType);
+                return Condition.ByControlType(controlType);
             }
 
             return new AndCondition(
-                this.CreateCondition(controlType),
+                Condition.ByControlType(controlType),
                 this.CreateNameOrIdCondition(name));
-        }
-
-        public PropertyCondition CreateCondition(ControlType controlType)
-        {
-            return this.ConditionFactory.ByControlType(controlType);
         }
 
         public OrCondition CreateNameOrIdCondition(string key)
         {
             return new OrCondition(
-                this.ConditionFactory.ByName(key),
-                this.ConditionFactory.ByAutomationId(key));
+                Condition.ByName(key),
+                Condition.ByAutomationId(key));
         }
     }
 }

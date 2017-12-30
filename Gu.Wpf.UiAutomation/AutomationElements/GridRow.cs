@@ -31,7 +31,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 if (this.TryFindFirst(
                     TreeScope.Children,
-                    this.CreateCondition(ControlType.HeaderItem),
+                    Condition.ByControlType(ControlType.HeaderItem),
                     x => new RowHeader(x),
                     Retry.Time,
                     out var header))
@@ -44,7 +44,7 @@ namespace Gu.Wpf.UiAutomation
                     pattern.Realize();
                     if (this.TryFindFirst(
                         TreeScope.Children,
-                        this.CreateCondition(ControlType.HeaderItem),
+                        Condition.ByControlType(ControlType.HeaderItem),
                         x => new RowHeader(x),
                         Retry.Time,
                         out header))

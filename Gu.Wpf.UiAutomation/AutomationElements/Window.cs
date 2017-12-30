@@ -26,15 +26,16 @@
 
         public bool IsModal => this.AutomationElement.WindowPattern().Current.IsModal;
 
-        public TitleBar TitleBar => this.FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
+        public TitleBar TitleBar => this.FindFirstChild(Condition.ByControlType(ControlType.TitleBar))?.AsTitleBar();
 
         public IReadOnlyList<Window> ModalWindows
         {
             get
             {
-                return this.FindAllChildren(cf =>
-                               cf.ByControlType(ControlType.Window)
-                                 .And(new PropertyCondition(WindowPatternIdentifiers.IsModalProperty, true)))
+                return this.FindAllChildren(
+                               new AndCondition(
+                                   Condition.ByControlType(ControlType.Window),
+                                   new PropertyCondition(WindowPatternIdentifiers.IsModalProperty, true)))
                            .Select(e => new Window(e.AutomationElement, isMainWindow: false))
                            .ToArray();
             }
@@ -48,9 +49,11 @@
             get
             {
                 var mainWindow = this.GetMainWindow();
-                var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window)
-                                                              .And(cf.ByName(string.Empty)
-                                                              .And(cf.ByClassName("Popup"))));
+                var popup = mainWindow.FindFirstChild(
+                    new AndCondition(
+                        Condition.ByControlType(ControlType.Window),
+                        Condition.ByName(string.Empty),
+                        Condition.ByClassName("Popup")));
                 if (popup == null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
@@ -68,7 +71,9 @@
 
         public IntPtr NativeWindowHandle => new IntPtr(this.AutomationElement.NativeWindowHandle());
 
-        public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
+        public MessageBox FindMessageBox() =>
+            this.FindFirstDescendant(Condition.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ??
+            throw new InvalidOperationException("Did not find a message box");
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
@@ -80,8 +85,12 @@
 
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
                 var desktop = this.AutomationElement.GetDesktop();
-                var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu)
-                                                             .And(this.ConditionFactory.ByName("Context").Or(this.ConditionFactory.ByName("System"))))
+                var ctxMenu = desktop.FindFirstChild(
+                                         new AndCondition(
+                                             Condition.ByControlType(ControlType.Menu),
+                                             new OrCondition(
+                                                 Condition.ByName("Context"),
+                                                 Condition.ByName("System"))))
                                      .AsContextMenu();
                 if (ctxMenu != null)
                 {
@@ -98,7 +107,10 @@
 
             if (frameworkType == FrameworkType.WinForms)
             {
-                var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
+                var ctxMenu = mainWindow.FindFirstChild(
+                    new AndCondition(
+                        Condition.ByControlType(ControlType.Menu),
+                        Condition.ByName("DropDown")));
                 return ctxMenu?.AsContextMenu() ?? throw new InvalidOperationException("Could not find ControlType.Menu with name DropDown");
             }
 
@@ -106,7 +118,7 @@
             {
                 // In WPF, there is a window (Popup) where the menu is inside
                 var popup = this.Popup;
-                var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
+                var ctxMenu = popup.FindFirstChild(Condition.ByControlType(ControlType.Menu));
                 return ctxMenu.AsContextMenu();
             }
 
@@ -171,7 +183,7 @@
             var element = AutomationElement.RootElement
                                            .FindFirst(
                                                TreeScope.Children,
-                                               ConditionFactory.Instance.ByProcessId(this.ProcessId));
+                                               Condition.ByProcessId(this.ProcessId));
             var mainWindow = new Window(element, isMainWindow: true);
             return mainWindow;
         }

@@ -568,8 +568,10 @@
         public IReadOnlyList<Window> GetAllTopLevelWindows()
         {
             var desktop = AutomationElement.RootElement;
-            var foundElements = desktop.FindAllChildren(ConditionFactory.Instance.ByControlType(ControlType.Window)
-                                                                        .And(ConditionFactory.Instance.ByProcessId(this.ProcessId)));
+            var foundElements = desktop.FindAllChildren(
+                new AndCondition(
+                    Condition.ByControlType(ControlType.Window),
+                    Condition.ByProcessId(this.ProcessId)));
             return foundElements.OfType<AutomationElement>().Select((x, i) => new Window(x, i == 0)).ToArray();
         }
 

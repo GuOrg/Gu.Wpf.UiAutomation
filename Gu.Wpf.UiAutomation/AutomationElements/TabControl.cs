@@ -32,7 +32,7 @@
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public IReadOnlyList<TabItem> Items => this.FindAllChildren(this.ConditionFactory.ByControlType(ControlType.TabItem), x => new TabItem(x));
+        public IReadOnlyList<TabItem> Items => this.FindAllChildren(Condition.ByControlType(ControlType.TabItem), x => new TabItem(x));
 
         public UiElement Content
         {
