@@ -133,10 +133,10 @@
             {
                 if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
                 {
-                    return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.Split('.')[1]}";
+                    return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
                 }
 
-                return $"{propertyCondition.Property.ProgrammaticName.Split('.')[1].Replace("Property", string.Empty)} == {propertyCondition.Value}";
+                return $"{propertyCondition.Property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} == {propertyCondition.Value}";
             }
 
             if (condition is AndCondition andCondition)

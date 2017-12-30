@@ -63,7 +63,7 @@
         /// <inheritdoc/>
         public override string LocalName => this.IsInAttribute
             ? this.GetAttributeName(this.attributeIndex)
-            : this.currentElement.ControlType().ProgrammaticName.Split('.')[1];
+            : this.currentElement.ControlType().ProgrammaticName.TrimStart("ControlType.");
 
         /// <inheritdoc/>
         public override string Name => this.LocalName;
@@ -325,7 +325,7 @@
 
         private int GetAttributeIndexFromName(string attributeName)
         {
-            if (Enum.TryParse(attributeName, out ElementAttributes parsedValue))
+            if (Enum.TryParse<ElementAttributes>(attributeName, out var parsedValue))
             {
                 return (int)parsedValue;
             }

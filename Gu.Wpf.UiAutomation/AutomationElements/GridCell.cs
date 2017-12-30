@@ -189,10 +189,9 @@ namespace Gu.Wpf.UiAutomation
                 this.Click();
             }
 
-            var child = this.FindFirstChild();
-            if (child.ControlType.Id == ControlType.Edit.Id)
+            if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var element))
             {
-                child.AsTextBox().Enter(value);
+                new TextBox(element).Enter(value);
             }
             else
             {
