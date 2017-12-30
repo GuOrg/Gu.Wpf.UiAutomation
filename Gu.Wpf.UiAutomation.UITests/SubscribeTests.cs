@@ -27,28 +27,53 @@
                 using (Subscribe.ToFocusChangedEvent(element => changes.Add(element.Name)))
                 {
                     window.FindTextBox("TextBox2").Focus();
+                    Wait.For(TimeSpan.FromMilliseconds(20));
                     CollectionAssert.AreEqual(new[] { "TextBox2" }, changes);
 
                     window.FindTextBox("Button1").Focus();
+                    Wait.For(TimeSpan.FromMilliseconds(20));
                     CollectionAssert.AreEqual(new[] { "Button1" }, changes);
                 }
             }
         }
 
         [Test]
-        public void FocusWindowPropertyChanges()
+        public void TextBoxValuePropertyChanges()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
             {
-                var changes = new List<string>();
+                var expected = new List<string>();
+                var actual = new List<string>();
                 var window = app.MainWindow;
                 var textBox = window.FindTextBox("TextBox1");
-
-                using (Subscribe.ToPropertyChangedEvent(textBox.AutomationElement, TreeScope.Element, ValuePattern.ValueProperty, (e, p, o) => changes.Add($"{e.AutomationId}.{p.ProgrammaticName.Split('.')[1]} = {o}")))
+                textBox.Text = string.Empty;
+                using (Subscribe.ToPropertyChangedEvent(
+                    textBox.AutomationElement,
+                    TreeScope.Element,
+                    ValuePattern.ValueProperty,
+                    (e, p, o) => actual.Add($"{e.AutomationId}.{p.ProgrammaticName.Split('.')[1]} = {o}")))
                 {
+                    CollectionAssert.AreEqual(expected, actual);
+
                     textBox.Text = "abc";
-                    CollectionAssert.AreEqual(new[] { "TextBox1.ValueProperty = abc" }, changes);
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = abc");
+                    CollectionAssert.AreEqual(expected, actual);
+
+                    textBox.Text = string.Empty;
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = ");
+                    CollectionAssert.AreEqual(expected, actual);
+
+                    textBox.Text = "abc";
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = abc");
+                    CollectionAssert.AreEqual(expected, actual);
                 }
+
+                // Checking that we stopped subscribing when disposing
+                textBox.Text = string.Empty;
+                CollectionAssert.AreEqual(expected, actual);
             }
         }
 

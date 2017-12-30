@@ -19,9 +19,36 @@
             return Disposable.Create(() => Automation.RemoveStructureChangedEventHandler(element, handler));
         }
 
+        /// <summary>
+        /// Subscribe to value changes
+        /// </summary>
+        /// <param name="element">The <see cref="AutomationElement"/></param>
+        /// <param name="treeScope">The <see cref="TreeScope"/></param>
+        /// <param name="property">The <see cref="AutomationProperty"/> to subscribe to changes for.</param>
+        /// <param name="action">
+        /// The action to invoke when value changes (sender, property, newValue)
+        /// </param>
+        /// <returns>A <see cref="IDisposable"/> that unsubcribes on dispose.</returns>
         public static IDisposable ToPropertyChangedEvent(AutomationElement element, TreeScope treeScope, AutomationProperty property, Action<UiElement, AutomationProperty, object> action)
         {
             AutomationPropertyChangedEventHandler handler = (sender, args) => action(new UiElement((AutomationElement)sender), args.Property, args.NewValue);
+            Automation.AddAutomationPropertyChangedEventHandler(element, treeScope, handler, property);
+            return Disposable.Create(() => Automation.RemoveAutomationPropertyChangedEventHandler(element, handler));
+        }
+
+        /// <summary>
+        /// Subscribe to value changes
+        /// </summary>
+        /// <param name="element">The <see cref="AutomationElement"/></param>
+        /// <param name="treeScope">The <see cref="TreeScope"/></param>
+        /// <param name="property">The <see cref="AutomationProperty"/> to subscribe to changes for.</param>
+        /// <param name="action">
+        /// The action to invoke when value changes (sender, property, oldValue, newValue)
+        /// </param>
+        /// <returns>A <see cref="IDisposable"/> that unsubcribes on dispose.</returns>
+        public static IDisposable ToPropertyChangedEvent(AutomationElement element, TreeScope treeScope, AutomationProperty property, Action<UiElement, AutomationProperty, object, object> action)
+        {
+            AutomationPropertyChangedEventHandler handler = (sender, args) => action(new UiElement((AutomationElement)sender), args.Property, args.OldValue, args.NewValue);
             Automation.AddAutomationPropertyChangedEventHandler(element, treeScope, handler, property);
             return Disposable.Create(() => Automation.RemoveAutomationPropertyChangedEventHandler(element, handler));
         }
