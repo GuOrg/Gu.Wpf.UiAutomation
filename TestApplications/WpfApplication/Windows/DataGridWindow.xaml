@@ -6,7 +6,7 @@
         xmlns:windows="clr-namespace:WpfApplication.Windows"
         Title="Window"
         Width="600"
-        Height="500"
+        Height="570"
         mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate x:Key="RowNumberTemplate" DataType="{x:Type local:DataGridItemViewModel}">
@@ -22,102 +22,116 @@
         <windows:DataGridWindowViewModel />
     </Window.DataContext>
     <UniformGrid Columns="2">
-        <DataGrid x:Name="DataGrid"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding ThreeItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
-                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="DataGrid">
+            <DataGrid x:Name="DataGrid"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding ThreeItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                    <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="SelectCellDataGrid"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding ThreeItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}"
-                  SelectionUnit="Cell">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
-                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="SelectCellDataGrid">
+            <DataGrid x:Name="SelectCellDataGrid"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding ThreeItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}"
+                      SelectionUnit="Cell">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                    <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="TemplateColumnDataGrid"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding ThreeItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="IntValue">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBox Text="{Binding IntValue}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBlock Text="{Binding IntValue}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="StringValue">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBox Text="{Binding StringValue}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
-                            <TextBlock Text="{Binding StringValue}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="TemplateColumnDataGrid">
+            <DataGrid x:Name="TemplateColumnDataGrid"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding ThreeItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="IntValue">
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
+                                <TextBox Text="{Binding IntValue}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
+                                <TextBlock Text="{Binding IntValue}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="StringValue">
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
+                                <TextBox Text="{Binding StringValue}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type local:DataGridItemViewModel}">
+                                <TextBlock Text="{Binding StringValue}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="DataGrid10"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding TenItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
-                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="DataGrid10">
+            <DataGrid x:Name="DataGrid10"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding TenItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                    <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="DataGridNoHeaders"
-                  AutoGenerateColumns="False"
-                  HeadersVisibility="None"
-                  ItemsSource="{Binding ThreeItems}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
-                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="DataGridNoHeaders">
+            <DataGrid x:Name="DataGridNoHeaders"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="None"
+                      ItemsSource="{Binding ThreeItems}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                    <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="ReadOnlyDataGrid"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  ItemsSource="{Binding ThreeItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
-                <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="ReadOnlyDataGrid">
+            <DataGrid x:Name="ReadOnlyDataGrid"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding ThreeItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}" Header="IntValue" />
+                    <DataGridTextColumn Binding="{Binding StringValue}" Header="StringValue" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
 
-        <DataGrid x:Name="ReadonlyColumnsDataGrid"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding ThreeItems}"
-                  RowHeaderStyle="{StaticResource RowNumberStyle}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding IntValue}"
-                                    Header="IntValue"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding StringValue}"
-                                    Header="StringValue"
-                                    IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <GroupBox Header="ReadonlyColumnsDataGrid">
+            <DataGrid x:Name="ReadonlyColumnsDataGrid"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding ThreeItems}"
+                      RowHeaderStyle="{StaticResource RowNumberStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding IntValue}"
+                                        Header="IntValue"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding StringValue}"
+                                        Header="StringValue"
+                                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </UniformGrid>
 </Window>

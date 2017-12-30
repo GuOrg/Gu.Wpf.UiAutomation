@@ -38,7 +38,7 @@
             {
                 if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
-                    valuePattern.SetValue(value);
+                    valuePattern.SetValue(value ?? string.Empty);
                 }
                 else
                 {

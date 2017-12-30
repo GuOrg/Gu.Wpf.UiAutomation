@@ -20,19 +20,10 @@ namespace Gu.Wpf.UiAutomation
 
         public MenuItem this[int index] => this.items[index];
 
-        public MenuItem this[string text]
-        {
-            get { return this.FirstOrDefault(x => x.Text.Equals(text)); }
-        }
+        public MenuItem this[string text] => this.FirstOrDefault(x => x.Text.Equals(text));
 
-        public IEnumerator<MenuItem> GetEnumerator()
-        {
-            return this.items.GetEnumerator();
-        }
+        public IEnumerator<MenuItem> GetEnumerator() => this.items.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this.items).GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)this.items).GetEnumerator();
     }
 }

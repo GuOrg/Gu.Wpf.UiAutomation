@@ -100,27 +100,25 @@ namespace Gu.Wpf.UiAutomation
             {
                 string GetValue()
                 {
-                    if (this.TryFindFirst(
-                        TreeScope.Children,
-                        Condition.TextBox,
-                        x => new TextBlock(x),
-                        TimeSpan.Zero,
-                        out var textBlock))
+                    if (this.AutomationElement.TryGetValuePattern(out var valuePattern) &&
+                        valuePattern.Current.Value is string text &&
+                        text != string.Empty)
                     {
-                        return textBlock.Text;
+                        return text;
                     }
 
-                    if (this.TryFindFirst(
-                        TreeScope.Children,
-                        Condition.TextBox,
-                        x => new TextBox(x),
-                        TimeSpan.Zero,
-                        out var textBox))
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBlock, out var textBlock))
                     {
-                        return textBox.Text;
+                        return textBlock.Name();
                     }
 
-                    if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var textBox) &&
+                        textBox.TryGetValuePattern(out var pattern))
+                    {
+                        return pattern.Current.Value;
+                    }
+
+                    if (this.AutomationElement.TryGetValuePattern(out valuePattern))
                     {
                         return valuePattern.Current.Value;
                     }
