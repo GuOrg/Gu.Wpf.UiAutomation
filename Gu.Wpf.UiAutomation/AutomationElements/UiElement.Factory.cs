@@ -36,7 +36,7 @@
             new ConditionAndCreate(Condition.Slider, e => new Slider(e)),
             ////new ConditionAndCreate(Condition.Spinner, e => new Spinner(e)),
             ////new ConditionAndCreate(Condition.SplitButton, e => new SplitButton(e)),
-            ////new ConditionAndCreate(Condition.StatusBar, e => new StatusBar(e)),
+            new ConditionAndCreate(Condition.StatusBar, e => new StatusBar(e)),
             new ConditionAndCreate(Condition.TabControl, e => new TabControl(e)),
             new ConditionAndCreate(Condition.TabItem, e => new TabItem(e)),
             new ConditionAndCreate(Condition.TextBlock, e => new TextBlock(e)),

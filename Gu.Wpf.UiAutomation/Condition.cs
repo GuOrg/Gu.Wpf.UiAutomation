@@ -8,33 +8,33 @@
     {
         public static System.Windows.Automation.Condition TrueCondition { get; } = System.Windows.Automation.Condition.TrueCondition;
 
-        public static PropertyCondition Button { get; } = ByControlType(ControlType.Button);
+        public static System.Windows.Automation.Condition Button { get; } = ByControlType(ControlType.Button);
 
-        public static PropertyCondition Calendar { get; } = ByControlType(ControlType.Calendar);
+        public static System.Windows.Automation.Condition Calendar { get; } = ByControlType(ControlType.Calendar);
 
-        public static PropertyCondition CheckBox { get; } = ByControlType(ControlType.CheckBox);
+        public static System.Windows.Automation.Condition CheckBox { get; } = ByControlType(ControlType.CheckBox);
 
-        public static PropertyCondition ComboBox { get; } = ByControlType(ControlType.ComboBox);
+        public static System.Windows.Automation.Condition ComboBox { get; } = ByControlType(ControlType.ComboBox);
 
-        public static PropertyCondition ControlTypeCustom { get; } = ByControlType(ControlType.Custom);
+        public static System.Windows.Automation.Condition ControlTypeCustom { get; } = ByControlType(ControlType.Custom);
 
-        public static PropertyCondition DataGrid { get; } = ByControlType(ControlType.DataGrid);
+        public static System.Windows.Automation.Condition DataGrid { get; } = ByControlType(ControlType.DataGrid);
 
-        public static PropertyCondition DataItem { get; } = ByControlType(ControlType.DataItem);
+        public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
-        public static PropertyCondition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
+        public static System.Windows.Automation.Condition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
-        public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), new PropertyCondition(AutomationElement.IsExpandCollapsePatternAvailableProperty, true));
+        public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
 
-        public static PropertyCondition GroupBox { get; } = ByControlType(ControlType.Group);
+        public static System.Windows.Automation.Condition GroupBox { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("GroupBox"));
 
-        public static PropertyCondition Header { get; } = ByControlType(ControlType.Header);
+        public static System.Windows.Automation.Condition Header { get; } = ByControlType(ControlType.Header);
 
-        public static PropertyCondition HeaderItem { get; } = ByControlType(ControlType.HeaderItem);
+        public static System.Windows.Automation.Condition HeaderItem { get; } = ByControlType(ControlType.HeaderItem);
 
-        public static PropertyCondition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
+        public static System.Windows.Automation.Condition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
 
-        public static PropertyCondition Image { get; } = ByControlType(ControlType.Image);
+        public static System.Windows.Automation.Condition Image { get; } = ByControlType(ControlType.Image);
 
         public static System.Windows.Automation.Condition Label { get; } = new AndCondition(
             ByControlType(ControlType.Text),
@@ -42,59 +42,62 @@
                 ByClassName("Text"),
                 ByClassName("Static")));
 
-        public static PropertyCondition ListBox { get; } = ByControlType(ControlType.List);
+        public static System.Windows.Automation.Condition ListBox { get; } = ByControlType(ControlType.List);
 
-        public static PropertyCondition ListBoxItem { get; } = ByControlType(ControlType.ListItem);
+        public static System.Windows.Automation.Condition ListBoxItem { get; } = ByControlType(ControlType.ListItem);
 
-        public static PropertyCondition Menu { get; } = ByControlType(ControlType.Menu);
+        public static System.Windows.Automation.Condition Menu { get; } = ByControlType(ControlType.Menu);
 
-        public static PropertyCondition MenuBar { get; } = ByControlType(ControlType.MenuBar);
+        public static System.Windows.Automation.Condition MenuBar { get; } = ByControlType(ControlType.MenuBar);
 
-        public static PropertyCondition MenuItem { get; } = ByControlType(ControlType.MenuItem);
+        public static System.Windows.Automation.Condition MenuItem { get; } = ByControlType(ControlType.MenuItem);
 
-        public static PropertyCondition Pane { get; } = ByControlType(ControlType.Pane);
+        public static System.Windows.Automation.Condition Pane { get; } = ByControlType(ControlType.Pane);
 
-        public static PropertyCondition ProgressBar { get; } = ByControlType(ControlType.ProgressBar);
+        public static System.Windows.Automation.Condition ProgressBar { get; } = ByControlType(ControlType.ProgressBar);
 
-        public static PropertyCondition RadioButton { get; } = ByControlType(ControlType.RadioButton);
+        public static System.Windows.Automation.Condition RadioButton { get; } = ByControlType(ControlType.RadioButton);
 
-        public static PropertyCondition ScrollBar { get; } = ByControlType(ControlType.ScrollBar);
+        public static System.Windows.Automation.Condition ScrollBar { get; } = ByControlType(ControlType.ScrollBar);
 
-        public static PropertyCondition Separator { get; } = ByControlType(ControlType.Separator);
+        public static System.Windows.Automation.Condition Separator { get; } = ByControlType(ControlType.Separator);
 
-        public static PropertyCondition Slider { get; } = ByControlType(ControlType.Slider);
+        public static System.Windows.Automation.Condition Slider { get; } = ByControlType(ControlType.Slider);
 
-        public static PropertyCondition Spinner { get; } = ByControlType(ControlType.Spinner);
+        public static System.Windows.Automation.Condition Spinner { get; } = ByControlType(ControlType.Spinner);
 
-        public static PropertyCondition SplitButton { get; } = ByControlType(ControlType.SplitButton);
+        public static System.Windows.Automation.Condition SplitButton { get; } = ByControlType(ControlType.SplitButton);
 
-        public static PropertyCondition StatusBar { get; } = ByControlType(ControlType.StatusBar);
+        public static System.Windows.Automation.Condition StatusBar { get; } = ByControlType(ControlType.StatusBar);
 
-        public static PropertyCondition TabControl { get; } = ByControlType(ControlType.Tab);
+        public static System.Windows.Automation.Condition TabControl { get; } = ByControlType(ControlType.Tab);
 
-        public static PropertyCondition TabItem { get; } = ByControlType(ControlType.TabItem);
+        public static System.Windows.Automation.Condition TabItem { get; } = ByControlType(ControlType.TabItem);
 
-        public static PropertyCondition ControlTypeTable { get; } = ByControlType(ControlType.Table);
+        public static System.Windows.Automation.Condition ControlTypeTable { get; } = ByControlType(ControlType.Table);
 
         public static System.Windows.Automation.Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("TextBlock"));
 
-        public static PropertyCondition TextBox { get; } = ByControlType(ControlType.Edit);
+        public static System.Windows.Automation.Condition TextBox { get; } = ByControlType(ControlType.Edit);
 
-        public static PropertyCondition Thumb { get; } = ByControlType(ControlType.Thumb);
+        public static System.Windows.Automation.Condition Thumb { get; } = ByControlType(ControlType.Thumb);
 
-        public static PropertyCondition TitleBar { get; } = ByControlType(ControlType.TitleBar);
+        public static System.Windows.Automation.Condition TitleBar { get; } = ByControlType(ControlType.TitleBar);
 
-        public static PropertyCondition ToolBar { get; } = ByControlType(ControlType.ToolBar);
+        public static System.Windows.Automation.Condition ToolBar { get; } = ByControlType(ControlType.ToolBar);
 
-        public static PropertyCondition ToolTip { get; } = ByControlType(ControlType.ToolTip);
+        public static System.Windows.Automation.Condition ToolTip { get; } = ByControlType(ControlType.ToolTip);
 
-        public static PropertyCondition TreeView { get; } = ByControlType(ControlType.Tree);
+        public static System.Windows.Automation.Condition TreeView { get; } = ByControlType(ControlType.Tree);
 
-        public static PropertyCondition TreeViewItem { get; } = ByControlType(ControlType.TreeItem);
+        public static System.Windows.Automation.Condition TreeViewItem { get; } = ByControlType(ControlType.TreeItem);
 
-        public static PropertyCondition UserControl { get; } = ByControlType(ControlType.Custom);
+        public static System.Windows.Automation.Condition UserControl { get; } = new AndCondition(
+            ByControlType(ControlType.Custom),
+            new PropertyCondition(AutomationElement.IsContentElementProperty, true),
+            new PropertyCondition(AutomationElement.IsControlElementProperty, true));
 
-        public static PropertyCondition Window { get; } = ByControlType(ControlType.Window);
+        public static System.Windows.Automation.Condition Window { get; } = ByControlType(ControlType.Window);
 
         public static PropertyCondition ByAutomationId(string automationId)
         {

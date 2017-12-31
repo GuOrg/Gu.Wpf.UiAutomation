@@ -104,36 +104,6 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="TextBox"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBox FindTextBox(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.TextBox, name),
-            x => new TextBox(x),
-            Retry.Time);
-
-        /// <summary>
-        /// Find the first <see cref="TabControl"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public TabControl FindTabControl(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.TabControl, name),
-            x => new TabControl(x),
-            Retry.Time);
-
-        /// <summary>
-        /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public UserControl FindUserControl(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.UserControl, name),
-            x => new UserControl(x),
-            Retry.Time);
-
-        /// <summary>
         /// Find the first <see cref="GroupBox"/> box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -224,6 +194,26 @@
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="TextBox"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TextBox FindTextBox(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.TextBox, name),
+            x => new TextBox(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="TabControl"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TabControl FindTabControl(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.TabControl, name),
+            x => new TabControl(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="TreeView"/> by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -231,6 +221,27 @@
             TreeScope.Descendants,
             this.CreateCondition(Condition.TreeView, name),
             x => new TreeView(x),
+            Retry.Time);
+
+
+        /// <summary>
+        /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public UserControl FindUserControl(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.UserControl, name),
+            x => new UserControl(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public StatusBar FindStatusBar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.StatusBar, name),
+            x => new StatusBar(x),
             Retry.Time);
 
         /// <summary>
