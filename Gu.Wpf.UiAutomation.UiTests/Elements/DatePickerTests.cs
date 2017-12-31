@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
+    using System;
     using NUnit.Framework;
 
     public class DatePickerTests
@@ -26,7 +27,7 @@
                 var datePicker = window.FindDatePicker();
                 Assert.AreEqual(string.Empty, datePicker.Value);
                 datePicker.Value = "2017-12-31";
-                Assert.AreEqual("2017-12-31 00:00:00", datePicker.Value);
+                Assert.AreEqual(DateTime.Parse("2017-12-31 00:00:00"), DateTime.Parse(datePicker.Value));
             }
         }
     }
