@@ -39,6 +39,28 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
+        
+        [TestCase("DataGrid", false)]
+        [TestCase("DataGrid10", false)]
+        [TestCase("DataGridNoHeaders", false)]
+        [TestCase("ReadOnlyDataGrid", true)]
+        [TestCase("ReadonlyColumnsDataGrid", true)]
+        [TestCase("TemplateColumnDataGrid", false)]
+        public void ContainingGrid(string name)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid(name);
+                Assert.AreEqual(dataGrid, dataGrid[0, 0].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[0, 1].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[1, 0].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[1, 1].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[2, 0].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[2, 1].ContainingGridView);
+            }
+        }
+
         [TestCase("DataGrid")]
         [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]

@@ -61,6 +61,38 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [Test]
+        public void Indexer()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                Assert.AreEqual("1", listView[0, 0].Value);
+                Assert.AreEqual("10", listView[0, 1].Value);
+                Assert.AreEqual("2", listView[1, 0].Value);
+                Assert.AreEqual("20", listView[1, 1].Value);
+                Assert.AreEqual("3", listView[2, 0].Value);
+                Assert.AreEqual("30", listView[2, 1].Value);
+            }
+        }
+
+        [Test]
+        public void ContainingGridView()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                Assert.AreEqual(listView, listView[0, 0].ContainingGridView);
+                Assert.AreEqual(listView, listView[0, 1].ContainingGridView);
+                Assert.AreEqual(listView, listView[1, 0].ContainingGridView);
+                Assert.AreEqual(listView, listView[1, 1].ContainingGridView);
+                Assert.AreEqual(listView, listView[2, 0].ContainingGridView);
+                Assert.AreEqual(listView, listView[2, 1].ContainingGridView);
+            }
+        }
+
+        [Test]
         public void SelectByIndex()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))

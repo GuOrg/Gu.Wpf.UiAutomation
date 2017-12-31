@@ -9,12 +9,14 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public class GridRow : SelectionItemControl
     {
+        private static readonly PropertyCondition TableItemCondition = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
+
         public GridRow(AutomationElement automationElement)
             : base(automationElement)
         {
         }
 
-        public IReadOnlyList<GridCell> Cells => this.AutomationElement.FindAllChildren(Condition.DataGridCell)
+        public IReadOnlyList<GridCell> Cells => this.AutomationElement.FindAllChildren(TableItemCondition)
                                                     .OfType<AutomationElement>()
                                                     .Select(x => new GridCell(x))
                                                     .ToArray();
