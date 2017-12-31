@@ -14,16 +14,10 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public IReadOnlyList<GridCell> Cells
-        {
-            get
-            {
-                return this.FindAllChildren()
-                           .Where(x => x.AutomationElement.TryGetCurrentPattern(TableItemPattern.Pattern, out _))
-                           .Select(x => x.AsGridCell())
-                           .ToArray();
-            }
-        }
+        public IReadOnlyList<GridCell> Cells => this.AutomationElement.FindAllChildren(Condition.DataGridCell)
+                                                    .OfType<AutomationElement>()
+                                                    .Select(x => new GridCell(x))
+                                                    .ToArray();
 
         public RowHeader Header
         {

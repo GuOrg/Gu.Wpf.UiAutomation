@@ -178,9 +178,9 @@ namespace Gu.Wpf.UiAutomation
 
             if (this.AutomationElement.TryGetSelectionItemPattern(out var selectionItemPattern))
             {
-                if (!this.IsSelected)
+                if (!selectionItemPattern.Current.IsSelected)
                 {
-                    this.Select();
+                    selectionItemPattern.Select();
                 }
             }
             else if (!this.HasKeyboardFocus)

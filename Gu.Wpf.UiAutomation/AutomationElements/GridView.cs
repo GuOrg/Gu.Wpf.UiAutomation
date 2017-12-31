@@ -35,7 +35,7 @@
                 if (this.TryFindFirst(
                     TreeScope.Children,
                     Condition.Header,
-                    x => new UiElement(x),
+                    FromAutomationElement,
                     Retry.Time,
                     out var header))
                 {
@@ -108,7 +108,7 @@
         public IReadOnlyList<UiElement> SelectedItems => this.SelectionPattern
                                                              .Current
                                                              .GetSelection()
-                                                             .Select(x => new UiElement(x))
+                                                             .Select(FromAutomationElement)
                                                              .ToArray();
 
         /// <summary>
@@ -151,7 +151,9 @@
         /// </summary>
         public GridCell Select(int row, int column)
         {
-            return this[row, column].Select().AsGridCell();
+            var cell = this[row, column];
+            cell.Select();
+            return cell;
         }
 
         /// <summary>
