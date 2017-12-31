@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Linq;
     using System.Windows.Automation;
 
@@ -23,9 +24,7 @@
 
         public static PropertyCondition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
-        public static PropertyCondition TextBox { get; } = ByControlType(ControlType.Edit);
-
-        public static PropertyCondition ControlTypeGroup { get; } = ByControlType(ControlType.Group);
+        public static PropertyCondition GroupBox { get; } = ByControlType(ControlType.Group);
 
         public static PropertyCondition Header { get; } = ByControlType(ControlType.Header);
 
@@ -37,13 +36,13 @@
 
         public static System.Windows.Automation.Condition Label { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("Text"));
 
-        public static PropertyCondition List { get; } = ByControlType(ControlType.List);
+        public static PropertyCondition ListBox { get; } = ByControlType(ControlType.List);
 
-        public static PropertyCondition ListItem { get; } = ByControlType(ControlType.ListItem);
+        public static PropertyCondition ListBoxItem { get; } = ByControlType(ControlType.ListItem);
 
         public static PropertyCondition Menu { get; } = ByControlType(ControlType.Menu);
 
-        public static PropertyCondition ControlTypeMenuBar { get; } = ByControlType(ControlType.MenuBar);
+        public static PropertyCondition MenuBar { get; } = ByControlType(ControlType.MenuBar);
 
         public static PropertyCondition MenuItem { get; } = ByControlType(ControlType.MenuItem);
 
@@ -65,13 +64,15 @@
 
         public static PropertyCondition StatusBar { get; } = ByControlType(ControlType.StatusBar);
 
-        public static PropertyCondition Tab { get; } = ByControlType(ControlType.Tab);
+        public static PropertyCondition TabControl { get; } = ByControlType(ControlType.Tab);
 
         public static PropertyCondition TabItem { get; } = ByControlType(ControlType.TabItem);
 
         public static PropertyCondition ControlTypeTable { get; } = ByControlType(ControlType.Table);
 
         public static System.Windows.Automation.Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("TextBlock"));
+
+        public static PropertyCondition TextBox { get; } = ByControlType(ControlType.Edit);
 
         public static PropertyCondition Thumb { get; } = ByControlType(ControlType.Thumb);
 
@@ -81,9 +82,9 @@
 
         public static PropertyCondition ToolTip { get; } = ByControlType(ControlType.ToolTip);
 
-        public static PropertyCondition Tree { get; } = ByControlType(ControlType.Tree);
+        public static PropertyCondition TreeView { get; } = ByControlType(ControlType.Tree);
 
-        public static PropertyCondition TreeItem { get; } = ByControlType(ControlType.TreeItem);
+        public static PropertyCondition TreeViewItem { get; } = ByControlType(ControlType.TreeItem);
 
         public static PropertyCondition Window { get; } = ByControlType(ControlType.Window);
 
@@ -155,6 +156,38 @@
             }
 
             return condition.ToString();
+        }
+
+        internal static bool IsMatch(AutomationElement element, System.Windows.Automation.Condition condition)
+        {
+            switch (condition)
+            {
+                case PropertyCondition propertyCondition:
+                    {
+                        switch (propertyCondition.Flags)
+                        {
+                            case PropertyConditionFlags.None:
+                                return Equals(element.GetCurrentPropertyValue(propertyCondition.Property), propertyCondition.Value);
+                            case PropertyConditionFlags.IgnoreCase:
+                                return string.Equals((string)element.GetCurrentPropertyValue(propertyCondition.Property), (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase);
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                    }
+
+                case AndCondition andCondition:
+                    return andCondition.GetConditions().All(c => IsMatch(element, c));
+                case OrCondition orCondition:
+                    return orCondition.GetConditions().Any(c => IsMatch(element, c));
+                case NotCondition notCondition:
+                    return !IsMatch(element, notCondition.Condition);
+                case var c when c == System.Windows.Automation.Condition.TrueCondition:
+                    return true;
+                case var c when c == System.Windows.Automation.Condition.FalseCondition:
+                    return false;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(condition), condition, "Condition not suported");
+            }
         }
     }
 }

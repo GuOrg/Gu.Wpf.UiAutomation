@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Patterns
 {
+    using System;
     using System.Windows.Automation;
     using NUnit.Framework;
 
@@ -27,6 +28,7 @@
                     (element, id) => invokeFired = true))
                 {
                     invokePattern.Invoke();
+                    Wait.For(TimeSpan.FromMilliseconds(50));
                     Assert.AreEqual("Invoked!", button.Text);
                     Assert.AreEqual(true, invokeFired);
                 }

@@ -79,13 +79,13 @@
                     this.FrameworkType == FrameworkType.Win32)
                 {
                     // WinForms and Win32
-                    var listElement = this.FindFirstChild(Condition.List);
+                    var listElement = this.FindFirstChild(Condition.ListBox);
                     return listElement.FindAllChildren(x => new ComboBoxItem(x));
                 }
 
                 // WPF
                 return this.FindAllChildren(
-                    Condition.ListItem,
+                    Condition.ListBoxItem,
                     x => new ComboBoxItem(x));
             }
         }
@@ -97,7 +97,7 @@
                 if (this.FrameworkType == FrameworkType.WinForms)
                 {
                     // WinForms
-                    var itemsList = this.FindFirstChild(Condition.List);
+                    var itemsList = this.FindFirstChild(Condition.ListBox);
 
                     // UIA3 does not see the list if it is collapsed
                     return itemsList != null && !itemsList.IsOffscreen;

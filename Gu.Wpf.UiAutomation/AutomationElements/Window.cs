@@ -10,6 +10,11 @@
 
     public class Window : UiElement
     {
+        public Window(AutomationElement automationElement)
+        : this(automationElement, Equals(automationElement.Parent(), Desktop.AutomationElement))
+        {
+        }
+
         public Window(AutomationElement automationElement, bool isMainWindow)
             : base(automationElement)
         {

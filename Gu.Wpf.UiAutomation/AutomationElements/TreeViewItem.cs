@@ -14,7 +14,7 @@
         {
             this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
             this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
-            this.treeViewItemCondition = Condition.TreeItem;
+            this.treeViewItemCondition = Condition.TreeViewItem;
         }
 
         /// <summary>

@@ -24,7 +24,7 @@
             {
                 var changes = new List<string>();
                 var window = app.MainWindow;
-                using (Subscribe.ToFocusChangedEvent(element => changes.Add(element.Name)))
+                using (Subscribe.ToFocusChangedEvent((sender, args) => changes.Add(((AutomationElement)sender).Name())))
                 {
                     window.FindTextBox("TextBox2").Focus();
                     Wait.For(TimeSpan.FromMilliseconds(20));
@@ -51,7 +51,7 @@
                     textBox.AutomationElement,
                     TreeScope.Element,
                     ValuePattern.ValueProperty,
-                    (e, p, o) => actual.Add($"{e.AutomationId}.{p.ProgrammaticName.Split('.')[1]} = {o}")))
+                    (sender, args) => actual.Add($"{((AutomationElement)sender).Current.AutomationId}.{args.Property.ProgrammaticName.Split('.')[1]} = {args.NewValue}")))
                 {
                     CollectionAssert.AreEqual(expected, actual);
 
@@ -84,7 +84,7 @@
             {
                 var changes = new List<string>();
                 var mainWindow = app.MainWindow;
-                using (Subscribe.ToFocusChangedEvent(element => changes.Add(element.ToString())))
+                using (Subscribe.ToFocusChangedEvent((element, _) => changes.Add(element.ToString())))
                 {
                     Wait.For(TimeSpan.FromMilliseconds(100));
                     var button1 = mainWindow.FindButton(this.GetResizeText());

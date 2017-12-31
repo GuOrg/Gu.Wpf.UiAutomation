@@ -140,7 +140,7 @@
 
             if (this.AutomationElement.TryFindFirst(TreeScope.Ancestors, Condition.Window, out var element))
             {
-                window = new Window(element, isMainWindow: Equals(element.Parent(), Desktop.AutomationElement));
+                window = new Window(element);
                 return true;
             }
 
@@ -255,25 +255,33 @@
         /// <summary>
         /// Registers the given event
         /// </summary>
-        public IDisposable SubscribeToEvent(AutomationEvent @event, TreeScope treeScope, Action<UiElement, AutomationEvent> action)
+        public IDisposable SubscribeToEvent(AutomationEvent automationEvent, TreeScope treeScope, Action<UiElement, AutomationEventArgs> action)
         {
-            return this.AutomationElement.SubscribeToEvent(@event, treeScope, action);
+            return this.AutomationElement.SubscribeToEvent(
+                automationEvent,
+                treeScope,
+                (sender, args) => action(FromAutomationElement((AutomationElement)sender), args));
         }
 
         /// <summary>
         /// Registers a property changed event with the given property
         /// </summary>
-        public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<UiElement, AutomationProperty, object> action, params AutomationProperty[] properties)
+        public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<UiElement, AutomationPropertyChangedEventArgs> action, params AutomationProperty[] properties)
         {
-            return this.AutomationElement.SubscribeToPropertyChangedEvent(treeScope, action, properties);
+            return this.AutomationElement.SubscribeToPropertyChangedEvent(
+                treeScope,
+                (sender, args) => action(FromAutomationElement((AutomationElement)sender), args),
+                properties);
         }
 
         /// <summary>
         /// Registers a structure changed event
         /// </summary>
-        public IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<UiElement, StructureChangeType, int[]> action)
+        public IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<UiElement, StructureChangedEventArgs> action)
         {
-            return this.AutomationElement.SubscribeToStructureChangedEvent(treeScope, action);
+            return this.AutomationElement.SubscribeToStructureChangedEvent(
+                treeScope, 
+                (sender, args) => action(FromAutomationElement((AutomationElement)sender), args));
         }
 
         /// <summary>
@@ -333,7 +341,7 @@
         /// </summary>
         public bool Equals(UiElement other)
         {
-            return other != null && this.AutomationElement.Equals(other.AutomationElement);
+            return other != null && Equals(this.AutomationElement, other.AutomationElement);
         }
 
         /// <inheritdoc/>
