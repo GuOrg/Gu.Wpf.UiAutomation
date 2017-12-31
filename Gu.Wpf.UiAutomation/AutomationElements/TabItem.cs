@@ -13,22 +13,7 @@
         /// <summary>
         /// Flag to get/set the selection of this element.
         /// </summary>
-        public bool IsSelected
-        {
-            get => this.SelectionItemPattern.Current.IsSelected;
-            set
-            {
-                if (this.IsSelected == value)
-                {
-                    return;
-                }
-
-                if (value && !this.IsSelected)
-                {
-                    this.Select();
-                }
-            }
-        }
+        public bool IsSelected => this.SelectionItemPattern.Current.IsSelected;
 
         public override UiElement Content
         {
@@ -43,6 +28,8 @@
             }
         }
 
+        protected SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
+
         /// <summary>
         /// Select this element.
         /// </summary>
@@ -51,7 +38,5 @@
             this.SelectionItemPattern.Select();
             return this;
         }
-
-        protected SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
     }
 }
