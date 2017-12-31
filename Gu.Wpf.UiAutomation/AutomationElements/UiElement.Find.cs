@@ -214,6 +214,16 @@
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="ToolBar"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ToolBar FindToolBar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.ToolBar, name),
+            x => new ToolBar(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="TreeView"/> by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -222,7 +232,6 @@
             this.CreateCondition(Condition.TreeView, name),
             x => new TreeView(x),
             Retry.Time);
-
 
         /// <summary>
         /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID
@@ -235,7 +244,7 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID
+        /// Find the first <see cref="StatusBar"/> by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
         public StatusBar FindStatusBar(string name = null) => this.FindFirst(

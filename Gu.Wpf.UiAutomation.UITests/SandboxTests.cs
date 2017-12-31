@@ -10,10 +10,10 @@
         [Test]
         public void Dump()
         {
-            using (var app = Application.Launch("WpfApplication.exe", "StatusBarWindow"))
+            using (var app = Application.Launch("WpfApplication.exe", "ToolBarWindow"))
             {
                 var window = app.MainWindow;
-                var element = window.FindFirst(TreeScope.Children, Condition.StatusBar);
+                var element = window.FindFirst(TreeScope.Children, Condition.ToolBar);
                 Console.WriteLine($"ControlType: {element.ControlType.ProgrammaticName}");
                 Console.WriteLine($"LocalizedControlType: {element.LocalizedControlType}");
                 Console.WriteLine($"ClassName: {element.ClassName}");

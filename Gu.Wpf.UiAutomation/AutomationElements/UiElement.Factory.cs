@@ -6,7 +6,7 @@
 
     public partial class UiElement
     {
-        private static readonly IReadOnlyList<ConditionAndCreate> ConditionAndCreates = new ConditionAndCreate[]
+        private static readonly IReadOnlyList<ConditionAndCreate> ConditionAndCreates = new[]
         {
             new ConditionAndCreate(Condition.Button, e => new Button(e)),
             //// Calendar
@@ -43,7 +43,7 @@
             new ConditionAndCreate(Condition.TextBox, e => new TextBox(e)),
             new ConditionAndCreate(Condition.Thumb, e => new Thumb(e)),
             new ConditionAndCreate(Condition.TitleBar, e => new TitleBar(e)),
-            ////new ConditionAndCreate(Condition.ToolBar, e => new ToolBar(e)),
+            new ConditionAndCreate(Condition.ToolBar, e => new ToolBar(e)),
             ////new ConditionAndCreate(Condition.ToolTip, e => new ToolTip(e)),
             new ConditionAndCreate(Condition.TreeView, e => new TreeView(e)),
             new ConditionAndCreate(Condition.TreeViewItem, e => new TreeViewItem(e)),

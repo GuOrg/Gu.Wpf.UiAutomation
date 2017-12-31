@@ -2,9 +2,9 @@
 {
     using System.Windows.Automation;
 
-    public class StatusBar : ContentControl
+    public class ToolBar : ContentControl
     {
-        public StatusBar(AutomationElement automationElement)
+        public ToolBar(AutomationElement automationElement)
             : base(automationElement)
         {
         }
