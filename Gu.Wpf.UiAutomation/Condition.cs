@@ -20,7 +20,7 @@
 
         public static System.Windows.Automation.Condition DataGrid { get; } = ByControlType(ControlType.DataGrid);
 
-        public static System.Windows.Automation.Condition DataGridCell { get; } = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
+        public static System.Windows.Automation.Condition DataGridCell { get; } = ByClassName("DataGridCell");
 
         public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 

@@ -64,6 +64,26 @@
         }
 
         [Test]
+        public void DumpDataGrid()
+        {
+            using (var app = Application.Launch("WpfApplication.exe", "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindDataGrid().AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpDataGridItem()
+        {
+            using (var app = Application.Launch("WpfApplication.exe", "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindDataGrid()[0, 0].AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpMessageBox()
         {
             using (var app = Application.Launch("WpfApplication.exe", "DialogWindow"))
