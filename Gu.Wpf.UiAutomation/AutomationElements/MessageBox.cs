@@ -9,6 +9,10 @@
         {
         }
 
+        public string Caption => this.AutomationElement.FindFirst(TreeScope.Children, Condition.TitleBar).Name();
+
+        public string Message => this.AutomationElement.FindFirst(TreeScope.Children, Condition.Label).Name();
+
         public void Close()
         {
             this.AutomationElement.WindowPattern().Close();

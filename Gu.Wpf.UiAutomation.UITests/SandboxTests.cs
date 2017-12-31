@@ -5,7 +5,7 @@
     using System.Windows.Automation;
     using NUnit.Framework;
 
-    [Explicit("Script")]
+    //[Explicit("Script")]
     public class SandboxTests
     {
         [Test]
@@ -52,7 +52,32 @@
             }
         }
 
-        private static void DumpRecursive(AutomationElement element, bool all = true, string padding = "")
+        [Test]
+        public void DumpWindow()
+        {
+            using (var app = Application.Launch("WpfApplication.exe", "EmptyWindow"))
+            {
+                var window = app.MainWindow;
+                var element = window.AutomationElement;
+                DumpRecursive(element);
+            }
+        }
+
+        [Test]
+        public void DumpMessageBox()
+        {
+            using (var app = Application.Launch("WpfApplication.exe", "DialogWindow"))
+            {
+                var window = app.MainWindow;
+                window.FindButton("Show MessageBox").Click();
+                var messageBox = window.FindMessageBox();
+                var element = messageBox.AutomationElement;
+                DumpRecursive(element);
+                messageBox.Close();
+            }
+        }
+
+        private static void DumpRecursive(AutomationElement element, bool all = false, string padding = "")
         {
             DumpPropertiesAndPatterns(element, all, padding);
             foreach (var child in element.Children())
@@ -64,12 +89,14 @@
 
         private static void DumpPropertiesAndPatterns(AutomationElement element, bool all = true, string padding = "")
         {
-            Console.WriteLine($"{padding}ControlType: {element.Current.ControlType.ProgrammaticName}");
-            Console.WriteLine($"{padding}LocalizedControlType: {element.Current.LocalizedControlType}");
-            Console.WriteLine($"{padding}ClassName: {element.Current.ClassName}");
-            Console.WriteLine($"{padding}AutomationId: {element.Current.AutomationId}");
-            Console.WriteLine($"{padding}IsContentElement: {element.Current.IsContentElement}");
-            Console.WriteLine($"{padding}IsControlElement: {element.Current.IsControlElement}");
+            var info = element.Current;
+            Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName}");
+            Console.WriteLine($"{padding}LocalizedControlType: {info.LocalizedControlType}");
+            Console.WriteLine($"{padding}ClassName: {info.ClassName}");
+            Console.WriteLine($"{padding}Name: {info.Name}");
+            Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
+            Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement}");
+            Console.WriteLine($"{padding}IsControlElement: {info.IsControlElement}");
 
             if (all)
             {

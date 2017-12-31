@@ -11,7 +11,7 @@
 
         private void OnShowMessageBoxClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Message", "Caption", MessageBoxButton.OK);
+            MessageBox.Show("Message text", "Caption text", MessageBoxButton.OK);
         }
 
         private void OnShowDialogClick(object sender, RoutedEventArgs e)

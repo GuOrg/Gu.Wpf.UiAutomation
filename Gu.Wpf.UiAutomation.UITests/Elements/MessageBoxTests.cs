@@ -14,7 +14,9 @@
                 var window = app.MainWindow;
                 window.FindButton("Show MessageBox").Click();
                 var messageBox = window.FindMessageBox();
-                Assert.AreEqual("Message", messageBox.FindLabel().Text);
+                Assert.AreEqual("Caption text", messageBox.Caption);
+                Assert.AreEqual("Message text", messageBox.Message);
+                Assert.AreEqual("Message text", messageBox.FindLabel().Text);
                 messageBox.Close();
             }
         }
