@@ -9,8 +9,6 @@
         {
         }
 
-        public static string ClassNameString { get; } = "#32770";
-
         public void Close()
         {
             this.AutomationElement.WindowPattern().Close();

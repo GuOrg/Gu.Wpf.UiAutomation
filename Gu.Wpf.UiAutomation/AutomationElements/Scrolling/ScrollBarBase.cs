@@ -43,8 +43,8 @@
 
         private Thumb FindThumb()
         {
-            var thumb = this.FindFirstChild(Condition.Thumb);
-            return thumb?.AsThumb();
+            var thumb = this.AutomationElement.FindFirst(TreeScope.Children, Condition.Thumb);
+            return thumb != null ? new Thumb(thumb) : null;
         }
     }
 }

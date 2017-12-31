@@ -89,12 +89,12 @@
             }
 
             // For WinForms, we loop thru the buttons and find the one right of the thumb
-            var buttons = this.FindAllChildren(Condition.Button);
-            foreach (var button in buttons)
+            var buttons = this.AutomationElement.FindAllChildren(Condition.Button);
+            foreach (AutomationElement button in buttons)
             {
-                if (button.Bounds.Left > this.Thumb.Bounds.Left)
+                if (button.BoundingRectangle().Left > this.Thumb.Bounds.Left)
                 {
-                    return button.AsButton();
+                    return new Button(button);
                 }
             }
 
@@ -110,12 +110,12 @@
             }
 
             // For WinForms, we loop thru the buttons and find the one left of the thumb
-            var buttons = this.FindAllChildren(Condition.Button);
-            foreach (var button in buttons)
+            var buttons = this.AutomationElement.FindAllChildren(Condition.Button);
+            foreach (AutomationElement button in buttons)
             {
-                if (button.Bounds.Right < this.Thumb.Bounds.Right)
+                if (button.BoundingRectangle().Right < this.Thumb.Bounds.Right)
                 {
-                    return button.AsButton();
+                    return new Button(button);
                 }
             }
 
