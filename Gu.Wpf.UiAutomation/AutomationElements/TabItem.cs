@@ -1,11 +1,9 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Automation;
 
-    public class TabItem : SelectionItemControl
+    public class TabItem : HeaderedContentControl
     {
         public TabItem(AutomationElement automationElement)
             : base(automationElement)
@@ -13,51 +11,47 @@
         }
 
         /// <summary>
-        /// The header text.
+        /// Flag to get/set the selection of this element.
         /// </summary>
-        public string Text
+        public bool IsSelected
         {
-            get
+            get => this.SelectionItemPattern.Current.IsSelected;
+            set
             {
-                var header = this.Header;
-                if (header != null)
+                if (this.IsSelected == value)
                 {
-                    return header.Name;
+                    return;
                 }
 
-                return this.Name;
+                if (value && !this.IsSelected)
+                {
+                    this.Select();
+                }
             }
         }
 
-        public UiElement Header => this.FindFirstChild();
-
-        public UiElement Content
+        public override UiElement Content
         {
             get
             {
                 if (!this.IsSelected)
                 {
-                    throw new InvalidOperationException("TabItem must have be selected to get Content");
+                    throw new InvalidOperationException("TabItem must have be selected to get Content.");
                 }
 
-                var children = this.FindAllChildren();
-                if (children.Count < 2)
-                {
-                    throw new InvalidOperationException($"{this.GetType().Name} does not have content.");
-                }
-
-                if (children.Count > 2)
-                {
-                    throw new InvalidOperationException($"{this.GetType().Name} has an itemscontrol as content. Use ContentCollection");
-                }
-
-                return children[1];
+                return base.Content;
             }
         }
 
         /// <summary>
-        /// When the content is an itemscontrol.
+        /// Select this element.
         /// </summary>
-        public IReadOnlyList<UiElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
+        public TabItem Select()
+        {
+            this.SelectionItemPattern.Select();
+            return this;
+        }
+
+        protected SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
     }
 }

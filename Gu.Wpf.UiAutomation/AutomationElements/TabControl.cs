@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Windows.Automation;
 
-    public class TabControl : UiElement
+    public class TabControl : Control
     {
         public TabControl(AutomationElement automationElement)
             : base(automationElement)

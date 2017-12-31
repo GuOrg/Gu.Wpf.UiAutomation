@@ -39,7 +39,7 @@
         /// This returns this.FindAllChildren().Skip(1).Single();
         /// So it assumes there is exactly one element in the header.
         /// </summary>
-        public UiElement Content
+        public virtual UiElement Content
         {
             get
             {

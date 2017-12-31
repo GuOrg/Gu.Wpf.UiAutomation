@@ -73,7 +73,7 @@
                 var tab = window.FindTabControl();
                 tab.SelectedIndex = 0;
                 var exception = Assert.Throws<InvalidOperationException>(() => _ = tab.Items[1].Content);
-                Assert.AreEqual("TabItem must have be selected to get Content", exception.Message);
+                Assert.AreEqual("TabItem must have be selected to get Content.", exception.Message);
             }
         }
     }
