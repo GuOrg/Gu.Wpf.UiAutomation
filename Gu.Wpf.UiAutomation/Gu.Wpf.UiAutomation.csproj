@@ -5,9 +5,13 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Gu.Wpf.UiAutomation.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System.Windows" />
     <Reference Include="Accessibility" />

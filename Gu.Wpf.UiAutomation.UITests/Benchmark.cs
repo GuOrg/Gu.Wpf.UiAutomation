@@ -17,7 +17,7 @@
                 // for side effect of having the app open.
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("Test Checkbox");
-                var isChecked = checkBox.IsChecked;
+                Assert.AreEqual(false, checkBox.IsChecked);
             }
         }
 
