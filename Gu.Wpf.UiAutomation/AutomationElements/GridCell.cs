@@ -18,19 +18,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public GridView ContainingGridView
-        {
-            get
-            {
-                var containingGrid = this.GridItemPattern.Current.ContainingGrid;
-                if (containingGrid.Current.ControlType.Id == ControlType.DataGrid.Id)
-                {
-                    return new DataGrid(containingGrid);
-                }
-
-                return new ListView(containingGrid);
-            }
-        }
+        public GridView ContainingGridView => (GridView)FromAutomationElement(this.GridItemPattern.Current.ContainingGrid);
 
         /// <summary>
         /// Get the parent of the cell (which should be the row)
