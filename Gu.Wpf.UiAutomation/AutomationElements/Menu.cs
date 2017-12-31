@@ -1,13 +1,16 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
     /// Represents a menu or a menubar, which contains menuitems
     /// </summary>
     public class Menu : Control
     {
-        public Menu(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Menu(AutomationElement automationElement, bool isWin32Menu = false)
+            : base(automationElement)
         {
+            this.IsWin32Menu = isWin32Menu;
         }
 
         public MenuItems Items
@@ -15,7 +18,7 @@
             get
             {
                 var childItems = this.FindAllChildren(
-                    cf => cf.ByControlType(ControlType.MenuItem),
+                    Condition.MenuItem,
                     x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }

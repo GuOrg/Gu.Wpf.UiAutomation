@@ -1,15 +1,17 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class ExpandCollapseAutomationElement : Control
     {
-        public ExpandCollapseAutomationElement(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ExpandCollapseAutomationElement(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public IExpandCollapsePattern ExpandCollapsePattern => this.Patterns.ExpandCollapse.Pattern;
+        public ExpandCollapsePattern ExpandCollapsePattern => this.AutomationElement.ExpandCollapsePattern();
 
-        public ExpandCollapseState ExpandCollapseState => this.ExpandCollapsePattern.ExpandCollapseState.Value;
+        public ExpandCollapseState ExpandCollapseState => this.ExpandCollapsePattern.Current.ExpandCollapseState;
 
         public void Expand()
         {

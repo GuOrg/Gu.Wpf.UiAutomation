@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
-    /// An UI-item which supports the <see cref="ISelectionItemPattern" />
+    /// An UI-item which supports the <see cref="SelectionItemPattern" />
     /// </summary>
     public class SelectionItemAutomationElement : Control
     {
-        public SelectionItemAutomationElement(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public SelectionItemAutomationElement(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -15,7 +17,7 @@
         /// </summary>
         public bool IsSelected
         {
-            get => this.SelectionItemPattern.IsSelected.ValueOrDefault();
+            get => this.SelectionItemPattern.Current.IsSelected;
             set
             {
                 if (this.IsSelected == value)
@@ -30,7 +32,7 @@
             }
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
+        public SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
 
         /// <summary>
         /// Select this element.

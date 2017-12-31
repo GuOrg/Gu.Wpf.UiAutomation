@@ -6,47 +6,44 @@
     [TestFixture]
     public class XPathTests
     {
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched("notepad.exe");
+        }
+
         [Test]
         public void NotepadFindFirst()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
-                var file = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
-                Assert.That(file, Is.Not.Null);
+                var item = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
+                Assert.NotNull(item);
             }
         }
 
         [Test]
         public void NotePadFindAll()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
                 var items = window.FindAllByXPath("//MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(6));
+                Assert.AreEqual(6, items.Count);
             }
         }
 
         [Test]
         public void NotePadFindAllIndexed()
         {
-            using (var app = Application.Launch("notepad.exe"))
+            using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                Assert.That(window, Is.Not.Null);
-                Assert.That(window.Title, Is.Not.Null);
                 var items = window.FindAllByXPath("(//MenuBar)[1]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(1));
+                Assert.AreEqual(1, items.Count);
                 items = window.FindAllByXPath("(//MenuBar)[2]/MenuItem");
-                Assert.That(items, Is.Not.Null);
-                Assert.That(items, Has.Length.EqualTo(5));
+                Assert.AreEqual(5, items.Count);
             }
         }
 

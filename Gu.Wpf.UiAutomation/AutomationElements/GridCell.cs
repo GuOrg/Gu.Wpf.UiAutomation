@@ -4,6 +4,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Cell element for grids and tables.
@@ -12,39 +13,46 @@ namespace Gu.Wpf.UiAutomation
     {
         private static readonly Regex NewItemPlaceHolderRegex = new Regex("^[^:]+: {NewItemPlaceholder}, [^:]+: \\d+$", RegexOptions.Singleline | RegexOptions.Compiled);
 
-        public GridCell(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public GridCell(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public GridView ContainingGridView => this.GridItemPattern.ContainingGrid.Value.AsDataGrid();
-
-        public GridRow ContainingRow
+        public GridView ContainingGridView
         {
             get
             {
-                // Get the parent of the cell (which should be the row)
-                var rowElement = this.Automation.TreeWalkerFactory.GetControlViewWalker().GetParent(this);
-                return rowElement?.AsGridRow();
+                var containingGrid = this.GridItemPattern.Current.ContainingGrid;
+                if (containingGrid.Current.ControlType.Id == ControlType.DataGrid.Id)
+                {
+                    return new DataGrid(containingGrid);
+                }
+
+                return new ListView(containingGrid);
             }
         }
+
+        /// <summary>
+        /// Get the parent of the cell (which should be the row)
+        /// </summary>
+        public GridRow ContainingRow => new GridRow(TreeWalker.ContentViewWalker.GetParent(this.AutomationElement));
 
         public bool IsReadOnly
         {
             get
             {
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                    valuePattern.IsReadOnly.TryGetValue(out var isReadonly))
+                if (this.AutomationElement.TryGetValuePattern(out var pattern))
                 {
-                    return isReadonly;
+                    return pattern.Current.IsReadOnly;
                 }
 
                 if (this.IsNewItemPlaceholder)
                 {
-                    if (this.GridItemPattern.Row.Value > 0)
+                    if (this.GridItemPattern.Current.Row > 0)
                     {
-                        return this.GridItemPattern.ContainingGrid.Value.AsDataGrid()[0, this.GridItemPattern.Column.Value]
-                                   .IsReadOnly;
+                        return this.GridItemPattern.Current.ContainingGrid.GridPattern()
+                                   .GetItem(0, this.GridItemPattern.Current.Column)
+                                   .ValuePattern().Current.IsReadOnly;
                     }
                 }
 
@@ -63,13 +71,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 string GetValue()
                 {
-                    if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                        valuePattern.Value.TryGetValue(out var v))
+                    if (this.AutomationElement.TryGetValuePattern(out var pattern))
                     {
-                        return v;
+                        return pattern.Current.Value;
                     }
 
-                    return this.Properties.Name.ValueOrDefault();
+                    return this.Name;
                 }
 
                 var value = GetValue();
@@ -93,33 +100,30 @@ namespace Gu.Wpf.UiAutomation
             {
                 string GetValue()
                 {
-                    if (this.TryFindFirst(
-                        TreeScope.Children,
-                        this.CreateCondition(ControlType.Text),
-                        x => new TextBlock(x),
-                        TimeSpan.Zero,
-                        out var textBlock))
-                    {
-                        return textBlock.Text;
-                    }
-
-                    if (this.TryFindFirst(
-                        TreeScope.Children,
-                        this.CreateCondition(ControlType.Edit),
-                        x => new TextBox(x),
-                        TimeSpan.Zero,
-                        out var textBox))
-                    {
-                        return textBox.Text;
-                    }
-
-                    if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                        valuePattern.Value.TryGetValue(out var text))
+                    if (this.AutomationElement.TryGetValuePattern(out var valuePattern) &&
+                        valuePattern.Current.Value is string text &&
+                        text != string.Empty)
                     {
                         return text;
                     }
 
-                    return this.Properties.Name.ValueOrDefault();
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBlock, out var textBlock))
+                    {
+                        return textBlock.Name();
+                    }
+
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var textBox) &&
+                        textBox.TryGetValuePattern(out var pattern))
+                    {
+                        return pattern.Current.Value;
+                    }
+
+                    if (this.AutomationElement.TryGetValuePattern(out valuePattern))
+                    {
+                        return valuePattern.Current.Value;
+                    }
+
+                    return this.Name;
                 }
 
                 var value = GetValue();
@@ -133,20 +137,17 @@ namespace Gu.Wpf.UiAutomation
 
             set
             {
-                if (this.Patterns.Value.TryGetPattern(out var valuePattern) &&
-                    valuePattern.Value.IsSupported)
+                if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
                     Wait.UntilResponsive(this);
-                    if (this.TryFindFirst(
+                    if (this.AutomationElement.TryFindFirst(
                         TreeScope.Children,
-                        this.CreateCondition(ControlType.Edit),
-                        x => new TextBox(x),
-                        TimeSpan.Zero,
+                        Condition.TextBox,
                         out var textBox))
                     {
-                        if (textBox.Patterns.Value.TryGetPattern(out valuePattern) &&
-                            !valuePattern.IsReadOnly.ValueOrDefault())
+                        if (textBox.TryGetValuePattern(out valuePattern) &&
+                            !valuePattern.Current.IsReadOnly)
                         {
                             valuePattern.SetValue(value);
                         }
@@ -160,9 +161,9 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        protected IGridItemPattern GridItemPattern => this.Patterns.GridItem.Pattern;
+        protected GridItemPattern GridItemPattern => this.AutomationElement.GridItemPattern();
 
-        protected ITableItemPattern TableItemPattern => this.Patterns.TableItem.Pattern;
+        protected TableItemPattern TableItemPattern => this.AutomationElement.TableItemPattern();
 
         /// <summary>
         /// Simulate typing in text. This is slower than setting Text but raises more events.
@@ -172,10 +173,10 @@ namespace Gu.Wpf.UiAutomation
             if (value != null &&
                 value.Contains('\n'))
             {
-                throw new ArgumentException("Only single line allowed for now.");
+                throw new NotSupportedException("Only single line allowed for now.");
             }
 
-            if (this.Patterns.SelectionItem.IsSupported)
+            if (this.AutomationElement.TryGetSelectionItemPattern(out var selectionItemPattern))
             {
                 if (!this.IsSelected)
                 {
@@ -188,10 +189,9 @@ namespace Gu.Wpf.UiAutomation
                 this.Click();
             }
 
-            var child = this.FindFirstChild();
-            if (child.ControlType == ControlType.Edit)
+            if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var element))
             {
-                child.AsTextBox().Enter(value);
+                new TextBox(element).Enter(value);
             }
             else
             {

@@ -2,14 +2,15 @@ namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     /// <summary>
     /// Row element for grids and tables.
     /// </summary>
     public class GridRow : SelectionItemAutomationElement
     {
-        public GridRow(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public GridRow(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -18,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 return this.FindAllChildren()
-                           .Where(x => x.Patterns.TableItem.IsSupported)
+                           .Where(x => x.AutomationElement.TryGetCurrentPattern(TableItemPattern.Pattern, out _))
                            .Select(x => x.AsGridCell())
                            .ToArray();
             }
@@ -30,7 +31,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 if (this.TryFindFirst(
                     TreeScope.Children,
-                    this.CreateCondition(ControlType.HeaderItem),
+                    Condition.HeaderItem,
                     x => new RowHeader(x),
                     Retry.Time,
                     out var header))
@@ -38,12 +39,12 @@ namespace Gu.Wpf.UiAutomation
                     return header;
                 }
 
-                if (this.Patterns.VirtualizedItem.TryGetPattern(out var pattern))
+                if (this.AutomationElement.TryGetVirtualizedItemPattern(out var pattern))
                 {
                     pattern.Realize();
                     if (this.TryFindFirst(
                         TreeScope.Children,
-                        this.CreateCondition(ControlType.HeaderItem),
+                        Condition.HeaderItem,
                         x => new RowHeader(x),
                         Retry.Time,
                         out header))
@@ -56,7 +57,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
+        protected ScrollItemPattern ScrollItemPattern => this.AutomationElement.ScrollItemPattern();
 
         /// <summary>
         /// Find a cell by a given text.

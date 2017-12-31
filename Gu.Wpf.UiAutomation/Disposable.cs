@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Provides a set of static methods for creating <see cref="IDisposable"/> objects.
@@ -26,6 +27,18 @@
             }
 
             return new ActionDisposable(dispose);
+        }
+
+        public static IDisposable Create(IEnumerable<IDisposable> disposables)
+        {
+            return Disposable.Create(
+                () =>
+                {
+                    foreach (var disposable in disposables)
+                    {
+                        disposable.Dispose();
+                    }
+                });
         }
 
         private sealed class NopDisposable : IDisposable

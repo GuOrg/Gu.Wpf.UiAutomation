@@ -1,15 +1,16 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class ToggleButton : Control
     {
-        public ToggleButton(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ToggleButton(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public ITogglePattern TogglePattern => this.Patterns.Toggle.Pattern;
+        public TogglePattern TogglePattern => this.AutomationElement.TogglePattern();
 
         public string Text
         {
@@ -17,12 +18,12 @@
             {
                 var children = this.FindAllChildren();
                 if (children.Count == 1 &&
-                    children[0].ControlType == ControlType.Text)
+                    children[0].ControlType.Id == ControlType.Text.Id)
                 {
-                    return children[0].Properties.Name.Value;
+                    return children[0].Name;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
 
@@ -62,10 +63,10 @@
                     return;
                 }
 
-                throw new UiAutomationException($"Setting {this} .IsChecked to {value?.ToString() ?? "null failed."}");
+                throw new UiAutomationException($"Setting ToggleButton {this.Name}.IsChecked to {value?.ToString() ?? "null"} failed.");
             }
         }
 
-        private ToggleState State => this.TogglePattern.ToggleState.Value;
+        private ToggleState State => this.TogglePattern.Current.ToggleState;
     }
 }

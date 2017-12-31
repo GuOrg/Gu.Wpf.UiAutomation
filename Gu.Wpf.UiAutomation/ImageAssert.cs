@@ -116,7 +116,7 @@
         /// </summary>
         /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
         /// <param name="element">The automation element.</param>
-        public static void AreEqual(string fileName, AutomationElement element)
+        public static void AreEqual(string fileName, UiElement element)
         {
             WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
@@ -158,7 +158,7 @@
         /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
         /// <param name="element">The automation element.</param>
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
-        public static void AreEqual(string fileName, AutomationElement element, Action<Exception, Bitmap> onFail)
+        public static void AreEqual(string fileName, UiElement element, Action<Exception, Bitmap> onFail)
         {
             WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
@@ -194,7 +194,7 @@
             }
         }
 
-        public static void AreEqual(Bitmap expected, AutomationElement element)
+        public static void AreEqual(Bitmap expected, UiElement element)
         {
             WaitForStartAnimation(element);
             using (var actualBmp = Capture.Rectangle(element.Bounds))
@@ -336,7 +336,7 @@
             }
         }
 
-        private static void WaitForStartAnimation(AutomationElement element)
+        private static void WaitForStartAnimation(UiElement element)
         {
             if (StartAnimation <= TimeSpan.Zero)
             {

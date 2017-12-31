@@ -1,21 +1,20 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class Expander : HeaderedContentControl
     {
-        public Expander(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Expander(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
         public bool IsExpanded
         {
-            get
-            {
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                return ecp?.ExpandCollapseState.ValueOrDefault() == ExpandCollapseState.Expanded;
-            }
+            get => this.AutomationElement.ExpandCollapsePattern()
+                       .Current
+                       .ExpandCollapseState == ExpandCollapseState.Expanded;
 
             set
             {
@@ -32,8 +31,12 @@
 
         public void Expand()
         {
-            if (!this.Properties.IsEnabled.Value ||
-                this.IsExpanded)
+            if (!this.IsEnabled)
+            {
+                throw new System.Windows.Automation.ElementNotEnabledException();
+            }
+
+            if (this.IsExpanded)
             {
                 return;
             }
@@ -47,8 +50,7 @@
             else
             {
                 // WPF
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                ecp?.Expand();
+                this.AutomationElement.ExpandCollapsePattern().Expand();
             }
         }
 
@@ -80,8 +82,7 @@
             else
             {
                 // WPF
-                var ecp = this.Patterns.ExpandCollapse.PatternOrDefault;
-                ecp?.Collapse();
+                this.AutomationElement.ExpandCollapsePattern().Collapse();
             }
 
             Wait.UntilResponsive(this);

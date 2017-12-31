@@ -92,9 +92,9 @@
 
         public class Win10Calc : ICalculator
         {
-            private readonly AutomationElement mainWindow;
+            private readonly UiElement mainWindow;
 
-            public Win10Calc(AutomationElement mainWindow)
+            public Win10Calc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
@@ -123,18 +123,18 @@
             {
                 get
                 {
-                    var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("CalculatorResults"));
-                    var value = resultElement.Properties.Name;
-                    return Regex.Replace(value.Value, "[^0-9]", string.Empty);
+                    var resultElement = this.mainWindow.FindFirstDescendant(Condition.ByAutomationId("CalculatorResults"));
+                    var value = resultElement.Name;
+                    return Regex.Replace(value, "[^0-9]", string.Empty);
                 }
             }
         }
 
         private class LegacyCalc : ICalculator
         {
-            private readonly AutomationElement mainWindow;
+            private readonly UiElement mainWindow;
 
-            public LegacyCalc(AutomationElement mainWindow)
+            public LegacyCalc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
@@ -163,9 +163,9 @@
             {
                 get
                 {
-                    var resultElement = this.mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("158"));
-                    var value = resultElement.Properties.Name;
-                    return Regex.Replace(value.Value, "[^0-9]", string.Empty);
+                    var resultElement = this.mainWindow.FindFirstDescendant(Condition.ByAutomationId("158"));
+                    var value = resultElement.Name;
+                    return Regex.Replace(value, "[^0-9]", string.Empty);
                 }
             }
         }

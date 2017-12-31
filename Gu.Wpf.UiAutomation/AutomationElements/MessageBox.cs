@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class MessageBox : AutomationElement
+    using System.Windows.Automation;
+
+    public class MessageBox : UiElement
     {
-        public MessageBox(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public MessageBox(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -11,14 +13,7 @@
 
         public void Close()
         {
-            var windowPattern = this.Patterns.Window.PatternOrDefault;
-            if (windowPattern != null)
-            {
-                windowPattern.Close();
-                return;
-            }
-
-            throw new MethodNotSupportedException("Close is not supported");
+            this.AutomationElement.WindowPattern().Close();
         }
     }
 }

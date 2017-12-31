@@ -1,25 +1,26 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
+    using System.Windows.Automation;
 
     public class TreeViewItem : Control
     {
         private readonly SelectionItemAutomationElement selectionItemAutomationElement;
         private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
-        private readonly ConditionBase treeViewItemCondition;
+        private readonly System.Windows.Automation.Condition treeViewItemCondition;
 
-        public TreeViewItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TreeViewItem(AutomationElement automationElement)
+            : base(automationElement)
         {
-            this.selectionItemAutomationElement = new SelectionItemAutomationElement(basicAutomationElement);
-            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(basicAutomationElement);
-            this.treeViewItemCondition = this.ConditionFactory.ByControlType(ControlType.TreeItem);
+            this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
+            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
+            this.treeViewItemCondition = Condition.TreeViewItem;
         }
 
         /// <summary>
         /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
         /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.BasicAutomationElement.FindAll(
+        public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
             this.treeViewItemCondition,
             x => new TreeViewItem(x));
@@ -31,11 +32,11 @@
         {
             get
             {
-                var value = this.Properties.Name.Value;
+                var value = this.Name;
                 if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.FindFirstChild(cf => cf.ByControlType(ControlType.Text));
-                    return textElement == null ? string.Empty : textElement.Properties.Name.Value;
+                    var textElement = this.FindFirstChild(Condition.TextBox);
+                    return textElement == null ? string.Empty : textElement.Name;
                 }
 
                 return value;
@@ -52,10 +53,9 @@
         {
             get
             {
-                if (this.Patterns.ExpandCollapse.TryGetPattern(out var pattern) &&
-                    pattern.ExpandCollapseState.TryGetValue(out var state))
+                if (this.AutomationElement.TryGetExpandCollapsePattern(out var pattern))
                 {
-                    return state == ExpandCollapseState.Expanded;
+                    return pattern.Current.ExpandCollapseState == ExpandCollapseState.Expanded;
                 }
 
                 return true;
@@ -76,17 +76,17 @@
 
         public void Expand()
         {
-            this.Patterns.ExpandCollapse.Pattern.Expand();
+            this.AutomationElement.ExpandCollapsePattern().Expand();
         }
 
         public void Collapse()
         {
-            this.Patterns.ExpandCollapse.Pattern.Collapse();
+            this.AutomationElement.ExpandCollapsePattern().Collapse();
         }
 
         public void Select()
         {
-            this.Patterns.SelectionItem.Pattern.Select();
+            this.AutomationElement.SelectionItemPattern().Select();
         }
     }
 }

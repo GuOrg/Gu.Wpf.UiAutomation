@@ -22,7 +22,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenEqualExplicitPath()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenEqualRelativePath()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
@@ -45,7 +45,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenEqualResourceName()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
@@ -56,7 +56,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenEqualResource()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
@@ -90,7 +90,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenNotEqual()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
@@ -102,7 +102,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenNotEqualSaveFileToTempRootedPath()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
@@ -118,7 +118,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [TestCase(@"Images\button.png")]
         public void WhenNotEqualSaveFileToTempRelativePath(string fileName)
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
@@ -136,7 +136,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [TestCase("button_resource")]
         public void WhenNotEqualSaveFileToResourceName(string fileName)
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var tempFile = Path.Combine(Path.GetTempPath(), "button_resource.png");
@@ -154,7 +154,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void WhenNotEqualWithAction()
         {
-            using (var app = Application.Launch(ExeFileName, "SizeWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");

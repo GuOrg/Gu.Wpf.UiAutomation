@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.UiAutomation.UiTests.Converters
 {
     using System.Windows;
+    using System.Windows.Automation;
     using NUnit.Framework;
 
     public class ValueConverterTests

@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class UserControl : Control
     {
-        public UserControl(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public UserControl(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public AutomationElement Content => this.FindFirstChild();
+        public UiElement Content => this.FindFirstChild();
     }
 }

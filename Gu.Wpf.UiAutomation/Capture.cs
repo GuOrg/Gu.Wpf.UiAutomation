@@ -59,18 +59,18 @@
         /// Captures an element and returns the image.
         /// Note that a sleep may be required before if the control is newly loaded.
         /// </summary>
-        public static Bitmap Element(AutomationElement element)
+        public static Bitmap Element(UiElement element)
         {
-            return Rectangle(element.Properties.BoundingRectangle.Value);
+            return Rectangle(element.Bounds);
         }
 
         /// <summary>
         /// Captures an element and saves it to a file.
         /// Note that a sleep may be required before if the control is newly loaded.
         /// </summary>
-        public static void ElementToFile(AutomationElement element, string filePath)
+        public static void ElementToFile(UiElement element, string filePath)
         {
-            using (var bmp = Rectangle(element.Properties.BoundingRectangle.Value))
+            using (var bmp = Rectangle(element.Bounds))
             {
                 Logger.Default.Info($"Capture.ElementToFile: {element} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);

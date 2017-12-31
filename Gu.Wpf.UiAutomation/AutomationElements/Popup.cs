@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class Popup : AutomationElement
+    using System.Windows.Automation;
+
+    public class Popup : UiElement
     {
-        public Popup(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public Popup(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
     }

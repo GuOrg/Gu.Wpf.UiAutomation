@@ -7,8 +7,17 @@
         Height="300"
         mc:Ignorable="d">
     <StackPanel>
-        <CheckBox x:Name="CheckBoxXName"
-                  AutomationProperties.AutomationId="CheckBoxAutomationId"
-                  Content="CheckBoxXNameAndAutomationId" />
+        <CheckBox x:Name="CheckBox1Name"
+                  AutomationProperties.AutomationId="CheckBox1AutomationId"
+                  Content="CheckBox1Content" />
+
+        <TextBlock Text="TextBlock1" />
+        <TextBlock Text="TextBlock2" />
+
+        <Label Content="Label1" />
+        <Label Content="Label2" />
+
+        <TextBox Text="TextBox1" />
+        <TextBox Text="TextBox2" />
     </StackPanel>
 </Window>

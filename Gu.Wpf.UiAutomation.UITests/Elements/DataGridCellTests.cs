@@ -60,7 +60,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("DataGrid")]
         [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]
-        [TestCase("TemplateColumnDataGrid")]
         public void Enter(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -76,7 +75,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
 
                 dataGrid[0, 0].Enter("11");
-                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
                 Assert.AreEqual("11", dataGrid[0, 0].FindTextBox().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
@@ -87,6 +86,40 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 dataGrid[1, 1].Click();
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.AreEqual("11", dataGrid[0, 0].FindTextBlock().Text);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+
+                dataGrid[0, 0].Enter("111");
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+            }
+        }
+
+        [Test]
+        public void EnterTemplateColumn()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid("TemplateColumnDataGrid");
+
+                Assert.AreEqual("1", dataGrid[0, 0].Value);
+                Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
+                Assert.AreEqual("2", dataGrid[1, 0].Value);
+                Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
+                Assert.AreEqual("3", dataGrid[2, 0].Value);
+                Assert.AreEqual("Item 3", dataGrid[2, 1].Value);
+
+                dataGrid[0, 0].Enter("11");
+                Assert.AreEqual("11", dataGrid[0, 0].Value);
+                Assert.AreEqual("11", dataGrid[0, 0].FindTextBox().Text);
                 Assert.AreEqual("Item 1", dataGrid[0, 1].Value);
                 Assert.AreEqual("2", dataGrid[1, 0].Value);
                 Assert.AreEqual("Item 2", dataGrid[1, 1].Value);
@@ -105,7 +138,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
 
         [TestCase("DataGrid")]
         [TestCase("SelectCellDataGrid")]
-        [TestCase("TemplateColumnDataGrid")]
         public void EnterInvalidValue(string name)
         {
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
@@ -118,10 +150,41 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
 
                 cell.Enter("a");
                 Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
+                Assert.AreEqual("1", cell.Value);
+                Assert.AreEqual("a", cell.FindTextBox().Text);
+
+                cell.Enter("11");
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
+                Assert.AreEqual("11", cell.Value);
+                Assert.AreEqual("11", cell.FindTextBlock().Text);
+            }
+        }
+
+        [Test]
+        public void EnterInvalidValueTemplateColumn()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid("TemplateColumnDataGrid");
+
+                var cell = dataGrid[0, 0];
+                Assert.AreEqual("1", cell.Value);
+
+                cell.Enter("a");
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
                 Assert.AreEqual("a", cell.Value);
                 Assert.AreEqual("a", cell.FindTextBox().Text);
 
                 cell.Enter("11");
+                Keyboard.Type(Key.TAB);
+                Keyboard.Type(Key.TAB);
                 Keyboard.Type(Key.TAB);
                 Assert.AreEqual("11", cell.Value);
                 Assert.AreEqual("11", cell.FindTextBlock().Text);

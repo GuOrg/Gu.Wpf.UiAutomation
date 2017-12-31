@@ -1,9 +1,11 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class RadioButton : Control
     {
-        public RadioButton(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public RadioButton(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -12,7 +14,7 @@
         /// </summary>
         public bool IsChecked
         {
-            get => this.SelectionItemPattern.IsSelected.Value;
+            get => this.SelectionItemPattern.Current.IsSelected;
             set
             {
                 if (this.IsChecked == value)
@@ -27,11 +29,11 @@
 
                 if (this.IsChecked != value)
                 {
-                    throw new UiAutomationException($"Setting {this} .IsChecked to {value}");
+                    throw new UiAutomationException($"Setting {this}.IsChecked to {value} failed.");
                 }
             }
         }
 
-        protected ISelectionItemPattern SelectionItemPattern => this.Patterns.SelectionItem.Pattern;
+        protected SelectionItemPattern SelectionItemPattern => this.AutomationElement.SelectionItemPattern();
     }
 }

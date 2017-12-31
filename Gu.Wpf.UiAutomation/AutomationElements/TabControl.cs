@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
-    public class TabControl : AutomationElement
+    public class TabControl : UiElement
     {
-        public TabControl(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public TabControl(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -31,9 +32,9 @@
         /// <summary>
         /// All <see cref="TabItem" /> objects from this <see cref="TabControl" />
         /// </summary>
-        public IReadOnlyList<TabItem> Items => this.FindAllChildren(this.ConditionFactory.ByControlType(ControlType.TabItem), x => new TabItem(x));
+        public IReadOnlyList<TabItem> Items => this.FindAllChildren(Condition.TabItem, x => new TabItem(x));
 
-        public AutomationElement Content
+        public UiElement Content
         {
             get
             {
@@ -58,7 +59,7 @@
         public TabItem Select(string text)
         {
             var tabItems = this.Items;
-            var tabItem = tabItems.FirstOrDefault(t => t.Properties.Name.ValueOrDefault("MISSING_VALUE") == text);
+            var tabItem = tabItems.FirstOrDefault(t => t.Name == text);
             if (tabItem == null)
             {
                 throw new Exception($"No TabItem found with text '{text}'");

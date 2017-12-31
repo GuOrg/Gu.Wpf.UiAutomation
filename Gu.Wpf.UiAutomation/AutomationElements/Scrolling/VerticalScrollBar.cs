@@ -1,11 +1,12 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
 
     public class VerticalScrollBar : ScrollBarBase
     {
-        public VerticalScrollBar(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public VerticalScrollBar(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 

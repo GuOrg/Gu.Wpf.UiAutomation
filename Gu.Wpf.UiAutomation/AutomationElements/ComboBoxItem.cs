@@ -1,12 +1,14 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     /// <summary>
     /// Represents an item in a <see cref="ComboBox"/>
     /// </summary>
     public class ComboBoxItem : SelectionItemAutomationElement
     {
-        public ComboBoxItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ComboBoxItem(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -18,15 +20,14 @@
                 {
                     // In WPF, the Text is actually an inner content only (text) element
                     // which can be accessed only with a raw walker.
-                    var rawTreeWalker = this.Automation.TreeWalkerFactory.GetRawViewWalker();
-                    var rawElement = rawTreeWalker.GetFirstChild(this);
+                    var rawElement = TreeWalker.RawViewWalker.GetFirstChild(this.AutomationElement);
                     if (rawElement != null)
                     {
-                        return rawElement.Properties.Name.Value;
+                        return rawElement.Name();
                     }
                 }
 
-                return this.BasicAutomationElement.Properties.Name.Value;
+                return this.AutomationElement.Name();
             }
         }
     }

@@ -41,17 +41,16 @@
             Wait.For(delay);
         }
 
-        public static bool UntilResponsive(AutomationElement automationElement)
+        public static bool UntilResponsive(UiElement uiElement)
         {
-            return UntilResponsive(automationElement, DefaultTimeout);
+            return UntilResponsive(uiElement, DefaultTimeout);
         }
 
-        public static bool UntilResponsive(AutomationElement automationElement, TimeSpan timeout)
+        public static bool UntilResponsive(UiElement uiElement, TimeSpan timeout)
         {
-            if (automationElement.TryGetWindow(out var window) &&
-                window.Properties.NativeWindowHandle.TryGetValue(out var handle))
+            if (uiElement.TryGetWindow(out var window))
             {
-                return UntilResponsive(handle, timeout);
+                return UntilResponsive(window.NativeWindowHandle, timeout);
             }
 
             return false;

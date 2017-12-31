@@ -5,12 +5,18 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Windows.Automation;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
-    public class Window : AutomationElement
+    public class Window : UiElement
     {
-        public Window(BasicAutomationElementBase basicAutomationElement, bool isMainWindow)
-            : base(basicAutomationElement)
+        public Window(AutomationElement automationElement)
+        : this(automationElement, Equals(automationElement.Parent(), Desktop.AutomationElement))
+        {
+        }
+
+        public Window(AutomationElement automationElement, bool isMainWindow)
+            : base(automationElement)
         {
             this.IsMainWindow = isMainWindow;
         }
@@ -21,18 +27,21 @@
         /// </summary>
         public bool IsMainWindow { get; }
 
-        public string Title => this.Properties.Name.Value;
+        public string Title => this.Name;
 
-        public bool IsModal => this.Patterns.Window.Pattern.IsModal.Value;
+        public bool IsModal => this.AutomationElement.WindowPattern().Current.IsModal;
 
-        public TitleBar TitleBar => this.FindFirstChild(cf => cf.ByControlType(ControlType.TitleBar))?.AsTitleBar();
+        public TitleBar TitleBar => this.FindFirstChild(Condition.TitleBar)?.AsTitleBar();
 
         public IReadOnlyList<Window> ModalWindows
         {
             get
             {
-                return this.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(new PropertyCondition(this.Automation.PropertyLibrary.Window.IsModal, true)))
-                           .Select(e => new Window(e.BasicAutomationElement, isMainWindow: false))
+                return this.FindAllChildren(
+                               new AndCondition(
+                                   Condition.Window,
+                                   new PropertyCondition(WindowPatternIdentifiers.IsModalProperty, true)))
+                           .Select(e => new Window(e.AutomationElement, isMainWindow: false))
                            .ToArray();
             }
         }
@@ -45,15 +54,17 @@
             get
             {
                 var mainWindow = this.GetMainWindow();
-                var popup = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Window)
-                                                              .And(cf.ByName(string.Empty)
-                                                              .And(cf.ByClassName("Popup"))));
+                var popup = mainWindow.FindFirstChild(
+                    new AndCondition(
+                        Condition.Window,
+                        Condition.ByName(string.Empty),
+                        Condition.ByClassName("Popup")));
                 if (popup == null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
                 }
 
-                return new Popup(popup.BasicAutomationElement);
+                return new Popup(popup.AutomationElement);
             }
         }
 
@@ -63,20 +74,11 @@
         /// </summary>
         public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
-        public IntPtr NativeWindowHandle
-        {
-            get
-            {
-                if (this.Properties.NativeWindowHandle.TryGetValue(out var value))
-                {
-                    return value;
-                }
+        public IntPtr NativeWindowHandle => new IntPtr(this.AutomationElement.NativeWindowHandle());
 
-                return IntPtr.Zero;
-            }
-        }
-
-        public MessageBox FindMessageBox() => this.FindFirstDescendant(cf => cf.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ?? throw new InvalidOperationException("Did not find a message box");
+        public MessageBox FindMessageBox() =>
+            this.FindFirstDescendant(Condition.ByClassName(MessageBox.ClassNameString))?.AsMessageBox() ??
+            throw new InvalidOperationException("Did not find a message box");
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
@@ -87,14 +89,16 @@
                 this.WaitUntilResponsive();
 
                 // The main menu is directly under the desktop with the name "Context" or in a few cases "System"
-                var desktop = this.BasicAutomationElement.Automation.GetDesktop();
-                var ctxMenu = desktop.FindFirstChild(cf => cf.ByControlType(ControlType.Menu)
-                                                             .And(this.ConditionFactory.ByName("Context").Or(this.ConditionFactory.ByName("System"))))
-                                     .AsContextMenu();
-                if (ctxMenu != null)
+                if (Desktop.AutomationElement.TryFindFirst(
+                    TreeScope.Children,
+                    new AndCondition(
+                        Condition.Menu,
+                        new OrCondition(
+                            Condition.ByName("Context"),
+                            Condition.ByName("System"))),
+                    out var element))
                 {
-                    ctxMenu.IsWin32Menu = true;
-                    return ctxMenu;
+                    return new ContextMenu(element, isWin32Menu: true);
                 }
             }
 
@@ -106,7 +110,10 @@
 
             if (frameworkType == FrameworkType.WinForms)
             {
-                var ctxMenu = mainWindow.FindFirstChild(cf => cf.ByControlType(ControlType.Menu).And(cf.ByName("DropDown")));
+                var ctxMenu = mainWindow.FindFirstChild(
+                    new AndCondition(
+                        Condition.Menu,
+                        Condition.ByName("DropDown")));
                 return ctxMenu?.AsContextMenu() ?? throw new InvalidOperationException("Could not find ControlType.Menu with name DropDown");
             }
 
@@ -114,7 +121,7 @@
             {
                 // In WPF, there is a window (Popup) where the menu is inside
                 var popup = this.Popup;
-                var ctxMenu = popup.FindFirstChild(cf => cf.ByControlType(ControlType.Menu));
+                var ctxMenu = popup.FindFirstChild(Condition.Menu);
                 return ctxMenu.AsContextMenu();
             }
 
@@ -137,19 +144,12 @@
                 }
             }
 
-            var windowPattern = this.Patterns.Window.PatternOrDefault;
-            if (windowPattern != null)
-            {
-                windowPattern.Close();
-                return;
-            }
-
-            throw new MethodNotSupportedException("Close is not supported");
+            this.AutomationElement.WindowPattern().Close();
         }
 
-        public void Move(int x, int y)
+        public void MoveTo(int x, int y)
         {
-            this.Patterns.Transform.PatternOrDefault?.Move(x, y);
+            this.AutomationElement.TransformPattern().Move(x, y);
         }
 
         /// <summary>
@@ -168,6 +168,11 @@
             }
         }
 
+        public UiElement FocusedElement()
+        {
+            return FromAutomationElement(AutomationElement.FocusedElement);
+        }
+
         /// <summary>
         /// Gets the main window (first window on desktop with the same process as this window)
         /// </summary>
@@ -178,10 +183,12 @@
                 return this;
             }
 
-            var mainWindow = this.Automation.GetDesktop()
-                                 .FindFirstChild(cf => cf.ByProcessId(this.Properties.ProcessId.Value))
-                                 .AsWindow(isMainWindow: true);
-            return mainWindow ?? this;
+            var element = AutomationElement.RootElement
+                                           .FindFirst(
+                                               TreeScope.Children,
+                                               Condition.ByProcessId(this.ProcessId));
+            var mainWindow = new Window(element, isMainWindow: true);
+            return mainWindow;
         }
     }
 }

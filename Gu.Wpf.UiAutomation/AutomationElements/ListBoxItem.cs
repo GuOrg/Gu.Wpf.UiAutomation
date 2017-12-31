@@ -1,9 +1,11 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class ListBoxItem : SelectionItemAutomationElement
     {
-        public ListBoxItem(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ListBoxItem(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -15,19 +17,18 @@ namespace Gu.Wpf.UiAutomation
                 {
                     // In WPF, the Text is actually an inner content only (text) element
                     // which can be accessed only with a raw walker.
-                    var rawTreeWalker = this.Automation.TreeWalkerFactory.GetRawViewWalker();
-                    var rawElement = rawTreeWalker.GetFirstChild(this);
+                    var rawElement = TreeWalker.RawViewWalker.GetFirstChild(this.AutomationElement);
                     if (rawElement != null)
                     {
-                        return rawElement.Properties.Name.Value;
+                        return rawElement.Name();
                     }
                 }
 
-                return this.BasicAutomationElement.Properties.Name.Value;
+                return this.AutomationElement.Name();
             }
         }
 
-        protected IScrollItemPattern ScrollItemPattern => this.Patterns.ScrollItem.Pattern;
+        protected ScrollItemPattern ScrollItemPattern => this.AutomationElement.ScrollItemPattern();
 
         public ListBoxItem ScrollIntoView()
         {

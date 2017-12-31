@@ -1,18 +1,20 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
-    public class ProgressBar : AutomationElement
+    using System.Windows.Automation;
+
+    public class ProgressBar : UiElement
     {
-        public ProgressBar(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ProgressBar(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
-        public IRangeValuePattern RangeValuePattern => this.Patterns.RangeValue.Pattern;
+        public RangeValuePattern RangeValuePattern => this.AutomationElement.RangeValuePattern();
 
-        public double Minimum => this.RangeValuePattern.Minimum.Value;
+        public double Minimum => this.RangeValuePattern.Current.Minimum;
 
-        public double Maximum => this.RangeValuePattern.Maximum.Value;
+        public double Maximum => this.RangeValuePattern.Current.Maximum;
 
-        public double Value => this.RangeValuePattern.Value.Value;
+        public double Value => this.RangeValuePattern.Current.Value;
     }
 }

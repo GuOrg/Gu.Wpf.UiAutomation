@@ -1,9 +1,11 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows.Automation;
+
     public class ColumnHeader : GridHeader
     {
-        public ColumnHeader(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ColumnHeader(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
     }

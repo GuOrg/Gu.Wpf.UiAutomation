@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     public class HeaderedContentControl : Control
     {
-        public HeaderedContentControl(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public HeaderedContentControl(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -21,24 +22,24 @@
                 var header = this.Header;
                 if (header != null)
                 {
-                    return header.Properties.Name.Value;
+                    return header.Name;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
 
         /// <summary>
         /// The first child so it assumes there is exactly one element in the header.
         /// </summary>
-        public AutomationElement Header => this.FindFirstChild();
+        public UiElement Header => this.FindFirstChild();
 
         /// <summary>
         /// When the content is a single item.
         /// This returns this.FindAllChildren().Skip(1).Single();
         /// So it assumes there is exactly one element in the header.
         /// </summary>
-        public AutomationElement Content
+        public UiElement Content
         {
             get
             {
@@ -62,17 +63,17 @@
         /// This returns this.FindAllChildren().Skip(1).ToArray();
         /// So it assumes there is exactly one element in the header.
         /// </summary>
-        public IReadOnlyList<AutomationElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
+        public IReadOnlyList<UiElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
 
         /// <summary>
         /// When the content is an ItemsControl.
         /// This returns this.FindAllChildren().Skip(1).ToArray();
         /// So it assumes there is exactly one element in the header.
         /// </summary>
-        public IReadOnlyList<T> ContentElements<T>(Func<BasicAutomationElementBase, T> wrap)
-            where T : AutomationElement
+        public IReadOnlyList<T> ContentElements<T>(Func<AutomationElement, T> wrap)
+            where T : UiElement
         {
-            return this.FindAllChildren(TrueCondition.Default, wrap).Skip(1).ToArray();
+            return this.FindAllChildren(System.Windows.Automation.Condition.TrueCondition, wrap).Skip(1).ToArray();
         }
     }
 }

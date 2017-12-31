@@ -8,8 +8,8 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Windows.Automation;
     using Gu.Wpf.UiAutomation.Logging;
-    using Gu.Wpf.UiAutomation.UIA3;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <inheritdoc />
@@ -36,10 +36,7 @@
         {
             this.processReference = process;
             this.IsStoreApp = isStoreApp;
-            this.Automation = new UIA3Automation();
         }
-
-        public UIA3Automation Automation { get; }
 
         /// <summary>
         /// Flag to indicate, if the application is a windows store app.
@@ -130,8 +127,8 @@
         {
             //// Logger.Default.Debug($"[Attaching to process:{process.Id}] [Process name:{process.ProcessName}] [Process full path:{process.MainModule.FileName}]");
             var app = new Application(new ProcessReference(process, dispose));
-            if (app.MainWindow.Properties.NativeWindowHandle.TryGetValue(out var windowHandle) &&
-                windowHandle != new IntPtr(0))
+            var windowHandle = app.MainWindow.NativeWindowHandle;
+            if (windowHandle != new IntPtr(0))
             {
                 User32.SetForegroundWindow(windowHandle);
                 Wait.UntilResponsive(app.MainWindow);
@@ -561,7 +558,7 @@
                 }
 
                 Wait.UntilResponsive(mainWindowHandle, waitTimeout ?? TimeSpan.MaxValue);
-                return this.mainWindow = new Window(this.Automation.FromHandle(mainWindowHandle).BasicAutomationElement, isMainWindow: true);
+                return this.mainWindow = new Window(AutomationElement.FromHandle(mainWindowHandle), isMainWindow: true);
             }
         }
 
@@ -570,9 +567,12 @@
         /// </summary>
         public IReadOnlyList<Window> GetAllTopLevelWindows()
         {
-            var desktop = this.Automation.GetDesktop();
-            var foundElements = desktop.FindAllChildren(cf => cf.ByControlType(ControlType.Window).And(cf.ByProcessId(this.ProcessId)));
-            return foundElements.Select((x, i) => x.AsWindow(i == 0)).ToArray();
+            var desktop = AutomationElement.RootElement;
+            var foundElements = desktop.FindAllChildren(
+                new AndCondition(
+                    Condition.Window,
+                    Condition.ByProcessId(this.ProcessId)));
+            return foundElements.OfType<AutomationElement>().Select((x, i) => new Window(x, i == 0)).ToArray();
         }
 
         public void Dispose()
@@ -589,7 +589,6 @@
                 Launched.Remove(this.processReference.Process);
             }
 
-            this.Automation.Dispose();
             this.disposed = true;
         }
 

@@ -24,6 +24,7 @@
                 Assert.AreEqual(0, slider.Minimum);
                 Assert.AreEqual(10, slider.Maximum);
                 Assert.AreEqual(5, slider.Value);
+                Assert.AreEqual(1, slider.SmallChange);
                 Assert.AreEqual(4, slider.LargeChange);
             }
         }
@@ -38,12 +39,12 @@
                 slider.Value = 5;
 
                 var thumb = slider.Thumb;
-                var oldPos = thumb.Properties.BoundingRectangle.Value.Center();
+                var oldPos = thumb.Bounds.Center();
                 thumb.SlideHorizontally(50);
                 Wait.UntilInputIsProcessed();
 
-                Assert.AreEqual(oldPos.X + 49, thumb.Properties.BoundingRectangle.Value.Center().X);
-                Assert.AreEqual(oldPos.Y, thumb.Properties.BoundingRectangle.Value.Center().Y);
+                Assert.AreEqual(oldPos.X + 49, thumb.Bounds.Center().X);
+                Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
             }
         }
 

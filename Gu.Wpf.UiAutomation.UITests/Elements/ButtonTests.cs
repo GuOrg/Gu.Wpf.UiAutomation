@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
-                Assert.AreEqual($"Did not find a Button matching (ControlType: Button AND (Name: {key} OR AutomationId: {key})).", exception.Message);
+                Assert.AreEqual($"Did not find a Button matching (ControlType == Button && (Name == {key} || AutomationId == {key})).", exception.Message);
             }
         }
 

@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Automation;
 
     public class ContentControl : Control
     {
-        public ContentControl(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public ContentControl(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -21,14 +22,14 @@
                 var header = this.Content;
                 if (header != null)
                 {
-                    return header.Properties.Name.Value;
+                    return header.Name;
                 }
 
-                return this.Properties.Name.Value;
+                return this.Name;
             }
         }
 
-        public AutomationElement Content
+        public UiElement Content
         {
             get
             {
@@ -50,6 +51,6 @@
         /// <summary>
         /// When the content is an itemscontrol.
         /// </summary>
-        public IReadOnlyList<AutomationElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
+        public IReadOnlyList<UiElement> ContentCollection => this.FindAllChildren().Skip(1).ToArray();
     }
 }

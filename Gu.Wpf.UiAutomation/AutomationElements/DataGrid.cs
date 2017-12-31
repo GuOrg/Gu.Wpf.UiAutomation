@@ -1,11 +1,12 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System.Linq;
+    using System.Windows.Automation;
 
     public class DataGrid : GridView
     {
-        public DataGrid(BasicAutomationElementBase basicAutomationElement)
-            : base(basicAutomationElement)
+        public DataGrid(AutomationElement automationElement)
+            : base(automationElement)
         {
         }
 
@@ -13,7 +14,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).Parent.BasicAutomationElement);
+                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).Parent());
                 return firstRow.Cells.Where(x => x.IsKeyboardFocusable)
                                      .All(x => x.IsReadOnly);
             }
@@ -23,18 +24,13 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var gridPattern = this.GridPattern;
-                if (!this.GridPattern.RowCount.TryGetValue(out var rowCount))
-                {
-                    return 0;
-                }
-
+                var rowCount = this.GridPattern.Current.RowCount;
                 if (rowCount == 0)
                 {
                     return 0;
                 }
 
-                var cell = gridPattern.GetItem(rowCount - 1, 0, x => new GridCell(x));
+                var cell = new GridCell(this.GridPattern.GetItem(rowCount - 1, 0));
                 if (cell.IsNewItemPlaceholder &&
                     cell.IsReadOnly)
                 {

@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.UiAutomation.UiTests", "Gu.Wpf.UiAutomation.UiTests\Gu.Wpf.UiAutomation.UiTests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.UiTests", "Gu.Wpf.UiAutomation.UiTests\Gu.Wpf.UiAutomation.UiTests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.UiAutomation.Tests", "Gu.Wpf.UiAutomation.Tests\Gu.Wpf.UiAutomation.Tests.csproj", "{AFE453D1-C9B6-43D0-835F-BAE465063453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.Tests", "Gu.Wpf.UiAutomation.Tests\Gu.Wpf.UiAutomation.Tests.csproj", "{AFE453D1-C9B6-43D0-835F-BAE465063453}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{3DB16548-AA97-4652-BCE9-2FA4AF413AFD}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,12 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{28EBF5DE
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interop", "Interop", "{4DC0FBAA-0BBE-46D8-B9BF-D685E799D32D}"
-	ProjectSection(SolutionItems) = preProject
-		Interop\Build.bat = Interop\Build.bat
-		Interop\Interop.UIAutomationClient.dll = Interop\Interop.UIAutomationClient.dll
 	EndProjectSection
 EndProject
 Global

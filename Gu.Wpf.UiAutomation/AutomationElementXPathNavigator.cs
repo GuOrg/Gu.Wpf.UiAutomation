@@ -1,26 +1,27 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Windows.Automation;
     using System.Xml;
     using System.Xml.XPath;
 
     /// <summary>
     /// Custom implementation of a <see cref="XPathNavigator" /> which allows
-    /// selecting items by xpath by using the <see cref="ITreeWalker" />.
+    /// selecting items by xpath by using the <see cref="TreeWalker" />.
     /// </summary>
     public class AutomationElementXPathNavigator : XPathNavigator
     {
         private const int NoAttributeValue = -1;
-        private readonly AutomationElement rootElement;
-        private readonly ITreeWalker treeWalker;
+        private readonly UiElement rootElement;
+        private readonly TreeWalker treeWalker;
         private AutomationElement currentElement;
         private int attributeIndex = NoAttributeValue;
 
-        public AutomationElementXPathNavigator(AutomationElement rootElement)
+        public AutomationElementXPathNavigator(UiElement rootElement)
         {
-            this.treeWalker = rootElement.Automation.TreeWalkerFactory.GetControlViewWalker();
+            this.treeWalker = TreeWalker.ControlViewWalker;
             this.rootElement = rootElement;
-            this.currentElement = rootElement;
+            this.currentElement = rootElement.AutomationElement;
         }
 
         private enum ElementAttributes
@@ -38,7 +39,7 @@
         public override string Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
 
         /// <inheritdoc/>
-        public override object UnderlyingObject => this.currentElement;
+        public override object UnderlyingObject => new UiElement(this.currentElement);
 
         /// <inheritdoc/>
         public override XPathNodeType NodeType
@@ -50,7 +51,7 @@
                     return XPathNodeType.Attribute;
                 }
 
-                if (this.currentElement.Equals(this.rootElement))
+                if (Equals(this.currentElement, this.rootElement.AutomationElement))
                 {
                     return XPathNodeType.Root;
                 }
@@ -60,13 +61,15 @@
         }
 
         /// <inheritdoc/>
-        public override string LocalName => this.IsInAttribute ? this.GetAttributeName(this.attributeIndex) : this.currentElement.Properties.ControlType.Value.ToString();
+        public override string LocalName => this.IsInAttribute
+            ? this.GetAttributeName(this.attributeIndex)
+            : this.currentElement.ControlType().ProgrammaticName.TrimStart("ControlType.");
 
         /// <inheritdoc/>
         public override string Name => this.LocalName;
 
         /// <inheritdoc/>
-        public override XmlNameTable NameTable => throw new NotImplementedException();
+        public override XmlNameTable NameTable => throw new NotSupportedException();
 
         /// <inheritdoc/>
         public override string NamespaceURI => string.Empty;
@@ -131,10 +134,10 @@
                 return string.Empty;
             }
 
-            var attributeIndex = this.GetAttributeIndexFromName(localName);
-            if (attributeIndex != NoAttributeValue)
+            var index = this.GetAttributeIndexFromName(localName);
+            if (index != NoAttributeValue)
             {
-                return this.GetAttributeValue(attributeIndex);
+                return this.GetAttributeValue(index);
             }
 
             return string.Empty;
@@ -148,10 +151,10 @@
                 return false;
             }
 
-            var attributeIndex = this.GetAttributeIndexFromName(localName);
-            if (attributeIndex != NoAttributeValue)
+            var index = this.GetAttributeIndexFromName(localName);
+            if (index != NoAttributeValue)
             {
-                this.attributeIndex = attributeIndex;
+                this.attributeIndex = index;
                 return true;
             }
 
@@ -161,20 +164,20 @@
         /// <inheritdoc/>
         public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <inheritdoc/>
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <inheritdoc/>
         public override void MoveToRoot()
         {
             this.attributeIndex = NoAttributeValue;
-            this.currentElement = this.rootElement;
+            this.currentElement = this.rootElement.AutomationElement;
         }
 
         /// <inheritdoc/>
@@ -240,7 +243,7 @@
                 return true;
             }
 
-            if (this.currentElement.Equals(this.rootElement))
+            if (Equals(this.currentElement, this.rootElement.AutomationElement))
             {
                 return false;
             }
@@ -258,7 +261,7 @@
                 return false;
             }
 
-            if (!this.rootElement.Equals(specificNavigator.rootElement))
+            if (!Equals(this.rootElement.AutomationElement, specificNavigator.rootElement.AutomationElement))
             {
                 return false;
             }
@@ -292,29 +295,29 @@
                 && this.attributeIndex == specificNavigator.attributeIndex;
         }
 
-        private string GetAttributeValue(int attributeIndex)
+        private string GetAttributeValue(int index)
         {
-            switch ((ElementAttributes)attributeIndex)
+            switch ((ElementAttributes)index)
             {
                 case ElementAttributes.AutomationId:
-                    return this.currentElement.Properties.AutomationId.Value;
+                    return this.currentElement.AutomationId();
                 case ElementAttributes.Name:
-                    return this.currentElement.Properties.Name.Value;
+                    return this.currentElement.Name();
                 case ElementAttributes.ClassName:
-                    return this.currentElement.Properties.ClassName.Value;
+                    return this.currentElement.ClassName();
                 case ElementAttributes.HelpText:
-                    return this.currentElement.Properties.HelpText.Value;
+                    return this.currentElement.HelpText();
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+                    throw new ArgumentOutOfRangeException(nameof(index));
             }
         }
 
-        private string GetAttributeName(int attributeIndex)
+        private string GetAttributeName(int index)
         {
-            var name = Enum.GetName(typeof(ElementAttributes), attributeIndex);
+            var name = Enum.GetName(typeof(ElementAttributes), index);
             if (name == null)
             {
-                throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             return name;
@@ -322,7 +325,7 @@
 
         private int GetAttributeIndexFromName(string attributeName)
         {
-            if (Enum.TryParse(attributeName, out ElementAttributes parsedValue))
+            if (Enum.TryParse<ElementAttributes>(attributeName, out var parsedValue))
             {
                 return (int)parsedValue;
             }
