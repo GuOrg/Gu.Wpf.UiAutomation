@@ -143,10 +143,9 @@
         {
             get
             {
-                var edit = this.GetEditableElement();
-                if (edit != null)
+                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var element))
                 {
-                    return edit.AsTextBox();
+                    return new TextBox(element);
                 }
 
                 throw new Exception("ComboBox is not editable.");
@@ -286,11 +285,6 @@
             var foundItem = this.Items.FirstOrDefault(item => item.Text.Equals(textToFind));
             foundItem?.Select();
             return foundItem;
-        }
-
-        private UiElement GetEditableElement()
-        {
-            return this.FindFirstChild(Condition.TextBox);
         }
     }
 }
