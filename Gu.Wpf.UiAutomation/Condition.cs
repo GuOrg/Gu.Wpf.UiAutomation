@@ -36,7 +36,11 @@
 
         public static PropertyCondition Image { get; } = ByControlType(ControlType.Image);
 
-        public static System.Windows.Automation.Condition Label { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("Text"));
+        public static System.Windows.Automation.Condition Label { get; } = new AndCondition(
+            ByControlType(ControlType.Text),
+            new OrCondition(
+                ByClassName("Text"),
+                ByClassName("Static")));
 
         public static PropertyCondition ListBox { get; } = ByControlType(ControlType.List);
 
@@ -175,12 +179,20 @@
             {
                 case PropertyCondition propertyCondition:
                     {
+                        var value = element.GetCurrentPropertyValue(propertyCondition.Property);
+                        if (Equals(propertyCondition.Property, AutomationElement.ControlTypeProperty) &&
+                            value is ControlType controlType &&
+                            propertyCondition.Value is int id)
+                        {
+                            return controlType.Id == id;
+                        }
+
                         switch (propertyCondition.Flags)
                         {
                             case PropertyConditionFlags.None:
-                                return Equals(element.GetCurrentPropertyValue(propertyCondition.Property), propertyCondition.Value);
+                                return Equals(value, propertyCondition.Value);
                             case PropertyConditionFlags.IgnoreCase:
-                                return string.Equals((string)element.GetCurrentPropertyValue(propertyCondition.Property), (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase);
+                                return string.Equals((string)value, (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase);
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }

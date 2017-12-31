@@ -24,5 +24,21 @@
                 child = walker.GetNextSibling(child);
             }
         }
+
+        public static IEnumerable<AutomationElement> Decendants(this TreeWalker walker, AutomationElement element)
+        {
+            foreach (var child in Children(walker, element))
+            {
+                yield return child;
+            }
+
+            foreach (var child in Children(walker, element))
+            {
+                foreach (var decendant in Decendants(walker,child))
+                {
+                    yield return decendant;
+                }
+            }
+        }
     }
 }

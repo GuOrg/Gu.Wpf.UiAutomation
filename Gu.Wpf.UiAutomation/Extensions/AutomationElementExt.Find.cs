@@ -17,6 +17,43 @@
             match = treeScope == TreeScope.Ancestors
                 ? new TreeWalker(condition).Ancestors(element).FirstOrDefault()
                 : element.FindFirst(treeScope, condition);
+            if (match == null)
+            {
+                switch (treeScope)
+                {
+                    case TreeScope.Children:
+                        foreach (var child in TreeWalker.RawViewWalker.Children(element))
+                        {
+                            if (Condition.IsMatch(child, condition))
+                            {
+                                match = child;
+                                return true;
+                            }
+                        }
+
+                        break;
+                    case TreeScope.Descendants:
+                        foreach (var child in TreeWalker.RawViewWalker.Decendants(element))
+                        {
+                            if (Condition.IsMatch(child, condition))
+                            {
+                                match = child;
+                                return true;
+                            }
+                        }
+
+                        break;
+                    case TreeScope.Parent:
+                        break;
+                    case TreeScope.Ancestors:
+                        break;
+                    case TreeScope.Subtree:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null);
+                }
+            }
+
             return match != null;
         }
 
