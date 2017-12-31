@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System.Linq;
     using System.Windows.Automation;
 
     /// <summary>
@@ -17,12 +16,9 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.FindAllChildren()
-                        .Where(c => c.ControlType != ControlType.Thumb)
-                        .TryGetSingle(out var child) &&
-                    child.ControlType == ControlType.Text)
+                if (this.AutomationElement.TryFindSingleChild(Condition.TextBlock, out var child))
                 {
-                    return child.AsTextBlock().Text;
+                    return child.Name();
                 }
 
                 return this.Name;
