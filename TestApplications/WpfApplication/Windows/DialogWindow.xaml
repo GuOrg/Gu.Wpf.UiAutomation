@@ -9,7 +9,8 @@
         Height="300"
         mc:Ignorable="d">
     <StackPanel>
-        <Button Click="OnShowMessageBoxClick" Content="Show MessageBox" />
+        <Button Click="OnShowMessageBoxOKCancelClick" Content="Show MessageBox OKCancel" />
+        <Button Click="OnShowMessageBoxYesNoCancelClick" Content="Show MessageBox YesNoCancel" />
         <Button Click="OnShowDialogClick" Content="Show Dialog" />
     </StackPanel>
 </Window>

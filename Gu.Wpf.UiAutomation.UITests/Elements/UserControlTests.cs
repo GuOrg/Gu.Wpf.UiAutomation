@@ -15,7 +15,7 @@
                 var window = app.MainWindow;
                 var userControl = window.FindUserControl(key);
                 Assert.AreEqual(expected, userControl.FindTextBlock().Text);
-                Assert.AreEqual(expected, userControl.Content.AsTextBlock().Text);
+                Assert.AreEqual(expected, ((TextBlock)userControl.Content).Text);
             }
         }
     }

@@ -56,8 +56,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander(key);
-                Assert.AreEqual(content, expander.Content.AsTextBlock().Text);
-                Assert.AreEqual(content, expander.ContentCollection[0].AsTextBlock().Text);
+                Assert.AreEqual(content, ((TextBlock)expander.Content).Text);
+                Assert.AreEqual(content, ((TextBlock)expander.ContentCollection[0]).Text);
             }
         }
 
@@ -70,12 +70,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
                 Assert.AreEqual("WithItemsControl", expander.Text);
-                Assert.AreEqual("WithItemsControl", expander.Header.AsTextBlock().Text);
+                Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentCollection;
                 Assert.AreEqual(2, content.Count);
-                Assert.AreEqual("1", content[0].AsTextBlock().Text);
-                Assert.AreEqual("2", content[1].AsTextBlock().Text);
+                Assert.AreEqual("1", ((TextBlock)content[0]).Text);
+                Assert.AreEqual("2", ((TextBlock)content[1]).Text);
             }
         }
 
@@ -88,7 +88,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
                 Assert.AreEqual("WithItemsControl", expander.Text);
-                Assert.AreEqual("WithItemsControl", expander.Header.AsTextBlock().Text);
+                Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentElements(x => new TextBlock(x));
                 Assert.AreEqual(2, content.Count);

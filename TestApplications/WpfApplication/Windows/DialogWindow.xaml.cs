@@ -9,9 +9,14 @@
             this.InitializeComponent();
         }
 
-        private void OnShowMessageBoxClick(object sender, RoutedEventArgs e)
+        private void OnShowMessageBoxOKCancelClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Message text", "Caption text", MessageBoxButton.OK);
+            MessageBox.Show("Message text", "Caption text", MessageBoxButton.OKCancel);
+        }
+
+        private void OnShowMessageBoxYesNoCancelClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Message text", "Caption text", MessageBoxButton.YesNoCancel);
         }
 
         private void OnShowDialogClick(object sender, RoutedEventArgs e)

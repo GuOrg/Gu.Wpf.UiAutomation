@@ -5,7 +5,7 @@
     using System.Windows.Automation;
     using NUnit.Framework;
 
-    //[Explicit("Script")]
+    [Explicit("Script")]
     public class SandboxTests
     {
         [Test]
@@ -69,7 +69,7 @@
             using (var app = Application.Launch("WpfApplication.exe", "DialogWindow"))
             {
                 var window = app.MainWindow;
-                window.FindButton("Show MessageBox").Click();
+                window.FindButton("Show MessageBox OKCancel").Click();
                 var messageBox = window.FindMessageBox();
                 var element = messageBox.AutomationElement;
                 DumpRecursive(element);

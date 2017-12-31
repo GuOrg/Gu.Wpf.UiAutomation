@@ -6,17 +6,47 @@
     {
         private const string ExeFileName = "WpfApplication.exe";
 
-        [Test]
-        public void MessageBox()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
-            using (var app = Application.Launch(ExeFileName, "DialogWindow"))
+            Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void MessageBoxOkCancel()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow"))
             {
                 var window = app.MainWindow;
-                window.FindButton("Show MessageBox").Click();
+                window.FindButton("Show MessageBox OKCancel").Click();
                 var messageBox = window.FindMessageBox();
                 Assert.AreEqual("Caption text", messageBox.Caption);
                 Assert.AreEqual("Message text", messageBox.Message);
                 Assert.AreEqual("Message text", messageBox.FindLabel().Text);
+
+                Assert.NotNull(messageBox.FindButton("OK"));
+                Assert.NotNull(messageBox.FindButton("Cancel"));
+
+                messageBox.Close();
+            }
+        }
+
+        [Test]
+        public void MessageBoxYesNoCancel()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow"))
+            {
+                var window = app.MainWindow;
+                window.FindButton("Show MessageBox YesNoCancel").Click();
+                var messageBox = window.FindMessageBox();
+                Assert.AreEqual("Caption text", messageBox.Caption);
+                Assert.AreEqual("Message text", messageBox.Message);
+                Assert.AreEqual("Message text", messageBox.FindLabel().Text);
+
+                Assert.NotNull(messageBox.FindButton("Yes"));
+                Assert.NotNull(messageBox.FindButton("No"));
+                Assert.NotNull(messageBox.FindButton("Cancel"));
+
                 messageBox.Close();
             }
         }

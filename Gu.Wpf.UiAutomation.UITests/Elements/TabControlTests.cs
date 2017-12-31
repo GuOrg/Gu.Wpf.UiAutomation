@@ -32,8 +32,8 @@
                     tabItem.Click();
                     if (tabItem.ContentCollection.Count == 1)
                     {
-                        Assert.AreEqual($"{i + 1}", tabItem.Content.AsTextBlock().Text);
-                        Assert.AreEqual($"{i + 1}", tab.Content.AsTextBlock().Text);
+                        Assert.AreEqual($"{i + 1}", ((TextBlock)tabItem.Content).Text);
+                        Assert.AreEqual($"{i + 1}", ((TextBlock)tab.Content).Text);
                     }
                 }
             }
