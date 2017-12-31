@@ -22,6 +22,10 @@
 
         public static System.Windows.Automation.Condition DataGridCell { get; } = ByClassName("DataGridCell");
 
+        public static System.Windows.Automation.Condition DataGridColumnHeader { get; } = ByClassName("DataGridColumnHeader");
+
+        public static System.Windows.Automation.Condition DataGridRowHeader { get; } = ByClassName("DataGridRowHeader");
+
         public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
         public static System.Windows.Automation.Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));
@@ -50,9 +54,15 @@
                 ByClassName("Text"),
                 ByClassName("Static")));
 
-        public static System.Windows.Automation.Condition ListBox { get; } = ByControlType(ControlType.List);
+        public static System.Windows.Automation.Condition ListBox { get; } = ByClassName("ListBox");
 
-        public static System.Windows.Automation.Condition ListBoxItem { get; } = ByControlType(ControlType.ListItem);
+        public static System.Windows.Automation.Condition ListBoxItem { get; } = ByClassName("ListBoxItem");
+
+        public static System.Windows.Automation.Condition ListView { get; } = ByClassName("ListView");
+  
+        public static System.Windows.Automation.Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
+      
+        public static System.Windows.Automation.Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
 
         public static System.Windows.Automation.Condition Menu { get; } = ByControlType(ControlType.Menu);
 

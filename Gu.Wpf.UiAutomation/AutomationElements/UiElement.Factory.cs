@@ -15,10 +15,14 @@
             //// Custom
             new ConditionAndCreate(Condition.DataGrid, e => new DataGrid(e)),
             new ConditionAndCreate(Condition.DataGridCell, e => new DataGridCell(e)),
+            new ConditionAndCreate(Condition.DataGridColumnHeader, e => new DataGridColumnHeader(e)),
+            new ConditionAndCreate(Condition.DataGridRowHeader, e => new DataGridRowHeader(e)),
             new ConditionAndCreate(Condition.DatePicker, e => new DatePicker(e)),
             //// DataItem
             //// ControlTypeDocument
             new ConditionAndCreate(Condition.Expander, e => new Expander(e)),
+            new ConditionAndCreate(Condition.GridViewColumnHeader, e => new GridViewColumnHeader(e)),
+            new ConditionAndCreate(Condition.GridViewRowHeader, e => new GridViewRowHeader(e)),
             new ConditionAndCreate(Condition.GroupBox, e => new GroupBox(e)),
             ////new ConditionAndCreate(Condition.Header, e => new Header(e)),
             ////new ConditionAndCreate(Condition.HeaderItem, e => new HeaderItem(e)),
@@ -27,6 +31,7 @@
             new ConditionAndCreate(Condition.Label, e => new Label(e)),
             new ConditionAndCreate(Condition.ListBox, e => new ListBox(e)),
             new ConditionAndCreate(Condition.ListBoxItem, e => new ListBoxItem(e)),
+            new ConditionAndCreate(Condition.ListView, e => new ListView(e)),
             new ConditionAndCreate(Condition.Menu, e => new Menu(e)),
             ////new ConditionAndCreate(Condition.MenuBar, e => new MenuBar(e)),
             new ConditionAndCreate(Condition.MenuItem, e => new MenuItem(e)),

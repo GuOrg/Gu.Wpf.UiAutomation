@@ -39,13 +39,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
-        
-        [TestCase("DataGrid", false)]
-        [TestCase("DataGrid10", false)]
-        [TestCase("DataGridNoHeaders", false)]
-        [TestCase("ReadOnlyDataGrid", true)]
-        [TestCase("ReadonlyColumnsDataGrid", true)]
-        [TestCase("TemplateColumnDataGrid", false)]
+        [TestCase("DataGrid")]
+        [TestCase("DataGrid10")]
+        [TestCase("DataGridNoHeaders")]
+        [TestCase("ReadOnlyDataGrid")]
+        [TestCase("ReadonlyColumnsDataGrid")]
+        [TestCase("TemplateColumnDataGrid")]
         public void ContainingGrid(string name)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
