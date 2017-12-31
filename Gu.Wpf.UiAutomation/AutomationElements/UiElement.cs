@@ -122,7 +122,7 @@
         public IReadOnlyList<UiElement> CachedChildren => this.AutomationElement
                                                               .CachedChildren
                                                               .OfType<AutomationElement>()
-                                                              .Select(x => new UiElement(x))
+                                                              .Select(FromAutomationElement)
                                                               .ToArray();
 
         /// <summary>

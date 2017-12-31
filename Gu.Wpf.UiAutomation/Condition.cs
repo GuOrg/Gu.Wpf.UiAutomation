@@ -20,6 +20,8 @@
 
         public static System.Windows.Automation.Condition DataGrid { get; } = ByControlType(ControlType.DataGrid);
 
+        public static System.Windows.Automation.Condition DataGridCell { get; } = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
+
         public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
         public static System.Windows.Automation.Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));
@@ -33,6 +35,10 @@
         public static System.Windows.Automation.Condition Header { get; } = ByControlType(ControlType.Header);
 
         public static System.Windows.Automation.Condition HeaderItem { get; } = ByControlType(ControlType.HeaderItem);
+
+        public static System.Windows.Automation.Condition HeaderSite { get; } = new PropertyCondition(AutomationElement.AutomationIdProperty, "HeaderSite");
+
+        public static System.Windows.Automation.Condition NotHeaderSite { get; } = new NotCondition(HeaderSite);
 
         public static System.Windows.Automation.Condition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
 
@@ -53,6 +59,12 @@
         public static System.Windows.Automation.Condition MenuBar { get; } = ByControlType(ControlType.MenuBar);
 
         public static System.Windows.Automation.Condition MenuItem { get; } = ByControlType(ControlType.MenuItem);
+
+        public static System.Windows.Automation.Condition MessageBox { get; } = ByClassName("#32770");
+
+        public static System.Windows.Automation.Condition ModalWindow { get; } = new AndCondition(
+            ByControlType(ControlType.Window),
+            new PropertyCondition(WindowPatternIdentifiers.IsModalProperty, true));
 
         public static System.Windows.Automation.Condition Pane { get; } = ByControlType(ControlType.Pane);
 

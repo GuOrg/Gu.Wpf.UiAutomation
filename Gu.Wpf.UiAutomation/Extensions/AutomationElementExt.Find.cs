@@ -33,7 +33,7 @@
 
                         break;
                     case TreeScope.Descendants:
-                        foreach (var child in TreeWalker.RawViewWalker.Decendants(element))
+                        foreach (var child in TreeWalker.RawViewWalker.Descendants(element))
                         {
                             if (Condition.IsMatch(child, condition))
                             {
@@ -59,12 +59,35 @@
 
         public static AutomationElement FindFirst(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
-            return element.FindFirst(treeScope, condition);
+            if (TryFindFirst(element, treeScope, condition, out var first))
+            {
+                return first;
+            }
+
+            throw new InvalidOperationException($"Did not find a {treeScope} matching {condition.Description()}.");
+        }
+
+        public static AutomationElement FindFirstChild(this AutomationElement element, System.Windows.Automation.Condition condition)
+        {
+            return FindFirst(element, TreeScope.Children, condition);
         }
 
         public static T FindFirst<T>(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
         {
-            return wrap(element.FindFirst(treeScope, condition));
+            return wrap(FindFirst(element, treeScope, condition));
+        }
+
+        public static bool TryFindSingleChild(this AutomationElement element, System.Windows.Automation.Condition condition, out AutomationElement match)
+        {
+            var collection = element.FindAll(TreeScope.Children, condition);
+            if (collection?.Count == 1)
+            {
+                match = collection[0];
+                return true;
+            }
+
+            match = null;
+            return false;
         }
 
         public static AutomationElementCollection FindAllChildren(this AutomationElement element, System.Windows.Automation.Condition condition)

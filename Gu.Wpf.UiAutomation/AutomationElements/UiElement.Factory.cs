@@ -29,6 +29,8 @@
             new ConditionAndCreate(Condition.Menu, e => new Menu(e)),
             ////new ConditionAndCreate(Condition.MenuBar, e => new MenuBar(e)),
             new ConditionAndCreate(Condition.MenuItem, e => new MenuItem(e)),
+            new ConditionAndCreate(Condition.MessageBox, e => new MessageBox(e)),
+            new ConditionAndCreate(Condition.ModalWindow, e => new Window(e, isMainWindow: false)),
             ////new ConditionAndCreate(Condition.Pane, e => new Pane(e)),
             new ConditionAndCreate(Condition.ProgressBar, e => new ProgressBar(e)),
             new ConditionAndCreate(Condition.RadioButton, e => new RadioButton(e)),
@@ -51,6 +53,16 @@
             new ConditionAndCreate(Condition.UserControl, e => new UserControl(e)),
             new ConditionAndCreate(Condition.Window, e => new Window(e)),
         };
+
+        public static UiElement FromAutomationElementOrNull(AutomationElement element)
+        {
+            if (element == null)
+            {
+                return null;
+            }
+
+            return FromAutomationElement(element);
+        }
 
         public static UiElement FromAutomationElement(AutomationElement element)
         {

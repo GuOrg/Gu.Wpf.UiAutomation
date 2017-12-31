@@ -334,7 +334,7 @@
         /// </summary>
         public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
-            return this.AutomationElement.FindAll(treeScope, condition, x => new UiElement(x));
+            return this.AutomationElement.FindAll(treeScope, condition, FromAutomationElement);
         }
 
         /// <summary>
@@ -364,7 +364,7 @@
         /// </summary>
         public bool TryFindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
         {
-            return this.TryFindAll(treeScope, condition, x => new UiElement(x), timeOut, out result);
+            return this.TryFindAll(treeScope, condition, FromAutomationElement, timeOut, out result);
         }
 
         /// <summary>
@@ -429,7 +429,7 @@
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                result = this.AutomationElement.FindFirst(treeScope, condition, x => new UiElement(x));
+                result = this.AutomationElement.FindFirst(treeScope, condition, FromAutomationElement);
                 if (result != null)
                 {
                     return true;
@@ -500,7 +500,7 @@
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
             {
-                result = this.AutomationElement.FindIndexed(treeScope, condition, index, x => new UiElement(x));
+                result = this.AutomationElement.FindIndexed(treeScope, condition, index, FromAutomationElement);
                 if (result != null)
                 {
                     return true;
@@ -593,7 +593,7 @@
 
         public IReadOnlyList<UiElement> FindAllChildren(System.Windows.Automation.Condition condition)
         {
-            return this.AutomationElement.FindAll(TreeScope.Children, condition, x => new UiElement(x));
+            return this.AutomationElement.FindAll(TreeScope.Children, condition, FromAutomationElement);
         }
 
         public UiElement FindFirstDescendant()

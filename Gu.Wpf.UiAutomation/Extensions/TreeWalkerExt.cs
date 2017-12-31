@@ -25,14 +25,14 @@
             }
         }
 
-        public static IEnumerable<AutomationElement> Decendants(this TreeWalker walker, AutomationElement element)
+        public static IEnumerable<AutomationElement> Descendants(this TreeWalker walker, AutomationElement element)
         {
             foreach (var child in Children(walker, element))
             {
                 yield return child;
-                foreach (var decendant in Decendants(walker, child))
+                foreach (var descendants in Descendants(walker, child))
                 {
-                    yield return decendant;
+                    yield return descendants;
                 }
             }
         }
