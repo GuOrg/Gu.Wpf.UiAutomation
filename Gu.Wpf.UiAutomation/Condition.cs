@@ -22,6 +22,8 @@
 
         public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
+        public static System.Windows.Automation.Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));
+
         public static System.Windows.Automation.Condition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
         public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));

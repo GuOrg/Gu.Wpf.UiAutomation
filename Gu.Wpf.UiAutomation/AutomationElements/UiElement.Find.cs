@@ -14,36 +14,6 @@
         }
 
         /// <summary>
-        /// Find the first <see cref="CheckBox"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public CheckBox FindCheckBox(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.CheckBox, name),
-            x => new CheckBox(x),
-            Retry.Time);
-
-        /// <summary>
-        /// Find the first <see cref="ToggleButton"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.Button, name),
-            x => new ToggleButton(x),
-            Retry.Time);
-
-        /// <summary>
-        /// Find the first <see cref="RadioButton"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public RadioButton FindRadioButton(string name) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.RadioButton, name),
-            x => new RadioButton(x),
-            Retry.Time);
-
-        /// <summary>
         /// Find the first <see cref="Button"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -54,23 +24,13 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="Slider"/> by x:Name, Content or AutomationID
+        /// Find the first <see cref="CheckBox"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public Slider FindSlider(string name = null) => this.FindFirst(
+        public CheckBox FindCheckBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Slider, name),
-            x => new Slider(x),
-            Retry.Time);
-
-        /// <summary>
-        /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
-        /// </summary>
-        /// <param name="name">x:Name, Content or AutomationID</param>
-        public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Condition.ProgressBar, name),
-            x => new ProgressBar(x),
+            this.CreateCondition(Condition.CheckBox, name),
+            x => new CheckBox(x),
             Retry.Time);
 
         /// <summary>
@@ -84,13 +44,23 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID
+        /// Find the first <see cref="DataGrid"/> by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBlock FindTextBlock(string name = null) => this.FindFirst(
+        public DataGrid FindDataGrid(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TextBlock, name),
-            x => new TextBlock(x),
+            this.CreateCondition(Condition.DataGrid, name),
+            x => new DataGrid(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="DatePicker"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public DatePicker FindDatePicker(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.DatePicker, name),
+            x => new DatePicker(x),
             Retry.Time);
 
         /// <summary>
@@ -184,13 +154,43 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="DataGrid"/> by x:Name, Header or AutomationID
+        /// Find the first <see cref="RadioButton"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public DataGrid FindDataGrid(string name = null) => this.FindFirst(
+        public RadioButton FindRadioButton(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.DataGrid, name),
-            x => new DataGrid(x),
+            this.CreateCondition(Condition.RadioButton, name),
+            x => new RadioButton(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.ProgressBar, name),
+            x => new ProgressBar(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="Slider"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Slider FindSlider(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.Slider, name),
+            x => new Slider(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TextBlock FindTextBlock(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.TextBlock, name),
+            x => new TextBlock(x),
             Retry.Time);
 
         /// <summary>
@@ -201,6 +201,16 @@
             TreeScope.Descendants,
             this.CreateCondition(Condition.TextBox, name),
             x => new TextBox(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="ToggleButton"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.Button, name),
+            x => new ToggleButton(x),
             Retry.Time);
 
         /// <summary>

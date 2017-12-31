@@ -14,6 +14,7 @@
             new ConditionAndCreate(Condition.ComboBox, e => new ComboBox(e)),
             //// Custom
             new ConditionAndCreate(Condition.DataGrid, e => new DataGrid(e)),
+            new ConditionAndCreate(Condition.DatePicker, e => new DatePicker(e)),
             //// DataItem
             //// ControlTypeDocument
             new ConditionAndCreate(Condition.Expander, e => new Expander(e)),
