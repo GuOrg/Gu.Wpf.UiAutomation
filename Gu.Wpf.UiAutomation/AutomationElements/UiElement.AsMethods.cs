@@ -63,6 +63,5 @@
         public Window AsWindow(bool isMainWindow) => new Window(this.AutomationElement, isMainWindow);
 
         public MessageBox AsMessageBox() => new MessageBox(this.AutomationElement);
-
     }
 }

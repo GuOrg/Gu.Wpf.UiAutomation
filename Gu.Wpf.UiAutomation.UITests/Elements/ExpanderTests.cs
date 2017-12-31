@@ -1,7 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
-    using System.Windows.Automation;
     using NUnit.Framework;
 
     public class ExpanderTests
@@ -41,9 +40,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander(key);
                 Assert.AreEqual(expected, expander.Text);
                 var header = expander.Header;
-                Assert.AreEqual(ControlType.Button, header.ControlType);
-                Assert.AreEqual("Button", header.ClassName);
-                Assert.AreEqual(expected, header.AsButton().Text);
+                Assert.AreEqual(expected, ((Button)header).Text);
             }
         }
 
