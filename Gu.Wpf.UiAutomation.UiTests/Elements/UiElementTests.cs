@@ -76,7 +76,7 @@
                 var button = window.FindButton("SizeButton");
                 Assert.AreEqual(200, button.ActualWidth);
                 Assert.AreEqual(100, button.ActualHeight);
-                Assert.AreEqual(new Rect(50, 112, 200, 100), button.RenderBounds);
+                Assert.AreEqual(new Rect(50, 111, 200, 100), button.RenderBounds);
                 Assert.IsInstanceOf<Rect>(button.Bounds);
             }
         }

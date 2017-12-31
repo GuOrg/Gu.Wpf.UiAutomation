@@ -71,7 +71,7 @@
             get
             {
                 var rect = this.AutomationElement.BoundingRectangle();
-                var windowBounds = this.Window?.Bounds ?? Rect.Empty;
+                var windowBounds = this.Window.Bounds;
                 rect.Offset(-windowBounds.X, -windowBounds.Y);
                 return rect;
             }
@@ -466,14 +466,18 @@
 
         protected void PerformMouseAction(bool moveMouse, Action action)
         {
-            var clickablePoint = this.GetClickablePoint();
+            if (!this.TryGetClickablePoint(out var point))
+            {
+                point = this.Bounds.Center();
+            }
+
             if (moveMouse)
             {
-                Mouse.MoveTo(clickablePoint);
+                Mouse.MoveTo(point);
             }
             else
             {
-                Mouse.Position = clickablePoint;
+                Mouse.Position = point;
             }
 
             action();
