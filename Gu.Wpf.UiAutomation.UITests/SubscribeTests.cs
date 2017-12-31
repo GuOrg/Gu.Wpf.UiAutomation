@@ -101,18 +101,22 @@
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
             {
-                var changes = new List<string>();
+                var changes = new List<int>();
                 var window = app.MainWindow;
-                Wait.For(TimeSpan.FromMilliseconds(500));
-                window.FocusedElement();
-                using (Subscribe.ToFocusChangedEvent((sender, args) => changes.Add(((AutomationElement)sender).Name())))
-                {
-                    window.FindTextBox("TextBox2").Focus();
-                    CollectionAssert.AreEqual(new[] { "TextBox2" }, changes);
 
-                    window.FindButton("Button1").Focus();
+                using (Subscribe.ToFocusChangedEvent((sender, args) => changes.Add(args.EventId.Id)))
+                {
+                    var textBox = window.FindTextBox("TextBox2");
+                    textBox.Focus();
                     Wait.For(TimeSpan.FromMilliseconds(20));
-                    CollectionAssert.AreEqual(new[] { "Button1" }, changes);
+                    CollectionAssert.AreEqual(new[] { 20005 }, changes);
+                    Assert.AreEqual(textBox, window.FocusedElement());
+
+                    var button = window.FindButton("Button1");
+                    button.Focus();
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    CollectionAssert.AreEqual(new[] { 20005, 20005 }, changes);
+                    Assert.AreEqual(button, window.FocusedElement());
                 }
             }
         }
