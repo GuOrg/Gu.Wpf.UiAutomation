@@ -3,18 +3,11 @@
     using System.Collections.Generic;
     using System.Windows.Automation;
 
-    public class TreeViewItem : Control
+    public class TreeViewItem : SelectionItemControl
     {
-        private readonly SelectionItemAutomationElement selectionItemAutomationElement;
-        private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
-        private readonly System.Windows.Automation.Condition treeViewItemCondition;
-
         public TreeViewItem(AutomationElement automationElement)
             : base(automationElement)
         {
-            this.selectionItemAutomationElement = new SelectionItemAutomationElement(automationElement);
-            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
-            this.treeViewItemCondition = Condition.TreeViewItem;
         }
 
         /// <summary>
@@ -22,7 +15,7 @@
         /// </summary>
         public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
-            this.treeViewItemCondition,
+            Condition.TreeViewItem,
             x => new TreeViewItem(x));
 
         /// <summary>
@@ -33,20 +26,15 @@
             get
             {
                 var value = this.Name;
-                if (string.IsNullOrEmpty(value) || value.Contains("System.Windows.Controls.TreeViewItem"))
+                if (string.IsNullOrEmpty(value) ||
+                    value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.FindFirstChild(Condition.TextBox);
-                    return textElement == null ? string.Empty : textElement.Name;
+                    var textElement = this.AutomationElement.FindFirstChild(System.Windows.Automation.Condition.TrueCondition);
+                    return textElement.Name() ?? string.Empty;
                 }
 
                 return value;
             }
-        }
-
-        public bool IsSelected
-        {
-            get => this.selectionItemAutomationElement.IsSelected;
-            set => this.selectionItemAutomationElement.IsSelected = value;
         }
 
         public bool IsExpanded
@@ -82,11 +70,6 @@
         public void Collapse()
         {
             this.AutomationElement.ExpandCollapsePattern().Collapse();
-        }
-
-        public void Select()
-        {
-            this.AutomationElement.SelectionItemPattern().Select();
         }
     }
 }

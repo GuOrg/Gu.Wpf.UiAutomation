@@ -2,7 +2,7 @@
 {
     using System.Windows.Automation;
 
-    public class Button : InvokeAutomationElement
+    public class Button : InvokeControl
     {
         public Button(AutomationElement automationElement)
             : base(automationElement)

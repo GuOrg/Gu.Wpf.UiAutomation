@@ -2,7 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
-    public class ListBoxItem : SelectionItemAutomationElement
+    public class ListBoxItem : SelectionItemControl
     {
         public ListBoxItem(AutomationElement automationElement)
             : base(automationElement)

@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Windows.Automation;
 
-    public class TabItem : SelectionItemAutomationElement
+    public class TabItem : SelectionItemControl
     {
         public TabItem(AutomationElement automationElement)
             : base(automationElement)

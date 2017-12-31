@@ -7,7 +7,7 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Row element for grids and tables.
     /// </summary>
-    public class GridRow : SelectionItemAutomationElement
+    public class GridRow : SelectionItemControl
     {
         public GridRow(AutomationElement automationElement)
             : base(automationElement)

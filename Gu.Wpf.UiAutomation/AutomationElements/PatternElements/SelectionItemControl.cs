@@ -5,9 +5,9 @@
     /// <summary>
     /// An UI-item which supports the <see cref="SelectionItemPattern" />
     /// </summary>
-    public class SelectionItemAutomationElement : Control
+    public class SelectionItemControl : Control
     {
-        public SelectionItemAutomationElement(AutomationElement automationElement)
+        public SelectionItemControl(AutomationElement automationElement)
             : base(automationElement)
         {
         }
@@ -37,7 +37,7 @@
         /// <summary>
         /// Select this element.
         /// </summary>
-        public SelectionItemAutomationElement Select()
+        public SelectionItemControl Select()
         {
             this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.Select());
             return this;
@@ -46,7 +46,7 @@
         /// <summary>
         /// Add this element to the selection.
         /// </summary>
-        public SelectionItemAutomationElement AddToSelection()
+        public SelectionItemControl AddToSelection()
         {
             this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.AddToSelection());
             return this;
@@ -55,7 +55,7 @@
         /// <summary>
         /// Remove this element from the selection.
         /// </summary>
-        public SelectionItemAutomationElement RemoveFromSelection()
+        public SelectionItemControl RemoveFromSelection()
         {
             this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.RemoveFromSelection());
             return this;

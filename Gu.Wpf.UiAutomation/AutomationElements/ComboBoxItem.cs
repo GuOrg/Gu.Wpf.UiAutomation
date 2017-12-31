@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents an item in a <see cref="ComboBox"/>
     /// </summary>
-    public class ComboBoxItem : SelectionItemAutomationElement
+    public class ComboBoxItem : SelectionItemControl
     {
         public ComboBoxItem(AutomationElement automationElement)
             : base(automationElement)

@@ -2,9 +2,9 @@
 {
     using System.Windows.Automation;
 
-    public class ExpandCollapseAutomationElement : Control
+    public class ExpandCollapseControl : Control
     {
-        public ExpandCollapseAutomationElement(AutomationElement automationElement)
+        public ExpandCollapseControl(AutomationElement automationElement)
             : base(automationElement)
         {
         }

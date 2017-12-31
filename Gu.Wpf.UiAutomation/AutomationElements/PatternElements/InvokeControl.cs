@@ -2,9 +2,9 @@
 {
     using System.Windows.Automation;
 
-    public class InvokeAutomationElement : Control
+    public class InvokeControl : Control
     {
-        public InvokeAutomationElement(AutomationElement automationElement)
+        public InvokeControl(AutomationElement automationElement)
             : base(automationElement)
         {
         }

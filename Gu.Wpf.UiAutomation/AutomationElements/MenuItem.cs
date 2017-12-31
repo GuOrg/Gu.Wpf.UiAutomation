@@ -8,14 +8,14 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public class MenuItem : Control
     {
-        private readonly InvokeAutomationElement invokeAutomationElement;
-        private readonly ExpandCollapseAutomationElement expandCollapseAutomationElement;
+        private readonly InvokeControl invokeControl;
+        private readonly ExpandCollapseControl expandCollapseControl;
 
         public MenuItem(AutomationElement automationElement)
             : base(automationElement)
         {
-            this.invokeAutomationElement = new InvokeAutomationElement(automationElement);
-            this.expandCollapseAutomationElement = new ExpandCollapseAutomationElement(automationElement);
+            this.invokeControl = new InvokeControl(automationElement);
+            this.expandCollapseControl = new ExpandCollapseControl(automationElement);
         }
 
         public string Text => this.AutomationElement.Name();
@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
                     ExpandCollapseState state;
                     do
                     {
-                        state = this.expandCollapseAutomationElement.ExpandCollapseState;
+                        state = this.expandCollapseControl.ExpandCollapseState;
                         if (state == ExpandCollapseState.Collapsed)
                         {
                             this.Expand();
@@ -74,19 +74,19 @@ namespace Gu.Wpf.UiAutomation
 
         public MenuItem Invoke()
         {
-            this.invokeAutomationElement.Invoke();
+            this.invokeControl.Invoke();
             return this;
         }
 
         public MenuItem Expand()
         {
-            this.expandCollapseAutomationElement.Expand();
+            this.expandCollapseControl.Expand();
             return this;
         }
 
         public MenuItem Collapse()
         {
-            this.expandCollapseAutomationElement.Collapse();
+            this.expandCollapseControl.Collapse();
             return this;
         }
     }
