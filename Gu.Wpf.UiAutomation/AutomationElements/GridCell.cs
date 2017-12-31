@@ -173,7 +173,7 @@ namespace Gu.Wpf.UiAutomation
             if (value != null &&
                 value.Contains('\n'))
             {
-                throw new ArgumentException("Only single line allowed for now.");
+                throw new NotSupportedException("Only single line allowed for now.");
             }
 
             if (this.AutomationElement.TryGetSelectionItemPattern(out var selectionItemPattern))

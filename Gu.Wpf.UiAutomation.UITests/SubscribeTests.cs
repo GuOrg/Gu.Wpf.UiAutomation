@@ -18,26 +18,6 @@
         }
 
         [Test]
-        public void FocusWindowFocusChanges()
-        {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
-            {
-                var changes = new List<string>();
-                var window = app.MainWindow;
-                using (Subscribe.ToFocusChangedEvent((sender, args) => changes.Add(((AutomationElement)sender).Name())))
-                {
-                    window.FindTextBox("TextBox2").Focus();
-                    Wait.For(TimeSpan.FromMilliseconds(20));
-                    CollectionAssert.AreEqual(new[] { "TextBox2" }, changes);
-
-                    window.FindTextBox("Button1").Focus();
-                    Wait.For(TimeSpan.FromMilliseconds(20));
-                    CollectionAssert.AreEqual(new[] { "Button1" }, changes);
-                }
-            }
-        }
-
-        [Test]
         public void TextBoxValuePropertyChanges()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
@@ -78,7 +58,67 @@
         }
 
         [Test]
-        public void FocusChangedWithPaintTest()
+        public void TextBoxSubscribeToPropertyChangedEvent()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
+            {
+                var expected = new List<string>();
+                var actual = new List<string>();
+                var window = app.MainWindow;
+                var textBox = window.FindTextBox("TextBox1");
+                textBox.Text = string.Empty;
+                using (textBox.SubscribeToPropertyChangedEvent(
+                    TreeScope.Element,
+                    ValuePattern.ValueProperty,
+                    (sender, args) => actual.Add($"{sender.AutomationId}.{args.Property.ProgrammaticName.Split('.')[1]} = {args.NewValue}")))
+                {
+                    CollectionAssert.AreEqual(expected, actual);
+
+                    textBox.Text = "abc";
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = abc");
+                    CollectionAssert.AreEqual(expected, actual);
+
+                    textBox.Text = string.Empty;
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = ");
+                    CollectionAssert.AreEqual(expected, actual);
+
+                    textBox.Text = "abc";
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    expected.Add("TextBox1.ValueProperty = abc");
+                    CollectionAssert.AreEqual(expected, actual);
+                }
+
+                // Checking that we stopped subscribing when disposing
+                textBox.Text = string.Empty;
+                CollectionAssert.AreEqual(expected, actual);
+            }
+        }
+
+        [Test]
+        public void ToFocusChangedEvent()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
+            {
+                var changes = new List<string>();
+                var window = app.MainWindow;
+                Wait.For(TimeSpan.FromMilliseconds(500));
+                window.FocusedElement();
+                using (Subscribe.ToFocusChangedEvent((sender, args) => changes.Add(((AutomationElement)sender).Name())))
+                {
+                    window.FindTextBox("TextBox2").Focus();
+                    CollectionAssert.AreEqual(new[] { "TextBox2" }, changes);
+
+                    window.FindButton("Button1").Focus();
+                    Wait.For(TimeSpan.FromMilliseconds(20));
+                    CollectionAssert.AreEqual(new[] { "Button1" }, changes);
+                }
+            }
+        }
+
+        [Test]
+        public void ToFocusChangedEventPaint()
         {
             using (var app = Application.Launch("mspaint"))
             {

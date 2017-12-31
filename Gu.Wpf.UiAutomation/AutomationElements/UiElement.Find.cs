@@ -10,7 +10,7 @@
     {
         public static UiElement FromPoint(Point point)
         {
-            return new UiElement(AutomationElement.FromPoint(point));
+            return FromAutomationElement(AutomationElement.FromPoint(point));
         }
 
         /// <summary>
@@ -19,7 +19,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public CheckBox FindCheckBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.CheckBox, name),
+            this.CreateCondition(Condition.CheckBox, name),
             x => new CheckBox(x),
             Retry.Time);
 
@@ -29,7 +29,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Button, name),
+            this.CreateCondition(Condition.Button, name),
             x => new ToggleButton(x),
             Retry.Time);
 
@@ -39,7 +39,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public RadioButton FindRadioButton(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.RadioButton, name),
+            this.CreateCondition(Condition.RadioButton, name),
             x => new RadioButton(x),
             Retry.Time);
 
@@ -49,7 +49,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Button FindButton(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Button, name),
+            this.CreateCondition(Condition.Button, name),
             x => new Button(x),
             Retry.Time);
 
@@ -59,7 +59,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Slider FindSlider(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Slider, name),
+            this.CreateCondition(Condition.Slider, name),
             x => new Slider(x),
             Retry.Time);
 
@@ -69,7 +69,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.ProgressBar, name),
+            this.CreateCondition(Condition.ProgressBar, name),
             x => new ProgressBar(x),
             Retry.Time);
 
@@ -79,7 +79,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ComboBox FindComboBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.ComboBox, name),
+            this.CreateCondition(Condition.ComboBox, name),
             x => new ComboBox(x),
             Retry.Time);
 
@@ -87,47 +87,11 @@
         /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public TextBlock FindTextBlock(string name = null)
-        {
-            var condition = this.CreateCondition(ControlType.Text, name);
-            if (this.TryFindFirst(
-                TreeScope.Descendants,
-                condition,
-                x => new TextBlock(x),
-                Retry.Time,
-                out var textBlock))
-            {
-                return textBlock;
-            }
-
-            foreach (var child in TreeWalker.RawViewWalker.Children(this.AutomationElement))
-            {
-                if (child.Current.ControlType.Id == ControlType.Text.Id)
-                {
-                    textBlock = new TextBlock(child);
-                    if (textBlock.AutomationId == name ||
-                        textBlock.Text == name)
-                    {
-                        return textBlock;
-                    }
-                }
-                else if (this.TryFindFirst(
-                    TreeScope.Descendants,
-                    condition,
-                    x => new TextBlock(x),
-                    Retry.Time,
-                    out textBlock))
-                {
-                    return textBlock;
-                }
-            }
-
-            return this.FindFirst(
-                TreeScope.Descendants,
-                condition,
-                x => new TextBlock(x),
-                Retry.Time);
-        }
+        public TextBlock FindTextBlock(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.TextBlock, name),
+            x => new TextBlock(x),
+            Retry.Time);
 
         /// <summary>
         /// Find the first <see cref="Label"/> by x:Name, Content or AutomationID
@@ -135,7 +99,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Label FindLabel(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Text, name),
+            this.CreateCondition(Condition.Label, name),
             x => new Label(x),
             Retry.Time);
 
@@ -145,7 +109,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TextBox FindTextBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Edit, name),
+            this.CreateCondition(Condition.TextBox, name),
             x => new TextBox(x),
             Retry.Time);
 
@@ -155,7 +119,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TabControl FindTabControl(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Tab, name),
+            this.CreateCondition(Condition.TabControl, name),
             x => new TabControl(x),
             Retry.Time);
 
@@ -165,7 +129,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public UserControl FindUserControl(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Custom, name),
+            this.CreateCondition(Condition.UserControl, name),
             x => new UserControl(x),
             Retry.Time);
 
@@ -175,7 +139,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public GroupBox FindGroupBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Group, name),
+            this.CreateCondition(Condition.GroupBox, name),
             x => new GroupBox(x),
             Retry.Time);
 
@@ -185,7 +149,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Expander FindExpander(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Group, name),
+            this.CreateCondition(Condition.Expander, name),
             x => new Expander(x),
             Retry.Time);
 
@@ -195,7 +159,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Menu FindMenu(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Menu, name),
+            this.CreateCondition(Condition.Menu, name),
             x => new Menu(x),
             Retry.Time);
 
@@ -205,7 +169,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public MenuItem FindMenuItem(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.MenuItem, name),
+            this.CreateCondition(Condition.MenuItem, name),
             x => new MenuItem(x),
             Retry.Time);
 
@@ -215,7 +179,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.ScrollBar, name),
+            this.CreateCondition(Condition.ScrollBar, name),
             x => new HorizontalScrollBar(x),
             Retry.Time);
 
@@ -225,7 +189,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.ScrollBar, name),
+            this.CreateCondition(Condition.ScrollBar, name),
             x => new VerticalScrollBar(x),
             Retry.Time);
 
@@ -235,7 +199,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListBox FindListBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.List, name),
+            this.CreateCondition(Condition.ListBox, name),
             x => new ListBox(x),
             Retry.Time);
 
@@ -245,7 +209,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListView FindListView(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.DataGrid, name),
+            this.CreateCondition(Condition.DataGrid, name),
             x => new ListView(x),
             Retry.Time);
 
@@ -255,7 +219,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public DataGrid FindDataGrid(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.DataGrid, name),
+            this.CreateCondition(Condition.DataGrid, name),
             x => new DataGrid(x),
             Retry.Time);
 
@@ -265,7 +229,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TreeView FindTreeView(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(ControlType.Tree, name),
+            this.CreateCondition(Condition.TreeView, name),
             x => new TreeView(x),
             Retry.Time);
 
@@ -276,7 +240,7 @@
         /// <param name="controlType">The control type</param>
         public UiElement FindDescendant(string name, ControlType controlType) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType, name),
+            this.CreateCondition(Condition.ByControlType(controlType), name),
             Retry.Time);
 
         /// <summary>
@@ -288,7 +252,7 @@
         public T FindDescendant<T>(string name, ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType, name),
+            this.CreateCondition(Condition.ByControlType(controlType), name),
             wrap,
             Retry.Time);
 
@@ -320,7 +284,7 @@
 
         public UiElement FindDescendant(ControlType controlType, string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(controlType, name),
+            this.CreateCondition(Condition.ByControlType(controlType), name),
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, string name, Func<AutomationElement, T> wrap)
@@ -332,7 +296,7 @@
 
         public UiElement FindDescendant(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateNameOrIdCondition(name),
+            Condition.ByNameOrAutomationId(name),
             Retry.Time);
 
         /// <summary>
@@ -714,23 +678,16 @@
             return itemList.ToArray();
         }
 
-        public System.Windows.Automation.Condition CreateCondition(ControlType controlType, string name)
+        public System.Windows.Automation.Condition CreateCondition(System.Windows.Automation.Condition controlTypeCondition, string name)
         {
             if (name == null)
             {
-                return Condition.ByControlType(controlType);
+                return controlTypeCondition;
             }
 
             return new AndCondition(
-                Condition.ByControlType(controlType),
-                this.CreateNameOrIdCondition(name));
-        }
-
-        public OrCondition CreateNameOrIdCondition(string key)
-        {
-            return new OrCondition(
-                Condition.ByName(key),
-                Condition.ByAutomationId(key));
+                controlTypeCondition,
+                Condition.ByNameOrAutomationId(name));
         }
     }
 }

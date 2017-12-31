@@ -24,6 +24,8 @@
 
         public static PropertyCondition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
+        public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), new PropertyCondition(AutomationElement.IsExpandCollapsePatternAvailableProperty, true));
+
         public static PropertyCondition GroupBox { get; } = ByControlType(ControlType.Group);
 
         public static PropertyCondition Header { get; } = ByControlType(ControlType.Header);
@@ -86,6 +88,8 @@
 
         public static PropertyCondition TreeViewItem { get; } = ByControlType(ControlType.TreeItem);
 
+        public static PropertyCondition UserControl { get; } = ByControlType(ControlType.Custom);
+
         public static PropertyCondition Window { get; } = ByControlType(ControlType.Window);
 
         public static PropertyCondition ByAutomationId(string automationId)
@@ -116,6 +120,13 @@
         public static PropertyCondition ByName(string name)
         {
             return new PropertyCondition(AutomationElementIdentifiers.NameProperty, name);
+        }
+
+        public static OrCondition ByNameOrAutomationId(string key)
+        {
+            return new OrCondition(
+                Condition.ByName(key),
+                Condition.ByAutomationId(key));
         }
 
         public static PropertyCondition ByProcessId(int processId)

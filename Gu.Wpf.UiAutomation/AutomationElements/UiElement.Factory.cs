@@ -16,6 +16,7 @@
             new ConditionAndCreate(Condition.DataGrid, e => new DataGrid(e)),
             //// DataItem
             //// ControlTypeDocument
+            new ConditionAndCreate(Condition.Expander, e => new Expander(e)),
             new ConditionAndCreate(Condition.GroupBox, e => new GroupBox(e)),
             ////new ConditionAndCreate(Condition.Header, e => new Header(e)),
             ////new ConditionAndCreate(Condition.HeaderItem, e => new HeaderItem(e)),
@@ -46,6 +47,7 @@
             ////new ConditionAndCreate(Condition.ToolTip, e => new ToolTip(e)),
             new ConditionAndCreate(Condition.TreeView, e => new TreeView(e)),
             new ConditionAndCreate(Condition.TreeViewItem, e => new TreeViewItem(e)),
+            new ConditionAndCreate(Condition.UserControl, e => new UserControl(e)),
             new ConditionAndCreate(Condition.Window, e => new Window(e)),
         };
 

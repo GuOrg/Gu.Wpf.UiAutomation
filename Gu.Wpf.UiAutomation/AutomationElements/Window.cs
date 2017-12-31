@@ -170,7 +170,7 @@
 
         public UiElement FocusedElement()
         {
-            return new UiElement(AutomationElement.FocusedElement);
+            return FromAutomationElement(AutomationElement.FocusedElement);
         }
 
         /// <summary>

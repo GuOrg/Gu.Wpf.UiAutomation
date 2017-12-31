@@ -266,6 +266,17 @@
         /// <summary>
         /// Registers a property changed event with the given property
         /// </summary>
+        public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, AutomationProperty property, Action<UiElement, AutomationPropertyChangedEventArgs> action)
+        {
+            return this.AutomationElement.SubscribeToPropertyChangedEvent(
+                treeScope,
+                property,
+                (sender, args) => action(FromAutomationElement((AutomationElement)sender), args));
+        }
+
+        /// <summary>
+        /// Registers a property changed event with the given property
+        /// </summary>
         public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<UiElement, AutomationPropertyChangedEventArgs> action, params AutomationProperty[] properties)
         {
             return this.AutomationElement.SubscribeToPropertyChangedEvent(
@@ -280,7 +291,7 @@
         public IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<UiElement, StructureChangedEventArgs> action)
         {
             return this.AutomationElement.SubscribeToStructureChangedEvent(
-                treeScope, 
+                treeScope,
                 (sender, args) => action(FromAutomationElement((AutomationElement)sender), args));
         }
 
