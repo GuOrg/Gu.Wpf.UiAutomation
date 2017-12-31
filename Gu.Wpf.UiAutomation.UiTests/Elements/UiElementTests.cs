@@ -76,8 +76,29 @@
                 var button = window.FindButton("SizeButton");
                 Assert.AreEqual(200, button.ActualWidth);
                 Assert.AreEqual(100, button.ActualHeight);
-                Assert.AreEqual(new Rect(50, 111, 200, 100), button.RenderBounds);
-                Assert.IsInstanceOf<Rect>(button.Bounds);
+            }
+        }
+
+        [Test]
+        public void RenderBounds()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                window.MoveTo(100, 200);
+                if (WindowsVersion.IsWindows7())
+                {
+                    Assert.AreEqual(new Rect(150, 311, 200, 100), button.Bounds);
+                    Assert.AreEqual(new Rect(100, 200, 300, 300), window.Bounds);
+                    Assert.AreEqual(new Rect(50, 111, 200, 100), button.RenderBounds);
+                }
+                else
+                {
+                    Assert.AreEqual(new Rect(150, 312, 200, 100), button.Bounds);
+                    Assert.AreEqual(new Rect(100, 200, 300, 300), window.Bounds);
+                    Assert.AreEqual(new Rect(50, 112, 200, 100), button.RenderBounds);
+                }
             }
         }
 

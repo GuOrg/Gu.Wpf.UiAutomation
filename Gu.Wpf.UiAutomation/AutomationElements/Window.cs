@@ -147,7 +147,7 @@
             this.AutomationElement.WindowPattern().Close();
         }
 
-        public void Move(int x, int y)
+        public void MoveTo(int x, int y)
         {
             this.AutomationElement.TransformPattern().Move(x, y);
         }

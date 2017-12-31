@@ -148,32 +148,32 @@
 
         public static string Description(this System.Windows.Automation.Condition condition)
         {
-            if (condition is PropertyCondition propertyCondition)
+            switch (condition)
             {
-                if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
-                {
-                    return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
-                }
+                case PropertyCondition propertyCondition:
+                    {
+                        if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
+                        {
+                            return
+                                $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
+                        }
 
-                return $"{propertyCondition.Property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} == {propertyCondition.Value}";
+                        return $"{propertyCondition.Property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} == {propertyCondition.Value}";
+                    }
+
+                case AndCondition andCondition:
+                    return $"({string.Join(" && ", andCondition.GetConditions().Select(x => x.Description()))})";
+                case OrCondition orCondition:
+                    return $"({string.Join(" || ", orCondition.GetConditions().Select(x => x.Description()))})";
+                case NotCondition notCondition:
+                    return $"!{notCondition.Condition.Description()}";
+                case var c when c == System.Windows.Automation.Condition.TrueCondition:
+                    return "Condition.TrueCondition";
+                case var c when c == System.Windows.Automation.Condition.FalseCondition:
+                    return "Condition.FalseCondition";
+                default:
+                    return condition.ToString();
             }
-
-            if (condition is AndCondition andCondition)
-            {
-                return $"({string.Join(" && ", andCondition.GetConditions().Select(x => x.Description()))})";
-            }
-
-            if (condition is OrCondition orCondition)
-            {
-                return $"({string.Join(" || ", orCondition.GetConditions().Select(x => x.Description()))})";
-            }
-
-            if (condition is NotCondition notCondition)
-            {
-                return $"!{notCondition.Condition.Description()}";
-            }
-
-            return condition.ToString();
         }
 
         internal static bool IsMatch(AutomationElement element, System.Windows.Automation.Condition condition)

@@ -80,7 +80,7 @@
             [TestCase("Content")]
             public void FindCheckBoxThrowsWhenNotFound(string key)
             {
-                Retry.Time = TimeSpan.FromMilliseconds(100);
+                Retry.Time = TimeSpan.FromMilliseconds(0);
                 using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
                 {
                     var window = app.MainWindow;
@@ -90,6 +90,8 @@
                         : $"Did not find a CheckBox matching (ControlType == CheckBox && (Name == {key} || AutomationId == {key})).";
                     Assert.AreEqual(expected, exception.Message);
                 }
+
+                Retry.ResetTime();
             }
 
             [Test]

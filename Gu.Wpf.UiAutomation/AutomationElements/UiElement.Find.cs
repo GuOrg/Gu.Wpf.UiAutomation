@@ -407,7 +407,7 @@
                 return result;
             }
 
-            throw new InvalidOperationException($"Did not find an element matching {condition}.");
+            throw new InvalidOperationException($"Did not find an element matching {condition.Description()}.");
         }
 
         /// <summary>
