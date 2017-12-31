@@ -437,33 +437,6 @@
 
         public MessageBox AsMessageBox() => new MessageBox(this.AutomationElement);
 
-        protected internal void ExecuteInPattern<TPattern>(TPattern pattern, bool throwIfNotSupported, Action<TPattern> action)
-        {
-            if (pattern != null)
-            {
-                action(pattern);
-            }
-            else if (throwIfNotSupported)
-            {
-                throw new System.NotSupportedException();
-            }
-        }
-
-        protected internal TRet ExecuteInPattern<TPattern, TRet>(TPattern pattern, bool throwIfNotSupported, Func<TPattern, TRet> func)
-        {
-            if (pattern != null)
-            {
-                return func(pattern);
-            }
-
-            if (throwIfNotSupported)
-            {
-                throw new System.NotSupportedException();
-            }
-
-            return default(TRet);
-        }
-
         protected void PerformMouseAction(bool moveMouse, Action action)
         {
             if (!this.TryGetClickablePoint(out var point))

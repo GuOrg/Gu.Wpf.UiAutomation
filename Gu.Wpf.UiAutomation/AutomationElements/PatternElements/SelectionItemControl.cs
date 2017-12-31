@@ -39,7 +39,7 @@
         /// </summary>
         public SelectionItemControl Select()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.Select());
+            this.SelectionItemPattern.Select();
             return this;
         }
 
@@ -48,7 +48,7 @@
         /// </summary>
         public SelectionItemControl AddToSelection()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.AddToSelection());
+            this.SelectionItemPattern.AddToSelection();
             return this;
         }
 
@@ -57,7 +57,7 @@
         /// </summary>
         public SelectionItemControl RemoveFromSelection()
         {
-            this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.RemoveFromSelection());
+            this.SelectionItemPattern.RemoveFromSelection();
             return this;
         }
     }

@@ -24,7 +24,7 @@
 
                 if (value && !this.IsChecked)
                 {
-                    this.ExecuteInPattern(this.SelectionItemPattern, throwIfNotSupported: true, action: pattern => pattern.Select());
+                    this.SelectionItemPattern.Select();
                 }
 
                 if (this.IsChecked != value)
