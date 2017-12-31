@@ -59,9 +59,9 @@
         public static System.Windows.Automation.Condition ListBoxItem { get; } = ByClassName("ListBoxItem");
 
         public static System.Windows.Automation.Condition ListView { get; } = ByClassName("ListView");
-  
+
         public static System.Windows.Automation.Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
-      
+
         public static System.Windows.Automation.Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
 
         public static System.Windows.Automation.Condition Menu { get; } = ByControlType(ControlType.Menu);
