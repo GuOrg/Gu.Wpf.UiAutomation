@@ -19,7 +19,7 @@
                 Assert.NotNull(popup);
                 var popupChildren = popup.FindAllChildren();
                 Assert.AreEqual(1, popupChildren.Count);
-                var check = popupChildren[0].AsCheckBox();
+                var check = (CheckBox)popupChildren[0];
                 Assert.AreEqual("This is a popup", check.Text);
             }
         }
@@ -36,7 +36,7 @@
                 var popup = window.Popup;
                 var popupChildren = popup.FindAllChildren();
                 Assert.AreEqual(1, popupChildren.Count);
-                var menu = popupChildren[0].AsMenu();
+                var menu = (Menu)popupChildren[0];
                 Assert.AreEqual(1, menu.Items.Count);
                 var menuItem = menu.Items[0];
                 Assert.AreEqual("Some MenuItem", menuItem.Text);

@@ -50,7 +50,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var button = window.FindButton(key);
-                Assert.AreEqual(expected, button.Content.AsTextBlock().Text);
+                Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
             }
         }
 

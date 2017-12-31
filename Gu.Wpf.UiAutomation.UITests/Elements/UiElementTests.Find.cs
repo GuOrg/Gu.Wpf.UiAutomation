@@ -31,7 +31,7 @@
                 {
                     var window = app.MainWindow;
                     var button = window.FindButton();
-                    var fromPoint = UiElement.FromPoint(button.GetClickablePoint()).AsButton();
+                    var fromPoint = (Button)UiElement.FromPoint(button.GetClickablePoint());
                     Assert.AreEqual(button.Text, fromPoint.Text);
                 }
             }
@@ -45,7 +45,7 @@
                     var textBox = window.FindTextBox();
                     textBox.Text = "focused";
                     textBox.Focus();
-                    var fromPoint = window.FocusedElement().AsTextBox();
+                    var fromPoint = (TextBox)window.FocusedElement();
                     Assert.AreEqual("focused", fromPoint.Text);
                 }
             }

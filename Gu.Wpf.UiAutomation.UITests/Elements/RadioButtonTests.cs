@@ -77,7 +77,7 @@
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow;
-                var radioButton = window.FindFirstDescendant(Condition.ByAutomationId("RadioButton1")).AsRadioButton();
+                var radioButton = window.FindRadioButton("RadioButton1");
                 Assert.AreEqual(false, radioButton.IsChecked);
 
                 radioButton.IsChecked = true;
@@ -91,8 +91,8 @@
             using (var app = Application.Launch(ExeFileName, "RadioButtonWindow"))
             {
                 var window = app.MainWindow;
-                var radioButton1 = window.FindFirstDescendant(Condition.ByAutomationId("RadioButton1")).AsRadioButton();
-                var radioButton2 = window.FindFirstDescendant(Condition.ByAutomationId("RadioButton2")).AsRadioButton();
+                var radioButton1 = window.FindRadioButton("RadioButton1");
+                var radioButton2 = window.FindRadioButton("RadioButton2");
 
                 Assert.AreEqual(false, radioButton1.IsChecked);
                 Assert.AreEqual(false, radioButton2.IsChecked);

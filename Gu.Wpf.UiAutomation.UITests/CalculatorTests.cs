@@ -41,10 +41,7 @@
                 var calc = WindowsVersion.IsWindows10()
                     ? (ICalculator)new Win10Calc(window)
                     : new LegacyCalc(window);
-                if (WindowsVersion.IsWindows7())
-                {
-                    Wait.For(TimeSpan.FromMilliseconds(200));
-                }
+                Wait.For(TimeSpan.FromMilliseconds(200));
 
                 // Switch to default mode
                 Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
