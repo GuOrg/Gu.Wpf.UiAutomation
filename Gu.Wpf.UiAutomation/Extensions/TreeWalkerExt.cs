@@ -30,11 +30,7 @@
             foreach (var child in Children(walker, element))
             {
                 yield return child;
-            }
-
-            foreach (var child in Children(walker, element))
-            {
-                foreach (var decendant in Decendants(walker,child))
+                foreach (var decendant in Decendants(walker, child))
                 {
                     yield return decendant;
                 }
