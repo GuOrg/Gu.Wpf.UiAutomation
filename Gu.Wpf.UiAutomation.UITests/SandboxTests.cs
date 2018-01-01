@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Linq;
@@ -14,6 +14,17 @@
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void DumpTypes()
+        {
+            foreach (var type in typeof(UiElement).Assembly
+                                                  .GetTypes()
+                                                  .Where(x => typeof(UiElement).IsAssignableFrom(x)))
+            {
+                Console.WriteLine($"- {type.Name}");
+            }
         }
 
         [Test]

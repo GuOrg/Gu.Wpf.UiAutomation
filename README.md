@@ -8,22 +8,84 @@
 
 
 ## Introduction
-Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.<br />
-The code is based on [FlaUI](https://github.com/Roemer/FlaUI) that is based on native UI Automation libraries from Microsoft and therefore kind of a wrapper around them.<br />
-Gu.Wpf.UiAutomation wraps almost everything from the UI Automation libraries but also provides the native objects in case someone has a special need which is not covered (yet) by Gu.Wpf.UiAutomation.<br />
-Some ideas are copied from the UIAComWrapper project or TestStack.White but rewritten from scratch to have a clean codebase.
+Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
+The library wraps `UIAutomationClient` and `UIAutomationClient` and tries to provide an API that is nice for WPF.
 
-The reason for this library is to shape the API to match WPF's types and names.
+The code inspired by [FlaUI](https://github.com/Roemer/FlaUI) and [White](https://github.com/TestStack/White).
+Tested on Windows 7, Windows 10, and the default AppVeyor image.
+
+## Supported types
+
+- Button
+- CheckBox
+- ColumnHeader
+- ComboBox
+- ComboBoxItem
+- ContentControl
+- ContextMenu
+- Control
+- DataGrid
+- DataGridCell
+- DataGridColumnHeader
+- DataGridRow
+- DataGridRowHeader
+- DatePicker
+- Expander
+- GridCell
+- GridHeader
+- GridRow
+- GridView
+- GridViewColumnHeader
+- GridViewRowHeader
+- GroupBox
+- HeaderedContentControl
+- Label
+- ListBox
+- ListBoxItem
+- ListView
+- ListViewItem
+- Menu
+- MenuBar
+- MenuItem
+- MessageBox
+- ExpandCollapseControl
+- InvokeControl
+- SelectionItemControl
+- Popup
+- ProgressBar
+- RadioButton
+- RepeatButton
+- RowHeader
+- HorizontalScrollBar
+- ScrollBar
+- VerticalScrollBar
+- ScrollViewer
+- Slider
+- StatusBar
+- TabControl
+- TabItem
+- TextBlock
+- TextBox
+- Thumb
+- TitleBar
+- ToggleButton
+- ToolBar
+- ToolTip
+- TreeView
+- TreeViewItem
+- UiElement
+- UserControl
+- Window
 
 ### Usage in Code
 The entry point is usually an application or the desktop so you get an automation element (like a the main window of the application).
 On this, you can then search sub-elements and interact with them.
-There is a helper class to launch, attach or close applications.
+The `Application` class is a helper for launching, attaching and closing applications.
 Since the application is not related to any UIA library, you need to create the automation you want and use it to get your first element, which then is your entry point.
 
-```csharp
+```cs
 [Test]
-public void IsChecked()
+public void CheckBoxIsChecked()
 {
     using (var app = Application.Launch("WpfApplication.exe"))
     {
@@ -42,7 +104,7 @@ The application class iss the way to start an application to test. There are a c
 Starts a new instance of the application and closes it on dispose. There is a flag to leave the app open but the default is close on dispose.
 Launch is useful for tests that mutate state where resetting can be slow and painful.
 
-```csharp
+```cs
 [Test]
 public void IsChecked()
 {
