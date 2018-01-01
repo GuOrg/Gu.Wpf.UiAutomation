@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Overlay
+namespace Gu.Wpf.UiAutomation.Overlay
 {
     using System;
     using System.Threading;
@@ -73,7 +73,7 @@
         private static void Show(Action action)
         {
             var startedEvent = new ManualResetEventSlim(initialState: false);
-            System.Windows.Threading.Dispatcher dispatcher = null;
+            Dispatcher dispatcher = null;
             var uiThread = new Thread(() =>
             {
                 // Create and install a new dispatcher context
@@ -81,6 +81,7 @@
                 dispatcher = Dispatcher.CurrentDispatcher;
 
                 // Signal that it is initialized
+                // ReSharper disable once AccessToDisposedClosure
                 startedEvent.Set();
 
                 // Start the dispatcher processing

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -16,7 +16,7 @@
 
         public static System.Windows.Point ClickablePoint(this AutomationElement element) => (System.Windows.Point)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ClickablePointProperty);
 
-        public static ControlType ControlType(this AutomationElement element) => (System.Windows.Automation.ControlType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty);
+        public static ControlType ControlType(this AutomationElement element) => (ControlType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty);
 
         public static object Culture(this AutomationElement element) => element.GetCurrentPropertyValue(AutomationElementIdentifiers.CultureProperty);
 
@@ -94,7 +94,7 @@
 
         public static int NativeWindowHandle(this AutomationElement element) => (int)element.GetCurrentPropertyValue(AutomationElementIdentifiers.NativeWindowHandleProperty);
 
-        public static OrientationType Orientation(this AutomationElement element) => (System.Windows.Automation.OrientationType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.OrientationProperty);
+        public static OrientationType Orientation(this AutomationElement element) => (OrientationType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.OrientationProperty);
 
         public static int ProcessId(this AutomationElement element) => (int)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ProcessIdProperty);
 

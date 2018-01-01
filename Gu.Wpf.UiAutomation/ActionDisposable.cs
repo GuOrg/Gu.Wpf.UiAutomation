@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Threading;
@@ -20,16 +20,13 @@
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the object is disposed.
-        /// </summary>
-        public bool IsDisposed => this.dispose == null;
-
-        /// <summary>
         /// Calls the disposal action if and only if the current instance hasn't been disposed yet.
         /// </summary>
         public void Dispose()
         {
+#pragma warning disable 420
             Interlocked.Exchange(ref this.dispose, null)?.Invoke();
+#pragma warning restore 420
         }
     }
 }

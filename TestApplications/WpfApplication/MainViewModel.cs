@@ -1,4 +1,4 @@
-﻿namespace WpfApplication
+namespace WpfApplication
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;

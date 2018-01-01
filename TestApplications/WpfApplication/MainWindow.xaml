@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication.MainWindow"
+<Window x:Class="WpfApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,196 +9,200 @@
         Height="450"
         ResizeMode="CanResize"
         mc:Ignorable="d">
-    <Window.DataContext>
-        <local:MainViewModel />
-    </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary>
-            <Menu x:Key="ViewsMenu">
-                <MenuItem Header="Some MenuItem" />
-            </Menu>
-        </ResourceDictionary>
-    </Window.Resources>
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Header="E_xit" />
-            </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Header="Copy">
-                    <MenuItem Header="Plain" />
-                    <MenuItem Header="Fancy" />
+  <Window.DataContext>
+    <local:MainViewModel />
+  </Window.DataContext>
+  <Window.Resources>
+    <ResourceDictionary>
+      <Menu x:Key="ViewsMenu">
+        <MenuItem Header="Some MenuItem" />
+      </Menu>
+    </ResourceDictionary>
+  </Window.Resources>
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_File">
+        <MenuItem Header="E_xit" />
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="Copy">
+          <MenuItem Header="Plain" />
+          <MenuItem Header="Fancy" />
+        </MenuItem>
+        <MenuItem Header="Paste" />
+      </MenuItem>
+    </Menu>
+    <StatusBar DockPanel.Dock="Bottom">
+      <StatusBarItem />
+    </StatusBar>
+    <TabControl>
+      <TabItem Header="Simple Controls">
+        <StackPanel Orientation="Vertical">
+          <Label Content="Test Label" />
+          <TextBox AutomationProperties.AutomationId="TextBox" />
+          <ComboBox Width="120"
+                    AutomationProperties.AutomationId="EditableComboBox"
+                    IsEditable="True">
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
+          </ComboBox>
+          <ComboBox Width="120"
+                    AutomationProperties.AutomationId="NonEditableComboBox"
+                    IsEditable="False"
+                    SelectionChanged="Selector_OnSelectionChanged">
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
+            <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
+          </ComboBox>
+          <CheckBox AutomationProperties.AutomationId="SimpleCheckBox" Content="Test Checkbox" />
+          <CheckBox AutomationProperties.AutomationId="ThreeStateCheckBox"
+                    Content="3-Way Test Checkbox"
+                    IsThreeState="True" />
+          <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
+          <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
+          <ProgressBar AutomationProperties.AutomationId="ProgressBar" Value="50" />
+          <Slider Width="150"
+                  AutomationProperties.AutomationId="Slider"
+                  LargeChange="4"
+                  Maximum="10"
+                  Minimum="0"
+                  SmallChange="1"
+                  Value="5" />
+          <Button AutomationProperties.AutomationId="ContextMenu" Content="With ContextMenu">
+            <Button.ContextMenu>
+              <ContextMenu>
+                <MenuItem Header="Context 1" />
+                <MenuItem Header="Context 2">
+                  <MenuItem Header="Inner Context" />
                 </MenuItem>
-                <MenuItem Header="Paste" />
-            </MenuItem>
-        </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem />
-        </StatusBar>
-        <TabControl>
-            <TabItem Header="Simple Controls">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Test Label" />
-                    <TextBox AutomationProperties.AutomationId="TextBox" />
-                    <ComboBox Width="120"
-                              AutomationProperties.AutomationId="EditableComboBox"
-                              IsEditable="True">
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
-                    </ComboBox>
-                    <ComboBox Width="120"
-                              AutomationProperties.AutomationId="NonEditableComboBox"
-                              IsEditable="False"
-                              SelectionChanged="Selector_OnSelectionChanged">
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem1" Text="Item 1" />
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem2" Text="Item 2" />
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem3" Text="Item 3" />
-                        <TextBlock AutomationProperties.AutomationId="EditableComboItem4" Text="Item 4" />
-                    </ComboBox>
-                    <CheckBox AutomationProperties.AutomationId="SimpleCheckBox" Content="Test Checkbox" />
-                    <CheckBox AutomationProperties.AutomationId="ThreeStateCheckBox"
-                              Content="3-Way Test Checkbox"
-                              IsThreeState="True" />
-                    <RadioButton AutomationProperties.AutomationId="RadioButton1" Content="RadioButton1" />
-                    <RadioButton AutomationProperties.AutomationId="RadioButton2" Content="RadioButton2" />
-                    <ProgressBar AutomationProperties.AutomationId="ProgressBar" Value="50" />
-                    <Slider Width="150"
-                            AutomationProperties.AutomationId="Slider"
-                            LargeChange="4"
-                            Maximum="10"
-                            Minimum="0"
-                            SmallChange="1"
-                            Value="5" />
-                    <Button AutomationProperties.AutomationId="ContextMenu" Content="With ContextMenu">
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Context 1" />
-                                <MenuItem Header="Context 2">
-                                    <MenuItem Header="Inner Context" />
-                                </MenuItem>
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                    </Button>
-                    <Button AutomationProperties.AutomationId="InvokableButton"
-                            Command="{Binding InvokeButtonCommand}"
-                            Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}" />
-                    <ScrollViewer Width="80"
-                                  Height="80"
-                                  HorizontalScrollBarVisibility="Auto"
-                                  VerticalScrollBarVisibility="Auto">
-                        <Button Width="200"
-                                Height="200"
-                                Content="BigButton" />
-                    </ScrollViewer>
-                    <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
-                    <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}"
-                           Placement="Bottom"
-                           PlacementTarget="{Binding ElementName=PopupToggleButton1}"
-                           StaysOpen="False">
-                        <Border Background="LightYellow">
-                            <Border Background="LightYellow"
-                                    BorderBrush="Black"
-                                    BorderThickness="1">
-                                <CheckBox Content="This is a popup" />
-                            </Border>
-                        </Border>
-                    </Popup>
-                    <ToggleButton Name="PopupToggleButton2">Popup Toggle 2</ToggleButton>
-                    <Popup Child="{DynamicResource ViewsMenu}"
-                           IsOpen="{Binding IsChecked, ElementName=PopupToggleButton2}"
-                           Placement="Top"
-                           PlacementTarget="{Binding ElementName=PopupToggleButton2}"
-                           StaysOpen="False" />
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Complex Controls">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <GroupBox Header="Tree">
-                            <TreeView AutomationProperties.AutomationId="treeView1">
-                                <TreeViewItem Header="Lvl1 a">
-                                    <TreeViewItem Header="Lvl2 a" />
-                                    <TreeViewItem Header="Lvl2 b">
-                                        <TreeViewItem Header="Lvl3 a" />
-                                    </TreeViewItem>
-                                    <TreeViewItem Header="Lvl2 b" />
-                                </TreeViewItem>
-                                <TreeViewItem Header="Lvl1 b" />
-                            </TreeView>
-                        </GroupBox>
-                        <GroupBox Header="ListView">
-                            <ListView AutomationProperties.AutomationId="listView1">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" />
-                                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" />
-                                    </GridView>
-                                </ListView.View>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="1" Value="10" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="2" Value="20" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="3" Value="30" />
-                                </ListViewItem>
-                            </ListView>
-                        </GroupBox>
-                        <Expander AutomationProperties.AutomationId="Expander" Header="More Options">
-                            <StackPanel Margin="10,4,0,0">
-                                <CheckBox Margin="4" Content="Option 1" />
-                                <CheckBox Margin="4" Content="Option 2" />
-                                <CheckBox Margin="4" Content="Option 3" />
-                            </StackPanel>
-                        </Expander>
-                        <GroupBox Header="Large List with Scroll">
-                            <ListView Width="150"
-                                      Height="100"
-                                      AutomationProperties.AutomationId="LargeListView">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Width="80"
-                                                        DisplayMemberBinding="{Binding Key}"
-                                                        Header="Key" />
-                                        <GridViewColumn Width="80"
-                                                        DisplayMemberBinding="{Binding Value}"
-                                                        Header="Value" />
-                                    </GridView>
-                                </ListView.View>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="1" Value="10" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="2" Value="20" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="3" Value="30" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="4" Value="40" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="5" Value="50" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="6" Value="60" />
-                                </ListViewItem>
-                                <ListViewItem>
-                                    <local:ListViewItem Key="VeryLongKey" Value="VeryLongValue" />
-                                </ListViewItem>
-                            </ListView>
-                        </GroupBox>
-                        <GroupBox Header="Grid">
-                            <DataGrid AutomationProperties.AutomationId="dataGrid1"
-                                      CanUserAddRows="False"
-                                      ItemsSource="{Binding DataGridItems}" />
-                        </GroupBox>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+              </ContextMenu>
+            </Button.ContextMenu>
+          </Button>
+          <Button AutomationProperties.AutomationId="InvokableButton"
+                  Command="{Binding InvokeButtonCommand}"
+                  Content="{Binding InvokeButtonText, FallbackValue=InvokableButton}" />
+          <ScrollViewer Width="80"
+                        Height="80"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+            <Button Width="200"
+                    Height="200"
+                    Content="BigButton" />
+          </ScrollViewer>
+          <ToggleButton Name="PopupToggleButton1">Popup Toggle 1</ToggleButton>
+          <Popup IsOpen="{Binding IsChecked, ElementName=PopupToggleButton1}"
+                 Placement="Bottom"
+                 PlacementTarget="{Binding ElementName=PopupToggleButton1}"
+                 StaysOpen="False">
+            <Border Background="LightYellow">
+              <Border Background="LightYellow"
+                      BorderBrush="Black"
+                      BorderThickness="1">
+                <CheckBox Content="This is a popup" />
+              </Border>
+            </Border>
+          </Popup>
+          <ToggleButton Name="PopupToggleButton2">Popup Toggle 2</ToggleButton>
+          <Popup Child="{DynamicResource ViewsMenu}"
+                 IsOpen="{Binding IsChecked, ElementName=PopupToggleButton2}"
+                 Placement="Top"
+                 PlacementTarget="{Binding ElementName=PopupToggleButton2}"
+                 StaysOpen="False" />
+        </StackPanel>
+      </TabItem>
+      <TabItem Header="Complex Controls">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <GroupBox Header="Tree">
+              <TreeView AutomationProperties.AutomationId="treeView1">
+                <TreeViewItem Header="Lvl1 a">
+                  <TreeViewItem Header="Lvl2 a" />
+                  <TreeViewItem Header="Lvl2 b">
+                    <TreeViewItem Header="Lvl3 a" />
+                  </TreeViewItem>
+                  <TreeViewItem Header="Lvl2 b" />
+                </TreeViewItem>
+                <TreeViewItem Header="Lvl1 b" />
+              </TreeView>
+            </GroupBox>
+            <GroupBox Header="ListView">
+              <ListView AutomationProperties.AutomationId="listView1">
+                <ListView.View>
+                  <GridView>
+                    <!--  ReSharper disable Xaml.BindingWithContextNotResolved  -->
+                    <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" />
+                    <!--  ReSharper restore Xaml.BindingWithContextNotResolved  -->
+                  </GridView>
+                </ListView.View>
+                <ListViewItem>
+                  <local:ListViewItem Key="1" Value="10" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="2" Value="20" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="3" Value="30" />
+                </ListViewItem>
+              </ListView>
+            </GroupBox>
+            <Expander AutomationProperties.AutomationId="Expander" Header="More Options">
+              <StackPanel Margin="10,4,0,0">
+                <CheckBox Margin="4" Content="Option 1" />
+                <CheckBox Margin="4" Content="Option 2" />
+                <CheckBox Margin="4" Content="Option 3" />
+              </StackPanel>
+            </Expander>
+            <GroupBox Header="Large List with Scroll">
+              <ListView Width="150"
+                        Height="100"
+                        AutomationProperties.AutomationId="LargeListView">
+                <ListView.View>
+                  <GridView>
+                    <!--  ReSharper disable Xaml.BindingWithContextNotResolved  -->
+                    <GridViewColumn Width="80"
+                                    DisplayMemberBinding="{Binding Key}"
+                                    Header="Key" />
+                    <GridViewColumn Width="80"
+                                    DisplayMemberBinding="{Binding Value}"
+                                    Header="Value" />
+                    <!--  ReSharper restore Xaml.BindingWithContextNotResolved  -->
+                  </GridView>
+                </ListView.View>
+                <ListViewItem>
+                  <local:ListViewItem Key="1" Value="10" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="2" Value="20" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="3" Value="30" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="4" Value="40" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="5" Value="50" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="6" Value="60" />
+                </ListViewItem>
+                <ListViewItem>
+                  <local:ListViewItem Key="VeryLongKey" Value="VeryLongValue" />
+                </ListViewItem>
+              </ListView>
+            </GroupBox>
+            <GroupBox Header="Grid">
+              <DataGrid AutomationProperties.AutomationId="dataGrid1"
+                        CanUserAddRows="False"
+                        ItemsSource="{Binding DataGridItems}" />
+            </GroupBox>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl>
+  </DockPanel>
 </Window>
 

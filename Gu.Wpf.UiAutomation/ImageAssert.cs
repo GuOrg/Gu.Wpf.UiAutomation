@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections;
@@ -444,6 +444,7 @@
                     return true;
                 }
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 candidate = Path.Combine(
                     Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath),
                     fileName);
@@ -454,6 +455,7 @@
                     return true;
                 }
 
+                //// ReSharper disable once AssignNullToNotNullAttribute
                 candidate = Path.Combine(
                     Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().Location).LocalPath),
                     fileName);
@@ -505,7 +507,7 @@
                     {
                         using (var stream = assembly.GetManifestResourceStream(name))
                         {
-                            using (var reader = new ResourceReader(stream))
+                            using (var reader = new ResourceReader(stream ?? throw new InvalidOperationException("Did not find a stream.")))
                             {
                                 foreach (var item in reader)
                                 {

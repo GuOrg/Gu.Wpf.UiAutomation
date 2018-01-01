@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation
+// ReSharper disable RedundantNameQualifier
+namespace Gu.Wpf.UiAutomation
 {
     using System.Drawing;
     using System.IO;
@@ -51,6 +52,7 @@
                 dispatcher = Dispatcher.CurrentDispatcher;
 
                 // Signal that it is initialized
+                // ReSharper disable once AccessToDisposedClosure
                 startedEvent.Set();
 
                 // Start the dispatcher processing
