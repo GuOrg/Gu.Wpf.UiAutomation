@@ -20,11 +20,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.UiTests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.Tests", "Gu.Wpf.UiAutomation.Tests\Gu.Wpf.UiAutomation.Tests.csproj", "{AFE453D1-C9B6-43D0-835F-BAE465063453}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{3DB16548-AA97-4652-BCE9-2FA4AF413AFD}"
-	ProjectSection(SolutionItems) = preProject
-		.paket\tools\install.ps1 = .paket\tools\install.ps1
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{28EBF5DE-D882-4A39-9F8B-D58D4FFADB67}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -59,7 +54,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C8276299-FA43-409B-A969-EF030AB56224} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
-		{3DB16548-AA97-4652-BCE9-2FA4AF413AFD} = {B1C84389-441E-4870-9EAC-F241B568B204}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA1E3AD6-06D8-4ECD-9AF7-37DD4785FEC5}
