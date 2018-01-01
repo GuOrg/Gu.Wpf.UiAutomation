@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.1.17.0
+version 0.2.0.0
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -19,4 +19,8 @@ files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
   bin/Release/net45/Gu.Wpf.UiAutomation.pdb ==> lib/net45
   bin/Release/net45/Gu.Wpf.UiAutomation.xml ==> lib/net45
-  bin/Release/net45/Interop.UIAutomationClient.dll ==> lib/net45 
+  bin/Release/net45/Interop.UIAutomationClient.dll ==> lib/net45
+
+frameworkAssemblies
+  UIAutomationClient
+  UIAutomationTypes

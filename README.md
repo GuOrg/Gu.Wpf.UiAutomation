@@ -90,7 +90,7 @@ public void Content(string key, string expected)
     {
         var window = app.MainWindow;
         var button = window.FindButton(key);
-        Assert.AreEqual(expected, button.Content.AsTextBlock().Text);
+        Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
     }
 }
 ```
