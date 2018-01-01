@@ -9,12 +9,7 @@
         private readonly Action<object> methodToExecute;
         private readonly Func<object, bool> canExecuteEvaluator;
 
-        public RelayCommand(Action<object> methodToExecute)
-            : this(methodToExecute, null)
-        {
-        }
-
-        public RelayCommand(Action<object> methodToExecute, Func<object, bool> canExecuteEvaluator)
+        public RelayCommand(Action<object> methodToExecute, Func<object, bool> canExecuteEvaluator = null)
         {
             this.methodToExecute = methodToExecute ?? throw new ArgumentNullException(nameof(methodToExecute));
             this.canExecuteEvaluator = canExecuteEvaluator;

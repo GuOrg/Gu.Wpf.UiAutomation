@@ -354,7 +354,7 @@
                     mouseData = MouseEventDataXButtons.XBUTTON2;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("mouseButton");
+                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
             }
 
             data = (uint)mouseData;

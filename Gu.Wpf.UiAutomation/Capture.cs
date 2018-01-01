@@ -26,6 +26,7 @@
             var hDest = CreateCompatibleDC(hSrce);
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
+            //// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, 0, 0, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
             var bmp = Image.FromHbitmap(hBmp);
             SelectObject(hDest, hOldBmp);

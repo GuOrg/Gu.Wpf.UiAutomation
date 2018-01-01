@@ -6,13 +6,6 @@
         Width="300"
         Height="300"
         mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary>
-            <Menu x:Key="ViewsMenu">
-                <MenuItem Header="Some MenuItem" />
-            </Menu>
-        </ResourceDictionary>
-    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
