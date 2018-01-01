@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -6,15 +6,39 @@
     {
         private const string ExeFileName = "WpfApplication.exe";
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ScrollBarWindow"))
             {
                 var window = app.MainWindow;
                 var scrollViewer = window.FindScrollViewer();
                 Assert.AreEqual("HorizontalScrollBar", scrollViewer.HorizontalScrollBar.AutomationId);
                 Assert.AreEqual("VerticalScrollBar", scrollViewer.VerticalScrollBar.AutomationId);
+                Assert.IsInstanceOf<ScrollViewer>(UiElement.FromAutomationElement(scrollViewer.AutomationElement));
+            }
+        }
+
+        [Test]
+        public void ScrollPattern()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ScrollBarWindow"))
+            {
+                var window = app.MainWindow;
+                var scrollViewer = window.FindScrollViewer();
+                var pattern = scrollViewer.ScrollPattern.Current;
+                Assert.AreEqual(0, pattern.HorizontalScrollPercent);
+                Assert.AreEqual(0, pattern.HorizontalViewSize);
+                Assert.AreEqual(true, pattern.HorizontallyScrollable);
+                Assert.AreEqual(0, pattern.VerticalScrollPercent);
+                Assert.AreEqual(0, pattern.VerticalViewSize);
+                Assert.AreEqual(true, pattern.VerticallyScrollable);
             }
         }
     }

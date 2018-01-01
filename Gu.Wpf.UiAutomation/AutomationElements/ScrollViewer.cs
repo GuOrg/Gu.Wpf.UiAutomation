@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -14,5 +14,7 @@
 
         public HorizontalScrollBar VerticalScrollBar => new HorizontalScrollBar(
             this.AutomationElement.FindFirst(TreeScope.Children, Condition.ByAutomationId("VerticalScrollBar")));
+
+        public ScrollPattern ScrollPattern => this.AutomationElement.ScrollPattern();
     }
 }
