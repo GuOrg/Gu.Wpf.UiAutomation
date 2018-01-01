@@ -17,6 +17,7 @@
             new ConditionAndCreate(Condition.DataGridCell, e => new DataGridCell(e)),
             new ConditionAndCreate(Condition.DataGridColumnHeader, e => new DataGridColumnHeader(e)),
             new ConditionAndCreate(Condition.DataGridRowHeader, e => new DataGridRowHeader(e)),
+            new ConditionAndCreate(Condition.DataGridRow, e => new DataGridRow(e)),
             new ConditionAndCreate(Condition.DatePicker, e => new DatePicker(e)),
             //// DataItem
             //// ControlTypeDocument
@@ -32,6 +33,7 @@
             new ConditionAndCreate(Condition.ListBox, e => new ListBox(e)),
             new ConditionAndCreate(Condition.ListBoxItem, e => new ListBoxItem(e)),
             new ConditionAndCreate(Condition.ListView, e => new ListView(e)),
+            new ConditionAndCreate(Condition.ListViewItem, e => new ListViewItem(e)),
             new ConditionAndCreate(Condition.Menu, e => new Menu(e)),
             new ConditionAndCreate(Condition.MenuBar, e => new MenuBar(e)),
             new ConditionAndCreate(Condition.MenuItem, e => new MenuItem(e)),

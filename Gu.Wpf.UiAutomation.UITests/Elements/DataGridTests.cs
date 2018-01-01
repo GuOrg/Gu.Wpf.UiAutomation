@@ -277,11 +277,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                var selectedRow = dataGrid.Select(index1).AsGridRow();
+                var selectedRow = dataGrid.Select(index1);
                 Assert.AreEqual($"{index1 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index1 + 1}", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem.AsGridRow();
+                selectedRow = (DataGridRow)dataGrid.SelectedItem;
                 Assert.AreEqual($"{index1 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index1 + 1}", selectedRow.Cells[1].Value);
 
@@ -289,7 +289,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual($"{index2 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index2 + 1}", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem.AsGridRow();
+                selectedRow = (DataGridRow)dataGrid.SelectedItem;
                 Assert.AreEqual($"{index2 + 1}", selectedRow.Cells[0].Value);
                 Assert.AreEqual($"Item {index2 + 1}", selectedRow.Cells[1].Value);
             }
@@ -305,7 +305,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var selectedCell = dataGrid.Select(index1, index2);
                 Assert.AreEqual($"{index1 + 1}", selectedCell.Value);
 
-                selectedCell = dataGrid.SelectedItem.AsGridCell();
+                selectedCell = (DataGridCell)dataGrid.SelectedItem;
                 Assert.AreEqual($"{index1 + 1}", selectedCell.Value);
             }
         }
@@ -323,7 +323,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 2", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem.AsGridRow();
+                selectedRow = (DataGridRow)dataGrid.SelectedItem;
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 2", selectedRow.Cells[1].Value);
 
@@ -331,7 +331,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 3", selectedRow.Cells[1].Value);
 
-                selectedRow = dataGrid.SelectedItem.AsGridRow();
+                selectedRow = (DataGridRow)dataGrid.SelectedItem;
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("Item 3", selectedRow.Cells[1].Value);
             }

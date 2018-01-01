@@ -104,7 +104,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem.AsGridRow();
+                selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
@@ -114,7 +114,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem.AsGridRow();
+                selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
@@ -133,7 +133,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem.AsGridRow();
+                selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("2", selectedRow.Cells[0].Value);
                 Assert.AreEqual("20", selectedRow.Cells[1].Value);
@@ -143,7 +143,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
 
-                selectedRow = listView.SelectedItem.AsGridRow();
+                selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
                 Assert.AreEqual("3", selectedRow.Cells[0].Value);
                 Assert.AreEqual("30", selectedRow.Cells[1].Value);
