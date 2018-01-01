@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.UiAutomation
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
 
     public static class RectExt
@@ -11,6 +12,7 @@
 
         public static Point Center(this Rect self) => new Point(self.Left + (self.Width / 2), self.Top + (self.Height / 2));
 
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator", Justification = "We want it here.")]
         public static bool IsZeroes(this Rect self)
         {
             return self.X == 0 &&

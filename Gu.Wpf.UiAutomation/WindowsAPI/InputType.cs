@@ -1,3 +1,4 @@
+// ReSharper disable InconsistentNaming
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     public enum InputType : uint

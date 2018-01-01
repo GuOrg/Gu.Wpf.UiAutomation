@@ -164,8 +164,8 @@
         public static OrCondition ByNameOrAutomationId(string key)
         {
             return new OrCondition(
-                Condition.ByName(key),
-                Condition.ByAutomationId(key));
+                ByName(key),
+                ByAutomationId(key));
         }
 
         public static PropertyCondition ByProcessId(int processId)
@@ -186,8 +186,7 @@
                     {
                         if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
                         {
-                            return
-                                $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
+                            return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
                         }
 
                         return $"{propertyCondition.Property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} == {propertyCondition.Value}";

@@ -33,7 +33,7 @@
         {
             if (!this.IsEnabled)
             {
-                throw new System.Windows.Automation.ElementNotEnabledException();
+                throw new ElementNotEnabledException("Cannot expand expander when it is not enabled.");
             }
 
             if (this.IsExpanded)

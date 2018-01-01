@@ -1,3 +1,5 @@
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;

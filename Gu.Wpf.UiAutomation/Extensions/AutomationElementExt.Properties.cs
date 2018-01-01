@@ -16,9 +16,9 @@
 
         public static System.Windows.Point ClickablePoint(this AutomationElement element) => (System.Windows.Point)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ClickablePointProperty);
 
-        public static System.Windows.Automation.ControlType ControlType(this AutomationElement element) => (System.Windows.Automation.ControlType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty);
+        public static ControlType ControlType(this AutomationElement element) => (System.Windows.Automation.ControlType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty);
 
-        public static object Culture(this AutomationElement element) => (object)element.GetCurrentPropertyValue(AutomationElementIdentifiers.CultureProperty);
+        public static object Culture(this AutomationElement element) => element.GetCurrentPropertyValue(AutomationElementIdentifiers.CultureProperty);
 
         public static string FrameworkId(this AutomationElement element) => (string)element.GetCurrentPropertyValue(AutomationElementIdentifiers.FrameworkIdProperty);
 
@@ -86,7 +86,7 @@
 
         public static string ItemType(this AutomationElement element) => (string)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ItemTypeProperty);
 
-        public static object LabeledBy(this AutomationElement element) => (object)element.GetCurrentPropertyValue(AutomationElementIdentifiers.LabeledByProperty);
+        public static object LabeledBy(this AutomationElement element) => element.GetCurrentPropertyValue(AutomationElementIdentifiers.LabeledByProperty);
 
         public static string LocalizedControlType(this AutomationElement element) => (string)element.GetCurrentPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty);
 
@@ -94,7 +94,7 @@
 
         public static int NativeWindowHandle(this AutomationElement element) => (int)element.GetCurrentPropertyValue(AutomationElementIdentifiers.NativeWindowHandleProperty);
 
-        public static System.Windows.Automation.OrientationType Orientation(this AutomationElement element) => (System.Windows.Automation.OrientationType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.OrientationProperty);
+        public static OrientationType Orientation(this AutomationElement element) => (System.Windows.Automation.OrientationType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.OrientationProperty);
 
         public static int ProcessId(this AutomationElement element) => (int)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ProcessIdProperty);
 

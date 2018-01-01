@@ -1,3 +1,4 @@
+// ReSharper disable AssignmentIsFullyDiscarded
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
@@ -87,8 +88,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.Throws<InvalidOperationException>(() => _ = groupBox.Content);
                 var content = groupBox.ContentElements(x => new TextBlock(x));
                 Assert.AreEqual(2, content.Count);
-                Assert.AreEqual("1", ((TextBlock)content[0]).Text);
-                Assert.AreEqual("2", ((TextBlock)content[1]).Text);
+                Assert.AreEqual("1", content[0].Text);
+                Assert.AreEqual("2", content[1].Text);
             }
         }
     }

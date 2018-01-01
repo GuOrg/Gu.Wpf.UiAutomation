@@ -78,7 +78,9 @@
         private static string GetXPathToElement(AutomationElement element, TreeWalker treeWalker, UiElement rootElement = null)
         {
             var parent = treeWalker.GetParent(element);
-            if (parent == null || (rootElement != null && parent.Equals(rootElement)))
+            if (parent == null ||
+                (rootElement != null && 
+                 Equals(parent, rootElement.AutomationElement)))
             {
                 return string.Empty;
             }

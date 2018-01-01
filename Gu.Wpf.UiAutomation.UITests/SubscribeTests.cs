@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.EventHandlers
+﻿namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Collections.Generic;

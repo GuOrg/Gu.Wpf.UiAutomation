@@ -1,3 +1,4 @@
+// ReSharper disable RedundantNameQualifier
 namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System.IO;

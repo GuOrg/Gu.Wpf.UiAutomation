@@ -106,7 +106,7 @@
                 // WPF
                 if (this.AutomationElement.TryGetExpandCollapsePattern(out var pattern))
                 {
-                    return pattern.Current.ExpandCollapseState == System.Windows.Automation.ExpandCollapseState.Expanded;
+                    return pattern.Current.ExpandCollapseState == ExpandCollapseState.Expanded;
                 }
 
                 return false;

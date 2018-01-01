@@ -1,3 +1,4 @@
+// ReSharper disable AssignmentIsFullyDiscarded
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
