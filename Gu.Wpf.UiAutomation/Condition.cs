@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Linq;
@@ -45,6 +45,10 @@
         public static System.Windows.Automation.Condition HeaderSite { get; } = new PropertyCondition(AutomationElement.AutomationIdProperty, "HeaderSite");
 
         public static System.Windows.Automation.Condition NotHeaderSite { get; } = new NotCondition(HeaderSite);
+
+        public static System.Windows.Automation.Condition HorizontalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId("VerticalScrollBar")));
+
+        public static System.Windows.Automation.Condition VerticalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId("HorizontalScrollBar")));
 
         public static System.Windows.Automation.Condition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
 
@@ -186,6 +190,7 @@
                     {
                         if (Equals(propertyCondition.Property, AutomationElementIdentifiers.ControlTypeProperty))
                         {
+                            // ReSharper disable once PossibleNullReferenceException
                             return $"ControlType == {ControlType.LookupById((int)propertyCondition.Value).ProgrammaticName.TrimStart("ControlType.")}";
                         }
 

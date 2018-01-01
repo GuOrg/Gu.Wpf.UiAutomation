@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -27,6 +27,7 @@
             new ConditionAndCreate(Condition.GroupBox, e => new GroupBox(e)),
             ////new ConditionAndCreate(Condition.Header, e => new Header(e)),
             ////new ConditionAndCreate(Condition.HeaderItem, e => new HeaderItem(e)),
+            new ConditionAndCreate(Condition.HorizontalScrollBar, e => new HorizontalScrollBar(e)),
             ////new ConditionAndCreate(Condition.Hyperlink, e => new Hyperlink(e)),
             ////new ConditionAndCreate(Condition.Image, e => new Image(e)),
             new ConditionAndCreate(Condition.Label, e => new Label(e)),
@@ -61,6 +62,7 @@
             new ConditionAndCreate(Condition.TreeView, e => new TreeView(e)),
             new ConditionAndCreate(Condition.TreeViewItem, e => new TreeViewItem(e)),
             new ConditionAndCreate(Condition.UserControl, e => new UserControl(e)),
+            new ConditionAndCreate(Condition.VerticalScrollBar, e => new VerticalScrollBar(e)),
             new ConditionAndCreate(Condition.Window, e => new Window(e)),
         };
 

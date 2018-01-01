@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -119,7 +119,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ScrollBar, name),
+            this.CreateCondition(Condition.HorizontalScrollBar, name),
             x => new HorizontalScrollBar(x),
             Retry.Time);
 
@@ -129,7 +129,7 @@
         /// <param name="name">x:Name, Content or AutomationID</param>
         public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ScrollBar, name),
+            this.CreateCondition(Condition.VerticalScrollBar, name),
             x => new VerticalScrollBar(x),
             Retry.Time);
 
