@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Automation;
 
-    public class VerticalScrollBar : ScrollBarBase
+    public class VerticalScrollBar : ScrollBar
     {
         public VerticalScrollBar(AutomationElement automationElement)
             : base(automationElement)

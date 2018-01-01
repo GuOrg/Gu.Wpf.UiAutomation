@@ -2,9 +2,9 @@
 {
     using System.Windows.Automation;
 
-    public abstract class ScrollBarBase : UiElement
+    public abstract class ScrollBar : UiElement
     {
-        protected ScrollBarBase(AutomationElement automationElement)
+        protected ScrollBar(AutomationElement automationElement)
             : base(automationElement)
         {
         }

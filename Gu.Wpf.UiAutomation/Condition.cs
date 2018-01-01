@@ -83,6 +83,8 @@
         public static System.Windows.Automation.Condition RadioButton { get; } = ByControlType(ControlType.RadioButton);
 
         public static System.Windows.Automation.Condition ScrollBar { get; } = ByControlType(ControlType.ScrollBar);
+        
+        public static System.Windows.Automation.Condition ScrollViewer { get; } = ByClassName("ScrollViewer");
 
         public static System.Windows.Automation.Condition Separator { get; } = ByControlType(ControlType.Separator);
 

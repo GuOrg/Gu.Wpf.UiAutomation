@@ -184,6 +184,16 @@
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="ScrollViewer"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ScrollViewer FindScrollViewer(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.ScrollViewer, name),
+            x => new ScrollViewer(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

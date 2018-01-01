@@ -125,6 +125,16 @@
             }
         }
 
+        [Test]
+        public void DumpScrollBarWindow()
+        {
+            using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.AutomationElement);
+            }
+        }
+
         private static void DumpRecursive(AutomationElement element, bool all = false, string padding = "")
         {
             DumpPropertiesAndPatterns(element, all, padding);

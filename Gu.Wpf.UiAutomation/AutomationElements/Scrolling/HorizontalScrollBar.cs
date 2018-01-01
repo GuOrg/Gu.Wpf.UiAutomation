@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Automation;
 
-    public class HorizontalScrollBar : ScrollBarBase
+    public class HorizontalScrollBar : ScrollBar
     {
         public HorizontalScrollBar(AutomationElement automationElement)
             : base(automationElement)
