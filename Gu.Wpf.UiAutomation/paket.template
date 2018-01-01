@@ -11,15 +11,21 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  BUGFIX: ImageAssert handle bmp.
-  FEATURE: ImageAssert.OnFail save when not found.
-  FEATURE: ImageAssert handle bmp.
+  FEATURE: Added more wrapper types.
+  FEATURE: Return better types to enable cast instead of using As-methods.
+  BREAKING: Use UIAutomationClient & UIAutomationTypes instead of interop assembly.
+  BREAKING: Rename HeaderedContentControl.HeaderText was Text
+  BREAKING: Rename UiElement was AutomationElement
+  BREAKING: Remove condition types, use built-in conditions.
+  BREAKING: Removed some exception types and use built-in instead.
+  BREAKING: Remove UIElement.ExecuteInPattern
+  BREAKING: Minor changes to inheritance hierarchies.
+  BREAKING: event handler signatures, use built-in delegates.
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
   bin/Release/net45/Gu.Wpf.UiAutomation.pdb ==> lib/net45
   bin/Release/net45/Gu.Wpf.UiAutomation.xml ==> lib/net45
-  bin/Release/net45/Interop.UIAutomationClient.dll ==> lib/net45
 
 frameworkAssemblies
   UIAutomationClient
