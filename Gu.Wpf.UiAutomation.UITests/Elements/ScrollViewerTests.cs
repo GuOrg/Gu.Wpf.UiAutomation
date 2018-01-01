@@ -37,7 +37,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual(66.75, pattern.HorizontalViewSize);
                 Assert.AreEqual(true, pattern.HorizontallyScrollable);
                 Assert.AreEqual(0, pattern.VerticalScrollPercent);
-                Assert.AreEqual(61.25, pattern.VerticalViewSize);
+                //// Using a tolerance as there is a difference on Win7 & Win10
+                Assert.AreEqual(61.25, pattern.VerticalViewSize, 1);
                 Assert.AreEqual(true, pattern.VerticallyScrollable);
             }
         }
