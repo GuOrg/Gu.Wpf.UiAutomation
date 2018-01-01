@@ -6,7 +6,7 @@
 
     public partial class UiElement
     {
-        private static readonly IReadOnlyList<ConditionAndCreate> ConditionAndCreates = new[]
+        private static readonly List<ConditionAndCreate> ConditionAndCreates = new List<ConditionAndCreate>
         {
             new ConditionAndCreate(Condition.Button, e => new Button(e)),
             //// Calendar
@@ -90,6 +90,16 @@
             return new UiElement(element);
         }
 
+        /// <summary>
+        /// Register a custom type for <see cref="FromAutomationElement"/>
+        /// </summary>
+        /// <param name="condition">The condition that matches the type</param>
+        /// <param name="create">The factory method for creating an instance</param>
+        public static void Register(System.Windows.Automation.Condition condition, Func<AutomationElement, UiElement> create)
+        {
+            ConditionAndCreates.Insert(0, new ConditionAndCreate(condition, create));
+        }
+
         private class ConditionAndCreate
         {
             private readonly System.Windows.Automation.Condition condition;
@@ -97,8 +107,8 @@
 
             public ConditionAndCreate(System.Windows.Automation.Condition condition, Func<AutomationElement, UiElement> create)
             {
-                this.condition = condition;
-                this.create = create;
+                this.condition = condition ?? throw new ArgumentNullException(nameof(condition));
+                this.create = create ?? throw new ArgumentNullException(nameof(create));
             }
 
             public bool TryCreate(AutomationElement element, out UiElement uiElement)
