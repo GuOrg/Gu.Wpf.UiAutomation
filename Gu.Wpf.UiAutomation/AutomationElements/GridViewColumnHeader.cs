@@ -2,7 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
-    public class GridViewColumnHeader : GridHeader
+    public class GridViewColumnHeader : ColumnHeader
     {
         public GridViewColumnHeader(AutomationElement automationElement)
             : base(automationElement)
