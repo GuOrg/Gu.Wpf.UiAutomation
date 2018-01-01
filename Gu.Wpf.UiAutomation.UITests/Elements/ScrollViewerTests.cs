@@ -34,10 +34,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var scrollViewer = window.FindScrollViewer();
                 var pattern = scrollViewer.ScrollPattern.Current;
                 Assert.AreEqual(0, pattern.HorizontalScrollPercent);
-                Assert.AreEqual(0, pattern.HorizontalViewSize);
+                Assert.AreEqual(66.75, pattern.HorizontalViewSize);
                 Assert.AreEqual(true, pattern.HorizontallyScrollable);
                 Assert.AreEqual(0, pattern.VerticalScrollPercent);
-                Assert.AreEqual(0, pattern.VerticalViewSize);
+                Assert.AreEqual(61.25, pattern.VerticalViewSize);
                 Assert.AreEqual(true, pattern.VerticallyScrollable);
             }
         }

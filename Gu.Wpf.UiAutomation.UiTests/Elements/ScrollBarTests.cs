@@ -45,8 +45,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var scrollBar = window.FindVerticalScrollBar();
-                Assert.AreEqual(0, scrollBar.MinimumValue);
-                Assert.AreEqual(155, scrollBar.MaximumValue);
+                Assert.AreEqual(0, scrollBar.Minimum);
+                Assert.AreEqual(155, scrollBar.Maximum);
                 Assert.AreEqual(0, scrollBar.Value);
                 Assert.AreEqual(0.1, scrollBar.SmallChange);
                 Assert.AreEqual(1, scrollBar.LargeChange);

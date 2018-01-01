@@ -2,7 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
-    public abstract class ScrollBar : UiElement
+    public abstract class ScrollBar : Control
     {
         protected ScrollBar(AutomationElement automationElement)
             : base(automationElement)
@@ -11,9 +11,9 @@ namespace Gu.Wpf.UiAutomation
 
         public double Value => this.RangeValuePattern.Current.Value;
 
-        public double MinimumValue => this.RangeValuePattern.Current.Minimum;
+        public double Minimum => this.RangeValuePattern.Current.Minimum;
 
-        public double MaximumValue => this.RangeValuePattern.Current.Maximum;
+        public double Maximum => this.RangeValuePattern.Current.Maximum;
 
         public double SmallChange => this.RangeValuePattern.Current.SmallChange;
 
