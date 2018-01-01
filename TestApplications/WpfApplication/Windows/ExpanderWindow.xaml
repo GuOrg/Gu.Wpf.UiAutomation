@@ -14,7 +14,7 @@
       <TextBlock Text="1" />
     </Expander>
 
-    <Expander x:Name="xName"
+    <Expander x:Name="XName"
               Header="2"
               IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
               IsExpanded="True">

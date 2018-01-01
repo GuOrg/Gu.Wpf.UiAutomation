@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [TestCase("AutomationId", "1")]
-        [TestCase("xName", "2")]
+        [TestCase("XName", "2")]
         [TestCase("Header", "Header")]
         public void FindExpander(string key, string header)
         {
@@ -32,7 +32,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [TestCase("AutomationId", "1")]
-        [TestCase("xName", "2")]
+        [TestCase("XName", "2")]
         [TestCase("Header", "Header")]
         public void Header(string key, string expected)
         {
@@ -47,7 +47,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [TestCase("AutomationId", "1")]
-        [TestCase("xName", "2")]
+        [TestCase("XName", "2")]
         [TestCase("Header", "3")]
         public void Content(string key, string content)
         {

@@ -13,7 +13,7 @@
       <TextBlock Text="1" />
     </GroupBox>
 
-    <GroupBox x:Name="xName"
+    <GroupBox x:Name="XName"
               Header="2"
               IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}">
       <TextBlock Text="2" />
