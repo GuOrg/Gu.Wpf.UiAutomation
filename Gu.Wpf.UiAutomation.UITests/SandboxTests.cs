@@ -142,7 +142,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.AutomationElement);
+                DumpRecursive(window.AutomationElement, true);
             }
         }
 

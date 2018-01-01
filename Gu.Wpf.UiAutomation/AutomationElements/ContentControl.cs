@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@
         }
 
         /// <summary>
-        /// The header text.
+        /// The content as text.
         /// </summary>
         public string Text
         {

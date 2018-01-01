@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Globalization;
@@ -56,10 +56,6 @@
 
         private ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
 
-        private Button LargeIncreaseButton => this.GetLargeIncreaseButton();
-
-        private Button LargeDecreaseButton => this.GetLargeDecreaseButton();
-
         public void SmallIncrement()
         {
             this.RangeValuePattern.SetValue((this.Value + this.SmallChange).Clamp(this.Minimum, this.Maximum));
@@ -78,48 +74,6 @@
         public void LargeDecrement()
         {
             this.RangeValuePattern.SetValue((this.Value - this.LargeChange).Clamp(this.Minimum, this.Maximum));
-        }
-
-        private Button GetLargeIncreaseButton()
-        {
-            if (this.FrameworkType == FrameworkType.Wpf)
-            {
-                // For WPF, this is simple
-                return this.FindButton("IncreaseLarge");
-            }
-
-            // For WinForms, we loop thru the buttons and find the one right of the thumb
-            var buttons = this.AutomationElement.FindAllChildren(Condition.Button);
-            foreach (AutomationElement button in buttons)
-            {
-                if (button.BoundingRectangle().Left > this.Thumb.Bounds.Left)
-                {
-                    return new Button(button);
-                }
-            }
-
-            return null;
-        }
-
-        private Button GetLargeDecreaseButton()
-        {
-            if (this.FrameworkType == FrameworkType.Wpf)
-            {
-                // For WPF, this is simple
-                return this.FindButton("DecreaseLarge");
-            }
-
-            // For WinForms, we loop thru the buttons and find the one left of the thumb
-            var buttons = this.AutomationElement.FindAllChildren(Condition.Button);
-            foreach (AutomationElement button in buttons)
-            {
-                if (button.BoundingRectangle().Right < this.Thumb.Bounds.Right)
-                {
-                    return new Button(button);
-                }
-            }
-
-            return null;
         }
     }
 }

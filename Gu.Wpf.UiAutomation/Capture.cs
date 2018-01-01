@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Drawing;
@@ -110,6 +110,7 @@
             var hDest = CreateCompatibleDC(hSrce);
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
+            //// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, (int)bounds.X, (int)bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
             var bmp = Image.FromHbitmap(hBmp);
             SelectObject(hDest, hOldBmp);

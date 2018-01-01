@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Concurrent;
@@ -631,6 +631,7 @@
                     return match;
                 }
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
                 while (dir?.Parent != null)
                 {

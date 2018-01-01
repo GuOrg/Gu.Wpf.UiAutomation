@@ -330,6 +330,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 dataGrid[0, 0].Value = "11";
                 Assert.AreEqual("11", dataGrid[0, 0].Value);
                 Assert.Inconclusive("Figure out the least ugly way here.");
+                //// ReSharper disable once HeuristicUnreachableCode
                 Assert.AreEqual("11", readOnly[0, 0].Value);
             }
         }
