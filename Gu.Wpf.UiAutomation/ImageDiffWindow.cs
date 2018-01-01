@@ -6,7 +6,6 @@
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
 
@@ -34,7 +33,7 @@
             this.actualImage = this.CreateImage(actual);
             root.Children.Add(this.actualImage);
 
-            var visibilityButton = new RepeatButton { Content = "Toggle visibility" };
+            var visibilityButton = new System.Windows.Controls.Primitives.RepeatButton { Content = "Toggle visibility" };
             visibilityButton.Click += this.OnVisibilityButtonClick;
             Grid.SetRow(visibilityButton, 1);
             root.Children.Add(visibilityButton);

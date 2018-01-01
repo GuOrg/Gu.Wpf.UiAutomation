@@ -40,6 +40,7 @@
             ////new ConditionAndCreate(Condition.Pane, e => new Pane(e)),
             new ConditionAndCreate(Condition.ProgressBar, e => new ProgressBar(e)),
             new ConditionAndCreate(Condition.RadioButton, e => new RadioButton(e)),
+            new ConditionAndCreate(Condition.RepeatButton, e => new RepeatButton(e)),
             new ConditionAndCreate(Condition.ScrollViewer, e => new ScrollViewer(e)),
             ////new ConditionAndCreate(Condition.ScrollBar, e => new ScrollBar(e)),
             ////new ConditionAndCreate(Condition.Separator, e => new Separator(e)),

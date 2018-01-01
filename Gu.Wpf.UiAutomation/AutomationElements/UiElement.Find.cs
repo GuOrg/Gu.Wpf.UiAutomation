@@ -154,6 +154,17 @@
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.ProgressBar, name),
+            x => new ProgressBar(x),
+            Retry.Time);
+
+        
+        /// <summary>
         /// Find the first <see cref="RadioButton"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -164,13 +175,13 @@
             Retry.Time);
 
         /// <summary>
-        /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
+        /// Find the first <see cref="RepeatButton"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
-        public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
+        public RepeatButton FindRepeatButton(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ProgressBar, name),
-            x => new ProgressBar(x),
+            this.CreateCondition(Condition.RepeatButton, name),
+            x => new RepeatButton(x),
             Retry.Time);
 
         /// <summary>
