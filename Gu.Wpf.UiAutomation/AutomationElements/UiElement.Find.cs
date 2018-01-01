@@ -163,7 +163,6 @@
             x => new ProgressBar(x),
             Retry.Time);
 
-        
         /// <summary>
         /// Find the first <see cref="RadioButton"/> by x:Name, Content or AutomationID
         /// </summary>

@@ -79,7 +79,7 @@
         {
             var parent = treeWalker.GetParent(element);
             if (parent == null ||
-                (rootElement != null && 
+                (rootElement != null &&
                  Equals(parent, rootElement.AutomationElement)))
             {
                 return string.Empty;
