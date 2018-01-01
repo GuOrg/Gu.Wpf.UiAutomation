@@ -21,10 +21,10 @@
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 Assert.AreEqual(4, tab.Items.Count);
-                Assert.AreEqual("x:Name", tab.Items[0].Text);
-                Assert.AreEqual("Header", tab.Items[1].Text);
-                Assert.AreEqual("AutomationProperties.AutomationId", tab.Items[2].Text);
-                Assert.AreEqual("WithItemsControl", tab.Items[3].Text);
+                Assert.AreEqual("x:Name", tab.Items[0].HeaderText);
+                Assert.AreEqual("Header", tab.Items[1].HeaderText);
+                Assert.AreEqual("AutomationProperties.AutomationId", tab.Items[2].HeaderText);
+                Assert.AreEqual("WithItemsControl", tab.Items[3].HeaderText);
 
                 for (var i = 0; i < tab.Items.Count; i++)
                 {

@@ -24,7 +24,7 @@
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 var tabItem = tab.Select(index);
-                Assert.AreEqual(header, tabItem.Text);
+                Assert.AreEqual(header, tabItem.HeaderText);
                 Assert.AreEqual(header, ((TextBlock)tabItem.Header).Text);
             }
         }
@@ -39,7 +39,7 @@
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 var tabItem = tab.Select(index);
-                Assert.AreEqual(header, tabItem.Text);
+                Assert.AreEqual(header, tabItem.HeaderText);
                 Assert.AreEqual(header, ((TextBlock)tabItem.Header).Text);
                 Assert.AreEqual(content, ((TextBlock)tabItem.Content).Text);
                 Assert.AreEqual(content, ((TextBlock)tabItem.ContentCollection[0]).Text);
@@ -54,7 +54,7 @@
                 var window = app.MainWindow;
                 var tab = window.FindTabControl();
                 var tabItem = tab.Select("WithItemsControl");
-                Assert.AreEqual("WithItemsControl", tabItem.Text);
+                Assert.AreEqual("WithItemsControl", tabItem.HeaderText);
                 Assert.AreEqual("WithItemsControl", ((TextBlock)tabItem.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = tabItem.Content);
                 var content = tabItem.ContentCollection;

@@ -15,7 +15,7 @@
         /// <summary>
         /// The header text.
         /// </summary>
-        public string Text
+        public string HeaderText
         {
             get
             {

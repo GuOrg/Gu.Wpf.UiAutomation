@@ -24,7 +24,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander(key);
-                Assert.AreEqual(header, expander.Text);
+                Assert.AreEqual(header, expander.HeaderText);
                 Assert.NotNull(expander.FindTextBlock());
             }
         }
@@ -38,7 +38,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var expander = window.FindExpander(key);
-                Assert.AreEqual(expected, expander.Text);
+                Assert.AreEqual(expected, expander.HeaderText);
                 var header = expander.Header;
                 Assert.AreEqual(expected, ((Button)header).Text);
             }
@@ -66,7 +66,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
-                Assert.AreEqual("WithItemsControl", expander.Text);
+                Assert.AreEqual("WithItemsControl", expander.HeaderText);
                 Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentCollection;
@@ -84,7 +84,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
-                Assert.AreEqual("WithItemsControl", expander.Text);
+                Assert.AreEqual("WithItemsControl", expander.HeaderText);
                 Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentElements(x => new TextBlock(x));
