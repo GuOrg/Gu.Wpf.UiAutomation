@@ -12,6 +12,7 @@ namespace Gu.Wpf.UiAutomation
             //// Calendar
             new ConditionAndCreate(Condition.CheckBox, e => new CheckBox(e)),
             new ConditionAndCreate(Condition.ComboBox, e => new ComboBox(e)),
+            new ConditionAndCreate(Condition.ContextMenu, e => new ContextMenu(e)),
             //// Custom
             new ConditionAndCreate(Condition.DataGrid, e => new DataGrid(e)),
             new ConditionAndCreate(Condition.DataGridCell, e => new DataGridCell(e)),

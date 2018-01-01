@@ -16,6 +16,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static System.Windows.Automation.Condition ComboBox { get; } = ByControlType(ControlType.ComboBox);
 
+        public static System.Windows.Automation.Condition ContextMenu { get; } = ByClassName("ContextMenu");
+
         public static System.Windows.Automation.Condition ControlTypeCustom { get; } = ByControlType(ControlType.Custom);
 
         public static System.Windows.Automation.Condition DataGrid { get; } = ByControlType(ControlType.DataGrid);

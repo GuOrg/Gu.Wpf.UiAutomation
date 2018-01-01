@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -10,6 +10,17 @@
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void Find()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SliderWindow"))
+            {
+                var window = app.MainWindow;
+                var slider = window.FindSlider("Slider");
+                Assert.IsInstanceOf<Slider>(UiElement.FromAutomationElement(slider.AutomationElement));
+            }
         }
 
         [Test]
@@ -26,6 +37,7 @@
                 Assert.AreEqual(5, slider.Value);
                 Assert.AreEqual(1, slider.SmallChange);
                 Assert.AreEqual(4, slider.LargeChange);
+                Assert.AreEqual(false, slider.IsOnlyValue);
             }
         }
 

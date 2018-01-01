@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System.Linq;
     using NUnit.Framework;
@@ -11,6 +11,19 @@
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [TestCase("AutomationId")]
+        [TestCase("XName")]
+        [TestCase("EditableComboBox")]
+        public void Find(string key)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var comboBox = window.FindComboBox(key);
+                Assert.IsInstanceOf<ComboBox>(UiElement.FromAutomationElement(comboBox.AutomationElement));
+            }
         }
 
         [TestCase("EditableComboBox", true)]

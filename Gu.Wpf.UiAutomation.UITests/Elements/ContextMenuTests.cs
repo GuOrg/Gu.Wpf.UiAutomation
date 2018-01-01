@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -21,6 +21,7 @@
                 Assert.AreEqual(1, subMenuLevel2.Count);
                 var innerItem = subMenuLevel2[0];
                 Assert.AreEqual("Inner Context", innerItem.Text);
+                Assert.IsInstanceOf<ContextMenu>(UiElement.FromAutomationElement(ctxMenu.AutomationElement));
             }
         }
     }
