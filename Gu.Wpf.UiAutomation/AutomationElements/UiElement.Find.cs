@@ -229,7 +229,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Button, name),
+            this.CreateCondition(Condition.ToggleButton, name),
             x => new ToggleButton(x),
             Retry.Time);
 

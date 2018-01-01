@@ -24,7 +24,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var button = window.FindButton(key);
-                Assert.NotNull(button);
+                Assert.IsAssignableFrom<Button>(UiElement.FromAutomationElement(button.AutomationElement));
             }
         }
 
@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
-                Assert.AreEqual($"Did not find a Button matching (ControlType == Button && (Name == {key} || AutomationId == {key})).", exception.Message);
+                Assert.AreEqual($"Did not find a Button matching ((ControlType == Button && IsTogglePatternAvailable == False) && (Name == {key} || AutomationId == {key})).", exception.Message);
             }
         }
 

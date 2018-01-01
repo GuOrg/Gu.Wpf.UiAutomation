@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander(key);
                 Assert.AreEqual(expected, expander.HeaderText);
                 var header = expander.Header;
-                Assert.AreEqual(expected, ((Button)header).Text);
+                Assert.AreEqual(expected, ((ToggleButton)header).Text);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
                 Assert.AreEqual("WithItemsControl", expander.HeaderText);
-                Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
+                Assert.AreEqual("WithItemsControl", ((ToggleButton)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentCollection;
                 Assert.AreEqual(2, content.Count);
@@ -87,7 +87,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var expander = window.FindExpander("WithItemsControl");
                 expander.IsExpanded = true;
                 Assert.AreEqual("WithItemsControl", expander.HeaderText);
-                Assert.AreEqual("WithItemsControl", ((Button)expander.Header).Text);
+                Assert.AreEqual("WithItemsControl", ((ToggleButton)expander.Header).Text);
                 Assert.Throws<InvalidOperationException>(() => _ = expander.Content);
                 var content = expander.ContentElements(x => new TextBlock(x));
                 Assert.AreEqual(2, content.Count);

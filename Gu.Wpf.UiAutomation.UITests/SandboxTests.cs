@@ -28,6 +28,17 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpButton()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
+            {
+                var window = app.MainWindow;
+                var toggleButton = window.FindToggleButton();
+                DumpRecursive(toggleButton.AutomationElement, all: true);
+            }
+        }
+
+        [Test]
         public void DumpTabControl()
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
@@ -147,7 +158,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void FindToggleButton()
+        public void DumpToggleButton()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
             {

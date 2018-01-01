@@ -8,7 +8,9 @@ namespace Gu.Wpf.UiAutomation
     {
         public static System.Windows.Automation.Condition TrueCondition { get; } = System.Windows.Automation.Condition.TrueCondition;
 
-        public static System.Windows.Automation.Condition Button { get; } = ByControlType(ControlType.Button);
+        public static System.Windows.Automation.Condition Button { get; } = new AndCondition(
+            ByControlType(ControlType.Button),
+            new PropertyCondition(AutomationElement.IsTogglePatternAvailableProperty, false));
 
         public static System.Windows.Automation.Condition Calendar { get; } = ByControlType(ControlType.Calendar);
 
@@ -121,6 +123,10 @@ namespace Gu.Wpf.UiAutomation
         public static System.Windows.Automation.Condition Thumb { get; } = ByControlType(ControlType.Thumb);
 
         public static System.Windows.Automation.Condition TitleBar { get; } = ByControlType(ControlType.TitleBar);
+
+        public static System.Windows.Automation.Condition ToggleButton { get; } = new AndCondition(
+            ByControlType(ControlType.Button),
+            new PropertyCondition(AutomationElement.IsTogglePatternAvailableProperty, true));
 
         public static System.Windows.Automation.Condition ToolBar { get; } = ByControlType(ControlType.ToolBar);
 
