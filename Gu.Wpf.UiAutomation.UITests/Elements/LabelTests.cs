@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -23,6 +23,7 @@
                 var label = window.FindLabel(key);
                 Assert.AreEqual(header, label.Text);
                 Assert.NotNull(label.FindTextBlock());
+                Assert.IsInstanceOf<Label>(UiElement.FromAutomationElement(label.AutomationElement));
             }
         }
     }

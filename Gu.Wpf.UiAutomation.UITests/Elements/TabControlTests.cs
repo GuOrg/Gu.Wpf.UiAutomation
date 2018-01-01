@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -11,6 +11,17 @@
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void FromAutomationElement()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var tabControl = window.FindTabControl();
+                Assert.IsInstanceOf<TabControl>(UiElement.FromAutomationElement(tabControl.AutomationElement));
+            }
         }
 
         [Test]

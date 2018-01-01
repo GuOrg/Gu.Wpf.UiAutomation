@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -22,7 +22,7 @@
                 var window = app.MainWindow;
                 var radioButton = window.FindRadioButton(key);
                 Assert.AreEqual(true, radioButton.IsEnabled);
-                Assert.NotNull(radioButton);
+                Assert.IsInstanceOf<RadioButton>(UiElement.FromAutomationElement(radioButton.AutomationElement));
             }
         }
 

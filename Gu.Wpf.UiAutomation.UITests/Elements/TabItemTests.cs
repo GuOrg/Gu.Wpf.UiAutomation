@@ -1,4 +1,4 @@
-﻿// ReSharper disable AssignmentIsFullyDiscarded
+// ReSharper disable AssignmentIsFullyDiscarded
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
@@ -13,6 +13,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void FromAutomationElement()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var tabItem = window.FindTabControl().Items[0];
+                Assert.IsInstanceOf<TabItem>(UiElement.FromAutomationElement(tabItem.AutomationElement));
+            }
         }
 
         [TestCase(0, "x:Name", "1")]

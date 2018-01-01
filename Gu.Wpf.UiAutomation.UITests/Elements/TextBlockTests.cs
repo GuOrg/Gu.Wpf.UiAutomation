@@ -22,6 +22,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var textBlock = window.FindTextBlock(key);
                 Assert.AreEqual(expected, textBlock.Text);
+                Assert.IsInstanceOf<TextBlock>(UiElement.FromAutomationElement(textBlock.AutomationElement));
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -15,7 +15,7 @@
                 var window = app.MainWindow;
                 var textBox = window.FindTextBox(key);
                 Assert.AreEqual(true, textBox.IsEnabled);
-                Assert.NotNull(textBox);
+                Assert.IsInstanceOf<TextBox>(UiElement.FromAutomationElement(textBox.AutomationElement));
             }
         }
 

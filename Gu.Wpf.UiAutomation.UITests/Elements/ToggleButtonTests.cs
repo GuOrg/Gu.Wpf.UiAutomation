@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -22,7 +22,7 @@
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton(key);
-                Assert.NotNull(toggleButton);
+                Assert.IsInstanceOf<ToggleButton>(UiElement.FromAutomationElement(toggleButton.AutomationElement));
             }
         }
 

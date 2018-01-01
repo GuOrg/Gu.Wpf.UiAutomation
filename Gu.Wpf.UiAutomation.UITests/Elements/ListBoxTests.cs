@@ -14,12 +14,23 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
 
         [TestCase("ListBox")]
         [TestCase("AutomationId")]
-        public void Items(string key)
+        public void Find(string key)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
-                var itemsControl = window.FindListBox(key);
+                var listBox = window.FindListBox(key);
+                Assert.IsInstanceOf<ListBox>(UiElement.FromAutomationElement(listBox.AutomationElement));
+            }
+        }
+
+        [Test]
+        public void Items()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var itemsControl = window.FindListBox("ListBox");
                 Assert.AreEqual(2, itemsControl.Items.Count);
             }
         }

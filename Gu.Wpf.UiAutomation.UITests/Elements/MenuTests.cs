@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -10,6 +10,17 @@
         public void OneTimeTearDown()
         {
             Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void Find()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
+            {
+                var window = app.MainWindow;
+                var menu = window.FindMenu();
+                Assert.IsInstanceOf<Menu>(UiElement.FromAutomationElement(menu.AutomationElement));
+            }
         }
 
         [Test]

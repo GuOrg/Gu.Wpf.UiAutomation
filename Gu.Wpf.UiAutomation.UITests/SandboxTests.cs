@@ -146,6 +146,17 @@ namespace Gu.Wpf.UiAutomation.UiTests
             }
         }
 
+        [Test]
+        public void FindToggleButton()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
+            {
+                var window = app.MainWindow;
+                var toggleButton = window.FindToggleButton();
+                DumpRecursive(toggleButton.AutomationElement, all: true);
+            }
+        }
+
         private static void DumpRecursive(AutomationElement element, bool all = false, string padding = "")
         {
             DumpPropertiesAndPatterns(element, all, padding);

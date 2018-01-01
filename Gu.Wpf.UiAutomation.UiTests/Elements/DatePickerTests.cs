@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
     using NUnit.Framework;
@@ -14,7 +14,8 @@
             {
                 var window = app.MainWindow;
                 var datePicker = window.FindDatePicker();
-                Assert.NotNull(datePicker);
+                Assert.IsInstanceOf<DatePicker>(datePicker);
+                Assert.IsInstanceOf<DatePicker>(UiElement.FromAutomationElement(datePicker.AutomationElement));
             }
         }
 

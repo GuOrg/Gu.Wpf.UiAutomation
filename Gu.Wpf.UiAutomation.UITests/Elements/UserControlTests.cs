@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -16,6 +16,7 @@
                 var userControl = window.FindUserControl(key);
                 Assert.AreEqual(expected, userControl.FindTextBlock().Text);
                 Assert.AreEqual(expected, ((TextBlock)userControl.Content).Text);
+                Assert.IsInstanceOf<UserControl>(UiElement.FromAutomationElement(userControl.AutomationElement));
             }
         }
     }
