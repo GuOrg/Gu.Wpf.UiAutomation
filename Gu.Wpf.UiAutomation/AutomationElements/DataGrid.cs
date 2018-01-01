@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System.Linq;
     using System.Windows.Automation;
 
     public class DataGrid : GridView
@@ -14,9 +13,22 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var firstRow = new GridRow(this.GridPattern.GetItem(0, 0).Parent());
-                return firstRow.Cells.Where(x => x.IsKeyboardFocusable)
-                                     .All(x => x.IsReadOnly);
+                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.DataGridRow, out var firstRow))
+                {
+                    foreach (AutomationElement cell in firstRow.FindAllChildren(Condition.DataGridCell))
+                    {
+                        if (cell.IsKeyboardFocusable() &&
+                            cell.TryGetValuePattern(out var valuePattern) &&
+                            !valuePattern.Current.IsReadOnly)
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+
+                return false;
             }
         }
 

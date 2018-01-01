@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Windows.Automation;
@@ -12,9 +12,7 @@
 
         public bool IsExpanded
         {
-            get => this.AutomationElement.ExpandCollapsePattern()
-                       .Current
-                       .ExpandCollapseState == ExpandCollapseState.Expanded;
+            get => this.ExpandCollapsePattern.Current.ExpandCollapseState == ExpandCollapseState.Expanded;
 
             set
             {
@@ -28,6 +26,8 @@
                 }
             }
         }
+
+        public ExpandCollapsePattern ExpandCollapsePattern => this.AutomationElement.ExpandCollapsePattern();
 
         public void Expand()
         {
@@ -50,7 +50,7 @@
             else
             {
                 // WPF
-                this.AutomationElement.ExpandCollapsePattern().Expand();
+                this.ExpandCollapsePattern.Expand();
             }
         }
 
@@ -67,8 +67,12 @@
 
         public void Collapse()
         {
-            if (!this.IsEnabled ||
-                !this.IsExpanded)
+            if (!this.IsEnabled)
+            {
+                throw new ElementNotEnabledException("Cannot expand expander when it is not enabled.");
+            }
+
+            if (!this.IsExpanded)
             {
                 return;
             }
@@ -82,7 +86,7 @@
             else
             {
                 // WPF
-                this.AutomationElement.ExpandCollapsePattern().Collapse();
+                this.ExpandCollapsePattern.Collapse();
             }
 
             Wait.UntilResponsive(this);
