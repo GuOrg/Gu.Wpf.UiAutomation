@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation
     {
         private static readonly List<ConditionAndCreate> ConditionAndCreates = new List<ConditionAndCreate>
         {
-            new ConditionAndCreate(Condition.Button, e => new Button(e)),
+            new ConditionAndCreate(Condition.Button, Button.Create),
             //// Calendar
             new ConditionAndCreate(Condition.CheckBox, e => new CheckBox(e)),
             new ConditionAndCreate(Condition.ComboBox, e => new ComboBox(e)),
@@ -36,7 +36,7 @@ namespace Gu.Wpf.UiAutomation
             ////new ConditionAndCreate(Condition.Image, e => new Image(e)),
             new ConditionAndCreate(Condition.Label, e => new Label(e)),
             new ConditionAndCreate(Condition.ListBox, e => new ListBox(e)),
-            new ConditionAndCreate(Condition.ListBoxItem, e => new ListBoxItem(e)),
+            new ConditionAndCreate(Condition.ListBoxItem, ListBoxItem.Create),
             new ConditionAndCreate(Condition.ListView, e => new ListView(e)),
             new ConditionAndCreate(Condition.ListViewItem, e => new ListViewItem(e)),
             new ConditionAndCreate(Condition.Menu, e => new Menu(e)),

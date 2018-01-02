@@ -32,6 +32,13 @@ namespace Gu.Wpf.UiAutomation
 
         public ScrollItemPattern ScrollItemPattern => this.AutomationElement.ScrollItemPattern();
 
+        public static SelectionItemControl Create(AutomationElement automationElement)
+        {
+            return Condition.IsMatch(automationElement.Parent(), Condition.ComboBox)
+                ? (SelectionItemControl)new ComboBoxItem(automationElement)
+                : new ListBoxItem(automationElement);
+        }
+
         public ListBoxItem ScrollIntoView()
         {
             this.ScrollItemPattern?.ScrollIntoView();

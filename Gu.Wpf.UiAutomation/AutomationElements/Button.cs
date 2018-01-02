@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -25,5 +25,15 @@
         }
 
         public UiElement Content => this.FindFirstChild();
+
+        public static Button Create(AutomationElement automationElement)
+        {
+            if (Condition.IsMatch(automationElement, Condition.RepeatButton))
+            {
+                return new RepeatButton(automationElement);
+            }
+
+            return new Button(automationElement);
+        }
     }
 }
