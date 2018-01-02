@@ -173,7 +173,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [TestCase("DataGrid", new[] { "Row 1", "Row 2", "Row 3", "" })]
-        [TestCase("DataGridEmpty",  new[] { "" })]
+        [TestCase("DataGridEmpty", new[] { "" })]
         [TestCase("DataGrid10", new[] { "Row 1", "Row 2", "Row 3", "Row 4", "Row 5", "Row 6", "Row 7", "Row 8", "Row 9", "Row 10", "" })]
         [TestCase("DataGridNoHeaders", new string[0])]
         [TestCase("ReadOnlyDataGrid", new[] { "Row 1", "Row 2", "Row 3" })]
@@ -185,6 +185,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
                 CollectionAssert.AreEqual(expected, dataGrid.RowHeaders.Select(x => x.Text));
+                CollectionAssert.AreEqual(expected, dataGrid.Rows.Select(x => x.Header.Text));
             }
         }
 
