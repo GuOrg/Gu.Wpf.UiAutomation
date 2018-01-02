@@ -8,5 +8,7 @@ namespace Gu.Wpf.UiAutomation
             : base(automationElement)
         {
         }
+
+        public new DataGridRowHeader Header => (DataGridRowHeader)base.Header;
     }
 }

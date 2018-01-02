@@ -18,6 +18,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
+        [Obsolete]
         public GridView ContainingGridView => (GridView)FromAutomationElement(this.GridItemPattern.Current.ContainingGrid);
 
         /// <summary>

@@ -12,6 +12,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             Application.KillLaunched(ExeFileName);
         }
 
+        [Test]
+        public void Find()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
+            {
+                var window = app.MainWindow;
+                var dataGrid = window.FindDataGrid();
+                Assert.IsInstanceOf<DataGrid>(UiElement.FromAutomationElement(dataGrid.AutomationElement));
+            }
+        }
+
         [TestCase("DataGrid")]
         [TestCase("DataGrid10")]
         [TestCase("DataGridNoHeaders")]

@@ -51,12 +51,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                Assert.AreEqual(dataGrid, dataGrid[0, 0].ContainingGridView);
-                Assert.AreEqual(dataGrid, dataGrid[0, 1].ContainingGridView);
-                Assert.AreEqual(dataGrid, dataGrid[1, 0].ContainingGridView);
-                Assert.AreEqual(dataGrid, dataGrid[1, 1].ContainingGridView);
-                Assert.AreEqual(dataGrid, dataGrid[2, 0].ContainingGridView);
-                Assert.AreEqual(dataGrid, dataGrid[2, 1].ContainingGridView);
+                Assert.AreEqual(dataGrid, dataGrid[0, 0].ContainingDataGrid);
+                Assert.AreEqual(dataGrid, dataGrid[0, 1].ContainingDataGrid);
+                Assert.AreEqual(dataGrid, dataGrid[1, 0].ContainingDataGrid);
+                Assert.AreEqual(dataGrid, dataGrid[1, 1].ContainingDataGrid);
+                Assert.AreEqual(dataGrid, dataGrid[2, 0].ContainingDataGrid);
+                Assert.AreEqual(dataGrid, dataGrid[2, 1].ContainingDataGrid);
             }
         }
 

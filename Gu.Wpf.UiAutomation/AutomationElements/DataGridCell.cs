@@ -8,5 +8,7 @@ namespace Gu.Wpf.UiAutomation
             : base(automationElement)
         {
         }
+
+        public DataGrid ContainingDataGrid => (DataGrid)FromAutomationElement(this.GridItemPattern.Current.ContainingGrid);
     }
 }

@@ -25,12 +25,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.TryFindFirst(
-                    TreeScope.Children,
-                    Condition.HeaderItem,
-                    x => new RowHeader(x),
-                    Retry.Time,
-                    out var header))
+                if (this.TryFindFirst(TreeScope.Children, Condition.HeaderItem, x => (RowHeader)FromAutomationElement(x), Retry.Time, out var header))
                 {
                     return header;
                 }
@@ -38,12 +33,7 @@ namespace Gu.Wpf.UiAutomation
                 if (this.AutomationElement.TryGetVirtualizedItemPattern(out var pattern))
                 {
                     pattern.Realize();
-                    if (this.TryFindFirst(
-                        TreeScope.Children,
-                        Condition.HeaderItem,
-                        x => new RowHeader(x),
-                        Retry.Time,
-                        out header))
+                    if (this.TryFindFirst(TreeScope.Children, Condition.HeaderItem, x => (RowHeader)FromAutomationElement(x), Retry.Time, out header))
                     {
                         return header;
                     }
