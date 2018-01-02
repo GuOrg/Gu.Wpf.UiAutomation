@@ -16,19 +16,10 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.DataGridRow, out var firstRow))
+                var cell = this.ItemContainerPattern.LastOrDefault();
+                if (cell.Name() == "{NewItemPlaceholder}")
                 {
-                    foreach (AutomationElement cell in firstRow.FindAllChildren(Condition.DataGridCell))
-                    {
-                        if (cell.IsKeyboardFocusable() &&
-                            cell.TryGetValuePattern(out var valuePattern) &&
-                            !valuePattern.Current.IsReadOnly)
-                        {
-                            return false;
-                        }
-                    }
-
-                    return true;
+                    return cell.BoundingRectangle().IsEmpty;
                 }
 
                 return false;
