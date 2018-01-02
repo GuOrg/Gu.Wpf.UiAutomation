@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Automation;
@@ -43,9 +42,9 @@ namespace Gu.Wpf.UiAutomation
 
         public ListBoxItem Select(string text)
         {
-            var match = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindByText(text));
-            match.Select();
-            return match;
+            var item = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindByText(text));
+            item.Select();
+            return item;
         }
 
         /// <summary>

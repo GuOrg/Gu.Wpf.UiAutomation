@@ -33,8 +33,29 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
-                var toggleButton = window.FindButton();
-                DumpRecursive(toggleButton.AutomationElement);
+                DumpRecursive(window.FindButton().AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpComboBox()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindComboBox().AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpComboBoxExpanded()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var comboBox = window.FindComboBox();
+                comboBox.Expand();
+                DumpRecursive(comboBox.AutomationElement);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@
     using System.Windows.Automation;
 
     /// <summary>
-    /// Element which can be used for combobox elements.
+    /// Element which can be used for ComboBox elements.
     /// </summary>
-    public class ComboBox : Control
+    public class ComboBox : Selector
     {
         public ComboBox(AutomationElement automationElement)
             : base(automationElement)
@@ -19,9 +19,9 @@
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.FindAllChildren(Condition.TextBox)
-                                              .Any(c => c.AutomationElement.TryGetValuePattern(out var pattern) &&
-                                                        !pattern.Current.IsReadOnly);
+        public virtual bool IsEditable => this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var textBox) &&
+                                              textBox.TryGetValuePattern(out var valuePattern) &&
+                                                !valuePattern.Current.IsReadOnly;
 
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is readonly or not.
@@ -47,12 +47,6 @@
         {
             get
             {
-                // In WinForms, there is no selection pattern, so search the items which are selected.
-                if (this.FrameworkType == FrameworkType.WinForms)
-                {
-                    return this.Items.Where(x => x.IsSelected).ToArray();
-                }
-
                 if (this.AutomationElement.TryGetSelectionPattern(out var pattern))
                 {
                     return pattern.Current.GetSelection().Select(x => new ComboBoxItem(x)).ToArray();
@@ -70,25 +64,7 @@
         /// <summary>
         /// Gets all items.
         /// </summary>
-        public IReadOnlyList<ComboBoxItem> Items
-        {
-            get
-            {
-                this.Expand();
-                if (this.FrameworkType == FrameworkType.WinForms ||
-                    this.FrameworkType == FrameworkType.Win32)
-                {
-                    // WinForms and Win32
-                    var listElement = this.FindFirstChild(Condition.ListBox);
-                    return listElement.FindAllChildren(x => new ComboBoxItem(x));
-                }
-
-                // WPF
-                return this.FindAllChildren(
-                    Condition.ListBoxItem,
-                    x => new ComboBoxItem(x));
-            }
-        }
+        public IReadOnlyList<ComboBoxItem> Items =>this.ItemContainerPattern.AllItems(x => new ComboBoxItem(x)).ToArray();
 
         public bool IsDropDownOpen
         {
@@ -132,9 +108,7 @@
             set => this.ValuePattern.SetValue(value);
         }
 
-        protected ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
-
-        protected SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
+        public ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
 
         /// <summary>
         /// Gets the editable element
@@ -214,7 +188,7 @@
                 // WinForms
                 if (!this.IsEnabled)
                 {
-                    throw new InvalidOperationException("Combobox must be enabled for expanding");
+                    throw new InvalidOperationException("ComboBox must be enabled for expanding");
                 }
 
                 var openButton = this.FindButton();
@@ -242,7 +216,7 @@
                 // WinForms
                 if (!this.IsEnabled)
                 {
-                    throw new InvalidOperationException("Combobox must be enabled for expanding");
+                    throw new InvalidOperationException("ComboBox must be enabled for expanding");
                 }
 
                 var openButton = this.FindButton();
@@ -270,21 +244,21 @@
         /// </summary>
         public ComboBoxItem Select(int index)
         {
-            var foundItem = this.Items[index];
-            foundItem.Select();
-            return foundItem;
+            var item = new ComboBoxItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(index));
+            item.Select();
+            return item;
         }
 
         /// <summary>
         /// Select the first item which matches the given text.
         /// </summary>
-        /// <param name="textToFind">The text to search for.</param>
+        /// <param name="text">The text to search for.</param>
         /// <returns>The first found item or null if no item matches.</returns>
-        public ComboBoxItem Select(string textToFind)
+        public ComboBoxItem Select(string text)
         {
-            var foundItem = this.Items.FirstOrDefault(item => item.Text.Equals(textToFind));
-            foundItem?.Select();
-            return foundItem;
+            var item = new ComboBoxItem(this.AutomationElement.ItemContainerPattern().FindByText(text));
+            item.Select();
+            return item;
         }
     }
 }
