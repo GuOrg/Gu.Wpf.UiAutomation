@@ -69,7 +69,12 @@ namespace Gu.Wpf.UiAutomation
 
         public static AutomationElement FindByText(this ItemContainerPattern pattern, string text)
         {
-            AutomationElement item = null;
+            var item = pattern.FindItemByProperty(null, AutomationElement.NameProperty, text);
+            if (item != null)
+            {
+                return item;
+            }
+
             var byNameCondition = new PropertyCondition(AutomationElement.NameProperty, text);
             while (true)
             {
@@ -81,11 +86,6 @@ namespace Gu.Wpf.UiAutomation
 
                 if (item.Name() == text)
                 {
-                    if (item.TryGetScrollItemPattern(out var scrollItem))
-                    {
-                        scrollItem.ScrollIntoView();
-                    }
-
                     return item;
                 }
 

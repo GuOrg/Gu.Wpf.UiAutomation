@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets all items.
         /// </summary>
-        public IReadOnlyList<ComboBoxItem> Items =>this.ItemContainerPattern.AllItems(x => new ComboBoxItem(x)).ToArray();
+        public IReadOnlyList<ComboBoxItem> Items => this.ItemContainerPattern.AllItems(x => new ComboBoxItem(x)).ToArray();
 
         public bool IsDropDownOpen
         {
