@@ -93,17 +93,16 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var headers = new List<DataGridRowHeader>();
-                foreach (var row in this.Rows)
+                var first = this.ItemContainerPattern.FirstOrDefault();
+                if (first == null ||
+                    !first.TryFindFirst(TreeScope.Children, Condition.HeaderItem, out _))
                 {
-                    var header = row.Header;
-                    if (header?.Bounds.IsEmpty == false)
-                    {
-                        headers.Add(header);
-                    }
+                    return new DataGridRowHeader[0];
                 }
 
-                return headers;
+                return this.ItemContainerPattern
+                           .AllItems(x => new DataGridRowHeader(x.FindFirstChild(Condition.DataGridRowHeader)))
+                           .ToArray();
             }
         }
 
