@@ -1,35 +1,9 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
-    using System.Collections.Generic;
     using System.Windows.Automation;
 
     public static partial class AutomationElementExt
     {
-        public static IReadOnlyList<AutomationPattern> Patterns { get; } = new[]
-                {
-                    System.Windows.Automation.DockPattern.Pattern,
-                    System.Windows.Automation.ExpandCollapsePattern.Pattern,
-                    System.Windows.Automation.GridItemPattern.Pattern,
-                    System.Windows.Automation.GridPattern.Pattern,
-                    System.Windows.Automation.InvokePattern.Pattern,
-                    System.Windows.Automation.MultipleViewPattern.Pattern,
-                    System.Windows.Automation.RangeValuePattern.Pattern,
-                    System.Windows.Automation.ScrollPattern.Pattern,
-                    System.Windows.Automation.ScrollItemPattern.Pattern,
-                    System.Windows.Automation.SelectionPattern.Pattern,
-                    System.Windows.Automation.SelectionItemPattern.Pattern,
-                    System.Windows.Automation.SynchronizedInputPattern.Pattern,
-                    System.Windows.Automation.TableItemPattern.Pattern,
-                    System.Windows.Automation.TablePattern.Pattern,
-                    System.Windows.Automation.TextPattern.Pattern,
-                    System.Windows.Automation.TransformPattern.Pattern,
-                    System.Windows.Automation.TogglePattern.Pattern,
-                    System.Windows.Automation.ValuePattern.Pattern,
-                    System.Windows.Automation.WindowPattern.Pattern,
-                    System.Windows.Automation.VirtualizedItemPattern.Pattern,
-                    System.Windows.Automation.ItemContainerPattern.Pattern,
-                };
-
         public static DockPattern DockPattern(this AutomationElement element)
         {
             if (TryGetDockPattern(element, out var pattern))

@@ -26,6 +26,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static System.Windows.Automation.Condition DataGridCell { get; } = ByClassName("DataGridCell");
 
+        public static System.Windows.Automation.Condition DataGridColumnHeadersPresenter { get; } = ByClassName("DataGridColumnHeadersPresenter");
+
         public static System.Windows.Automation.Condition DataGridColumnHeader { get; } = ByClassName("DataGridColumnHeader");
 
         public static System.Windows.Automation.Condition DataGridRow { get; } = ByClassName("DataGridRow");
