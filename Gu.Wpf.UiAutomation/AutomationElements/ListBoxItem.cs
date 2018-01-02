@@ -9,6 +9,8 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
+        public ListBox ContainingListBox => (ListBox)FromAutomationElement(this.SelectionItemPattern.Current.SelectionContainer);
+
         public virtual string Text
         {
             get
@@ -28,7 +30,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        protected ScrollItemPattern ScrollItemPattern => this.AutomationElement.ScrollItemPattern();
+        public ScrollItemPattern ScrollItemPattern => this.AutomationElement.ScrollItemPattern();
 
         public ListBoxItem ScrollIntoView()
         {

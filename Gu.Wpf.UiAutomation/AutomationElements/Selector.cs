@@ -10,5 +10,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         public SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
+
+        public bool CanSelectMultiple => (bool)this.AutomationElement.GetCurrentPropertyValue(SelectionPattern.CanSelectMultipleProperty);
     }
 }

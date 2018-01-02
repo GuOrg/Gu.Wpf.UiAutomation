@@ -134,6 +134,16 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpListBox10()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindListBox("ListBox10").AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpListView()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
@@ -222,8 +232,8 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 Console.WriteLine($"{padding}Name: {info.Name}");
                 Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
                 Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement} IsControlElement: {info.IsControlElement}");
-                //// Console.WriteLine($"{padding}Properties: {string.Join(", ", element.GetSupportedProperties().Select(x => x.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")))}");
-                Console.WriteLine($"{padding}Patterns: {string.Join(", ", element.GetSupportedPatterns().Select(x => x.ProgrammaticName.TrimEnd("Identifiers.Pattern").TrimEnd("Pattern")))}");
+                Console.WriteLine($"{padding}Properties: {string.Join(", ", element.GetSupportedProperties().Select(x => x.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")).OrderBy(x => x))}");
+                Console.WriteLine($"{padding}Patterns: {string.Join(", ", element.GetSupportedPatterns().Select(x => x.ProgrammaticName.TrimEnd("Identifiers.Pattern").TrimEnd("Pattern")).OrderBy(x => x))}");
                 Console.WriteLine();
             }
         }

@@ -155,7 +155,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static PropertyCondition IsKeyboardFocusable { get; } = new PropertyCondition(System.Windows.Automation.AutomationElement.IsKeyboardFocusableProperty, true);
 
-        public static readonly PropertyCondition IsTableItemPatternAvailable = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
+        public static PropertyCondition IsTableItemPatternAvailable { get; } = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
+
+        public static PropertyCondition IsScrollItemPatternAvailable { get; } = new PropertyCondition(AutomationElement.IsScrollItemPatternAvailableProperty, true);
+
+        public static PropertyCondition IsScrollPatternAvailable { get; } = new PropertyCondition(AutomationElement.IsScrollPatternAvailableProperty, true);
 
         public static PropertyCondition ByAutomationId(string automationId)
         {

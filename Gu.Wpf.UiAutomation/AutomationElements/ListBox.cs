@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Windows.Automation;
 
-    public class ListBox : Control
+    public class ListBox : Selector
     {
         public ListBox(AutomationElement automationElement)
             : base(automationElement)
@@ -13,18 +13,9 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
+        /// Returns the rows which are currently visible to Interop.UIAutomationClient.
         /// </summary>
-        public virtual IReadOnlyList<ListBoxItem> Items
-        {
-            get
-            {
-                return this.FindAll(
-                    TreeScope.Children,
-                    Condition.ListBoxItem,
-                    x => new ListBoxItem(x));
-            }
-        }
+        public virtual IReadOnlyList<ListBoxItem> Items => this.ItemContainerPattern.AllItems(x => new ListBoxItem(x)).ToArray();
 
         /// <summary>
         /// Gets all selected items.
@@ -43,31 +34,21 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        protected SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
+        public ItemContainerPattern ItemContainerPattern => this.AutomationElement.ItemContainerPattern();
 
         /// <summary>
         /// Select a row by index.
         /// </summary>
         public ListBoxItem Select(int rowIndex)
         {
-            var item = this.FindAt(
-                TreeScope.Children,
-                Condition.ListBoxItem,
-                rowIndex,
-                x => new ListBoxItem(x),
-                Retry.Time);
+            var item = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
             item.Select();
             return item;
         }
 
         public ListBoxItem Select(string text)
         {
-            var match = this.Items.FirstOrDefault(item => item.Text.Equals(text));
-            if (match == null)
-            {
-                throw new InvalidOperationException($"Did not find an item by text {text}");
-            }
-
+            var match = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindByText(text));
             match.Select();
             return match;
         }
@@ -77,7 +58,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem AddToSelection(int rowIndex)
         {
-            var item = this.Items.ElementAt(rowIndex);
+            var item = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
             item.AddToSelection();
             return item;
         }
@@ -87,7 +68,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListBoxItem RemoveFromSelection(int rowIndex)
         {
-            var item = this.Items.ElementAt(rowIndex);
+            var item = new ListBoxItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
             item.RemoveFromSelection();
             return item;
         }
