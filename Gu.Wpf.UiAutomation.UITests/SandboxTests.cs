@@ -33,8 +33,8 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton();
-                DumpRecursive(toggleButton.AutomationElement, all: true);
+                var toggleButton = window.FindButton();
+                DumpRecursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindDataGrid().AutomationElement);
+                DumpRecursive(window.FindDataGrid().AutomationElement, allPropertiesAndPatterns: false);
             }
         }
 
@@ -153,7 +153,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.AutomationElement, all: true);
+                DumpRecursive(window.AutomationElement, allPropertiesAndPatterns: true);
             }
         }
 
@@ -164,31 +164,21 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton();
-                DumpRecursive(toggleButton.AutomationElement, all: true);
+                DumpRecursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
             }
         }
 
-        private static void DumpRecursive(AutomationElement element, bool all = false, string padding = "")
+        private static void DumpRecursive(AutomationElement element, bool allPropertiesAndPatterns = false, string padding = "")
         {
-            DumpPropertiesAndPatterns(element, all, padding);
+            DumpPropertiesAndPatterns(element, allPropertiesAndPatterns, padding);
             foreach (var child in element.Children())
             {
-                DumpRecursive(child, all, padding + "  ");
-                Console.WriteLine();
+                DumpRecursive(child, allPropertiesAndPatterns, padding + "  ");
             }
         }
 
         private static void DumpPropertiesAndPatterns(AutomationElement element, bool all = true, string padding = "")
         {
-            var info = element.Current;
-            Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName}");
-            Console.WriteLine($"{padding}LocalizedControlType: {info.LocalizedControlType}");
-            Console.WriteLine($"{padding}ClassName: {info.ClassName}");
-            Console.WriteLine($"{padding}Name: {info.Name}");
-            Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
-            Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement}");
-            Console.WriteLine($"{padding}IsControlElement: {info.IsControlElement}");
-
             if (all)
             {
                 foreach (var pattern in element.GetSupportedPatterns())
@@ -205,14 +195,26 @@ namespace Gu.Wpf.UiAutomation.UiTests
                             Console.WriteLine($"{padding}{property.Name} {property.GetValue(value)}");
                         }
                     }
-
-                    Console.WriteLine();
                 }
 
                 foreach (var property in element.GetSupportedProperties().OrderBy(x => x.ProgrammaticName))
                 {
                     Console.WriteLine($"{padding}{property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} {element.GetCurrentPropertyValue(property)}");
                 }
+
+                Console.WriteLine();
+            }
+            else
+            {
+                var info = element.Current;
+                Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName}");
+                Console.WriteLine($"{padding}LocalizedControlType: {info.LocalizedControlType}");
+                Console.WriteLine($"{padding}ClassName: {info.ClassName}");
+                Console.WriteLine($"{padding}Name: {info.Name}");
+                Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
+                Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement}");
+                Console.WriteLine($"{padding}IsControlElement: {info.IsControlElement}");
+                Console.WriteLine();
             }
         }
     }
