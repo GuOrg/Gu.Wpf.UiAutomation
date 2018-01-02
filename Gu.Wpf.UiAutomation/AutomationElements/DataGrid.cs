@@ -153,7 +153,7 @@ namespace Gu.Wpf.UiAutomation
             return gridRow;
         }
 
-        public DataGridRow Row(int row) => (DataGridRow)FromAutomationElement(this.GridPattern.GetItem(row, 0).Parent());
+        public DataGridRow Row(int row) => (DataGridRow)FromAutomationElement(this.ItemContainerPattern.FindAtIndex(row));
 
         public DataGridRowHeader RowHeader(int row) => this.Row(row).Header;
 
