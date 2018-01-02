@@ -6,6 +6,43 @@ namespace Gu.Wpf.UiAutomation
 
     public static class ItemContainerPatternExt
     {
+        public static AutomationElement FirstOrDefault(this ItemContainerPattern pattern)
+        {
+            var item = pattern.FindItemByProperty(null, null, null);
+            if (item != null &&
+                item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+            {
+                virtualizedItemPattern.Realize();
+            }
+
+            return item;
+        }
+
+        public static AutomationElement LastOrDefault(this ItemContainerPattern pattern)
+        {
+            var item = pattern.FindItemByProperty(null, null, null);
+            if (item == null)
+            {
+                return null;
+            }
+
+            while (true)
+            {
+                var temp = pattern.FindItemByProperty(item, null, null);
+                if (temp == null)
+                {
+                    if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+                    {
+                        virtualizedItemPattern.Realize();
+                    }
+
+                    return item;
+                }
+
+                item = temp;
+            }
+        }
+
         public static IEnumerable<AutomationElement> AllItems(this ItemContainerPattern pattern)
         {
             AutomationElement item = null;
@@ -15,6 +52,11 @@ namespace Gu.Wpf.UiAutomation
                 if (item == null)
                 {
                     break;
+                }
+
+                if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+                {
+                    virtualizedItemPattern.Realize();
                 }
 
                 yield return item;
@@ -30,6 +72,11 @@ namespace Gu.Wpf.UiAutomation
                 if (item == null)
                 {
                     break;
+                }
+
+                if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+                {
+                    virtualizedItemPattern.Realize();
                 }
 
                 yield return wrap(item);
@@ -50,9 +97,9 @@ namespace Gu.Wpf.UiAutomation
 
                 if (current == index)
                 {
-                    if (item.TryGetScrollItemPattern(out var scrollItem))
+                    if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
                     {
-                        scrollItem.ScrollIntoView();
+                        virtualizedItemPattern.Realize();
                     }
 
                     return item;
@@ -82,6 +129,11 @@ namespace Gu.Wpf.UiAutomation
                 if (item == null)
                 {
                     throw new InvalidOperationException($"Did not find an item by text {text}");
+                }
+
+                if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
+                {
+                    virtualizedItemPattern.Realize();
                 }
 
                 if (item.Name() == text)
