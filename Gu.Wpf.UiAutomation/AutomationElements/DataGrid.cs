@@ -48,9 +48,9 @@ namespace Gu.Wpf.UiAutomation
                     return 0;
                 }
 
-                var cell = new GridCell(this.GridPattern.GetItem(rowCount - 1, 0));
-                if (cell.IsNewItemPlaceholder &&
-                    cell.IsReadOnly)
+                var cell = this.GridPattern.GetItem(rowCount - 1, 0);
+                if (DataGridCell.NewItemPlaceHolderRegex.IsMatch(cell.Name()) &&
+                    cell.Parent().BoundingRectangle().IsEmpty)
                 {
                     return rowCount - 1;
                 }
@@ -156,7 +156,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Select a row by index.
         /// </summary>
-        public GridRow Select(int rowIndex)
+        public DataGridRow Select(int rowIndex)
         {
             var gridRow = this.GetRowByIndex(rowIndex);
             if (WindowsVersion.IsWindows7())

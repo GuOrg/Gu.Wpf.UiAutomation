@@ -42,6 +42,10 @@ namespace Gu.Wpf.UiAutomation
 
         public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
 
+        public static System.Windows.Automation.Condition GridViewCell { get; } = new AndCondition(
+            new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true),
+            new PropertyCondition(AutomationElement.IsGridItemPatternAvailableProperty, true));
+
         public static System.Windows.Automation.Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
 
         public static System.Windows.Automation.Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
@@ -146,6 +150,10 @@ namespace Gu.Wpf.UiAutomation
             new PropertyCondition(AutomationElement.IsControlElementProperty, true));
 
         public static System.Windows.Automation.Condition Window { get; } = ByControlType(ControlType.Window);
+
+        public static PropertyCondition IsKeyboardFocusable { get; } = new PropertyCondition(System.Windows.Automation.AutomationElement.IsKeyboardFocusableProperty, true);
+
+        public static readonly PropertyCondition IsTableItemPatternAvailable = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
 
         public static PropertyCondition ByAutomationId(string automationId)
         {

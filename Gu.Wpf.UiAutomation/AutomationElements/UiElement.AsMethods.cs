@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     public partial class UiElement
     {
@@ -18,8 +18,6 @@
 
         public Expander AsExpander() => new Expander(this.AutomationElement);
 
-        public GridRow AsGridRow() => new GridRow(this.AutomationElement);
-
         public ListBox AsListBox() => new ListBox(this.AutomationElement);
 
         public ListView AsListView() => new ListView(this.AutomationElement);
@@ -28,7 +26,7 @@
 
         public ListBoxItem AsListBoxItem() => new ListBoxItem(this.AutomationElement);
 
-        public GridCell AsGridCell() => new GridCell(this.AutomationElement);
+        public GridViewCell AsGridCell() => new GridViewCell(FromAutomationElement(this.AutomationElement));
 
         public Menu AsMenu() => new Menu(this.AutomationElement);
 

@@ -89,14 +89,14 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var rows = listView.Rows;
                 Assert.AreEqual(3, rows.Count);
                 Assert.AreEqual(2, rows[0].Cells.Count);
-                Assert.AreEqual("1", rows[0].Cells[0].Value);
-                Assert.AreEqual("10", rows[0].Cells[1].Value);
+                Assert.AreEqual("1", rows[0].Cells[0].Text);
+                Assert.AreEqual("10", rows[0].Cells[1].Text);
                 Assert.AreEqual(2, rows[1].Cells.Count);
-                Assert.AreEqual("2", rows[1].Cells[0].Value);
-                Assert.AreEqual("20", rows[1].Cells[1].Value);
+                Assert.AreEqual("2", rows[1].Cells[0].Text);
+                Assert.AreEqual("20", rows[1].Cells[1].Text);
                 Assert.AreEqual(2, rows[2].Cells.Count);
-                Assert.AreEqual("3", rows[2].Cells[0].Value);
-                Assert.AreEqual("30", rows[2].Cells[1].Value);
+                Assert.AreEqual("3", rows[2].Cells[0].Text);
+                Assert.AreEqual("30", rows[2].Cells[1].Text);
             }
         }
 
@@ -107,12 +107,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                Assert.AreEqual("1", ((TextBlock)listView[0, 0]).Text);
-                Assert.AreEqual("10", ((TextBlock)listView[0, 1]).Text);
-                Assert.AreEqual("2", ((TextBlock)listView[1, 0]).Text);
-                Assert.AreEqual("20", ((TextBlock)listView[1, 1]).Text);
-                Assert.AreEqual("3", ((TextBlock)listView[2, 0]).Text);
-                Assert.AreEqual("30", ((TextBlock)listView[2, 1]).Text);
+                Assert.AreEqual("1", ((TextBlock)listView[0, 0].Content).Text);
+                Assert.AreEqual("10", ((TextBlock)listView[0, 1].Content).Text);
+                Assert.AreEqual("2", ((TextBlock)listView[1, 0].Content).Text);
+                Assert.AreEqual("20", ((TextBlock)listView[1, 1].Content).Text);
+                Assert.AreEqual("3", ((TextBlock)listView[2, 0].Content).Text);
+                Assert.AreEqual("30", ((TextBlock)listView[2, 1].Content).Text);
             }
         }
 
@@ -138,23 +138,23 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var listView = window.FindListView();
                 var selectedRow = listView.Select(1);
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("2", selectedRow.Cells[0].Value);
-                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+                Assert.AreEqual("2", selectedRow.Cells[0].Text);
+                Assert.AreEqual("20", selectedRow.Cells[1].Text);
 
                 selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("2", selectedRow.Cells[0].Value);
-                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+                Assert.AreEqual("2", selectedRow.Cells[0].Text);
+                Assert.AreEqual("20", selectedRow.Cells[1].Text);
 
                 selectedRow = listView.Select(2);
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("3", selectedRow.Cells[0].Value);
-                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+                Assert.AreEqual("3", selectedRow.Cells[0].Text);
+                Assert.AreEqual("30", selectedRow.Cells[1].Text);
 
                 selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("3", selectedRow.Cells[0].Value);
-                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+                Assert.AreEqual("3", selectedRow.Cells[0].Text);
+                Assert.AreEqual("30", selectedRow.Cells[1].Text);
             }
         }
 
@@ -167,23 +167,23 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var listView = window.FindListView();
                 var selectedRow = listView.Select(1, "20");
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("2", selectedRow.Cells[0].Value);
-                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+                Assert.AreEqual("2", selectedRow.Cells[0].Text);
+                Assert.AreEqual("20", selectedRow.Cells[1].Text);
 
                 selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("2", selectedRow.Cells[0].Value);
-                Assert.AreEqual("20", selectedRow.Cells[1].Value);
+                Assert.AreEqual("2", selectedRow.Cells[0].Text);
+                Assert.AreEqual("20", selectedRow.Cells[1].Text);
 
                 selectedRow = listView.Select(1, "30");
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("3", selectedRow.Cells[0].Value);
-                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+                Assert.AreEqual("3", selectedRow.Cells[0].Text);
+                Assert.AreEqual("30", selectedRow.Cells[1].Text);
 
                 selectedRow = (ListViewItem)listView.SelectedItem;
                 Assert.AreEqual(2, selectedRow.Cells.Count);
-                Assert.AreEqual("3", selectedRow.Cells[0].Value);
-                Assert.AreEqual("30", selectedRow.Cells[1].Value);
+                Assert.AreEqual("3", selectedRow.Cells[0].Text);
+                Assert.AreEqual("30", selectedRow.Cells[1].Text);
             }
         }
     }
