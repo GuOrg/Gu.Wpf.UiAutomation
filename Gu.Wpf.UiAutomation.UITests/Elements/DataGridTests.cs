@@ -161,28 +161,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
-        [TestCase("DataGrid", 4)]
-        ////[TestCase("DataGrid10", 11)]
-        [TestCase("DataGridNoHeaders", 0)]
-        [TestCase("ReadOnlyDataGrid", 3)]
-        [TestCase("ReadonlyColumnsDataGrid", 4)]
-        public void RowHeaders(string name, int expectedRows)
+        [TestCase("DataGrid", new[] { "Row 1", "Row 2", "Row 3", "" })]
+        [TestCase("DataGridEmpty",  new[] { "" })]
+        [TestCase("DataGrid10", new[] { "Row 1", "Row 2", "Row 3", "Row 4", "Row 5", "Row 6", "Row 7", "Row 8", "Row 9", "Row 10", "" })]
+        [TestCase("DataGridNoHeaders", new string[0])]
+        [TestCase("ReadOnlyDataGrid", new[] { "Row 1", "Row 2", "Row 3" })]
+        [TestCase("ReadonlyColumnsDataGrid", new[] { "Row 1", "Row 2", "Row 3", "" })]
+        public void RowHeaders(string name, string[] expected)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
                 var dataGrid = window.FindDataGrid(name);
-                var rowHeaders = dataGrid.RowHeaders;
-                Assert.AreEqual(expectedRows, rowHeaders.Count);
-                if (expectedRows == 0)
-                {
-                    return;
-                }
-
-                Assert.AreEqual("Row 1", rowHeaders[0].Text);
-                Assert.AreEqual("Row 2", rowHeaders[1].Text);
-                Assert.AreEqual("Row 3", rowHeaders[2].Text);
-                Assert.AreEqual($"Row {dataGrid.RowCount - 1}", rowHeaders[dataGrid.RowCount - 2].Text);
+                CollectionAssert.AreEqual(expected, dataGrid.RowHeaders.Select(x => x.Text));
             }
         }
 
