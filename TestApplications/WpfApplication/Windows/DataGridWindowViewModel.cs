@@ -1,10 +1,12 @@
-﻿namespace WpfApplication.Windows
+namespace WpfApplication.Windows
 {
     using System.Collections.ObjectModel;
     using System.Linq;
 
     public class DataGridWindowViewModel
     {
+        public ObservableCollection<DataGridItemViewModel> Empty { get; } = new ObservableCollection<DataGridItemViewModel>();
+
         public ObservableCollection<DataGridItemViewModel> ThreeItems { get; } = new ObservableCollection<DataGridItemViewModel>
         {
             new DataGridItemViewModel { IntValue = 1, StringValue = "Item 1" },
