@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -66,6 +66,8 @@
         public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
         public IntPtr NativeWindowHandle => new IntPtr(this.AutomationElement.NativeWindowHandle());
+
+        public WindowPattern WindowPattern => this.AutomationElement.WindowPattern();
 
         public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Condition.MessageBox));
 

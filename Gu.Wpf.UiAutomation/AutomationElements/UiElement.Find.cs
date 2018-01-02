@@ -244,6 +244,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="TitleBar"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TitleBar FindTitleBar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Condition.TitleBar, name),
+            x => new TitleBar(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="ToolBar"/> by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
