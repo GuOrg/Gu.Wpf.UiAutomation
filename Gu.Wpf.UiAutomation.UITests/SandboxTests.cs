@@ -34,7 +34,17 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindButton();
-                DumpRecursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
+                DumpRecursive(toggleButton.AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpDataGrid()
+        {
+            using (var app = Application.Launch(ExeFileName, "SingleDataGridWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindDataGrid().AutomationElement);
             }
         }
 
@@ -90,16 +100,6 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 var element = window.AutomationElement;
                 DumpRecursive(element);
-            }
-        }
-
-        [Test]
-        public void DumpDataGrid()
-        {
-            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
-            {
-                var window = app.MainWindow;
-                DumpRecursive(window.FindDataGrid().AutomationElement, allPropertiesAndPatterns: false);
             }
         }
 
@@ -207,13 +207,13 @@ namespace Gu.Wpf.UiAutomation.UiTests
             else
             {
                 var info = element.Current;
-                Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName}");
-                Console.WriteLine($"{padding}LocalizedControlType: {info.LocalizedControlType}");
+                Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName} (LocalizedControlType: {info.LocalizedControlType})");
                 Console.WriteLine($"{padding}ClassName: {info.ClassName}");
                 Console.WriteLine($"{padding}Name: {info.Name}");
                 Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
-                Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement}");
-                Console.WriteLine($"{padding}IsControlElement: {info.IsControlElement}");
+                Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement} IsControlElement: {info.IsControlElement}");
+                //// Console.WriteLine($"{padding}Properties: {string.Join(", ", element.GetSupportedProperties().Select(x => x.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")))}");
+                Console.WriteLine($"{padding}Patterns: {string.Join(", ", element.GetSupportedPatterns().Select(x => x.ProgrammaticName.TrimEnd("Identifiers.Pattern").TrimEnd("Pattern")))}");
                 Console.WriteLine();
             }
         }

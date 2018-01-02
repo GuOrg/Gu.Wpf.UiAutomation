@@ -21,6 +21,11 @@ namespace Gu.Wpf.UiAutomation
                     return child.Name();
                 }
 
+                if (this.AutomationElement.TryFindSingleChild(Condition.Label, out child))
+                {
+                    return child.Name();
+                }
+
                 return this.Name;
             }
         }
