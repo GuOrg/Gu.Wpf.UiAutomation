@@ -49,6 +49,16 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpDataGrid10()
+        {
+            using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindDataGrid("DataGrid10").AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpTabControl()
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))

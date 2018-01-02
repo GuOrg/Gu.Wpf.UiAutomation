@@ -18,6 +18,7 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Condition.DataGridCell, e => new DataGridCell(e)),
             new ConditionAndCreate(Condition.DataGridColumnHeader, e => new DataGridColumnHeader(e)),
             new ConditionAndCreate(Condition.DataGridColumnHeadersPresenter, e => new DataGridColumnHeadersPresenter(e)),
+            new ConditionAndCreate(Condition.DataGridDetailsPresenter, e => new DataGridDetailsPresenter(e)),
             new ConditionAndCreate(Condition.DataGridRowHeader, e => new DataGridRowHeader(e)),
             new ConditionAndCreate(Condition.DataGridRow, e => new DataGridRow(e)),
             new ConditionAndCreate(Condition.DatePicker, e => new DatePicker(e)),

@@ -34,6 +34,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static System.Windows.Automation.Condition DataGridRowHeader { get; } = ByClassName("DataGridRowHeader");
 
+        public static System.Windows.Automation.Condition DataGridDetailsPresenter { get; } = ByClassName("DataGridDetailsPresenter");
+
         public static System.Windows.Automation.Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
         public static System.Windows.Automation.Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));

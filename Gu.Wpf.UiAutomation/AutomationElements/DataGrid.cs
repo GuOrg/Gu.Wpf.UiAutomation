@@ -67,6 +67,11 @@ namespace Gu.Wpf.UiAutomation
         public DataGridColumnHeadersPresenter ColumnHeadersPresenter => (DataGridColumnHeadersPresenter)this.FindFirstChild(Condition.DataGridColumnHeadersPresenter);
 
         /// <summary>
+        /// The presenter for row header template.
+        /// </summary>
+        public DataGridDetailsPresenter DetailsPresenter => (DataGridDetailsPresenter)this.FindFirstChild(Condition.DataGridDetailsPresenter);
+
+        /// <summary>
         /// Gets all column header elements.
         /// </summary>
         public IReadOnlyList<DataGridColumnHeader> ColumnHeaders
