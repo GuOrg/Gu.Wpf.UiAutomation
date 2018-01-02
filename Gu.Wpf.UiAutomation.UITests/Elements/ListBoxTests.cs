@@ -71,16 +71,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.IsInstanceOf<ListBoxItem>(listBox.Items[0]);
                 Assert.IsInstanceOf<ListBoxItem>(listBox.Items[1]);
                 Assert.IsNull(listBox.SelectedItem);
+                Assert.AreEqual(-1, listBox.SelectedIndex);
 
                 var item = listBox.Select(0);
                 Assert.AreEqual("Johan", item.FindTextBlock().Text);
                 Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
                 Assert.AreEqual(item, listBox.SelectedItem);
+                Assert.AreEqual(0, listBox.SelectedIndex);
 
                 item = listBox.Select(1);
                 Assert.AreEqual("Erik", item.FindTextBlock().Text);
                 Assert.AreEqual("Erik", listBox.SelectedItem.FindTextBlock().Text);
                 Assert.AreEqual(item, listBox.SelectedItem);
+                Assert.AreEqual(1, listBox.SelectedIndex);
             }
         }
 
