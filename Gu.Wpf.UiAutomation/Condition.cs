@@ -153,7 +153,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static System.Windows.Automation.Condition Window { get; } = ByControlType(ControlType.Window);
 
-        public static PropertyCondition IsKeyboardFocusable { get; } = new PropertyCondition(System.Windows.Automation.AutomationElement.IsKeyboardFocusableProperty, true);
+        public static PropertyCondition IsKeyboardFocusable { get; } = new PropertyCondition(AutomationElement.IsKeyboardFocusableProperty, true);
 
         public static PropertyCondition IsTableItemPatternAvailable { get; } = new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true);
 
