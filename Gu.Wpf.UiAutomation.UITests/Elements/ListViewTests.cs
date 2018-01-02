@@ -100,17 +100,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var listView = window.FindListView();
                 Assert.AreEqual(3, listView.RowCount);
-                var rows = listView.Rows;
-                Assert.AreEqual(3, rows.Count);
-                Assert.AreEqual(2, rows[0].Cells.Count);
-                Assert.AreEqual("1", rows[0].Cells[0].Text);
-                Assert.AreEqual("10", rows[0].Cells[1].Text);
-                Assert.AreEqual(2, rows[1].Cells.Count);
-                Assert.AreEqual("2", rows[1].Cells[0].Text);
-                Assert.AreEqual("20", rows[1].Cells[1].Text);
-                Assert.AreEqual(2, rows[2].Cells.Count);
-                Assert.AreEqual("3", rows[2].Cells[0].Text);
-                Assert.AreEqual("30", rows[2].Cells[1].Text);
+                var items = listView.Items;
+                Assert.AreEqual(3, items.Count);
+                Assert.AreEqual(2, items[0].Cells.Count);
+                Assert.AreEqual("1", items[0].Cells[0].Text);
+                Assert.AreEqual("10", items[0].Cells[1].Text);
+                Assert.AreEqual(2, items[1].Cells.Count);
+                Assert.AreEqual("2", items[1].Cells[0].Text);
+                Assert.AreEqual("20", items[1].Cells[1].Text);
+                Assert.AreEqual(2, items[2].Cells.Count);
+                Assert.AreEqual("3", items[2].Cells[0].Text);
+                Assert.AreEqual("30", items[2].Cells[1].Text);
             }
         }
 
@@ -137,9 +137,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                Assert.AreEqual(listView, listView.Rows[0].ContainingListView);
-                Assert.AreEqual(listView, listView.Rows[1].ContainingListView);
-                Assert.AreEqual(listView, listView.Rows[2].ContainingListView);
+                Assert.AreEqual(listView, listView.Items[0].ContainingListView);
+                Assert.AreEqual(listView, listView.Items[1].ContainingListView);
+                Assert.AreEqual(listView, listView.Items[2].ContainingListView);
             }
         }
 

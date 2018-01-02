@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Patterns
+namespace Gu.Wpf.UiAutomation.UiTests.Patterns
 {
     using NUnit.Framework;
 
@@ -18,10 +18,10 @@
                 Assert.AreEqual(7, gridPattern.Current.RowCount);
 
                 ItemRealizer.RealizeItems(listView);
-                Assert.AreEqual(listView.Rows.Count, gridPattern.Current.RowCount);
+                Assert.AreEqual(listView.Items.Count, gridPattern.Current.RowCount);
                 var scrollPattern = listView.AutomationElement.ScrollPattern();
                 Assert.AreEqual(0, scrollPattern.Current.VerticalScrollPercent);
-                foreach (var item in listView.Rows)
+                foreach (var item in listView.Items)
                 {
                     var scrollItemPattern = item.AutomationElement.ScrollItemPattern();
                     Assert.NotNull(scrollItemPattern);

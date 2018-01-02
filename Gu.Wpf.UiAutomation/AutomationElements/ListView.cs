@@ -50,25 +50,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        /// <summary>
-        /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
-        /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
-        /// </summary>
-        public virtual IReadOnlyList<ListViewItem> Rows
-        {
-            get
-            {
-                var rowCount = this.RowCount;
-                var rows = new ListViewItem[rowCount];
-                var gridPattern = this.AutomationElement.GridPattern();
-                for (var i = 0; i < rowCount; i++)
-                {
-                    rows[i] = (ListViewItem)FromAutomationElement(gridPattern.GetItem(i, 0).Parent());
-                }
-
-                return rows;
-            }
-        }
+        public virtual IReadOnlyList<ListViewItem> Items => this.ItemContainerPattern.AllItems(x => new ListViewItem(x)).ToArray();
 
         /// <summary>
         /// Gets all selected items.
@@ -95,17 +77,9 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ListViewItem Select(int rowIndex)
         {
-            var gridRow = this.GetRowByIndex(rowIndex);
-            if (WindowsVersion.IsWindows7())
-            {
-                gridRow.Cells[0].Click();
-            }
-            else
-            {
-                gridRow.Select();
-            }
-
-            return gridRow;
+            var item = new ListViewItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
+            item.Select();
+            return item;
         }
 
         public ListViewItem Row(int row) => (ListViewItem)FromAutomationElement(this.GridPattern.GetItem(row, 0).Parent());

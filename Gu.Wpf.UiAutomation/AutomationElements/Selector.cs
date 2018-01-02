@@ -11,6 +11,8 @@ namespace Gu.Wpf.UiAutomation
 
         public SelectionPattern SelectionPattern => this.AutomationElement.SelectionPattern();
 
+        public ItemContainerPattern ItemContainerPattern => this.AutomationElement.ItemContainerPattern();
+
         public bool CanSelectMultiple => (bool)this.AutomationElement.GetCurrentPropertyValue(SelectionPattern.CanSelectMultipleProperty);
     }
 }

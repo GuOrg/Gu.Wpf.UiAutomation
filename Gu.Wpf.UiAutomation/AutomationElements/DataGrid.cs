@@ -120,21 +120,9 @@ namespace Gu.Wpf.UiAutomation
         /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
         /// </summary>
-        public virtual IReadOnlyList<DataGridRow> Rows
-        {
-            get
-            {
-                var rowCount = this.RowCount;
-                var rows = new DataGridRow[rowCount];
-                var gridPattern = this.AutomationElement.GridPattern();
-                for (var i = 0; i < rowCount; i++)
-                {
-                    rows[i] = new DataGridRow(gridPattern.GetItem(i, 0).Parent());
-                }
-
-                return rows;
-            }
-        }
+        public virtual IReadOnlyList<DataGridRow> Rows => this.ItemContainerPattern.AllItems(x => new DataGridRow(x))
+                                                                                   .Take(this.RowCount)
+                                                                                   .ToArray();
 
         /// <summary>
         /// Gets all selected items.
@@ -153,8 +141,6 @@ namespace Gu.Wpf.UiAutomation
         public GridPattern GridPattern => this.AutomationElement.GridPattern();
 
         public TablePattern TablePattern => this.AutomationElement.TablePattern();
-
-        public ItemContainerPattern ItemContainerPattern => this.AutomationElement.ItemContainerPattern();
 
         public DataGridCell this[int row, int col] => (DataGridCell)FromAutomationElement(this.GridPattern.GetItem(row, col));
 

@@ -12,9 +12,6 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        /// <summary>
-        /// Returns the rows which are currently visible to Interop.UIAutomationClient.
-        /// </summary>
         public virtual IReadOnlyList<ListBoxItem> Items => this.ItemContainerPattern.AllItems(x => new ListBoxItem(x)).ToArray();
 
         /// <summary>
@@ -33,8 +30,6 @@ namespace Gu.Wpf.UiAutomation
                 return element != null ? new ListBoxItem(element) : null;
             }
         }
-
-        public ItemContainerPattern ItemContainerPattern => this.AutomationElement.ItemContainerPattern();
 
         /// <summary>
         /// Select a row by index.
