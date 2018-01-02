@@ -1,11 +1,10 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
-    using System.Linq;
     using System.Windows.Automation;
     using NUnit.Framework;
     using Condition = Gu.Wpf.UiAutomation.Condition;
 
-    public class DataGridColumnHeadersPresenterTests
+    public class DataGridColumnHeaderTests
     {
         private const string ExeFileName = "WpfApplication.exe";
 
@@ -21,20 +20,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
             {
                 var window = app.MainWindow;
-                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeadersPresenter);
-                Assert.IsInstanceOf<DataGridColumnHeadersPresenter>(UiElement.FromAutomationElement(presenter.AutomationElement));
+                var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeader);
+                Assert.IsInstanceOf<DataGridColumnHeader>(UiElement.FromAutomationElement(header.AutomationElement));
             }
         }
 
         [Test]
-        public void Headers()
+        public void Properties()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
             {
                 var window = app.MainWindow;
-                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeadersPresenter);
-                CollectionAssert.AllItemsAreInstancesOfType(presenter.Headers, typeof(DataGridColumnHeader));
-                CollectionAssert.AreEqual(new[] { "IntValue", "StringValue" }, presenter.Headers.Select(x => x.Text));
+                var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeader);
+                Assert.AreEqual("IntValue", header.Text);
+                Assert.NotNull(header.LeftHeaderGripper);
+                Assert.NotNull(header.RightHeaderGripper);
             }
         }
     }
