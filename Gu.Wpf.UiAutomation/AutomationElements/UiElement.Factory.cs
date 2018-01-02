@@ -25,6 +25,7 @@ namespace Gu.Wpf.UiAutomation
             //// ControlTypeDocument
             new ConditionAndCreate(Condition.Expander, e => new Expander(e)),
             new ConditionAndCreate(Condition.GridViewColumnHeader, e => new GridViewColumnHeader(e)),
+            new ConditionAndCreate(Condition.GridViewHeaderRowPresenter, e => new GridViewHeaderRowPresenter(e)),
             new ConditionAndCreate(Condition.GridViewRowHeader, e => new GridViewRowHeader(e)),
             new ConditionAndCreate(Condition.GroupBox, e => new GroupBox(e)),
             ////new ConditionAndCreate(Condition.Header, e => new Header(e)),

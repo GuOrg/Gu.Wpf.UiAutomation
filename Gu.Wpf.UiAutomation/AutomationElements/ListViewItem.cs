@@ -8,5 +8,7 @@ namespace Gu.Wpf.UiAutomation
             : base(automationElement)
         {
         }
+
+        public ListView ContainingListView => (ListView)FromAutomationElement(this.SelectionItemPattern.Current.SelectionContainer);
     }
 }

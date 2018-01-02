@@ -13,6 +13,46 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         }
 
         [Test]
+        public void FromAutomationElement()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                Assert.IsInstanceOf<ListView>(UiElement.FromAutomationElement(listView.AutomationElement));
+            }
+        }
+
+        [Test]
+        public void ColumnHeaders()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                Assert.AreEqual(2, listView.ColumnHeaders.Count);
+
+                Assert.AreEqual("Key", listView.ColumnHeaders[0].Text);
+                Assert.AreEqual("Value", listView.ColumnHeaders[1].Text);
+            }
+        }
+
+        [Test]
+        public void ColumnHeadersPresenter()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                var presenter = listView.ColumnHeadersPresenter;
+                Assert.AreEqual(2, presenter.Headers.Count);
+
+                Assert.AreEqual("Key", presenter.Headers[0].Text);
+                Assert.AreEqual("Value", presenter.Headers[1].Text);
+            }
+        }
+
+        [Test]
         public void RowAndColumnCount()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
@@ -67,12 +107,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                Assert.AreEqual("1", listView[0, 0].Value);
-                Assert.AreEqual("10", listView[0, 1].Value);
-                Assert.AreEqual("2", listView[1, 0].Value);
-                Assert.AreEqual("20", listView[1, 1].Value);
-                Assert.AreEqual("3", listView[2, 0].Value);
-                Assert.AreEqual("30", listView[2, 1].Value);
+                Assert.AreEqual("1", ((TextBlock)listView[0, 0]).Text);
+                Assert.AreEqual("10", ((TextBlock)listView[0, 1]).Text);
+                Assert.AreEqual("2", ((TextBlock)listView[1, 0]).Text);
+                Assert.AreEqual("20", ((TextBlock)listView[1, 1]).Text);
+                Assert.AreEqual("3", ((TextBlock)listView[2, 0]).Text);
+                Assert.AreEqual("30", ((TextBlock)listView[2, 1]).Text);
             }
         }
 
@@ -83,12 +123,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                Assert.AreEqual(listView, listView[0, 0].ContainingGridView);
-                Assert.AreEqual(listView, listView[0, 1].ContainingGridView);
-                Assert.AreEqual(listView, listView[1, 0].ContainingGridView);
-                Assert.AreEqual(listView, listView[1, 1].ContainingGridView);
-                Assert.AreEqual(listView, listView[2, 0].ContainingGridView);
-                Assert.AreEqual(listView, listView[2, 1].ContainingGridView);
+                Assert.AreEqual(listView, listView.Rows[0].ContainingListView);
+                Assert.AreEqual(listView, listView.Rows[1].ContainingListView);
+                Assert.AreEqual(listView, listView.Rows[2].ContainingListView);
             }
         }
 

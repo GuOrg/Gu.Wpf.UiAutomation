@@ -18,13 +18,10 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        [Obsolete]
-        public GridView ContainingGridView => (GridView)FromAutomationElement(this.GridItemPattern.Current.ContainingGrid);
-
         /// <summary>
         /// Get the parent of the cell (which should be the row)
         /// </summary>
-        public GridRow ContainingRow => new GridRow(TreeWalker.ContentViewWalker.GetParent(this.AutomationElement));
+        public GridRow ContainingRow => (GridRow)FromAutomationElement(this.AutomationElement.Parent());
 
         public bool IsReadOnly
         {

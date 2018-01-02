@@ -149,7 +149,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListView FindListView(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.DataGrid, name),
+            this.CreateCondition(Condition.ListView, name),
             x => new ListView(x),
             Retry.Time);
 

@@ -22,7 +22,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static System.Windows.Automation.Condition ControlTypeCustom { get; } = ByControlType(ControlType.Custom);
 
-        public static System.Windows.Automation.Condition DataGrid { get; } = ByControlType(ControlType.DataGrid);
+        public static System.Windows.Automation.Condition DataGrid { get; } = ByClassName("DataGrid");
 
         public static System.Windows.Automation.Condition DataGridCell { get; } = ByClassName("DataGridCell");
 
@@ -41,6 +41,12 @@ namespace Gu.Wpf.UiAutomation
         public static System.Windows.Automation.Condition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
         public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
+
+        public static System.Windows.Automation.Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
+
+        public static System.Windows.Automation.Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
+
+        public static System.Windows.Automation.Condition GridViewHeaderRowPresenter { get; } = ByClassName("GridViewHeaderRowPresenter");
 
         public static System.Windows.Automation.Condition GroupBox { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("GroupBox"));
 
@@ -73,10 +79,6 @@ namespace Gu.Wpf.UiAutomation
         public static System.Windows.Automation.Condition ListView { get; } = ByClassName("ListView");
 
         public static System.Windows.Automation.Condition ListViewItem { get; } = ByClassName("ListViewItem");
-
-        public static System.Windows.Automation.Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
-
-        public static System.Windows.Automation.Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
 
         public static System.Windows.Automation.Condition Menu { get; } = ByControlType(ControlType.Menu);
 
