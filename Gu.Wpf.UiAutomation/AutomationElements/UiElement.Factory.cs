@@ -91,6 +91,12 @@ namespace Gu.Wpf.UiAutomation
             {
                 if (conditionAndCreate.TryCreate(element, out var uiElement))
                 {
+                    if (element.Parent() is AutomationElement parent &&
+                        Condition.IsMatch(parent, Condition.ListViewItem))
+                    {
+                        return new GridViewCell(uiElement);
+                    }
+
                     return uiElement;
                 }
             }

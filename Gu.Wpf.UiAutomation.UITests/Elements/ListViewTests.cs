@@ -45,6 +45,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var window = app.MainWindow;
                 var listView = window.FindListView();
                 var presenter = listView.ColumnHeadersPresenter;
+                Assert.IsInstanceOf<GridViewHeaderRowPresenter>(UiElement.FromAutomationElement(presenter.AutomationElement));
                 Assert.AreEqual(2, presenter.Headers.Count);
 
                 Assert.AreEqual("Key", presenter.Headers[0].Text);
@@ -75,6 +76,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual(2, columns.Count);
                 Assert.AreEqual("Key", columns[0].Text);
                 Assert.AreEqual("Value", columns[1].Text);
+            }
+        }
+
+        [Test]
+        public void Cell()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
+            {
+                var window = app.MainWindow;
+                var listView = window.FindListView();
+                var cell = listView[0, 0];
+                Assert.IsInstanceOf<GridViewCell>(cell);
+                Assert.IsInstanceOf<GridViewCell>(UiElement.FromAutomationElement(cell.AutomationElement));
             }
         }
 

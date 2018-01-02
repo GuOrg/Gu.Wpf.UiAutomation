@@ -88,7 +88,7 @@ namespace Gu.Wpf.UiAutomation
 
         public TablePattern TablePattern => this.AutomationElement.TablePattern();
 
-        public GridViewCell this[int row, int col] => GridViewCell.Create(FromAutomationElement(this.GridPattern.GetItem(row, col)));
+        public GridViewCell this[int row, int col] => (GridViewCell)FromAutomationElement(this.GridPattern.GetItem(row, col));
 
         /// <summary>
         /// Select a row by index.
