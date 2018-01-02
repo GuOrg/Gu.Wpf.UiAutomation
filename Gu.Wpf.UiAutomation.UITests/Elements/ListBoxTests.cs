@@ -25,14 +25,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
-        [Test]
-        public void Items()
+        [TestCase("BoundListBox", new[] { "Johan", "Erik" })]
+        [TestCase("ListBox", new[] { "1", "2" })]
+        [TestCase("ListBox10", new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", })]
+        public void Items(string name, string[] expected)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
-                var listBox = window.FindListBox("ListBox");
-                Assert.AreEqual(2, listBox.Items.Count);
+                var listBox = window.FindListBox(name);
+                CollectionAssert.AreEqual(expected, listBox.Items.Select(x => x.Text));
             }
         }
 
