@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
+    using System.Linq;
     using NUnit.Framework;
 
     public class DataGridTests
