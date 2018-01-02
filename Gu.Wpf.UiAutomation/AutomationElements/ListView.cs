@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Windows.Automation;
 
-    public class ListView : Selector
+    public class ListView : MultiSelector<ListViewItem>
     {
         public ListView(AutomationElement automationElement)
             : base(automationElement)
@@ -50,37 +50,11 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public virtual IReadOnlyList<ListViewItem> Items => this.ItemContainerPattern.AllItems(x => new ListViewItem(x)).ToArray();
-
-        /// <summary>
-        /// Gets all selected items.
-        /// </summary>
-        public IReadOnlyList<UiElement> SelectedItems => this.SelectionPattern
-                                                             .Current
-                                                             .GetSelection()
-                                                             .Select(FromAutomationElement)
-                                                             .ToArray();
-
-        /// <summary>
-        /// Gets the first selected item or null otherwise.
-        /// </summary>
-        public UiElement SelectedItem => this.SelectedItems?.FirstOrDefault();
-
         public GridPattern GridPattern => this.AutomationElement.GridPattern();
 
         public TablePattern TablePattern => this.AutomationElement.TablePattern();
 
         public GridViewCell this[int row, int col] => (GridViewCell)FromAutomationElement(this.GridPattern.GetItem(row, col));
-
-        /// <summary>
-        /// Select a row by index.
-        /// </summary>
-        public ListViewItem Select(int rowIndex)
-        {
-            var item = new ListViewItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
-            item.Select();
-            return item;
-        }
 
         public ListViewItem Row(int row) => (ListViewItem)FromAutomationElement(this.GridPattern.GetItem(row, 0).Parent());
 

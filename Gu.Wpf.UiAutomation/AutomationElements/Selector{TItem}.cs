@@ -15,11 +15,6 @@ namespace Gu.Wpf.UiAutomation
         public virtual IReadOnlyList<TItem> Items => this.ItemContainerPattern.AllItems(x => (TItem)FromAutomationElement(x)).ToArray();
 
         /// <summary>
-        /// Gets all selected items.
-        /// </summary>
-        public IReadOnlyList<TItem> SelectedItems => this.SelectionPattern.Current.GetSelection().Select(x => (TItem)FromAutomationElement(x)).ToArray();
-
-        /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
         public TItem SelectedItem

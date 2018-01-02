@@ -9,7 +9,7 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Element which can be used for ComboBox elements.
     /// </summary>
-    public class ComboBox : Selector
+    public class ComboBox : Selector<ComboBoxItem>
     {
         public ComboBox(AutomationElement automationElement)
             : base(automationElement)
@@ -39,32 +39,6 @@ namespace Gu.Wpf.UiAutomation
                 return !this.AutomationElement.TryGetSelectionPattern(out _);
             }
         }
-
-        /// <summary>
-        /// Gets all selected items.
-        /// </summary>
-        public IReadOnlyList<ComboBoxItem> SelectedItems
-        {
-            get
-            {
-                if (this.AutomationElement.TryGetSelectionPattern(out var pattern))
-                {
-                    return pattern.Current.GetSelection().Select(x => new ComboBoxItem(x)).ToArray();
-                }
-
-                return new ComboBoxItem[0];
-            }
-        }
-
-        /// <summary>
-        /// Gets the first selected item or null otherwise.
-        /// </summary>
-        public ComboBoxItem SelectedItem => this.SelectedItems?.SingleOrDefault();
-
-        /// <summary>
-        /// Gets all items.
-        /// </summary>
-        public IReadOnlyList<ComboBoxItem> Items => this.ItemContainerPattern.AllItems(x => new ComboBoxItem(x)).ToArray();
 
         public bool IsDropDownOpen
         {
@@ -237,28 +211,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             Wait.UntilResponsive(this);
-        }
-
-        /// <summary>
-        /// Select an item by index.
-        /// </summary>
-        public ComboBoxItem Select(int index)
-        {
-            var item = new ComboBoxItem(this.AutomationElement.ItemContainerPattern().FindAtIndex(index));
-            item.Select();
-            return item;
-        }
-
-        /// <summary>
-        /// Select the first item which matches the given text.
-        /// </summary>
-        /// <param name="text">The text to search for.</param>
-        /// <returns>The first found item or null if no item matches.</returns>
-        public ComboBoxItem Select(string text)
-        {
-            var item = new ComboBoxItem(this.AutomationElement.ItemContainerPattern().FindByText(text));
-            item.Select();
-            return item;
         }
     }
 }
