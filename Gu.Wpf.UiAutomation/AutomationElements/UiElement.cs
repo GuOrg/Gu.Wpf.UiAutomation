@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -31,6 +31,11 @@
         /// Get the parent <see cref="UiElement"/>
         /// </summary>
         public UiElement Parent => new UiElement(TreeWalker.RawViewWalker.GetParent(this.AutomationElement));
+
+        /// <summary>
+        /// Get the children
+        /// </summary>
+        public IReadOnlyList<UiElement> Children => this.FindAllChildren();
 
         /// <summary>
         /// Get the parent <see cref="UiElement"/>
