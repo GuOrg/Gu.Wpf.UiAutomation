@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindFirst(TreeScope.Descendants,Conditions.Calendar).AutomationElement);
+                DumpRecursive(window.FindFirst(TreeScope.Descendants, Conditions.Calendar).AutomationElement);
             }
         }
 

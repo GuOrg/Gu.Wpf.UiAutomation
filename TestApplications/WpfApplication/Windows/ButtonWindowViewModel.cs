@@ -1,4 +1,4 @@
-﻿namespace WpfApplication.Windows
+namespace WpfApplication.Windows
 {
     using System;
     using System.ComponentModel;

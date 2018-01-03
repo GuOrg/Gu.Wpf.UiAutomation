@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Globalization;
     using System.Windows.Automation;
 
     public static partial class AutomationElementExt
@@ -18,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static ControlType ControlType(this AutomationElement element) => (ControlType)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty);
 
-        public static object Culture(this AutomationElement element) => element.GetCurrentPropertyValue(AutomationElementIdentifiers.CultureProperty);
+        public static CultureInfo Culture(this AutomationElement element) => (CultureInfo)element.GetCurrentPropertyValue(AutomationElementIdentifiers.CultureProperty);
 
         public static string FrameworkId(this AutomationElement element) => (string)element.GetCurrentPropertyValue(AutomationElementIdentifiers.FrameworkIdProperty);
 

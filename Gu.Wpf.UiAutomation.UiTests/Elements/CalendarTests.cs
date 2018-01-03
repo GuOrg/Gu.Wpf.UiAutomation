@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
+    using System;
     using NUnit.Framework;
 
     public class CalendarTests
@@ -29,11 +30,27 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow"))
             {
-                Assert.Fail("Need to figure out how to get items for current view.");
                 var window = app.MainWindow;
                 var calendar = window.FindCalendar();
                 CollectionAssert.AllItemsAreInstancesOfType(calendar.Items, typeof(CalendarDayButton));
                 calendar.Items[3].Select();
+            }
+        }
+
+        [Test]
+        public void SelectDate()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow"))
+            {
+                var window = app.MainWindow;
+                var calendar = window.FindCalendar();
+                var date = DateTime.Today.AddDays(1);
+                Assert.Null(calendar.SelectedItem);
+                calendar.Select(date);
+
+                // Can't figure out a nice way to assert here
+                // Tricky with culture
+                Assert.NotNull(calendar.SelectedItem);
             }
         }
     }
