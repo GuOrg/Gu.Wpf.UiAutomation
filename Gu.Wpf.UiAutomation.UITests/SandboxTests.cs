@@ -153,6 +153,28 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpRichTextBox()
+        {
+            using (var app = Application.Launch(ExeFileName, "RichTextBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var element = window.FindFirstDescendant(Conditions.ByClassName("RichTextBox")).AutomationElement;
+                DumpRecursive(element);
+            }
+        }
+
+        [Test]
+        public void DumpPasswordBox()
+        {
+            using (var app = Application.Launch(ExeFileName, "PasswordBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var element = window.FindFirstDescendant(new PropertyCondition(AutomationElement.IsPasswordProperty, true)).AutomationElement;
+                DumpRecursive(element);
+            }
+        }
+
+        [Test]
         public void DumpSeparatorWindow()
         {
             using (var app = Application.Launch(ExeFileName, "SeparatorWindow"))
