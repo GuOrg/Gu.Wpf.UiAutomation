@@ -10,7 +10,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public IReadOnlyList<DataGridColumnHeader> Headers => this.FindAllChildren(Condition.DataGridColumnHeader, x => new DataGridColumnHeader(x));
+        public IReadOnlyList<DataGridColumnHeader> Headers => this.FindAllChildren(Conditions.DataGridColumnHeader, x => new DataGridColumnHeader(x));
 
         public ItemContainerPattern ItemContainerPattern => this.AutomationElement.ItemContainerPattern();
     }

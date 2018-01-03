@@ -3,7 +3,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
     using System.Linq;
     using System.Windows.Automation;
     using NUnit.Framework;
-    using Condition = Gu.Wpf.UiAutomation.Condition;
 
     public class DataGridColumnHeadersPresenterTests
     {
@@ -21,7 +20,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
             {
                 var window = app.MainWindow;
-                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeadersPresenter);
+                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeadersPresenter);
                 Assert.IsInstanceOf<DataGridColumnHeadersPresenter>(UiElement.FromAutomationElement(presenter.AutomationElement));
             }
         }
@@ -32,7 +31,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
             {
                 var window = app.MainWindow;
-                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Condition.DataGridColumnHeadersPresenter);
+                var presenter = (DataGridColumnHeadersPresenter)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeadersPresenter);
                 CollectionAssert.AllItemsAreInstancesOfType(presenter.Headers, typeof(DataGridColumnHeader));
                 CollectionAssert.AreEqual(new[] { "IntValue", "StringValue" }, presenter.Headers.Select(x => x.Text));
             }

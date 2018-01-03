@@ -570,8 +570,8 @@ namespace Gu.Wpf.UiAutomation
             var desktop = AutomationElement.RootElement;
             var foundElements = desktop.FindAllChildren(
                 new AndCondition(
-                    Condition.Window,
-                    Condition.ByProcessId(this.ProcessId)));
+                    Conditions.Window,
+                    Conditions.ByProcessId(this.ProcessId)));
             return foundElements.OfType<AutomationElement>().Select((x, i) => new Window(x, i == 0)).ToArray();
         }
 

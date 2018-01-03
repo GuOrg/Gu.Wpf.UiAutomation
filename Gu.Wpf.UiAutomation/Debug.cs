@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Text;
@@ -56,13 +56,13 @@
                 cr.Add(AutomationElementIdentifiers.IsWindowPatternAvailableProperty);
 
                 cr.TreeScope = TreeScope.Subtree;
-                cr.TreeFilter = System.Windows.Automation.Condition.TrueCondition;
+                cr.TreeFilter = Condition.TrueCondition;
 
                 // Activate the cache request
                 using (cr.Activate())
                 {
                     // Re-find the root element with caching activated
-                    uiElement = uiElement.FindFirst(TreeScope.Element, System.Windows.Automation.Condition.TrueCondition);
+                    uiElement = uiElement.FindFirst(TreeScope.Element, Condition.TrueCondition);
                     Details(stringBuilder, uiElement, string.Empty);
                 }
 
@@ -86,7 +86,7 @@
             }
 
             // Get the index
-            var allChildren = parent.FindAllChildren(Condition.ByControlType(element.Current.ControlType));
+            var allChildren = parent.FindAllChildren(Conditions.ByControlType(element.Current.ControlType));
             var currentItemText = $"{element.Current.ControlType}";
             if (allChildren.Count > 1)
             {

@@ -35,8 +35,8 @@ namespace Gu.Wpf.UiAutomation
                     var menu = new Menu(
                         this.Window.AutomationElement.FindFirstChild(
                             new AndCondition(
-                                Condition.Menu,
-                                Condition.ByName(this.Text))),
+                                Conditions.Menu,
+                                Conditions.ByName(this.Text))),
                         isWin32Menu: true);
 
                     // Now return the menu items
@@ -61,7 +61,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 var childItems = this.FindAllChildren(
-                    Condition.MenuItem,
+                    Conditions.MenuItem,
                     x => new MenuItem(x) { IsWin32Menu = this.IsWin32Menu });
                 return new MenuItems(childItems);
             }

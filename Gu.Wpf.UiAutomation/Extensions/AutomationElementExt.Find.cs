@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@
             return TreeWalker.RawViewWalker.GetParent(element);
         }
 
-        public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, out AutomationElement match)
+        public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, Condition condition, out AutomationElement match)
         {
             match = treeScope == TreeScope.Ancestors
                 ? new TreeWalker(condition).Ancestors(element).FirstOrDefault()
@@ -24,7 +24,7 @@
                     case TreeScope.Children:
                         foreach (var child in TreeWalker.RawViewWalker.Children(element))
                         {
-                            if (Condition.IsMatch(child, condition))
+                            if (Conditions.IsMatch(child, condition))
                             {
                                 match = child;
                                 return true;
@@ -35,7 +35,7 @@
                     case TreeScope.Descendants:
                         foreach (var child in TreeWalker.RawViewWalker.Descendants(element))
                         {
-                            if (Condition.IsMatch(child, condition))
+                            if (Conditions.IsMatch(child, condition))
                             {
                                 match = child;
                                 return true;
@@ -57,7 +57,7 @@
             return match != null;
         }
 
-        public static AutomationElement FindFirst(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition)
+        public static AutomationElement FindFirst(this AutomationElement element, TreeScope treeScope, Condition condition)
         {
             if (TryFindFirst(element, treeScope, condition, out var first))
             {
@@ -67,17 +67,17 @@
             throw new InvalidOperationException($"Did not find a {treeScope} matching {condition.Description()}.");
         }
 
-        public static AutomationElement FindFirstChild(this AutomationElement element, System.Windows.Automation.Condition condition)
+        public static AutomationElement FindFirstChild(this AutomationElement element, Condition condition)
         {
             return FindFirst(element, TreeScope.Children, condition);
         }
 
-        public static T FindFirst<T>(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
+        public static T FindFirst<T>(this AutomationElement element, TreeScope treeScope, Condition condition, Func<AutomationElement, T> wrap)
         {
             return wrap(FindFirst(element, treeScope, condition));
         }
 
-        public static bool TryFindSingleChild(this AutomationElement element, System.Windows.Automation.Condition condition, out AutomationElement match)
+        public static bool TryFindSingleChild(this AutomationElement element, Condition condition, out AutomationElement match)
         {
             var collection = element.FindAll(TreeScope.Children, condition);
             if (collection?.Count == 1)
@@ -90,17 +90,17 @@
             return false;
         }
 
-        public static AutomationElementCollection FindAllChildren(this AutomationElement element, System.Windows.Automation.Condition condition)
+        public static AutomationElementCollection FindAllChildren(this AutomationElement element, Condition condition)
         {
             return element.FindAll(TreeScope.Children, condition);
         }
 
-        public static AutomationElementCollection FindAll(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition)
+        public static AutomationElementCollection FindAll(this AutomationElement element, TreeScope treeScope, Condition condition)
         {
             return element.FindAll(treeScope, condition);
         }
 
-        public static IReadOnlyList<T> FindAll<T>(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
+        public static IReadOnlyList<T> FindAll<T>(this AutomationElement element, TreeScope treeScope, Condition condition, Func<AutomationElement, T> wrap)
         {
             var elements = FindAll(element, treeScope, condition);
             var result = new T[elements.Count];
@@ -112,7 +112,7 @@
             return result;
         }
 
-        public static bool TryFindIndexed(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, int index, out AutomationElement result)
+        public static bool TryFindIndexed(this AutomationElement element, TreeScope treeScope, Condition condition, int index, out AutomationElement result)
         {
             result = null;
             if (index < 0)
@@ -130,7 +130,7 @@
             return true;
         }
 
-        public static AutomationElement FindIndexed(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, int index)
+        public static AutomationElement FindIndexed(this AutomationElement element, TreeScope treeScope, Condition condition, int index)
         {
             if (index < 0)
             {
@@ -146,7 +146,7 @@
             return elements[index];
         }
 
-        public static T FindIndexed<T>(this AutomationElement element, TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap)
+        public static T FindIndexed<T>(this AutomationElement element, TreeScope treeScope, Condition condition, int index, Func<AutomationElement, T> wrap)
         {
             return wrap(FindIndexed(element, treeScope, condition, index));
         }

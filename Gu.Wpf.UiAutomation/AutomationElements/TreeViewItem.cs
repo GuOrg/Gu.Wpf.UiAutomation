@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
     using System.Windows.Automation;
@@ -15,7 +15,7 @@
         /// </summary>
         public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
-            Condition.TreeViewItem,
+            Conditions.TreeViewItem,
             x => new TreeViewItem(x));
 
         /// <summary>
@@ -29,7 +29,7 @@
                 if (string.IsNullOrEmpty(value) ||
                     value.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.AutomationElement.FindFirstChild(System.Windows.Automation.Condition.TrueCondition);
+                    var textElement = this.AutomationElement.FindFirstChild(Condition.TrueCondition);
                     return textElement.Name() ?? string.Empty;
                 }
 

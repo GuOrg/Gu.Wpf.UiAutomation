@@ -10,6 +10,6 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public IReadOnlyList<GridViewColumnHeader> Headers => this.FindAllChildren(Condition.GridViewColumnHeader, x => new GridViewColumnHeader(x));
+        public IReadOnlyList<GridViewColumnHeader> Headers => this.FindAllChildren(Conditions.GridViewColumnHeader, x => new GridViewColumnHeader(x));
     }
 }

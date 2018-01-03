@@ -13,7 +13,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var children = this.AutomationElement.FindAllChildren(System.Windows.Automation.Condition.TrueCondition);
+                var children = this.AutomationElement.FindAllChildren(Condition.TrueCondition);
                 if (children.Count == 1 &&
                     children[0].Current.ControlType.Id == ControlType.Text.Id)
                 {
@@ -28,7 +28,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static Button Create(AutomationElement automationElement)
         {
-            if (Condition.IsMatch(automationElement, Condition.RepeatButton))
+            if (Conditions.IsMatch(automationElement, Conditions.RepeatButton))
             {
                 return new RepeatButton(automationElement);
             }

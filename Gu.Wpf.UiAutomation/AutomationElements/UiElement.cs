@@ -143,7 +143,7 @@ namespace Gu.Wpf.UiAutomation
                 return true;
             }
 
-            if (this.AutomationElement.TryFindFirst(TreeScope.Ancestors, Condition.Window, out var element))
+            if (this.AutomationElement.TryFindFirst(TreeScope.Ancestors, Conditions.Window, out var element))
             {
                 window = new Window(element);
                 return true;

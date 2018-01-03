@@ -9,8 +9,8 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public Thumb TopHeaderGripper => (Thumb)this.FindFirstChild(Condition.Thumb);
+        public Thumb TopHeaderGripper => (Thumb)this.FindFirstChild(Conditions.Thumb);
 
-        public Thumb BottomHeaderGripper => (Thumb)this.FindAt(TreeScope.Children, Condition.Thumb, 1, Retry.Time);
+        public Thumb BottomHeaderGripper => (Thumb)this.FindAt(TreeScope.Children, Conditions.Thumb, 1, Retry.Time);
     }
 }

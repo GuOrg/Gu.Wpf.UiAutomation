@@ -15,7 +15,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.TryFindFirst(TreeScope.Children, Condition.HeaderItem, x => (DataGridRowHeader)FromAutomationElement(x), Retry.Time, out var header))
+                if (this.TryFindFirst(TreeScope.Children, Conditions.HeaderItem, x => (DataGridRowHeader)FromAutomationElement(x), Retry.Time, out var header))
                 {
                     return header;
                 }
@@ -23,7 +23,7 @@ namespace Gu.Wpf.UiAutomation
                 if (this.AutomationElement.TryGetVirtualizedItemPattern(out var pattern))
                 {
                     pattern.Realize();
-                    if (this.TryFindFirst(TreeScope.Children, Condition.HeaderItem, x => (DataGridRowHeader)FromAutomationElement(x), Retry.Time, out header))
+                    if (this.TryFindFirst(TreeScope.Children, Conditions.HeaderItem, x => (DataGridRowHeader)FromAutomationElement(x), Retry.Time, out header))
                     {
                         return header;
                     }
@@ -35,7 +35,7 @@ namespace Gu.Wpf.UiAutomation
 
         public DataGrid ContainingDataGrid => (DataGrid)FromAutomationElement(this.SelectionItemPattern.Current.SelectionContainer);
 
-        public IReadOnlyList<DataGridCell> Cells => this.AutomationElement.FindAllChildren(Condition.IsTableItemPatternAvailable)
+        public IReadOnlyList<DataGridCell> Cells => this.AutomationElement.FindAllChildren(Conditions.IsTableItemPatternAvailable)
                                                         .OfType<AutomationElement>()
                                                         .Select(x => new DataGridCell(x))
                                                         .ToArray();

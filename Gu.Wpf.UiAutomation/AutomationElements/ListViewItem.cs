@@ -13,7 +13,7 @@ namespace Gu.Wpf.UiAutomation
 
         public ListView ContainingListView => (ListView)FromAutomationElement(this.SelectionItemPattern.Current.SelectionContainer);
 
-        public IReadOnlyList<GridViewCell> Cells => this.AutomationElement.FindAllChildren(Condition.GridViewCell)
+        public IReadOnlyList<GridViewCell> Cells => this.AutomationElement.FindAllChildren(Conditions.GridViewCell)
                                                         .OfType<AutomationElement>()
                                                         .Select(x => GridViewCell.Create(FromAutomationElement(x)))
                                                         .ToArray();

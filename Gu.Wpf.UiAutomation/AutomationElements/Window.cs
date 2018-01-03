@@ -31,9 +31,9 @@ namespace Gu.Wpf.UiAutomation
 
         public bool IsModal => this.AutomationElement.WindowPattern().Current.IsModal;
 
-        public TitleBar TitleBar => new TitleBar(this.AutomationElement.FindFirstChild(Condition.TitleBar));
+        public TitleBar TitleBar => new TitleBar(this.AutomationElement.FindFirstChild(Conditions.TitleBar));
 
-        public IReadOnlyList<Window> ModalWindows => this.FindAllChildren(Condition.ModalWindow)
+        public IReadOnlyList<Window> ModalWindows => this.FindAllChildren(Conditions.ModalWindow)
                                                          .Select(e => new Window(e.AutomationElement, isMainWindow: false))
                                                          .ToArray();
 
@@ -47,9 +47,9 @@ namespace Gu.Wpf.UiAutomation
                 var mainWindow = this.GetMainWindow();
                 var popup = mainWindow.FindFirstChild(
                     new AndCondition(
-                        Condition.Window,
-                        Condition.ByName(string.Empty),
-                        Condition.ByClassName("Popup")));
+                        Conditions.Window,
+                        Conditions.ByName(string.Empty),
+                        Conditions.ByClassName("Popup")));
                 if (popup == null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
@@ -69,7 +69,7 @@ namespace Gu.Wpf.UiAutomation
 
         public WindowPattern WindowPattern => this.AutomationElement.WindowPattern();
 
-        public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Condition.MessageBox));
+        public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Conditions.MessageBox));
 
         public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
 
@@ -83,10 +83,10 @@ namespace Gu.Wpf.UiAutomation
                 if (Desktop.AutomationElement.TryFindFirst(
                     TreeScope.Children,
                     new AndCondition(
-                        Condition.Menu,
+                        Conditions.Menu,
                         new OrCondition(
-                            Condition.ByName("Context"),
-                            Condition.ByName("System"))),
+                            Conditions.ByName("Context"),
+                            Conditions.ByName("System"))),
                     out var element))
                 {
                     return new ContextMenu(element, isWin32Menu: true);
@@ -103,8 +103,8 @@ namespace Gu.Wpf.UiAutomation
             {
                 var ctxMenu = mainWindow.AutomationElement.FindFirstChild(
                     new AndCondition(
-                        Condition.Menu,
-                        Condition.ByName("DropDown")));
+                        Conditions.Menu,
+                        Conditions.ByName("DropDown")));
                 return new ContextMenu(ctxMenu);
             }
 
@@ -112,7 +112,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 // In WPF, there is a window (Popup) where the menu is inside
                 var popup = this.Popup;
-                var ctxMenu = popup.AutomationElement.FindFirstChild(Condition.Menu);
+                var ctxMenu = popup.AutomationElement.FindFirstChild(Conditions.Menu);
                 return new ContextMenu(ctxMenu);
             }
 
@@ -177,7 +177,7 @@ namespace Gu.Wpf.UiAutomation
             var element = AutomationElement.RootElement
                                            .FindFirst(
                                                TreeScope.Children,
-                                               Condition.ByProcessId(this.ProcessId));
+                                               Conditions.ByProcessId(this.ProcessId));
             var mainWindow = new Window(element, isMainWindow: true);
             return mainWindow;
         }

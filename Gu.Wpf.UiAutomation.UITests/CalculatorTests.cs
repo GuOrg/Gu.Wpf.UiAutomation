@@ -120,7 +120,7 @@
             {
                 get
                 {
-                    var resultElement = this.mainWindow.FindFirstDescendant(Condition.ByAutomationId("CalculatorResults"));
+                    var resultElement = this.mainWindow.FindFirstDescendant(Conditions.ByAutomationId("CalculatorResults"));
                     var value = resultElement.Name;
                     return Regex.Replace(value, "[^0-9]", string.Empty);
                 }
@@ -160,7 +160,7 @@
             {
                 get
                 {
-                    var resultElement = this.mainWindow.FindFirstDescendant(Condition.ByAutomationId("158"));
+                    var resultElement = this.mainWindow.FindFirstDescendant(Conditions.ByAutomationId("158"));
                     var value = resultElement.Name;
                     return Regex.Replace(value, "[^0-9]", string.Empty);
                 }

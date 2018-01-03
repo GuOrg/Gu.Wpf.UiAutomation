@@ -78,7 +78,7 @@ namespace Gu.Wpf.UiAutomation
         public IReadOnlyList<T> ContentElements<T>(Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindAllChildren(System.Windows.Automation.Condition.TrueCondition, wrap).Skip(1).ToArray();
+            return this.FindAllChildren(Condition.TrueCondition, wrap).Skip(1).ToArray();
         }
     }
 }

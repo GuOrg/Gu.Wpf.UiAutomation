@@ -22,7 +22,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public int ColumnCount => this.GridPattern.Current.ColumnCount;
 
-        public GridViewHeaderRowPresenter ColumnHeadersPresenter => (GridViewHeaderRowPresenter)this.FindFirstChild(Condition.GridViewHeaderRowPresenter);
+        public GridViewHeaderRowPresenter ColumnHeadersPresenter => (GridViewHeaderRowPresenter)this.FindFirstChild(Conditions.GridViewHeaderRowPresenter);
 
         /// <summary>
         /// Gets all column header elements.
@@ -31,10 +31,10 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.TryFindFirst(TreeScope.Children, Condition.Header, FromAutomationElement, Retry.Time, out var header))
+                if (this.TryFindFirst(TreeScope.Children, Conditions.Header, FromAutomationElement, Retry.Time, out var header))
                 {
                     return header.FindAllChildren(
-                        Condition.HeaderItem,
+                        Conditions.HeaderItem,
                         x => new GridViewColumnHeader(x));
                 }
 

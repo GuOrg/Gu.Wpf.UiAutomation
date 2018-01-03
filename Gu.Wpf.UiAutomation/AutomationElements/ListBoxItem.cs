@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static SelectionItemControl Create(AutomationElement automationElement)
         {
-            return Condition.IsMatch(automationElement.Parent(), Condition.ComboBox)
+            return Conditions.IsMatch(automationElement.Parent(), Conditions.ComboBox)
                 ? (SelectionItemControl)new ComboBoxItem(automationElement)
                 : new ListBoxItem(automationElement);
         }

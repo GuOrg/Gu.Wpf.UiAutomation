@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Button FindButton(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Button, name),
+            this.CreateCondition(Conditions.Button, name),
             x => new Button(x),
             Retry.Time);
 
@@ -29,7 +29,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public CheckBox FindCheckBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.CheckBox, name),
+            this.CreateCondition(Conditions.CheckBox, name),
             x => new CheckBox(x),
             Retry.Time);
 
@@ -39,7 +39,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ComboBox FindComboBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ComboBox, name),
+            this.CreateCondition(Conditions.ComboBox, name),
             x => new ComboBox(x),
             Retry.Time);
 
@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public DataGrid FindDataGrid(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.DataGrid, name),
+            this.CreateCondition(Conditions.DataGrid, name),
             x => new DataGrid(x),
             Retry.Time);
 
@@ -59,7 +59,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public DatePicker FindDatePicker(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.DatePicker, name),
+            this.CreateCondition(Conditions.DatePicker, name),
             x => new DatePicker(x),
             Retry.Time);
 
@@ -69,7 +69,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Label FindLabel(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Label, name),
+            this.CreateCondition(Conditions.Label, name),
             x => new Label(x),
             Retry.Time);
 
@@ -79,7 +79,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public GroupBox FindGroupBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.GroupBox, name),
+            this.CreateCondition(Conditions.GroupBox, name),
             x => new GroupBox(x),
             Retry.Time);
 
@@ -89,7 +89,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Expander FindExpander(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Expander, name),
+            this.CreateCondition(Conditions.Expander, name),
             x => new Expander(x),
             Retry.Time);
 
@@ -99,7 +99,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Menu FindMenu(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Menu, name),
+            this.CreateCondition(Conditions.Menu, name),
             x => new Menu(x),
             Retry.Time);
 
@@ -109,7 +109,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public MenuItem FindMenuItem(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.MenuItem, name),
+            this.CreateCondition(Conditions.MenuItem, name),
             x => new MenuItem(x),
             Retry.Time);
 
@@ -119,7 +119,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.HorizontalScrollBar, name),
+            this.CreateCondition(Conditions.HorizontalScrollBar, name),
             x => new HorizontalScrollBar(x),
             Retry.Time);
 
@@ -129,7 +129,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.VerticalScrollBar, name),
+            this.CreateCondition(Conditions.VerticalScrollBar, name),
             x => new VerticalScrollBar(x),
             Retry.Time);
 
@@ -139,7 +139,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListBox FindListBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ListBox, name),
+            this.CreateCondition(Conditions.ListBox, name),
             x => new ListBox(x),
             Retry.Time);
 
@@ -149,7 +149,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ListView FindListView(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ListView, name),
+            this.CreateCondition(Conditions.ListView, name),
             x => new ListView(x),
             Retry.Time);
 
@@ -159,7 +159,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ProgressBar, name),
+            this.CreateCondition(Conditions.ProgressBar, name),
             x => new ProgressBar(x),
             Retry.Time);
 
@@ -169,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public RadioButton FindRadioButton(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.RadioButton, name),
+            this.CreateCondition(Conditions.RadioButton, name),
             x => new RadioButton(x),
             Retry.Time);
 
@@ -179,7 +179,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public RepeatButton FindRepeatButton(string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.RepeatButton, name),
+            this.CreateCondition(Conditions.RepeatButton, name),
             x => new RepeatButton(x),
             Retry.Time);
 
@@ -189,7 +189,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public Slider FindSlider(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.Slider, name),
+            this.CreateCondition(Conditions.Slider, name),
             x => new Slider(x),
             Retry.Time);
 
@@ -199,7 +199,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ScrollViewer FindScrollViewer(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ScrollViewer, name),
+            this.CreateCondition(Conditions.ScrollViewer, name),
             x => new ScrollViewer(x),
             Retry.Time);
 
@@ -209,7 +209,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TextBlock FindTextBlock(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TextBlock, name),
+            this.CreateCondition(Conditions.TextBlock, name),
             x => new TextBlock(x),
             Retry.Time);
 
@@ -219,7 +219,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TextBox FindTextBox(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TextBox, name),
+            this.CreateCondition(Conditions.TextBox, name),
             x => new TextBox(x),
             Retry.Time);
 
@@ -229,7 +229,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ToggleButton, name),
+            this.CreateCondition(Conditions.ToggleButton, name),
             x => new ToggleButton(x),
             Retry.Time);
 
@@ -239,7 +239,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TabControl FindTabControl(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TabControl, name),
+            this.CreateCondition(Conditions.TabControl, name),
             x => new TabControl(x),
             Retry.Time);
 
@@ -249,7 +249,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TitleBar FindTitleBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TitleBar, name),
+            this.CreateCondition(Conditions.TitleBar, name),
             x => new TitleBar(x),
             Retry.Time);
 
@@ -259,7 +259,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public ToolBar FindToolBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ToolBar, name),
+            this.CreateCondition(Conditions.ToolBar, name),
             x => new ToolBar(x),
             Retry.Time);
 
@@ -269,7 +269,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public TreeView FindTreeView(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.TreeView, name),
+            this.CreateCondition(Conditions.TreeView, name),
             x => new TreeView(x),
             Retry.Time);
 
@@ -279,7 +279,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public UserControl FindUserControl(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.UserControl, name),
+            this.CreateCondition(Conditions.UserControl, name),
             x => new UserControl(x),
             Retry.Time);
 
@@ -289,7 +289,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="name">x:Name, Content or AutomationID</param>
         public StatusBar FindStatusBar(string name = null) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.StatusBar, name),
+            this.CreateCondition(Conditions.StatusBar, name),
             x => new StatusBar(x),
             Retry.Time);
 
@@ -300,7 +300,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="controlType">The control type</param>
         public UiElement FindDescendant(string name, ControlType controlType) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ByControlType(controlType), name),
+            this.CreateCondition(Conditions.ByControlType(controlType), name),
             Retry.Time);
 
         /// <summary>
@@ -312,51 +312,51 @@ namespace Gu.Wpf.UiAutomation
         public T FindDescendant<T>(string name, ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ByControlType(controlType), name),
+            this.CreateCondition(Conditions.ByControlType(controlType), name),
             wrap,
             Retry.Time);
 
         public UiElement FindDescendant(ControlType controlType) => this.FindFirst(
             TreeScope.Descendants,
-            Condition.ByControlType(controlType),
+            Conditions.ByControlType(controlType),
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            Condition.ByControlType(controlType),
+            Conditions.ByControlType(controlType),
             wrap,
             Retry.Time);
 
         public UiElement FindDescendant(ControlType controlType, int index) => this.FindAt(
             TreeScope.Descendants,
-            Condition.ByControlType(controlType),
+            Conditions.ByControlType(controlType),
             index,
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, int index, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindAt(
             TreeScope.Descendants,
-            Condition.ByControlType(controlType),
+            Conditions.ByControlType(controlType),
             index,
             wrap,
             Retry.Time);
 
         public UiElement FindDescendant(ControlType controlType, string name) => this.FindFirst(
             TreeScope.Descendants,
-            this.CreateCondition(Condition.ByControlType(controlType), name),
+            this.CreateCondition(Conditions.ByControlType(controlType), name),
             Retry.Time);
 
         public T FindDescendant<T>(ControlType controlType, string name, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            Condition.ByControlType(controlType),
+            Conditions.ByControlType(controlType),
             wrap,
             Retry.Time);
 
         public UiElement FindDescendant(string name) => this.FindFirst(
             TreeScope.Descendants,
-            Condition.ByNameOrAutomationId(name),
+            Conditions.ByNameOrAutomationId(name),
             Retry.Time);
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace Gu.Wpf.UiAutomation
 
         public UiElement FindFirstChild(string automationId)
         {
-            return this.FindFirst(TreeScope.Children, Condition.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Children, Conditions.ByAutomationId(automationId));
         }
 
         public UiElement FindFirstChild(System.Windows.Automation.Condition condition)
@@ -639,24 +639,24 @@ namespace Gu.Wpf.UiAutomation
 
         public UiElement FindFirstDescendant(string automationId)
         {
-            return this.FindFirst(TreeScope.Descendants, Condition.ByAutomationId(automationId));
+            return this.FindFirst(TreeScope.Descendants, Conditions.ByAutomationId(automationId));
         }
 
         public T FindFirstDescendant<T>(string automationId, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants, Condition.ByAutomationId(automationId), wrap);
+            return this.FindFirst(TreeScope.Descendants, Conditions.ByAutomationId(automationId), wrap);
         }
 
         public UiElement FindFirstDescendant(ControlType controlType)
         {
-            return this.FindFirst(TreeScope.Descendants, Condition.ByControlType(controlType));
+            return this.FindFirst(TreeScope.Descendants, Conditions.ByControlType(controlType));
         }
 
         public T FindFirstDescendant<T>(ControlType controlType, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
-            return this.FindFirst(TreeScope.Descendants, Condition.ByControlType(controlType), wrap);
+            return this.FindFirst(TreeScope.Descendants, Conditions.ByControlType(controlType), wrap);
         }
 
         public UiElement FindFirstDescendant(System.Windows.Automation.Condition condition)
@@ -747,7 +747,7 @@ namespace Gu.Wpf.UiAutomation
 
             return new AndCondition(
                 controlTypeCondition,
-                Condition.ByNameOrAutomationId(name));
+                Conditions.ByNameOrAutomationId(name));
         }
     }
 }

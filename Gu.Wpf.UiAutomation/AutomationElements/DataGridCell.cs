@@ -65,13 +65,13 @@ namespace Gu.Wpf.UiAutomation
                         return text;
                     }
 
-                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBlock, out var textBlockOrLabel) ||
-                        this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.Label, out textBlockOrLabel))
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.TextBlock, out var textBlockOrLabel) ||
+                        this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.Label, out textBlockOrLabel))
                     {
                         return textBlockOrLabel.Name();
                     }
 
-                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var textBox) &&
+                    if (this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.TextBox, out var textBox) &&
                         textBox.TryGetValuePattern(out var pattern))
                     {
                         return pattern.Current.Value;
@@ -102,7 +102,7 @@ namespace Gu.Wpf.UiAutomation
                     Wait.UntilResponsive(this);
                     if (this.AutomationElement.TryFindFirst(
                         TreeScope.Children,
-                        Condition.TextBox,
+                        Conditions.TextBox,
                         out var textBox))
                     {
                         if (textBox.TryGetValuePattern(out valuePattern) &&
@@ -148,7 +148,7 @@ namespace Gu.Wpf.UiAutomation
                 this.Click();
             }
 
-            if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var element))
+            if (this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.TextBox, out var element))
             {
                 new TextBox(element).Enter(value);
             }

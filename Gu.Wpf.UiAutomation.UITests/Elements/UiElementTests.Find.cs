@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Windows.Automation;
     using NUnit.Framework;
-    using Condition = Gu.Wpf.UiAutomation.Condition;
 
     public partial class UiElementTests
     {
@@ -122,7 +121,7 @@
                 using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
                 {
                     var window = app.MainWindow;
-                    var child = window.FindAt(TreeScope.Descendants, Condition.TrueCondition, index, TimeSpan.FromMilliseconds(100));
+                    var child = window.FindAt(TreeScope.Descendants, Conditions.TrueCondition, index, TimeSpan.FromMilliseconds(100));
                     Assert.AreEqual(expected, child.ControlType);
                 }
             }
@@ -135,7 +134,7 @@
                     var window = app.MainWindow;
                     var child = window.FindAt(
                         TreeScope.Descendants,
-                        Condition.CheckBox,
+                        Conditions.CheckBox,
                         1,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100));
@@ -152,7 +151,7 @@
                     var window = app.MainWindow;
                     Assert.AreEqual(true, window.TryFindAt(
                         TreeScope.Descendants,
-                        Condition.CheckBox,
+                        Conditions.CheckBox,
                         1,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100),
@@ -162,7 +161,7 @@
 
                     Assert.AreEqual(false, window.TryFindAt(
                         TreeScope.Descendants,
-                        Condition.CheckBox,
+                        Conditions.CheckBox,
                         100,
                         x => new CheckBox(x),
                         TimeSpan.FromMilliseconds(100),

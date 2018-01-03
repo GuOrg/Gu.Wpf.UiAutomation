@@ -16,12 +16,12 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.AutomationElement.TryFindSingleChild(Condition.TextBlock, out var child))
+                if (this.AutomationElement.TryFindSingleChild(Conditions.TextBlock, out var child))
                 {
                     return child.Name();
                 }
 
-                if (this.AutomationElement.TryFindSingleChild(Condition.Label, out child))
+                if (this.AutomationElement.TryFindSingleChild(Conditions.Label, out child))
                 {
                     return child.Name();
                 }

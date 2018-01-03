@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation
 
         private Thumb FindThumb()
         {
-            var thumb = this.AutomationElement.FindFirst(TreeScope.Children, Condition.Thumb);
+            var thumb = this.AutomationElement.FindFirst(TreeScope.Children, Conditions.Thumb);
             return thumb != null ? new Thumb(thumb) : null;
         }
     }

@@ -55,12 +55,12 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public int ColumnCount => this.GridPattern.Current.ColumnCount;
 
-        public DataGridColumnHeadersPresenter ColumnHeadersPresenter => (DataGridColumnHeadersPresenter)this.FindFirstChild(Condition.DataGridColumnHeadersPresenter);
+        public DataGridColumnHeadersPresenter ColumnHeadersPresenter => (DataGridColumnHeadersPresenter)this.FindFirstChild(Conditions.DataGridColumnHeadersPresenter);
 
         /// <summary>
         /// The presenter for row header template.
         /// </summary>
-        public DataGridDetailsPresenter DetailsPresenter => (DataGridDetailsPresenter)this.FindFirstChild(Condition.DataGridDetailsPresenter);
+        public DataGridDetailsPresenter DetailsPresenter => (DataGridDetailsPresenter)this.FindFirstChild(Conditions.DataGridDetailsPresenter);
 
         /// <summary>
         /// Gets all column header elements.
@@ -69,9 +69,9 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.TryFindFirst(TreeScope.Children, Condition.DataGridColumnHeadersPresenter, FromAutomationElement, Retry.Time, out var header))
+                if (this.TryFindFirst(TreeScope.Children, Conditions.DataGridColumnHeadersPresenter, FromAutomationElement, Retry.Time, out var header))
                 {
-                    return header.FindAllChildren(Condition.HeaderItem, x => (DataGridColumnHeader)FromAutomationElement(x));
+                    return header.FindAllChildren(Conditions.HeaderItem, x => (DataGridColumnHeader)FromAutomationElement(x));
                 }
 
                 if (this.AutomationElement.TryGetTablePattern(out var tablePattern))

@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Flag which indicates, if the <see cref="ComboBox"/> is editable or not.
         /// </summary>
-        public virtual bool IsEditable => this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var textBox) &&
+        public virtual bool IsEditable => this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.TextBox, out var textBox) &&
                                               textBox.TryGetValuePattern(out var valuePattern) &&
                                                 !valuePattern.Current.IsReadOnly;
 
@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
                 if (this.FrameworkType == FrameworkType.WinForms)
                 {
                     // WinForms
-                    var itemsList = this.FindFirstChild(Condition.ListBox);
+                    var itemsList = this.FindFirstChild(Conditions.ListBox);
 
                     // UIA3 does not see the list if it is collapsed
                     return itemsList != null && !itemsList.IsOffscreen;
@@ -90,7 +90,7 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TextBox, out var element))
+                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Conditions.TextBox, out var element))
                 {
                     return new TextBox(element);
                 }
