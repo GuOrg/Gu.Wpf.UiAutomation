@@ -41,6 +41,11 @@ namespace Gu.Wpf.UiAutomation
         public TItem Select(int rowIndex)
         {
             var item = (TItem)FromAutomationElement(this.AutomationElement.ItemContainerPattern().FindAtIndex(rowIndex));
+            if (item.AutomationElement.TryGetVirtualizedItemPattern(out var pattern))
+            {
+                pattern.Realize();
+            }
+
             item.Select();
             return item;
         }
@@ -48,6 +53,11 @@ namespace Gu.Wpf.UiAutomation
         public TItem Select(string text)
         {
             var item = (TItem)FromAutomationElement(this.AutomationElement.ItemContainerPattern().FindByText(text));
+            if (item.AutomationElement.TryGetVirtualizedItemPattern(out var pattern))
+            {
+                pattern.Realize();
+            }
+
             item.Select();
             return item;
         }
