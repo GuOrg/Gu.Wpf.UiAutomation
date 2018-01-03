@@ -44,6 +44,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
 
+        public static Condition GridSplitter { get; } = ByClassName("GridSplitter");
+
         public static Condition GridViewCell { get; } = new AndCondition(
             new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true),
             new PropertyCondition(AutomationElement.IsGridItemPatternAvailableProperty, true));

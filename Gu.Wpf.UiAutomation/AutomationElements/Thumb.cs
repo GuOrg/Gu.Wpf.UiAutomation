@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -8,6 +8,8 @@
             : base(automationElement)
         {
         }
+
+        public TransformPattern TransformPattern => this.AutomationElement.TransformPattern();
 
         /// <summary>
         /// Moves the slider horizontally

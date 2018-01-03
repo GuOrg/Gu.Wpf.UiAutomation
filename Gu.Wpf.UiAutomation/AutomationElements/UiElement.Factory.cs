@@ -25,6 +25,7 @@ namespace Gu.Wpf.UiAutomation
             //// DataItem
             //// ControlTypeDocument
             new ConditionAndCreate(Conditions.Expander, e => new Expander(e)),
+            new ConditionAndCreate(Conditions.GridSplitter, e => new GridSplitter(e)),
             new ConditionAndCreate(Conditions.GridViewColumnHeader, e => new GridViewColumnHeader(e)),
             new ConditionAndCreate(Conditions.GridViewHeaderRowPresenter, e => new GridViewHeaderRowPresenter(e)),
             new ConditionAndCreate(Conditions.GridViewRowHeader, e => new GridViewRowHeader(e)),

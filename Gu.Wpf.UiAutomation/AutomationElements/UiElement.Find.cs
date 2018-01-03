@@ -74,6 +74,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="GridSplitter"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public GridSplitter FindGridSplitter(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.GridSplitter, name),
+            x => new GridSplitter(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="GroupBox"/> box by x:Name, Header or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

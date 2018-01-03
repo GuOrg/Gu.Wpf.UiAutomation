@@ -80,6 +80,26 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpExpander()
+        {
+            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            {
+                var window = app.MainWindow;
+                var element = window.FindExpander().AutomationElement;
+                DumpRecursive(element);
+            }
+        }
+
+        [Test]
+        public void DumpGridSplitterWindow()
+        {
+            using (var app = Application.Launch(ExeFileName, "GridSplitterWindow"))
+            {
+                DumpRecursive(app.MainWindow.AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpMenu()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
@@ -123,13 +143,11 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void DumpExpander()
+        public void DumpSeparatorWindow()
         {
-            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
+            using (var app = Application.Launch(ExeFileName, "SeparatorWindow"))
             {
-                var window = app.MainWindow;
-                var element = window.FindExpander().AutomationElement;
-                DumpRecursive(element);
+                DumpRecursive(app.MainWindow.AutomationElement);
             }
         }
 
