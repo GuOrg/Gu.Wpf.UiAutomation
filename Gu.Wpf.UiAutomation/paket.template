@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.2.0.0
+version 0.2.1.0
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,6 +11,14 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
+  FEATURE: Handle virtualization for ListBox.Items.
+  FEATURE: UiElement.Children for displaying trees.
+  BUGFIX: Handle empty data grids.
+  BREAKING: Remove DataGrid.RowHeaders use the Rows headers.
+  BREAKING: Rename Conditions, was Condition, confusing when same name as System.Windows.Automation.Condition
+  BREAKING: rename ScrollBar.Minimum & Maximum to match WPF property names.
+  BREAKING: Remove GridView, refactor DataGrid & ListView
+
   FEATURE: Added more wrapper types.
   FEATURE: Return better types to enable cast instead of using As-methods.
   BREAKING: Use UIAutomationClient & UIAutomationTypes instead of interop assembly.

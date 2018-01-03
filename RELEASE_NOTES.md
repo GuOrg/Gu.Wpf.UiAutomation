@@ -1,3 +1,12 @@
+# 0.2.1
+* FEATURE: Handle virtualization for ListBox.Items.
+* FEATURE: UiElement.Children for displaying trees.
+* BUGFIX: Handle empty data grids.
+* BREAKING: Remove DataGrid.RowHeaders use the Rows headers.
+* BREAKING: Rename Conditions, was Condition, confusing when same name as System.Windows.Automation.Condition
+* BREAKING: rename ScrollBar.Minimum & Maximum to match WPF property names.
+* BREAKING: Remove GridView, refactor DataGrid & ListView
+
 # 0.2.0
 * FEATURE: Added more wrapper types.
 * FEATURE: Return better types to enable cast instead of using As-methods.
