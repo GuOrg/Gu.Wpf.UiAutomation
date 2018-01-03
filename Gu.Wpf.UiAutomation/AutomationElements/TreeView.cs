@@ -1,10 +1,10 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Automation;
 
-    public class TreeView : Control
+    public class TreeView : Selector<TreeViewItem>
     {
         public TreeView(AutomationElement automationElement)
             : base(automationElement)
@@ -15,14 +15,6 @@
         /// The currently selected <see cref="TreeViewItem" />
         /// </summary>
         public TreeViewItem SelectedTreeViewItem => this.SearchSelectedItem(this.Items);
-
-        /// <summary>
-        /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeView" />
-        /// </summary>
-        public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
-            TreeScope.Children,
-            Conditions.TreeViewItem,
-            x => new TreeViewItem(x));
 
         private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)
         {

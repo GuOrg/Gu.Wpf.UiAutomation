@@ -80,6 +80,16 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpMenu()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindMenu().AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpTabControl()
         {
             using (var app = Application.Launch(ExeFileName, "TabControlWindow"))
@@ -206,6 +216,16 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton();
                 DumpRecursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
+            }
+        }
+
+        [Test]
+        public void DumpTreeView()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TreeViewWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindTreeView().AutomationElement);
             }
         }
 
