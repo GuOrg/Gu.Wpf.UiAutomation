@@ -15,7 +15,10 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 
 ## Supported types
 
+
 - Button
+- Calendar
+- CalendarDayButton
 - CheckBox
 - ColumnHeader
 - ComboBox
@@ -26,18 +29,21 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - DataGrid
 - DataGridCell
 - DataGridColumnHeader
+- DataGridColumnHeadersPresenter
+- DataGridDetailsPresenter
 - DataGridRow
 - DataGridRowHeader
 - DatePicker
 - Expander
-- GridCell
 - GridHeader
-- GridRow
-- GridView
+- GridSplitter
+- GridViewCell
 - GridViewColumnHeader
+- GridViewHeaderRowPresenter
 - GridViewRowHeader
 - GroupBox
 - HeaderedContentControl
+- HorizontalScrollBar
 - Label
 - ListBox
 - ListBoxItem
@@ -47,6 +53,7 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - MenuBar
 - MenuItem
 - MessageBox
+- MultiSelector`1
 - ExpandCollapseControl
 - InvokeControl
 - SelectionItemControl
@@ -55,10 +62,11 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - RadioButton
 - RepeatButton
 - RowHeader
-- HorizontalScrollBar
 - ScrollBar
-- VerticalScrollBar
 - ScrollViewer
+- Selector
+- Selector`1
+- Separator
 - Slider
 - StatusBar
 - TabControl
@@ -74,7 +82,9 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - TreeViewItem
 - UiElement
 - UserControl
+- VerticalScrollBar
 - Window
+
 
 ### Usage in Code
 The entry point is usually an application or the desktop so you get an automation element (like a the main window of the application).
