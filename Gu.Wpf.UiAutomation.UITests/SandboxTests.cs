@@ -38,6 +38,16 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpCalendar()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindFirst(TreeScope.Descendants,Conditions.Calendar).AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpComboBox()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
@@ -148,6 +158,15 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "SeparatorWindow"))
             {
                 DumpRecursive(app.MainWindow.AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpStatusBar()
+        {
+            using (var app = Application.Launch(ExeFileName, "StatusBarWindow"))
+            {
+                DumpRecursive(app.MainWindow.FindStatusBar().AutomationElement);
             }
         }
 

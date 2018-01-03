@@ -13,11 +13,16 @@ namespace Gu.Wpf.UiAutomation
 
         public UiElement Content => this.FindFirstChild();
 
-        public static Button Create(AutomationElement automationElement)
+        public static UiElement Create(AutomationElement automationElement)
         {
             if (Conditions.IsMatch(automationElement, Conditions.RepeatButton))
             {
                 return new RepeatButton(automationElement);
+            }
+
+            if (Conditions.IsMatch(automationElement, Conditions.CalendarDayButton))
+            {
+                return new CalendarDayButton(automationElement);
             }
 
             return new Button(automationElement);

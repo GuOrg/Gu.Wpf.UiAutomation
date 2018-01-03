@@ -6,12 +6,5 @@
         Width="300"
         Height="300"
         mc:Ignorable="d">
-  <StatusBar VerticalAlignment="Bottom">
-    <StatusBarItem>
-      <TextBlock Text="TextBlock1" />
-    </StatusBarItem>
-    <StatusBarItem>
-      <TextBlock Text="TextBlock2" />
-    </StatusBarItem>
-  </StatusBar>
+  <Calendar />
 </Window>

@@ -24,6 +24,26 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="Calendar"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Calendar FindCalendar(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.Calendar, name),
+            x => new Calendar(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="CalendarDayButton"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public CalendarDayButton FindCalendarDayButton(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.CalendarDayButton, name),
+            x => new CalendarDayButton(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="CheckBox"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

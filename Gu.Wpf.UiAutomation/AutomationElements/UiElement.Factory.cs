@@ -10,6 +10,8 @@ namespace Gu.Wpf.UiAutomation
         {
             new ConditionAndCreate(Conditions.Button, Button.Create),
             //// Calendar
+            new ConditionAndCreate(Conditions.Calendar, e => new Calendar(e)),
+            new ConditionAndCreate(Conditions.CalendarDayButton, e => new CalendarDayButton(e)),
             new ConditionAndCreate(Conditions.CheckBox, e => new CheckBox(e)),
             new ConditionAndCreate(Conditions.ComboBox, e => new ComboBox(e)),
             new ConditionAndCreate(Conditions.ContextMenu, e => new ContextMenu(e)),

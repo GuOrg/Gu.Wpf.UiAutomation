@@ -14,6 +14,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition Calendar { get; } = ByControlType(ControlType.Calendar);
 
+        public static Condition CalendarDayButton { get; } = ByClassName("CalendarDayButton");
+
         public static Condition CheckBox { get; } = ByControlType(ControlType.CheckBox);
 
         public static Condition ComboBox { get; } = ByControlType(ControlType.ComboBox);
