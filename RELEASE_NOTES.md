@@ -1,3 +1,6 @@
+# 0.2.1.1
+* BUGFIX: Selector.Select() virtualized items.
+
 # 0.2.1
 * FEATURE: Handle virtualization for ListBox.Items.
 * FEATURE: UiElement.Children for displaying trees.
