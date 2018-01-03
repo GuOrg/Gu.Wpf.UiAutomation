@@ -87,26 +87,6 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Gets all row header elements.
-        /// </summary>
-        public IReadOnlyList<DataGridRowHeader> RowHeaders
-        {
-            get
-            {
-                var first = this.ItemContainerPattern.FirstOrDefault();
-                if (first == null ||
-                    !first.TryFindFirst(TreeScope.Children, Condition.HeaderItem, out _))
-                {
-                    return new DataGridRowHeader[0];
-                }
-
-                return this.ItemContainerPattern
-                           .AllItems(x => new DataGridRowHeader(x.FindFirstChild(Condition.DataGridRowHeader)))
-                           .ToArray();
-            }
-        }
-
-        /// <summary>
         /// Returns the rows which are currently visible to Interop.UIAutomationClient. Might not be the full list (eg. in virtualized lists)!
         /// Use <see cref="GetRowByIndex" /> to make sure to get the correct row.
         /// </summary>
