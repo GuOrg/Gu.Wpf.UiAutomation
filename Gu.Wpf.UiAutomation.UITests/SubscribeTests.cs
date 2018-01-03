@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Collections.Generic;
@@ -99,6 +99,7 @@
         [Test]
         public void ToFocusChangedEvent()
         {
+            // This fails on Win 10 for some reason.
             using (var app = Application.AttachOrLaunch(ExeFileName, "FocusWindow"))
             {
                 var changes = new List<int>();
