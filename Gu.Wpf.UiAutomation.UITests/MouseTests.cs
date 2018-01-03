@@ -1,6 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
-    using System.Windows;
     using NUnit.Framework;
 
     [TestFixture]
@@ -11,7 +10,7 @@
         [Test]
         public void MoveTest()
         {
-            Mouse.Position = new Point(0, 0);
+            Mouse.Position = new System.Windows.Point(0, 0);
             Mouse.MoveBy(800, 0);
             Mouse.MoveBy(0, 400);
             Mouse.MoveBy(-400, -200);
@@ -25,7 +24,7 @@
                 var mainWindow = app.MainWindow;
                 var mouseX = mainWindow.Bounds.Left + 50;
                 var mouseY = mainWindow.Bounds.Top + 200;
-                Mouse.Position = new Point(mouseX, mouseY);
+                Mouse.Position = new System.Windows.Point(mouseX, mouseY);
                 Mouse.Down(MouseButton.Left);
                 Mouse.MoveBy(100, 10);
                 Mouse.MoveBy(10, 50);

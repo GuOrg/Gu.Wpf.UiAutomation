@@ -1,6 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Converters
+namespace Gu.Wpf.UiAutomation.UiTests.Converters
 {
-    using System.Windows;
     using System.Windows.Automation;
     using NUnit.Framework;
 
@@ -37,7 +36,7 @@
             {
                 var window = app.MainWindow;
                 var checkBox = window.FindCheckBox("Test Checkbox");
-                Assert.IsInstanceOf<Rect>(checkBox.Bounds);
+                Assert.IsInstanceOf<System.Windows.Rect>(checkBox.Bounds);
             }
         }
     }

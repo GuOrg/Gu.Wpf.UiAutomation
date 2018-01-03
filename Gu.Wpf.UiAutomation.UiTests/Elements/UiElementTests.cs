@@ -1,8 +1,7 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
     using System.Drawing;
-    using System.Windows;
     using NUnit.Framework;
 
     public partial class UiElementTests
@@ -89,15 +88,15 @@
                 window.MoveTo(100, 200);
                 if (WindowsVersion.IsWindows7())
                 {
-                    Assert.AreEqual(new Rect(150, 311, 200, 100), button.Bounds);
-                    Assert.AreEqual(new Rect(100, 200, 300, 300), window.Bounds);
-                    Assert.AreEqual(new Rect(50, 111, 200, 100), button.RenderBounds);
+                    Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
+                    Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
+                    Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
                 }
                 else
                 {
-                    Assert.AreEqual(new Rect(150, 312, 200, 100), button.Bounds);
-                    Assert.AreEqual(new Rect(100, 200, 300, 300), window.Bounds);
-                    Assert.AreEqual(new Rect(50, 112, 200, 100), button.RenderBounds);
+                    Assert.AreEqual(new System.Windows.Rect(150, 312, 200, 100), button.Bounds);
+                    Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
+                    Assert.AreEqual(new System.Windows.Rect(50, 112, 200, 100), button.RenderBounds);
                 }
             }
         }
