@@ -50,6 +50,7 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Conditions.RadioButton, e => new RadioButton(e)),
             new ConditionAndCreate(Conditions.RepeatButton, e => new RepeatButton(e)),
             new ConditionAndCreate(Conditions.ScrollViewer, e => new ScrollViewer(e)),
+            new ConditionAndCreate(Conditions.Separator, e => new Separator(e)),
             ////new ConditionAndCreate(Conditions.ScrollBar, e => new ScrollBar(e)),
             ////new ConditionAndCreate(Conditions.Separator, e => new Separator(e)),
             new ConditionAndCreate(Conditions.Slider, e => new Slider(e)),
