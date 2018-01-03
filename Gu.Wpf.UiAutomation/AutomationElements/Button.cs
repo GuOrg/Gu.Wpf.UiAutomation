@@ -9,20 +9,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public string Text
-        {
-            get
-            {
-                var children = this.AutomationElement.FindAllChildren(Condition.TrueCondition);
-                if (children.Count == 1 &&
-                    children[0].Current.ControlType.Id == ControlType.Text.Id)
-                {
-                    return children[0].Current.Name;
-                }
-
-                return this.Name;
-            }
-        }
+        public string Text => this.AutomationElement.Text();
 
         public UiElement Content => this.FindFirstChild();
 

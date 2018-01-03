@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -8,6 +8,8 @@
             : base(automationElement)
         {
         }
+
+        public string Text => this.AutomationElement.Text();
 
         /// <summary>
         /// Flag to get/set the selection of this element.

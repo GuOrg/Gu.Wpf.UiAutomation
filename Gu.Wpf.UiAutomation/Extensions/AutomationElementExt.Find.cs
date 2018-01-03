@@ -12,6 +12,11 @@ namespace Gu.Wpf.UiAutomation
             return TreeWalker.RawViewWalker.GetParent(element);
         }
 
+        public static IEnumerable<AutomationElement> Children(this AutomationElement element)
+        {
+            return TreeWalker.RawViewWalker.Children(element);
+        }
+
         public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, Condition condition, out AutomationElement match)
         {
             match = treeScope == TreeScope.Ancestors

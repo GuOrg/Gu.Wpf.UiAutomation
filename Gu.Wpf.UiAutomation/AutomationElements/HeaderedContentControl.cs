@@ -19,10 +19,9 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var header = this.Header;
-                if (header != null)
+                if (this.AutomationElement.TryFindFirst(TreeScope.Children, Condition.TrueCondition, out var child))
                 {
-                    return header.Name;
+                    return child.Text();
                 }
 
                 return this.Name;

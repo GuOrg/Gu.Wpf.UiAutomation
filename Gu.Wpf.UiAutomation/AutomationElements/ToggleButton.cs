@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Windows.Automation;
@@ -12,20 +12,7 @@
 
         public TogglePattern TogglePattern => this.AutomationElement.TogglePattern();
 
-        public string Text
-        {
-            get
-            {
-                var children = this.FindAllChildren();
-                if (children.Count == 1 &&
-                    children[0].ControlType.Id == ControlType.Text.Id)
-                {
-                    return children[0].Name;
-                }
-
-                return this.Name;
-            }
-        }
+        public string Text => this.AutomationElement.Text();
 
         public bool? IsChecked
         {

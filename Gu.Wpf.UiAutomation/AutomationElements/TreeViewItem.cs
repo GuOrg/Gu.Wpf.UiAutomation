@@ -25,15 +25,14 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                var value = this.Name;
-                if (string.IsNullOrEmpty(value) ||
-                    value.Contains("System.Windows.Controls.TreeViewItem"))
+                var text = this.Name;
+                if (string.IsNullOrEmpty(text) ||
+                    text.Contains("System.Windows.Controls.TreeViewItem"))
                 {
-                    var textElement = this.AutomationElement.FindFirstChild(Condition.TrueCondition);
-                    return textElement.Name() ?? string.Empty;
+                    return this.AutomationElement.Text();
                 }
 
-                return value;
+                return text;
             }
         }
 

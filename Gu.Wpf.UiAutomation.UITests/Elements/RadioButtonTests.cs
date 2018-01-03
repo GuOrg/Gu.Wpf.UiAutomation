@@ -48,6 +48,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
+        [TestCase("Test RadioButton", "Test RadioButton")]
+        public void Text(string name, string expected)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "RadioButtonWindow"))
+            {
+                var window = app.MainWindow;
+                Assert.AreEqual(expected, window.FindRadioButton(name).Text);
+            }
+        }
+
         [Test]
         public void Click()
         {

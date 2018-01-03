@@ -15,19 +15,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// The content as text.
         /// </summary>
-        public string Text
-        {
-            get
-            {
-                var header = this.Content;
-                if (header != null)
-                {
-                    return header.Name;
-                }
-
-                return this.Name;
-            }
-        }
+        public string Text => this.AutomationElement.Text();
 
         public UiElement Content
         {

@@ -12,22 +12,6 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public string Text
-        {
-            get
-            {
-                if (this.AutomationElement.TryFindSingleChild(Conditions.TextBlock, out var child))
-                {
-                    return child.Name();
-                }
-
-                if (this.AutomationElement.TryFindSingleChild(Conditions.Label, out child))
-                {
-                    return child.Name();
-                }
-
-                return this.Name;
-            }
-        }
+        public string Text => this.AutomationElement.Text();
     }
 }
