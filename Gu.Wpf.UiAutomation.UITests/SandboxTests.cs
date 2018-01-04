@@ -258,12 +258,22 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void DumpScrollBarWindow()
+        public void DumpScrollViewer()
         {
             using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.AutomationElement, allPropertiesAndPatterns: true);
+                DumpRecursive(window.FindScrollViewer().AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpTextBox()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
+            {
+                var window = app.MainWindow;
+                DumpRecursive(window.FindTextBox().AutomationElement);
             }
         }
 

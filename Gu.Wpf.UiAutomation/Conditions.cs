@@ -104,6 +104,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition Pane { get; } = ByControlType(ControlType.Pane);
 
+        public static Condition PasswordBox { get; } = ByClassName("PasswordBox");
+
         public static Condition ProgressBar { get; } = ByControlType(ControlType.ProgressBar);
 
         public static Condition RadioButton { get; } = ByControlType(ControlType.RadioButton);
@@ -137,7 +139,9 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static Condition Text { get; } = ByControlType(ControlType.Text);
 
-        public static Condition TextBox { get; } = ByControlType(ControlType.Edit);
+        public static Condition TextBox { get; } = ByClassName("TextBox");
+
+        public static Condition TextBoxBase { get; } = ByControlType(ControlType.Edit);
 
         public static Condition Thumb { get; } = ByControlType(ControlType.Thumb);
 

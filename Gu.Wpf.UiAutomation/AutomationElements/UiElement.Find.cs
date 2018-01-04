@@ -184,6 +184,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="PasswordBox"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public PasswordBox FindPasswordBox(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.PasswordBox, name),
+            x => new PasswordBox(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -261,6 +271,16 @@ namespace Gu.Wpf.UiAutomation
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TextBox, name),
             x => new TextBox(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="TextBoxBase"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public TextBoxBase FindTextBoxBase(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.TextBoxBase, name),
+            x => new TextBoxBase(x),
             Retry.Time);
 
         /// <summary>
