@@ -70,6 +70,15 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpFrame()
+        {
+            using (var app = Application.Launch(ExeFileName, "FrameWindow"))
+            {
+                DumpRecursive(app.MainWindow.FindFrame().AutomationElement);
+            }
+        }
+
+        [Test]
         public void DumpDataGrid()
         {
             using (var app = Application.Launch(ExeFileName, "SingleDataGridWindow"))
@@ -130,7 +139,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 window.FindButton("Show OpenFileDialog").Click();
-                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.OpenFileDialog);
+                var dialog = window.FindOpenFileDialog();
                 DumpRecursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }
@@ -143,7 +152,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 window.FindButton("Show SaveFileDialog").Click();
-                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.SaveFileDialog);
+                var dialog = window.FindSaveFileDialog();
                 DumpRecursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }

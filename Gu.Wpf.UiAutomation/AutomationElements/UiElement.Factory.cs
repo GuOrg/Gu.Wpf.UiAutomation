@@ -24,6 +24,7 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Conditions.DataGridRowHeader, e => new DataGridRowHeader(e)),
             new ConditionAndCreate(Conditions.DataGridRow, e => new DataGridRow(e)),
             new ConditionAndCreate(Conditions.DatePicker, e => new DatePicker(e)),
+            new ConditionAndCreate(Conditions.Frame, e => new Frame(e)),
             //// DataItem
             //// ControlTypeDocument
             new ConditionAndCreate(Conditions.Expander, e => new Expander(e)),

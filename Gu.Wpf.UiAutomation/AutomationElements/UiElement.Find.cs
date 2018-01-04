@@ -84,6 +84,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="Frame"/> by x:Name, Header or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public Frame FindFrame(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.Frame, name),
+            x => new Frame(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="Label"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

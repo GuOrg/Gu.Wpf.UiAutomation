@@ -42,6 +42,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));
 
+        public static Condition Frame { get; } = ByClassName("Frame");
+
         public static Condition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
         public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
