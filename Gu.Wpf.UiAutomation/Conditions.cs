@@ -98,6 +98,10 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition MessageBox { get; } = ByClassName("#32770");
 
+        public static Condition OpenFileDialog { get; } = ByClassName("#32770");
+
+        public static Condition SaveFileDialog { get; } = ByClassName("#32770");
+
         public static Condition ModalWindow { get; } = new AndCondition(
             ByControlType(ControlType.Window),
             new PropertyCondition(WindowPatternIdentifiers.IsModalProperty, true));

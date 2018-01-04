@@ -18,6 +18,8 @@ namespace Gu.Wpf.UiAutomation
 
         public TextPattern TextPattern => this.AutomationElement.TextPattern();
 
+        public ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
+
         public bool IsReadOnly
         {
             get

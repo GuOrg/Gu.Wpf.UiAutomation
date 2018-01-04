@@ -184,6 +184,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="OpenFileDialog"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public OpenFileDialog FindOpenFileDialog(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.OpenFileDialog, name),
+            x => new OpenFileDialog(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="PasswordBox"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>
@@ -231,6 +241,16 @@ namespace Gu.Wpf.UiAutomation
             TreeScope.Descendants,
             this.CreateCondition(Conditions.RepeatButton, name),
             x => new RepeatButton(x),
+            Retry.Time);
+
+        /// <summary>
+        /// Find the first <see cref="SaveFileDialog"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public SaveFileDialog FindSaveFileDialog(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.SaveFileDialog, name),
+            x => new SaveFileDialog(x),
             Retry.Time);
 
         /// <summary>

@@ -46,6 +46,8 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Conditions.MenuBar, e => new MenuBar(e)),
             new ConditionAndCreate(Conditions.MenuItem, e => new MenuItem(e)),
             new ConditionAndCreate(Conditions.MessageBox, e => new MessageBox(e)),
+            new ConditionAndCreate(Conditions.OpenFileDialog, e => new OpenFileDialog(e)),
+            new ConditionAndCreate(Conditions.SaveFileDialog, e => new SaveFileDialog(e)),
             new ConditionAndCreate(Conditions.ModalWindow, e => new Window(e, isMainWindow: false)),
             ////new ConditionAndCreate(Conditions.Pane, e => new Pane(e)),
             new ConditionAndCreate(Conditions.PasswordBox, e => new PasswordBox(e)),

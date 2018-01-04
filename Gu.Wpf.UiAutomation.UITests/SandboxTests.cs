@@ -130,7 +130,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 window.FindButton("Show OpenFileDialog").Click();
-                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.ModalWindow);
+                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.OpenFileDialog);
                 DumpRecursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }
@@ -143,7 +143,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 window.FindButton("Show SaveFileDialog").Click();
-                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.ModalWindow);
+                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.SaveFileDialog);
                 DumpRecursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }
