@@ -34,7 +34,9 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - DataGridRow
 - DataGridRowHeader
 - DatePicker
+- Dialog
 - Expander
+- Frame
 - GridHeader
 - GridSplitter
 - GridViewCell
@@ -54,6 +56,8 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - MenuItem
 - MessageBox
 - MultiSelector`1
+- OpenFileDialog
+- PasswordBox
 - ExpandCollapseControl
 - InvokeControl
 - SelectionItemControl
@@ -61,7 +65,9 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - ProgressBar
 - RadioButton
 - RepeatButton
+- RichTextBox
 - RowHeader
+- SaveFileDialog
 - ScrollBar
 - ScrollViewer
 - Selector
@@ -73,6 +79,7 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - TabItem
 - TextBlock
 - TextBox
+- TextBoxBase
 - Thumb
 - TitleBar
 - ToggleButton
