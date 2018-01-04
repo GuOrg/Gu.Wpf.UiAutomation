@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.2.1.1
+version 0.2.2.0
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,25 +11,14 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  BUGFIX: Selector.Select() virtualized items.
-  FEATURE: Handle virtualization for ListBox.Items.
-  FEATURE: UiElement.Children for displaying trees.
-  BUGFIX: Handle empty data grids.
-  BREAKING: Remove DataGrid.RowHeaders use the Rows headers.
-  BREAKING: Rename Conditions, was Condition, confusing when same name as System.Windows.Automation.Condition
-  BREAKING: rename ScrollBar.Minimum & Maximum to match WPF property names.
-  BREAKING: Remove GridView, refactor DataGrid & ListView
-
-  FEATURE: Added more wrapper types.
-  FEATURE: Return better types to enable cast instead of using As-methods.
-  BREAKING: Use UIAutomationClient & UIAutomationTypes instead of interop assembly.
-  BREAKING: Rename HeaderedContentControl.HeaderText was Text
-  BREAKING: Rename UiElement was AutomationElement
-  BREAKING: Remove condition types, use built-in conditions.
-  BREAKING: Removed some exception types and use built-in instead.
-  BREAKING: Remove UIElement.ExecuteInPattern
-  BREAKING: Minor changes to inheritance hierarchies.
-  BREAKING: event handler signatures, use built-in delegates.
+  FEATURE: Calendar
+  FEATURE: CalendarDayButton
+  FEATURE: Frame
+  FEATURE: GridSplitter
+  FEATURE: OpenFileDialog
+  FEATURE: PasswordBox
+  FEATURE: SaveFileDialog
+  FEATURE: Separator
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45

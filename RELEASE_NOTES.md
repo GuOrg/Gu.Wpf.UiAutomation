@@ -1,3 +1,13 @@
+# 0.2.2
+* FEATURE: Calendar
+* FEATURE: CalendarDayButton
+* FEATURE: Frame
+* FEATURE: GridSplitter
+* FEATURE: OpenFileDialog
+* FEATURE: PasswordBox
+* FEATURE: SaveFileDialog
+* FEATURE: Separator
+
 # 0.2.1.1
 * BUGFIX: Selector.Select() virtualized items.
 
