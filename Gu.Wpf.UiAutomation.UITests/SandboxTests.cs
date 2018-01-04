@@ -90,6 +90,20 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
+        public void DumpDialog()
+        {
+            using (var app = Application.Launch(ExeFileName, "DialogWindow"))
+            {
+                var window = app.MainWindow;
+                window.FindButton("Show Dialog").Click();
+                var dialog = window.FindDialog();
+                var element = dialog.AutomationElement;
+                DumpRecursive(element);
+                dialog.Close();
+            }
+        }
+
+        [Test]
         public void DumpExpander()
         {
             using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
@@ -106,6 +120,32 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "GridSplitterWindow"))
             {
                 DumpRecursive(app.MainWindow.AutomationElement);
+            }
+        }
+
+        [Test]
+        public void DumpOpenFileDialog()
+        {
+            using (var app = Application.Launch(ExeFileName, "DialogWindow"))
+            {
+                var window = app.MainWindow;
+                window.FindButton("Show OpenFileDialog").Click();
+                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.ModalWindow);
+                DumpRecursive(dialog.AutomationElement);
+                dialog.AutomationElement.WindowPattern().Close();
+            }
+        }
+
+        [Test]
+        public void DumpSaveFileDialog()
+        {
+            using (var app = Application.Launch(ExeFileName, "DialogWindow"))
+            {
+                var window = app.MainWindow;
+                window.FindButton("Show SaveFileDialog").Click();
+                var dialog = window.FindFirst(TreeScope.Descendants, Conditions.ModalWindow);
+                DumpRecursive(dialog.AutomationElement);
+                dialog.AutomationElement.WindowPattern().Close();
             }
         }
 

@@ -1,6 +1,7 @@
-﻿namespace WpfApplication.Windows
+namespace WpfApplication.Windows
 {
     using System.Windows;
+    using Microsoft.Win32;
 
     public partial class DialogWindow : Window
     {
@@ -23,6 +24,18 @@
         {
             var window = new Dialog { Owner = this };
             window.ShowDialog();
+        }
+
+        private void OnSaveFileDialog(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.ShowDialog(this);
+        }
+
+        private void OnOpenFileDialog(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.ShowDialog(this);
         }
     }
 }
