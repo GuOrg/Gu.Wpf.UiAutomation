@@ -194,6 +194,16 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="RichTextBox"/> by x:Name, Content or AutomationID
+        /// </summary>
+        /// <param name="name">x:Name, Content or AutomationID</param>
+        public RichTextBox FindRichTextBox(string name = null) => this.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.RichTextBox, name),
+            x => new RichTextBox(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID</param>

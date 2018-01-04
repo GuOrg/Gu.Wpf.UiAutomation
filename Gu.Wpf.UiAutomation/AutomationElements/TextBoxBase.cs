@@ -12,6 +12,12 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
+        public ScrollViewer ScrollViewer => this.FindScrollViewer();
+
+        public ScrollPattern ScrollPattern => this.AutomationElement.ScrollPattern();
+
+        public TextPattern TextPattern => this.AutomationElement.TextPattern();
+
         public bool IsReadOnly
         {
             get

@@ -112,6 +112,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition RepeatButton { get; } = ByClassName("RepeatButton");
 
+        public static Condition RichTextBox { get; } = ByClassName("RichTextBox");
+
         public static Condition ScrollBar { get; } = ByControlType(ControlType.ScrollBar);
 
         public static Condition ScrollViewer { get; } = ByClassName("ScrollViewer");
