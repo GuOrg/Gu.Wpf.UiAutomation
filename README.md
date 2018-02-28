@@ -266,6 +266,34 @@ on_failure:
   - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 ```
 
+## AppVeyor
+Troubleshooting failing UI-tests on AppVeyor is tricky. Here is a snippet that can be used for getting a screenshot of what things look like.
+
+```cs
+[Test]
+public void SomeTest()
+{
+    try
+    {
+        using (var app = Application.AttachOrLaunch("SomeApp.exe"))
+        {
+            ...
+        }
+    }
+    catch (TimeoutException)
+    {
+        Capture.ScreenToFile(Path.Combine(Path.GetTempPath(), "SomeTest.png"));
+        throw;
+    }
+}
+```
+
+And in `appveyor.yml`
+```
+on_failure:
+  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+```
+
 ### Contribution
 Feel free to fork Gu.Wpf.UiAutomation and send pull requests of your modifications.<br />
 You can also create issues if you find problems or have ideas on how to further improve Gu.Wpf.UiAutomation.
