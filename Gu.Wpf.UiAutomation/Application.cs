@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
         public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(10));
 
         /// <summary>
-        /// The proces Id of the application.
+        /// The process Id of the application.
         /// </summary>
         public int ProcessId => this.processReference.Process.Id;
 
