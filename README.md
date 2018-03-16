@@ -8,7 +8,7 @@
 
 ## Introduction
 Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
-The library wraps `UIAutomationClient` and `UIAutomationClient` and tries to provide an API that is nice for WPF.
+The library wraps `UIAutomationClient` and tries to provide an API that is nice for WPF.
 
 The code inspired by [FlaUI](https://github.com/Roemer/FlaUI) and [White](https://github.com/TestStack/White).
 Tested on Windows 7, Windows 10, and the default AppVeyor image.
