@@ -52,15 +52,16 @@ namespace Gu.Wpf.UiAutomation
                 IsChecked = true,
             };
             BindingOperations.SetBinding(
-                this.expectedImage,
-                VisibilityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath("IsChecked"),
-                    Mode = BindingMode.TwoWay,
-                    Converter = new BooleanToVisibilityConverter(),
-                    Source = this.expectedButton,
-                });
+                                 this.expectedImage,
+                                 VisibilityProperty,
+                                 new Binding
+                                 {
+                                     Path = new PropertyPath("IsChecked"),
+                                     Mode = BindingMode.TwoWay,
+                                     Converter = new BooleanToVisibilityConverter(),
+                                     Source = this.expectedButton,
+                                 })
+                             .IgnoreReturnValue();
             buttonGrid.Children.Add(this.expectedButton);
 
             this.actualButton = new System.Windows.Controls.Primitives.ToggleButton
@@ -69,47 +70,22 @@ namespace Gu.Wpf.UiAutomation
                 IsChecked = true,
             };
             BindingOperations.SetBinding(
-                this.actualImage,
-                VisibilityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath("IsChecked"),
-                    Mode = BindingMode.TwoWay,
-                    Converter = new BooleanToVisibilityConverter(),
-                    Source = this.actualButton,
-                });
+                                 this.actualImage,
+                                 VisibilityProperty,
+                                 new Binding
+                                 {
+                                     Path = new PropertyPath("IsChecked"),
+                                     Mode = BindingMode.TwoWay,
+                                     Converter = new BooleanToVisibilityConverter(),
+                                     Source = this.actualButton,
+                                 })
+                             .IgnoreReturnValue();
             buttonGrid.Children.Add(this.actualButton);
             root.Children.Add(buttonGrid);
 
             this.BindOpacity(this.expectedImage);
             this.BindOpacity(this.actualImage);
             this.Content = root;
-        }
-
-        private void BindOpacity(System.Windows.Controls.Image image)
-        {
-            BindingOperations.SetBinding(
-                image,
-                OpacityProperty,
-                new MultiBinding
-                {
-                    Converter = new AndToOpacityConverter(),
-                    Bindings =
-                    {
-                        new Binding
-                        {
-                            Path = new PropertyPath("IsChecked"),
-                            Mode = BindingMode.OneWay,
-                            Source = this.expectedButton,
-                        },
-                        new Binding
-                        {
-                            Path = new PropertyPath("IsChecked"),
-                            Mode = BindingMode.OneWay,
-                            Source = this.actualButton,
-                        },
-                    }
-                });
         }
 
         public static void Show(Bitmap expected, Bitmap actual)
@@ -142,11 +118,11 @@ namespace Gu.Wpf.UiAutomation
             dispatcher.Invoke(() =>
             {
                 var window = new ImageDiffWindow(expected, actual);
-                window.ShowDialog();
+                window.ShowDialog().IgnoreReturnValue();
             });
 
             dispatcher.InvokeShutdown();
-            uiThread.Join(1000);
+            uiThread.Join(1000).IgnoreReturnValue();
             startedEvent.Dispose();
         }
 
@@ -175,6 +151,33 @@ namespace Gu.Wpf.UiAutomation
 
             Grid.SetRow(image, 0);
             return image;
+        }
+
+        private void BindOpacity(System.Windows.Controls.Image image)
+        {
+            BindingOperations.SetBinding(
+                                 image,
+                                 OpacityProperty,
+                                 new MultiBinding
+                                 {
+                                     Converter = new AndToOpacityConverter(),
+                                     Bindings =
+                                     {
+                                         new Binding
+                                         {
+                                             Path = new PropertyPath("IsChecked"),
+                                             Mode = BindingMode.OneWay,
+                                             Source = this.expectedButton,
+                                         },
+                                         new Binding
+                                         {
+                                             Path = new PropertyPath("IsChecked"),
+                                             Mode = BindingMode.OneWay,
+                                             Source = this.actualButton,
+                                         },
+                                     }
+                                 })
+                             .IgnoreReturnValue();
         }
 
         private class AndToOpacityConverter : IMultiValueConverter

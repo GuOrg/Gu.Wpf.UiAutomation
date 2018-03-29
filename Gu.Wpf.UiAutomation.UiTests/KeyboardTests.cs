@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System.Diagnostics;
     using System.Threading;
@@ -78,13 +78,13 @@
         }
 
         [TestCase(ScanCodeShort.KEY_A, false, "a")]
-        public void PressScanCode(ushort scancode, bool isExtendedKey, string expected)
+        public void PressScanCode(ScanCodeShort scanCode, bool isExtendedKey, string expected)
         {
             using (var app = Application.Launch(ExeFileName, "SingleTextBoxWindow"))
             {
                 var mainWindow = app.MainWindow;
-                Keyboard.PressScanCode(scancode, isExtendedKey);
-                Keyboard.ReleaseScanCode(scancode, isExtendedKey);
+                Keyboard.PressScanCode((ushort)scanCode, isExtendedKey);
+                Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
                 var textBox = mainWindow.FindTextBox();
                 var sw = Stopwatch.StartNew();
                 while (sw.ElapsedMilliseconds < 1000)

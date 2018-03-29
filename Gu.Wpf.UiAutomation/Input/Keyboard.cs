@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -279,7 +279,7 @@
             {
                 this.key = key;
 #pragma warning disable CS0618 // Type or member is obsolete
-                Press(this.key);
+                Press(key);
 #pragma warning restore CS0618 // Type or member is obsolete
             }
 
