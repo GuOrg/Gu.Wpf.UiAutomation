@@ -22,6 +22,8 @@ namespace Gu.Wpf.UiAutomation
     {
         public static OnFail OnFail { get; set; }
 
+        public static TimeSpan RetryTime { get; set; } = TimeSpan.FromMilliseconds(2000);
+
         public static TimeSpan StartAnimation { get; set; } = WindowsVersion.IsWindows10() ||
                                                               WindowsVersion.IsWindows8() ||
                                                               WindowsVersion.IsWindows8_1()
@@ -86,6 +88,22 @@ namespace Gu.Wpf.UiAutomation
                     {
                         using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
                         {
+                            if (Equal(expected, actual))
+                            {
+                                return;
+                            }
+
+                            var start = DateTime.Now;
+                            while (!Retry.IsTimeouted(start, RetryTime))
+                            {
+                                if (Equal(expected, actual))
+                                {
+                                    return;
+                                }
+
+                                Wait.For(Retry.PollInterval);
+                            }
+
                             try
                             {
                                 AreEqual(expected, actual);
@@ -127,6 +145,22 @@ namespace Gu.Wpf.UiAutomation
                     {
                         using (var actual = Capture.Rectangle(element.Bounds))
                         {
+                            if (Equal(expected, actual))
+                            {
+                                return;
+                            }
+
+                            var start = DateTime.Now;
+                            while (!Retry.IsTimeouted(start, RetryTime))
+                            {
+                                if (Equal(expected, actual))
+                                {
+                                    return;
+                                }
+
+                                Wait.For(Retry.PollInterval);
+                            }
+
                             switch (OnFail)
                             {
                                 case OnFail.DoNothing:
@@ -207,6 +241,22 @@ namespace Gu.Wpf.UiAutomation
         {
             using (var actualBmp = actual.ToBitmap(expected.Size(), expected.PixelFormat()))
             {
+                if (Equal(expected, actualBmp))
+                {
+                    return;
+                }
+
+                var start = DateTime.Now;
+                while (!Retry.IsTimeouted(start, RetryTime))
+                {
+                    if (Equal(expected, actualBmp))
+                    {
+                        return;
+                    }
+
+                    Wait.For(Retry.PollInterval);
+                }
+
                 AreEqual(expected, actualBmp);
             }
         }
@@ -279,6 +329,27 @@ namespace Gu.Wpf.UiAutomation
                     throw AssertException.Create("Images do not match.");
                 }
             }
+        }
+
+        public static bool Equal(Bitmap expected, Bitmap actual)
+        {
+            if (expected.Size != actual.Size)
+            {
+                return false;
+            }
+
+            for (var x = 0; x < expected.Size.Width; x++)
+            {
+                for (var y = 0; y < expected.Size.Height; y++)
+                {
+                    if (expected.GetPixel(x, y).Name != actual.GetPixel(x, y).Name)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public static Bitmap ToBitmap(this UIElement element, Size size, PixelFormat pixelFormat)
