@@ -1,3 +1,6 @@
+# 0.2.3
+* FEATURE: Retry in ImageAssert
+
 # 0.2.2
 * FEATURE: Calendar
 * FEATURE: CalendarDayButton

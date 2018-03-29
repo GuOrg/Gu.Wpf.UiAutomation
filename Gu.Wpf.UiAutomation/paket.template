@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.2.2.0
+version 0.2.3.0
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
@@ -11,14 +11,7 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: Calendar
-  FEATURE: CalendarDayButton
-  FEATURE: Frame
-  FEATURE: GridSplitter
-  FEATURE: OpenFileDialog
-  FEATURE: PasswordBox
-  FEATURE: SaveFileDialog
-  FEATURE: Separator
+  FEATURE: Retry in ImageAssert
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
