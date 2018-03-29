@@ -16,11 +16,6 @@ namespace Gu.Wpf.UiAutomation
 
     public class ImageDiffWindow : System.Windows.Window
     {
-        private readonly System.Windows.Controls.Image expectedImage;
-        private readonly System.Windows.Controls.Image actualImage;
-        private readonly System.Windows.Controls.Primitives.ToggleButton expectedButton;
-        private readonly System.Windows.Controls.Primitives.ToggleButton actualButton;
-
         private ImageDiffWindow(Bitmap expected, Bitmap actual)
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
@@ -35,56 +30,26 @@ namespace Gu.Wpf.UiAutomation
             var root = new Grid();
             root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            this.expectedImage = this.CreateImage(expected);
-            root.Children.Add(this.expectedImage);
+            var expectedImage = CreateImage(expected);
+            root.Children.Add(expectedImage);
 
-            this.actualImage = this.CreateImage(actual);
-            root.Children.Add(this.actualImage);
+            var actualImage = CreateImage(actual);
+            root.Children.Add(actualImage);
 
             var buttonGrid = new UniformGrid
             {
                 Rows = 1,
             };
             Grid.SetRow(buttonGrid, 1);
-            this.expectedButton = new System.Windows.Controls.Primitives.ToggleButton
-            {
-                Content = "Expected",
-                IsChecked = true,
-            };
-            BindingOperations.SetBinding(
-                                 this.expectedImage,
-                                 VisibilityProperty,
-                                 new Binding
-                                 {
-                                     Path = new PropertyPath("IsChecked"),
-                                     Mode = BindingMode.TwoWay,
-                                     Converter = new BooleanToVisibilityConverter(),
-                                     Source = this.expectedButton,
-                                 })
-                             .IgnoreReturnValue();
-            buttonGrid.Children.Add(this.expectedButton);
+            var expectedButton = CreateToggleButton("Expected", expectedImage);
+            buttonGrid.Children.Add(expectedButton);
 
-            this.actualButton = new System.Windows.Controls.Primitives.ToggleButton
-            {
-                Content = "actual",
-                IsChecked = true,
-            };
-            BindingOperations.SetBinding(
-                                 this.actualImage,
-                                 VisibilityProperty,
-                                 new Binding
-                                 {
-                                     Path = new PropertyPath("IsChecked"),
-                                     Mode = BindingMode.TwoWay,
-                                     Converter = new BooleanToVisibilityConverter(),
-                                     Source = this.actualButton,
-                                 })
-                             .IgnoreReturnValue();
-            buttonGrid.Children.Add(this.actualButton);
+            var actualButton = CreateToggleButton("Actual", actualImage);
+            buttonGrid.Children.Add(actualButton);
             root.Children.Add(buttonGrid);
 
-            this.BindOpacity(this.expectedImage);
-            this.BindOpacity(this.actualImage);
+            BindOpacity(expectedImage, expectedButton, actualButton);
+            BindOpacity(actualImage, expectedButton, actualButton);
             this.Content = root;
         }
 
@@ -141,19 +106,43 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private System.Windows.Controls.Image CreateImage(Bitmap bitmap)
+        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap)
         {
             var image = new System.Windows.Controls.Image
-                        {
-                            Source = CreateBitmapSource(bitmap),
-                            Opacity = 0.5,
-                        };
+            {
+                Source = CreateBitmapSource(bitmap),
+                Opacity = 0.5,
+            };
 
             Grid.SetRow(image, 0);
             return image;
         }
 
-        private void BindOpacity(System.Windows.Controls.Image image)
+        private static System.Windows.Controls.Primitives.ToggleButton CreateToggleButton(string content, System.Windows.Controls.Image image)
+        {
+            var actualButton = new System.Windows.Controls.Primitives.ToggleButton
+            {
+                Content = content,
+                IsChecked = true,
+            };
+            BindingOperations.SetBinding(
+                                 image,
+                                 VisibilityProperty,
+                                 new Binding
+                                 {
+                                     Path = new PropertyPath("IsChecked"),
+                                     Mode = BindingMode.TwoWay,
+                                     Converter = new BooleanToVisibilityConverter(),
+                                     Source = actualButton,
+                                 })
+                             .IgnoreReturnValue();
+            return actualButton;
+        }
+
+        private static void BindOpacity(
+            System.Windows.Controls.Image image,
+            System.Windows.Controls.Primitives.ToggleButton expectedButton,
+            System.Windows.Controls.Primitives.ToggleButton actualButton)
         {
             BindingOperations.SetBinding(
                                  image,
@@ -167,13 +156,13 @@ namespace Gu.Wpf.UiAutomation
                                          {
                                              Path = new PropertyPath("IsChecked"),
                                              Mode = BindingMode.OneWay,
-                                             Source = this.expectedButton,
+                                             Source = expectedButton,
                                          },
                                          new Binding
                                          {
                                              Path = new PropertyPath("IsChecked"),
                                              Mode = BindingMode.OneWay,
-                                             Source = this.actualButton,
+                                             Source = actualButton,
                                          },
                                      }
                                  })
