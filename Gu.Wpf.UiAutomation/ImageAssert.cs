@@ -11,7 +11,6 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Reflection;
     using System.Resources;
-    using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -35,7 +34,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
         /// <param name="element">The UIElement.</param>
-        public static void AreEqual(string fileName, UIElement element)
+        public static void AreEqual(string fileName, System.Windows.UIElement element)
         {
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
@@ -78,7 +77,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
         /// <param name="element">The UIElement.</param>
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
-        public static void AreEqual(string fileName, UIElement element, Action<Exception, Bitmap> onFail)
+        public static void AreEqual(string fileName, System.Windows.UIElement element, Action<Exception, Bitmap> onFail)
         {
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
@@ -88,22 +87,6 @@ namespace Gu.Wpf.UiAutomation
                     {
                         using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
                         {
-                            if (Equal(expected, actual))
-                            {
-                                return;
-                            }
-
-                            var start = DateTime.Now;
-                            while (!Retry.IsTimeouted(start, RetryTime))
-                            {
-                                if (Equal(expected, actual))
-                                {
-                                    return;
-                                }
-
-                                Wait.For(Retry.PollInterval);
-                            }
-
                             try
                             {
                                 AreEqual(expected, actual);
@@ -129,6 +112,30 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public static void AreEqual(Bitmap expected, System.Windows.UIElement actual)
+        {
+            using (var actualBmp = actual.ToBitmap(expected.Size(), expected.PixelFormat()))
+            {
+                if (Equal(expected, actualBmp))
+                {
+                    return;
+                }
+
+                var start = DateTime.Now;
+                while (!Retry.IsTimeouted(start, RetryTime))
+                {
+                    if (Equal(expected, actualBmp))
+                    {
+                        return;
+                    }
+
+                    Wait.For(Retry.PollInterval);
+                }
+
+                AreEqual(expected, actualBmp);
+            }
+        }
+
         /// <summary>
         /// Compare Capture.Rectangle(element.Bounds) to the expected image.
         /// </summary>
@@ -143,24 +150,13 @@ namespace Gu.Wpf.UiAutomation
                 {
                     using (var expected = (Bitmap)Image.FromStream(stream))
                     {
+                        if (Equal(expected, element, RetryTime))
+                        {
+                            return;
+                        }
+
                         using (var actual = Capture.Rectangle(element.Bounds))
                         {
-                            if (Equal(expected, actual))
-                            {
-                                return;
-                            }
-
-                            var start = DateTime.Now;
-                            while (!Retry.IsTimeouted(start, RetryTime))
-                            {
-                                if (Equal(expected, actual))
-                                {
-                                    return;
-                                }
-
-                                Wait.For(Retry.PollInterval);
-                            }
-
                             switch (OnFail)
                             {
                                 case OnFail.DoNothing:
@@ -201,6 +197,11 @@ namespace Gu.Wpf.UiAutomation
                 {
                     using (var expected = (Bitmap)Image.FromStream(stream))
                     {
+                        if (Equal(expected, element, RetryTime))
+                        {
+                            return;
+                        }
+
                         using (var actual = Capture.Rectangle(element.Bounds))
                         {
                             try
@@ -231,32 +232,13 @@ namespace Gu.Wpf.UiAutomation
         public static void AreEqual(Bitmap expected, UiElement element)
         {
             WaitForStartAnimation(element);
+            if (Equal(expected, element, RetryTime))
+            {
+                return;
+            }
+
             using (var actualBmp = Capture.Rectangle(element.Bounds))
             {
-                AreEqual(expected, actualBmp);
-            }
-        }
-
-        public static void AreEqual(Bitmap expected, UIElement actual)
-        {
-            using (var actualBmp = actual.ToBitmap(expected.Size(), expected.PixelFormat()))
-            {
-                if (Equal(expected, actualBmp))
-                {
-                    return;
-                }
-
-                var start = DateTime.Now;
-                while (!Retry.IsTimeouted(start, RetryTime))
-                {
-                    if (Equal(expected, actualBmp))
-                    {
-                        return;
-                    }
-
-                    Wait.For(Retry.PollInterval);
-                }
-
                 AreEqual(expected, actualBmp);
             }
         }
@@ -331,6 +313,25 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public static bool Equal(Bitmap expected, UiElement element, TimeSpan retryTime)
+        {
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, retryTime))
+            {
+                using (var actual = Capture.Rectangle(element.Bounds))
+                {
+                    if (Equal(expected, actual))
+                    {
+                        return true;
+                    }
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+
+            return false;
+        }
+
         public static bool Equal(Bitmap expected, Bitmap actual)
         {
             if (expected.Size != actual.Size)
@@ -352,28 +353,28 @@ namespace Gu.Wpf.UiAutomation
             return true;
         }
 
-        public static Bitmap ToBitmap(this UIElement element, Size size, PixelFormat pixelFormat)
+        public static Bitmap ToBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
         {
             return element.ToRenderTargetBitmap(size, pixelFormat)
                           .ToBitmap();
         }
 
-        public static Bitmap ToBitmap(this UIElement element, Size size)
+        public static Bitmap ToBitmap(this System.Windows.UIElement element, Size size)
         {
             return element.ToRenderTargetBitmap(size, PixelFormats.Pbgra32)
                           .ToBitmap();
         }
 
-        public static RenderTargetBitmap ToRenderTargetBitmap(this UIElement element, Size size)
+        public static RenderTargetBitmap ToRenderTargetBitmap(this System.Windows.UIElement element, Size size)
         {
             return element.ToRenderTargetBitmap(size, PixelFormats.Pbgra32);
         }
 
-        public static RenderTargetBitmap ToRenderTargetBitmap(this UIElement element, Size size, PixelFormat pixelFormat)
+        public static RenderTargetBitmap ToRenderTargetBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
         {
             var result = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, pixelFormat);
             element.Measure(size);
-            element.Arrange(new Rect(size));
+            element.Arrange(new System.Windows.Rect(size));
             result.Render(element);
             return result;
         }
@@ -389,17 +390,17 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public static void SaveImage(this UIElement element, Size size, string fileName)
+        public static void SaveImage(this System.Windows.UIElement element, Size size, string fileName)
         {
             SaveImage(element, size, GetPixelFormat(fileName), fileName);
         }
 
-        public static void SaveImage(this UIElement element, Size size, PixelFormat pixelFormat, string fileName)
+        public static void SaveImage(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat, string fileName)
         {
             using (var stream = File.OpenWrite(fileName))
             {
                 element.Measure(size);
-                element.Arrange(new Rect(size));
+                element.Arrange(new System.Windows.Rect(size));
                 var renderTargetBitmap = element.ToRenderTargetBitmap(size, pixelFormat);
                 var encoder = GetEncoder(fileName);
                 encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
