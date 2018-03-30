@@ -1,7 +1,7 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.2.3.0
+version 0.2.3.1
 authors Johan Larsson
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
