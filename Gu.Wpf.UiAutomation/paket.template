@@ -1,8 +1,8 @@
 ﻿type file
 id Gu.Wpf.UiAutomation
 title Gu.Wpf.UiAutomation
-version 0.2.3.1
-authors Johan Larsson
+version 0.2.3.2
+authors Johan Larsson, milleniumbug
 owners Johan Larsson
 copyright Copyright Johan Larsson 2017
 description Library for writing UI-tests for WPF.
@@ -11,7 +11,7 @@ projectUrl https://github.com/JohanLarsson/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: Retry in ImageAssert
+  BUGFIX: Don't look in %windir%
 
 files
   bin/Release/net45/Gu.Wpf.UiAutomation.dll ==> lib/net45
