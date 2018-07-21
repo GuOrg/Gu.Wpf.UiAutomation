@@ -9,6 +9,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Reflection;
     using System.Windows.Automation;
+    using Gu.Wpf.UiAutomation.Internals;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -624,7 +625,7 @@ namespace Gu.Wpf.UiAutomation
                     return fileName;
                 }
 
-                var match = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
+                var match = SafeDirectoryEnumeration.EnumerateFilesOpportunistic(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
                                      .FirstOrDefault();
                 if (match != null)
                 {
