@@ -29,10 +29,10 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         public const uint WS_TILED = WS_OVERLAPPED;
         public const uint WS_ICONIC = WS_MINIMIZE;
         public const uint WS_SIZEBOX = WS_THICKFRAME;
-        public const uint WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
 
         // Common Window Styles
         public const uint WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+        public const uint WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
         public const uint WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
         public const uint WS_CHILDWINDOW = WS_CHILD;
 

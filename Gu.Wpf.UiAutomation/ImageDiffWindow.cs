@@ -55,13 +55,14 @@ namespace Gu.Wpf.UiAutomation
 
         public static void Show(Bitmap expected, Bitmap actual)
         {
-            var startedEvent = new ManualResetEventSlim(initialState: false);
-            System.Windows.Threading.Dispatcher dispatcher = null;
-            var uiThread = new Thread(() =>
+            using (var startedEvent = new ManualResetEventSlim(initialState: false))
             {
+                System.Windows.Threading.Dispatcher dispatcher = null;
+                var uiThread = new Thread(() =>
+                {
                 // Create and install a new dispatcher context
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                dispatcher = Dispatcher.CurrentDispatcher;
+                    dispatcher = Dispatcher.CurrentDispatcher;
 
                 // Signal that it is initialized
                 // ReSharper disable once AccessToDisposedClosure
@@ -69,26 +70,26 @@ namespace Gu.Wpf.UiAutomation
 
                 // Start the dispatcher processing
                 Dispatcher.Run();
-            });
+                });
 
-            // Set the apartment state
-            uiThread.SetApartmentState(ApartmentState.STA);
+                // Set the apartment state
+                uiThread.SetApartmentState(ApartmentState.STA);
 
-            // Make the thread a background thread
-            uiThread.IsBackground = true;
+                // Make the thread a background thread
+                uiThread.IsBackground = true;
 
-            // Start the thread
-            uiThread.Start();
-            startedEvent.Wait();
-            dispatcher.Invoke(() =>
-            {
-                var window = new ImageDiffWindow(expected, actual);
-                window.ShowDialog().IgnoreReturnValue();
-            });
+                // Start the thread
+                uiThread.Start();
+                startedEvent.Wait();
+                dispatcher.Invoke(() =>
+                {
+                    var window = new ImageDiffWindow(expected, actual);
+                    window.ShowDialog().IgnoreReturnValue();
+                });
 
-            dispatcher.InvokeShutdown();
-            uiThread.Join(1000).IgnoreReturnValue();
-            startedEvent.Dispose();
+                dispatcher.InvokeShutdown();
+                uiThread.Join(1000).IgnoreReturnValue();
+            }
         }
 
         private static BitmapSource CreateBitmapSource(Bitmap bitmap)

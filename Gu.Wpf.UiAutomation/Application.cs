@@ -405,8 +405,8 @@ namespace Gu.Wpf.UiAutomation
                         process.WaitForExit(1000);
                     }
 
-                    process.Dispose();
                     Launched.Remove(process);
+                    process.Dispose();
                 }
             }
         }

@@ -72,35 +72,36 @@ namespace Gu.Wpf.UiAutomation.Overlay
 
         private static void Show(Action action)
         {
-            var startedEvent = new ManualResetEventSlim(initialState: false);
-            Dispatcher dispatcher = null;
-            var uiThread = new Thread(() =>
+            using (var startedEvent = new ManualResetEventSlim(initialState: false))
             {
-                // Create and install a new dispatcher context
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                dispatcher = Dispatcher.CurrentDispatcher;
+                Dispatcher dispatcher = null;
+                var uiThread = new Thread(() =>
+                {
+                    // Create and install a new dispatcher context
+                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                    dispatcher = Dispatcher.CurrentDispatcher;
 
-                // Signal that it is initialized
-                // ReSharper disable once AccessToDisposedClosure
-                startedEvent.Set();
+                    // Signal that it is initialized
+                    // ReSharper disable once AccessToDisposedClosure
+                    startedEvent.Set();
 
-                // Start the dispatcher processing
-                Dispatcher.Run();
-            });
+                    // Start the dispatcher processing
+                    Dispatcher.Run();
+                });
 
-            // Set the apartment state
-            uiThread.SetApartmentState(ApartmentState.STA);
+                // Set the apartment state
+                uiThread.SetApartmentState(ApartmentState.STA);
 
-            // Make the thread a background thread
-            uiThread.IsBackground = true;
+                // Make the thread a background thread
+                uiThread.IsBackground = true;
 
-            // Start the thread
-            uiThread.Start();
-            startedEvent.Wait();
-            dispatcher.Invoke(action);
-            dispatcher.InvokeShutdown();
-            uiThread.Join(1000);
-            startedEvent.Dispose();
+                // Start the thread
+                uiThread.Start();
+                startedEvent.Wait();
+                dispatcher.Invoke(action);
+                dispatcher.InvokeShutdown();
+                _ = uiThread.Join(1000);
+            }
         }
 
         private void SetWindowTransparent()
