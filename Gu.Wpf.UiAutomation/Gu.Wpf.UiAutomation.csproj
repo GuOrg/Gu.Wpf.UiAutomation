@@ -3,13 +3,24 @@
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
     <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.ruleset</CodeAnalysisRuleSet>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Gu.Wpf.UiAutomation.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Johan Larsson, milleniumbug</Authors>
+    <Company>Johan Larsson</Company>
+    <Version>0.2.3.2</Version>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
+    <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
+    <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>
+    <PackageReleaseNotes>BUGFIX: Don't look in %windir%</PackageReleaseNotes>
+    <Description>Library for writing UI-tests for WPF.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,5 +34,6 @@
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
