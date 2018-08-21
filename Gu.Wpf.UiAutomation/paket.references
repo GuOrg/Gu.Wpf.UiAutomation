@@ -1,4 +1,5 @@
-SourceLink.Create.CommandLine
+group Build
+  SourceLink.Create.CommandLine
 
 group Analyzers
   StyleCop.Analyzers

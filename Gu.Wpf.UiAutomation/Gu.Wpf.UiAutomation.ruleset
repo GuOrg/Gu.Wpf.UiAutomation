@@ -4,16 +4,6 @@
     <Name Resource="MinimumRecommendedRules_Name" />
     <Description Resource="MinimumRecommendedRules_Description" />
   </Localization>
-  <Rules AnalyzerId="Gu.Analyzers.Analyzers" RuleNamespace="Gu.Analyzers.Analyzers">
-    <Rule Id="GU0030" Action="Error" />
-    <Rule Id="GU0031" Action="Error" />
-    <Rule Id="GU0032" Action="Error" />
-    <Rule Id="GU0033" Action="Error" />
-    <Rule Id="GU0034" Action="Error" />
-    <Rule Id="GU0035" Action="Error" />
-    <Rule Id="GU0036" Action="Error" />
-    <Rule Id="GU0037" Action="Error" />
-  </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
     <Rule Id="CS1591" Action="None" />
   </Rules>

@@ -1,13 +1,22 @@
 source https://api.nuget.org/v3/index.json
-nuget SourceLink.Create.CommandLine
-nuget NUnit
-nuget Moq
+
+group Test
+  source http://www.nuget.org/api/v2/
+  storage: none
+  nuget NUnit
+  nuget Moq
 
 group Analyzers
   source http://www.nuget.org/api/v2/
+  storage: none
   nuget StyleCop.Analyzers
   nuget AsyncUsageAnalyzers
   nuget Gu.Analyzers
   nuget IDisposableAnalyzers
   nuget WpfAnalyzers
   nuget JetBrains.Annotations
+
+group Build
+  source http://www.nuget.org/api/v2/
+  storage: none
+  nuget SourceLink.Create.CommandLine

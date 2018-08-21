@@ -1,5 +1,6 @@
-NUnit
-Moq
+group Test
+  NUnit
+  Moq
 
 group Analyzers
   StyleCop.Analyzers

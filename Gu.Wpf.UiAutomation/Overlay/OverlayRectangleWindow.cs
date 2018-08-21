@@ -108,7 +108,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             var extendedStyle = User32.GetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE, extendedStyle | WindowStyles.WS_EX_TRANSPARENT);
+            _ = User32.SetWindowLong(hwnd, WindowLongParam.GWL_EXSTYLE, extendedStyle | WindowStyles.WS_EX_TRANSPARENT);
         }
 
         private void TimerTick(object sender, EventArgs e)
