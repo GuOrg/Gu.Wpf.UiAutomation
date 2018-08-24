@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System.Diagnostics;
     using System.Threading;
