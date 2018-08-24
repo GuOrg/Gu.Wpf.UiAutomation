@@ -194,7 +194,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static IDisposable Pressing(Key key)
         {
-            return new KeyPressingActivation(key);
+            return new PressedKey(key);
         }
 
         public static void ClearFocus()
@@ -267,15 +267,12 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        /// <summary>
-        /// Disposable class which presses the key on creation
-        /// and disposes it on destruction.
-        /// </summary>
-        private class KeyPressingActivation : IDisposable
+        /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>
+        private class PressedKey : IDisposable
         {
             private readonly Key key;
 
-            public KeyPressingActivation(Key key)
+            public PressedKey(Key key)
             {
                 this.key = key;
 #pragma warning disable CS0618 // Type or member is obsolete
