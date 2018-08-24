@@ -131,8 +131,8 @@ namespace Gu.Wpf.UiAutomation
             var windowHandle = app.MainWindow.NativeWindowHandle;
             if (windowHandle != new IntPtr(0))
             {
-                User32.SetForegroundWindow(windowHandle);
-                Wait.UntilResponsive(app.MainWindow);
+                _ = User32.SetForegroundWindow(windowHandle);
+                _ = Wait.UntilResponsive(app.MainWindow);
             }
 
             return app;
@@ -402,7 +402,7 @@ namespace Gu.Wpf.UiAutomation
                     if (!process.HasExited)
                     {
                         process.Kill();
-                        process.WaitForExit(1000);
+                        _ = process.WaitForExit(1000);
                     }
 
                     Launched.Remove(process);
@@ -429,11 +429,11 @@ namespace Gu.Wpf.UiAutomation
                     if (!process.HasExited)
                     {
                         process.Kill();
-                        process.WaitForExit(1000);
+                        _ = process.WaitForExit(1000);
                     }
 
-                    process.Dispose();
                     Launched.Remove(process);
+                    process.Dispose();
                 }
             }
         }
@@ -456,18 +456,18 @@ namespace Gu.Wpf.UiAutomation
                 return true;
             }
 
-            this.processReference.Process.CloseMainWindow();
+            _ = this.processReference.Process.CloseMainWindow();
             if (this.IsStoreApp)
             {
                 return true;
             }
 
-            this.processReference.Process.WaitForExit(5000);
+            _ = this.processReference.Process.WaitForExit(5000);
             if (!this.processReference.Process.HasExited)
             {
                 Logger.Default.Info("Application failed to exit, killing process");
                 this.processReference.Process.Kill();
-                this.processReference.Process.WaitForExit(5000);
+                _ = this.processReference.Process.WaitForExit(5000);
                 return false;
             }
 
@@ -508,7 +508,7 @@ namespace Gu.Wpf.UiAutomation
         {
             this.ThrowIfDisposed();
             var waitTime = (waitTimeout ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds;
-            this.processReference.Process.WaitForInputIdle((int)waitTime);
+            _ = this.processReference.Process.WaitForInputIdle((int)waitTime);
         }
 
         /// <summary>
@@ -558,7 +558,7 @@ namespace Gu.Wpf.UiAutomation
                     waitTimeout = waitTimeout - (DateTime.Now - start);
                 }
 
-                Wait.UntilResponsive(mainWindowHandle, waitTimeout ?? TimeSpan.MaxValue);
+                _ = Wait.UntilResponsive(mainWindowHandle, waitTimeout ?? TimeSpan.MaxValue);
                 return this.mainWindow = new Window(AutomationElement.FromHandle(mainWindowHandle), isMainWindow: true);
             }
         }
@@ -585,7 +585,7 @@ namespace Gu.Wpf.UiAutomation
 
             if (this.processReference.OnDispose == OnDispose.KillProcess)
             {
-                this.Close();
+                _ = this.Close();
                 this.processReference.Dispose();
                 Launched.Remove(this.processReference.Process);
             }

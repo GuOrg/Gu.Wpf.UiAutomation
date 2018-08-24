@@ -1,4 +1,4 @@
-﻿namespace WpfApplication
+namespace WpfApplication
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -20,7 +20,7 @@
                 var textBlock = (TextBlock)item;
                 if (textBlock.Text == "Item 4")
                 {
-                    MessageBox.Show("Do you really want to do it?");
+                    _ = MessageBox.Show("Do you really want to do it?");
                 }
             }
         }

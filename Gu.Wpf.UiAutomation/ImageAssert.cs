@@ -446,7 +446,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var window = element.Window;
-            User32.GetWindowThreadProcessId(window.NativeWindowHandle, out var id);
+            _ = User32.GetWindowThreadProcessId(window.NativeWindowHandle, out var id);
             using (var process = Process.GetProcessById((int)id))
             {
                 var upTime = DateTime.Now - process.StartTime;

@@ -99,7 +99,7 @@ namespace Gu.Wpf.UiAutomation
                 if (this.AutomationElement.TryGetValuePattern(out var valuePattern))
                 {
                     valuePattern.SetValue(value);
-                    Wait.UntilResponsive(this);
+                    _ = Wait.UntilResponsive(this);
                     if (this.AutomationElement.TryFindFirst(
                         TreeScope.Children,
                         Conditions.TextBox,
@@ -176,7 +176,7 @@ namespace Gu.Wpf.UiAutomation
             }
             else
             {
-                Wait.UntilResponsive(this);
+                _ = Wait.UntilResponsive(this);
             }
         }
     }

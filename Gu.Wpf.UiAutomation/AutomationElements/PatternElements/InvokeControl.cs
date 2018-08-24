@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -14,7 +14,7 @@
         public void Invoke()
         {
             this.InvokePattern.Invoke();
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
     }
 }

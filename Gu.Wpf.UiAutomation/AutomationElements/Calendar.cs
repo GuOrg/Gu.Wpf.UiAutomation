@@ -21,9 +21,9 @@ namespace Gu.Wpf.UiAutomation
 
         public MultipleViewPattern MultipleViewPattern => this.AutomationElement.MultipleViewPattern();
 
-        public void Select(DateTime dateTime)
+        public CalendarDayButton Select(DateTime dateTime)
         {
-            this.Select(dateTime.ToString(CultureInfo.InstalledUICulture));
+            return this.Select(dateTime.ToString(CultureInfo.InstalledUICulture));
         }
     }
 }

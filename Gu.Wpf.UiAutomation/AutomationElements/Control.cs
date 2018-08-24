@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.LeftClick);
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.LeftDoubleClick);
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.RightClick);
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             this.PerformMouseAction(moveMouse, Mouse.RightDoubleClick);
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
 
         /// <summary>
@@ -158,8 +158,8 @@ namespace Gu.Wpf.UiAutomation
             var windowHandle = this.AutomationElement.NativeWindowHandle();
             if (windowHandle != 0)
             {
-                User32.SetFocus(new IntPtr(windowHandle));
-                Wait.UntilResponsive(this);
+                _ = User32.SetFocus(new IntPtr(windowHandle));
+                _ = Wait.UntilResponsive(this);
             }
             else
             {
@@ -176,8 +176,8 @@ namespace Gu.Wpf.UiAutomation
             var nativeWindowHandle = this.AutomationElement.NativeWindowHandle();
             if (nativeWindowHandle != 0)
             {
-                User32.SetForegroundWindow(new IntPtr(nativeWindowHandle));
-                Wait.UntilResponsive(this);
+                _ = User32.SetForegroundWindow(new IntPtr(nativeWindowHandle));
+                _ = Wait.UntilResponsive(this);
             }
             else
             {

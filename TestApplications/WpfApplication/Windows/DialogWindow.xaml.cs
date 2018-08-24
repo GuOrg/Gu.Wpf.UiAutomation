@@ -12,30 +12,30 @@ namespace WpfApplication.Windows
 
         private void OnShowMessageBoxOKCancelClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Message text", "Caption text", MessageBoxButton.OKCancel);
+            _ = MessageBox.Show("Message text", "Caption text", MessageBoxButton.OKCancel);
         }
 
         private void OnShowMessageBoxYesNoCancelClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Message text", "Caption text", MessageBoxButton.YesNoCancel);
+            _ = MessageBox.Show("Message text", "Caption text", MessageBoxButton.YesNoCancel);
         }
 
         private void OnShowDialogClick(object sender, RoutedEventArgs e)
         {
             var window = new Dialog { Owner = this };
-            window.ShowDialog();
+            _ = window.ShowDialog();
         }
 
         private void OnSaveFileDialog(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog();
-            dialog.ShowDialog(this);
+            _ = dialog.ShowDialog(this);
         }
 
         private void OnOpenFileDialog(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.ShowDialog(this);
+            _ = dialog.ShowDialog(this);
         }
     }
 }

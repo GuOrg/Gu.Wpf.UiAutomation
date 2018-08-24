@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
         public void Invoke()
         {
             this.InvokePattern.Invoke();
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
     }
 }

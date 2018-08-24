@@ -89,7 +89,7 @@ namespace Gu.Wpf.UiAutomation
                 this.ExpandCollapsePattern.Collapse();
             }
 
-            Wait.UntilResponsive(this);
+            _ = Wait.UntilResponsive(this);
         }
     }
 }

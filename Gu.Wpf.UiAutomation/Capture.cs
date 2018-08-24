@@ -28,12 +28,12 @@ namespace Gu.Wpf.UiAutomation
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
             //// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, 0, 0, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            _ = BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, 0, 0, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
             var bmp = Image.FromHbitmap(hBmp);
-            SelectObject(hDest, hOldBmp);
-            DeleteObject(hBmp);
-            DeleteDC(hDest);
-            ReleaseDC(hDesk, hSrce);
+            _ = SelectObject(hDest, hOldBmp);
+            _ = DeleteObject(hBmp);
+            _ = DeleteDC(hDest);
+            _ = ReleaseDC(hDesk, hSrce);
             return bmp;
         }
 
@@ -112,12 +112,12 @@ namespace Gu.Wpf.UiAutomation
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
             //// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, (int)bounds.X, (int)bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+            _ = BitBlt(hDest, 0, 0, sz.Width, sz.Height, hSrce, (int)bounds.X, (int)bounds.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
             var bmp = Image.FromHbitmap(hBmp);
-            SelectObject(hDest, hOldBmp);
-            DeleteObject(hBmp);
-            DeleteDC(hDest);
-            ReleaseDC(hDesk, hSrce);
+            _ = SelectObject(hDest, hOldBmp);
+            _ = DeleteObject(hBmp);
+            _ = DeleteDC(hDest);
+            _ = ReleaseDC(hDesk, hSrce);
             return bmp;
         }
 
@@ -133,7 +133,7 @@ namespace Gu.Wpf.UiAutomation
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                memory.Seek(0, SeekOrigin.Begin);
+                _ = memory.Seek(0, SeekOrigin.Begin);
                 bitmapImage.StreamSource = memory;
                 bitmapImage.EndInit();
                 bitmapImage.Freeze();

@@ -52,7 +52,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
             {
                 window?.Close();
                 window = new OverlayRectangleWindow(rectangle, color, duration);
-                window.ShowDialog();
+                _ = window.ShowDialog();
             });
         }
 

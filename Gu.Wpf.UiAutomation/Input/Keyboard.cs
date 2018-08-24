@@ -199,7 +199,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static void ClearFocus()
         {
-            User32.SetFocus(IntPtr.Zero);
+            _ = User32.SetFocus(IntPtr.Zero);
         }
 
         /// <summary>
@@ -275,9 +275,7 @@ namespace Gu.Wpf.UiAutomation
             public PressedKey(Key key)
             {
                 this.key = key;
-#pragma warning disable CS0618 // Type or member is obsolete
-                Press(key);
-#pragma warning restore CS0618 // Type or member is obsolete
+                PressVirtualKeyCode((ushort)key);
             }
 
             public void Dispose()
