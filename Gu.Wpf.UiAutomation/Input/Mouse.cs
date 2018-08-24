@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -62,8 +62,12 @@
         {
             get
             {
-                User32.GetCursorPos(out POINT p);
-                return new Point(p.X, p.Y);
+                if (User32.GetCursorPos(out var p))
+                {
+                    return new Point(p.X, p.Y);
+                }
+
+                throw new InvalidOperationException("Failed getting cursor position.");
             }
 
             set => User32.SetCursorPos((int)value.X, (int)value.Y);
@@ -222,7 +226,7 @@
         /// <param name="mouseButton">The mouse button to press</param>
         public static void Down(MouseButton mouseButton)
         {
-            var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out uint data);
+            var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out var data);
             SendInput(0, 0, data, flags);
         }
 
@@ -234,6 +238,16 @@
         {
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out uint data);
             SendInput(0, 0, data, flags);
+        }
+
+        /// <summary>
+        /// Hold the mouse button pressed for example during a drag operation.
+        /// </summary>
+        /// <param name="mouseButton">The <see cref="MouseButton"/></param>
+        /// <returns>A <see cref="IDisposable"/> that releases the kay on dispose.</returns>
+        public static IDisposable Hold(MouseButton mouseButton)
+        {
+            return new PressedButton(mouseButton);
         }
 
         /// <summary>
@@ -263,11 +277,10 @@
         public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
         {
             Position = startingPoint;
-            var currentX = Position.X;
-            var currentY = Position.Y;
-            Down(mouseButton);
-            Position = new Point(currentX + distance, currentY);
-            Up(mouseButton);
+            using (Hold(mouseButton))
+            {
+                Position += new Vector(distance, 0);
+            }
         }
 
         /// <summary>
@@ -279,11 +292,10 @@
         public static void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
         {
             Position = startingPoint;
-            var currentX = Position.X;
-            var currentY = Position.Y;
-            Down(mouseButton);
-            Position = new Point(currentX, currentY + distance);
-            Up(mouseButton);
+            using (Hold(mouseButton))
+            {
+                Position += new Vector(distance, 0);
+            }
         }
 
         public static void LeftClick()
@@ -435,6 +447,23 @@
 
             x = ((x - vScreenLeft) * 65536 / vScreenWidth) + (65536 / (vScreenWidth * 2));
             y = ((y - vScreenTop) * 65536 / vScreenHeight) + (65536 / (vScreenHeight * 2));
+        }
+
+        /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>
+        private class PressedButton : IDisposable
+        {
+            private readonly MouseButton key;
+
+            public PressedButton(MouseButton key)
+            {
+                this.key = key;
+                Down(key);
+            }
+
+            public void Dispose()
+            {
+                Up(this.key);
+            }
         }
     }
 }
