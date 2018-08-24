@@ -297,7 +297,7 @@ namespace Gu.Wpf.UiAutomation
             Position = startingPoint;
             using (Hold(mouseButton))
             {
-                Position += new Vector(distance, 0);
+                Position += new Vector(0, distance);
             }
         }
 
@@ -307,7 +307,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
         /// <param name="endPoint">The distance to drag, + for down, - for up</param>
-        public static void DragTo(MouseButton mouseButton, Point startingPoint, Point endPoint)
+        public static void Drag(MouseButton mouseButton, Point startingPoint, Point endPoint)
         {
             Position = startingPoint;
             using (Hold(mouseButton))

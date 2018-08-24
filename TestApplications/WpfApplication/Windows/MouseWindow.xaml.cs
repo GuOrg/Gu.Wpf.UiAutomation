@@ -1,5 +1,6 @@
 namespace WpfApplication.Windows
 {
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
 
@@ -17,12 +18,12 @@ namespace WpfApplication.Windows
 
         private void OnMouseButtonEvent(object sender, MouseButtonEventArgs e)
         {
-            this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source)} Button: {e.ChangedButton} {e.ButtonState}");
+            this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source).ToString(CultureInfo.InvariantCulture)} Button: {e.ChangedButton} {e.ButtonState}");
         }
 
         private void OnMouseEvent(object sender, MouseEventArgs e)
         {
-            this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source)}");
+            this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source).ToString(CultureInfo.InvariantCulture)}");
         }
     }
 }
