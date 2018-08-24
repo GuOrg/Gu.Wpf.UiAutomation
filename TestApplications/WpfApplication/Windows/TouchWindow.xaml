@@ -13,6 +13,13 @@
         </Grid.ColumnDefinitions>
         <GroupBox Background="Gray"
                   Header="Touch area"
+                  IsManipulationEnabled="True"
+                  ManipulationBoundaryFeedback="OnManipulation"
+                  ManipulationCompleted="OnManipulation"
+                  ManipulationDelta="OnManipulation"
+                  ManipulationInertiaStarting="OnManipulation"
+                  ManipulationStarted="OnManipulation"
+                  ManipulationStarting="OnManipulation"
                   PreviewTouchDown="OnTouch"
                   PreviewTouchMove="OnTouch"
                   PreviewTouchUp="OnTouch"

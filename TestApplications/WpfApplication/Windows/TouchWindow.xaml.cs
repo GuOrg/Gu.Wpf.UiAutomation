@@ -15,5 +15,10 @@ namespace WpfApplication.Windows
         {
             this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetTouchPoint((IInputElement)e.Source).Position.ToString(CultureInfo.InvariantCulture)}");
         }
+
+        private void OnManipulation(object sender, InputEventArgs e)
+        {
+            this.Events.Items.Add($"{e.RoutedEvent.Name}");
+        }
     }
 }
