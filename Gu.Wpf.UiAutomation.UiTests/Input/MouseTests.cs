@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
     using System.Collections.Generic;
@@ -206,7 +206,6 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
-
 
         [Test]
         public void RightDown()
