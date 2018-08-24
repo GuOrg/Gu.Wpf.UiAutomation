@@ -82,6 +82,9 @@
     <Compile Include="Windows\ListBoxWindowViewModel.cs">
       <DependentUpon>ListBoxWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MouseWindow.xaml.cs">
+      <DependentUpon>MouseWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SlowWindow.xaml.cs">
       <DependentUpon>SlowWindow.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
     <Page Include="Windows\GridSplitterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\MouseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\RichTextBoxWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

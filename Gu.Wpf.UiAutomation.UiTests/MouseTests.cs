@@ -1,34 +1,169 @@
 namespace Gu.Wpf.UiAutomation.UiTests
 {
+    using System.Linq;
     using NUnit.Framework;
 
     [TestFixture]
     public class MouseTests
     {
         private const string ExeFileName = "WpfApplication.exe";
+        private const string WindowName = "MouseWindow";
+
+        [SetUp]
+        public void SetUp()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                app.MainWindow.FindButton("Clear").Click();
+            }
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Application.KillLaunched(ExeFileName);
+        }
+
+        [Test]
+        public void Position()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.TopLeft;
+                var expected = new[]
+                {
+                    "MouseEnter Position: 0;0",
+                    "PreviewMouseMove Position: 0;0",
+                    "MouseMove Position: 0;0",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
 
         [Test]
         public void MoveTest()
         {
-            Mouse.Position = new System.Windows.Point(0, 0);
-            Mouse.MoveBy(800, 0);
-            Mouse.MoveBy(0, 400);
-            Mouse.MoveBy(-400, -200);
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.TopLeft;
+
+                Mouse.MoveBy(800, 0);
+                Mouse.MoveBy(0, 400);
+                Mouse.MoveBy(-400, -200);
+            }
         }
 
         [Test]
         public void ClickTest()
         {
-            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
-                var mainWindow = app.MainWindow;
-                var mouseX = mainWindow.Bounds.Left + 50;
-                var mouseY = mainWindow.Bounds.Top + 200;
-                Mouse.Position = new System.Windows.Point(mouseX, mouseY);
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Click(MouseButton.Left, mouseArea.Bounds.Center());
+                var expected = new[]
+                {
+                    "MouseEnter Position: 100;300",
+                    "PreviewMouseMove Position: 100;300",
+                    "MouseMove Position: 100;300",
+                    "PreviewMouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 100;300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "MouseDown Position: 100;300",
+                    "PreviewMouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "PreviewMouseUp Position: 100;300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "MouseUp Position: 100;300",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void Down()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
                 Mouse.Down(MouseButton.Left);
-                Mouse.MoveBy(100, 10);
-                Mouse.MoveBy(10, 50);
+                var expected = new[]
+                {
+                    "PreviewMouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 100;300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "MouseDown Position: 100;300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+
                 Mouse.Up(MouseButton.Left);
+            }
+        }
+
+        [Test]
+        public void Up()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.Down(MouseButton.Left);
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                Mouse.Up(MouseButton.Left);
+                var expected = new[]
+                {
+                    "PreviewMouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "PreviewMouseUp Position: 100;300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "MouseUp Position: 100;300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void Hold()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                using (Mouse.Hold(MouseButton.Left))
+                {
+                }
+
+                var expected = new[]
+                {
+                    "PreviewMouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 100;300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 100;300 Button: Left Pressed",
+                    "MouseDown Position: 100;300",
+                    "PreviewMouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "PreviewMouseUp Position: 100;300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 100;300 Button: Left Released",
+                    "MouseUp Position: 100;300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
     }

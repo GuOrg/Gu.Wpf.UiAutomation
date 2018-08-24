@@ -70,7 +70,11 @@ namespace Gu.Wpf.UiAutomation
                 throw new InvalidOperationException("Failed getting cursor position.");
             }
 
-            set => User32.SetCursorPos((int)value.X, (int)value.Y);
+            set
+            {
+                _ = User32.SetCursorPos((int)value.X, (int)value.Y);
+                Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(10));
+            }
         }
 
         /// <summary>
@@ -235,7 +239,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to release</param>
         public static void Up(MouseButton mouseButton)
         {
-            var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out uint data);
+            var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out var data);
             SendInput(0, 0, data, flags);
         }
 

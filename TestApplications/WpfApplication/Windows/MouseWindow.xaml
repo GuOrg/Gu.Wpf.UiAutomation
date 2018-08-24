@@ -1,0 +1,55 @@
+<Window x:Class="WpfApplication.Windows.MouseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MouseWindow"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d">
+    <Grid Height="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Background="Gray"
+                  Header="Mouse area"
+                  MouseDoubleClick="OnMouseEvent"
+                  MouseDown="OnMouseEvent"
+                  MouseEnter="OnMouseEvent"
+                  MouseLeave="OnMouseEvent"
+                  MouseLeftButtonDown="OnMouseButtonEvent"
+                  MouseLeftButtonUp="OnMouseButtonEvent"
+                  MouseMove="OnMouseEvent"
+                  MouseRightButtonDown="OnMouseButtonEvent"
+                  MouseRightButtonUp="OnMouseButtonEvent"
+                  MouseUp="OnMouseEvent"
+                  MouseWheel="OnMouseEvent"
+                  PreviewMouseDoubleClick="OnMouseButtonEvent"
+                  PreviewMouseDown="OnMouseButtonEvent"
+                  PreviewMouseLeftButtonDown="OnMouseButtonEvent"
+                  PreviewMouseLeftButtonUp="OnMouseButtonEvent"
+                  PreviewMouseMove="OnMouseEvent"
+                  PreviewMouseRightButtonDown="OnMouseButtonEvent"
+                  PreviewMouseRightButtonUp="OnMouseButtonEvent"
+                  PreviewMouseUp="OnMouseButtonEvent"
+                  PreviewMouseWheel="OnMouseEvent">
+            <GroupBox.Template>
+                <ControlTemplate TargetType="{x:Type GroupBox}">
+                    <Border Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </GroupBox.Template>
+        </GroupBox>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ListBox x:Name="Events" />
+            <Button Grid.Row="1"
+                    Click="OnClearCLick"
+                    Content="Clear" />
+        </Grid>
+    </Grid>
+</Window>

@@ -5,10 +5,13 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 15.0.26730.3
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1C84389-441E-4870-9EAC-F241B568B204}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
 		.paket\Readme.paket.md = .paket\Readme.paket.md
+		Settings.XamlStyler = Settings.XamlStyler
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation", "Gu.Wpf.UiAutomation\Gu.Wpf.UiAutomation.csproj", "{DF81078D-0932-47BA-B5A7-176CFF202375}"
