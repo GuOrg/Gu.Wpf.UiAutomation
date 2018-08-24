@@ -159,7 +159,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void Down()
+        public void LeftDown()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -184,7 +184,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void Up()
+        public void LeftUp()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -207,8 +207,58 @@ namespace Gu.Wpf.UiAutomation.UiTests
             }
         }
 
+
         [Test]
-        public void Hold()
+        public void RightDown()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                Mouse.Down(MouseButton.Right);
+                var expected = new[]
+                {
+                    "PreviewMouseRightButtonDown Position: 100,300 Button: Right Pressed",
+                    "PreviewMouseDown Position: 100,300 Button: Right Pressed",
+                    "MouseRightButtonDown Position: 100,300 Button: Right Pressed",
+                    "MouseDown Position: 100,300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+
+                Mouse.Up(MouseButton.Right);
+            }
+        }
+
+        [Test]
+        public void RightUp()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.Down(MouseButton.Right);
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                Mouse.Up(MouseButton.Right);
+                var expected = new[]
+                {
+                    "PreviewMouseRightButtonUp Position: 100,300 Button: Right Released",
+                    "PreviewMouseUp Position: 100,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 100,300 Button: Right Released",
+                    "MouseUp Position: 100,300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void HoldLeft()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -231,6 +281,36 @@ namespace Gu.Wpf.UiAutomation.UiTests
                     "PreviewMouseLeftButtonUp Position: 100,300 Button: Left Released",
                     "PreviewMouseUp Position: 100,300 Button: Left Released",
                     "MouseLeftButtonUp Position: 100,300 Button: Left Released",
+                    "MouseUp Position: 100,300",
+                };
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void HoldRight()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                using (Mouse.Hold(MouseButton.Right))
+                {
+                }
+
+                var expected = new[]
+                {
+                    "PreviewMouseRightButtonDown Position: 100,300 Button: Right Pressed",
+                    "PreviewMouseDown Position: 100,300 Button: Right Pressed",
+                    "MouseRightButtonDown Position: 100,300 Button: Right Pressed",
+                    "MouseDown Position: 100,300",
+                    "PreviewMouseRightButtonUp Position: 100,300 Button: Right Released",
+                    "PreviewMouseUp Position: 100,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 100,300 Button: Right Released",
                     "MouseUp Position: 100,300",
                 };
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
