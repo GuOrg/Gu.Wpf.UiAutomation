@@ -235,7 +235,9 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryWithAttached(ProcessStartInfo processStartInfo, Action<Application> onAttached)
         {
+#pragma warning disable IDISP001 // Dispose created.
             if (TryAttach(processStartInfo, OnDispose.LeaveOpen, out var app))
+#pragma warning restore IDISP001 // Dispose created.
             {
                 onAttached(app);
                 return true;
