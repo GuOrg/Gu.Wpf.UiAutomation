@@ -164,5 +164,27 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 Assert.AreEqual(1, count);
             }
         }
+
+        [Test]
+        public void WhenEqualElements()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                ImageAssert.AreEqual(button, button);
+            }
+        }
+
+        [Test]
+        public void WhenNotEqualElements()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("SizeButton");
+                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(window, button));
+            }
+        }
     }
 }

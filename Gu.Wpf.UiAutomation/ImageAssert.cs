@@ -229,6 +229,36 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public static void AreEqual(UiElement expected, UiElement actual)
+        {
+            WaitForStartAnimation(actual);
+
+            var start = DateTime.Now;
+            while (!Retry.IsTimeouted(start, RetryTime))
+            {
+                using (var expectedBmp = Capture.Rectangle(expected.Bounds))
+                {
+                    using (var actualBmp = Capture.Rectangle(actual.Bounds))
+                    {
+                        if (Equal(expectedBmp, actualBmp))
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                Wait.For(Retry.PollInterval);
+            }
+
+            using (var expectedBmp = Capture.Rectangle(expected.Bounds))
+            {
+                using (var actualBmp = Capture.Rectangle(actual.Bounds))
+                {
+                    AreEqual(expectedBmp, actualBmp);
+                }
+            }
+        }
+
         public static void AreEqual(Bitmap expected, UiElement element)
         {
             WaitForStartAnimation(element);
