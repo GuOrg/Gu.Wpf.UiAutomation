@@ -85,8 +85,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="deltaY">The delta for the y-axis</param>
         public static void MoveBy(int deltaX, int deltaY)
         {
-            var currPos = Position;
-            MoveTo((int)currPos.X + deltaX, (int)currPos.Y + deltaY);
+            MoveTo(Position + new Vector(deltaX, deltaY));
         }
 
         /// <summary>
@@ -269,7 +268,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Drags the mouse horizontally
+        /// Drags the mouse horizontally in one step.
         /// </summary>
         /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
@@ -284,7 +283,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Drags the mouse vertically
+        /// Drags the mouse vertically in one step.
         /// </summary>
         /// <param name="mouseButton">The mouse button to use for dragging</param>
         /// <param name="startingPoint">Starting point of the drag</param>
@@ -295,6 +294,21 @@ namespace Gu.Wpf.UiAutomation
             using (Hold(mouseButton))
             {
                 Position += new Vector(distance, 0);
+            }
+        }
+
+        /// <summary>
+        /// Drags the mouse in one step.
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging</param>
+        /// <param name="startingPoint">Starting point of the drag</param>
+        /// <param name="endPoint">The distance to drag, + for down, - for up</param>
+        public static void DragTo(MouseButton mouseButton, Point startingPoint, Point endPoint)
+        {
+            Position = startingPoint;
+            using (Hold(mouseButton))
+            {
+                Position = endPoint;
             }
         }
 
