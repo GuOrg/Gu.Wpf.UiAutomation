@@ -11,7 +11,7 @@ namespace WpfApplication.Windows
             this.InitializeComponent();
         }
 
-        private void OnClearCLick(object sender, RoutedEventArgs e)
+        private void OnClearClick(object sender, RoutedEventArgs e)
         {
             this.Events.Items.Clear();
         }
