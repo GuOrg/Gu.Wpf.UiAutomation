@@ -91,6 +91,9 @@
     <Compile Include="Windows\TextBoxWindowViewModel.cs">
       <DependentUpon>TextBoxWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TouchWindow.xaml.cs">
+      <DependentUpon>TouchWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
     <Page Include="Windows\ToolBarWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\TouchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\UserControl1.xaml">
       <SubType>Designer</SubType>
