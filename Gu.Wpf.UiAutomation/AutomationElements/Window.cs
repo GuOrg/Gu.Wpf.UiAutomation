@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
                     new AndCondition(
                         Conditions.Window,
                         Conditions.ByName(string.Empty),
-                        Conditions.ByClassName("Popup")));
+                        Conditions.ByClassName(nameof(this.Popup))));
                 if (popup == null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
