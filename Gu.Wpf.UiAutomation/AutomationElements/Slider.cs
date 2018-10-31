@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation
 
                 // UIA3 for WinForms does not have the RangeValue pattern, only the value pattern
                 // The value in this case is always between 0 and 100
-                return Convert.ToDouble(this.ValuePattern.Current.Value);
+                return double.Parse(this.ValuePattern.Current.Value, CultureInfo.InvariantCulture);
             }
 
             set

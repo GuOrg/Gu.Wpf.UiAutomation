@@ -12,18 +12,18 @@ namespace Gu.Wpf.UiAutomation
         public TransformPattern TransformPattern => this.AutomationElement.TransformPattern();
 
         /// <summary>
-        /// Moves the slider horizontally
+        /// Moves the slider horizontally.
         /// </summary>
-        /// <param name="distance">+ for right, - for left</param>
+        /// <param name="distance">+ for right, - for left.</param>
         public void SlideHorizontally(int distance)
         {
             Mouse.DragHorizontally(MouseButton.Left, this.Bounds.Center(), distance);
         }
 
         /// <summary>
-        /// Moves the slider vertically
+        /// Moves the slider vertically.
         /// </summary>
-        /// <param name="distance">+ for down, - for up</param>
+        /// <param name="distance">+ for down, - for up.</param>
         public void SlideVertically(int distance)
         {
             Mouse.DragVertically(MouseButton.Left, this.Bounds.Center(), distance);

@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation
     {
         /// <summary>
         /// Gets the XPath to the element until the desktop or the given root element.
-        /// Warning: This is quite a heavy operation
+        /// Warning: This is quite a heavy operation.
         /// </summary>
         public static string GetXPathToElement(UiElement element, UiElement rootElement = null)
         {

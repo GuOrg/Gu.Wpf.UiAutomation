@@ -3,7 +3,7 @@
     using System.Windows.Automation;
 
     /// <summary>
-    /// Represents a menu or a menubar, which contains menuitems
+    /// Represents a menu or a menubar, which contains menuitems.
     /// </summary>
     public class Menu : Control
     {
@@ -25,7 +25,7 @@
         }
 
         /// <summary>
-        /// Flag to indicate if the menu is a Win32 menu because that one needs special handling
+        /// Flag to indicate if the menu is a Win32 menu because that one needs special handling.
         /// </summary>
         public bool IsWin32Menu { get; set; }
     }

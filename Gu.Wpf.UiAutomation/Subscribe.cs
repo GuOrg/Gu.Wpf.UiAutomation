@@ -18,10 +18,10 @@
         }
 
         /// <summary>
-        /// Subscribe to value changes
+        /// Subscribe to value changes.
         /// </summary>
-        /// <param name="element">The <see cref="AutomationElement"/></param>
-        /// <param name="treeScope">The <see cref="TreeScope"/></param>
+        /// <param name="element">The <see cref="AutomationElement"/>.</param>
+        /// <param name="treeScope">The <see cref="TreeScope"/>.</param>
         /// <param name="property">The <see cref="AutomationProperty"/> to subscribe to changes for.</param>
         /// <param name="handler"> The <see cref="AutomationPropertyChangedEventHandler"/>. </param>
         /// <returns>A <see cref="IDisposable"/> that unsubcribes on dispose.</returns>

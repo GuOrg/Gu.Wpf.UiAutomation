@@ -7,7 +7,7 @@
     public static class ExtensionMethods
     {
         /// <summary>
-        /// Makes sure a comparable object is between a given range
+        /// Makes sure a comparable object is between a given range.
         /// </summary>
         public static T Clamp<T>(this T source, T min, T max)
             where T : IComparable
@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// Converts a double to the nearest int32
+        /// Converts a double to the nearest int32.
         /// </summary>
         public static int ToInt(this double value)
         {
@@ -29,7 +29,7 @@
         }
 
         /// <summary>
-        /// Checks if a double is not NaN and not Infinity
+        /// Checks if a double is not NaN and not Infinity.
         /// </summary>
         public static bool HasValue(this double value)
         {

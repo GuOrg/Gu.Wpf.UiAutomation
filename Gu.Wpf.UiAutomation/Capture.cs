@@ -11,12 +11,12 @@ namespace Gu.Wpf.UiAutomation
     using Gu.Wpf.UiAutomation.Logging;
 
     /// <summary>
-    /// Provides methods to capture screenshots or partially screenshots
+    /// Provides methods to capture screenshots or partially screenshots.
     /// </summary>
     public static class Capture
     {
         /// <summary>
-        /// Captures the whole screen (all monitors)
+        /// Captures the whole screen (all monitors).
         /// </summary>
         public static Bitmap Screen()
         {
@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Captures the screen and saves it to a file
+        /// Captures the screen and saves it to a file.
         /// </summary>
         public static void ScreenToFile(string filePath)
         {
@@ -80,7 +80,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Captures a specific area and saves it to a file
+        /// Captures a specific area and saves it to a file.
         /// </summary>
         public static void RectangleToFile(Rect bounds, string filePath)
         {
@@ -100,7 +100,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Captures a specific area from the screen
+        /// Captures a specific area from the screen.
         /// </summary>
         public static Bitmap Rectangle(Rect bounds)
         {
@@ -122,7 +122,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Converts a WinForms bitmap to a WPF bitmap
+        /// Converts a WinForms bitmap to a WPF bitmap.
         /// </summary>
         public static BitmapImage ToWpf(this Bitmap bitmap)
         {

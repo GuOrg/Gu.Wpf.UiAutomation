@@ -11,37 +11,37 @@ namespace Gu.Wpf.UiAutomation
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
-    /// Mouse class to simulate mouse input
+    /// Mouse class to simulate mouse input.
     /// </summary>
     public static class Mouse
     {
         /// <summary>
-        /// Time to add to the double click time to prevent false double clicks
+        /// Time to add to the double click time to prevent false double clicks.
         /// </summary>
         private const int ExtraMillisecondsBecauseOfBugInWindows = 13;
 
         /// <summary>
-        /// Numer which defines one wheel "click" of the mouse wheel
+        /// Numer which defines one wheel "click" of the mouse wheel.
         /// </summary>
         private const int WheelDelta = 120;
 
         /// <summary>
-        /// The current max timespan (in milliseconds) for double clicks
+        /// The current max timespan (in milliseconds) for double clicks.
         /// </summary>
         private static readonly int CurrentDoubleClickTime;
 
         /// <summary>
-        /// Dictionary which holds the last click time for each button
+        /// Dictionary which holds the last click time for each button.
         /// </summary>
         private static readonly Dictionary<MouseButton, DateTime> LastClickTimes;
 
         /// <summary>
-        /// Dictionary which holds the last click position for each button
+        /// Dictionary which holds the last click position for each button.
         /// </summary>
         private static readonly Dictionary<MouseButton, Point> LastClickPositions;
 
         /// <summary>
-        /// Static constructor
+        /// Static constructor.
         /// </summary>
         static Mouse()
         {
@@ -56,7 +56,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Current position of the mouse cursor
+        /// Current position of the mouse cursor.
         /// </summary>
         public static Point Position
         {
@@ -78,25 +78,25 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Flag to indicate if the buttons are swapped (left-handed)
+        /// Flag to indicate if the buttons are swapped (left-handed).
         /// </summary>
         public static bool AreButtonsSwapped => User32.GetSystemMetrics(SystemMetric.SM_SWAPBUTTON) != 0;
 
         /// <summary>
-        /// Moves the mouse by a given delta from the current position
+        /// Moves the mouse by a given delta from the current position.
         /// </summary>
-        /// <param name="deltaX">The delta for the x-axis</param>
-        /// <param name="deltaY">The delta for the y-axis</param>
+        /// <param name="deltaX">The delta for the x-axis.</param>
+        /// <param name="deltaY">The delta for the y-axis.</param>
         public static void MoveBy(int deltaX, int deltaY)
         {
             MoveTo(Position + new Vector(deltaX, deltaY));
         }
 
         /// <summary>
-        /// Moves the mouse to a new position
+        /// Moves the mouse to a new position.
         /// </summary>
-        /// <param name="newX">The new position on the x-axis</param>
-        /// <param name="newY">The new position on the y-axis</param>
+        /// <param name="newX">The new position on the x-axis.</param>
+        /// <param name="newY">The new position on the y-axis.</param>
         public static void MoveTo(int newX, int newY)
         {
             // Get starting position
@@ -151,18 +151,18 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Moves the mouse to a new position
+        /// Moves the mouse to a new position.
         /// </summary>
-        /// <param name="newPosition">The new position for the mouse</param>
+        /// <param name="newPosition">The new position for the mouse.</param>
         public static void MoveTo(Point newPosition)
         {
             MoveTo(newPosition.X.ToInt(), newPosition.Y.ToInt());
         }
 
         /// <summary>
-        /// Clicks the specified mouse button at the current location
+        /// Clicks the specified mouse button at the current location.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to click</param>
+        /// <param name="mouseButton">The mouse button to click.</param>
         public static void Click(MouseButton mouseButton)
         {
             var currClickPosition = Position;
@@ -190,10 +190,10 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Moves to a specific position and clicks the specified mouse button
+        /// Moves to a specific position and clicks the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to click</param>
-        /// <param name="point">The position to move to before clicking</param>
+        /// <param name="mouseButton">The mouse button to click.</param>
+        /// <param name="point">The position to move to before clicking.</param>
         public static void Click(MouseButton mouseButton, Point point)
         {
             Position = point;
@@ -201,9 +201,9 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Double-clicks the specified mouse button at the current location
+        /// Double-clicks the specified mouse button at the current location.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to double-click</param>
+        /// <param name="mouseButton">The mouse button to double-click.</param>
         public static void DoubleClick(MouseButton mouseButton)
         {
             Down(mouseButton);
@@ -213,10 +213,10 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Moves to a specific position and double-clicks the specified mouse button
+        /// Moves to a specific position and double-clicks the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to double-click</param>
-        /// <param name="point">The position to move to before double-clicking</param>
+        /// <param name="mouseButton">The mouse button to double-click.</param>
+        /// <param name="point">The position to move to before double-clicking.</param>
         public static void DoubleClick(MouseButton mouseButton, Point point)
         {
             Position = point;
@@ -224,9 +224,9 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Sends a mouse down command for the specified mouse button
+        /// Sends a mouse down command for the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to press</param>
+        /// <param name="mouseButton">The mouse button to press.</param>
         public static void Down(MouseButton mouseButton)
         {
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out var data);
@@ -234,9 +234,9 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Sends a mouse up command for the specified mouse button
+        /// Sends a mouse up command for the specified mouse button.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to release</param>
+        /// <param name="mouseButton">The mouse button to release.</param>
         public static void Up(MouseButton mouseButton)
         {
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out var data);
@@ -246,7 +246,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Hold the mouse button pressed for example during a drag operation.
         /// </summary>
-        /// <param name="mouseButton">The <see cref="MouseButton"/></param>
+        /// <param name="mouseButton">The <see cref="MouseButton"/>.</param>
         /// <returns>A <see cref="IDisposable"/> that releases the kay on dispose.</returns>
         public static IDisposable Hold(MouseButton mouseButton)
         {
@@ -254,7 +254,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Simulates scrolling of the mouse wheel up or down
+        /// Simulates scrolling of the mouse wheel up or down.
         /// </summary>
         public static void Scroll(double lines)
         {
@@ -263,7 +263,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Simulates scrolling of the horizontal mouse wheel left or right
+        /// Simulates scrolling of the horizontal mouse wheel left or right.
         /// </summary>
         public static void HorizontalScroll(double lines)
         {
@@ -274,9 +274,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Drags the mouse horizontally in one step.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging</param>
-        /// <param name="startingPoint">Starting point of the drag</param>
-        /// <param name="distance">The distance to drag, + for right, - for left</param>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="distance">The distance to drag, + for right, - for left.</param>
         public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
         {
             Position = startingPoint;
@@ -289,9 +289,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Drags the mouse vertically in one step.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging</param>
-        /// <param name="startingPoint">Starting point of the drag</param>
-        /// <param name="distance">The distance to drag, + for down, - for up</param>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="distance">The distance to drag, + for down, - for up.</param>
         public static void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
         {
             Position = startingPoint;
@@ -304,9 +304,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Drags the mouse in one step.
         /// </summary>
-        /// <param name="mouseButton">The mouse button to use for dragging</param>
-        /// <param name="startingPoint">Starting point of the drag</param>
-        /// <param name="endPoint">The distance to drag, + for down, - for up</param>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="startingPoint">Starting point of the drag.</param>
+        /// <param name="endPoint">The distance to drag, + for down, - for up.</param>
         public static void Drag(MouseButton mouseButton, Point startingPoint, Point endPoint)
         {
             Position = startingPoint;
@@ -358,7 +358,7 @@ namespace Gu.Wpf.UiAutomation
 
         /// <summary>
         /// Converts the button to the correct <see cref="MouseEventFlags" /> object
-        /// and fills the additional data if needed
+        /// and fills the additional data if needed.
         /// </summary>
         private static MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out uint data)
         {
@@ -392,7 +392,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set
+        /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set.
         /// </summary>
         private static MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
         {
@@ -413,7 +413,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Effectively sends the mouse input command
+        /// Effectively sends the mouse input command.
         /// </summary>
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         private static void SendInput(int x, int y, uint data, MouseEventFlags flags)
@@ -454,7 +454,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Normalizes the coordinates to get the absolute values from 0 to 65536
+        /// Normalizes the coordinates to get the absolute values from 0 to 65536.
         /// </summary>
         private static void NormalizeCoordinates(ref int x, ref int y)
         {

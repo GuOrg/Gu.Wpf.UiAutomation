@@ -23,22 +23,22 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// The wrapped <see cref="System.Windows.Automation.AutomationElement"/>
+        /// The wrapped <see cref="System.Windows.Automation.AutomationElement"/>.
         /// </summary>
         public AutomationElement AutomationElement { get; }
 
         /// <summary>
-        /// Get the parent <see cref="UiElement"/>
+        /// Get the parent <see cref="UiElement"/>.
         /// </summary>
         public UiElement Parent => new UiElement(TreeWalker.RawViewWalker.GetParent(this.AutomationElement));
 
         /// <summary>
-        /// Get the children
+        /// Get the children.
         /// </summary>
         public IReadOnlyList<UiElement> Children => this.FindAllChildren();
 
         /// <summary>
-        /// Get the parent <see cref="UiElement"/>
+        /// Get the parent <see cref="UiElement"/>.
         /// </summary>
         public Window Window
         {
@@ -241,7 +241,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets a clickable point of the element.
         /// </summary>
-        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found</exception>
+        /// <exception cref="NoClickablePointException">Thrown when no clickable point was found.</exception>
         public Point GetClickablePoint()
         {
             return this.AutomationElement.GetClickablePoint();
@@ -250,15 +250,15 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Tries to get a clickable point of the element.
         /// </summary>
-        /// <param name="point">The clickable point or null, if no point was found</param>
-        /// <returns>True if a point was found, false otherwise</returns>
+        /// <param name="point">The clickable point or null, if no point was found.</param>
+        /// <returns>True if a point was found, false otherwise.</returns>
         public bool TryGetClickablePoint(out Point point)
         {
             return this.AutomationElement.TryGetClickablePoint(out point);
         }
 
         /// <summary>
-        /// Registers the given event
+        /// Registers the given event.
         /// </summary>
         public IDisposable SubscribeToEvent(AutomationEvent automationEvent, TreeScope treeScope, Action<UiElement, AutomationEventArgs> action)
         {
@@ -269,7 +269,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Registers a property changed event with the given property
+        /// Registers a property changed event with the given property.
         /// </summary>
         public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, AutomationProperty property, Action<UiElement, AutomationPropertyChangedEventArgs> action)
         {
@@ -280,7 +280,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Registers a property changed event with the given property
+        /// Registers a property changed event with the given property.
         /// </summary>
         public IDisposable SubscribeToPropertyChangedEvent(TreeScope treeScope, Action<UiElement, AutomationPropertyChangedEventArgs> action, params AutomationProperty[] properties)
         {
@@ -291,7 +291,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Registers a structure changed event
+        /// Registers a structure changed event.
         /// </summary>
         public IDisposable SubscribeToStructureChangedEvent(TreeScope treeScope, Action<UiElement, StructureChangedEventArgs> action)
         {
@@ -301,7 +301,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Gets the available patterns for an element via properties
+        /// Gets the available patterns for an element via properties.
         /// </summary>
         public IReadOnlyList<AutomationPattern> GetSupportedPatterns()
         {
@@ -309,7 +309,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Checks if the given pattern is available for the element via properties
+        /// Checks if the given pattern is available for the element via properties.
         /// </summary>
         public bool IsPatternSupported(AutomationPattern patternId)
         {
@@ -373,7 +373,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Overrides the string representation of the element with something useful
+        /// Overrides the string representation of the element with something useful.
         /// </summary>
         public override string ToString()
         {

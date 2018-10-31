@@ -84,7 +84,7 @@ namespace Gu.Wpf.UiAutomation
         public ValuePattern ValuePattern => this.AutomationElement.ValuePattern();
 
         /// <summary>
-        /// Gets the editable element
+        /// Gets the editable element.
         /// </summary>
         protected virtual TextBox EditableItem
         {

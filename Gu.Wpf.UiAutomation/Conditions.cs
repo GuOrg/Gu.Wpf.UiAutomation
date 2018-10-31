@@ -143,7 +143,7 @@ namespace Gu.Wpf.UiAutomation
         public static Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName(nameof(TextBlock)));
 
         /// <summary>
-        /// For finding textblocks and labels
+        /// For finding textblocks and labels.
         /// </summary>
         public static Condition Text { get; } = ByControlType(ControlType.Text);
 

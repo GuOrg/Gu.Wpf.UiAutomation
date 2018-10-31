@@ -1,9 +1,11 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
+// ReSharper disable IdentifierTypo
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     /// <summary>
-    /// These are the hardware keyboard codes
+    /// These are the hardware keyboard codes.
     /// </summary>
     public enum ScanCodeShort : ushort
     {

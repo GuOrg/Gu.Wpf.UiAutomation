@@ -3,7 +3,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Automation;
 
     /// <summary>
-    /// An UI-item which supports the <see cref="SelectionItemPattern" />
+    /// An UI-item which supports the <see cref="SelectionItemPattern" />.
     /// </summary>
     public class SelectionItemControl : Control
     {

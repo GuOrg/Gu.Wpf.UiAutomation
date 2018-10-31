@@ -5,7 +5,7 @@
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
-    /// Class with various helper tools used in various places
+    /// Class with various helper tools used in various places.
     /// </summary>
     public static class Wait
     {
@@ -25,7 +25,7 @@
 
         /// <summary>
         /// Waits 100 ms for a generic time which was found to be sufficient to allow
-        /// input (mouse, keyboard, ...) do be processed
+        /// input (mouse, keyboard, ...) do be processed.
         /// </summary>
         public static void UntilInputIsProcessed()
         {
@@ -34,7 +34,7 @@
 
         /// <summary>
         /// Waits for a generic time which was found to be sufficient to allow
-        /// input (mouse, keyboard, ...) do be processed
+        /// input (mouse, keyboard, ...) do be processed.
         /// </summary>
         public static void UntilInputIsProcessed(TimeSpan delay)
         {
@@ -63,7 +63,7 @@
 
         /// <summary>
         /// Waits until a window is responsive by sending a WM_NULL message.
-        /// See: https://blogs.msdn.microsoft.com/oldnewthing/20161118-00/?p=94745
+        /// See: https://blogs.msdn.microsoft.com/oldnewthing/20161118-00/?p=94745.
         /// </summary>
         public static bool UntilResponsive(IntPtr hWnd, TimeSpan timeout)
         {

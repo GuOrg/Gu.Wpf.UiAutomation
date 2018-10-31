@@ -3,7 +3,7 @@
     using System.Windows.Automation;
 
     /// <summary>
-    /// Helper class which tries to load all items for an item container
+    /// Helper class which tries to load all items for an item container.
     /// </summary>
     public static class ItemRealizer
     {

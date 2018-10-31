@@ -3,7 +3,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Automation;
 
     /// <summary>
-    /// Represents an item in a <see cref="ComboBox"/>
+    /// Represents an item in a <see cref="ComboBox"/>.
     /// </summary>
     public class ComboBoxItem : SelectionItemControl
     {

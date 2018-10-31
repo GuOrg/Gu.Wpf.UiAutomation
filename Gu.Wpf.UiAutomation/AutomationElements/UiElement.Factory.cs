@@ -116,10 +116,10 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Register a custom type for <see cref="FromAutomationElement"/>
+        /// Register a custom type for <see cref="FromAutomationElement"/>.
         /// </summary>
-        /// <param name="condition">The condition that matches the type</param>
-        /// <param name="create">The factory method for creating an instance</param>
+        /// <param name="condition">The condition that matches the type.</param>
+        /// <param name="create">The factory method for creating an instance.</param>
         public static void Register(Condition condition, Func<AutomationElement, UiElement> create)
         {
             ConditionAndCreates.Insert(0, new ConditionAndCreate(condition, create));

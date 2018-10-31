@@ -4,7 +4,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Automation;
 
     /// <summary>
-    /// Represents a menuitem which can also contain sub-menuitems
+    /// Represents a menuitem which can also contain sub-menuitems.
     /// </summary>
     public class MenuItem : Control
     {
@@ -68,7 +68,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Flag to indicate if the containing menu is a Win32 menu because that one needs special handling
+        /// Flag to indicate if the containing menu is a Win32 menu because that one needs special handling.
         /// </summary>
         internal bool IsWin32Menu { get; set; }
 

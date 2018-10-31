@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
         public DataGrid ContainingDataGrid => (DataGrid)FromAutomationElement(this.GridItemPattern.Current.ContainingGrid);
 
         /// <summary>
-        /// Get the parent of the cell (which should be the row)
+        /// Get the parent of the cell (which should be the row).
         /// </summary>
         public DataGridRow ContainingRow => (DataGridRow)FromAutomationElement(this.AutomationElement.Parent());
 
@@ -60,7 +60,7 @@ namespace Gu.Wpf.UiAutomation
                 {
                     if (this.AutomationElement.TryGetValuePattern(out var valuePattern) &&
                         valuePattern.Current.Value is string text &&
-                        text != string.Empty)
+                        text.Length > 0)
                     {
                         return text;
                     }

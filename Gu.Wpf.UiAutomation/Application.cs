@@ -55,7 +55,7 @@ namespace Gu.Wpf.UiAutomation
         public int ProcessId => this.processReference.Process.Id;
 
         /// <summary>
-        /// Process.StartTime
+        /// Process.StartTime.
         /// </summary>
         public DateTime StartTime => this.processReference.Process.StartTime;
 
@@ -92,17 +92,17 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Attach to a running process
+        /// Attach to a running process.
         /// </summary>
-        /// <param name="processId">The id as shown in task manager</param>
-        /// <returns>The application</returns>
+        /// <param name="processId">The id as shown in task manager.</param>
+        /// <returns>The application.</returns>
         public static Application Attach(int processId)
         {
             return Attach(FindProcess(processId));
         }
 
         /// <summary>
-        /// Attach to a running process
+        /// Attach to a running process.
         /// </summary>
         public static Application Attach(string exeFileName, int index = 0)
         {
@@ -122,7 +122,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Attach to a running process
+        /// Attach to a running process.
         /// </summary>
         public static Application Attach(Process process, OnDispose dispose = OnDispose.LeaveOpen)
         {
@@ -213,7 +213,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>.
         /// </summary>
         public static bool TryWithAttached(string exeFileName, Action<Application> onAttached)
         {
@@ -222,7 +222,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>.
         /// </summary>
         public static bool TryWithAttached(string exeFileName, string args, Action<Application> onAttached)
         {
@@ -231,7 +231,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Attach to a running process if found and perform <paramref name="onAttached"/>
+        /// Attach to a running process if found and perform <paramref name="onAttached"/>.
         /// </summary>
         public static bool TryWithAttached(ProcessStartInfo processStartInfo, Action<Application> onAttached)
         {

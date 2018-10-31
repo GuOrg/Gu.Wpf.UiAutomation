@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// The currently selected <see cref="TreeViewItem" />
+        /// The currently selected <see cref="TreeViewItem" />.
         /// </summary>
         public TreeViewItem SelectedTreeViewItem => this.SearchSelectedItem(this.Items);
 

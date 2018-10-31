@@ -38,7 +38,7 @@ namespace Gu.Wpf.UiAutomation
                                                          .ToArray();
 
         /// <summary>
-        /// Gets the current WPF popup window
+        /// Gets the current WPF popup window.
         /// </summary>
         public Popup Popup
         {
@@ -144,7 +144,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Brings the element to the foreground
+        /// Brings the element to the foreground.
         /// </summary>
         public void SetTransparency(byte alpha)
         {
@@ -165,7 +165,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Gets the main window (first window on desktop with the same process as this window)
+        /// Gets the main window (first window on desktop with the same process as this window).
         /// </summary>
         private Window GetMainWindow()
         {

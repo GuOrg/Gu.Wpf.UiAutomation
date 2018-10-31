@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation
+#pragma warning disable CA1707 // Identifiers should not contain underscores
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using Microsoft.Win32;

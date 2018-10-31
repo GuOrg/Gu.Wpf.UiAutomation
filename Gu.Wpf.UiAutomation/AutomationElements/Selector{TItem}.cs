@@ -27,7 +27,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// The index of the currently selected <see cref="TabItem" />
+        /// The index of the currently selected <see cref="TabItem" />.
         /// </summary>
         public int SelectedIndex
         {

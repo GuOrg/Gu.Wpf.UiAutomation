@@ -11,7 +11,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />
+        /// All child <see cref="TreeViewItem" /> objects from this <see cref="TreeViewItem" />.
         /// </summary>
         public IReadOnlyList<TreeViewItem> Items => this.AutomationElement.FindAll(
             TreeScope.Children,
@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
             x => new TreeViewItem(x));
 
         /// <summary>
-        /// The text of the <see cref="TreeViewItem" />
+        /// The text of the <see cref="TreeViewItem" />.
         /// </summary>
         public string Text
         {
