@@ -24,6 +24,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Windows" />
     <Reference Include="Accessibility" />
     <Reference Include="PresentationCore" />

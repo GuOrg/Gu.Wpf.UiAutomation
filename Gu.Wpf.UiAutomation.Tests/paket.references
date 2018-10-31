@@ -3,8 +3,11 @@ group Test
   Moq
 
 group Analyzers
-  StyleCop.Analyzers
   AsyncUsageAnalyzers
   Gu.Analyzers
   IDisposableAnalyzers
-  JetBrains.Annotations
+  Microsoft.CodeAnalysis.FxCopAnalyzers
+  PropertyChangedAnalyzers
+  ReflectionAnalyzers
+  StyleCop.Analyzers
+  WpfAnalyzers
