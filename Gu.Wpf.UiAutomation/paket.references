@@ -6,8 +6,6 @@ group Analyzers
   Gu.Analyzers
   IDisposableAnalyzers
   Microsoft.CodeAnalysis.FxCopAnalyzers
-  PropertyChangedAnalyzers
   PublicApiAnalyzer
   ReflectionAnalyzers
   StyleCop.Analyzers
-  WpfAnalyzers
