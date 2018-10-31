@@ -95,7 +95,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
-                var exception = Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                var exception = Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
                 Assert.AreEqual("Sizes did not match\r\nExpected: {Width=200, Height=100}\r\nActual:   {Width=300, Height=300}", exception.Message);
             }
         }
@@ -110,7 +110,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
                 File.Delete(tempFile);
                 ImageAssert.OnFail = OnFail.SaveImageToTemp;
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
                 Assert.AreEqual(true, File.Exists(tempFile));
             }
         }
@@ -129,7 +129,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 }
 
                 ImageAssert.OnFail = OnFail.SaveImageToTemp;
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
                 Assert.AreEqual(true, File.Exists(tempFile));
             }
         }
@@ -147,7 +147,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 }
 
                 ImageAssert.OnFail = OnFail.SaveImageToTemp;
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window));
+                Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
                 Assert.AreEqual(true, File.Exists(tempFile));
             }
         }
@@ -160,7 +160,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
                 var count = 0;
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(fileName, window, (exception, bitmap) => count++));
+                Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window, (exception, bitmap) => count++));
                 Assert.AreEqual(1, count);
             }
         }
@@ -183,7 +183,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("SizeButton");
-                Assert.Throws<NUnit.Framework.AssertionException>(() => ImageAssert.AreEqual(window, button));
+                Assert.Throws<AssertException>(() => ImageAssert.AreEqual(window, button));
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
 
@@ -8,7 +8,12 @@
     [Serializable]
     public class AssertException : Exception
     {
-        private static Type exceptionType;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssertException"/> class.
+        /// </summary>
+        public AssertException()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssertException"/> class.
@@ -36,11 +41,6 @@
         /// <returns>The exception.</returns>
         public static Exception Create(string message)
         {
-            if (TryGetExceptionType(out Type type))
-            {
-                return (Exception)Activator.CreateInstance(type, message);
-            }
-
             return new AssertException(message);
         }
 
@@ -52,28 +52,10 @@
         /// <returns>The exception.</returns>
         public static Exception Create(string message, Exception innerException)
         {
-            if (TryGetExceptionType(out var type))
-            {
-                return (Exception)Activator.CreateInstance(type, message, innerException);
-            }
-
             return new AssertException(message, innerException);
         }
 
         /// <inheritdoc />
         public override string ToString() => this.Message;
-
-        private static bool TryGetExceptionType(out Type type)
-        {
-            if (exceptionType == null)
-            {
-                exceptionType = Type.GetType("Xunit.Sdk.XunitException,xunit.assert", throwOnError: false, ignoreCase: false) ??
-                                Type.GetType("NUnit.Framework.AssertionException,nunit.framework", throwOnError: false, ignoreCase: false) ??
-                                typeof(AssertException);
-            }
-
-            type = exceptionType;
-            return type != typeof(AssertException);
-        }
     }
 }
