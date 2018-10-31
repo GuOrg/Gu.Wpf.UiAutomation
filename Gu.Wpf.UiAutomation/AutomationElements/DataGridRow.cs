@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Automation;
@@ -47,7 +48,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public DataGridCell FindCellByText(string textToFind)
         {
-            return this.Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind));
+            return this.Cells.FirstOrDefault(cell => cell.Value.Equals(textToFind, StringComparison.CurrentCulture));
         }
 
         public DataGridRow ScrollIntoView()

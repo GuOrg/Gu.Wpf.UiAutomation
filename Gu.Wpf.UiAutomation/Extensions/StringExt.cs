@@ -1,10 +1,12 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
+    using System;
+
     internal static class StringExt
     {
         internal static string TrimStart(this string text, string toTrim)
         {
-            if (text.StartsWith(toTrim))
+            if (text.StartsWith(toTrim, StringComparison.CurrentCulture))
             {
                 return text.Substring(toTrim.Length);
             }
@@ -14,7 +16,7 @@
 
         internal static string TrimEnd(this string text, string toTrim)
         {
-            if (text.EndsWith(toTrim))
+            if (text.EndsWith(toTrim, StringComparison.CurrentCulture))
             {
                 return text.Substring(0, text.Length - toTrim.Length);
             }

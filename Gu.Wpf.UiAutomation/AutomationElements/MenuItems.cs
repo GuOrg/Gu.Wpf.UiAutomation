@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -20,7 +21,7 @@ namespace Gu.Wpf.UiAutomation
 
         public MenuItem this[int index] => this.items[index];
 
-        public MenuItem this[string text] => this.FirstOrDefault(x => x.Text.Equals(text));
+        public MenuItem this[string text] => this.FirstOrDefault(x => x.Text.Equals(text, StringComparison.CurrentCulture));
 
         public IEnumerator<MenuItem> GetEnumerator() => this.items.GetEnumerator();
 

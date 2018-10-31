@@ -596,7 +596,7 @@ namespace Gu.Wpf.UiAutomation
             public static bool TryFind(Assembly assembly, string resourceName, out Bitmap result)
             {
                 var map = Cache.GetOrAdd(assembly, CreateMergedDictionary);
-                result = map.FirstOrDefault(x => x.Key.EndsWith(resourceName)).Value;
+                result = map.FirstOrDefault(x => x.Key.EndsWith(resourceName, StringComparison.CurrentCulture)).Value;
                 return result != null;
             }
 
