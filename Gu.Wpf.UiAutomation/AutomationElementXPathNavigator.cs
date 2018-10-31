@@ -29,7 +29,7 @@
             AutomationId,
             Name,
             ClassName,
-            HelpText
+            HelpText,
         }
 
         /// <inheritdoc/>
@@ -91,7 +91,7 @@
             var clonedObject = new AutomationElementXPathNavigator(this.rootElement)
             {
                 currentElement = this.currentElement,
-                attributeIndex = this.attributeIndex
+                attributeIndex = this.attributeIndex,
             };
             return clonedObject;
         }

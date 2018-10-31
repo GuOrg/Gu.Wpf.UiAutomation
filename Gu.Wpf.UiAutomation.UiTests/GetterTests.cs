@@ -27,7 +27,7 @@
                 var cacheRequest = new CacheRequest
                 {
                     AutomationElementMode = AutomationElementMode.None,
-                    TreeScope = TreeScope.Element
+                    TreeScope = TreeScope.Element,
                 };
 
                 cacheRequest.Add(WindowPattern.Pattern);
@@ -56,7 +56,7 @@
             var cacheRequest = new CacheRequest
             {
                 AutomationElementMode = AutomationElementMode.None,
-                TreeScope = TreeScope.Element
+                TreeScope = TreeScope.Element,
             };
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
@@ -86,7 +86,7 @@
             var cacheRequest = new CacheRequest
             {
                 AutomationElementMode = AutomationElementMode.None,
-                TreeScope = TreeScope.Element
+                TreeScope = TreeScope.Element,
             };
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {

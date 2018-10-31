@@ -12,7 +12,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -36,7 +36,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -60,7 +60,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -84,7 +84,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -108,7 +108,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -132,7 +132,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -156,7 +156,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -180,7 +180,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -204,7 +204,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -228,7 +228,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -252,7 +252,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation
@@ -276,7 +276,7 @@
             // Arrange
             var mock = new Mock<TestLogger>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This gets us an instance of AbstractBase which has instrumentation

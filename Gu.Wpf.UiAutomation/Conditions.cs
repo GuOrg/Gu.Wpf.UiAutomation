@@ -14,65 +14,65 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition Calendar { get; } = ByControlType(ControlType.Calendar);
 
-        public static Condition CalendarDayButton { get; } = ByClassName("CalendarDayButton");
+        public static Condition CalendarDayButton { get; } = ByClassName(nameof(CalendarDayButton));
 
         public static Condition CheckBox { get; } = ByControlType(ControlType.CheckBox);
 
         public static Condition ComboBox { get; } = ByControlType(ControlType.ComboBox);
 
-        public static Condition ContextMenu { get; } = ByClassName("ContextMenu");
+        public static Condition ContextMenu { get; } = ByClassName(nameof(ContextMenu));
 
         public static Condition ControlTypeCustom { get; } = ByControlType(ControlType.Custom);
 
-        public static Condition DataGrid { get; } = ByClassName("DataGrid");
+        public static Condition DataGrid { get; } = ByClassName(nameof(DataGrid));
 
-        public static Condition DataGridCell { get; } = ByClassName("DataGridCell");
+        public static Condition DataGridCell { get; } = ByClassName(nameof(DataGridCell));
 
-        public static Condition DataGridColumnHeadersPresenter { get; } = ByClassName("DataGridColumnHeadersPresenter");
+        public static Condition DataGridColumnHeadersPresenter { get; } = ByClassName(nameof(DataGridColumnHeadersPresenter));
 
-        public static Condition DataGridColumnHeader { get; } = ByClassName("DataGridColumnHeader");
+        public static Condition DataGridColumnHeader { get; } = ByClassName(nameof(DataGridColumnHeader));
 
-        public static Condition DataGridRow { get; } = ByClassName("DataGridRow");
+        public static Condition DataGridRow { get; } = ByClassName(nameof(DataGridRow));
 
-        public static Condition DataGridRowHeader { get; } = ByClassName("DataGridRowHeader");
+        public static Condition DataGridRowHeader { get; } = ByClassName(nameof(DataGridRowHeader));
 
-        public static Condition DataGridDetailsPresenter { get; } = ByClassName("DataGridDetailsPresenter");
+        public static Condition DataGridDetailsPresenter { get; } = ByClassName(nameof(DataGridDetailsPresenter));
 
         public static Condition DataItem { get; } = ByControlType(ControlType.DataItem);
 
-        public static Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName("DatePicker"));
+        public static Condition DatePicker { get; } = new AndCondition(ByControlType(ControlType.Custom), ByClassName(nameof(DatePicker)));
 
-        public static Condition Frame { get; } = ByClassName("Frame");
+        public static Condition Frame { get; } = ByClassName(nameof(Frame));
 
         public static Condition ControlTypeDocument { get; } = ByControlType(ControlType.Document);
 
-        public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("Expander"));
+        public static AndCondition Expander { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName(nameof(Expander)));
 
-        public static Condition GridSplitter { get; } = ByClassName("GridSplitter");
+        public static Condition GridSplitter { get; } = ByClassName(nameof(GridSplitter));
 
         public static Condition GridViewCell { get; } = new AndCondition(
             new PropertyCondition(AutomationElement.IsTableItemPatternAvailableProperty, true),
             new PropertyCondition(AutomationElement.IsGridItemPatternAvailableProperty, true));
 
-        public static Condition GridViewColumnHeader { get; } = ByClassName("GridViewColumnHeader");
+        public static Condition GridViewColumnHeader { get; } = ByClassName(nameof(GridViewColumnHeader));
 
-        public static Condition GridViewRowHeader { get; } = ByClassName("GridViewRowHeader");
+        public static Condition GridViewRowHeader { get; } = ByClassName(nameof(GridViewRowHeader));
 
-        public static Condition GridViewHeaderRowPresenter { get; } = ByClassName("GridViewHeaderRowPresenter");
+        public static Condition GridViewHeaderRowPresenter { get; } = ByClassName(nameof(GridViewHeaderRowPresenter));
 
-        public static Condition GroupBox { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName("GroupBox"));
+        public static Condition GroupBox { get; } = new AndCondition(ByControlType(ControlType.Group), ByClassName(nameof(GroupBox)));
 
         public static Condition Header { get; } = ByControlType(ControlType.Header);
 
         public static Condition HeaderItem { get; } = ByControlType(ControlType.HeaderItem);
 
-        public static Condition HeaderSite { get; } = new PropertyCondition(AutomationElement.AutomationIdProperty, "HeaderSite");
+        public static Condition HeaderSite { get; } = new PropertyCondition(AutomationElement.AutomationIdProperty, nameof(HeaderSite));
 
         public static Condition NotHeaderSite { get; } = new NotCondition(HeaderSite);
 
-        public static Condition HorizontalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId("VerticalScrollBar")));
+        public static Condition HorizontalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId(nameof(VerticalScrollBar))));
 
-        public static Condition VerticalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId("HorizontalScrollBar")));
+        public static Condition VerticalScrollBar { get; } = new AndCondition(ByControlType(ControlType.ScrollBar), new NotCondition(ByAutomationId(nameof(HorizontalScrollBar))));
 
         public static Condition Hyperlink { get; } = ByControlType(ControlType.Hyperlink);
 
@@ -81,16 +81,16 @@ namespace Gu.Wpf.UiAutomation
         public static Condition Label { get; } = new AndCondition(
             ByControlType(ControlType.Text),
             new OrCondition(
-                ByClassName("Text"),
+                ByClassName(nameof(Text)),
                 ByClassName("Static")));
 
-        public static Condition ListBox { get; } = ByClassName("ListBox");
+        public static Condition ListBox { get; } = ByClassName(nameof(ListBox));
 
-        public static Condition ListBoxItem { get; } = ByClassName("ListBoxItem");
+        public static Condition ListBoxItem { get; } = ByClassName(nameof(ListBoxItem));
 
-        public static Condition ListView { get; } = ByClassName("ListView");
+        public static Condition ListView { get; } = ByClassName(nameof(ListView));
 
-        public static Condition ListViewItem { get; } = ByClassName("ListViewItem");
+        public static Condition ListViewItem { get; } = ByClassName(nameof(ListViewItem));
 
         public static Condition Menu { get; } = ByControlType(ControlType.Menu);
 
@@ -110,19 +110,19 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition Pane { get; } = ByControlType(ControlType.Pane);
 
-        public static Condition PasswordBox { get; } = ByClassName("PasswordBox");
+        public static Condition PasswordBox { get; } = ByClassName(nameof(PasswordBox));
 
         public static Condition ProgressBar { get; } = ByControlType(ControlType.ProgressBar);
 
         public static Condition RadioButton { get; } = ByControlType(ControlType.RadioButton);
 
-        public static Condition RepeatButton { get; } = ByClassName("RepeatButton");
+        public static Condition RepeatButton { get; } = ByClassName(nameof(RepeatButton));
 
-        public static Condition RichTextBox { get; } = ByClassName("RichTextBox");
+        public static Condition RichTextBox { get; } = ByClassName(nameof(RichTextBox));
 
         public static Condition ScrollBar { get; } = ByControlType(ControlType.ScrollBar);
 
-        public static Condition ScrollViewer { get; } = ByClassName("ScrollViewer");
+        public static Condition ScrollViewer { get; } = ByClassName(nameof(ScrollViewer));
 
         public static Condition Separator { get; } = ByControlType(ControlType.Separator);
 
@@ -140,14 +140,14 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition ControlTypeTable { get; } = ByControlType(ControlType.Table);
 
-        public static Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName("TextBlock"));
+        public static Condition TextBlock { get; } = new AndCondition(ByControlType(ControlType.Text), ByClassName(nameof(TextBlock)));
 
         /// <summary>
         /// For finding textblocks and labels
         /// </summary>
         public static Condition Text { get; } = ByControlType(ControlType.Text);
 
-        public static Condition TextBox { get; } = ByClassName("TextBox");
+        public static Condition TextBox { get; } = ByClassName(nameof(TextBox));
 
         public static Condition TextBoxBase { get; } = ByControlType(ControlType.Edit);
 

@@ -8,6 +8,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     {
         NOTHING = 0x00000000,
         XBUTTON1 = 0x00000001,
-        XBUTTON2 = 0x00000002
+        XBUTTON2 = 0x00000002,
     }
 }

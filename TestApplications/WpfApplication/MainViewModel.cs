@@ -15,7 +15,7 @@ namespace WpfApplication
             {
                 new DataGridItemViewModel { IntValue = 1, StringValue = "Spongebob" },
                 new DataGridItemViewModel { IntValue = 2, StringValue = "Patrick" },
-                new DataGridItemViewModel { IntValue = 3, StringValue = "Tadeus" }
+                new DataGridItemViewModel { IntValue = 3, StringValue = "Tadeus" },
             };
 
             this.invokeButtonText = "Invoke me!";

@@ -438,7 +438,7 @@ namespace Gu.Wpf.UiAutomation
                 mouseData = data,
                 dwExtraInfo = User32.GetMessageExtraInfo(),
                 time = 0,
-                dwFlags = flags
+                dwFlags = flags,
             };
 
             // Build the input object

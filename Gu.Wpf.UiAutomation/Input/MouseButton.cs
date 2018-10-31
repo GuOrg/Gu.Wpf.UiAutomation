@@ -25,6 +25,6 @@
         /// <summary>
         /// The fifth mouse button
         /// </summary>
-        XButton2
+        XButton2,
     }
 }

@@ -13,6 +13,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         ALT = 0x04,
         Hankaku = 0x08,
         Reserved1 = 0x10,
-        Reserved2 = 0x20
+        Reserved2 = 0x20,
     }
 }

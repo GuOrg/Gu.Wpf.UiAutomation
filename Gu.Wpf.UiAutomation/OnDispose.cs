@@ -10,6 +10,6 @@
         /// <summary>
         /// Leave the process running when the <see cref="Application"/> is disposed.
         /// </summary>
-        LeaveOpen
+        LeaveOpen,
     }
 }

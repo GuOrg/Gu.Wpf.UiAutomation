@@ -165,7 +165,7 @@ namespace Gu.Wpf.UiAutomation
                                              Mode = BindingMode.OneWay,
                                              Source = actualButton,
                                          },
-                                     }
+                                     },
                                  })
                              .IgnoreReturnValue();
         }

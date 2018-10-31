@@ -114,6 +114,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         F21 = 0x6C,
         F22 = 0x6D,
         F23 = 0x6E,
-        F24 = 0x76
+        F24 = 0x76,
     }
 }

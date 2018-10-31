@@ -7,6 +7,6 @@
         Wpf,
         WinForms,
         Win32,
-        Xaml
+        Xaml,
     }
 }

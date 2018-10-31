@@ -224,7 +224,7 @@ namespace Gu.Wpf.UiAutomation
             var keyboardInput = new KEYBDINPUT
             {
                 time = 0,
-                dwExtraInfo = User32.GetMessageExtraInfo()
+                dwExtraInfo = User32.GetMessageExtraInfo(),
             };
 
             // Add the "key-up" flag if needed. By default it is "key-down"

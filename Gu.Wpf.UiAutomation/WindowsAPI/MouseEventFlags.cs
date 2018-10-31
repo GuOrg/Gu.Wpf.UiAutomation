@@ -20,6 +20,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         MOUSEEVENTF_HWHEEL = 0x1000, // >= Win Vista only
         MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000,
         MOUSEEVENTF_VIRTUALDESK = 0x4000,
-        MOUSEEVENTF_ABSOLUTE = 0x8000
+        MOUSEEVENTF_ABSOLUTE = 0x8000,
     }
 }
