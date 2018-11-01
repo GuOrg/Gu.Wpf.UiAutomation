@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
     {
         private const string ExeFileName = "WpfApplication.exe";
 
-        private static readonly string WindowName = "GroupBoxWindow";
+        private const string WindowName = "GroupBoxWindow";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

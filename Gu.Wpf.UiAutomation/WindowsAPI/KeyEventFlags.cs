@@ -7,7 +7,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     using System;
 
     [Flags]
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum KeyEventFlags : uint
+#pragma warning restore CA1028 // Enum Storage should be Int32
     {
         KEYEVENTF_KEYDOWN = 0x0000,
         KEYEVENTF_EXTENDEDKEY = 0x0001,

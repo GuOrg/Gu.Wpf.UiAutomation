@@ -7,7 +7,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     using System;
 
     [Flags]
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum SendMessageTimeoutFlags : uint
+#pragma warning restore CA1028 // Enum Storage should be Int32
     {
         SMTO_NORMAL = 0x0,
         SMTO_BLOCK = 0x1,

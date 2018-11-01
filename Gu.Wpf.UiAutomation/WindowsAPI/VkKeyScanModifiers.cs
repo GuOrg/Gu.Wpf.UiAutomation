@@ -1,11 +1,14 @@
 // ReSharper disable UnusedMember.Global
 // ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;
 
     [Flags]
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum VkKeyScanModifiers : byte
+#pragma warning restore CA1028 // Enum Storage should be Int32
     {
         NONE = 0,
         SHIFT = 0x01,

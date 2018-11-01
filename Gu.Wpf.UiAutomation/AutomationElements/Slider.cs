@@ -1,6 +1,5 @@
 namespace Gu.Wpf.UiAutomation
 {
-    using System;
     using System.Globalization;
     using System.Windows.Automation;
 

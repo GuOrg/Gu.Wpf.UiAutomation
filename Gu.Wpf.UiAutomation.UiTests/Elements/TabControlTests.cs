@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
     public class TabControlTests
     {
         private const string ExeFileName = "WpfApplication.exe";
-        private static readonly string WindowName = "TabControlWindow";
+        private const string WindowName = "TabControlWindow";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

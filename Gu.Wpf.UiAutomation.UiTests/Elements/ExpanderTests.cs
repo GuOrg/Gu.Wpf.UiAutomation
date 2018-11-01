@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
     {
         private const string ExeFileName = "WpfApplication.exe";
 
-        private static readonly string WindowName = "ExpanderWindow";
+        private const string WindowName = "ExpanderWindow";
 
         [OneTimeTearDown]
         public void OneTimeTearDown()

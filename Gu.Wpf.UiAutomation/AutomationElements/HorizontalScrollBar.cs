@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Windows.Automation;
@@ -23,7 +23,7 @@
                     case FrameworkType.Win32:
                         return "UpButton";
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidOperationException($"Did not find {nameof(this.SmallDecrementText)} for framework type: {this.FrameworkType}");
                 }
             }
         }
@@ -41,7 +41,7 @@
                     case FrameworkType.Win32:
                         return "DownButton";
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidOperationException($"Did not find {nameof(this.SmallIncrementText)} for framework type: {this.FrameworkType}");
                 }
             }
         }
@@ -59,7 +59,7 @@
                     case FrameworkType.Win32:
                         return "DownPageButton";
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidOperationException($"Did not find {nameof(this.LargeDecrementText)} for framework type: {this.FrameworkType}");
                 }
             }
         }
@@ -77,7 +77,7 @@
                     case FrameworkType.Win32:
                         return "UpPageButton";
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidOperationException($"Did not find {nameof(this.LargeIncrementText)} for framework type: {this.FrameworkType}");
                 }
             }
         }

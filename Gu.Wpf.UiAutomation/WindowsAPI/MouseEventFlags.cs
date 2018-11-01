@@ -7,7 +7,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     using System;
 
     [Flags]
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum MouseEventFlags : uint
+#pragma warning restore CA1028 // Enum Storage should be Int32
     {
         MOUSEEVENTF_MOVE = 0x0001,
         MOUSEEVENTF_LEFTDOWN = 0x0002,
