@@ -69,6 +69,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.MoveBy(800, 0);
                 Mouse.MoveBy(0, 400);
                 Mouse.MoveBy(-400, -200);
+                var expected = new[]
+                {
+                    "MouseEnter Position: 80,0",
+                    "PreviewMouseMove Position: 80,0",
+                    "MouseMove Position: 80,0",
+                    "PreviewMouseMove Position: 160,0",
+                    "MouseMove Position: 160,0",
+                    "MouseLeave Position: 240,0",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
 

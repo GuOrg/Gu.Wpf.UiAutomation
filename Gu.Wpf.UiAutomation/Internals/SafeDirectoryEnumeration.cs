@@ -1,4 +1,4 @@
-namespace Gu.Wpf.UiAutomation.Internals
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;

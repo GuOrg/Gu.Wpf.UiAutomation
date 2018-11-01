@@ -1,9 +1,15 @@
 // ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
+#pragma warning disable CA1051 // Do not declare visible instance fields
+#pragma warning disable CA2225 // Operator overloads have named alternates
+#pragma warning disable CA1815 // Override equals and operator equals on value types
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System;
     using System.Drawing;
     using System.Runtime.InteropServices;
 
+    [Obsolete("This is not used anywhere, dunno if there is a reason to keep it.")]
     [StructLayout(LayoutKind.Sequential)]
     public struct COLORREF
     {

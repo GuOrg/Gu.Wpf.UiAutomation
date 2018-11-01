@@ -9,7 +9,6 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Reflection;
     using System.Windows.Automation;
-    using Gu.Wpf.UiAutomation.Internals;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -671,7 +670,7 @@ namespace Gu.Wpf.UiAutomation
         {
             if (this.disposed)
             {
-                throw new ObjectDisposedException(this.GetType().FullName);
+                throw new ObjectDisposedException(typeof(Application).FullName);
             }
         }
 
