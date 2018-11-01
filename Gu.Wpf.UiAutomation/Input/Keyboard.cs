@@ -265,6 +265,11 @@ namespace Gu.Wpf.UiAutomation
                 var errorCode = Marshal.GetLastWin32Error();
                 Logger.Default.Warn("Could not send keyboard input. ErrorCode: {0}", errorCode);
             }
+
+            if (WindowsVersion.IsWindows10())
+            {
+                Wait.For(TimeSpan.FromMilliseconds(10));
+            }
         }
 
         /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>

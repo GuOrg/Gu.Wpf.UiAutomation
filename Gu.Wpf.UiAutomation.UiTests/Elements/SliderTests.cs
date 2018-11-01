@@ -54,18 +54,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var oldPos = thumb.Bounds.Center();
                 thumb.SlideHorizontally(50);
                 Wait.UntilInputIsProcessed();
-
-                if (WindowsVersion.IsWindows10())
-                {
-                    Assert.Inconclusive();
-                    Assert.AreEqual(oldPos.X + 50, thumb.Bounds.Center().X);
-                    Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
-                }
-                else
-                {
-                    Assert.AreEqual(oldPos.X + 49, thumb.Bounds.Center().X);
-                    Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
-                }
+                Assert.AreEqual(oldPos.X + 49, thumb.Bounds.Center().X);
+                Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
             }
         }
 

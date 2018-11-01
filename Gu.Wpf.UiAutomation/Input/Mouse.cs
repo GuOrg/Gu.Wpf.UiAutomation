@@ -451,6 +451,11 @@ namespace Gu.Wpf.UiAutomation
                 var errorCode = Marshal.GetLastWin32Error();
                 Logger.Default.Warn("Could not send mouse input. ErrorCode: {0}", errorCode);
             }
+
+            if (WindowsVersion.IsWindows10())
+            {
+                Wait.For(TimeSpan.FromMilliseconds(10));
+            }
         }
 
         /// <summary>
@@ -467,20 +472,20 @@ namespace Gu.Wpf.UiAutomation
             y = ((y - vScreenTop) * 65536 / vScreenHeight) + (65536 / (vScreenHeight * 2));
         }
 
-        /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>
+        /// <summary>Disposable class which presses the button on creation and releases it on dispose.</summary>
         private class PressedButton : IDisposable
         {
-            private readonly MouseButton key;
+            private readonly MouseButton button;
 
-            public PressedButton(MouseButton key)
+            public PressedButton(MouseButton button)
             {
-                this.key = key;
-                Down(key);
+                this.button = button;
+                Down(button);
             }
 
             public void Dispose()
             {
-                Up(this.key);
+                Up(this.button);
             }
         }
     }
