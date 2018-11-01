@@ -1,3 +1,4 @@
+// ReSharper disable IdentifierTypo
 #pragma warning disable SA1310 // Field names must not contain underscore
 #pragma warning disable SA1600 // Elements must be documented
 #pragma warning disable CA1707 // Identifiers should not contain underscores

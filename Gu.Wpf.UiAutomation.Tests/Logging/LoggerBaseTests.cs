@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Tests.Logging
+namespace Gu.Wpf.UiAutomation.Tests.Logging
 {
     using System;
     using Moq;
@@ -31,7 +31,7 @@
         }
 
         [Test]
-        public void IsTraceEnabled_True_TraceLoggingIsEnabled()
+        public void IsTraceEnabledTrueTraceLoggingIsEnabled()
         {
             // Arrange
             var mock = new Mock<TestLogger>
@@ -127,7 +127,7 @@
         }
 
         [Test]
-        public void IsInfoEnabled_True_InfoLoggingIsEnabled()
+        public void IsInfoEnabledTrueInfoLoggingIsEnabled()
         {
             // Arrange
             var mock = new Mock<TestLogger>
@@ -151,7 +151,7 @@
         }
 
         [Test]
-        public void IsWarnEnabled_False_WarnLoggingIsDisabled()
+        public void IsWarnEnabledFalseWarnLoggingIsDisabled()
         {
             // Arrange
             var mock = new Mock<TestLogger>

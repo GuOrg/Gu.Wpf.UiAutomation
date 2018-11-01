@@ -1,7 +1,10 @@
 // ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
+// ReSharper disable UnusedMember.Global
 #pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
 #pragma warning disable SA1600 // Elements must be documented
 #pragma warning disable GU0060 // Enum member value conflict. According to Roman this is ok.
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation
 {
     public enum Key : ushort
