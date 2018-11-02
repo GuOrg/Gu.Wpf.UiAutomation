@@ -33,7 +33,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindButton().AutomationElement);
+                Dump.Recursive(window.FindButton().AutomationElement);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindFirst(TreeScope.Descendants, Conditions.Calendar).AutomationElement);
+                Dump.Recursive(window.FindFirst(TreeScope.Descendants, Conditions.Calendar).AutomationElement);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindComboBox().AutomationElement);
+                Dump.Recursive(window.FindComboBox().AutomationElement);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 var comboBox = window.FindComboBox();
                 comboBox.Expand();
-                DumpRecursive(comboBox.AutomationElement);
+                Dump.Recursive(comboBox.AutomationElement);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using (var app = Application.Launch(ExeFileName, "FrameWindow"))
             {
-                DumpRecursive(app.MainWindow.FindFrame().AutomationElement);
+                Dump.Recursive(app.MainWindow.FindFrame().AutomationElement);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "SingleDataGridWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindDataGrid().AutomationElement);
+                Dump.Recursive(window.FindDataGrid().AutomationElement);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindDataGrid("DataGrid10").AutomationElement);
+                Dump.Recursive(window.FindDataGrid("DataGrid10").AutomationElement);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 window.FindButton("Show Dialog").Click();
                 var dialog = window.FindDialog();
                 var element = dialog.AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
                 dialog.Close();
             }
         }
@@ -119,7 +119,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindExpander().AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -128,7 +128,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using (var app = Application.Launch(ExeFileName, "GridSplitterWindow"))
             {
-                DumpRecursive(app.MainWindow.AutomationElement);
+                Dump.Recursive(app.MainWindow.AutomationElement);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 window.FindButton("Show OpenFileDialog").Click();
                 var dialog = window.FindOpenFileDialog();
-                DumpRecursive(dialog.AutomationElement);
+                Dump.Recursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }
         }
@@ -153,7 +153,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 var window = app.MainWindow;
                 window.FindButton("Show SaveFileDialog").Click();
                 var dialog = window.FindSaveFileDialog();
-                DumpRecursive(dialog.AutomationElement);
+                Dump.Recursive(dialog.AutomationElement);
                 dialog.AutomationElement.WindowPattern().Close();
             }
         }
@@ -164,7 +164,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindMenu().AutomationElement);
+                Dump.Recursive(window.FindMenu().AutomationElement);
             }
         }
 
@@ -175,7 +175,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindTabControl().AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -186,7 +186,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindTabControl().Items[0].AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindGroupBox().AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -208,7 +208,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindFirstDescendant(Conditions.ByClassName("RichTextBox")).AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -219,7 +219,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.FindFirstDescendant(new PropertyCondition(AutomationElement.IsPasswordProperty, true)).AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -228,7 +228,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using (var app = Application.Launch(ExeFileName, "SeparatorWindow"))
             {
-                DumpRecursive(app.MainWindow.AutomationElement);
+                Dump.Recursive(app.MainWindow.AutomationElement);
             }
         }
 
@@ -237,7 +237,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using (var app = Application.Launch(ExeFileName, "StatusBarWindow"))
             {
-                DumpRecursive(app.MainWindow.FindStatusBar().AutomationElement);
+                Dump.Recursive(app.MainWindow.FindStatusBar().AutomationElement);
             }
         }
 
@@ -248,7 +248,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var element = window.AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
             }
         }
 
@@ -258,7 +258,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindDataGrid()[0, 0].AutomationElement);
+                Dump.Recursive(window.FindDataGrid()[0, 0].AutomationElement);
             }
         }
 
@@ -268,7 +268,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindListBox().AutomationElement);
+                Dump.Recursive(window.FindListBox().AutomationElement);
             }
         }
 
@@ -278,7 +278,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindListBox("ListBox10").AutomationElement);
+                Dump.Recursive(window.FindListBox("ListBox10").AutomationElement);
             }
         }
 
@@ -288,7 +288,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindListView().AutomationElement);
+                Dump.Recursive(window.FindListView().AutomationElement);
             }
         }
 
@@ -301,7 +301,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 window.FindButton("Show MessageBox OKCancel").Click();
                 var messageBox = window.FindMessageBox();
                 var element = messageBox.AutomationElement;
-                DumpRecursive(element);
+                Dump.Recursive(element);
                 messageBox.Close();
             }
         }
@@ -312,7 +312,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.Launch(ExeFileName, "ScrollBarWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindScrollViewer().AutomationElement);
+                Dump.Recursive(window.FindScrollViewer().AutomationElement);
             }
         }
 
@@ -322,7 +322,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindTextBox().AutomationElement);
+                Dump.Recursive(window.FindTextBox().AutomationElement);
             }
         }
 
@@ -333,7 +333,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             {
                 var window = app.MainWindow;
                 var toggleButton = window.FindToggleButton();
-                DumpRecursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
+                Dump.Recursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
             }
         }
 
@@ -343,57 +343,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using (var app = Application.AttachOrLaunch(ExeFileName, "TreeViewWindow"))
             {
                 var window = app.MainWindow;
-                DumpRecursive(window.FindTreeView().AutomationElement);
-            }
-        }
-
-        private static void DumpRecursive(AutomationElement element, bool allPropertiesAndPatterns = false, string padding = "")
-        {
-            DumpPropertiesAndPatterns(element, allPropertiesAndPatterns, padding);
-            foreach (var child in element.Children())
-            {
-                DumpRecursive(child, allPropertiesAndPatterns, padding + "  ");
-            }
-        }
-
-        private static void DumpPropertiesAndPatterns(AutomationElement element, bool all = true, string padding = "")
-        {
-            if (all)
-            {
-                foreach (var pattern in element.GetSupportedPatterns())
-                {
-                    Console.WriteLine($"{padding}{pattern.ProgrammaticName}");
-                    var currentPattern = element.GetCurrentPattern(pattern);
-                    Console.WriteLine($"{padding}{currentPattern}");
-                    var currentProperty = currentPattern.GetType().GetProperty("Current");
-                    if (currentProperty != null)
-                    {
-                        var value = currentProperty.GetValue(currentPattern);
-                        foreach (var property in value.GetType().GetProperties())
-                        {
-                            Console.WriteLine($"{padding}{property.Name} {property.GetValue(value)}");
-                        }
-                    }
-                }
-
-                foreach (var property in element.GetSupportedProperties().OrderBy(x => x.ProgrammaticName))
-                {
-                    Console.WriteLine($"{padding}{property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} {element.GetCurrentPropertyValue(property)}");
-                }
-
-                Console.WriteLine();
-            }
-            else
-            {
-                var info = element.Current;
-                Console.WriteLine($"{padding}ControlType: {info.ControlType.ProgrammaticName} (LocalizedControlType: {info.LocalizedControlType})");
-                Console.WriteLine($"{padding}ClassName: {info.ClassName}");
-                Console.WriteLine($"{padding}Name: {info.Name}");
-                Console.WriteLine($"{padding}AutomationId: {info.AutomationId}");
-                Console.WriteLine($"{padding}IsContentElement: {info.IsContentElement} IsControlElement: {info.IsControlElement}");
-                Console.WriteLine($"{padding}Properties: {string.Join(", ", element.GetSupportedProperties().Select(x => x.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")).OrderBy(x => x))}");
-                Console.WriteLine($"{padding}Patterns: {string.Join(", ", element.GetSupportedPatterns().Select(x => x.ProgrammaticName.TrimEnd("Identifiers.Pattern").TrimEnd("Pattern")).OrderBy(x => x))}");
-                Console.WriteLine();
+                Dump.Recursive(window.FindTreeView().AutomationElement);
             }
         }
     }
