@@ -14,12 +14,12 @@
   <PropertyGroup>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
-    <Version>0.2.3.2</Version>
+    <Version>0.2.4.0</Version>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
     <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>
-    <PackageReleaseNotes>BUGFIX: Don't look in %windir%</PackageReleaseNotes>
+    <PackageReleaseNotes>FEATURE: detect AppVeyor and wait longer.</PackageReleaseNotes>
     <Description>Library for writing UI-tests for WPF.</Description>
   </PropertyGroup>
 

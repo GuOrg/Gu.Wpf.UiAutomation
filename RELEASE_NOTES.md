@@ -1,3 +1,6 @@
+# 0.2.4
+* FEATURE: detect AppVeyor and wait longer.
+
 # 0.2.3
 * FEATURE: Retry in ImageAssert
 
