@@ -111,4 +111,7 @@
     <Rule Id="SA1652" Action="None" />
     <Rule Id="SA0001" Action="None" />
   </Rules>
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+    <Rule Id="CA1707" Action="None" />
+  </Rules>
 </RuleSet>

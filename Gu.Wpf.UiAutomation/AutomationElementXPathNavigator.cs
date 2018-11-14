@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Windows.Automation;

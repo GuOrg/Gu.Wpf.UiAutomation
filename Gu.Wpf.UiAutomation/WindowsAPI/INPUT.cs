@@ -7,8 +7,10 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     public struct INPUT
     {
 #pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning disable CA1051 // Do not declare visible instance fields
         public InputType type;
         public INPUTUNION u;
+#pragma warning restore CA1051 // Do not declare visible instance fields
 #pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
 
         public static int Size => Marshal.SizeOf(typeof(INPUT));

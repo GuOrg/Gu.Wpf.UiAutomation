@@ -23,4 +23,7 @@
     <Rule Id="SA1633" Action="None" />
     <Rule Id="SA1642" Action="None" />
   </Rules>
+  <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
+    <Rule Id="CA1401" Action="None" />
+  </Rules>
 </RuleSet>
