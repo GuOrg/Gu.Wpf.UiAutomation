@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Calls <see cref="GetMainWindow"/> with a timeout of ten seconds.
         /// </summary>
-        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(10));
+        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsAppVeyor() ? 100 : 10));
 
         /// <summary>
         /// The process Id of the application.
