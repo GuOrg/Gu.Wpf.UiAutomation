@@ -4,39 +4,51 @@ namespace Gu.Wpf.UiAutomation
     using System;
     using Microsoft.Win32;
 
+    /// <summary>
+    /// Provides methods for determining current windows version.
+    /// </summary>
     public static class WindowsVersion
     {
         private static readonly string CurrentProductName = GetCurrentProductName();
 
-        public static bool CurrentContains(string name)
-        {
-            return CurrentProductName.Contains(name);
-        }
+        public static bool CurrentContains(string name) => CurrentProductName.Contains(name);
 
-        public static bool IsWindows7()
-        {
-            return CurrentContains("Windows 7");
-        }
+        /// <summary>
+        /// Returns true if running on AppVeyor.
+        /// Checks if environment variable APPVEYOR is defined.
+        /// </summary>
+        /// <returns>True if on AppVeyor.</returns>
+        public static bool IsAppVeyor() => Environment.GetEnvironmentVariable("APPVEYOR") != null;
 
-        public static bool IsWindows8()
-        {
-            return CurrentContains("Windows 8");
-        }
+        /// <summary>
+        /// Check if the installed operating system is Windows 7.
+        /// </summary>
+        /// <returns>True if Windows 7.</returns>
+        public static bool IsWindows7() => CurrentContains("Windows 7");
 
-        public static bool IsWindows8_1()
-        {
-            return CurrentContains("Windows 8.1");
-        }
+        /// <summary>
+        /// Check if the installed operating system is Windows 8.
+        /// </summary>
+        /// <returns>True if Windows 8.</returns>
+        public static bool IsWindows8() => CurrentContains("Windows 8");
 
-        public static bool IsWindows10()
-        {
-            return CurrentContains("Windows 10");
-        }
+        /// <summary>
+        /// Check if the installed operating system is Windows 8.1.
+        /// </summary>
+        /// <returns>True if Windows 8.1.</returns>
+        public static bool IsWindows8_1() => CurrentContains("Windows 8.1");
 
-        public static bool IsWindowsServer2016()
-        {
-            return CurrentContains("Windows Server 2016");
-        }
+        /// <summary>
+        /// Check if the installed operating system is Windows 10.
+        /// </summary>
+        /// <returns>True if Windows 10.</returns>
+        public static bool IsWindows10() => CurrentContains("Windows 10");
+
+        /// <summary>
+        /// Check if the installed operating system is Windows Server 2016.
+        /// </summary>
+        /// <returns>True if Windows Server 2016.</returns>
+        public static bool IsWindowsServer2016() => CurrentContains("Windows Server 2016");
 
         private static string GetCurrentProductName()
         {
