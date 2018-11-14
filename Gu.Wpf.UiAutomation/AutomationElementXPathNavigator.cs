@@ -314,13 +314,19 @@ namespace Gu.Wpf.UiAutomation
 
         private string GetAttributeName(int index)
         {
-            var name = Enum.GetName(typeof(ElementAttributes), index);
-            if (name == null)
+            switch ((ElementAttributes)index)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                case ElementAttributes.AutomationId:
+                    return nameof(ElementAttributes.AutomationId);
+                case ElementAttributes.Name:
+                    return nameof(ElementAttributes.Name);
+                case ElementAttributes.ClassName:
+                    return nameof(ElementAttributes.ClassName);
+                case ElementAttributes.HelpText:
+                    return nameof(ElementAttributes.HelpText);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(index));
             }
-
-            return name;
         }
 
         private int GetAttributeIndexFromName(string attributeName)
