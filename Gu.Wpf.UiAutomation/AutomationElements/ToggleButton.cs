@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.Globalization;
     using System.Windows.Automation;
 
     public class ToggleButton : Control
@@ -27,7 +28,7 @@ namespace Gu.Wpf.UiAutomation
                     case ToggleState.Indeterminate:
                         return null;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new InvalidOperationException($"Not handling state {this.State}");
                 }
             }
 
@@ -50,7 +51,7 @@ namespace Gu.Wpf.UiAutomation
                     return;
                 }
 
-                throw new UiAutomationException($"Setting ToggleButton {this.Name}.IsChecked to {value?.ToString() ?? "null"} failed.");
+                throw new UiAutomationException($"Setting ToggleButton {this.Name}.IsChecked to {value?.ToString(CultureInfo.InvariantCulture) ?? "null"} failed.");
             }
         }
 

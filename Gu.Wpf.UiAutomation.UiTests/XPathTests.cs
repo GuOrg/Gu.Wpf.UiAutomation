@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System.Globalization;
     using NUnit.Framework;
@@ -18,7 +18,7 @@
             using (var app = Application.AttachOrLaunch("notepad.exe"))
             {
                 var window = app.MainWindow;
-                var item = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{this.GetFileMenuText()}']");
+                var item = window.FindFirstByXPath($"/MenuBar/MenuItem[@Name='{GetFileMenuText()}']");
                 Assert.NotNull(item);
             }
         }
@@ -47,7 +47,7 @@
             }
         }
 
-        private string GetFileMenuText()
+        private static string GetFileMenuText()
         {
             switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {

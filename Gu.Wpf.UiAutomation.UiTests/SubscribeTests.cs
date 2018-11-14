@@ -136,10 +136,10 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 using (Subscribe.ToFocusChangedEvent((element, _) => changes.Add(element.ToString())))
                 {
                     Wait.For(TimeSpan.FromMilliseconds(100));
-                    var button1 = mainWindow.FindButton(this.GetResizeText());
+                    var button1 = mainWindow.FindButton(GetResizeText());
                     button1.Invoke();
                     Wait.For(TimeSpan.FromMilliseconds(100));
-                    var radio2 = mainWindow.FindRadioButton(this.GetPixelsText());
+                    var radio2 = mainWindow.FindRadioButton(GetPixelsText());
                     Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                     Wait.For(TimeSpan.FromMilliseconds(100));
                     using (Keyboard.Pressing(Key.ESCAPE))
@@ -152,7 +152,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             }
         }
 
-        private string GetResizeText()
+        private static string GetResizeText()
         {
             switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {
@@ -163,7 +163,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             }
         }
 
-        private string GetPixelsText()
+        private static string GetPixelsText()
         {
             switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
             {

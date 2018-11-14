@@ -55,7 +55,7 @@ namespace Gu.Wpf.UiAutomation
 
                                 break;
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new InvalidOperationException($"Not handling OnFail {OnFail}");
                         }
                     }
                 }
@@ -169,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
                                         (bitmap) => bitmap.Save(TempFileName(fileName), GetImageFormat(fileName)));
                                     break;
                                 default:
-                                    throw new ArgumentOutOfRangeException();
+                                    throw new InvalidOperationException($"Not handling OnFail {OnFail}");
                             }
                         }
                     }
@@ -525,7 +525,7 @@ namespace Gu.Wpf.UiAutomation
                 case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
                     return PixelFormats.Pbgra32;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(bitmap), bitmap.PixelFormat, "Unhandled pixel format.");
             }
         }
 

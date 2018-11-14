@@ -1,6 +1,7 @@
-﻿namespace Gu.Wpf.UiAutomation.Tests.Extensions
+namespace Gu.Wpf.UiAutomation.Tests.Extensions
 {
     using System;
+    using System.Collections;
     using System.Linq;
     using NUnit.Framework;
 
@@ -33,6 +34,14 @@
                             .ToArray();
             Assert.AreEqual(expected, ints.TryGetSingle(x => x == 1, out var result));
             Assert.AreEqual(match, result);
+        }
+
+        public IEnumerable Get(int[] xs)
+        {
+            foreach (var x in xs)
+            {
+                yield return x;
+            }
         }
     }
 }

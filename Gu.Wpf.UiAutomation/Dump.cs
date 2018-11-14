@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A string representing the automation tree of <paramref name="element"/>.</returns>
         public static string Recursive(UiElement element, bool allPropertiesAndPatterns = false)
         {
-            return Recursive(element.AutomationElement);
+            return Recursive(element.AutomationElement, allPropertiesAndPatterns);
         }
 
         /// <summary>

@@ -95,7 +95,7 @@ namespace Gu.Wpf.UiAutomation
                     return new TextBox(element);
                 }
 
-                throw new Exception("ComboBox is not editable.");
+                throw new InvalidOperationException("ComboBox is not editable.");
             }
         }
 

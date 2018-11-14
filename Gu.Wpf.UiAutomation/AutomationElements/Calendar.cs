@@ -23,7 +23,9 @@ namespace Gu.Wpf.UiAutomation
 
         public CalendarDayButton Select(DateTime dateTime)
         {
+#pragma warning disable CA1305 // Specify IFormatProvider
             return this.Select(dateTime.ToString(CultureInfo.InstalledUICulture));
+#pragma warning restore CA1305 // Specify IFormatProvider
         }
     }
 }

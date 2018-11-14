@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Logging
+namespace Gu.Wpf.UiAutomation.Logging
 {
     using System;
 
@@ -48,42 +48,42 @@
                 case LogLevel.Trace:
                     if (this.IsTraceEnabled)
                     {
-                        this.GatedTrace(this.GetFormattedMessage(message, exception, args));
+                        this.GatedTrace(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
                 case LogLevel.Debug:
                     if (this.IsDebugEnabled)
                     {
-                        this.GatedDebug(this.GetFormattedMessage(message, exception, args));
+                        this.GatedDebug(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
                 case LogLevel.Info:
                     if (this.IsInfoEnabled)
                     {
-                        this.GatedInfo(this.GetFormattedMessage(message, exception, args));
+                        this.GatedInfo(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
                 case LogLevel.Warn:
                     if (this.IsWarnEnabled)
                     {
-                        this.GatedWarn(this.GetFormattedMessage(message, exception, args));
+                        this.GatedWarn(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
                 case LogLevel.Error:
                     if (this.IsErrorEnabled)
                     {
-                        this.GatedError(this.GetFormattedMessage(message, exception, args));
+                        this.GatedError(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
                 case LogLevel.Fatal:
                     if (this.IsFatalEnabled)
                     {
-                        this.GatedFatal(this.GetFormattedMessage(message, exception, args));
+                        this.GatedFatal(GetFormattedMessage(message, exception, args));
                     }
 
                     break;
@@ -176,7 +176,7 @@
 
         protected abstract void GatedFatal(string message);
 
-        private string GetFormattedMessage(string message, Exception exception, params object[] args)
+        private static string GetFormattedMessage(string message, Exception exception, params object[] args)
         {
             var formattedMsg = args == null ? message : string.Format(message, args);
             return exception == null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);

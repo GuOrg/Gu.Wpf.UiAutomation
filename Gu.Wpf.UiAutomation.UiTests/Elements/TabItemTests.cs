@@ -38,6 +38,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var tabItem = tab.Select(index);
                 Assert.AreEqual(header, tabItem.HeaderText);
                 Assert.AreEqual(header, ((TextBlock)tabItem.Header).Text);
+                Assert.AreEqual(content, ((TextBlock)tabItem.Content).Text);
             }
         }
 

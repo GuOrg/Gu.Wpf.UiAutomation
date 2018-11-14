@@ -1,4 +1,5 @@
 // ReSharper disable InconsistentNaming
+#pragma warning disable CA1815 // Override equals and operator equals on value types
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System.Runtime.InteropServices;

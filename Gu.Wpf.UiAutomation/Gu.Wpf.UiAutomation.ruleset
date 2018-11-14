@@ -26,4 +26,10 @@
   <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
     <Rule Id="CA1401" Action="None" />
   </Rules>
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+    <Rule Id="CA1710" Action="None" />
+    <Rule Id="CA1714" Action="None" />
+    <Rule Id="CA1051" Action="None" />
+    <Rule Id="CA1028" Action="None" />
+  </Rules>
 </RuleSet>

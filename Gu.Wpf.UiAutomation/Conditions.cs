@@ -280,7 +280,7 @@ namespace Gu.Wpf.UiAutomation
                             case PropertyConditionFlags.IgnoreCase:
                                 return string.Equals((string)value, (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase);
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new ArgumentOutOfRangeException(nameof(condition), propertyCondition.Flags, "Unknown flags.");
                         }
                     }
 
