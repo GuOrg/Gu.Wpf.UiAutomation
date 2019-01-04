@@ -1,1 +1,8 @@
-﻿
+﻿Gu.Wpf.UiAutomation.AssertException.AssertException() -> void
+Gu.Wpf.UiAutomation.Dump
+Gu.Wpf.UiAutomation.Window.CanMove.get -> bool
+Gu.Wpf.UiAutomation.Window.CanResize.get -> bool
+Gu.Wpf.UiAutomation.Window.Resize(int width, int height) -> void
+static Gu.Wpf.UiAutomation.Dump.Recursive(Gu.Wpf.UiAutomation.UiElement element, bool allPropertiesAndPatterns = false) -> string
+static Gu.Wpf.UiAutomation.Dump.Recursive(System.Windows.Automation.AutomationElement element, bool allPropertiesAndPatterns = false) -> string
+static Gu.Wpf.UiAutomation.WindowsVersion.IsAppVeyor() -> bool

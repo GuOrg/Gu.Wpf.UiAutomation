@@ -1,5 +1,6 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
+    using System.Globalization;
     using System.Linq;
     using NUnit.Framework;
 
@@ -27,6 +28,21 @@
                 var dialog = window.ModalWindows.Single();
                 Assert.AreEqual("Message", dialog.FindTextBlock().Text);
                 dialog.Close();
+            }
+        }
+
+        [Test]
+        public void Resize()
+        {
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            {
+                var window = app.MainWindow;
+                Assert.AreEqual(true, window.CanResize);
+                Assert.AreEqual("300,300", window.Bounds.Size.ToString(CultureInfo.InvariantCulture));
+
+                window.Resize(270, 280);
+                Assert.AreEqual(true, window.CanResize);
+                Assert.AreEqual("270,280", window.Bounds.Size.ToString(CultureInfo.InvariantCulture));
             }
         }
     }

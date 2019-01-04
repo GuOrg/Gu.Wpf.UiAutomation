@@ -29,6 +29,18 @@ namespace Gu.Wpf.UiAutomation
 
         public string Title => this.Name;
 
+        /// <summary>
+        /// Get TransformPattern.CanResize.
+        /// </summary>
+        public bool CanResize => this.AutomationElement.TryGetTransformPattern(out var valuePattern) &&
+                                 valuePattern.Current.CanResize;
+
+        /// <summary>
+        /// Get TransformPattern.CanMove.
+        /// </summary>
+        public bool CanMove => this.AutomationElement.TryGetTransformPattern(out var valuePattern) &&
+                                 valuePattern.Current.CanMove;
+
         public bool IsModal => this.AutomationElement.WindowPattern().Current.IsModal;
 
         public TitleBar TitleBar => new TitleBar(this.AutomationElement.FindFirstChild(Conditions.TitleBar));
@@ -138,9 +150,22 @@ namespace Gu.Wpf.UiAutomation
             this.AutomationElement.WindowPattern().Close();
         }
 
+        /// <summary>Moves the control.</summary>
+        /// <param name="x">Absolute screen coordinates of the left side of the control.</param>
+        /// <param name="y">Absolute screen coordinates of the top of the control.</param>
+        /// <exception cref="System.InvalidOperationException">The <see cref="System.Windows.Automation.TransformPattern.TransformPatternInformation.CanMove" /> property is false.</exception>
         public void MoveTo(int x, int y)
         {
             this.AutomationElement.TransformPattern().Move(x, y);
+        }
+
+        /// <summary>Resizes the control.</summary>
+        /// <param name="width">The new width of the window, in pixels.</param>
+        /// <param name="height">The new height of the window, in pixels.</param>
+        /// <exception cref="System.InvalidOperationException">The <see cref="System.Windows.Automation.TransformPattern.TransformPatternInformation.CanResize" /> property is false.</exception>
+        public void Resize(int width, int height)
+        {
+            this.AutomationElement.TransformPattern().Resize(width, height);
         }
 
         /// <summary>
