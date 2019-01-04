@@ -1,3 +1,6 @@
+# 0.2.5
+* FEATURE: support resizing window.
+
 # 0.2.4
 * FEATURE: detect AppVeyor and wait longer.
 

@@ -4,7 +4,7 @@ projectUrl https://github.com/GuOrg/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: detect AppVeyor and wait longer.
+  FEATURE: support resizing window.
 
 excludedgroups
   Analyzers

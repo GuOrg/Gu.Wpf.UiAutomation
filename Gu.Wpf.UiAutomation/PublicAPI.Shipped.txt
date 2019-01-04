@@ -21,6 +21,7 @@ Gu.Wpf.UiAutomation.Application.StartTime.get -> System.DateTime
 Gu.Wpf.UiAutomation.Application.WaitForMainWindow(System.TimeSpan? waitTimeout = null) -> void
 Gu.Wpf.UiAutomation.Application.WaitWhileBusy(System.TimeSpan? waitTimeout = null) -> void
 Gu.Wpf.UiAutomation.AssertException
+Gu.Wpf.UiAutomation.AssertException.AssertException() -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.AutomationElementExt
@@ -150,6 +151,7 @@ Gu.Wpf.UiAutomation.Dialog.Dialog(System.Windows.Automation.AutomationElement au
 Gu.Wpf.UiAutomation.Dialog.TransformPattern.get -> System.Windows.Automation.TransformPattern
 Gu.Wpf.UiAutomation.Dialog.WindowPattern.get -> System.Windows.Automation.WindowPattern
 Gu.Wpf.UiAutomation.Disposable
+Gu.Wpf.UiAutomation.Dump
 Gu.Wpf.UiAutomation.EnumerableExt
 Gu.Wpf.UiAutomation.ExpandCollapseControl
 Gu.Wpf.UiAutomation.ExpandCollapseControl.Collapse() -> void
@@ -860,6 +862,8 @@ Gu.Wpf.UiAutomation.VerticalScrollBar.ScrollUpLarge() -> void
 Gu.Wpf.UiAutomation.VerticalScrollBar.VerticalScrollBar(System.Windows.Automation.AutomationElement automationElement) -> void
 Gu.Wpf.UiAutomation.Wait
 Gu.Wpf.UiAutomation.Window
+Gu.Wpf.UiAutomation.Window.CanMove.get -> bool
+Gu.Wpf.UiAutomation.Window.CanResize.get -> bool
 Gu.Wpf.UiAutomation.Window.Close() -> void
 Gu.Wpf.UiAutomation.Window.ContextMenu.get -> Gu.Wpf.UiAutomation.ContextMenu
 Gu.Wpf.UiAutomation.Window.FindDialog() -> Gu.Wpf.UiAutomation.Window
@@ -872,6 +876,7 @@ Gu.Wpf.UiAutomation.Window.ModalWindows.get -> System.Collections.Generic.IReadO
 Gu.Wpf.UiAutomation.Window.MoveTo(int x, int y) -> void
 Gu.Wpf.UiAutomation.Window.NativeWindowHandle.get -> System.IntPtr
 Gu.Wpf.UiAutomation.Window.Popup.get -> Gu.Wpf.UiAutomation.Popup
+Gu.Wpf.UiAutomation.Window.Resize(int width, int height) -> void
 Gu.Wpf.UiAutomation.Window.SetTransparency(byte alpha) -> void
 Gu.Wpf.UiAutomation.Window.Title.get -> string
 Gu.Wpf.UiAutomation.Window.TitleBar.get -> Gu.Wpf.UiAutomation.TitleBar
@@ -1807,6 +1812,8 @@ static Gu.Wpf.UiAutomation.Debug.GetXPathToElement(Gu.Wpf.UiAutomation.UiElement
 static Gu.Wpf.UiAutomation.Desktop.AutomationElement.get -> System.Windows.Automation.AutomationElement
 static Gu.Wpf.UiAutomation.Disposable.Create(System.Action dispose) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Disposable.Empty.get -> System.IDisposable
+static Gu.Wpf.UiAutomation.Dump.Recursive(Gu.Wpf.UiAutomation.UiElement element, bool allPropertiesAndPatterns = false) -> string
+static Gu.Wpf.UiAutomation.Dump.Recursive(System.Windows.Automation.AutomationElement element, bool allPropertiesAndPatterns = false) -> string
 static Gu.Wpf.UiAutomation.EnumerableExt.TryGetSingle<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T, bool> predicate, out T result) -> bool
 static Gu.Wpf.UiAutomation.EnumerableExt.TryGetSingle<T>(this System.Collections.Generic.IEnumerable<T> source, out T result) -> bool
 static Gu.Wpf.UiAutomation.ExtensionMethods.Clamp<T>(this T source, T min, T max) -> T
@@ -1936,6 +1943,7 @@ static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.MouseInput(Gu.Wpf.UiAutomation.Windo
 static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Size.get -> int
 static Gu.Wpf.UiAutomation.WindowsStoreAppLauncher.Launch(string appUserModelId, string arguments) -> System.Diagnostics.Process
 static Gu.Wpf.UiAutomation.WindowsVersion.CurrentContains(string name) -> bool
+static Gu.Wpf.UiAutomation.WindowsVersion.IsAppVeyor() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows10() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows7() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8() -> bool
