@@ -45,5 +45,23 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("270,280", window.Bounds.Size.ToString(CultureInfo.InvariantCulture));
             }
         }
+
+        [Test]
+        public void Move()
+        {
+            using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
+            {
+                var window = app.MainWindow;
+                Assert.AreEqual(true, window.CanMove);
+
+                window.MoveTo(10, 20);
+                Assert.AreEqual(true, window.CanMove);
+                Assert.AreEqual("10,20,300,300", window.Bounds.ToString(CultureInfo.InvariantCulture));
+
+                window.MoveTo(30, 40);
+                Assert.AreEqual(true, window.CanMove);
+                Assert.AreEqual("30,40,300,300", window.Bounds.ToString(CultureInfo.InvariantCulture));
+            }
+        }
     }
 }
