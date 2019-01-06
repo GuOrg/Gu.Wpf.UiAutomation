@@ -46,24 +46,9 @@ namespace Gu.Wpf.UiAutomation
         public static IDisposable Down(Point point)
         {
             var location = TouchPoint.Create(point);
-            contacts = new[]
-            {
-                new PointerTouchInfo
-                {
-                    PointerInfo =
-                    {
-                        PointerType = PointerInputType.PT_TOUCH,
-                        PointerFlags = PointerFlag.DOWN | PointerFlag.INRANGE | PointerFlag.INCONTACT,
-                        PtPixelLocation = location,
-                        PointerId = 0,
-                    },
-                    TouchFlags = TouchFlags.NONE,
-                    Orientation = 90,
-                    Pressure = 32000,
-                    TouchMasks = TouchMask.CONTACTAREA | TouchMask.ORIENTATION | TouchMask.PRESSURE,
-                    ContactArea = ContactArea.Create(location, 1),
-                },
-            };
+            var info = PointerTouchInfo.Create(point, 0);
+            contacts = new[] { info };
+
             if (!InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();

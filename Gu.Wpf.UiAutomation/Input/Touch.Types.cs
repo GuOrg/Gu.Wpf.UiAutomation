@@ -1,13 +1,17 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
+// ReSharper disable NotAccessedField.Local
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMember.Local
+#pragma warning disable 649
 namespace Gu.Wpf.UiAutomation
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Windows;
 
     public static partial class Touch
     {
+        [Flags]
         private enum PointerFlag
         {
             NONE = 0x00000000,
@@ -40,6 +44,7 @@ namespace Gu.Wpf.UiAutomation
             NONE = 0x00000000,
         }
 
+        [Flags]
         private enum TouchMask
         {
             NONE = 0x00000000,
@@ -53,7 +58,7 @@ namespace Gu.Wpf.UiAutomation
             PT_POINTER = 0x00000001,
             PT_TOUCH = 0x00000002,
             PT_PEN = 0x00000003,
-            PT_MOUSE = 0x00000004
+            PT_MOUSE = 0x00000004,
         }
 
         private enum PointerButtonChangeType
@@ -68,7 +73,7 @@ namespace Gu.Wpf.UiAutomation
             FOURTHBUTTON_DOWN,
             FOURTHBUTTON_UP,
             FIFTHBUTTON_DOWN,
-            FIFTHBUTTON_UP
+            FIFTHBUTTON_UP,
         }
 
         private struct ContactArea
@@ -148,7 +153,7 @@ namespace Gu.Wpf.UiAutomation
                     Orientation = 90,
                     Pressure = 32000,
                     TouchMasks = TouchMask.CONTACTAREA | TouchMask.ORIENTATION | TouchMask.PRESSURE,
-                    ContactArea = ContactArea.Create(touchPoint, 2),
+                    ContactArea = ContactArea.Create(touchPoint, 1),
                 };
 
                 return contact;
