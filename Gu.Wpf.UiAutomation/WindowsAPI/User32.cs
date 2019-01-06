@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.WindowsAPI
+namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;
     using System.Runtime.InteropServices;
@@ -32,6 +32,12 @@
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetCursorPos(out POINT lpPoint);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool GetCursorInfo(out CURSORINFO info);
+
+        [DllImport("user32.dll")]
+        public static extern CursorState ShowCursor(bool bShow);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetCursorPos(int x, int y);
