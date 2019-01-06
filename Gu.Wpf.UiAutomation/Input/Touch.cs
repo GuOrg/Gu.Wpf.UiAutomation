@@ -1,6 +1,114 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
-    public static class Touch
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.InteropServices;
+    using System.Windows;
+
+    /// <summary>
+    /// For simulating touch input.
+    /// </summary>
+    public static partial class Touch
     {
+        static Touch()
+        {
+            if (!InitializeTouchInjection())
+            {
+                throw new Win32Exception();
+            }
+        }
+
+        private static PointerTouchInfo[] contacts = new PointerTouchInfo[1];
+
+        /// <summary>
+        /// Initialize touch injection. Can be called many times.
+        /// </summary>
+        public static void Initialize()
+        {
+            // nop just for side effect of running static ctor.
+        }
+
+        /// <summary>
+        /// Simulate tap.
+        /// </summary>
+        /// <param name="point">The position.</param>
+        public static void Tap(Point point)
+        {
+            Down(point);
+            Up();
+        }
+
+        /// <summary>
+        /// Simulate touch down.
+        /// </summary>
+        /// <param name="point">The position.</param>
+        public static void Down(Point point)
+        {
+            var location = TouchPoint.Create(point);
+            contacts = new[]
+            {
+                new PointerTouchInfo
+                {
+                    PointerInfo =
+                    {
+                        PointerType = PointerInputType.PT_TOUCH,
+                        PointerFlags = PointerFlag.DOWN | PointerFlag.INRANGE | PointerFlag.INCONTACT,
+                        PtPixelLocation = location,
+                        PointerId = 0,
+                    },
+                    TouchFlags = TouchFlags.NONE,
+                    Orientation = 90,
+                    Pressure = 32000,
+                    TouchMasks = TouchMask.CONTACTAREA | TouchMask.ORIENTATION | TouchMask.PRESSURE,
+                    ContactArea = ContactArea.Create(location, 0),
+                },
+            };
+            if (!InjectTouchInput(1, contacts))
+            {
+                throw new Win32Exception();
+            }
+        }
+
+        /// <summary>
+        /// Simulate touch up.
+        /// </summary>
+        public static void Up()
+        {
+            contacts[0].PointerInfo.PointerFlags = PointerFlag.UP;
+            if (!InjectTouchInput(1, contacts))
+            {
+                throw new Win32Exception();
+            }
+
+            contacts = null;
+        }
+
+        /// <summary>
+        /// Simulate touch drag.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        public static void DragTo(Point position)
+        {
+            if (contacts == null ||
+                contacts.Length != 1)
+            {
+                throw new InvalidOperationException("Call Touch.Down first.");
+            }
+
+            contacts[0].PointerInfo.PointerFlags = PointerFlag.UPDATE | PointerFlag.INRANGE | PointerFlag.INCONTACT;
+
+            contacts[0].PointerInfo.PtPixelLocation = TouchPoint.Create(position);
+
+            if (!InjectTouchInput(1, contacts))
+            {
+                throw new Win32Exception();
+            }
+        }
+
+        [DllImport("User32.dll", SetLastError = true)]
+        private static extern bool InitializeTouchInjection(uint maxCount = 1, TouchFeedback feedbackMode = TouchFeedback.DEFAULT);
+
+        [DllImport("User32.dll", SetLastError = true)]
+        private static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] PointerTouchInfo[] contacts);
     }
 }
