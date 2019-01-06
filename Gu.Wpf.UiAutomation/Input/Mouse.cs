@@ -4,11 +4,9 @@ namespace Gu.Wpf.UiAutomation
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
     using System.Windows;
-    using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>

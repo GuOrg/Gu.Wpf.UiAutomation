@@ -104,6 +104,40 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
+        [Test]
+        public void TapThenClick()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+                Touch.Tap(area.Bounds.Center());
+                var expected = new[]
+                {
+                    "TouchEnter Position: 99,299",
+                    "PreviewTouchDown Position: 99,299",
+                    "TouchDown Position: 99,299",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchUp Position: 99,299",
+                    "TouchUp Position: 99,299",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 99,299",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                app.MainWindow.FindButton("Clear").Click();
+                CollectionAssert.IsEmpty(events.Items);
+            }
+        }
+
         // ReSharper disable once UnusedMember.Local
         private static void Dump(ListBox events)
         {

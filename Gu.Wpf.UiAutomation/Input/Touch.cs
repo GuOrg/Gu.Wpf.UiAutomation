@@ -4,6 +4,7 @@ namespace Gu.Wpf.UiAutomation
     using System.ComponentModel;
     using System.Runtime.InteropServices;
     using System.Windows;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// For simulating touch input.
@@ -35,7 +36,6 @@ namespace Gu.Wpf.UiAutomation
         public static void Tap(Point point)
         {
             Down(point).Dispose();
-            Wait.For(TimeSpan.FromMilliseconds(100));
         }
 
         /// <summary>
@@ -45,17 +45,23 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A disposable that calls Up when disposed.</returns>
         public static IDisposable Down(Point point)
         {
-            var location = TouchPoint.Create(point);
-            var info = PointerTouchInfo.Create(point, 0);
-            contacts = new[] { info };
+            contacts = new[] { PointerTouchInfo.Create(point, 0) };
 
             if (!InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();
             }
 
-            Wait.UntilInputIsProcessed();
-            return new ActionDisposable(() => Up());
+            return new ActionDisposable(() =>
+            {
+                contacts[0].PointerInfo.PointerFlags = PointerFlag.UP;
+                if (!InjectTouchInput(1, contacts))
+                {
+                    throw new Win32Exception();
+                }
+
+                contacts = null;
+            });
         }
 
         /// <summary>
@@ -79,7 +85,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             contacts = null;
-            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -106,7 +111,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         [DllImport("User32.dll", SetLastError = true)]
-        private static extern bool InitializeTouchInjection(uint maxCount = 256, TouchFeedback feedbackMode = TouchFeedback.DEFAULT);
+        private static extern bool InitializeTouchInjection(uint maxCount = 256, TouchFeedback feedbackMode = TouchFeedback.NONE);
 
         [DllImport("User32.dll", SetLastError = true)]
         private static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] PointerTouchInfo[] contacts);
