@@ -54,6 +54,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new Win32Exception();
             }
 
+            Wait.UntilInputIsProcessed();
             return new ActionDisposable(() => Up());
         }
 
@@ -78,6 +79,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             contacts = null;
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new Win32Exception();
             }
 
-            Wait.For(TimeSpan.FromMilliseconds(100));
+            Wait.UntilInputIsProcessed();
         }
 
         [DllImport("User32.dll", SetLastError = true)]
