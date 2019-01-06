@@ -16,13 +16,13 @@ namespace Gu.Wpf.UiAutomation
     {
         static Touch()
         {
-            if (!InitializeTouchInjection())
+            if (!User32.InitializeTouchInjection())
             {
                 throw new Win32Exception();
             }
         }
 
-        private static PointerTouchInfo[] contacts = new PointerTouchInfo[1];
+        private static POINTER_TOUCH_INFO[] contacts = new POINTER_TOUCH_INFO[1];
 
         /// <summary>
         /// Initialize touch injection. Can be called many times.
@@ -50,17 +50,17 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A disposable that calls Up when disposed.</returns>
         public static IDisposable Down(Point point)
         {
-            contacts = new[] { PointerTouchInfo.Create(point, 0) };
+            contacts = new[] { POINTER_TOUCH_INFO.Create(point, 0) };
 
-            if (!InjectTouchInput(1, contacts))
+            if (!User32.InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();
             }
 
             return new ActionDisposable(() =>
             {
-                contacts[0].PointerInfo.PointerFlags = PointerFlag.UP;
-                if (!InjectTouchInput(1, contacts))
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
+                if (!User32.InjectTouchInput(1, contacts))
                 {
                     throw new Win32Exception();
                 }
@@ -81,10 +81,10 @@ namespace Gu.Wpf.UiAutomation
 
             for (var i = 0; i < contacts.Length; i++)
             {
-                contacts[i].PointerInfo.PointerFlags = PointerFlag.UP;
+                contacts[i].PointerInfo.PointerFlags = POINTER_FLAG.UP;
             }
 
-            if (!InjectTouchInput(contacts.Length, contacts))
+            if (!User32.InjectTouchInput(contacts.Length, contacts))
             {
                 throw new Win32Exception();
             }
@@ -101,10 +101,10 @@ namespace Gu.Wpf.UiAutomation
         {
             using (Down(from))
             {
-                contacts[0].PointerInfo.PointerFlags = PointerFlag.UPDATE | PointerFlag.INRANGE | PointerFlag.INCONTACT;
-                contacts[0].PointerInfo.PtPixelLocation = TouchPoint.Create(to);
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                contacts[0].PointerInfo.PtPixelLocation = POINT.Create(to);
 
-                if (!InjectTouchInput(1, contacts))
+                if (!User32.InjectTouchInput(1, contacts))
                 {
                     throw new Win32Exception();
                 }
@@ -125,20 +125,14 @@ namespace Gu.Wpf.UiAutomation
                 throw new UiAutomationException("Call Touch.Down first.");
             }
 
-            contacts[0].PointerInfo.PointerFlags = PointerFlag.UPDATE | PointerFlag.INRANGE | PointerFlag.INCONTACT;
-            contacts[0].PointerInfo.PtPixelLocation = TouchPoint.Create(position);
+            contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+            contacts[0].PointerInfo.PtPixelLocation = POINT.Create(position);
 
-            if (!InjectTouchInput(1, contacts))
+            if (!User32.InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();
             }
         }
-
-        [DllImport("User32.dll", SetLastError = true)]
-        private static extern bool InitializeTouchInjection(uint maxCount = 256, TouchFeedback feedbackMode = TouchFeedback.NONE);
-
-        [DllImport("User32.dll", SetLastError = true)]
-        private static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] PointerTouchInfo[] contacts);
 
         private static CursorState GetCursorState()
         {
