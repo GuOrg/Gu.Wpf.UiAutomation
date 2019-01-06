@@ -23,13 +23,13 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// The absolute position of the mouse, or the amount of motion since the last mouse event was generated, depending on the value of the dwFlags member.
         /// Absolute data is specified as the x coordinate of the mouse; relative data is specified as the number of pixels moved.
         /// </summary>
-        public long dx;
+        public int dx;
 
         /// <summary>
         /// The absolute position of the mouse, or the amount of motion since the last mouse event was generated, depending on the value of the dwFlags member.
         /// Absolute data is specified as the y coordinate of the mouse; relative data is specified as the number of pixels moved.
         /// </summary>
-        public long dy;
+        public int dy;
 
         /// <summary>
         /// If dwFlags contains MOUSEEVENTF_WHEEL, then mouseData specifies the amount of wheel movement. A positive value indicates that the wheel was rotated forward, away from the user; a negative value indicates that the wheel was rotated backward, toward the user.
