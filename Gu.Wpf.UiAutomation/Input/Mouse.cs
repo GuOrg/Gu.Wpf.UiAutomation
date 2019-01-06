@@ -164,8 +164,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             // Perform the click
-            Down(mouseButton);
-            Up(mouseButton);
+            Hold(mouseButton).Dispose();
 
             // Update the time and location
             LastClick = new ButtonClick(mouseButton, position);
@@ -188,10 +187,8 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to double-click.</param>
         public static void DoubleClick(MouseButton mouseButton)
         {
-            Down(mouseButton);
-            Up(mouseButton);
-            Down(mouseButton);
-            Up(mouseButton);
+            Hold(mouseButton).Dispose();
+            Hold(mouseButton).Dispose();
         }
 
         /// <summary>
@@ -207,6 +204,8 @@ namespace Gu.Wpf.UiAutomation
 
         /// <summary>
         /// Sends a mouse down command for the specified mouse button.
+        /// Avoid calling this method as things get weird if Up is not called.
+        /// Prefer using(Hold())  for drag operations.
         /// </summary>
         /// <param name="mouseButton">The mouse button to press.</param>
         public static void Down(MouseButton mouseButton)
