@@ -83,7 +83,7 @@ namespace Gu.Wpf.UiAutomation
             /// <summary>
             /// Touchpad pointer type (Windows 8.1 and later).
             /// </summary>
-            PT_TOUCHPAD = 0x00000004,
+            PT_TOUCHPAD = 0x00000005,
         }
 
         private enum PointerButtonChangeType
