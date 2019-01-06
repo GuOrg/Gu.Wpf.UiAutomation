@@ -163,10 +163,8 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            // Perform the click
-            Hold(mouseButton).Dispose();
-
-            // Update the time and location
+            Down(mouseButton);
+            Up(mouseButton);
             LastClick = new ButtonClick(mouseButton, position);
         }
 
@@ -187,8 +185,10 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to double-click.</param>
         public static void DoubleClick(MouseButton mouseButton)
         {
-            Hold(mouseButton).Dispose();
-            Hold(mouseButton).Dispose();
+            Down(mouseButton);
+            Up(mouseButton);
+            Down(mouseButton);
+            Up(mouseButton);
         }
 
         /// <summary>
@@ -338,9 +338,9 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Get <see cref="CursorState"/>
+        /// Get <see cref="CursorState"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The <see cref="CursorState"/>.</returns>
         public static CursorState GetCursorState()
         {
             var cursorInfo = CURSORINFO.Create();

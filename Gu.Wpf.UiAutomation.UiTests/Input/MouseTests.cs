@@ -36,6 +36,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var mouseArea = window.FindGroupBox("Mouse area");
                 var events = window.FindListBox("Events");
                 Mouse.Position = mouseArea.Bounds.TopLeft;
+                Wait.UntilInputIsProcessed();
                 var expected = new List<string>
                 {
                     "MouseEnter Position: 0,0",
@@ -46,6 +47,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
 
                 Mouse.Position = mouseArea.Bounds.Center();
+                Wait.UntilInputIsProcessed();
                 expected.AddRange(new[]
                 {
                     "PreviewMouseMove Position: 100,300",

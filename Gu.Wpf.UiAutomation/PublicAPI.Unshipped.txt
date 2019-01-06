@@ -92,6 +92,7 @@ Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.CONTACTAREA = 1 -> Gu.Wpf.UiAutomation
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
