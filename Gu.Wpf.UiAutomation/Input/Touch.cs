@@ -65,14 +65,6 @@ namespace Gu.Wpf.UiAutomation
                     throw new Win32Exception();
                 }
 
-                //contacts[0].PointerInfo.PointerFlags = PointerFlag.CAPTURECHANGED;
-                //contacts[0].TouchMasks = TouchMask.NONE;
-                //contacts[0].PointerInfo.PointerType = PointerInputType.PT_MOUSE;
-                //if (!InjectTouchInput(1, contacts))
-                //{
-                //    throw new Win32Exception();
-                //}
-
                 contacts = null;
             });
         }
