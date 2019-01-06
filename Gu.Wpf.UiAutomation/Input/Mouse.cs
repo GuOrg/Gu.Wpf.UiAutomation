@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Security;
@@ -447,9 +448,7 @@ namespace Gu.Wpf.UiAutomation
             // Send the command
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {
-                // An error occured
-                var errorCode = Marshal.GetLastWin32Error();
-                Logger.Default.Warn("Could not send mouse input. ErrorCode: {0}", errorCode);
+                throw new Win32Exception();
             }
 
             if (WindowsVersion.IsWindows10())
