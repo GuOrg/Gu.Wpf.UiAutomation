@@ -107,6 +107,9 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_info
+        /// </summary>
         private struct POINTER_INFO
         {
             public PointerInputType PointerType;
@@ -127,14 +130,48 @@ namespace Gu.Wpf.UiAutomation
             public PointerButtonChangeType ButtonChangeType;
         }
 
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_touch_info
+        /// </summary>
         private struct PointerTouchInfo
         {
+            /// <summary>
+            /// An embedded <see cref="PointerInfo"/> header structure.
+            /// </summary>
             public POINTER_INFO PointerInfo;
+
+            /// <summary>
+            /// Currently none.
+            /// </summary>
             public TouchFlags TouchFlags;
+
+            /// <summary>
+            /// Indicates which of the optional fields contain valid values. The member can be zero or any combination of the values from the <see cref="TouchMasks"/> constants.
+            /// </summary>
             public TouchMask TouchMasks;
+
+            /// <summary>
+            /// The predicted screen coordinates of the contact area, in pixels. By default, if the device does not report a contact area, this field defaults to a 0-by-0 rectangle centered around the pointer location.
+            /// The predicted value is based on the pointer position reported by the digitizer and the motion of the pointer.
+            /// This correction can compensate for visual lag due to inherent delays in sensing and processing the pointer location on the digitizer.
+            /// This is applicable to pointers of type <see cref="PointerInputType.PT_TOUCH"/>.
+            /// </summary>
             public ContactArea ContactArea;
+
+            /// <summary>
+            /// The raw screen coordinates of the contact area, in pixels. For adjusted screen coordinates, see rcContact.
+            /// </summary>
             public ContactArea ContactAreaRaw;
+
+            /// <summary>
+            /// A pointer orientation, with a value between 0 and 359, where 0 indicates a touch pointer aligned with the x-axis and pointing from left to right; increasing values indicate degrees of rotation in the clockwise direction.
+            /// This field defaults to 0 if the device does not report orientation.
+            /// </summary>
             public uint Orientation;
+
+            /// <summary>
+            /// A pen pressure normalized to a range between 0 and 1024. The default is 0 if the device does not report pressure.
+            /// </summary>
             public uint Pressure;
 
             public static PointerTouchInfo Create(Point point, uint id)
@@ -150,9 +187,7 @@ namespace Gu.Wpf.UiAutomation
                         PointerId = id,
                     },
                     TouchFlags = TouchFlags.NONE,
-                    Orientation = 90,
-                    Pressure = 32000,
-                    TouchMasks = TouchMask.CONTACTAREA | TouchMask.ORIENTATION | TouchMask.PRESSURE,
+                    TouchMasks = TouchMask.CONTACTAREA,
                     ContactArea = ContactArea.Create(touchPoint, 1),
                 };
 
