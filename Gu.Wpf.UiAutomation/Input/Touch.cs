@@ -34,15 +34,15 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="point">The position.</param>
         public static void Tap(Point point)
         {
-            Down(point);
-            Up();
+            Down(point).Dispose();
         }
 
         /// <summary>
         /// Simulate touch down.
         /// </summary>
         /// <param name="point">The position.</param>
-        public static void Down(Point point)
+        /// <returns>A disposable that calls Up when disposed.</returns>
+        public static IDisposable Down(Point point)
         {
             var location = TouchPoint.Create(point);
             contacts = new[]
@@ -60,13 +60,15 @@ namespace Gu.Wpf.UiAutomation
                     Orientation = 90,
                     Pressure = 32000,
                     TouchMasks = TouchMask.CONTACTAREA | TouchMask.ORIENTATION | TouchMask.PRESSURE,
-                    ContactArea = ContactArea.Create(location, 0),
+                    ContactArea = ContactArea.Create(location, 1),
                 },
             };
             if (!InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();
             }
+
+            return new ActionDisposable(() => Up());
         }
 
         /// <summary>
