@@ -356,6 +356,21 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Get <see cref="CursorState"/>
+        /// </summary>
+        /// <returns></returns>
+        public static CursorState GetCursorState()
+        {
+            var cursorInfo = CURSORINFO.Create();
+            if (!User32.GetCursorInfo(ref cursorInfo))
+            {
+                throw new Win32Exception();
+            }
+
+            return cursorInfo.Flags;
+        }
+
+        /// <summary>
         /// Converts the button to the correct <see cref="MouseEventFlags" /> object
         /// and fills the additional data if needed.
         /// </summary>

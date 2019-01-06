@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
     using System.Linq;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
     [TestFixture]
@@ -171,6 +172,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
                 app.MainWindow.FindButton("Clear").Click();
                 CollectionAssert.IsEmpty(events.Items);
+                Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
             }
         }
 

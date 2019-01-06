@@ -2,7 +2,6 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
     using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -132,17 +131,6 @@ namespace Gu.Wpf.UiAutomation
             {
                 throw new Win32Exception();
             }
-        }
-
-        private static CursorState GetCursorState()
-        {
-            var cursorInfo = CURSORINFO.Create();
-            if (!User32.GetCursorInfo(ref cursorInfo))
-            {
-                throw new Win32Exception();
-            }
-
-            return cursorInfo.Flags;
         }
     }
 }
