@@ -8,6 +8,9 @@ namespace Gu.Wpf.UiAutomation
 
     /// <summary>
     /// For simulating touch input.
+    /// https://docs.microsoft.com/en-us/windows/desktop/api/_input_touchinjection/
+    /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_touch_info
+    /// https://social.technet.microsoft.com/wiki/contents/articles/6460.simulating-touch-input-in-windows-8-using-touch-injection-api.aspx
     /// </summary>
     public static partial class Touch
     {
@@ -35,7 +38,9 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="point">The position.</param>
         public static void Tap(Point point)
         {
-            Down(point).Dispose();
+            using (Down(point))
+            {
+            }
         }
 
         /// <summary>
@@ -59,6 +64,14 @@ namespace Gu.Wpf.UiAutomation
                 {
                     throw new Win32Exception();
                 }
+
+                //contacts[0].PointerInfo.PointerFlags = PointerFlag.CAPTURECHANGED;
+                //contacts[0].TouchMasks = TouchMask.NONE;
+                //contacts[0].PointerInfo.PointerType = PointerInputType.PT_MOUSE;
+                //if (!InjectTouchInput(1, contacts))
+                //{
+                //    throw new Win32Exception();
+                //}
 
                 contacts = null;
             });
@@ -88,7 +101,28 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Simulate touch drag in one step.
+        /// </summary>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        public static void Drag(Point from, Point to)
+        {
+            using (Down(from))
+            {
+                contacts[0].PointerInfo.PointerFlags = PointerFlag.UPDATE | PointerFlag.INRANGE | PointerFlag.INCONTACT;
+                contacts[0].PointerInfo.PtPixelLocation = TouchPoint.Create(to);
+
+                if (!InjectTouchInput(1, contacts))
+                {
+                    throw new Win32Exception();
+                }
+            }
+        }
+
+        /// <summary>
         /// Simulate touch drag.
+        /// Call <see cref="Down"/> before calling this method.
+        /// This method is useful when dragging to multiple positions.
         /// </summary>
         /// <param name="position">The position.</param>
         public static void DragTo(Point position)
@@ -106,8 +140,6 @@ namespace Gu.Wpf.UiAutomation
             {
                 throw new Win32Exception();
             }
-
-            Wait.UntilInputIsProcessed();
         }
 
         [DllImport("User32.dll", SetLastError = true)]

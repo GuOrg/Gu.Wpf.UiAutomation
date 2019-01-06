@@ -78,6 +78,42 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var window = app.MainWindow;
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
+
+                Touch.Drag(area.Bounds.Center(), area.Bounds.TopLeft);
+                var expected = new[]
+                {
+                    "TouchEnter Position: 99,299",
+                    "PreviewTouchDown Position: 99,299",
+                    "TouchDown Position: 99,299",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchMove Position: -1,-1",
+                    "TouchMove Position: -1,-1",
+                    "ManipulationDelta",
+                    "PreviewTouchUp Position: -1,-1",
+                    "TouchUp Position: -1,-1",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: -1,-1",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void DragTo()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
                 using (Touch.Down(area.Bounds.Center()))
                 {
                     Touch.DragTo(area.Bounds.TopLeft);
