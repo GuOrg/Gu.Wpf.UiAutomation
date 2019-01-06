@@ -1,1 +1,107 @@
-﻿
+﻿Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Cursor -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Flags -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.ScreenPos -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Size -> int
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.CURSOR_SHOWING = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.CURSOR_SUPPRESSED = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.HIDDEN = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.NOMOUSE = -1 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_DOWN = 9 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_UP = 10 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIRSTBUTTON_DOWN = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIRSTBUTTON_UP = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FOURTHBUTTON_DOWN = 7 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FOURTHBUTTON_UP = 8 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.SECONDBUTTON_DOWN = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.SECONDBUTTON_UP = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.THIRDBUTTON_DOWN = 5 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.THIRDBUTTON_UP = 6 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CANCELLED = 32768 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CAPTURECHANGED = 2097152 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CONFIDENCE = 16384 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.DOWN = 65536 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FIFTHBUTTON = 256 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FIRSTBUTTON = 16 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FOURTHBUTTON = 128 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.HASTRANSFORM = 4194304 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.HWHEEL = 1048576 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.INCONTACT = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.INRANGE = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.NEW = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.PRIMARY = 8192 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.SECONDBUTTON = 32 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.THIRDBUTTON = 64 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.UP = 262144 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.UPDATE = 131072 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.WHEEL = 524288 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.ButtonChangeType -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.DwKeyStates -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.DwTime -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.FrameId -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.HistoryCount -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.HwndTarget -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.InputData -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.POINTER_INFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PerformanceCount -> ulong
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerFlags -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerId -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerType -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtHimetricLocation -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtHimetricLocationRaw -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtPixelLocation -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtPixelLocationRaw -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.SourceDevice -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_MOUSE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_PEN = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_POINTER = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_TOUCH = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_TOUCHPAD = 5 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Contact -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.ContactAreaRaw -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Move(int deltaX, int deltaY) -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Orientation -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.POINTER_TOUCH_INFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.PointerInfo -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Pressure -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.TouchFlags -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.TouchMasks -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Bottom -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Left -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.RECT() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Right -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Top -> int
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.INDIRECT = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.NONE = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.CONTACTAREA = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
+static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
+static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
+static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
+static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
+static Gu.Wpf.UiAutomation.Touch.Up() -> void
+static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Create() -> Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Create(System.Windows.Point point, uint id) -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
+static Gu.Wpf.UiAutomation.WindowsAPI.RECT.Create(Gu.Wpf.UiAutomation.WindowsAPI.POINT p, int radius) -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorInfo(ref Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO info) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InitializeTouchInjection(uint maxCount = 256, Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK feedbackMode = Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.NONE) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO[] contacts) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.ShowCursor(bool bShow) -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
