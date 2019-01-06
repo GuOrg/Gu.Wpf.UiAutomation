@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         public static extern bool GetCursorPos(out POINT lpPoint);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetCursorInfo(out CURSORINFO info);
+        public static extern bool GetCursorInfo(ref CURSORINFO info);
 
         [DllImport("user32.dll")]
         public static extern CursorState ShowCursor(bool bShow);

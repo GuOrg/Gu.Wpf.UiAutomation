@@ -110,5 +110,16 @@ namespace Gu.Wpf.UiAutomation
 
         [DllImport("User32.dll", SetLastError = true)]
         private static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] PointerTouchInfo[] contacts);
+
+        private static CursorState GetCursorState()
+        {
+            var cursorInfo = CURSORINFO.Create();
+            if (!User32.GetCursorInfo(ref cursorInfo))
+            {
+                throw new Win32Exception();
+            }
+
+            return cursorInfo.Flags;
+        }
     }
 }
