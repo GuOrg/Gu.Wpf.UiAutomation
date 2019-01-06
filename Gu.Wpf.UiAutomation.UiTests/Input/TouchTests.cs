@@ -2,7 +2,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using Gu.Wpf.UiAutomation.WindowsAPI;
+    using Microsoft.Win32.SafeHandles;
     using NUnit.Framework;
 
     [TestFixture]
@@ -183,6 +185,33 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             {
                 Console.WriteLine($"\"{item.Text}\",");
             }
+        }
+
+        private class SafeCursorHandle : SafeHandleZeroOrMinusOneIsInvalid
+        {
+            public SafeCursorHandle(IntPtr handle)
+                : base(true)
+            {
+                this.SetHandle(handle);
+            }
+
+            protected override bool ReleaseHandle()
+            {
+                if (!this.IsInvalid)
+                {
+                    if (!DestroyCursor(this.handle))
+                    {
+                        throw new System.ComponentModel.Win32Exception();
+                    }
+
+                    this.handle = IntPtr.Zero;
+                }
+
+                return true;
+            }
+
+            [DllImport("user32.dll", SetLastError = true)]
+            private static extern bool DestroyCursor(IntPtr handle);
         }
     }
 }
