@@ -8,6 +8,11 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     public enum CursorState
     {
         /// <summary>
+        /// No mouse installed.
+        /// </summary>
+        NOMOUSE = -1,
+
+        /// <summary>
         /// The cursor is hidden.
         /// </summary>
         HIDDEN = 0,
