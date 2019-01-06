@@ -459,12 +459,21 @@ namespace Gu.Wpf.UiAutomation
 
             public void Move(int deltaX, int deltaY)
             {
-                this.PointerInfo.PtPixelLocation.X += deltaX;
-                this.PointerInfo.PtPixelLocation.Y += deltaY;
-                this.ContactArea.Left += deltaX;
-                this.ContactArea.Right += deltaX;
-                this.ContactArea.Top += deltaY;
-                this.ContactArea.Bottom += deltaY;
+                var oldLocation = this.PointerInfo.PtPixelLocation;
+                this.PointerInfo.PtPixelLocation = new TouchPoint
+                {
+                    X = oldLocation.X + deltaX,
+                    Y = oldLocation.Y + deltaY
+                };
+
+                var oldArea = this.ContactArea;
+                this.ContactArea = new ContactArea
+                {
+                    Left = oldArea.Left + deltaX,
+                    Top = oldArea.Top + deltaY,
+                    Right = oldArea.Right + deltaX,
+                    Bottom = oldArea.Bottom + deltaY,
+                };
             }
         }
     }
