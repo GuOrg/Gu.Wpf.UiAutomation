@@ -10,10 +10,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         private const string ExeFileName = "WpfApplication.exe";
         private const string WindowName = "TouchWindow";
 
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            // Touch must be initialized before the app to test touch on is started.
+            // Not sure why but my guess is the call to InitializeTouchInjection adds a touch device making WPF start listening for touch input.
+            Touch.Initialize();
+        }
+
         [SetUp]
         public void SetUp()
         {
-            Touch.Initialize();
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 app.MainWindow.FindButton("Clear").Click();
@@ -29,6 +36,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void Tap()
         {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
@@ -56,6 +68,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void Drag()
         {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;

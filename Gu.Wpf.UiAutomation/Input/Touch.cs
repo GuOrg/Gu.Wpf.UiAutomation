@@ -35,6 +35,7 @@ namespace Gu.Wpf.UiAutomation
         public static void Tap(Point point)
         {
             Down(point).Dispose();
+            Wait.For(TimeSpan.FromMilliseconds(100));
         }
 
         /// <summary>
@@ -76,8 +77,17 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Up()
         {
-            contacts[0].PointerInfo.PointerFlags = PointerFlag.UP;
-            if (!InjectTouchInput(1, contacts))
+            if (contacts == null)
+            {
+                throw new UiAutomationException("Call Touch.Down first.");
+            }
+
+            for (var i = 0; i < contacts.Length; i++)
+            {
+                contacts[i].PointerInfo.PointerFlags = PointerFlag.UP;
+            }
+
+            if (!InjectTouchInput(contacts.Length, contacts))
             {
                 throw new Win32Exception();
             }
@@ -94,21 +104,22 @@ namespace Gu.Wpf.UiAutomation
             if (contacts == null ||
                 contacts.Length != 1)
             {
-                throw new InvalidOperationException("Call Touch.Down first.");
+                throw new UiAutomationException("Call Touch.Down first.");
             }
 
             contacts[0].PointerInfo.PointerFlags = PointerFlag.UPDATE | PointerFlag.INRANGE | PointerFlag.INCONTACT;
-
             contacts[0].PointerInfo.PtPixelLocation = TouchPoint.Create(position);
 
             if (!InjectTouchInput(1, contacts))
             {
                 throw new Win32Exception();
             }
+
+            Wait.For(TimeSpan.FromMilliseconds(100));
         }
 
         [DllImport("User32.dll", SetLastError = true)]
-        private static extern bool InitializeTouchInjection(uint maxCount = 1, TouchFeedback feedbackMode = TouchFeedback.DEFAULT);
+        private static extern bool InitializeTouchInjection(uint maxCount = 256, TouchFeedback feedbackMode = TouchFeedback.DEFAULT);
 
         [DllImport("User32.dll", SetLastError = true)]
         private static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] PointerTouchInfo[] contacts);
