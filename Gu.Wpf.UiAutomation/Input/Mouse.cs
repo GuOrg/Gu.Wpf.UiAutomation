@@ -27,32 +27,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// The current max timespan (in milliseconds) for double clicks.
         /// </summary>
-        private static readonly int CurrentDoubleClickTime;
+        private static readonly int CurrentDoubleClickTime = (int)User32.GetDoubleClickTime();
 
-        /// <summary>
-        /// Dictionary which holds the last click time for each button.
-        /// </summary>
-        private static readonly Dictionary<MouseButton, DateTime> LastClickTimes;
-
-        /// <summary>
-        /// Dictionary which holds the last click position for each button.
-        /// </summary>
-        private static readonly Dictionary<MouseButton, Point> LastClickPositions;
-
-        /// <summary>
-        /// Static constructor.
-        /// </summary>
-        static Mouse()
-        {
-            CurrentDoubleClickTime = (int)User32.GetDoubleClickTime();
-            LastClickTimes = new Dictionary<MouseButton, DateTime>();
-            LastClickPositions = new Dictionary<MouseButton, Point>();
-            foreach (MouseButton mouseButton in Enum.GetValues(typeof(MouseButton)))
-            {
-                LastClickTimes.Add(mouseButton, DateTime.Now);
-                LastClickPositions.Add(mouseButton, new Point(0, 0));
-            }
-        }
+        private static ButtonClick? LastClick;
 
         /// <summary>
         /// Current position of the mouse cursor.
@@ -66,12 +43,16 @@ namespace Gu.Wpf.UiAutomation
                     return new Point(p.X, p.Y);
                 }
 
-                throw new InvalidOperationException("Failed getting cursor position.");
+                throw new Win32Exception();
             }
 
             set
             {
-                _ = User32.SetCursorPos((int)value.X, (int)value.Y);
+                if (!User32.SetCursorPos((int)value.X, (int)value.Y))
+                {
+                    throw new Win32Exception();
+                }
+
                 Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(10));
             }
         }
@@ -164,13 +145,16 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to click.</param>
         public static void Click(MouseButton mouseButton)
         {
-            var currClickPosition = Position;
+            var position = POINT.Create(Position);
 
             // Check if the position is the same as with last click
-            if (LastClickPositions[mouseButton].Equals(currClickPosition))
+            if (LastClick is ButtonClick buttonClick &&
+                buttonClick.Button == mouseButton &&
+                buttonClick.Position.X == position.X &&
+                buttonClick.Position.Y == position.Y)
             {
                 // Get the timeout needed to not fire a double click
-                var timeout = CurrentDoubleClickTime - DateTime.Now.Subtract(LastClickTimes[mouseButton]).Milliseconds;
+                var timeout = CurrentDoubleClickTime - DateTime.UtcNow.Subtract(buttonClick.Time).Milliseconds;
 
                 // Wait the needed time to prevent the double click
                 if (timeout > 0)
@@ -184,8 +168,7 @@ namespace Gu.Wpf.UiAutomation
             Up(mouseButton);
 
             // Update the time and location
-            LastClickTimes[mouseButton] = DateTime.Now;
-            LastClickPositions[mouseButton] = Position;
+            LastClick = new ButtonClick(mouseButton, position);
         }
 
         /// <summary>
@@ -499,6 +482,22 @@ namespace Gu.Wpf.UiAutomation
             {
                 Up(this.button);
             }
+        }
+
+        private struct ButtonClick
+        {
+            public ButtonClick(MouseButton button, POINT position)
+            {
+                this.Button = button;
+                this.Time = DateTime.UtcNow;
+                this.Position = position;
+            }
+
+            internal readonly MouseButton Button;
+
+            internal readonly POINT Position;
+
+            internal readonly DateTime Time;
         }
     }
 }
