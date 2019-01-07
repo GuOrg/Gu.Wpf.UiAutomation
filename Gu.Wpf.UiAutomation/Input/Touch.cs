@@ -13,6 +13,8 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static partial class Touch
     {
+        private static POINTER_TOUCH_INFO[] contacts = new POINTER_TOUCH_INFO[1];
+
         static Touch()
         {
             if (!User32.InitializeTouchInjection())
@@ -20,8 +22,6 @@ namespace Gu.Wpf.UiAutomation
                 throw new Win32Exception();
             }
         }
-
-        private static POINTER_TOUCH_INFO[] contacts = new POINTER_TOUCH_INFO[1];
 
         /// <summary>
         /// Initialize touch injection. Can be called many times.
@@ -39,6 +39,7 @@ namespace Gu.Wpf.UiAutomation
         {
             using (Down(point))
             {
+                Wait.UntilInputIsProcessed();
             }
         }
 

@@ -172,6 +172,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                User32.SetCursorPos((int)area.Bounds.Center().X + 1, (int)area.Bounds.Center().Y);
                 app.MainWindow.FindButton("Clear").Click();
                 CollectionAssert.IsEmpty(events.Items);
                 Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
@@ -185,33 +186,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             {
                 Console.WriteLine($"\"{item.Text}\",");
             }
-        }
-
-        private class SafeCursorHandle : SafeHandleZeroOrMinusOneIsInvalid
-        {
-            public SafeCursorHandle(IntPtr handle)
-                : base(true)
-            {
-                this.SetHandle(handle);
-            }
-
-            protected override bool ReleaseHandle()
-            {
-                if (!this.IsInvalid)
-                {
-                    if (!DestroyCursor(this.handle))
-                    {
-                        throw new System.ComponentModel.Win32Exception();
-                    }
-
-                    this.handle = IntPtr.Zero;
-                }
-
-                return true;
-            }
-
-            [DllImport("user32.dll", SetLastError = true)]
-            private static extern bool DestroyCursor(IntPtr handle);
         }
     }
 }
