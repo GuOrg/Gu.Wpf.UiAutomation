@@ -127,7 +127,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "MouseMove Position: 100,300",
                 };
 
-                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
