@@ -59,7 +59,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
-        public void MoveTest()
+        public void Move()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -83,6 +83,51 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "MouseLeave Position: 240,0",
                 };
 
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void MoveTo()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+
+                // So that we always start from the same position.
+                app.MainWindow.FindButton("Clear").Click(moveMouse: true);
+                Mouse.Position = mouseArea.Bounds.TopLeft;
+                Mouse.MoveTo(mouseArea.Bounds.Center());
+                var expected = new[]
+                {
+                    "MouseEnter Position: 0,0",
+                    "PreviewMouseMove Position: 0,0",
+                    "MouseMove Position: 0,0",
+                    "PreviewMouseMove Position: 10,30",
+                    "MouseMove Position: 10,30",
+                    "PreviewMouseMove Position: 20,60",
+                    "MouseMove Position: 20,60",
+                    "PreviewMouseMove Position: 30,90",
+                    "MouseMove Position: 30,90",
+                    "PreviewMouseMove Position: 40,120",
+                    "MouseMove Position: 40,120",
+                    "PreviewMouseMove Position: 50,150",
+                    "MouseMove Position: 50,150",
+                    "PreviewMouseMove Position: 60,180",
+                    "MouseMove Position: 60,180",
+                    "PreviewMouseMove Position: 70,210",
+                    "MouseMove Position: 70,210",
+                    "PreviewMouseMove Position: 80,240",
+                    "MouseMove Position: 80,240",
+                    "PreviewMouseMove Position: 90,270",
+                    "MouseMove Position: 90,270",
+                    "PreviewMouseMove Position: 100,300",
+                    "MouseMove Position: 100,300",
+                };
+
+                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }

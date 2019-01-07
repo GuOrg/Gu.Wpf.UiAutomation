@@ -91,13 +91,13 @@ namespace Gu.Wpf.UiAutomation
             var optimalPixelsPerMillisecond = 1;
             var minDuration = 200;
             var maxDuration = 500;
-            var duration = Convert.ToInt32(totalDistance / optimalPixelsPerMillisecond).Clamp(minDuration, maxDuration);
+            var duration = (totalDistance / optimalPixelsPerMillisecond).Clamp(minDuration, maxDuration);
 
             // Calculate the steps for the smoothness
             var optimalPixelsPerStep = 10;
             var minSteps = 10;
             var maxSteps = 50;
-            var steps = Convert.ToInt32(totalDistance / optimalPixelsPerStep).Clamp(minSteps, maxSteps);
+            var steps = (totalDistance / optimalPixelsPerStep).Clamp(minSteps, maxSteps);
 
             // Calculate the interval and the step size
             var interval = duration / steps;
