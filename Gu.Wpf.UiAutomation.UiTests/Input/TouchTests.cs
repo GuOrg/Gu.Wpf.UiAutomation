@@ -2,9 +2,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using Gu.Wpf.UiAutomation.WindowsAPI;
-    using Microsoft.Win32.SafeHandles;
     using NUnit.Framework;
 
     [TestFixture]
