@@ -13,6 +13,12 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         public int X;
         public int Y;
 
+        public POINT(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
         public static POINT Create(Point p)
         {
             return new POINT
