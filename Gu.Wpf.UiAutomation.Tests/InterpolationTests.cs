@@ -15,21 +15,21 @@ namespace Gu.Wpf.UiAutomation.Tests
         [TestCase("0,0", "-100,0", 195, "-100,0")]
         [TestCase("0,0", "0,100", 100, "0,50")]
         [TestCase("0,0", "0,100", 201, null)]
-        public void TryCurrent(string @from, string to, int elapsed, string expected)
+        public void TryGetPosition(string @from, string to, int elapsed, string expected)
         {
-            var interpolation = new Interpolation(Parse(from), Parse(to), TimeSpan.FromMilliseconds(200));
-            Assert.AreEqual(true, interpolation.TryCurrent(TimeSpan.FromMilliseconds(0), out var p));
+            var interpolation = Interpolation.Start(Parse(from), Parse(to), TimeSpan.FromMilliseconds(200));
+            Assert.AreEqual(true, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(0), out var p));
             Assert.AreEqual(@from, $"{p.X},{p.Y}");
 
             if (expected == null)
             {
-                Assert.AreEqual(true, interpolation.TryCurrent(TimeSpan.FromMilliseconds(elapsed), out p));
+                Assert.AreEqual(true, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(elapsed), out p));
                 Assert.AreEqual(to, $"{p.X},{p.Y}");
-                Assert.AreEqual(false, interpolation.TryCurrent(TimeSpan.FromMilliseconds(elapsed), out _));
+                Assert.AreEqual(false, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(elapsed), out _));
             }
             else
             {
-                Assert.AreEqual(true, interpolation.TryCurrent(TimeSpan.FromMilliseconds(elapsed), out p));
+                Assert.AreEqual(true, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(elapsed), out p));
                 Assert.AreEqual(expected, $"{p.X},{p.Y}");
             }
         }

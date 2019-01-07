@@ -23,43 +23,61 @@ namespace Gu.Wpf.UiAutomation
             Done,
         }
 
-        /// <summary>
-        /// Using a shared <see cref="Stopwatch"/> here as for example drag should not be called from multiple threads.
-        /// </summary>
-        public static readonly Stopwatch Stopwatch = Stopwatch.StartNew();
+        private readonly Stopwatch stopwatch = Stopwatch.StartNew();
+        private readonly POINT from;
+        private readonly POINT to;
+        private readonly TimeSpan time;
 
         private Status status = Status.NotStarted;
 
-        public Interpolation(POINT @from, POINT to, TimeSpan time)
+        private Interpolation(POINT @from, POINT to, TimeSpan time)
         {
-            Stopwatch.Restart();
-            this.From = @from;
-            this.To = to;
-            this.Time = time;
+            this.from = @from;
+            this.to = to;
+            this.time = time;
         }
 
         /// <summary>
-        /// The starting point of the interpolation.
+        /// Create an instance of <see cref="Interpolation"/>.
         /// </summary>
-        public POINT From { get; }
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="speed">The speed in pixels / s.</param>
+        /// <returns>An instance of <see cref="Interpolation"/>.</returns>
+        public static Interpolation Start(POINT from, POINT to, double speed)
+        {
+            var dx = from.X - to.X;
+            var dy = from.Y - to.Y;
+            var dist = Math.Sqrt((dx * dx) + (dy * dy));
+            return new Interpolation(from, to, TimeSpan.FromSeconds(dist / speed));
+        }
 
         /// <summary>
-        /// The end point of the interpolation.
+        /// Create an instance of the class.
         /// </summary>
-        public POINT To { get; }
+        /// <remarks>
+        /// Calls Restart() on <see cref="stopwatch"/>.
+        /// </remarks>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="time">The total time of the interpolation.</param>
+        public static Interpolation Start(POINT @from, POINT to, TimeSpan time) => new Interpolation(from, to, time);
 
         /// <summary>
-        /// The duration of the interpolation.
+        /// Try get the interpolated position at current time.
         /// </summary>
-        public TimeSpan Time { get; }
+        /// <param name="position">The current position.</param>
+        /// <returns>True until arrived at end position.</returns>
+        public bool TryGetPosition(out POINT position) => this.TryGetPosition(this.stopwatch.Elapsed, out position);
 
         /// <summary>
         /// Try get the interpolated position at <paramref name="elapsed"/>.
+        /// This is exposed mostly for test.
         /// </summary>
         /// <param name="elapsed">The time elapsed since the start.</param>
         /// <param name="position">The current position.</param>
-        /// <returns>True if a position could be calculated.</returns>
-        public bool TryCurrent(TimeSpan elapsed, out POINT position)
+        /// <returns>True until arrived at end position.</returns>
+        internal bool TryGetPosition(TimeSpan elapsed, out POINT position)
         {
             if (this.status == Status.Done)
             {
@@ -69,21 +87,21 @@ namespace Gu.Wpf.UiAutomation
 
             if (this.status == Status.NotStarted)
             {
-                position = this.From;
+                position = this.from;
                 this.status = Status.Running;
             }
-            else if (this.Time.TotalMilliseconds - elapsed.TotalMilliseconds < 10)
+            else if (this.time.TotalMilliseconds - elapsed.TotalMilliseconds < 10)
             {
-                position = this.To;
+                position = this.to;
                 this.status = Status.Done;
             }
             else
             {
-                var s = elapsed.TotalMilliseconds / this.Time.TotalMilliseconds;
+                var s = elapsed.TotalMilliseconds / this.time.TotalMilliseconds;
                 position = new POINT
                 {
-                    X = (int)(this.From.X + (s * (this.To.X - this.From.X))),
-                    Y = (int)(this.From.Y + (s * (this.To.Y - this.From.Y))),
+                    X = (int)(this.from.X + (s * (this.to.X - this.from.X))),
+                    Y = (int)(this.from.Y + (s * (this.to.Y - this.from.Y))),
                 };
             }
 

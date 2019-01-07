@@ -1,9 +1,5 @@
 ﻿Gu.Wpf.UiAutomation.Interpolation
-Gu.Wpf.UiAutomation.Interpolation.From.get -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
-Gu.Wpf.UiAutomation.Interpolation.Interpolation(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> void
-Gu.Wpf.UiAutomation.Interpolation.Time.get -> System.TimeSpan
-Gu.Wpf.UiAutomation.Interpolation.To.get -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
-Gu.Wpf.UiAutomation.Interpolation.TryCurrent(System.TimeSpan elapsed, out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
+Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Cursor -> System.IntPtr
@@ -101,6 +97,8 @@ Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.Window
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 override Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.ReleaseHandle() -> bool
+static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
@@ -118,4 +116,3 @@ static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, 
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.HandleRef hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.SafeHandle hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.ShowCursor(bool bShow) -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
-static readonly Gu.Wpf.UiAutomation.Interpolation.Stopwatch -> System.Diagnostics.Stopwatch

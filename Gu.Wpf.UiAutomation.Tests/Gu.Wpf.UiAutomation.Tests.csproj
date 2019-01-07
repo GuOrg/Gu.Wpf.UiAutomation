@@ -7,6 +7,11 @@
     <CodeAnalysisRuleSet>Gu.Wpf.UiAutomation.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Gu.Wpf.UiAutomation.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.UiAutomation\Gu.Wpf.UiAutomation.csproj" />
   </ItemGroup>
