@@ -16,13 +16,6 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public class Interpolation
     {
-        private enum Status
-        {
-            NotStarted,
-            Running,
-            Done,
-        }
-
         private readonly Stopwatch stopwatch = Stopwatch.StartNew();
         private readonly POINT from;
         private readonly POINT to;
@@ -35,6 +28,13 @@ namespace Gu.Wpf.UiAutomation
             this.from = @from;
             this.to = to;
             this.time = time;
+        }
+
+        private enum Status
+        {
+            NotStarted,
+            Running,
+            Done,
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
 // ReSharper disable UnusedMember.Global
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;

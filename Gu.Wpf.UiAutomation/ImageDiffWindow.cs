@@ -60,16 +60,16 @@ namespace Gu.Wpf.UiAutomation
                 System.Windows.Threading.Dispatcher dispatcher = null;
                 var uiThread = new Thread(() =>
                 {
-                // Create and install a new dispatcher context
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                    // Create and install a new dispatcher context
+                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                     dispatcher = Dispatcher.CurrentDispatcher;
 
-                // Signal that it is initialized
-                // ReSharper disable once AccessToDisposedClosure
-                startedEvent.Set();
+                    // Signal that it is initialized
+                    // ReSharper disable once AccessToDisposedClosure
+                    startedEvent.Set();
 
-                // Start the dispatcher processing
-                Dispatcher.Run();
+                    // Start the dispatcher processing
+                    Dispatcher.Run();
                 });
 
                 // Set the apartment state

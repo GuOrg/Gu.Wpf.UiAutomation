@@ -1,9 +1,11 @@
 // ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     /// <summary>
     /// Returned from GetCursorInfo
-    /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagcursorinfo
+    /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagcursorinfo.
     /// </summary>
     public enum CursorState
     {

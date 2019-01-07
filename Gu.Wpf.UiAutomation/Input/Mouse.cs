@@ -29,7 +29,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         private static readonly int CurrentDoubleClickTime = (int)User32.GetDoubleClickTime();
 
-        private static ButtonClick? LastClick;
+        private static ButtonClick? lastClick;
 
         /// <summary>
         /// Current position of the mouse cursor.
@@ -148,7 +148,7 @@ namespace Gu.Wpf.UiAutomation
             var position = POINT.Create(Position);
 
             // Check if the position is the same as with last click
-            if (LastClick is ButtonClick buttonClick &&
+            if (lastClick is ButtonClick buttonClick &&
                 buttonClick.Button == mouseButton &&
                 buttonClick.Position.X == position.X &&
                 buttonClick.Position.Y == position.Y)
@@ -165,7 +165,7 @@ namespace Gu.Wpf.UiAutomation
 
             Down(mouseButton);
             Up(mouseButton);
-            LastClick = new ButtonClick(mouseButton, position);
+            lastClick = new ButtonClick(mouseButton, position);
         }
 
         /// <summary>
@@ -470,6 +470,20 @@ namespace Gu.Wpf.UiAutomation
             y = ((y - vScreenTop) * 65536 / vScreenHeight) + (65536 / (vScreenHeight * 2));
         }
 
+        private struct ButtonClick
+        {
+            internal readonly MouseButton Button;
+            internal readonly POINT Position;
+            internal readonly DateTime Time;
+
+            public ButtonClick(MouseButton button, POINT position)
+            {
+                this.Button = button;
+                this.Time = DateTime.UtcNow;
+                this.Position = position;
+            }
+        }
+
         /// <summary>Disposable class which presses the button on creation and releases it on dispose.</summary>
         private class PressedButton : IDisposable
         {
@@ -485,22 +499,6 @@ namespace Gu.Wpf.UiAutomation
             {
                 Up(this.button);
             }
-        }
-
-        private struct ButtonClick
-        {
-            public ButtonClick(MouseButton button, POINT position)
-            {
-                this.Button = button;
-                this.Time = DateTime.UtcNow;
-                this.Position = position;
-            }
-
-            internal readonly MouseButton Button;
-
-            internal readonly POINT Position;
-
-            internal readonly DateTime Time;
         }
     }
 }

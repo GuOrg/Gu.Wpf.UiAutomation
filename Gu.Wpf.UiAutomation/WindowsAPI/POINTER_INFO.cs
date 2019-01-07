@@ -1,3 +1,5 @@
+// ReSharper disable UnassignedField.Global
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;
@@ -5,7 +7,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// <summary>
     /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_info.
     /// </summary>
-    public struct POINTER_INFO
+    public struct POINTER_INFO : IEquatable<POINTER_INFO>
     {
         /// <summary>
         /// A value from the <see cref="POINTER_INPUT_TYPE"/> enumeration that specifies the pointer type.
@@ -97,8 +99,8 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
 
         /// <summary>
         /// Indicates which keyboard modifier keys were pressed at the time the input was generated. May be zero or a combination of the following values.
-        /// POINTER_MOD_SHIFT – A SHIFT key was pressed.
-        /// POINTER_MOD_CTRL – A CTRL key was pressed.
+        /// POINTER_MOD_SHIFT â€“ A SHIFT key was pressed.
+        /// POINTER_MOD_CTRL â€“ A CTRL key was pressed.
         /// </summary>
         public uint DwKeyStates;
 
@@ -112,5 +114,65 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// A value from the POINTER_BUTTON_CHANGE_TYPE enumeration that specifies the change in button state between this input and the previous input.
         /// </summary>
         public POINTER_BUTTON_CHANGE_TYPE ButtonChangeType;
+
+        public static bool operator ==(POINTER_INFO left, POINTER_INFO right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(POINTER_INFO left, POINTER_INFO right)
+        {
+            return !left.Equals(right);
+        }
+
+        /// <inheritdoc />
+        public bool Equals(POINTER_INFO other)
+        {
+            return this.PointerType == other.PointerType &&
+                   this.PointerId == other.PointerId &&
+                   this.FrameId == other.FrameId &&
+                   this.PointerFlags == other.PointerFlags &&
+                   this.SourceDevice.Equals(other.SourceDevice) &&
+                   this.HwndTarget.Equals(other.HwndTarget) &&
+                   this.PtPixelLocation.Equals(other.PtPixelLocation) &&
+                   this.PtPixelLocationRaw.Equals(other.PtPixelLocationRaw) &&
+                   this.PtHimetricLocation.Equals(other.PtHimetricLocation) &&
+                   this.PtHimetricLocationRaw.Equals(other.PtHimetricLocationRaw) &&
+                   this.DwTime == other.DwTime &&
+                   this.HistoryCount == other.HistoryCount &&
+                   this.InputData == other.InputData &&
+                   this.DwKeyStates == other.DwKeyStates &&
+                   this.PerformanceCount == other.PerformanceCount &&
+                   this.ButtonChangeType == other.ButtonChangeType;
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is POINTER_INFO other &&
+                                                   this.Equals(other);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (int)this.PointerType;
+                hashCode = (hashCode * 397) ^ (int)this.PointerId;
+                hashCode = (hashCode * 397) ^ (int)this.FrameId;
+                hashCode = (hashCode * 397) ^ (int)this.PointerFlags;
+                hashCode = (hashCode * 397) ^ this.SourceDevice.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.HwndTarget.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.PtPixelLocation.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.PtPixelLocationRaw.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.PtHimetricLocation.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.PtHimetricLocationRaw.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)this.DwTime;
+                hashCode = (hashCode * 397) ^ (int)this.HistoryCount;
+                hashCode = (hashCode * 397) ^ (int)this.InputData;
+                hashCode = (hashCode * 397) ^ (int)this.DwKeyStates;
+                hashCode = (hashCode * 397) ^ this.PerformanceCount.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)this.ButtonChangeType;
+                return hashCode;
+            }
+        }
     }
 }

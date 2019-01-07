@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// If the MOUSEEVENTF_ABSOLUTE value is not specified, dxand dy specify movement relative to the previous mouse event (the last reported position). Positive values mean the mouse moved right(or down); negative values mean the mouse moved left(or up).
     /// Relative mouse motion is subject to the effects of the mouse speed and the two-mouse threshold values.A user sets these three values with the Pointer Speed slider of the Control Panel's Mouse Properties sheet. You can obtain and set these values using the SystemParametersInfo function.
     /// The system applies two tests to the specified relative mouse movement.If the specified distance along either the x or y axis is greater than the first mouse threshold value, and the mouse speed is not zero, the system doubles the distance.If the specified distance along either the x or y axis is greater than the second mouse threshold value, and the mouse speed is equal to two, the system doubles the distance that resulted from applying the first threshold test.It is thus possible for the system to multiply specified relative mouse movement along the x or y axis by up to four times.
-    /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagmouseinput
+    /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagmouseinput.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct MOUSEINPUT

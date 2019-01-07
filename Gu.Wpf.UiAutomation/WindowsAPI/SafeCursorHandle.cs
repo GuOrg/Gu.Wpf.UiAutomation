@@ -10,7 +10,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     public class SafeCursorHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeCursorHandle(IntPtr handle)
-            : base(true)
+            : base(ownsHandle: true)
         {
             this.SetHandle(handle);
         }

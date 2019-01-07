@@ -491,10 +491,12 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         SUBTRACT = 0x6D,
 
+#pragma warning disable CA1720 // Identifier contains type name
         /// <summary>
         /// Decimal key
         /// </summary>
         DECIMAL = 0x6E,
+#pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
         /// Divide key

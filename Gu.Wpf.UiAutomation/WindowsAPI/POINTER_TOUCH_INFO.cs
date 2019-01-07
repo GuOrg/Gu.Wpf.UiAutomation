@@ -1,11 +1,13 @@
+#pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+    using System;
     using System.Windows;
 
     /// <summary>
     /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_touch_info.
     /// </summary>
-    public struct POINTER_TOUCH_INFO
+    public struct POINTER_TOUCH_INFO : IEquatable<POINTER_TOUCH_INFO>
     {
         /// <summary>
         /// An embedded <see cref="PointerInfo"/> header structure.
@@ -46,6 +48,16 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// </summary>
         public uint Pressure;
 
+        public static bool operator ==(POINTER_TOUCH_INFO left, POINTER_TOUCH_INFO right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(POINTER_TOUCH_INFO left, POINTER_TOUCH_INFO right)
+        {
+            return !left.Equals(right);
+        }
+
         public static POINTER_TOUCH_INFO Create(Point point, uint id)
         {
             var touchPoint = POINT.Create(point);
@@ -83,6 +95,38 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                 Right = oldArea.Right + deltaX,
                 Bottom = oldArea.Bottom + deltaY,
             };
+        }
+
+        /// <inheritdoc />
+        public bool Equals(POINTER_TOUCH_INFO other)
+        {
+            return this.PointerInfo.Equals(other.PointerInfo) &&
+                   this.TouchFlags == other.TouchFlags &&
+                   this.TouchMasks == other.TouchMasks &&
+                   this.Contact.Equals(other.Contact) &&
+                   this.ContactAreaRaw.Equals(other.ContactAreaRaw) &&
+                   this.Orientation == other.Orientation &&
+                   this.Pressure == other.Pressure;
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is POINTER_TOUCH_INFO other &&
+                                                   this.Equals(other);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = this.PointerInfo.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)this.TouchFlags;
+                hashCode = (hashCode * 397) ^ (int)this.TouchMasks;
+                hashCode = (hashCode * 397) ^ this.Contact.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.ContactAreaRaw.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)this.Orientation;
+                hashCode = (hashCode * 397) ^ (int)this.Pressure;
+                return hashCode;
+            }
         }
     }
 }

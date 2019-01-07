@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation.Logging
 {
     using System;
+    using System.Globalization;
 
     public abstract class LoggerBase : ILogger
     {
@@ -178,7 +179,7 @@ namespace Gu.Wpf.UiAutomation.Logging
 
         private static string GetFormattedMessage(string message, Exception exception, params object[] args)
         {
-            var formattedMsg = args == null ? message : string.Format(message, args);
+            var formattedMsg = args == null ? message : string.Format(CultureInfo.InvariantCulture, message, args);
             return exception == null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);
         }
     }
