@@ -16,10 +16,19 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public class Interpolation
     {
+        private enum Status
+        {
+            NotStarted,
+            Running,
+            Done,
+        }
+
         /// <summary>
         /// Using a shared <see cref="Stopwatch"/> here as for example drag should not be called from multiple threads.
         /// </summary>
         public static readonly Stopwatch Stopwatch = Stopwatch.StartNew();
+
+        private Status status = Status.NotStarted;
 
         public Interpolation(POINT @from, POINT to, TimeSpan time)
         {
@@ -52,15 +61,21 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>True if a position could be calculated.</returns>
         public bool TryCurrent(TimeSpan elapsed, out POINT position)
         {
-            if (elapsed > this.Time)
+            if (this.status == Status.Done)
             {
                 position = default(POINT);
                 return false;
             }
 
-            if (Math.Abs(elapsed.TotalMilliseconds - this.Time.TotalMilliseconds) < 10)
+            if (this.status == Status.NotStarted)
+            {
+                position = this.From;
+                this.status = Status.Running;
+            }
+            else if (this.Time.TotalMilliseconds - elapsed.TotalMilliseconds < 10)
             {
                 position = this.To;
+                this.status = Status.Done;
             }
             else
             {
