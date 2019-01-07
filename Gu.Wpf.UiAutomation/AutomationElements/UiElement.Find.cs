@@ -450,7 +450,7 @@ namespace Gu.Wpf.UiAutomation
         public T FindDescendant<T>(ControlType controlType, string name, Func<AutomationElement, T> wrap)
             where T : UiElement => this.FindFirst(
             TreeScope.Descendants,
-            Conditions.ByControlType(controlType),
+            this.CreateCondition(Conditions.ByControlType(controlType), name),
             wrap,
             Retry.Time);
 

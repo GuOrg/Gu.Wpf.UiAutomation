@@ -34,6 +34,11 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
+        protected AssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        {
+        }
+
         /// <summary>
         /// Create an <see cref="AssertException"/> or an exception specific to the currently used test framework if found.
         /// </summary>
@@ -54,8 +59,5 @@ namespace Gu.Wpf.UiAutomation
         {
             return new AssertException(message, innerException);
         }
-
-        /// <inheritdoc />
-        public override string ToString() => this.Message;
     }
 }

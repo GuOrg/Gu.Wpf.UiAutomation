@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.Tests.Extensions
+namespace Gu.Wpf.UiAutomation.Tests.Extensions
 {
     using System.Windows;
     using NUnit.Framework;
@@ -21,13 +21,7 @@
         public void CenterTest()
         {
             var rectangle = new Rect(10, 20, 30, 40);
-            this.AssertPointsAreSame(rectangle.Center(), new Point(25, 40));
-        }
-
-        private void AssertPointsAreSame(Point p1, Point p2)
-        {
-            Assert.AreEqual(p1.X, p2.X);
-            Assert.AreEqual(p1.Y, p2.Y);
+            Assert.AreEqual(rectangle.Center(), new Point(25, 40));
         }
     }
 }

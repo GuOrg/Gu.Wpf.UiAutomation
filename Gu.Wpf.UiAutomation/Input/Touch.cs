@@ -9,7 +9,7 @@ namespace Gu.Wpf.UiAutomation
     /// For simulating touch input.
     /// https://docs.microsoft.com/en-us/windows/desktop/api/_input_touchinjection/
     /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_touch_info
-    /// https://social.technet.microsoft.com/wiki/contents/articles/6460.simulating-touch-input-in-windows-8-using-touch-injection-api.aspx
+    /// https://social.technet.microsoft.com/wiki/contents/articles/6460.simulating-touch-input-in-windows-8-using-touch-injection-api.aspx.
     /// </summary>
     public static partial class Touch
     {

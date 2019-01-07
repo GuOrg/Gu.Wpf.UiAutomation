@@ -1,5 +1,4 @@
 // ReSharper disable InconsistentNaming
-#pragma warning disable CA1815 // Override equals and operator equals on value types
 #pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
 #pragma warning disable CA1051 // Do not declare visible instance fields
 namespace Gu.Wpf.UiAutomation.WindowsAPI

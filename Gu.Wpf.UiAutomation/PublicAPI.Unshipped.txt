@@ -1,4 +1,5 @@
-﻿Gu.Wpf.UiAutomation.Interpolation
+﻿Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
+Gu.Wpf.UiAutomation.Interpolation
 Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void
