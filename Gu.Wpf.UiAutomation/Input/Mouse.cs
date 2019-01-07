@@ -426,19 +426,23 @@ namespace Gu.Wpf.UiAutomation
                 flags |= MouseEventFlags.MOUSEEVENTF_VIRTUALDESK;
             }
 
-            // Build the mouse input object
-            var mouseInput = new MOUSEINPUT
-            {
-                dx = x,
-                dy = y,
-                mouseData = data,
-                dwExtraInfo = User32.GetMessageExtraInfo(),
-                time = 0,
-                dwFlags = flags,
-            };
-
             // Build the input object
-            var input = INPUT.MouseInput(mouseInput);
+            var input = new INPUT
+            {
+                type = InputType.INPUT_MOUSE,
+                u = new INPUTUNION
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = x,
+                        dy = y,
+                        mouseData = data,
+                        dwExtraInfo = User32.GetMessageExtraInfo(),
+                        time = 0,
+                        dwFlags = flags,
+                    },
+                },
+            };
 
             // Send the command
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
