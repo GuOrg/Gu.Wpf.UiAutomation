@@ -412,6 +412,54 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Effectively sends the mouse input command.
+        /// </summary>
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        private static void SendInput(int x, int y, MouseEventFlags flags, int data = 0)
+        {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            // Check if we are trying to do an absolute move
+            if (flags.HasFlag(MouseEventFlags.MOUSEEVENTF_ABSOLUTE))
+            {
+                // Absolute position requires normalized coordinates
+                NormalizeCoordinates(ref x, ref y);
+                flags |= MouseEventFlags.MOUSEEVENTF_VIRTUALDESK;
+            }
+
+            // Build the input object
+            var input = new INPUT
+            {
+                type = InputType.INPUT_MOUSE,
+                u = new INPUTUNION
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = x,
+                        dy = y,
+                        mouseData = data,
+                        dwExtraInfo = User32.GetMessageExtraInfo(),
+                        time = 0,
+                        dwFlags = flags,
+                    },
+                },
+            };
+
+            // Send the command
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                throw new Win32Exception();
+            }
+
+            if (WindowsVersion.IsWindows10())
+            {
+                Wait.For(TimeSpan.FromMilliseconds(10));
+            }
+        }
+
+        /// <summary>
         /// Normalizes the coordinates to get the absolute values from 0 to 65536.
         /// </summary>
         private static void NormalizeCoordinates(ref int x, ref int y)
