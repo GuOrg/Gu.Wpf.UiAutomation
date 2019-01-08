@@ -26,6 +26,13 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// The speed the mouse is moved when for example dragging.
+        /// Pixels per second.
+        /// Default value is 2000.
+        /// </summary>
+        public static double MoveSpeed { get; set; } = 2000;
+
+        /// <summary>
         /// Initialize touch injection. Can be called many times.
         /// </summary>
         public static void Initialize()
@@ -95,7 +102,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Simulate touch drag in one step.
+        /// Simulate touch drag.
         /// </summary>
         /// <param name="from">The start position.</param>
         /// <param name="to">The end position.</param>
@@ -103,12 +110,18 @@ namespace Gu.Wpf.UiAutomation
         {
             using (Down(from))
             {
-                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
-                contacts[0].PointerInfo.PtPixelLocation = POINT.Create(to);
-
-                if (!User32.InjectTouchInput(1, contacts))
+                var interpolation = Interpolation.Start(from, to, MoveSpeed);
+                while (interpolation.TryGetPosition(out var pos))
                 {
-                    throw new Win32Exception();
+                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts[0].PointerInfo.PtPixelLocation = pos;
+
+                    if (!User32.InjectTouchInput(1, contacts))
+                    {
+                        throw new Win32Exception();
+                    }
+
+                    Wait.For(TimeSpan.FromMilliseconds(10));
                 }
             }
         }
@@ -127,12 +140,18 @@ namespace Gu.Wpf.UiAutomation
                 throw new UiAutomationException("Call Touch.Down first.");
             }
 
-            contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
-            contacts[0].PointerInfo.PtPixelLocation = POINT.Create(position);
-
-            if (!User32.InjectTouchInput(1, contacts))
+            var interpolation = Interpolation.Start(contacts[0].PointerInfo.PtPixelLocation, POINT.Create(position), MoveSpeed);
+            while (interpolation.TryGetPosition(out var pos))
             {
-                throw new Win32Exception();
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                contacts[0].PointerInfo.PtPixelLocation = pos;
+
+                if (!User32.InjectTouchInput(1, contacts))
+                {
+                    throw new Win32Exception();
+                }
+
+                Wait.For(TimeSpan.FromMilliseconds(10));
             }
         }
     }

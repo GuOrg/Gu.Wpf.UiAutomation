@@ -81,22 +81,24 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
 
-                Touch.Drag(area.Bounds.Center(), area.Bounds.TopLeft);
+                Touch.Drag(area.Bounds.BottomRight, area.Bounds.BottomRight + new Vector(10, 10));
                 var expected = new[]
                 {
-                    "TouchEnter Position: 249,299",
-                    "PreviewTouchDown Position: 249,299",
-                    "TouchDown Position: 249,299",
+                    "TouchEnter Position: 499,599",
+                    "PreviewTouchDown Position: 499,599",
+                    "TouchDown Position: 499,599",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchMove Position: -1,-1",
-                    "TouchMove Position: -1,-1",
+                    "PreviewTouchMove Position: 499,599",
+                    "TouchMove Position: 499,599",
+                    "PreviewTouchMove Position: 509,609",
+                    "TouchMove Position: 509,609",
                     "ManipulationDelta",
-                    "PreviewTouchUp Position: -1,-1",
-                    "TouchUp Position: -1,-1",
+                    "PreviewTouchUp Position: 509,609",
+                    "TouchUp Position: 509,609",
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
-                    "TouchLeave Position: -1,-1",
+                    "TouchLeave Position: 509,609",
                 };
 
                 Dump(events);
@@ -117,28 +119,31 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var window = app.MainWindow;
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
-                using (Touch.Down(area.Bounds.Center()))
+                using (Touch.Down(area.Bounds.BottomRight))
                 {
-                    Touch.DragTo(area.Bounds.TopLeft);
+                    Touch.DragTo(area.Bounds.BottomRight + new Vector(10, 10));
                 }
 
                 var expected = new[]
                 {
-                    "TouchEnter Position: 249,299",
-                    "PreviewTouchDown Position: 249,299",
-                    "TouchDown Position: 249,299",
+                    "TouchEnter Position: 499,599",
+                    "PreviewTouchDown Position: 499,599",
+                    "TouchDown Position: 499,599",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchMove Position: -1,-1",
-                    "TouchMove Position: -1,-1",
+                    "PreviewTouchMove Position: 499,599",
+                    "TouchMove Position: 499,599",
+                    "PreviewTouchMove Position: 509,609",
+                    "TouchMove Position: 509,609",
                     "ManipulationDelta",
-                    "PreviewTouchUp Position: -1,-1",
-                    "TouchUp Position: -1,-1",
+                    "PreviewTouchUp Position: 509,609",
+                    "TouchUp Position: 509,609",
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
-                    "TouchLeave Position: -1,-1",
+                    "TouchLeave Position: 509,609",
                 };
 
+                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }

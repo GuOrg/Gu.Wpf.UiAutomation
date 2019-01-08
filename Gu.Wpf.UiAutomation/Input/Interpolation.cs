@@ -8,6 +8,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Diagnostics;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
@@ -35,6 +36,15 @@ namespace Gu.Wpf.UiAutomation
             Running,
             Done,
         }
+
+        /// <summary>
+        /// Create an instance of <see cref="Interpolation"/>.
+        /// </summary>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="speed">The speed in pixels / s.</param>
+        /// <returns>An instance of <see cref="Interpolation"/>.</returns>
+        public static Interpolation Start(Point from, Point to, double speed) => Start(POINT.Create(from), POINT.Create(to), speed);
 
         /// <summary>
         /// Create an instance of <see cref="Interpolation"/>.
