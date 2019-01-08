@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Threading;
@@ -29,7 +29,7 @@
         /// </summary>
         public static void UntilInputIsProcessed()
         {
-            For(TimeSpan.FromMilliseconds(100));
+            For(TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() ? 200 : 50));
         }
 
         /// <summary>

@@ -75,17 +75,17 @@ namespace Gu.Wpf.UiAutomation.UiTests
                     CollectionAssert.AreEqual(expected, actual);
 
                     textBox.Text = "abc";
-                    Wait.For(TimeSpan.FromMilliseconds(50));
+                    Wait.UntilInputIsProcessed();
                     expected.Add("TextBox1.ValueProperty = abc");
                     CollectionAssert.AreEqual(expected, actual);
 
                     textBox.Text = string.Empty;
-                    Wait.For(TimeSpan.FromMilliseconds(50));
+                    Wait.UntilInputIsProcessed();
                     expected.Add("TextBox1.ValueProperty = ");
                     CollectionAssert.AreEqual(expected, actual);
 
                     textBox.Text = "abc";
-                    Wait.For(TimeSpan.FromMilliseconds(50));
+                    Wait.UntilInputIsProcessed();
                     expected.Add("TextBox1.ValueProperty = abc");
                     CollectionAssert.AreEqual(expected, actual);
                 }
