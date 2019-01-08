@@ -50,8 +50,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Wait.UntilInputIsProcessed();
                 expected.AddRange(new[]
                 {
-                    "PreviewMouseMove Position: 100,300",
-                    "MouseMove Position: 100,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
                 });
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -59,28 +59,26 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
-        public void Move()
+        public void MoveBy()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
                 var mouseArea = window.FindGroupBox("Mouse area");
                 var events = window.FindListBox("Events");
-                Mouse.Position = mouseArea.Bounds.TopLeft;
-
-                Mouse.MoveBy(800, 0);
-                Mouse.MoveBy(0, 400);
-                Mouse.MoveBy(-400, -200);
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveBy(-20, 0);
+                Mouse.MoveBy(0, -20);
+                Mouse.MoveBy(20, 20);
                 var expected = new[]
                 {
-                    "MouseEnter Position: 0,0",
-                    "PreviewMouseMove Position: 0,0",
-                    "MouseMove Position: 0,0",
-                    "PreviewMouseMove Position: 80,0",
-                    "MouseMove Position: 80,0",
-                    "PreviewMouseMove Position: 160,0",
-                    "MouseMove Position: 160,0",
-                    "MouseLeave Position: 240,0",
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -96,35 +94,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var mouseArea = window.FindGroupBox("Mouse area");
                 var events = window.FindListBox("Events");
 
-                // So that we always start from the same position.
-                app.MainWindow.FindButton("Clear").Click(moveMouse: true);
-                Mouse.Position = mouseArea.Bounds.TopLeft;
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, 0));
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, -20));
                 Mouse.MoveTo(mouseArea.Bounds.Center());
                 var expected = new[]
                 {
-                    "MouseEnter Position: 0,0",
-                    "PreviewMouseMove Position: 0,0",
-                    "MouseMove Position: 0,0",
-                    "PreviewMouseMove Position: 10,30",
-                    "MouseMove Position: 10,30",
-                    "PreviewMouseMove Position: 20,60",
-                    "MouseMove Position: 20,60",
-                    "PreviewMouseMove Position: 30,90",
-                    "MouseMove Position: 30,90",
-                    "PreviewMouseMove Position: 40,120",
-                    "MouseMove Position: 40,120",
-                    "PreviewMouseMove Position: 50,150",
-                    "MouseMove Position: 50,150",
-                    "PreviewMouseMove Position: 60,180",
-                    "MouseMove Position: 60,180",
-                    "PreviewMouseMove Position: 70,210",
-                    "MouseMove Position: 70,210",
-                    "PreviewMouseMove Position: 80,240",
-                    "MouseMove Position: 80,240",
-                    "PreviewMouseMove Position: 90,270",
-                    "MouseMove Position: 90,270",
-                    "PreviewMouseMove Position: 100,300",
-                    "MouseMove Position: 100,300",
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -142,17 +124,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Click(MouseButton.Left, mouseArea.Bounds.Center());
                 var expected = new[]
                 {
-                    "MouseEnter Position: 100,300",
-                    "PreviewMouseMove Position: 100,300",
-                    "MouseMove Position: 100,300",
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "PreviewMouseUp Position: 100,300 Button: Left Released",
-                    "MouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "MouseUp Position: 100,300",
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "PreviewMouseUp Position: 250,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "MouseUp Position: 250,300",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -170,17 +152,17 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Click(MouseButton.Right, mouseArea.Bounds.Center());
                 var expected = new[]
                 {
-                    "MouseEnter Position: 100,300",
-                    "PreviewMouseMove Position: 100,300",
-                    "MouseMove Position: 100,300",
-                    "PreviewMouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Right Pressed",
-                    "MouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "PreviewMouseUp Position: 100,300 Button: Right Released",
-                    "MouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "MouseUp Position: 100,300",
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Right Pressed",
+                    "MouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "PreviewMouseUp Position: 250,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "MouseUp Position: 250,300",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -198,19 +180,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.DoubleClick(MouseButton.Left, mouseArea.Bounds.Center());
                 var expected = new[]
                 {
-                    "MouseEnter Position: 100,300",
-                    "PreviewMouseMove Position: 100,300",
-                    "MouseMove Position: 100,300",
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "PreviewMouseUp Position: 100,300 Button: Left Released",
-                    "MouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "MouseUp Position: 100,300",
-                    "PreviewMouseDoubleClick Position: 100,300 Button: Left Pressed",
-                    "MouseDoubleClick Position: 100,300",
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "PreviewMouseUp Position: 250,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "MouseUp Position: 250,300",
+                    "PreviewMouseDoubleClick Position: 250,300 Button: Left Pressed",
+                    "MouseDoubleClick Position: 250,300",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -231,20 +213,20 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Down(MouseButton.Left);
                 var expected = new List<string>
                 {
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
                 };
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
 
                 Mouse.Up(MouseButton.Left);
                 expected.AddRange(new[]
                 {
-                    "PreviewMouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "PreviewMouseUp Position: 100,300 Button: Left Released",
-                    "MouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "MouseUp Position: 100,300",
+                    "PreviewMouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "PreviewMouseUp Position: 250,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "MouseUp Position: 250,300",
                 });
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -265,20 +247,20 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Down(MouseButton.Right);
                 var expected = new List<string>
                 {
-                    "PreviewMouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Right Pressed",
-                    "MouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                    "MouseDown Position: 100,300",
+                    "PreviewMouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Right Pressed",
+                    "MouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "MouseDown Position: 250,300",
                 };
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
 
                 Mouse.Up(MouseButton.Right);
                 expected.AddRange(new[]
                 {
-                    "PreviewMouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "PreviewMouseUp Position: 100,300 Button: Right Released",
-                    "MouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "MouseUp Position: 100,300",
+                    "PreviewMouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "PreviewMouseUp Position: 250,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "MouseUp Position: 250,300",
                 });
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
@@ -300,20 +282,20 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 {
                     expected = new List<string>
                     {
-                        "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                        "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                        "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                        "MouseDown Position: 100,300",
+                        "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                        "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                        "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                        "MouseDown Position: 250,300",
                     };
                     CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
                 }
 
                 expected.AddRange(new[]
                 {
-                    "PreviewMouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "PreviewMouseUp Position: 100,300 Button: Left Released",
-                    "MouseLeftButtonUp Position: 100,300 Button: Left Released",
-                    "MouseUp Position: 100,300",
+                    "PreviewMouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "PreviewMouseUp Position: 250,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "MouseUp Position: 250,300",
                 });
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -336,19 +318,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 {
                     expected = new List<string>
                     {
-                        "PreviewMouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                        "PreviewMouseDown Position: 100,300 Button: Right Pressed",
-                        "MouseRightButtonDown Position: 100,300 Button: Right Pressed",
-                        "MouseDown Position: 100,300",
+                        "PreviewMouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                        "PreviewMouseDown Position: 250,300 Button: Right Pressed",
+                        "MouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                        "MouseDown Position: 250,300",
                     };
                 }
 
                 expected.AddRange(new[]
                 {
-                    "PreviewMouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "PreviewMouseUp Position: 100,300 Button: Right Released",
-                    "MouseRightButtonUp Position: 100,300 Button: Right Released",
-                    "MouseUp Position: 100,300",
+                    "PreviewMouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "PreviewMouseUp Position: 250,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "MouseUp Position: 250,300",
                 });
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
@@ -369,17 +351,18 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 
                 var expected = new[]
                 {
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseMove Position: 110,320",
-                    "MouseMove Position: 110,320",
-                    "PreviewMouseLeftButtonUp Position: 110,320 Button: Left Released",
-                    "PreviewMouseUp Position: 110,320 Button: Left Released",
-                    "MouseLeftButtonUp Position: 110,320 Button: Left Released",
-                    "MouseUp Position: 110,320",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseMove Position: 260,320",
+                    "MouseMove Position: 260,320",
+                    "PreviewMouseLeftButtonUp Position: 260,320 Button: Left Released",
+                    "PreviewMouseUp Position: 260,320 Button: Left Released",
+                    "MouseLeftButtonUp Position: 260,320 Button: Left Released",
+                    "MouseUp Position: 260,320",
                 };
+
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
@@ -395,21 +378,22 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Position = mouseArea.Bounds.Center();
                 app.MainWindow.FindButton("Clear").Invoke();
 
-                Mouse.DragHorizontally(MouseButton.Left, mouseArea.Bounds.Center(), 1);
+                Mouse.DragHorizontally(MouseButton.Left, mouseArea.Bounds.Center(), 10);
 
                 var expected = new[]
                 {
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseMove Position: 101,300",
-                    "MouseMove Position: 101,300",
-                    "PreviewMouseLeftButtonUp Position: 101,300 Button: Left Released",
-                    "PreviewMouseUp Position: 101,300 Button: Left Released",
-                    "MouseLeftButtonUp Position: 101,300 Button: Left Released",
-                    "MouseUp Position: 101,300",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseMove Position: 260,300",
+                    "MouseMove Position: 260,300",
+                    "PreviewMouseLeftButtonUp Position: 260,300 Button: Left Released",
+                    "PreviewMouseUp Position: 260,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 260,300 Button: Left Released",
+                    "MouseUp Position: 260,300",
                 };
+
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
@@ -425,21 +409,22 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.Position = mouseArea.Bounds.Center();
                 app.MainWindow.FindButton("Clear").Invoke();
 
-                Mouse.DragVertically(MouseButton.Left, mouseArea.Bounds.Center(), 1);
+                Mouse.DragVertically(MouseButton.Left, mouseArea.Bounds.Center(), 10);
 
                 var expected = new[]
                 {
-                    "PreviewMouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "PreviewMouseDown Position: 100,300 Button: Left Pressed",
-                    "MouseLeftButtonDown Position: 100,300 Button: Left Pressed",
-                    "MouseDown Position: 100,300",
-                    "PreviewMouseMove Position: 100,301",
-                    "MouseMove Position: 100,301",
-                    "PreviewMouseLeftButtonUp Position: 100,301 Button: Left Released",
-                    "PreviewMouseUp Position: 100,301 Button: Left Released",
-                    "MouseLeftButtonUp Position: 100,301 Button: Left Released",
-                    "MouseUp Position: 100,301",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseMove Position: 250,310",
+                    "MouseMove Position: 250,310",
+                    "PreviewMouseLeftButtonUp Position: 250,310 Button: Left Released",
+                    "PreviewMouseUp Position: 250,310 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,310 Button: Left Released",
+                    "MouseUp Position: 250,310",
                 };
+
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }

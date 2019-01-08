@@ -32,6 +32,13 @@ namespace Gu.Wpf.UiAutomation
         private static ButtonClick? lastClick;
 
         /// <summary>
+        /// The speed the mouse is moved when for example dragging.
+        /// Pixels per second.
+        /// Default value is 2000.
+        /// </summary>
+        public static double MoveSpeed { get; set; } = 2000;
+
+        /// <summary>
         /// Current position of the mouse cursor.
         /// </summary>
         public static Point Position
@@ -81,52 +88,15 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="newY">The new position on the y-axis.</param>
         public static void MoveTo(int newX, int newY)
         {
-            // Get starting position
-            var startPos = Position;
-            var startX = startPos.X;
-            var startY = startPos.Y;
-
-            // Prepare variables
-            var totalDistance = startPos.DistanceTo(Position);
-
-            // Calculate the duration for the speed
-            var optimalPixelsPerMillisecond = 1;
-            var minDuration = 200;
-            var maxDuration = 500;
-            var duration = (totalDistance / optimalPixelsPerMillisecond).Clamp(minDuration, maxDuration);
-
-            // Calculate the steps for the smoothness
-            var optimalPixelsPerStep = 10;
-            var minSteps = 10;
-            var maxSteps = 50;
-            var steps = (totalDistance / optimalPixelsPerStep).Clamp(minSteps, maxSteps);
-
-            // Calculate the interval and the step size
-            var interval = duration / steps;
-            var stepX = (newX - startX) / steps;
-            var stepY = (newY - startY) / steps;
-
-            // Build a list of movement points (except the last one, to set that one perfectly)
-            var movements = new List<Point>();
-            for (var i = 1; i < steps; i++)
+            var interpolation = Interpolation.Start(POINT.Create(Position), new POINT(newX, newY), MoveSpeed);
+            while (interpolation.TryGetPosition(out var pos))
             {
-                var tempX = startX + (i * stepX);
-                var tempY = startY + (i * stepY);
-                movements.Add(new Point(tempX, tempY));
-            }
+                if (!User32.SetCursorPos(pos.X, pos.Y))
+                {
+                    throw new Win32Exception();
+                }
 
-            // Add an exact point for the last one, if it does not fit exactly
-            var lastPoint = movements.Last();
-            if ((int)lastPoint.X != newX || (int)lastPoint.Y != newY)
-            {
-                movements.Add(new Point(newX, newY));
-            }
-
-            // Loop thru the steps and set them
-            foreach (var point in movements)
-            {
-                Position = point;
-                Wait.For(TimeSpan.FromMilliseconds(interval));
+                Wait.For(TimeSpan.FromMilliseconds(10));
             }
 
             Wait.UntilInputIsProcessed();
@@ -138,7 +108,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="newPosition">The new position for the mouse.</param>
         public static void MoveTo(Point newPosition)
         {
-            MoveTo(newPosition.X.ToInt(), newPosition.Y.ToInt());
+            MoveTo((int)newPosition.X, (int)newPosition.Y);
         }
 
         /// <summary>
@@ -261,11 +231,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="distance">The distance to drag, + for right, - for left.</param>
         public static void DragHorizontally(MouseButton mouseButton, Point startingPoint, double distance)
         {
-            Position = startingPoint;
-            using (Hold(mouseButton))
-            {
-                Position += new Vector(distance, 0);
-            }
+            Drag(mouseButton, startingPoint, startingPoint + new Vector(distance, 0));
         }
 
         /// <summary>
@@ -276,26 +242,33 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="distance">The distance to drag, + for down, - for up.</param>
         public static void DragVertically(MouseButton mouseButton, Point startingPoint, double distance)
         {
-            Position = startingPoint;
-            using (Hold(mouseButton))
-            {
-                Position += new Vector(0, distance);
-            }
+            Drag(mouseButton, startingPoint, startingPoint + new Vector(0, distance));
         }
 
         /// <summary>
         /// Drags the mouse in one step.
         /// </summary>
         /// <param name="mouseButton">The mouse button to use for dragging.</param>
-        /// <param name="startingPoint">Starting point of the drag.</param>
-        /// <param name="endPoint">The distance to drag, + for down, - for up.</param>
-        public static void Drag(MouseButton mouseButton, Point startingPoint, Point endPoint)
+        /// <param name="from">Starting point of the drag.</param>
+        /// <param name="to">The distance to drag, + for down, - for up.</param>
+        public static void Drag(MouseButton mouseButton, Point from, Point to)
         {
-            Position = startingPoint;
+            Position = from;
             using (Hold(mouseButton))
             {
-                Position = endPoint;
+                var interpolation = Interpolation.Start(POINT.Create(from), POINT.Create(to), MoveSpeed);
+                while (interpolation.TryGetPosition(out var pos))
+                {
+                    if (!User32.SetCursorPos(pos.X, pos.Y))
+                    {
+                        throw new Win32Exception();
+                    }
+
+                    Wait.For(TimeSpan.FromMilliseconds(10));
+                }
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         public static void LeftClick()

@@ -131,7 +131,10 @@ override Gu.Wpf.UiAutomation.WindowsAPI.RECT.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.ReleaseHandle() -> bool
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
+static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void

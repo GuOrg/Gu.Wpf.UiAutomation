@@ -8,8 +8,8 @@
         mc:Ignorable="d">
     <Grid Height="600">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
         <GroupBox Background="Gray"
                   Header="Mouse area"

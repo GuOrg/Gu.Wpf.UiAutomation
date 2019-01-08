@@ -19,7 +19,9 @@ namespace Gu.Wpf.UiAutomation
         {
             if (!User32.InitializeTouchInjection())
             {
+#pragma warning disable CA1065 // Do not raise exceptions in unexpected locations
                 throw new Win32Exception();
+#pragma warning restore CA1065 // Do not raise exceptions in unexpected locations
             }
         }
 

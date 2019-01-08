@@ -255,20 +255,15 @@ namespace Gu.Wpf.UiAutomation
         /// <inheritdoc/>
         public override bool MoveTo(XPathNavigator other)
         {
-            var navigator = other as AutomationElementXPathNavigator;
-            if (navigator == null)
+            if (other is AutomationElementXPathNavigator navigator &&
+                Equals(this.rootElement.AutomationElement, navigator.rootElement.AutomationElement))
             {
-                return false;
+                this.currentElement = navigator.currentElement;
+                this.attributeIndex = navigator.attributeIndex;
+                return true;
             }
 
-            if (!Equals(this.rootElement.AutomationElement, navigator.rootElement.AutomationElement))
-            {
-                return false;
-            }
-
-            this.currentElement = navigator.currentElement;
-            this.attributeIndex = navigator.attributeIndex;
-            return true;
+            return false;
         }
 
         /// <inheritdoc/>
