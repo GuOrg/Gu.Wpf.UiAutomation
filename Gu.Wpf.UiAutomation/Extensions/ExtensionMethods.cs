@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -18,14 +18,6 @@
 
             return source.CompareTo(smallest) < 0 ? smallest :
                 source.CompareTo(biggest) > 0 ? biggest : source;
-        }
-
-        /// <summary>
-        /// Converts a double to the nearest int32.
-        /// </summary>
-        public static int ToInt(this double value)
-        {
-            return Convert.ToInt32(value);
         }
 
         /// <summary>

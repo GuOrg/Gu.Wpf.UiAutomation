@@ -184,10 +184,9 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public UiElement FocusedElement()
-        {
-            return FromAutomationElement(AutomationElement.FocusedElement);
-        }
+#pragma warning disable CA1822
+        public UiElement FocusedElement() => FromAutomationElement(AutomationElement.FocusedElement);
+#pragma warning restore CA1822
 
         /// <summary>
         /// Gets the main window (first window on desktop with the same process as this window).

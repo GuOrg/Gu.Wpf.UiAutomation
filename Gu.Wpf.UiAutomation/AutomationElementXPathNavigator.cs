@@ -62,7 +62,7 @@ namespace Gu.Wpf.UiAutomation
 
         /// <inheritdoc/>
         public override string LocalName => this.IsInAttribute
-            ? this.GetAttributeName(this.attributeIndex)
+            ? GetAttributeName(this.attributeIndex)
             : this.currentElement.ControlType().ProgrammaticName.TrimStart("ControlType.");
 
         /// <inheritdoc/>
@@ -134,7 +134,7 @@ namespace Gu.Wpf.UiAutomation
                 return string.Empty;
             }
 
-            var index = this.GetAttributeIndexFromName(localName);
+            var index = GetAttributeIndexFromName(localName);
             if (index != NoAttributeValue)
             {
                 return this.GetAttributeValue(index);
@@ -151,7 +151,7 @@ namespace Gu.Wpf.UiAutomation
                 return false;
             }
 
-            var index = this.GetAttributeIndexFromName(localName);
+            var index = GetAttributeIndexFromName(localName);
             if (index != NoAttributeValue)
             {
                 this.attributeIndex = index;
@@ -286,24 +286,7 @@ namespace Gu.Wpf.UiAutomation
                    this.attributeIndex == navigator.attributeIndex;
         }
 
-        private string GetAttributeValue(int index)
-        {
-            switch ((ElementAttributes)index)
-            {
-                case ElementAttributes.AutomationId:
-                    return this.currentElement.AutomationId();
-                case ElementAttributes.Name:
-                    return this.currentElement.Name();
-                case ElementAttributes.ClassName:
-                    return this.currentElement.ClassName();
-                case ElementAttributes.HelpText:
-                    return this.currentElement.HelpText();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(index));
-            }
-        }
-
-        private string GetAttributeName(int index)
+        private static string GetAttributeName(int index)
         {
             switch ((ElementAttributes)index)
             {
@@ -320,7 +303,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private int GetAttributeIndexFromName(string attributeName)
+        private static int GetAttributeIndexFromName(string attributeName)
         {
             if (Enum.TryParse<ElementAttributes>(attributeName, out var parsedValue))
             {
@@ -328,6 +311,23 @@ namespace Gu.Wpf.UiAutomation
             }
 
             return NoAttributeValue;
+        }
+
+        private string GetAttributeValue(int index)
+        {
+            switch ((ElementAttributes)index)
+            {
+                case ElementAttributes.AutomationId:
+                    return this.currentElement.AutomationId();
+                case ElementAttributes.Name:
+                    return this.currentElement.Name();
+                case ElementAttributes.ClassName:
+                    return this.currentElement.ClassName();
+                case ElementAttributes.HelpText:
+                    return this.currentElement.HelpText();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(index));
+            }
         }
     }
 }
