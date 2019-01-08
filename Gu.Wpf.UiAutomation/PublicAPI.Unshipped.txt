@@ -1,6 +1,7 @@
 ﻿Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.Interpolation
 Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Cursor -> System.IntPtr
@@ -14,6 +15,10 @@ Gu.Wpf.UiAutomation.WindowsAPI.CursorState.CURSOR_SUPPRESSED = 2 -> Gu.Wpf.UiAut
 Gu.Wpf.UiAutomation.WindowsAPI.CursorState.HIDDEN = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 Gu.Wpf.UiAutomation.WindowsAPI.CursorState.NOMOUSE = -1 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUT other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_DOWN = 9 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_UP = 10 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
@@ -102,10 +107,20 @@ Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.CONTACTAREA = 1 -> Gu.Wpf.UiAutomation
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Equals(object obj) -> bool
@@ -122,11 +137,21 @@ static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
 static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
 static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Touch.Up() -> void
+static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Create() -> Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
 static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO left, Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO left, Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.INPUT left, Gu.Wpf.UiAutomation.WindowsAPI.INPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.INPUT left, Gu.Wpf.UiAutomation.WindowsAPI.INPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION left, Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION left, Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Create(System.Windows.Point point, uint id) -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO

@@ -150,8 +150,7 @@ namespace Gu.Wpf.UiAutomation
             // Check if the position is the same as with last click
             if (lastClick is ButtonClick buttonClick &&
                 buttonClick.Button == mouseButton &&
-                buttonClick.Position.X == position.X &&
-                buttonClick.Position.Y == position.Y)
+                buttonClick.Point == position)
             {
                 // Get the timeout needed to not fire a double click
                 var timeout = CurrentDoubleClickTime - DateTime.UtcNow.Subtract(buttonClick.Time).Milliseconds;
@@ -473,14 +472,14 @@ namespace Gu.Wpf.UiAutomation
         private struct ButtonClick
         {
             internal readonly MouseButton Button;
-            internal readonly POINT Position;
+            internal readonly POINT Point;
             internal readonly DateTime Time;
 
-            public ButtonClick(MouseButton button, POINT position)
+            public ButtonClick(MouseButton button, POINT point)
             {
                 this.Button = button;
                 this.Time = DateTime.UtcNow;
-                this.Position = position;
+                this.Point = point;
             }
         }
 

@@ -10,7 +10,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
 
     [Obsolete("This is not used anywhere, dunno if there is a reason to keep it.")]
     [StructLayout(LayoutKind.Sequential)]
-    public struct COLORREF
+    public struct COLORREF : IEquatable<COLORREF>
     {
         public byte R;
         public byte G;
@@ -43,10 +43,40 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             return new COLORREF(c.R, c.G, c.B);
         }
 
+        public static bool operator ==(COLORREF left, COLORREF right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(COLORREF left, COLORREF right)
+        {
+            return !left.Equals(right);
+        }
+
         /// <inheritdoc/>
         public override string ToString()
         {
             return $"R={this.R},G={this.G},B={this.B}";
+        }
+
+        /// <inheritdoc/>
+        public bool Equals(COLORREF other) => this.R == other.R &&
+                                              this.G == other.G &&
+                                              this.B == other.B;
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is COLORREF other && this.Equals(other);
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = this.R.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.G.GetHashCode();
+                hashCode = (hashCode * 397) ^ this.B.GetHashCode();
+                return hashCode;
+            }
         }
     }
 }

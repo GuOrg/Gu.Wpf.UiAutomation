@@ -15,7 +15,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagmouseinput.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct MOUSEINPUT
+    public struct MOUSEINPUT : IEquatable<MOUSEINPUT>
     {
         /// <summary>
         /// The absolute position of the mouse, or the amount of motion since the last mouse event was generated, depending on the value of the dwFlags member.
@@ -56,5 +56,40 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// An additional value associated with the mouse event. An application calls GetMessageExtraInfo to obtain this extra information.
         /// </summary>
         public IntPtr dwExtraInfo;
+
+        public static bool operator ==(MOUSEINPUT left, MOUSEINPUT right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(MOUSEINPUT left, MOUSEINPUT right)
+        {
+            return !left.Equals(right);
+        }
+
+        /// <inheritdoc />
+        public bool Equals(MOUSEINPUT other)
+        {
+            return this.dx == other.dx && this.dy == other.dy && this.mouseData == other.mouseData && this.dwFlags == other.dwFlags && this.time == other.time && this.dwExtraInfo.Equals(other.dwExtraInfo);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is MOUSEINPUT other &&
+                                                   this.Equals(other);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = this.dx;
+                hashCode = (hashCode * 397) ^ this.dy;
+                hashCode = (hashCode * 397) ^ (int)this.mouseData;
+                hashCode = (hashCode * 397) ^ (int)this.dwFlags;
+                hashCode = (hashCode * 397) ^ (int)this.time;
+                hashCode = (hashCode * 397) ^ this.dwExtraInfo.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }

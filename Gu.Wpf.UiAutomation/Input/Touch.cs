@@ -11,7 +11,7 @@ namespace Gu.Wpf.UiAutomation
     /// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/ns-winuser-tagpointer_touch_info
     /// https://social.technet.microsoft.com/wiki/contents/articles/6460.simulating-touch-input-in-windows-8-using-touch-injection-api.aspx.
     /// </summary>
-    public static partial class Touch
+    public static class Touch
     {
         private static POINTER_TOUCH_INFO[] contacts = new POINTER_TOUCH_INFO[1];
 
