@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
     using System.Linq;
+    using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
@@ -50,16 +51,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Touch.Tap(area.Bounds.Center());
                 var expected = new[]
                 {
-                    "TouchEnter Position: 99,299",
-                    "PreviewTouchDown Position: 99,299",
-                    "TouchDown Position: 99,299",
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchUp Position: 99,299",
-                    "TouchUp Position: 99,299",
+                    "PreviewTouchUp Position: 249,299",
+                    "TouchUp Position: 249,299",
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
-                    "TouchLeave Position: 99,299",
+                    "TouchLeave Position: 249,299",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
@@ -83,9 +84,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Touch.Drag(area.Bounds.Center(), area.Bounds.TopLeft);
                 var expected = new[]
                 {
-                    "TouchEnter Position: 99,299",
-                    "PreviewTouchDown Position: 99,299",
-                    "TouchDown Position: 99,299",
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
                     "PreviewTouchMove Position: -1,-1",
@@ -98,6 +99,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: -1,-1",
                 };
 
+                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
@@ -122,9 +124,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 
                 var expected = new[]
                 {
-                    "TouchEnter Position: 99,299",
-                    "PreviewTouchDown Position: 99,299",
-                    "TouchDown Position: 99,299",
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
                     "PreviewTouchMove Position: -1,-1",
@@ -157,16 +159,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Touch.Tap(area.Bounds.Center());
                 var expected = new[]
                 {
-                    "TouchEnter Position: 99,299",
-                    "PreviewTouchDown Position: 99,299",
-                    "TouchDown Position: 99,299",
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchUp Position: 99,299",
-                    "TouchUp Position: 99,299",
+                    "PreviewTouchUp Position: 249,299",
+                    "TouchUp Position: 249,299",
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
-                    "TouchLeave Position: 99,299",
+                    "TouchLeave Position: 249,299",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
