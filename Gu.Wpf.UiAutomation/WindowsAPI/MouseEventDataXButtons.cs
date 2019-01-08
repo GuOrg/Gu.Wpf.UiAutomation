@@ -4,9 +4,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     using System;
 
     [Flags]
-#pragma warning disable CA1028 // Enum Storage should be Int32
-    public enum MouseEventDataXButtons : uint
-#pragma warning restore CA1028 // Enum Storage should be Int32
+    public enum MouseEventDataXButtons : int
     {
         NOTHING = 0x00000000,
         XBUTTON1 = 0x00000001,

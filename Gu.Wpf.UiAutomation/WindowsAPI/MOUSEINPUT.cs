@@ -37,7 +37,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// If dwFlags does not contain MOUSEEVENTF_WHEEL, MOUSEEVENTF_XDOWN, or MOUSEEVENTF_XUP, then mouseData should be zero.
         /// If dwFlags contains MOUSEEVENTF_XDOWN or MOUSEEVENTF_XUP, then mouseData specifies which X buttons were pressed or released. This value may be any combination of the following flags.
         /// </summary>
-        public uint mouseData;
+        public int mouseData;
 
         /// <summary>
         /// A set of bit flags that specify various aspects of mouse motion and button clicks. The bits in this member can be any reasonable combination of the following values.

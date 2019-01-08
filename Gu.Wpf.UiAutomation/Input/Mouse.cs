@@ -118,8 +118,6 @@ namespace Gu.Wpf.UiAutomation
         public static void Click(MouseButton mouseButton)
         {
             var position = POINT.Create(Position);
-
-            // Check if the position is the same as with last click
             if (lastClick is ButtonClick buttonClick &&
                 buttonClick.Button == mouseButton &&
                 buttonClick.Point == position)
@@ -182,7 +180,7 @@ namespace Gu.Wpf.UiAutomation
         public static void Down(MouseButton mouseButton)
         {
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out var data);
-            SendInput(0, 0, data, flags);
+            SendInput(flags, data);
         }
 
         /// <summary>
@@ -192,7 +190,7 @@ namespace Gu.Wpf.UiAutomation
         public static void Up(MouseButton mouseButton)
         {
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out var data);
-            SendInput(0, 0, data, flags);
+            SendInput(flags, data);
         }
 
         /// <summary>
@@ -210,8 +208,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Scroll(double lines)
         {
-            var amount = (uint)(WheelDelta * lines);
-            SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_WHEEL);
+            SendInput(MouseEventFlags.MOUSEEVENTF_WHEEL, (int)(WheelDelta * lines));
         }
 
         /// <summary>
@@ -219,8 +216,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void HorizontalScroll(double lines)
         {
-            var amount = (uint)(WheelDelta * lines);
-            SendInput(0, 0, amount, MouseEventFlags.MOUSEEVENTF_HWHEEL);
+            SendInput(MouseEventFlags.MOUSEEVENTF_HWHEEL, (int)(WheelDelta * lines));
         }
 
         /// <summary>
@@ -330,7 +326,7 @@ namespace Gu.Wpf.UiAutomation
         /// Converts the button to the correct <see cref="MouseEventFlags" /> object
         /// and fills the additional data if needed.
         /// </summary>
-        private static MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out uint data)
+        private static MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out int data)
         {
             MouseEventFlags mouseEventFlags;
             var mouseData = MouseEventDataXButtons.NOTHING;
@@ -357,7 +353,7 @@ namespace Gu.Wpf.UiAutomation
                     throw new ArgumentOutOfRangeException(nameof(mouseButton));
             }
 
-            data = (uint)mouseData;
+            data = (int)mouseData;
             return mouseEventFlags;
         }
 
@@ -382,25 +378,13 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        /// <summary>
-        /// Effectively sends the mouse input command.
-        /// </summary>
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
-        private static void SendInput(int x, int y, uint data, MouseEventFlags flags)
+        private static void SendInput(MouseEventFlags flags, int data = 0)
         {
             // Demand the correct permissions
             var permissions = new PermissionSet(PermissionState.Unrestricted);
             permissions.Demand();
 
-            // Check if we are trying to do an absolute move
-            if (flags.HasFlag(MouseEventFlags.MOUSEEVENTF_ABSOLUTE))
-            {
-                // Absolute position requires normalized coordinates
-                NormalizeCoordinates(ref x, ref y);
-                flags |= MouseEventFlags.MOUSEEVENTF_VIRTUALDESK;
-            }
-
-            // Build the input object
             var input = new INPUT
             {
                 type = InputType.INPUT_MOUSE,
@@ -408,11 +392,8 @@ namespace Gu.Wpf.UiAutomation
                 {
                     mi = new MOUSEINPUT
                     {
-                        dx = x,
-                        dy = y,
                         mouseData = data,
                         dwExtraInfo = User32.GetMessageExtraInfo(),
-                        time = 0,
                         dwFlags = flags,
                     },
                 },

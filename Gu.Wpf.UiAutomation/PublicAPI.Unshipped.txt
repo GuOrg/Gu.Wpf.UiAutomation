@@ -20,6 +20,7 @@ Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUT
 Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.mouseData -> int
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_DOWN = 9 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_UP = 10 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
