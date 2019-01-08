@@ -25,5 +25,10 @@ namespace WpfApplication.Windows
         {
             this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source).ToString(CultureInfo.InvariantCulture)}");
         }
+
+        private void OnMouseWheelEvent(object sender, MouseWheelEventArgs e)
+        {
+            this.Events.Items.Add($"{e.RoutedEvent.Name} Position: {e.GetPosition((IInputElement)e.Source).ToString(CultureInfo.InvariantCulture)} {e.Delta}");
+        }
     }
 }

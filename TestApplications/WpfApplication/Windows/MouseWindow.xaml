@@ -23,7 +23,7 @@
                   MouseRightButtonDown="OnMouseButtonEvent"
                   MouseRightButtonUp="OnMouseButtonEvent"
                   MouseUp="OnMouseEvent"
-                  MouseWheel="OnMouseEvent"
+                  MouseWheel="OnMouseWheelEvent"
                   PreviewMouseDoubleClick="OnMouseButtonEvent"
                   PreviewMouseDown="OnMouseButtonEvent"
                   PreviewMouseLeftButtonDown="OnMouseButtonEvent"
@@ -32,7 +32,7 @@
                   PreviewMouseRightButtonDown="OnMouseButtonEvent"
                   PreviewMouseRightButtonUp="OnMouseButtonEvent"
                   PreviewMouseUp="OnMouseButtonEvent"
-                  PreviewMouseWheel="OnMouseEvent">
+                  PreviewMouseWheel="OnMouseWheelEvent">
             <GroupBox.Template>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
                     <Border Background="{TemplateBinding Background}" />

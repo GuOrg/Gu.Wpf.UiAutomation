@@ -429,6 +429,31 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
+        [TestCase(-2, "-240")]
+        [TestCase(-1, "-120")]
+        [TestCase(1, "120")]
+        [TestCase(2, "240")]
+        public void Scroll(int scroll, string expected)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                Mouse.Scroll(scroll);
+                var expecteds = new[]
+                {
+                    $"PreviewMouseWheel Position: 250,300 {expected}",
+                    $"MouseWheel Position: 250,300 {expected}",
+                };
+
+                CollectionAssert.AreEqual(expecteds, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
         // ReSharper disable once UnusedMember.Local
         private static void Dump(ListBox events)
         {
