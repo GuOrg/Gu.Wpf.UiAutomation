@@ -255,19 +255,19 @@ namespace Gu.Wpf.UiAutomation
         /// <inheritdoc/>
         public override bool MoveTo(XPathNavigator other)
         {
-            var specificNavigator = other as AutomationElementXPathNavigator;
-            if (specificNavigator == null)
+            var navigator = other as AutomationElementXPathNavigator;
+            if (navigator == null)
             {
                 return false;
             }
 
-            if (!Equals(this.rootElement.AutomationElement, specificNavigator.rootElement.AutomationElement))
+            if (!Equals(this.rootElement.AutomationElement, navigator.rootElement.AutomationElement))
             {
                 return false;
             }
 
-            this.currentElement = specificNavigator.currentElement;
-            this.attributeIndex = specificNavigator.attributeIndex;
+            this.currentElement = navigator.currentElement;
+            this.attributeIndex = navigator.attributeIndex;
             return true;
         }
 
@@ -280,19 +280,10 @@ namespace Gu.Wpf.UiAutomation
         /// <inheritdoc/>
         public override bool IsSamePosition(XPathNavigator other)
         {
-            var specificNavigator = other as AutomationElementXPathNavigator;
-            if (specificNavigator == null)
-            {
-                return false;
-            }
-
-            if (!this.rootElement.Equals(specificNavigator.rootElement))
-            {
-                return false;
-            }
-
-            return this.currentElement.Equals(specificNavigator.currentElement)
-                && this.attributeIndex == specificNavigator.attributeIndex;
+            return other is AutomationElementXPathNavigator navigator &&
+                   this.rootElement.Equals(navigator.rootElement) &&
+                   this.currentElement.Equals(navigator.currentElement) &&
+                   this.attributeIndex == navigator.attributeIndex;
         }
 
         private string GetAttributeValue(int index)

@@ -1,6 +1,7 @@
 ﻿Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.Interpolation
 Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
+Gu.Wpf.UiAutomation.UiElement.FindFirstChild<T>(System.Windows.Automation.Condition condition, System.Func<System.Windows.Automation.AutomationElement, T> wrap) -> T
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void

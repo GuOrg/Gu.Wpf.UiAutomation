@@ -704,6 +704,12 @@ namespace Gu.Wpf.UiAutomation
             return this.FindFirst(TreeScope.Children, condition);
         }
 
+        public T FindFirstChild<T>(System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
+             where T : UiElement
+        {
+            return this.FindFirst(TreeScope.Children, condition, wrap);
+        }
+
         public IReadOnlyList<UiElement> FindAllChildren()
         {
             return this.FindAll(TreeScope.Children, System.Windows.Automation.Condition.TrueCondition);

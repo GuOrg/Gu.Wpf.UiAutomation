@@ -1,4 +1,5 @@
-﻿namespace Gu.Wpf.UiAutomation
+#pragma warning disable CA1034 // Nested types should not be visible
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Diagnostics;

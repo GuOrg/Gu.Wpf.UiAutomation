@@ -83,7 +83,7 @@ namespace Gu.Wpf.UiAutomation
 
         public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Conditions.MessageBox));
 
-        public Window FindDialog() => this.ModalWindows.FirstOrDefault() ?? throw new InvalidOperationException("Did not find a dialog");
+        public Window FindDialog() => this.FindFirstChild(Conditions.ModalWindow, e => new Window(e, isMainWindow: false));
 
         public ContextMenu GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {

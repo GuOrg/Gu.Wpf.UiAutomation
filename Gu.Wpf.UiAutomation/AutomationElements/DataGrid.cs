@@ -106,7 +106,15 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public UiElement SelectedItem => this.SelectedItems?.FirstOrDefault();
+        public UiElement SelectedItem
+        {
+            get
+            {
+                return this.SelectionPattern.Current.GetSelection().FirstOrDefault() is AutomationElement item
+                    ? FromAutomationElement(item)
+                    : null;
+            }
+        }
 
         public GridPattern GridPattern => this.AutomationElement.GridPattern();
 

@@ -43,10 +43,12 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public bool IsStoreApp { get; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
         /// <summary>
         /// Calls <see cref="GetMainWindow"/> with a timeout of ten seconds.
         /// </summary>
         public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsAppVeyor() ? 100 : 10));
+#pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
         /// The process Id of the application.

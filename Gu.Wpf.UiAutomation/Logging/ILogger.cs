@@ -1,7 +1,10 @@
-﻿namespace Gu.Wpf.UiAutomation.Logging
+namespace Gu.Wpf.UiAutomation.Logging
 {
     using System;
 
+    /// <summary>
+    /// Not sure if we want to keep the logging stuff.
+    /// </summary>
     public interface ILogger
     {
         bool IsTraceEnabled { get; }
@@ -36,9 +39,11 @@
 
         void Warn(string message, Exception exception, params object[] args);
 
+#pragma warning disable CA1716 // Identifiers should not match keywords
         void Error(string message, params object[] args);
 
         void Error(string message, Exception exception, params object[] args);
+#pragma warning restore CA1716 // Identifiers should not match keywords
 
         void Fatal(string message, params object[] args);
 
