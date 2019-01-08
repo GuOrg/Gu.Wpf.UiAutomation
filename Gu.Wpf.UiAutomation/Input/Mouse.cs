@@ -245,14 +245,14 @@ namespace Gu.Wpf.UiAutomation
         /// Drags the mouse in one step.
         /// </summary>
         /// <param name="mouseButton">The mouse button to use for dragging.</param>
-        /// <param name="from">Starting point of the drag.</param>
-        /// <param name="to">The distance to drag, + for down, - for up.</param>
+        /// <param name="from">Start point of the drag.</param>
+        /// <param name="to">End point for the drga.</param>
         public static void Drag(MouseButton mouseButton, Point from, Point to)
         {
             Position = from;
             using (Hold(mouseButton))
             {
-                var interpolation = Interpolation.Start(POINT.Create(from), POINT.Create(to), MoveSpeed);
+                var interpolation = Interpolation.Start(from, to, MoveSpeed);
                 while (interpolation.TryGetPosition(out var pos))
                 {
                     if (!User32.SetCursorPos(pos.X, pos.Y))
