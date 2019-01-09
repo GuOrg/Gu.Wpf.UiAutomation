@@ -382,6 +382,8 @@ namespace Gu.Wpf.UiAutomation
             {
                 throw new Win32Exception();
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>

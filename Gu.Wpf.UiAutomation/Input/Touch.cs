@@ -206,6 +206,8 @@ namespace Gu.Wpf.UiAutomation
                     Wait.For(TimeSpan.FromMilliseconds(10));
                 }
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -236,6 +238,8 @@ namespace Gu.Wpf.UiAutomation
                     Wait.For(TimeSpan.FromMilliseconds(10));
                 }
             }
+
+            Wait.UntilInputIsProcessed();
         }
     }
 }
