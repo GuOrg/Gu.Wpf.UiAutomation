@@ -108,9 +108,31 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">The end position.</param>
         public static void Drag(Point from, Point to)
         {
+            Drag(from, to, TimeSpan.FromSeconds((from - to).Length / MoveSpeed));
+        }
+
+        /// <summary>
+        /// Simulate touch drag.
+        /// </summary>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="speed">The speed for the drag pixels per second.</param>
+        public static void Drag(Point from, Point to, double speed)
+        {
+            Drag(from, to, TimeSpan.FromSeconds((from - to).Length / speed));
+        }
+
+        /// <summary>
+        /// Simulate touch drag.
+        /// </summary>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="duration">The time to drag.</param>
+        public static void Drag(Point from, Point to, TimeSpan duration)
+        {
             using (Down(from))
             {
-                var interpolation = Interpolation.Start(from, to, MoveSpeed);
+                var interpolation = Interpolation.Start(from, to, duration);
                 while (interpolation.TryGetPosition(out var pos))
                 {
                     contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
