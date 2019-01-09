@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Threading;
@@ -15,6 +15,7 @@
         /// </summary>
         public static TimeSpan PollInterval { get; set; } = TimeSpan.FromMilliseconds(100);
 
+        [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;
@@ -37,6 +38,7 @@
             }
         }
 
+        [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static T WhileException<T>(Func<T> retryMethod, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
             var startTime = DateTime.Now;

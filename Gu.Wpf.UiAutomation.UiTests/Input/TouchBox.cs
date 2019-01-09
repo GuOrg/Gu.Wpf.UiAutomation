@@ -1,56 +1,52 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq;
     using System.Windows;
-    using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
     public class TouchBox
     {
         [Test]
-        public void TapThenMoveOutside()
+        public void Tap()
         {
-            using (var app = Application.Launch("WpfApplication.exe", "EmptyWindow"))
+            using (var app = Application.AttachOrLaunch("WpfApplication.exe", "EmptyWindow"))
             {
                 var window = app.MainWindow;
-                Console.WriteLine(Mouse.Position);
                 Touch.Tap(window.Bounds.Center());
-                Console.WriteLine(Mouse.Position);
-                SendInput(POINT.Create(window.Bounds.TopLeft + new Vector(-1, -1)), MouseEventFlags.MOUSEEVENTF_MOVE);
-                Console.WriteLine(Mouse.Position);
-                //SendInput(new POINT(0, 0), MouseEventFlags.MOUSEEVENTF_MOVE);
-
-                //var p = POINT.Create(window.Bounds.Center());
-                //User32.SetCursorPos(p.X, p.Y);
             }
         }
 
-        private static void SendInput(POINT p, MouseEventFlags flags)
+        [Test]
+        public void TapThenOut()
         {
-            var input = new INPUT
+            using (var app = Application.AttachOrLaunch("WpfApplication.exe", "EmptyWindow"))
             {
-                type = InputType.INPUT_MOUSE,
-                u = new INPUTUNION
-                {
-                    mi = new MOUSEINPUT
-                    {
-                        dx = p.X,
-                        dy = p.Y,
-                        dwExtraInfo = User32.GetMessageExtraInfo(),
-                        time = 0,
-                        dwFlags = flags,
-                    },
-                },
-            };
-
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
+                var window = app.MainWindow;
+                Touch.Tap(window.Bounds.Center());
+                Mouse.Restore();
+                Mouse.Position = new Point(0, 0);
             }
+        }
 
-            Wait.UntilInputIsProcessed();
+        [Test]
+        public void TapThen()
+        {
+            using (var app = Application.AttachOrLaunch("WpfApplication.exe", "TouchWindow"))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                Touch.Tap(area.Bounds.Center());
+                Mouse.Position = app.MainWindow.FindButton("Clear").Bounds.Center();
+            }
+        }
+
+        [Test]
+        public void TapClearThen()
+        {
+            using (var app = Application.AttachOrLaunch("WpfApplication.exe", "TouchWindow"))
+            {
+                var window = app.MainWindow;
+                Touch.Tap(app.MainWindow.FindButton("Clear").Bounds.Center());
+            }
         }
     }
 }

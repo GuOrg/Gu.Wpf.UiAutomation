@@ -179,6 +179,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to press.</param>
         public static void Down(MouseButton mouseButton)
         {
+            if (GetCursorState() == CursorState.CURSOR_SUPPRESSED)
+            {
+                Restore();
+            }
+
             var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out var data);
             SendInput(flags, data);
         }
@@ -309,13 +314,40 @@ namespace Gu.Wpf.UiAutomation
 
         /// <summary>
         /// Calls SendInput MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE with <see cref="Position"/>.
-        /// Then sleeps 500 ms giving a chance for focus to update.
         /// There must be better ways to do this.
         /// </summary>
         public static void Restore()
         {
-            MoveAbsolute(Position);
-            Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(500));
+            var input = new INPUT
+            {
+                type = InputType.INPUT_MOUSE,
+                u = new INPUTUNION
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dx = (int)(Position.X * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN),
+                        dy = (int)(Position.Y * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN),
+                        dwExtraInfo = User32.GetMessageExtraInfo(),
+                        time = 0,
+                        dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE,
+                    },
+                },
+            };
+
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                throw new Win32Exception();
+            }
+
+            if (!Wait.UntilResponsive(User32.WindowFromPoint(POINT.Create(Position)), TimeSpan.FromSeconds(5)))
+            {
+                throw new Win32Exception();
+            }
+
+            if (User32.GetActiveWindow() != User32.WindowFromPoint(POINT.Create(Position)))
+            {
+
+            }
         }
 
         /// <summary>
