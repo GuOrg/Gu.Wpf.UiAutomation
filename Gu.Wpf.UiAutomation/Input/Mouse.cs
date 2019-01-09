@@ -82,13 +82,63 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Moves the mouse by a given delta from the current position.
+        /// </summary>
+        /// <param name="delta">The delta for the x-axis.</param>
+        public static void MoveBy(Vector delta)
+        {
+            MoveTo(Position + delta);
+        }
+
+        /// <summary>
+        /// Moves the mouse by a given delta from the current position.
+        /// </summary>
+        /// <param name="deltaX">The delta for the x-axis.</param>
+        /// <param name="deltaY">The delta for the y-axis.</param>
+        /// <param name="duration">The time to interpolate the move.</param>
+        public static void MoveBy(int deltaX, int deltaY, TimeSpan duration)
+        {
+            MoveTo(Position + new Vector(deltaX, deltaY), duration);
+        }
+
+        /// <summary>
+        /// Moves the mouse by a given delta from the current position.
+        /// </summary>
+        /// <param name="delta">The delta for the x-axis.</param>
+        /// <param name="duration">The time to interpolate the move.</param>
+        public static void MoveBy(Vector delta, TimeSpan duration)
+        {
+            MoveTo(Position + delta, duration);
+        }
+
+        /// <summary>
         /// Moves the mouse to a new position.
         /// </summary>
         /// <param name="newX">The new position on the x-axis.</param>
         /// <param name="newY">The new position on the y-axis.</param>
         public static void MoveTo(int newX, int newY)
         {
-            var interpolation = Interpolation.Start(POINT.Create(Position), new POINT(newX, newY), MoveSpeed);
+            var p = new Point(newX, newY);
+            MoveTo(p, TimeSpan.FromSeconds((Position - p).Length / MoveSpeed));
+        }
+
+        /// <summary>
+        /// Moves the mouse to a new position.
+        /// </summary>
+        /// <param name="newPosition">The new position for the mouse.</param>
+        public static void MoveTo(Point newPosition)
+        {
+            MoveTo((int)newPosition.X, (int)newPosition.Y);
+        }
+
+        /// <summary>
+        /// Moves the mouse by a given delta from the current position.
+        /// </summary>
+        /// <param name="newPosition">The delta for the x-axis.</param>
+        /// <param name="duration">The time to interpolate the move.</param>
+        public static void MoveTo(Point newPosition, TimeSpan duration)
+        {
+            var interpolation = Interpolation.Start(Position, newPosition, duration);
             while (interpolation.TryGetPosition(out var pos))
             {
                 if (!User32.SetCursorPos(pos.X, pos.Y))
@@ -100,15 +150,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             Wait.UntilInputIsProcessed();
-        }
-
-        /// <summary>
-        /// Moves the mouse to a new position.
-        /// </summary>
-        /// <param name="newPosition">The new position for the mouse.</param>
-        public static void MoveTo(Point newPosition)
-        {
-            MoveTo((int)newPosition.X, (int)newPosition.Y);
         }
 
         /// <summary>

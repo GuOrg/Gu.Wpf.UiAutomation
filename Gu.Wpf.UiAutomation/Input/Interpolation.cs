@@ -64,6 +64,14 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Create an instance of the class.
         /// </summary>
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="time">The total time of the interpolation.</param>
+        public static Interpolation Start(Point from, Point to, TimeSpan time) => new Interpolation(POINT.Create(from), POINT.Create(to), time);
+
+        /// <summary>
+        /// Create an instance of the class.
+        /// </summary>
         /// <remarks>
         /// Calls Restart() on <see cref="stopwatch"/>.
         /// </remarks>
