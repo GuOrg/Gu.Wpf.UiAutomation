@@ -40,21 +40,11 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <inheritdoc />
-        public bool Equals(TwoFingers other)
-        {
-            return this.First.Equals(other.First) && this.Second.Equals(other.Second);
-        }
+        public bool Equals(TwoFingers other) => this.First.Equals(other.First) &&
+                                                this.Second.Equals(other.Second);
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            return obj is TwoFingers other && this.Equals(other);
-        }
+        public override bool Equals(object obj) => obj is TwoFingers other && this.Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode()

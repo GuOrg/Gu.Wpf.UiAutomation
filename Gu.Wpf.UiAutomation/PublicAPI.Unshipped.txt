@@ -2,6 +2,10 @@
 Gu.Wpf.UiAutomation.Interpolation
 Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
 Gu.Wpf.UiAutomation.TwoFingers
+Gu.Wpf.UiAutomation.TwoFingers.Equals(Gu.Wpf.UiAutomation.TwoFingers other) -> bool
+Gu.Wpf.UiAutomation.TwoFingers.First.get -> System.Windows.Point
+Gu.Wpf.UiAutomation.TwoFingers.Second.get -> System.Windows.Point
+Gu.Wpf.UiAutomation.TwoFingers.TwoFingers(System.Windows.Point first, System.Windows.Point second) -> void
 Gu.Wpf.UiAutomation.UiElement.FindFirstChild<T>(System.Windows.Automation.Condition condition, System.Func<System.Windows.Automation.AutomationElement, T> wrap) -> T
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
@@ -112,6 +116,8 @@ Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.CONTACTAREA = 1 -> Gu.Wpf.UiAutomation
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+override Gu.Wpf.UiAutomation.TwoFingers.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.TwoFingers.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Equals(object obj) -> bool
@@ -158,6 +164,8 @@ static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Touch.Multi(Gu.Wpf.UiAutomation.TwoFingers from, Gu.Wpf.UiAutomation.TwoFingers to, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Touch.Up() -> void
+static Gu.Wpf.UiAutomation.TwoFingers.operator !=(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
+static Gu.Wpf.UiAutomation.TwoFingers.operator ==(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Create() -> Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
