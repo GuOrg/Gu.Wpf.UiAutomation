@@ -343,11 +343,6 @@ namespace Gu.Wpf.UiAutomation
             {
                 throw new Win32Exception();
             }
-
-            if (User32.GetActiveWindow() != User32.WindowFromPoint(POINT.Create(Position)))
-            {
-
-            }
         }
 
         /// <summary>
