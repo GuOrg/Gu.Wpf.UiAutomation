@@ -175,3 +175,4 @@ static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, 
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.HandleRef hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.SafeHandle hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.ShowCursor(bool bShow) -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.WindowFromPoint(Gu.Wpf.UiAutomation.WindowsAPI.POINT p) -> System.IntPtr

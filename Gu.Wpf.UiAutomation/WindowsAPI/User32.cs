@@ -74,5 +74,8 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
 
         [DllImport("User32.dll", SetLastError = true)]
         public static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] POINTER_TOUCH_INFO[] contacts);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr WindowFromPoint(POINT p);
     }
 }
