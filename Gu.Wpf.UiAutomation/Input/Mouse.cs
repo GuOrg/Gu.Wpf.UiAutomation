@@ -336,7 +336,7 @@ namespace Gu.Wpf.UiAutomation
 
             // SendInput brings back cursor
             // Wiggle SetCursorPos updates focus
-
+            // There are better ways, this is nasty cargo culting.
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0 ||
                 !User32.SetCursorPos((int)Position.X + 1, (int)Position.Y) ||
                 !User32.SetCursorPos((int)Position.X, (int)Position.Y))
