@@ -14,6 +14,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern uint GetWindowLong(IntPtr hWnd, int nIndex);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetActiveWindow();
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SetWindowLong(IntPtr hWnd, int nIndex, uint dwNewLong);
 

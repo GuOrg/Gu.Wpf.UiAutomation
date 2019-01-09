@@ -171,6 +171,7 @@ static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.operator ==(Gu.Wpf.UiAu
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.Create(Gu.Wpf.UiAutomation.WindowsAPI.POINT p, int radius) -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetActiveWindow() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursor() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorInfo(ref Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO info) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetDesktopWindow() -> System.IntPtr
