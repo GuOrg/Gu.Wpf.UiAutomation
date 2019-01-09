@@ -134,7 +134,7 @@ namespace Gu.Wpf.UiAutomation
 
         /// <summary>
         /// Simulate touch drag.
-        /// Call <see cref="Down"/> before calling this method.
+        /// Call <see cref="Down(Point)"/> before calling this method.
         /// This method is useful when dragging to multiple positions.
         /// </summary>
         /// <param name="position">The position.</param>
