@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -177,7 +178,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
-                User32.SetCursorPos((int)area.Bounds.Center().X + 1, (int)area.Bounds.Center().Y);
+
                 app.MainWindow.FindButton("Clear").Click();
                 CollectionAssert.IsEmpty(events.Items);
                 Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
