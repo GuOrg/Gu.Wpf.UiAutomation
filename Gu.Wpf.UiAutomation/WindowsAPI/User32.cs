@@ -39,6 +39,15 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetCursorInfo(ref CURSORINFO info);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetWindowDC(IntPtr handle);
+
         [DllImport("user32.dll")]
         public static extern CursorState ShowCursor(bool bShow);
 

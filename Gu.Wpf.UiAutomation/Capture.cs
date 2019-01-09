@@ -9,6 +9,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.Logging;
+    using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>
     /// Provides methods to capture screenshots or partially screenshots.
@@ -22,8 +23,8 @@ namespace Gu.Wpf.UiAutomation
         {
             // https://stackoverflow.com/a/3072580/1069200
             var sz = new System.Drawing.Size((int)SystemParameters.VirtualScreenWidth, (int)SystemParameters.VirtualScreenHeight);
-            var hDesk = GetDesktopWindow();
-            var hSrce = GetWindowDC(hDesk);
+            var hDesk = User32.GetDesktopWindow();
+            var hSrce = User32.GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
@@ -106,8 +107,8 @@ namespace Gu.Wpf.UiAutomation
         {
             // https://stackoverflow.com/a/3072580/1069200
             var sz = new System.Drawing.Size((int)bounds.Width, (int)bounds.Height);
-            var hDesk = GetDesktopWindow();
-            var hSrce = GetWindowDC(hDesk);
+            var hDesk = User32.GetDesktopWindow();
+            var hSrce = User32.GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
             var hBmp = CreateCompatibleBitmap(hSrce, sz.Width, sz.Height);
             var hOldBmp = SelectObject(hDest, hBmp);
@@ -162,11 +163,5 @@ namespace Gu.Wpf.UiAutomation
 
         [DllImport("gdi32.dll")]
         private static extern IntPtr SelectObject(IntPtr hdc, IntPtr bmp);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDesktopWindow();
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetWindowDC(IntPtr ptr);
     }
 }

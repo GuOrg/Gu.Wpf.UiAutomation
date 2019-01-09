@@ -173,6 +173,9 @@ static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator !=(Gu.Wpf.UiAutomation.Windo
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursor() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorInfo(ref Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO info) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetDesktopWindow() -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetForegroundWindow() -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetWindowDC(System.IntPtr handle) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InitializeTouchInjection(uint maxCount = 256, Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK feedbackMode = Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO[] contacts) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.HandleRef hcursor) -> System.IntPtr
