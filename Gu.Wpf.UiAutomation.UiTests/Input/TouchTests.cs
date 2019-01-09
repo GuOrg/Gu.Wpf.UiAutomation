@@ -152,7 +152,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: 299,299",
                 };
 
-                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
