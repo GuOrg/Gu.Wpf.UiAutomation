@@ -6,8 +6,11 @@ queue:
   - vstest
 
 steps:
+- cmd: dotnet restore
+  displayName: 'Restore'
+
 - task: VSBuild@1
-  displayName: 'Build solution **\*.sln'
+  displayName: 'Build'
 
 - task: VSTest@2
   displayName: 'Test'
