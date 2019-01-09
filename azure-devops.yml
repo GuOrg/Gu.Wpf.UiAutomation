@@ -6,7 +6,7 @@ queue:
   - vstest
 
 steps:
-- cmd: dotnet restore
+- powershell: dotnet restore
   displayName: 'Restore'
 
 - task: VSBuild@1
