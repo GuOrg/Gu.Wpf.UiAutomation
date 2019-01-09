@@ -145,6 +145,7 @@ static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.Restore() -> void
+static Gu.Wpf.UiAutomation.Touch.Down(Gu.Wpf.UiAutomation.TwoFingers fingers) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
@@ -153,6 +154,7 @@ static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
 static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
+static Gu.Wpf.UiAutomation.Touch.Multi(Gu.Wpf.UiAutomation.TwoFingers from, Gu.Wpf.UiAutomation.TwoFingers to, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Touch.Up() -> void
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool

@@ -61,7 +61,7 @@ namespace Gu.Wpf.UiAutomation
         {
             contacts = new[] { POINTER_TOUCH_INFO.Create(point, 0) };
 
-            if (!User32.InjectTouchInput(1, contacts))
+            if (!User32.InjectTouchInput(contacts.Length, contacts))
             {
                 throw new Win32Exception();
             }
@@ -69,7 +69,38 @@ namespace Gu.Wpf.UiAutomation
             return new ActionDisposable(() =>
             {
                 contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
-                if (!User32.InjectTouchInput(1, contacts))
+                if (!User32.InjectTouchInput(contacts.Length, contacts))
+                {
+                    throw new Win32Exception();
+                }
+
+                contacts = null;
+            });
+        }
+
+        /// <summary>
+        /// Simulate touch down.
+        /// </summary>
+        /// <param name="fingers">The position.</param>
+        /// <returns>A disposable that calls Up when disposed.</returns>
+        public static IDisposable Down(TwoFingers fingers)
+        {
+            contacts = new[]
+            {
+                POINTER_TOUCH_INFO.Create(fingers.First, 0),
+                POINTER_TOUCH_INFO.Create(fingers.Second, 1),
+            };
+
+            if (!User32.InjectTouchInput(contacts.Length, contacts))
+            {
+                throw new Win32Exception();
+            }
+
+            return new ActionDisposable(() =>
+            {
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
+                contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UP;
+                if (!User32.InjectTouchInput(contacts.Length, contacts))
                 {
                     throw new Win32Exception();
                 }
@@ -99,6 +130,35 @@ namespace Gu.Wpf.UiAutomation
             }
 
             contacts = null;
+        }
+
+        /// <summary>
+        /// Simulate touch drag.
+        /// Call <see cref="Down"/> before calling this method.
+        /// This method is useful when dragging to multiple positions.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        public static void DragTo(Point position)
+        {
+            if (contacts == null ||
+                contacts.Length != 1)
+            {
+                throw new UiAutomationException("Call Touch.Down first.");
+            }
+
+            var interpolation = Interpolation.Start(contacts[0].PointerInfo.PtPixelLocation, POINT.Create(position), MoveSpeed);
+            while (interpolation.TryGetPosition(out var pos))
+            {
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                contacts[0].PointerInfo.PtPixelLocation = pos;
+
+                if (!User32.InjectTouchInput(1, contacts))
+                {
+                    throw new Win32Exception();
+                }
+
+                Wait.For(TimeSpan.FromMilliseconds(10));
+            }
         }
 
         /// <summary>
@@ -149,31 +209,32 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Simulate touch drag.
-        /// Call <see cref="Down"/> before calling this method.
-        /// This method is useful when dragging to multiple positions.
+        /// Simulate touch pinch etc.
         /// </summary>
-        /// <param name="position">The position.</param>
-        public static void DragTo(Point position)
+        /// <param name="from">The start position.</param>
+        /// <param name="to">The end position.</param>
+        /// <param name="duration">The time to drag.</param>
+        public static void Multi(TwoFingers from, TwoFingers to, TimeSpan duration)
         {
-            if (contacts == null ||
-                contacts.Length != 1)
+            using (Down(from))
             {
-                throw new UiAutomationException("Call Touch.Down first.");
-            }
-
-            var interpolation = Interpolation.Start(contacts[0].PointerInfo.PtPixelLocation, POINT.Create(position), MoveSpeed);
-            while (interpolation.TryGetPosition(out var pos))
-            {
-                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
-                contacts[0].PointerInfo.PtPixelLocation = pos;
-
-                if (!User32.InjectTouchInput(1, contacts))
+                var interpolation1 = Interpolation.Start(from.First, to.First, duration);
+                var interpolation2 = Interpolation.Start(from.Second, to.Second, duration);
+                while (interpolation1.TryGetPosition(out var pos1) &&
+                       interpolation2.TryGetPosition(out var pos2))
                 {
-                    throw new Win32Exception();
-                }
+                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts[0].PointerInfo.PtPixelLocation = pos1;
+                    contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts[1].PointerInfo.PtPixelLocation = pos2;
 
-                Wait.For(TimeSpan.FromMilliseconds(10));
+                    if (!User32.InjectTouchInput(2, contacts))
+                    {
+                        throw new Win32Exception();
+                    }
+
+                    Wait.For(TimeSpan.FromMilliseconds(10));
+                }
             }
         }
     }

@@ -1,7 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System;
-    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -102,6 +101,58 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: 509,609",
                 };
 
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void TwoFingers()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+                var cp = area.Bounds.Center();
+                Touch.Multi(
+                    new TwoFingers(cp + new Vector(-100, 0), cp + new Vector(100, 0)),
+                    new TwoFingers(cp + new Vector(-50, 0), cp + new Vector(50, 0)),
+                    TimeSpan.FromMilliseconds(10));
+                var expected = new[]
+                {
+                    "TouchEnter Position: 149,299",
+                    "PreviewTouchDown Position: 149,299",
+                    "TouchDown Position: 149,299",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "TouchEnter Position: 349,299",
+                    "PreviewTouchDown Position: 349,299",
+                    "TouchDown Position: 349,299",
+                    "ManipulationDelta",
+                    "PreviewTouchMove Position: 149,299",
+                    "TouchMove Position: 149,299",
+                    "PreviewTouchMove Position: 349,299",
+                    "TouchMove Position: 349,299",
+                    "PreviewTouchMove Position: 199,299",
+                    "TouchMove Position: 199,299",
+                    "PreviewTouchMove Position: 299,299",
+                    "TouchMove Position: 299,299",
+                    "PreviewTouchUp Position: 199,299",
+                    "TouchUp Position: 199,299",
+                    "TouchLeave Position: 199,299",
+                    "PreviewTouchUp Position: 299,299",
+                    "TouchUp Position: 299,299",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 299,299",
+                };
+
+                Dump(events);
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
