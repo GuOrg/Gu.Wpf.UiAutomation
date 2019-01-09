@@ -334,12 +334,12 @@ namespace Gu.Wpf.UiAutomation
                 },
             };
 
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
-            }
+            // SendInput brings back cursor
+            // Wiggle SetCursorPos updates focus
 
-            if (!Wait.UntilResponsive(User32.WindowFromPoint(POINT.Create(Position)), TimeSpan.FromSeconds(5)))
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0 ||
+                !User32.SetCursorPos((int)Position.X + 1, (int)Position.Y) ||
+                !User32.SetCursorPos((int)Position.X, (int)Position.Y))
             {
                 throw new Win32Exception();
             }
