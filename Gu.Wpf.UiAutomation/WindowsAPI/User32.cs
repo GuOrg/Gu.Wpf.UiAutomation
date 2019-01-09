@@ -70,7 +70,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         public static extern short VkKeyScan(char ch);
 
         [DllImport("User32.dll", SetLastError = true)]
-        public static extern bool InitializeTouchInjection(uint maxCount = 256, TOUCH_FEEDBACK feedbackMode = TOUCH_FEEDBACK.NONE);
+        public static extern bool InitializeTouchInjection(uint maxCount = 256, TOUCH_FEEDBACK feedbackMode = TOUCH_FEEDBACK.DEFAULT);
 
         [DllImport("User32.dll", SetLastError = true)]
         public static extern bool InjectTouchInput(int count, [MarshalAs(UnmanagedType.LPArray), In] POINTER_TOUCH_INFO[] contacts);

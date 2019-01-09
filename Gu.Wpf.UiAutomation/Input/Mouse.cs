@@ -308,6 +308,17 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Calls SendInput MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE with <see cref="Position"/>.
+        /// Then sleeps 500 ms giving a chance for focus to update.
+        /// There must be better ways to do this.
+        /// </summary>
+        public static void Restore()
+        {
+            MoveAbsolute(Position);
+            Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(500));
+        }
+
+        /// <summary>
         /// Get <see cref="CursorState"/>.
         /// </summary>
         /// <returns>The <see cref="CursorState"/>.</returns>
@@ -411,25 +422,8 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        /// <summary>
-        /// Effectively sends the mouse input command.
-        /// </summary>
-        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
-        private static void SendInput(int x, int y, MouseEventFlags flags, int data = 0)
+        private static void MoveAbsolute(Point p)
         {
-            // Demand the correct permissions
-            var permissions = new PermissionSet(PermissionState.Unrestricted);
-            permissions.Demand();
-
-            // Check if we are trying to do an absolute move
-            if (flags.HasFlag(MouseEventFlags.MOUSEEVENTF_ABSOLUTE))
-            {
-                // Absolute position requires normalized coordinates
-                NormalizeCoordinates(ref x, ref y);
-                flags |= MouseEventFlags.MOUSEEVENTF_VIRTUALDESK;
-            }
-
-            // Build the input object
             var input = new INPUT
             {
                 type = InputType.INPUT_MOUSE,
@@ -437,40 +431,19 @@ namespace Gu.Wpf.UiAutomation
                 {
                     mi = new MOUSEINPUT
                     {
-                        dx = x,
-                        dy = y,
-                        mouseData = data,
+                        dx = (int)(p.X * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN),
+                        dy = (int)(p.Y * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN),
                         dwExtraInfo = User32.GetMessageExtraInfo(),
                         time = 0,
-                        dwFlags = flags,
+                        dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE,
                     },
                 },
             };
 
-            // Send the command
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {
                 throw new Win32Exception();
             }
-
-            if (WindowsVersion.IsWindows10())
-            {
-                Wait.For(TimeSpan.FromMilliseconds(10));
-            }
-        }
-
-        /// <summary>
-        /// Normalizes the coordinates to get the absolute values from 0 to 65536.
-        /// </summary>
-        private static void NormalizeCoordinates(ref int x, ref int y)
-        {
-            var vScreenWidth = User32.GetSystemMetrics(SystemMetric.SM_CXVIRTUALSCREEN);
-            var vScreenHeight = User32.GetSystemMetrics(SystemMetric.SM_CYVIRTUALSCREEN);
-            var vScreenLeft = User32.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
-            var vScreenTop = User32.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
-
-            x = ((x - vScreenLeft) * 65536 / vScreenWidth) + (65536 / (vScreenWidth * 2));
-            y = ((y - vScreenTop) * 65536 / vScreenHeight) + (65536 / (vScreenHeight * 2));
         }
 
         private struct ButtonClick

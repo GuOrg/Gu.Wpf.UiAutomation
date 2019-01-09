@@ -98,6 +98,8 @@ Gu.Wpf.UiAutomation.WindowsAPI.RECT.Right -> int
 Gu.Wpf.UiAutomation.WindowsAPI.RECT.Top -> int
 Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle
 Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.SafeCursorHandle(System.IntPtr handle) -> void
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CXSCREEN = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CYSCREEN = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
 Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.INDIRECT = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
@@ -137,6 +139,7 @@ static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButto
 static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
+static Gu.Wpf.UiAutomation.Mouse.Restore() -> void
 static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
@@ -170,7 +173,7 @@ static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator !=(Gu.Wpf.UiAutomation.Windo
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursor() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorInfo(ref Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO info) -> bool
-static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InitializeTouchInjection(uint maxCount = 256, Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK feedbackMode = Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.NONE) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InitializeTouchInjection(uint maxCount = 256, Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK feedbackMode = Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO[] contacts) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.HandleRef hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.SafeHandle hcursor) -> System.IntPtr
