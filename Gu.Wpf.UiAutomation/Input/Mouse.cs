@@ -22,11 +22,6 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         private const int WheelDelta = 120;
 
-        /// <summary>
-        /// The current max timespan (in milliseconds) for double clicks.
-        /// </summary>
-        private static readonly int CurrentDoubleClickTime = (int)User32.GetDoubleClickTime();
-
         private static ButtonClick? lastClick;
 
         /// <summary>
@@ -159,10 +154,11 @@ namespace Gu.Wpf.UiAutomation
             var position = POINT.Create(Position);
             if (lastClick is ButtonClick buttonClick &&
                 buttonClick.Button == mouseButton &&
-                buttonClick.Point == position)
+                Math.Abs(buttonClick.Point.X - position.X) < User32.GetSystemMetrics(SystemMetric.SM_CXDOUBLECLK) / 2 &&
+                Math.Abs(buttonClick.Point.Y - position.Y) < User32.GetSystemMetrics(SystemMetric.SM_CYDOUBLECLK) / 2)
             {
                 // Get the timeout needed to not fire a double click
-                var timeout = CurrentDoubleClickTime - DateTime.UtcNow.Subtract(buttonClick.Time).Milliseconds;
+                var timeout = User32.GetDoubleClickTime() - DateTime.UtcNow.Subtract(buttonClick.Time).Milliseconds;
 
                 // Wait the needed time to prevent the double click
                 if (timeout > 0)
