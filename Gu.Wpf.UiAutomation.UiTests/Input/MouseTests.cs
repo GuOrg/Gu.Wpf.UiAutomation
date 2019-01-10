@@ -469,7 +469,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 app.MainWindow.FindButton("Clear").Invoke();
 
                 Mouse.HorizontalScroll(scroll);
-                Assert.Inconclusive("Not sure if we can detect any events here");
+                Assert.Inconclusive($"Not sure if we can detect any events here. Expected {expected}");
                 ////var expecteds = new[]
                 ////{
                 ////    $"PreviewMouseWheel Position: 250,300 {expected}",
