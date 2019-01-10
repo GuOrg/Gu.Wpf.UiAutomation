@@ -139,11 +139,14 @@ override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.RECT.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.WindowsAPI.RECT.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.ReleaseHandle() -> bool
+static Gu.Wpf.UiAutomation.Interpolation.Duration(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> System.TimeSpan
+static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Point from, System.Windows.Point to, double speed) -> System.TimeSpan
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to) -> void
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, System.TimeSpan duration) -> void

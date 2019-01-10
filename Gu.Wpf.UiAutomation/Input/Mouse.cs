@@ -117,7 +117,7 @@ namespace Gu.Wpf.UiAutomation
         public static void MoveTo(int newX, int newY)
         {
             var p = new Point(newX, newY);
-            MoveTo(p, TimeSpan.FromSeconds((Position - p).Length / MoveSpeed));
+            MoveTo(p, Interpolation.Duration(Position, p, MoveSpeed));
         }
 
         /// <summary>
@@ -293,10 +293,22 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">End point for the drga.</param>
         public static void Drag(MouseButton mouseButton, Point from, Point to)
         {
+            Drag(mouseButton, from, to, Interpolation.Duration(from, to, MoveSpeed));
+        }
+
+        /// <summary>
+        /// Drags the mouse in one step.
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="from">Start point of the drag.</param>
+        /// <param name="to">End point for the drga.</param>
+        /// <param name="duration">The time to perform the drag.</param>
+        public static void Drag(MouseButton mouseButton, Point from, Point to, TimeSpan duration)
+        {
             Position = from;
             using (Hold(mouseButton))
             {
-                var interpolation = Interpolation.Start(from, to, MoveSpeed);
+                var interpolation = Interpolation.Start(from, to, duration);
                 while (interpolation.TryGetPosition(out var pos))
                 {
                     if (!User32.SetCursorPos(pos.X, pos.Y))

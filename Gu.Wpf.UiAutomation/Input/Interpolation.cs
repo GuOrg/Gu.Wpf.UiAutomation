@@ -55,10 +55,7 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>An instance of <see cref="Interpolation"/>.</returns>
         public static Interpolation Start(POINT from, POINT to, double speed)
         {
-            var dx = from.X - to.X;
-            var dy = from.Y - to.Y;
-            var dist = Math.Sqrt((dx * dx) + (dy * dy));
-            return new Interpolation(from, to, TimeSpan.FromSeconds(dist / speed));
+            return new Interpolation(from, to, Interpolation.Duration(from, to, speed));
         }
 
         /// <summary>
@@ -79,6 +76,27 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">The end position.</param>
         /// <param name="time">The total time of the interpolation.</param>
         public static Interpolation Start(POINT @from, POINT to, TimeSpan time) => new Interpolation(from, to, time);
+
+        /// <summary>
+        /// Calculate the time it takes to travel from <paramref name="from"/> to <paramref name="to"/> at <paramref name="speed"/>.
+        /// </summary>
+        /// <param name="from">The start point.</param>
+        /// <param name="to">The end point.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        /// <returns>The time.</returns>
+        public static TimeSpan Duration(POINT from, POINT to, double speed) => Duration(new Point(from.X, from.Y), new Point(to.X, to.Y), speed);
+
+        /// <summary>
+        /// Calculate the time it takes to travel from <paramref name="from"/> to <paramref name="to"/> at <paramref name="speed"/>.
+        /// </summary>
+        /// <param name="from">The start point.</param>
+        /// <param name="to">The end point.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        /// <returns>The time.</returns>
+        public static TimeSpan Duration(Point from, Point to, double speed)
+        {
+            return TimeSpan.FromSeconds((from - to).Length / speed);
+        }
 
         /// <summary>
         /// Try get the interpolated position at current time.

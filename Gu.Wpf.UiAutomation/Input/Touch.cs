@@ -168,7 +168,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">The end position.</param>
         public static void Drag(Point from, Point to)
         {
-            Drag(from, to, TimeSpan.FromSeconds((from - to).Length / MoveSpeed));
+            Drag(from, to, Interpolation.Duration(from, to, MoveSpeed));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="speed">The speed for the drag pixels per second.</param>
         public static void Drag(Point from, Point to, double speed)
         {
-            Drag(from, to, TimeSpan.FromSeconds((from - to).Length / speed));
+            Drag(from, to, Interpolation.Duration(from, to, MoveSpeed));
         }
 
         /// <summary>
