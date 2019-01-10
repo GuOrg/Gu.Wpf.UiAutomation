@@ -397,7 +397,7 @@ namespace Gu.Wpf.UiAutomation
                 },
             };
 
-            // SendInput brings back cursor
+            // SendInput with absolute position brings back cursor
             // Wiggle SetCursorPos updates focus
             // There are better ways, this is nasty cargo culting.
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0 ||
