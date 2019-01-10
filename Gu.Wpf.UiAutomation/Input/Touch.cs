@@ -241,5 +241,21 @@ namespace Gu.Wpf.UiAutomation
 
             Wait.UntilInputIsProcessed();
         }
+
+        /// <summary>
+        /// Pinch around <paramref name="around"/>.
+        /// </summary>
+        /// <param name="around">The center point of the pinch.</param>
+        /// <param name="startRadius">The start radius.</param>
+        /// <param name="endRadius">The end radius.</param>
+        /// <param name="duration">The duration.</param>
+        /// <param name="angle">The angle to the x axis.</param>
+        public static void Pinch(Point around, double startRadius, double endRadius, TimeSpan duration, double angle = 45)
+        {
+            Multi(
+                TwoFingers.Around(around, startRadius, angle),
+                TwoFingers.Around(around, endRadius, angle),
+                duration);
+        }
     }
 }

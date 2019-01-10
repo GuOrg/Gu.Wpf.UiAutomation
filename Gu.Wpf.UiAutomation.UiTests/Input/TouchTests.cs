@@ -157,6 +157,54 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
+        public void Pinch()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+                var cp = area.Bounds.Center();
+                Touch.Pinch(cp, 100, 50, TimeSpan.FromMilliseconds(10));
+                var expected = new[]
+                {
+                    "TouchEnter Position: 319,369",
+                    "PreviewTouchDown Position: 319,369",
+                    "TouchDown Position: 319,369",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "TouchEnter Position: 178,228",
+                    "PreviewTouchDown Position: 178,228",
+                    "TouchDown Position: 178,228",
+                    "ManipulationDelta",
+                    "PreviewTouchMove Position: 319,369",
+                    "TouchMove Position: 319,369",
+                    "PreviewTouchMove Position: 178,228",
+                    "TouchMove Position: 178,228",
+                    "PreviewTouchMove Position: 284,334",
+                    "TouchMove Position: 284,334",
+                    "PreviewTouchMove Position: 213,263",
+                    "TouchMove Position: 213,263",
+                    "PreviewTouchUp Position: 284,334",
+                    "TouchUp Position: 284,334",
+                    "TouchLeave Position: 284,334",
+                    "PreviewTouchUp Position: 213,263",
+                    "TouchUp Position: 213,263",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 213,263",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
         public void DragTo()
         {
             if (WindowsVersion.IsAppVeyor())

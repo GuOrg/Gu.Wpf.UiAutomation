@@ -162,8 +162,10 @@ static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Touch.Multi(Gu.Wpf.UiAutomation.TwoFingers from, Gu.Wpf.UiAutomation.TwoFingers to, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Touch.Pinch(System.Windows.Point around, double startRadius, double endRadius, System.TimeSpan duration, double angle = 45) -> void
 static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Touch.Up() -> void
+static Gu.Wpf.UiAutomation.TwoFingers.Around(System.Windows.Point around, double radius, double angle) -> Gu.Wpf.UiAutomation.TwoFingers
 static Gu.Wpf.UiAutomation.TwoFingers.operator !=(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
 static Gu.Wpf.UiAutomation.TwoFingers.operator ==(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool

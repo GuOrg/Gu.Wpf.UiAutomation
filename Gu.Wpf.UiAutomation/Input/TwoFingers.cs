@@ -39,6 +39,19 @@ namespace Gu.Wpf.UiAutomation
             return !left.Equals(right);
         }
 
+        /// <summary>
+        /// Create an instance of <see cref="TwoFingers"/>.
+        /// </summary>
+        /// <param name="around">The center point.</param>
+        /// <param name="radius">The radius.</param>
+        /// <param name="angle">The angle to the x axis.</param>
+        /// <returns>An instance of <see cref="TwoFingers"/>.</returns>
+        public static TwoFingers Around(Point around, double radius, double angle)
+        {
+            var v = new Vector(radius * Math.Cos(angle * Math.PI / 180), radius * Math.Sin(angle * Math.PI / 180));
+            return new TwoFingers(around + v, around - v);
+        }
+
         /// <inheritdoc />
         public bool Equals(TwoFingers other) => this.First.Equals(other.First) &&
                                                 this.Second.Equals(other.Second);
