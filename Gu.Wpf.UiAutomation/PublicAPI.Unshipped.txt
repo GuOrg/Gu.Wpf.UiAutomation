@@ -147,6 +147,7 @@ static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, double speed) -> void
 static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, System.TimeSpan duration) -> void

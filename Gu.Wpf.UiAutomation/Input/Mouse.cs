@@ -302,6 +302,18 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to use for dragging.</param>
         /// <param name="from">Start point of the drag.</param>
         /// <param name="to">End point for the drga.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        public static void Drag(MouseButton mouseButton, Point from, Point to, double speed)
+        {
+            Drag(mouseButton, from, to, Interpolation.Duration(from, to, speed));
+        }
+
+        /// <summary>
+        /// Drags the mouse in one step.
+        /// </summary>
+        /// <param name="mouseButton">The mouse button to use for dragging.</param>
+        /// <param name="from">Start point of the drag.</param>
+        /// <param name="to">End point for the drga.</param>
         /// <param name="duration">The time to perform the drag.</param>
         public static void Drag(MouseButton mouseButton, Point from, Point to, TimeSpan duration)
         {
