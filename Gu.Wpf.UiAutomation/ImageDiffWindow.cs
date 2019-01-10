@@ -84,11 +84,11 @@ namespace Gu.Wpf.UiAutomation
                 dispatcher.Invoke(() =>
                 {
                     var window = new ImageDiffWindow(expected, actual);
-                    window.ShowDialog().IgnoreReturnValue();
+                    _ = window.ShowDialog();
                 });
 
                 dispatcher.InvokeShutdown();
-                uiThread.Join(1000).IgnoreReturnValue();
+                _ = uiThread.Join(1000);
             }
         }
 
@@ -126,17 +126,16 @@ namespace Gu.Wpf.UiAutomation
                 Content = content,
                 IsChecked = true,
             };
-            BindingOperations.SetBinding(
-                                 image,
-                                 VisibilityProperty,
-                                 new Binding
-                                 {
-                                     Path = new PropertyPath("IsChecked"),
-                                     Mode = BindingMode.TwoWay,
-                                     Converter = new BooleanToVisibilityConverter(),
-                                     Source = actualButton,
-                                 })
-                             .IgnoreReturnValue();
+            _ = BindingOperations.SetBinding(
+                                    image,
+                                    VisibilityProperty,
+                                    new Binding
+                                    {
+                                        Path = new PropertyPath("IsChecked"),
+                                        Mode = BindingMode.TwoWay,
+                                        Converter = new BooleanToVisibilityConverter(),
+                                        Source = actualButton,
+                                    });
             return actualButton;
         }
 
@@ -145,14 +144,14 @@ namespace Gu.Wpf.UiAutomation
             System.Windows.Controls.Primitives.ToggleButton expectedButton,
             System.Windows.Controls.Primitives.ToggleButton actualButton)
         {
-            BindingOperations.SetBinding(
-                                 image,
-                                 OpacityProperty,
-                                 new MultiBinding
-                                 {
-                                     Converter = new AndToOpacityConverter(),
-                                     Bindings =
-                                     {
+            _ = BindingOperations.SetBinding(
+                                  image,
+                                  OpacityProperty,
+                                  new MultiBinding
+                                  {
+                                      Converter = new AndToOpacityConverter(),
+                                      Bindings =
+                                      {
                                          new Binding
                                          {
                                              Path = new PropertyPath("IsChecked"),
@@ -165,9 +164,8 @@ namespace Gu.Wpf.UiAutomation
                                              Mode = BindingMode.OneWay,
                                              Source = actualButton,
                                          },
-                                     },
-                                 })
-                             .IgnoreReturnValue();
+                                      },
+                                  });
         }
 
         private class AndToOpacityConverter : IMultiValueConverter
