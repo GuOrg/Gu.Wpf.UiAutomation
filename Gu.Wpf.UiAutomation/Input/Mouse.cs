@@ -376,46 +376,20 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Restore()
         {
-            var input = new INPUT
+            SendInput(new MOUSEINPUT
             {
-                type = InputType.INPUT_MOUSE,
-                u = new INPUTUNION
-                {
-                    mi = new MOUSEINPUT
-                    {
-                        dx = (int)(Position.X * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN),
-                        dy = (int)(Position.Y * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN),
-                        dwExtraInfo = User32.GetMessageExtraInfo(),
-                        dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE,
-                    },
-                },
-            };
-
-            // SendInput with absolute position brings back cursor
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
-            }
+                dx = (int)(Position.X * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN),
+                dy = (int)(Position.Y * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN),
+                dwExtraInfo = User32.GetMessageExtraInfo(),
+                dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE,
+            });
 
             Wait.UntilInputIsProcessed();
-            input = new INPUT
+            SendInput(new MOUSEINPUT
             {
-                type = InputType.INPUT_MOUSE,
-                u = new INPUTUNION
-                {
-                    mi = new MOUSEINPUT
-                    {
-                        dwExtraInfo = User32.GetMessageExtraInfo(),
-                        dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP,
-                    },
-                },
-            };
-
-            // SendInput with left up to update focus. Massive hack here.
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
-            }
+                dwExtraInfo = User32.GetMessageExtraInfo(),
+                dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP,
+            });
 
             Wait.UntilInputIsProcessed();
         }
@@ -491,8 +465,18 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         private static void SendInput(MouseEventFlags flags, int data = 0)
+        {
+            SendInput(new MOUSEINPUT
+            {
+                mouseData = data,
+                dwExtraInfo = User32.GetMessageExtraInfo(),
+                dwFlags = flags,
+            });
+        }
+
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        private static void SendInput(MOUSEINPUT mouseInput)
         {
             // Demand the correct permissions
             var permissions = new PermissionSet(PermissionState.Unrestricted);
@@ -503,12 +487,7 @@ namespace Gu.Wpf.UiAutomation
                 type = InputType.INPUT_MOUSE,
                 u = new INPUTUNION
                 {
-                    mi = new MOUSEINPUT
-                    {
-                        mouseData = data,
-                        dwExtraInfo = User32.GetMessageExtraInfo(),
-                        dwFlags = flags,
-                    },
+                    mi = mouseInput,
                 },
             };
 
@@ -516,11 +495,6 @@ namespace Gu.Wpf.UiAutomation
             if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {
                 throw new Win32Exception();
-            }
-
-            if (WindowsVersion.IsWindows10())
-            {
-                Wait.For(TimeSpan.FromMilliseconds(10));
             }
         }
 
