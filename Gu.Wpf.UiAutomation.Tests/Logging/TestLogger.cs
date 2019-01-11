@@ -1,7 +1,9 @@
-﻿namespace Gu.Wpf.UiAutomation.Tests.Logging
+namespace Gu.Wpf.UiAutomation.Tests.Logging
 {
+    using System;
     using Gu.Wpf.UiAutomation.Logging;
 
+    [Obsolete("Candidate for removal. Comment on issue #74 if we should keep it.")]
     public class TestLogger : LoggerBase
     {
         public virtual void PublicTrace(string message)

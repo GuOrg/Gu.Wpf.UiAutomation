@@ -3,6 +3,7 @@ namespace Gu.Wpf.UiAutomation.Logging
     using System;
     using System.Globalization;
 
+    [Obsolete("Candidate for removal. Comment on issue #74 if we should keep it.")]
     public abstract class LoggerBase : ILogger
     {
         protected LoggerBase()

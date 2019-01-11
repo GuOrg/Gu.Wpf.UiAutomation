@@ -53,7 +53,6 @@ namespace Gu.Wpf.UiAutomation
         {
             using (var bmp = Screen())
             {
-                Logger.Default.Info($"Capture.ScreenToFile: {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }
@@ -75,7 +74,6 @@ namespace Gu.Wpf.UiAutomation
         {
             using (var bmp = Rectangle(element.Bounds))
             {
-                Logger.Default.Info($"Capture.ElementToFile: {element} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }
@@ -87,7 +85,6 @@ namespace Gu.Wpf.UiAutomation
         {
             using (var bmp = Rectangle(bounds))
             {
-                Logger.Default.Info($"Capture.RectangleToFile: {bounds} {filePath}");
                 bmp.Save(filePath, ImageFormat.Png);
             }
         }

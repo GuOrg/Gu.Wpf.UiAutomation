@@ -310,25 +310,16 @@ namespace Gu.Wpf.UiAutomation
                 processStartInfo.WorkingDirectory = ".";
             }
 
-            try
+            var app = new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
+            if (onDispose == OnDispose.LeaveOpen)
             {
-                var app = new Application(new ProcessReference(Process.Start(processStartInfo), onDispose));
-                if (onDispose == OnDispose.LeaveOpen)
+                lock (Launched)
                 {
-                    lock (Launched)
-                    {
-                        Launched.Add(app.processReference.Process);
-                    }
+                    Launched.Add(app.processReference.Process);
                 }
+            }
 
-                return app;
-            }
-            catch (Win32Exception ex)
-            {
-                var error = $"[Failed Launching process:{processStartInfo.FileName}] [Working directory:{new DirectoryInfo(processStartInfo.WorkingDirectory).FullName}] [Process full path:{new FileInfo(processStartInfo.FileName).FullName}] [Current Directory:{Environment.CurrentDirectory}]";
-                Logger.Default.Error(error, ex);
-                throw;
-            }
+            return app;
         }
 
         public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
@@ -452,7 +443,6 @@ namespace Gu.Wpf.UiAutomation
                 Launched.Remove(this.processReference.Process);
             }
 
-            Logger.Default.Debug("Closing application");
             if (this.disposed ||
                 this.processReference.Process.HasExited)
             {
@@ -468,7 +458,6 @@ namespace Gu.Wpf.UiAutomation
             _ = this.processReference.Process.WaitForExit(5000);
             if (!this.processReference.Process.HasExited)
             {
-                Logger.Default.Info("Application failed to exit, killing process");
                 this.processReference.Process.Kill();
                 _ = this.processReference.Process.WaitForExit(5000);
                 return false;

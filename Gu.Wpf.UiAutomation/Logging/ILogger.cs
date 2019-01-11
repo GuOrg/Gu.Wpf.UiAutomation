@@ -5,6 +5,7 @@ namespace Gu.Wpf.UiAutomation.Logging
     /// <summary>
     /// Not sure if we want to keep the logging stuff.
     /// </summary>
+    [Obsolete("Candidate for removal. Comment on issue #74 if we should keep it.")]
     public interface ILogger
     {
         bool IsTraceEnabled { get; }
