@@ -36,6 +36,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
+        [TestCase(new[] { Key.KEY_Z }, "z")]
+        [TestCase(new[] { Key.KEY_Z, Key.KEY_Z, Key.KEY_Z }, "zzz")]
+        public void TypeKeys(Key[] keys, string expected)
+        {
+            using (var app = Application.Launch(ExeFileName, WindowName))
+            {
+                var mainWindow = app.MainWindow;
+                Keyboard.Type(keys);
+                var textBox = mainWindow.FindTextBox();
+                Assert.AreEqual(expected, textBox.Text);
+            }
+        }
+
         [TestCase("abc")]
         [TestCase("ééééééööööö aaa | ")]
         [TestCase("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ")]
@@ -57,7 +70,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             using (var app = Application.Launch(ExeFileName, WindowName))
             {
                 var mainWindow = app.MainWindow;
-                using (Keyboard.Pressing(Key.SHIFT))
+                using (Keyboard.Hold(Key.SHIFT))
                 {
                     Keyboard.Type(key);
                 }
@@ -73,7 +86,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             using (var app = Application.Launch(ExeFileName, WindowName))
             {
                 var mainWindow = app.MainWindow;
+#pragma warning disable CS0618 // Type or member is obsolete
                 Keyboard.PressScanCode((ushort)scanCode, isExtendedKey);
+#pragma warning restore CS0618 // Type or member is obsolete
                 Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
                 Wait.UntilInputIsProcessed();
                 var textBox = mainWindow.FindTextBox();

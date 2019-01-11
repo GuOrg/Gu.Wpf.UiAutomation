@@ -93,8 +93,8 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                Press(key);
-                Release(key);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
             }
         }
 
@@ -110,12 +110,12 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                Press(key);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
             }
 
             foreach (var key in keys.Reverse())
             {
-                Release(key);
+                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
             }
         }
 
@@ -124,8 +124,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
-            PressScanCode(scanCode, isExtendedKey);
-            ReleaseScanCode(scanCode, isExtendedKey);
+            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
+            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
         }
 
         /// <summary>
@@ -133,8 +133,16 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeVirtualKeyCode(ushort virtualKeyCode)
         {
-            PressVirtualKeyCode(virtualKeyCode);
-            ReleaseVirtualKeyCode(virtualKeyCode);
+            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+        }
+
+        /// <summary>
+        /// Presses the given key and releases it when the returned object is disposed.
+        /// </summary>
+        public static IDisposable Hold(Key key)
+        {
+            return new PressedKey(key);
         }
 
         /// <summary>
@@ -191,6 +199,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Presses the given key and releases it when the returned object is disposed.
         /// </summary>
+        [Obsolete("Renamed to Hold")]
         public static IDisposable Pressing(Key key)
         {
             return new PressedKey(key);
@@ -283,12 +292,12 @@ namespace Gu.Wpf.UiAutomation
             public PressedKey(Key key)
             {
                 this.key = key;
-                PressVirtualKeyCode((ushort)key);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
             }
 
             public void Dispose()
             {
-                Release(this.key);
+                SendInput((ushort)this.key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
             }
         }
     }

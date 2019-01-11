@@ -142,7 +142,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                     var radio2 = mainWindow.FindRadioButton(GetPixelsText());
                     Mouse.Click(MouseButton.Left, radio2.GetClickablePoint());
                     Wait.For(TimeSpan.FromMilliseconds(100));
-                    using (Keyboard.Pressing(Key.ESCAPE))
+                    using (Keyboard.Hold(Key.ESCAPE))
                     {
                         Wait.For(TimeSpan.FromMilliseconds(100));
                         mainWindow.Close();

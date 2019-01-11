@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Text.RegularExpressions;
@@ -63,7 +63,7 @@
                 Assert.AreEqual("6912", result);
 
                 // Date comparison
-                using (Keyboard.Pressing(Key.CONTROL))
+                using (Keyboard.Hold(Key.CONTROL))
                 {
                     Keyboard.Type(Key.KEY_E);
                 }

@@ -147,6 +147,7 @@ static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.PO
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Keyboard.Hold(Gu.Wpf.UiAutomation.Key key) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, double speed) -> void
