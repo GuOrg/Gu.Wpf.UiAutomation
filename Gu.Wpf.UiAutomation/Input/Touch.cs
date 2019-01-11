@@ -59,7 +59,7 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A disposable that calls Up when disposed.</returns>
         public static IDisposable Down(Point point)
         {
-            contacts = new[] { POINTER_TOUCH_INFO.Create(point, 0) };
+            contacts = new[] { POINTER_TOUCH_INFO.Create(point, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT, 0) };
 
             if (!User32.InjectTouchInput(contacts.Length, contacts))
             {
@@ -87,8 +87,8 @@ namespace Gu.Wpf.UiAutomation
         {
             contacts = new[]
             {
-                POINTER_TOUCH_INFO.Create(fingers.First, 0),
-                POINTER_TOUCH_INFO.Create(fingers.Second, 1),
+                POINTER_TOUCH_INFO.Create(fingers.First, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT, 0),
+                POINTER_TOUCH_INFO.Create(fingers.Second, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT, 1),
             };
 
             if (!User32.InjectTouchInput(contacts.Length, contacts))

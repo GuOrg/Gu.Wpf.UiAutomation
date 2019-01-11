@@ -191,7 +191,7 @@ static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator !=(Gu.Wpf.UiAutomation
 static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
-static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Create(System.Windows.Point point, uint id) -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Create(System.Windows.Point point, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG flags, uint id = 0) -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.RECT.Create(Gu.Wpf.UiAutomation.WindowsAPI.POINT p, int radius) -> Gu.Wpf.UiAutomation.WindowsAPI.RECT

@@ -58,7 +58,14 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             return !left.Equals(right);
         }
 
-        public static POINTER_TOUCH_INFO Create(Point point, uint id)
+        /// <summary>
+        /// Create a <see cref="POINTER_TOUCH_INFO"/> structure.
+        /// </summary>
+        /// <param name="point">The <see cref="Point"/>.</param>
+        /// <param name="flags">The <see cref="POINTER_FLAG"/>.</param>
+        /// <param name="id">The id of the point, only needed when more than one.</param>
+        /// <returns>A <see cref="POINTER_TOUCH_INFO"/> structure.</returns>
+        public static POINTER_TOUCH_INFO Create(Point point, POINTER_FLAG flags, uint id = 0)
         {
             var touchPoint = POINT.Create(point);
             var contact = new POINTER_TOUCH_INFO
@@ -66,7 +73,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                 PointerInfo =
                 {
                     PointerType = POINTER_INPUT_TYPE.PT_TOUCH,
-                    PointerFlags = POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT,
+                    PointerFlags = flags,
                     PtPixelLocation = touchPoint,
                     PointerId = id,
                 },
