@@ -422,13 +422,13 @@ namespace Gu.Wpf.UiAutomation
             });
 
             Wait.UntilInputIsProcessed();
-            SendInput(new MOUSEINPUT
-            {
-                dwExtraInfo = User32.GetMessageExtraInfo(),
-                dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP,
-            });
+            //SendInput(new MOUSEINPUT
+            //{
+            //    dwExtraInfo = User32.GetMessageExtraInfo(),
+            //    dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP,
+            //});
 
-            Wait.UntilInputIsProcessed();
+            //Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
