@@ -25,7 +25,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
-                Touch.Tap(app.MainWindow.FindButton("Clear").GetClickablePoint());
+                var window = app.MainWindow;
+                window.WaitUntilResponsive();
+                Touch.Tap(window.FindButton("Clear").Bounds.Center());
             }
         }
 

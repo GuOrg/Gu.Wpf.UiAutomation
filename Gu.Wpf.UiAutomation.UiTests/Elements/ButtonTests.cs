@@ -1,6 +1,7 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
+    using System.Globalization;
     using NUnit.Framework;
 
     public class ButtonTests
@@ -253,6 +254,20 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
 
                 button.Invoke();
                 Assert.AreEqual("1", textBlock.Text);
+            }
+        }
+
+        [Test]
+        public void GetClickablePoint()
+        {
+            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
+            {
+                var window = app.MainWindow;
+                var button = window.FindButton("Test Button");
+                Assert.AreEqual("0", button.GetClickablePoint().ToString(CultureInfo.InvariantCulture));
+
+                Assert.AreEqual(true, button.TryGetClickablePoint(out var p));
+                Assert.AreEqual("0", p.ToString(CultureInfo.InvariantCulture));
             }
         }
     }
