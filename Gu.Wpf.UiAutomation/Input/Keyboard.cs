@@ -37,8 +37,8 @@ namespace Gu.Wpf.UiAutomation
             if (character > 0xFE || code == -1)
             {
                 // It seems to be unicode
-                SendInput(character, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false, isUnicode: true);
-                SendInput(character, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false, isUnicode: true);
+                SendInput(character, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_UNICODE);
+                SendInput(character, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_UNICODE);
             }
             else
             {
@@ -66,17 +66,17 @@ namespace Gu.Wpf.UiAutomation
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
-                    SendInput((ushort)mod, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
+                    SendInput((ushort)mod, KeyEventFlags.KEYEVENTF_KEYDOWN);
                 }
 
                 // Type the effective key
-                SendInput(low, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
-                SendInput(low, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+                SendInput(low, KeyEventFlags.KEYEVENTF_KEYDOWN);
+                SendInput(low, KeyEventFlags.KEYEVENTF_KEYUP);
 
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
-                    SendInput((ushort)mod, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+                    SendInput((ushort)mod, KeyEventFlags.KEYEVENTF_KEYUP);
                 }
             }
         }
@@ -93,8 +93,8 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
-                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN);
+                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP);
             }
         }
 
@@ -110,12 +110,12 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
+                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN);
             }
 
             foreach (var key in keys.Reverse())
             {
-                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP);
             }
         }
 
@@ -133,8 +133,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
-            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYDOWN);
+            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYUP);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Prefer Hold")]
         public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
+            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYDOWN);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ReleaseVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+            SendInput(virtualKeyCode, KeyEventFlags.KEYEVENTF_KEYUP);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code.</param>
         /// <param name="isExtended">Flag if the key is an extended key.</param>
         /// <param name="isUnicode">Flag if the key is unicode.</param>
-        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags, bool isScanCode, bool isExtended = false, bool isUnicode = false)
+        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags, bool isScanCode = false, bool isExtended = false)
         {
             // Prepare the basic object
             var keyboardInput = new KEYBDINPUT
@@ -247,9 +247,8 @@ namespace Gu.Wpf.UiAutomation
                     keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
                 }
             }
-            else if (isUnicode)
+            else if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_UNICODE))
             {
-                keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_UNICODE;
                 keyboardInput.wScan = keyCode;
             }
             else
@@ -286,12 +285,12 @@ namespace Gu.Wpf.UiAutomation
             public PressedKey(Key key)
             {
                 this.key = key;
-                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: false);
+                SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN);
             }
 
             public void Dispose()
             {
-                SendInput((ushort)this.key, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: false);
+                SendInput((ushort)this.key, KeyEventFlags.KEYEVENTF_KEYUP);
             }
         }
     }
