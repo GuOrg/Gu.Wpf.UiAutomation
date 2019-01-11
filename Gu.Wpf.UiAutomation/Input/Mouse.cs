@@ -469,9 +469,9 @@ namespace Gu.Wpf.UiAutomation
         {
             SendInput(new MOUSEINPUT
             {
+                dwFlags = flags,
                 mouseData = data,
                 dwExtraInfo = User32.GetMessageExtraInfo(),
-                dwFlags = flags,
             });
         }
 
