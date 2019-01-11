@@ -170,6 +170,7 @@ namespace Gu.Wpf.UiAutomation
             Down(mouseButton);
             Up(mouseButton);
             lastClick = new ButtonClick(mouseButton, position);
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -219,8 +220,26 @@ namespace Gu.Wpf.UiAutomation
                 Restore();
             }
 
-            var flags = GetFlagsAndDataForButton(mouseButton, isDown: true, data: out var data);
-            SendInput(flags, data);
+            switch (SwapButtonIfNeeded(mouseButton))
+            {
+                case MouseButton.Left:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_LEFTDOWN);
+                    break;
+                case MouseButton.Middle:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_MIDDLEDOWN);
+                    break;
+                case MouseButton.Right:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_RIGHTDOWN);
+                    break;
+                case MouseButton.XButton1:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_XDOWN, (int)MouseEventDataXButtons.XBUTTON1);
+                    break;
+                case MouseButton.XButton2:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_XDOWN, (int)MouseEventDataXButtons.XBUTTON2);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
+            }
         }
 
         /// <summary>
@@ -229,8 +248,26 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to release.</param>
         public static void Up(MouseButton mouseButton)
         {
-            var flags = GetFlagsAndDataForButton(mouseButton, isDown: false, data: out var data);
-            SendInput(flags, data);
+            switch (SwapButtonIfNeeded(mouseButton))
+            {
+                case MouseButton.Left:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_LEFTUP);
+                    break;
+                case MouseButton.Middle:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_MIDDLEUP);
+                    break;
+                case MouseButton.Right:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_RIGHTUP);
+                    break;
+                case MouseButton.XButton1:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_XUP, (int)MouseEventDataXButtons.XBUTTON1);
+                    break;
+                case MouseButton.XButton2:
+                    SendInput(MouseEventFlags.MOUSEEVENTF_XUP, (int)MouseEventDataXButtons.XBUTTON2);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
+            }
         }
 
         /// <summary>
@@ -407,41 +444,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             return cursorInfo.Flags;
-        }
-
-        /// <summary>
-        /// Converts the button to the correct <see cref="MouseEventFlags" /> object
-        /// and fills the additional data if needed.
-        /// </summary>
-        private static MouseEventFlags GetFlagsAndDataForButton(MouseButton mouseButton, bool isDown, out int data)
-        {
-            MouseEventFlags mouseEventFlags;
-            var mouseData = MouseEventDataXButtons.NOTHING;
-            switch (SwapButtonIfNeeded(mouseButton))
-            {
-                case MouseButton.Left:
-                    mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_LEFTDOWN : MouseEventFlags.MOUSEEVENTF_LEFTUP;
-                    break;
-                case MouseButton.Middle:
-                    mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_MIDDLEDOWN : MouseEventFlags.MOUSEEVENTF_MIDDLEUP;
-                    break;
-                case MouseButton.Right:
-                    mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_RIGHTDOWN : MouseEventFlags.MOUSEEVENTF_RIGHTUP;
-                    break;
-                case MouseButton.XButton1:
-                    mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_XDOWN : MouseEventFlags.MOUSEEVENTF_XUP;
-                    mouseData = MouseEventDataXButtons.XBUTTON1;
-                    break;
-                case MouseButton.XButton2:
-                    mouseEventFlags = isDown ? MouseEventFlags.MOUSEEVENTF_XDOWN : MouseEventFlags.MOUSEEVENTF_XUP;
-                    mouseData = MouseEventDataXButtons.XBUTTON2;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(mouseButton));
-            }
-
-            data = (int)mouseData;
-            return mouseEventFlags;
         }
 
         /// <summary>
