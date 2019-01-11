@@ -63,5 +63,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual(text, textBox.Text);
             }
         }
+
+        [Test]
+        public void Focus()
+        {
+            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
+            {
+                var window = app.MainWindow;
+                var textBox = window.FindTextBox("TestTextBox");
+                textBox.Focus();
+                Assert.AreEqual(true, textBox.HasKeyboardFocus);
+
+                textBox = window.FindTextBox("TestTextBox1");
+                textBox.Focus();
+                Assert.AreEqual(true, textBox.HasKeyboardFocus);
+            }
+        }
     }
 }
