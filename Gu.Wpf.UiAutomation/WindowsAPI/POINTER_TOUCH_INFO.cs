@@ -78,8 +78,8 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                     PointerId = id,
                 },
                 TouchFlags = TOUCH_FLAGS.NONE,
-                TouchMasks = TOUCH_MASK.CONTACTAREA,
-                Contact = RECT.Create(touchPoint, 1),
+                TouchMasks = TOUCH_MASK.NONE,
+                Contact = RECT.Create(touchPoint, 0),
             };
 
             return contact;
