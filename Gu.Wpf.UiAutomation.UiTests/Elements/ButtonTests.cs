@@ -264,10 +264,15 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             {
                 var window = app.MainWindow;
                 var button = window.FindButton("Test Button");
-                Assert.AreEqual("0", button.GetClickablePoint().ToString(CultureInfo.InvariantCulture));
+                var textBlock = window.FindTextBlock("CountTextBlock");
+                Assert.AreEqual("0", textBlock.Text);
+
+                Mouse.LeftClick(button.GetClickablePoint());
+                Assert.AreEqual("1", textBlock.Text);
 
                 Assert.AreEqual(true, button.TryGetClickablePoint(out var p));
-                Assert.AreEqual("0", p.ToString(CultureInfo.InvariantCulture));
+                Mouse.LeftClick(p);
+                Assert.AreEqual("2", textBlock.Text);
             }
         }
     }
