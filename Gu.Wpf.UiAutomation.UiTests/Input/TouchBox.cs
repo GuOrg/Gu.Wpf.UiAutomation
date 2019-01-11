@@ -6,6 +6,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
+    [Explicit("Sandbox")]
     public class TouchBox
     {
         private const string ExeFileName = "WpfApplication.exe";
