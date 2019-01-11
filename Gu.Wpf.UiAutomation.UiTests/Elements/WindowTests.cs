@@ -14,6 +14,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using (var app = Application.Launch(ExeFileName, "EmptyWindow"))
             {
                 var window = app.MainWindow;
+                window.WaitUntilResponsive();
                 window.Close();
             }
         }
