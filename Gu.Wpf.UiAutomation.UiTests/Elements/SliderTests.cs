@@ -53,7 +53,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 var thumb = slider.Thumb;
                 var oldPos = thumb.Bounds.Center();
                 thumb.SlideHorizontally(50);
-                Assert.AreEqual(oldPos.X + 49, thumb.Bounds.Center().X);
+                Assert.AreEqual(oldPos.X + 50, thumb.Bounds.Center().X);
                 Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
             }
         }
