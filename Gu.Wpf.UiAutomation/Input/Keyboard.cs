@@ -66,17 +66,17 @@ namespace Gu.Wpf.UiAutomation
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
-                    SendInput((ushort)mod, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+                    SendInput((ushort)mod, isKeyDown: true, isScanCode: false, isExtended: false);
                 }
 
                 // Type the effective key
-                SendInput(low, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
-                SendInput(low, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput(low, isKeyDown: true, isScanCode: false, isExtended: false);
+                SendInput(low, isKeyDown: false, isScanCode: false, isExtended: false);
 
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
-                    SendInput((ushort)mod, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+                    SendInput((ushort)mod, isKeyDown: false, isScanCode: false, isExtended: false);
                 }
             }
         }
@@ -93,8 +93,8 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
-                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false);
+                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false);
             }
         }
 
@@ -110,12 +110,12 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false);
             }
 
             foreach (var key in keys.Reverse())
             {
-                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)key, isKeyDown: false, isScanCode: false, isExtended: false);
             }
         }
 
@@ -124,8 +124,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
-            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
+            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey);
+            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
-            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false);
+            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Prefer Hold")]
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
+            SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Prefer Hold")]
         public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+            SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
+            SendInput(scanCode, isKeyDown: false, isScanCode: true, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ReleaseVirtualKeyCode(ushort virtualKeyCode)
         {
-            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+            SendInput(virtualKeyCode, isKeyDown: false, isScanCode: false, isExtended: false);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code.</param>
         /// <param name="isExtended">Flag if the key is an extended key.</param>
         /// <param name="isUnicode">Flag if the key is unicode.</param>
-        private static void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode)
+        private static void SendInput(ushort keyCode, bool isKeyDown, bool isScanCode, bool isExtended, bool isUnicode = false)
         {
             // Prepare the basic object
             var keyboardInput = new KEYBDINPUT
@@ -292,12 +292,12 @@ namespace Gu.Wpf.UiAutomation
             public PressedKey(Key key)
             {
                 this.key = key;
-                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)key, isKeyDown: true, isScanCode: false, isExtended: false);
             }
 
             public void Dispose()
             {
-                SendInput((ushort)this.key, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
+                SendInput((ushort)this.key, isKeyDown: false, isScanCode: false, isExtended: false);
             }
         }
     }
