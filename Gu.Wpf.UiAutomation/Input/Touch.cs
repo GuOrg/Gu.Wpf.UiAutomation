@@ -179,7 +179,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="speed">The speed for the drag pixels per second.</param>
         public static void Drag(Point from, Point to, double speed)
         {
-            Drag(from, to, Interpolation.Duration(from, to, MoveSpeed));
+            Drag(from, to, Interpolation.Duration(from, to, speed));
         }
 
         /// <summary>
