@@ -246,7 +246,43 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
-        public void TapThenClick()
+        public void TapThenClickWithMove()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+                Touch.Tap(area.Bounds.Center());
+                var expected = new[]
+                {
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchUp Position: 249,299",
+                    "TouchUp Position: 249,299",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 249,299",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+
+                app.MainWindow.FindButton("Clear").Click(moveMouse: true);
+                CollectionAssert.IsEmpty(events.Items);
+                Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
+            }
+        }
+
+        [Test]
+        public void TapThenClickNoMove()
         {
             if (WindowsVersion.IsAppVeyor())
             {
