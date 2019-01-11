@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation
 
     public class Thumb : UiElement
     {
-        private const int DragSpeed = 500;
+        private const int DragSpeed = 200;
 
         public Thumb(AutomationElement automationElement)
             : base(automationElement)
