@@ -66,7 +66,7 @@ namespace Gu.Wpf.UiAutomation
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
-                    Press(mod);
+                    SendInput((ushort)mod, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
                 }
 
                 // Type the effective key
@@ -76,7 +76,7 @@ namespace Gu.Wpf.UiAutomation
                 // Release the modifiers
                 foreach (var mod in Enumerable.Reverse(modifiers))
                 {
-                    Release(mod);
+                    SendInput((ushort)mod, isKeyDown: false, isScanCode: false, isExtended: false, isUnicode: false);
                 }
             }
         }

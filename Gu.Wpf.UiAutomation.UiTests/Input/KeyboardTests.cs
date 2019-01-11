@@ -45,17 +45,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var mainWindow = app.MainWindow;
                 Keyboard.Type(text);
                 var textBox = mainWindow.FindTextBox();
-                var sw = Stopwatch.StartNew();
-                while (sw.ElapsedMilliseconds < 1000)
-                {
-                    if (textBox.Text == text)
-                    {
-                        Assert.Pass();
-                    }
-
-                    Thread.Sleep(10);
-                }
-
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(text, textBox.Text);
             }
         }
