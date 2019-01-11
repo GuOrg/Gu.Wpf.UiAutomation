@@ -239,7 +239,7 @@ namespace Gu.Wpf.UiAutomation
 
                 // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
                 // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
-                if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_EXTENDEDKEY) ||
+                if (isExtended ||
                     (keyCode & 0xFF00) == 0xE0)
                 {
                     keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
@@ -269,10 +269,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new Win32Exception();
             }
 
-            if (WindowsVersion.IsWindows10())
-            {
-                Wait.For(TimeSpan.FromMilliseconds(10));
-            }
+            Wait.For(TimeSpan.FromMilliseconds(10));
         }
 
         /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>
