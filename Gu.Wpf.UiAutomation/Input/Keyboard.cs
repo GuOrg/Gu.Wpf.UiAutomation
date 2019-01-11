@@ -124,8 +124,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: true, isExtended: isExtendedKey);
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: true, isExtended: isExtendedKey);
+            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
+            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Prefer Hold")]
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN, isScanCode: true, isExtended: isExtendedKey);
+            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP, isScanCode: true, isExtended: isExtendedKey);
+            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
         }
 
         /// <summary>
@@ -223,10 +223,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         /// <param name="keyCode">The key code to send. Can be the scan code or the virtual key code.</param>
         /// <param name="keyFlags">Flag if the key should be pressed or released.</param>
-        /// <param name="isScanCode">Flag if the code is the scan code or the virtual key code.</param>
         /// <param name="isExtended">Flag if the key is an extended key.</param>
-        /// <param name="isUnicode">Flag if the key is unicode.</param>
-        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags, bool isScanCode = false, bool isExtended = false)
+        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags, bool isExtended = false)
         {
             // Prepare the basic object
             var keyboardInput = new KEYBDINPUT
@@ -235,14 +233,14 @@ namespace Gu.Wpf.UiAutomation
                 dwFlags = keyFlags,
             };
 
-            if (isScanCode)
+            if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_SCANCODE))
             {
                 keyboardInput.wScan = keyCode;
-                keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_SCANCODE;
 
                 // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
                 // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
-                if (isExtended || (keyCode & 0xFF00) == 0xE0)
+                if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_EXTENDEDKEY) ||
+                    (keyCode & 0xFF00) == 0xE0)
                 {
                     keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
                 }
