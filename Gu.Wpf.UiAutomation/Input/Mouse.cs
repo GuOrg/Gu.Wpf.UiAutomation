@@ -372,8 +372,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Calls SendInput MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE with <see cref="Position"/>.
-        /// There must be better ways to do this.
+        /// Restore the mouse cursor.
         /// </summary>
         public static void Restore()
         {
@@ -387,18 +386,33 @@ namespace Gu.Wpf.UiAutomation
                         dx = (int)(Position.X * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CXSCREEN),
                         dy = (int)(Position.Y * 65536) / User32.GetSystemMetrics(SystemMetric.SM_CYSCREEN),
                         dwExtraInfo = User32.GetMessageExtraInfo(),
-                        time = 0,
                         dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE,
                     },
                 },
             };
 
             // SendInput with absolute position brings back cursor
-            // Wiggle SetCursorPos updates focus
-            // There are better ways, this is nasty cargo culting.
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0 ||
-                !User32.SetCursorPos((int)Position.X + 1, (int)Position.Y) ||
-                !User32.SetCursorPos((int)Position.X, (int)Position.Y))
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                throw new Win32Exception();
+            }
+
+            Wait.UntilInputIsProcessed();
+            input = new INPUT
+            {
+                type = InputType.INPUT_MOUSE,
+                u = new INPUTUNION
+                {
+                    mi = new MOUSEINPUT
+                    {
+                        dwExtraInfo = User32.GetMessageExtraInfo(),
+                        dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP,
+                    },
+                },
+            };
+
+            // SendInput with left up to update focus. Massive hack here.
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
             {
                 throw new Win32Exception();
             }

@@ -382,6 +382,11 @@ namespace Gu.Wpf.UiAutomation
 
         protected void PerformMouseAction(bool moveMouse, Action action)
         {
+            if (Mouse.GetCursorState() == WindowsAPI.CursorState.CURSOR_SUPPRESSED)
+            {
+                Mouse.Restore();
+            }
+
             if (!this.TryGetClickablePoint(out var point))
             {
                 point = this.Bounds.Center();
