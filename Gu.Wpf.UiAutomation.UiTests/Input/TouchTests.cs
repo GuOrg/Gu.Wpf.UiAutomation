@@ -6,7 +6,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
-    [TestFixture]
+    [Explicit("Temp ignore.")]
     public class TouchTests
     {
         private const string ExeFileName = "WpfApplication.exe";
