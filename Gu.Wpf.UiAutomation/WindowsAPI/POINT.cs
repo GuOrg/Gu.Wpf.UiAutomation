@@ -30,15 +30,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             return !left.Equals(right);
         }
 
-        public static POINT Create(Point p)
-        {
-            return new POINT
-            {
-                X = (int)p.X,
-                Y = (int)p.Y,
-            };
-        }
-
         /// <inheritdoc />
         public bool Equals(POINT other)
         {
@@ -56,6 +47,15 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             {
                 return (this.X * 397) ^ this.Y;
             }
+        }
+
+        internal static POINT Create(Point p)
+        {
+            return new POINT
+            {
+                X = (int)p.X,
+                Y = (int)p.Y,
+            };
         }
     }
 }
