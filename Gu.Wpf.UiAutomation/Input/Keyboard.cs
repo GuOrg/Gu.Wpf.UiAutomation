@@ -5,6 +5,8 @@ namespace Gu.Wpf.UiAutomation
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
     using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -64,9 +66,7 @@ namespace Gu.Wpf.UiAutomation
                 // Press the modifiers
                 foreach (var mod in modifiers)
                 {
-#pragma warning disable CS0618 // Type or member is obsolete
                     Press(mod);
-#pragma warning restore CS0618 // Type or member is obsolete
                 }
 
                 // Type the effective key
@@ -93,9 +93,7 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-#pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
-#pragma warning restore CS0618 // Type or member is obsolete
                 Release(key);
             }
         }
@@ -112,9 +110,7 @@ namespace Gu.Wpf.UiAutomation
 
             foreach (var key in keys)
             {
-#pragma warning disable CS0618 // Type or member is obsolete
                 Press(key);
-#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             foreach (var key in keys.Reverse())
@@ -144,7 +140,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Presses the given key.
         /// </summary>
-        [Obsolete("Prefer pressing")]
+        [Obsolete("Prefer Hold")]
         public static void Press(Key key)
         {
             PressVirtualKeyCode((ushort)key);
@@ -153,6 +149,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Presses the given scan-code.
         /// </summary>
+        [Obsolete("Prefer Hold")]
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
             SendInput(scanCode, isKeyDown: true, isScanCode: true, isExtended: isExtendedKey, isUnicode: false);
@@ -161,6 +158,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Presses the given virtual key-code.
         /// </summary>
+        [Obsolete("Prefer Hold")]
         public static void PressVirtualKeyCode(ushort virtualKeyCode)
         {
             SendInput(virtualKeyCode, isKeyDown: true, isScanCode: false, isExtended: false, isUnicode: false);
@@ -256,11 +254,17 @@ namespace Gu.Wpf.UiAutomation
                 keyboardInput.wVk = keyCode;
             }
 
-            // Build the input object
-            var input = INPUT.KeyboardInput(keyboardInput);
+            SendInput(keyboardInput);
+        }
 
-            // Send the command
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        private static void SendInput(KEYBDINPUT keyboardInput)
+        {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            if (User32.SendInput(1, new[] { INPUT.KeyboardInput(keyboardInput) }, INPUT.Size) == 0)
             {
                 throw new Win32Exception();
             }
