@@ -6,7 +6,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using System.Windows;
     using NUnit.Framework;
 
-    [TestFixture]
     public class MouseTests
     {
         private const string ExeFileName = "WpfApplication.exe";

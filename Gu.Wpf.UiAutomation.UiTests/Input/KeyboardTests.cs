@@ -5,7 +5,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
-    [TestFixture]
     public class KeyboardTests
     {
         private const string ExeFileName = "WpfApplication.exe";
@@ -85,18 +84,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var mainWindow = app.MainWindow;
                 Keyboard.PressScanCode((ushort)scanCode, isExtendedKey);
                 Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
+                Wait.UntilInputIsProcessed();
                 var textBox = mainWindow.FindTextBox();
                 var sw = Stopwatch.StartNew();
-                while (sw.ElapsedMilliseconds < 1000)
-                {
-                    if (textBox.Text == expected)
-                    {
-                        Assert.Pass();
-                    }
-
-                    Thread.Sleep(10);
-                }
-
                 Assert.AreEqual(expected, textBox.Text);
             }
         }
