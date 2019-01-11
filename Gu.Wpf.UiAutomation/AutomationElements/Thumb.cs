@@ -1,9 +1,12 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System.Windows;
     using System.Windows.Automation;
 
     public class Thumb : UiElement
     {
+        private const int DragSpeed = 500;
+
         public Thumb(AutomationElement automationElement)
             : base(automationElement)
         {
@@ -17,7 +20,9 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="distance">+ for right, - for left.</param>
         public void SlideHorizontally(int distance)
         {
-            Mouse.DragHorizontally(MouseButton.Left, this.Bounds.Center(), distance);
+            var cp = this.GetClickablePoint();
+            Mouse.Drag(MouseButton.Left, cp, cp + new Vector(distance, 0), DragSpeed);
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -26,7 +31,9 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="distance">+ for down, - for up.</param>
         public void SlideVertically(int distance)
         {
-            Mouse.DragVertically(MouseButton.Left, this.Bounds.Center(), distance);
+            var cp = this.GetClickablePoint();
+            Mouse.Drag(MouseButton.Left, cp, cp + new Vector(0, distance), DragSpeed);
+            Wait.UntilInputIsProcessed();
         }
     }
 }
