@@ -113,7 +113,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
-        public void LeftClick()
+        public void ClickMouseButtonLeft()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -141,7 +141,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [Test]
-        public void RightClick()
+        public void ClickMouseButtonRight()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
@@ -149,6 +149,62 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var mouseArea = window.FindGroupBox("Mouse area");
                 var events = window.FindListBox("Events");
                 Mouse.Click(MouseButton.Right, mouseArea.Bounds.Center());
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Right Pressed",
+                    "MouseRightButtonDown Position: 250,300 Button: Right Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "PreviewMouseUp Position: 250,300 Button: Right Released",
+                    "MouseRightButtonUp Position: 250,300 Button: Right Released",
+                    "MouseUp Position: 250,300",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void LeftClick()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.LeftClick(mouseArea.Bounds.Center());
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "PreviewMouseUp Position: 250,300 Button: Left Released",
+                    "MouseLeftButtonUp Position: 250,300 Button: Left Released",
+                    "MouseUp Position: 250,300",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [Test]
+        public void RightClick()
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.RightClick(mouseArea.Bounds.Center());
                 var expected = new[]
                 {
                     "MouseEnter Position: 250,300",
