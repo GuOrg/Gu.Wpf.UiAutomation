@@ -218,7 +218,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var window = app.MainWindow;
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
-                using (Touch.Down(area.Bounds.BottomRight))
+                using (Touch.Hold(area.Bounds.BottomRight))
                 {
                     Touch.DragTo(area.Bounds.BottomRight + new Vector(10, 10));
                 }

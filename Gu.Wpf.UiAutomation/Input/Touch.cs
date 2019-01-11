@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="point">The position.</param>
         public static void Tap(Point point)
         {
-            using (Down(point))
+            using (Hold(point))
             {
                 Wait.UntilInputIsProcessed();
             }
@@ -57,7 +57,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         /// <param name="point">The position.</param>
         /// <returns>A disposable that calls Up when disposed.</returns>
-        public static IDisposable Down(Point point)
+        public static IDisposable Hold(Point point)
         {
             contacts = new[] { POINTER_TOUCH_INFO.Create(point, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT) };
             if (!User32.InjectTouchInput(contacts.Length, contacts))
@@ -82,7 +82,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         /// <param name="fingers">The position.</param>
         /// <returns>A disposable that calls Up when disposed.</returns>
-        public static IDisposable Down(TwoFingers fingers)
+        public static IDisposable Hold(TwoFingers fingers)
         {
             contacts = new[]
             {
@@ -133,7 +133,7 @@ namespace Gu.Wpf.UiAutomation
 
         /// <summary>
         /// Simulate touch drag.
-        /// Call <see cref="Down(Point)"/> before calling this method.
+        /// Call <see cref="Hold(Point)"/> before calling this method.
         /// This method is useful when dragging to multiple positions.
         /// </summary>
         /// <param name="position">The position.</param>
@@ -189,7 +189,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to drag.</param>
         public static void Drag(Point from, Point to, TimeSpan duration)
         {
-            using (Down(from))
+            using (Hold(from))
             {
                 var interpolation = Interpolation.Start(from, to, duration);
                 while (interpolation.TryGetPosition(out var pos))
@@ -217,7 +217,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to drag.</param>
         public static void Multi(TwoFingers from, TwoFingers to, TimeSpan duration)
         {
-            using (Down(from))
+            using (Hold(from))
             {
                 var interpolation1 = Interpolation.Start(from.First, to.First, duration);
                 var interpolation2 = Interpolation.Start(from.Second, to.Second, duration);

@@ -158,12 +158,12 @@ static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.Restore() -> void
-static Gu.Wpf.UiAutomation.Touch.Down(Gu.Wpf.UiAutomation.TwoFingers fingers) -> System.IDisposable
-static Gu.Wpf.UiAutomation.Touch.Down(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to, double speed) -> void
 static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
+static Gu.Wpf.UiAutomation.Touch.Hold(Gu.Wpf.UiAutomation.TwoFingers fingers) -> System.IDisposable
+static Gu.Wpf.UiAutomation.Touch.Hold(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
