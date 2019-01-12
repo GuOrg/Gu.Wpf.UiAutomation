@@ -444,15 +444,17 @@ steps:
   displayName: 'Test'
 
 - task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    sourceFolder: $(Agent.TempDirectory)
-    contents: *.png
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    sourceFolder: '$(Agent.TempDirectory)'
+    contents: '*.png'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish: $(Build.ArtifactStagingDirectory)'
   inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: Images
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'Images'
 ```
 
 ## AppVeyor
