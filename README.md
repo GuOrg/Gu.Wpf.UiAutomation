@@ -107,6 +107,7 @@ protected override void OnStartup(StartupEventArgs e)
     - [Touch](#touch)
   - [ImageAssert](#imageassert)
     - [OnFail](#onfail)
+  - [Azure devops pipelines](#azure-devops-pipelines)
   - [AppVeyor](#appveyor)
     - [Contribution](#contribution)
 
@@ -418,6 +419,34 @@ And in `appveyor.yml`
 ```
 on_failure:
   - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+```
+
+## Azure devops pipelines
+
+```yml
+queue:
+  name: Hosted VS2017
+  demands: 
+  - msbuild
+  - visualstudio
+  - vstest
+
+steps:
+- powershell: dotnet restore
+  displayName: 'Restore'
+
+- task: VSBuild@1
+  displayName: 'Build'
+  inputs:
+    configuration: Release
+
+- task: VSTest@2
+  displayName: 'Test'
+
+- task: CopyFiles@2
+  contents: '*.png' 
+  sourceFolder: $env:temp
+  targetFolder: $env:BUILD_ARTIFACTSTAGINGDIRECTORY
 ```
 
 ## AppVeyor

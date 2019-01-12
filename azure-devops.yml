@@ -16,3 +16,8 @@ steps:
 
 - task: VSTest@2
   displayName: 'Test'
+
+- task: CopyFiles@2
+  contents: '*.png' 
+  sourceFolder: $env:temp
+  targetFolder: $env:BUILD_ARTIFACTSTAGINGDIRECTORY
