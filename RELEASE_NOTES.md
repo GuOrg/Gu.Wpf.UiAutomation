@@ -1,3 +1,7 @@
+# 0.2.7
+* FEATURE: touch & mouse drag with infinite speed.
+* Expose Mouse & Keyboard SendInput
+
 # 0.2.6
 * FEATURE: support touch.
 

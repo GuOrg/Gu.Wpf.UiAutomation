@@ -1988,6 +1988,7 @@ static Gu.Wpf.UiAutomation.ImageAssert.ToRenderTargetBitmap(this System.Windows.
 static Gu.Wpf.UiAutomation.ImageDiffWindow.Show(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> void
 static Gu.Wpf.UiAutomation.Interpolation.Duration(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> System.TimeSpan
 static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Point from, System.Windows.Point to, double speed) -> System.TimeSpan
+static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Vector delta, double speed) -> System.TimeSpan
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
@@ -2009,6 +2010,7 @@ static Gu.Wpf.UiAutomation.Keyboard.Pressing(Gu.Wpf.UiAutomation.Key key) -> Sys
 static Gu.Wpf.UiAutomation.Keyboard.Release(Gu.Wpf.UiAutomation.Key key) -> void
 static Gu.Wpf.UiAutomation.Keyboard.ReleaseScanCode(ushort scanCode, bool isExtendedKey) -> void
 static Gu.Wpf.UiAutomation.Keyboard.ReleaseVirtualKeyCode(ushort virtualKeyCode) -> void
+static Gu.Wpf.UiAutomation.Keyboard.SendInput(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT keyboardInput) -> void
 static Gu.Wpf.UiAutomation.Keyboard.Type(char character) -> void
 static Gu.Wpf.UiAutomation.Keyboard.Type(params Gu.Wpf.UiAutomation.Key[] keys) -> void
 static Gu.Wpf.UiAutomation.Keyboard.Type(string text) -> void
@@ -2038,12 +2040,14 @@ static Gu.Wpf.UiAutomation.Mouse.LeftDoubleClick() -> void
 static Gu.Wpf.UiAutomation.Mouse.LeftDoubleClick(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, double speed) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(int deltaX, int deltaY) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(int deltaX, int deltaY, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, double speed) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(int newX, int newY) -> void
 static Gu.Wpf.UiAutomation.Mouse.Position.get -> System.Windows.Point
 static Gu.Wpf.UiAutomation.Mouse.Position.set -> void
@@ -2053,6 +2057,7 @@ static Gu.Wpf.UiAutomation.Mouse.RightClick(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.RightDoubleClick() -> void
 static Gu.Wpf.UiAutomation.Mouse.RightDoubleClick(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.Scroll(double lines) -> void
+static Gu.Wpf.UiAutomation.Mouse.SendInput(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT mouseInput) -> void
 static Gu.Wpf.UiAutomation.Mouse.Up(Gu.Wpf.UiAutomation.MouseButton mouseButton) -> void
 static Gu.Wpf.UiAutomation.Overlay.OverlayRectangleWindow.CloseCurrent() -> void
 static Gu.Wpf.UiAutomation.Overlay.OverlayRectangleWindow.Show(System.Windows.Rect rectangle, System.Windows.Media.Color color, System.TimeSpan duration) -> void
@@ -2083,6 +2088,7 @@ static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
 static Gu.Wpf.UiAutomation.Touch.Hold(Gu.Wpf.UiAutomation.TwoFingers fingers) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Hold(System.Windows.Point point) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
+static Gu.Wpf.UiAutomation.Touch.InjectTouchInput(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO[] contacts) -> void
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.get -> double
 static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Touch.Multi(Gu.Wpf.UiAutomation.TwoFingers from, Gu.Wpf.UiAutomation.TwoFingers to, System.TimeSpan duration) -> void

@@ -4,7 +4,8 @@ projectUrl https://github.com/GuOrg/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: support touch.
+  FEATURE: touch & mouse drag with infinite speed.
+  Expose Mouse & Keyboard SendInput
 
 excludedgroups
   Analyzers
