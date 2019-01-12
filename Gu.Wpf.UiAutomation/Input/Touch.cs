@@ -191,12 +191,15 @@ namespace Gu.Wpf.UiAutomation
         {
             if (duration.Ticks == 0)
             {
-                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
-                contacts[0].PointerInfo.PtPixelLocation = POINT.From(to);
-
-                if (!User32.InjectTouchInput(1, contacts))
+                using (Hold(from))
                 {
-                    throw new Win32Exception();
+                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts[0].PointerInfo.PtPixelLocation = POINT.From(to);
+
+                    if (!User32.InjectTouchInput(1, contacts))
+                    {
+                        throw new Win32Exception();
+                    }
                 }
             }
             else
