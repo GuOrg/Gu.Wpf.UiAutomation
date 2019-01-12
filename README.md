@@ -6,7 +6,24 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/wpxtooew9wicyuqa/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-uiautomation/branch/master)
 [![Build Status](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_apis/build/status/Gu.Wpf.UiAutomation-CI?branchName=master)](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_build/latest?definitionId=5&branchName=master)
 
+## Table of contents
 
+  - [Introduction](#introduction)
+  - [Supported types](#supported-types)
+  - [Sample test](#sample-test)
+  - [Application](#application)
+    - [Launch](#launch)
+    - [Attach](#attach)
+    - [AttachOrLaunch](#attachorlaunch)
+      - [Arguments](#arguments)
+  - [Input](#input)
+    - [Mouse](#mouse)
+    - [Keyboard](#keyboard)
+    - [Touch](#touch)
+  - [ImageAssert](#imageassert)
+    - [OnFail](#onfail)
+  - [AppVeyor](#appveyor)
+    - [Contribution](#contribution)
 
 ## Introduction
 Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
@@ -95,7 +112,7 @@ Tested on Windows 7, Windows 10, and the default AppVeyor image.
 - Window
 
 
-### Usage in Code
+## Sample test
 The entry point is usually an application or the desktop so you get an automation element (like a the main window of the application).
 On this, you can then search sub-elements and interact with them.
 The `Application` class is a helper for launching, attaching and closing applications.
@@ -115,10 +132,10 @@ public void CheckBoxIsChecked()
 }
 ```
 
-### Application
+## Application
 The application class iss the way to start an application to test. There are a couple of factory methods.
 
-#### Launch
+### Launch
 Starts a new instance of the application and closes it on dispose. There is a flag to leave the app open but the default is close on dispose.
 Launch is useful for tests that mutate state where resetting can be slow and painful.
 
@@ -136,10 +153,10 @@ public void IsChecked()
 }
 ```
 
-#### Attach
+### Attach
 Attaches to a running process and leaves it open when disposing disposing by default.
 
-#### AttachOrLaunch
+### AttachOrLaunch
 Attaches to a running process or launches a new if not found and leaves it open when disposing by default.
 
 ```cs
@@ -220,6 +237,62 @@ public partial class App
         }
 
         base.OnStartup(e);
+    }
+}
+```
+
+## Input
+
+### Mouse
+
+For mouse input like click, drag, scroll etc.
+
+```cs
+[Test]
+public void DragFromCenterToTopLeft()
+{
+    using (var app = Application.Launch("WpfApplication.exe"))
+    {
+        var window = app.MainWindow;
+        Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
+        Assert.AreEqual(...);
+    }
+}
+```
+
+### Keyboard
+
+For typing or holding modifier keys.
+
+```cs
+[Test]
+public void ShiftDragFromCenterToTopLeft()
+{
+    using (var app = Application.Launch("WpfApplication.exe"))
+    {
+        var window = app.MainWindow;
+        using (Keyboard.Hold(Key.SHIFT))
+        {
+            Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
+            Assert.AreEqual(...);
+        }
+    }
+}
+```
+
+### Touch
+
+For mouse input like click, drag, scroll etc.
+
+```cs
+[Test]
+public void DragFromCenterToTopLeft()
+{
+    using (var app = Application.Launch("WpfApplication.exe"))
+    {
+        var window = app.MainWindow;
+        Touch.Drag(window.Bound.Center(), window.Bound.TopLeft);
+        Assert.AreEqual(...);
     }
 }
 ```

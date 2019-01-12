@@ -65,7 +65,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         }
 
         [TestCase(Key.KEY_Z, "Z")]
-        public void TypeKeyWhilePressingShift(Key key, string expected)
+        public void TypeKeyWhileHoldingShift(Key key, string expected)
         {
             using (var app = Application.Launch(ExeFileName, WindowName))
             {
