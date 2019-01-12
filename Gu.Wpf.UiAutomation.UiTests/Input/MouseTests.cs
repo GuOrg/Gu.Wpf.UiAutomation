@@ -112,6 +112,153 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
+        [TestCase(0)]
+        [TestCase(200)]
+        public void MoveToWithDuration(int milliseconds)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, 0), TimeSpan.FromMilliseconds(milliseconds));
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, -20), TimeSpan.FromMilliseconds(milliseconds));
+                Mouse.MoveTo(mouseArea.Bounds.Center(), TimeSpan.FromMilliseconds(milliseconds));
+                Wait.UntilInputIsProcessed();
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
+                };
+
+                if (milliseconds == 0)
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+            }
+        }
+
+        [TestCase(2000)]
+        [TestCase(double.PositiveInfinity)]
+        public void MoveToWithSpeed(double speed)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, 0), speed);
+                Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, -20), speed);
+                Mouse.MoveTo(mouseArea.Bounds.Center(), speed);
+                Wait.UntilInputIsProcessed();
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
+                };
+
+                if (double.IsInfinity(speed))
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+            }
+        }
+
+        [TestCase(0)]
+        [TestCase(200)]
+        public void MoveByWithDuration(int milliseconds)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveBy(new Vector(-20, 0), TimeSpan.FromMilliseconds(milliseconds));
+                Mouse.MoveBy(new Vector(0, -20), TimeSpan.FromMilliseconds(milliseconds));
+                Mouse.MoveBy(new Vector(20, 20), TimeSpan.FromMilliseconds(milliseconds));
+                Wait.UntilInputIsProcessed();
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
+                };
+
+                if (milliseconds == 0)
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+            }
+        }
+
+        [TestCase(2000)]
+        [TestCase(double.PositiveInfinity)]
+        public void MoveByWithSpeed(double speed)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+
+                Mouse.Position = mouseArea.Bounds.Center();
+                Mouse.MoveBy(new Vector(-20, 0), speed);
+                Mouse.MoveBy(new Vector(0, -20), speed);
+                Mouse.MoveBy(new Vector(20, 20), speed);
+                var expected = new[]
+                {
+                    "MouseEnter Position: 250,300",
+                    "PreviewMouseMove Position: 250,300",
+                    "MouseMove Position: 250,300",
+                    "PreviewMouseMove Position: 230,300",
+                    "MouseMove Position: 230,300",
+                    "PreviewMouseMove Position: 230,280",
+                    "MouseMove Position: 230,280",
+                };
+
+                if (double.IsInfinity(speed))
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+            }
+        }
+
         [Test]
         public void ClickMouseButtonLeft()
         {
@@ -419,6 +566,45 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
+        [TestCase(0)]
+        [TestCase(200)]
+        public void DragWithDuration(int milliseconds)
+        {
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var mouseArea = window.FindGroupBox("Mouse area");
+                var events = window.FindListBox("Events");
+                Mouse.Position = mouseArea.Bounds.Center();
+                app.MainWindow.FindButton("Clear").Invoke();
+
+                Mouse.Drag(MouseButton.Left, mouseArea.Bounds.Center(), mouseArea.Bounds.Center() + new Vector(10, 20), TimeSpan.FromMilliseconds(milliseconds));
+                Wait.UntilInputIsProcessed();
+                var expected = new[]
+                {
+                    "PreviewMouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "PreviewMouseDown Position: 250,300 Button: Left Pressed",
+                    "MouseLeftButtonDown Position: 250,300 Button: Left Pressed",
+                    "MouseDown Position: 250,300",
+                    "PreviewMouseMove Position: 260,320",
+                    "MouseMove Position: 260,320",
+                    "PreviewMouseLeftButtonUp Position: 260,320 Button: Left Released",
+                    "PreviewMouseUp Position: 260,320 Button: Left Released",
+                    "MouseLeftButtonUp Position: 260,320 Button: Left Released",
+                    "MouseUp Position: 260,320",
+                };
+
+                if (milliseconds == 0)
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
             }
         }
 

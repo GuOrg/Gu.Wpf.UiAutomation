@@ -1,1 +1,3 @@
-﻿
+﻿static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Vector delta, double speed) -> System.TimeSpan
+static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, double speed) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, double speed) -> void

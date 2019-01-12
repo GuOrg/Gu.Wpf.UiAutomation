@@ -98,6 +98,16 @@ namespace Gu.Wpf.UiAutomation
         /// Moves the mouse by a given delta from the current position.
         /// </summary>
         /// <param name="delta">The delta for the x-axis.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        public static void MoveBy(Vector delta, double speed)
+        {
+            MoveTo(Position + delta, Interpolation.Duration(delta, speed));
+        }
+
+        /// <summary>
+        /// Moves the mouse by a given delta from the current position.
+        /// </summary>
+        /// <param name="delta">The delta for the x-axis.</param>
         /// <param name="duration">The time to interpolate the move.</param>
         public static void MoveBy(Vector delta, TimeSpan duration)
         {
@@ -121,7 +131,17 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="newPosition">The new position for the mouse.</param>
         public static void MoveTo(Point newPosition)
         {
-            MoveTo((int)newPosition.X, (int)newPosition.Y);
+            MoveTo(newPosition, Interpolation.Duration(Position, newPosition, MoveSpeed));
+        }
+
+        /// <summary>
+        /// Moves the mouse to a new position.
+        /// </summary>
+        /// <param name="newPosition">The new position for the mouse.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        public static void MoveTo(Point newPosition, double speed)
+        {
+            MoveTo(newPosition, Interpolation.Duration(Position, newPosition, speed));
         }
 
         /// <summary>
@@ -131,15 +151,25 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to interpolate the move.</param>
         public static void MoveTo(Point newPosition, TimeSpan duration)
         {
-            var interpolation = Interpolation.Start(Position, newPosition, duration);
-            while (interpolation.TryGetPosition(out var pos))
+            if (duration.Ticks == 0)
             {
-                if (!User32.SetCursorPos(pos.X, pos.Y))
+                if (!User32.SetCursorPos((int)newPosition.X, (int)newPosition.Y))
                 {
                     throw new Win32Exception();
                 }
+            }
+            else
+            {
+                var interpolation = Interpolation.Start(Position, newPosition, duration);
+                while (interpolation.TryGetPosition(out var pos))
+                {
+                    if (!User32.SetCursorPos(pos.X, pos.Y))
+                    {
+                        throw new Win32Exception();
+                    }
 
-                Wait.For(TimeSpan.FromMilliseconds(10));
+                    Wait.For(TimeSpan.FromMilliseconds(10));
+                }
             }
 
             Wait.UntilInputIsProcessed();
@@ -350,18 +380,36 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to perform the drag.</param>
         public static void Drag(MouseButton mouseButton, Point from, Point to, TimeSpan duration)
         {
-            Position = from;
-            using (Hold(mouseButton))
+            if (duration.Ticks == 0)
             {
-                var interpolation = Interpolation.Start(from, to, duration);
-                while (interpolation.TryGetPosition(out var pos))
+                if (!User32.SetCursorPos((int)from.X, (int)from.Y))
                 {
-                    if (!User32.SetCursorPos(pos.X, pos.Y))
+                    throw new Win32Exception();
+                }
+
+                using (Hold(mouseButton))
+                {
+                    if (!User32.SetCursorPos((int)to.X, (int)to.Y))
                     {
                         throw new Win32Exception();
                     }
+                }
+            }
+            else
+            {
+                Position = from;
+                using (Hold(mouseButton))
+                {
+                    var interpolation = Interpolation.Start(from, to, duration);
+                    while (interpolation.TryGetPosition(out var pos))
+                    {
+                        if (!User32.SetCursorPos(pos.X, pos.Y))
+                        {
+                            throw new Win32Exception();
+                        }
 
-                    Wait.For(TimeSpan.FromMilliseconds(10));
+                        Wait.For(TimeSpan.FromMilliseconds(10));
+                    }
                 }
             }
 

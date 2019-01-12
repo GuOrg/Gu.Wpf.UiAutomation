@@ -93,9 +93,22 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">The end point.</param>
         /// <param name="speed">The speed in pixels per second.</param>
         /// <returns>The time.</returns>
-        public static TimeSpan Duration(Point from, Point to, double speed)
+        public static TimeSpan Duration(Point from, Point to, double speed) => Duration(from - to, speed);
+
+        /// <summary>
+        /// Calculate the time it takes to travel <paramref name="delta"/> at <paramref name="speed"/>.
+        /// </summary>
+        /// <param name="delta">The start point.</param>
+        /// <param name="speed">The speed in pixels per second.</param>
+        /// <returns>The time.</returns>
+        public static TimeSpan Duration(Vector delta, double speed)
         {
-            return TimeSpan.FromSeconds((from - to).Length / speed);
+            if (double.IsInfinity(speed))
+            {
+                return TimeSpan.Zero;
+            }
+
+            return TimeSpan.FromSeconds(delta.Length / speed);
         }
 
         /// <summary>
