@@ -1,3 +1,6 @@
+# 0.2.6
+* FEATURE: support touch.
+
 # 0.2.5
 * FEATURE: support resizing window.
 

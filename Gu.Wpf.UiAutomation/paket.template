@@ -4,7 +4,7 @@ projectUrl https://github.com/GuOrg/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: support resizing window.
+  FEATURE: support touch.
 
 excludedgroups
   Analyzers

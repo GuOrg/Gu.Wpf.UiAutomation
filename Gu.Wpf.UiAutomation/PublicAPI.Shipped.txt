@@ -22,6 +22,7 @@ Gu.Wpf.UiAutomation.Application.WaitForMainWindow(System.TimeSpan? waitTimeout =
 Gu.Wpf.UiAutomation.Application.WaitWhileBusy(System.TimeSpan? waitTimeout = null) -> void
 Gu.Wpf.UiAutomation.AssertException
 Gu.Wpf.UiAutomation.AssertException.AssertException() -> void
+Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.AutomationElementExt
@@ -206,6 +207,8 @@ Gu.Wpf.UiAutomation.HorizontalScrollBar
 Gu.Wpf.UiAutomation.HorizontalScrollBar.HorizontalScrollBar(System.Windows.Automation.AutomationElement automationElement) -> void
 Gu.Wpf.UiAutomation.ImageAssert
 Gu.Wpf.UiAutomation.ImageDiffWindow
+Gu.Wpf.UiAutomation.Interpolation
+Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
 Gu.Wpf.UiAutomation.InvokeControl
 Gu.Wpf.UiAutomation.InvokeControl.Invoke() -> void
 Gu.Wpf.UiAutomation.InvokeControl.InvokeControl(System.Windows.Automation.AutomationElement automationElement) -> void
@@ -685,6 +688,11 @@ Gu.Wpf.UiAutomation.TreeViewItem.Items.get -> System.Collections.Generic.IReadOn
 Gu.Wpf.UiAutomation.TreeViewItem.Text.get -> string
 Gu.Wpf.UiAutomation.TreeViewItem.TreeViewItem(System.Windows.Automation.AutomationElement automationElement) -> void
 Gu.Wpf.UiAutomation.TreeWalkerExt
+Gu.Wpf.UiAutomation.TwoFingers
+Gu.Wpf.UiAutomation.TwoFingers.Equals(Gu.Wpf.UiAutomation.TwoFingers other) -> bool
+Gu.Wpf.UiAutomation.TwoFingers.First.get -> System.Windows.Point
+Gu.Wpf.UiAutomation.TwoFingers.Second.get -> System.Windows.Point
+Gu.Wpf.UiAutomation.TwoFingers.TwoFingers(System.Windows.Point first, System.Windows.Point second) -> void
 Gu.Wpf.UiAutomation.UiAutomationException
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException() -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Exception innerException) -> void
@@ -782,6 +790,7 @@ Gu.Wpf.UiAutomation.UiElement.FindFirstChild() -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.FindFirstChild(System.Windows.Automation.Condition condition) -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.FindFirstChild(string automationId) -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.FindFirstChild<T>(System.Func<System.Windows.Automation.AutomationElement, T> wrap) -> T
+Gu.Wpf.UiAutomation.UiElement.FindFirstChild<T>(System.Windows.Automation.Condition condition, System.Func<System.Windows.Automation.AutomationElement, T> wrap) -> T
 Gu.Wpf.UiAutomation.UiElement.FindFirstDescendant() -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.FindFirstDescendant(System.Windows.Automation.Condition condition) -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.FindFirstDescendant(System.Windows.Automation.ControlType controlType) -> Gu.Wpf.UiAutomation.UiElement
@@ -980,18 +989,34 @@ Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState.STATE_SYSTEM_VALID = Gu.Wpf.Ui
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.B -> byte
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.COLORREF(byte r, byte g, byte b) -> void
+Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.G -> byte
 Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.R -> byte
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.CURSORINFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Cursor -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Equals(Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Flags -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.ScreenPos -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Size -> int
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.CURSOR_SHOWING = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.CURSOR_SUPPRESSED = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.HIDDEN = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
+Gu.Wpf.UiAutomation.WindowsAPI.CursorState.NOMOUSE = -1 -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT
+Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.HARDWAREINPUT() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.uMsg -> uint
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.wParamH -> ushort
 Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.wParamL -> ushort
 Gu.Wpf.UiAutomation.WindowsAPI.INPUT
+Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.INPUT.INPUT() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.INPUT.type -> Gu.Wpf.UiAutomation.WindowsAPI.InputType
 Gu.Wpf.UiAutomation.WindowsAPI.INPUT.u -> Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION
 Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION
+Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.Equals(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.INPUTUNION() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.hi -> Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT
 Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.ki -> Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT
@@ -1001,6 +1026,7 @@ Gu.Wpf.UiAutomation.WindowsAPI.InputType.INPUT_HARDWARE = 2 -> Gu.Wpf.UiAutomati
 Gu.Wpf.UiAutomation.WindowsAPI.InputType.INPUT_KEYBOARD = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.InputType
 Gu.Wpf.UiAutomation.WindowsAPI.InputType.INPUT_MOUSE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.InputType
 Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT
+Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.KEYBDINPUT() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.dwExtraInfo -> System.IntPtr
 Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.dwFlags -> Gu.Wpf.UiAutomation.WindowsAPI.KeyEventFlags
@@ -1015,12 +1041,13 @@ Gu.Wpf.UiAutomation.WindowsAPI.KeyEventFlags.KEYEVENTF_SCANCODE = 8 -> Gu.Wpf.Ui
 Gu.Wpf.UiAutomation.WindowsAPI.KeyEventFlags.KEYEVENTF_UNICODE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.KeyEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.LayeredWindowAttributes
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT
+Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT other) -> bool
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.MOUSEINPUT() -> void
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.dwExtraInfo -> System.IntPtr
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.dwFlags -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.dx -> int
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.dy -> int
-Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.mouseData -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.mouseData -> int
 Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.time -> uint
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventDataXButtons
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventDataXButtons.NOTHING = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventDataXButtons
@@ -1042,6 +1069,83 @@ Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_WHEEL = 2048 -> Gu.Wp
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_XDOWN = 128 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_XUP = 256 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.Oleacc
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_DOWN = 9 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_UP = 10 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIRSTBUTTON_DOWN = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIRSTBUTTON_UP = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FOURTHBUTTON_DOWN = 7 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FOURTHBUTTON_UP = 8 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.SECONDBUTTON_DOWN = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.SECONDBUTTON_UP = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.THIRDBUTTON_DOWN = 5 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.THIRDBUTTON_UP = 6 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CANCELLED = 32768 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CAPTURECHANGED = 2097152 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.CONFIDENCE = 16384 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.DOWN = 65536 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FIFTHBUTTON = 256 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FIRSTBUTTON = 16 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.FOURTHBUTTON = 128 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.HASTRANSFORM = 4194304 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.HWHEEL = 1048576 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.INCONTACT = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.INRANGE = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.NEW = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.PRIMARY = 8192 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.SECONDBUTTON = 32 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.THIRDBUTTON = 64 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.UP = 262144 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.UPDATE = 131072 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG.WHEEL = 524288 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.ButtonChangeType -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.DwKeyStates -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.DwTime -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.Equals(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.FrameId -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.HistoryCount -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.HwndTarget -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.InputData -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.POINTER_INFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PerformanceCount -> ulong
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerFlags -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerId -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PointerType -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtHimetricLocation -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtHimetricLocationRaw -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtPixelLocation -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.PtPixelLocationRaw -> Gu.Wpf.UiAutomation.WindowsAPI.POINT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.SourceDevice -> System.IntPtr
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_MOUSE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_PEN = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_POINTER = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_TOUCH = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE.PT_TOUCHPAD = 5 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INPUT_TYPE
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Contact -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.ContactAreaRaw -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Equals(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Move(int deltaX, int deltaY) -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Orientation -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.POINTER_TOUCH_INFO() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.PointerInfo -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Pressure -> uint
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.TouchFlags -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.TouchMasks -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.RECT
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Bottom -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Equals(Gu.Wpf.UiAutomation.WindowsAPI.RECT other) -> bool
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Left -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.RECT() -> void
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Right -> int
+Gu.Wpf.UiAutomation.WindowsAPI.RECT.Top -> int
+Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle
+Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.SafeCursorHandle(System.IntPtr handle) -> void
 Gu.Wpf.UiAutomation.WindowsAPI.ScanCodeShort
 Gu.Wpf.UiAutomation.WindowsAPI.ScanCodeShort.ADD = 78 -> Gu.Wpf.UiAutomation.WindowsAPI.ScanCodeShort
 Gu.Wpf.UiAutomation.WindowsAPI.ScanCodeShort.ALT = 56 -> Gu.Wpf.UiAutomation.WindowsAPI.ScanCodeShort
@@ -1160,11 +1264,26 @@ Gu.Wpf.UiAutomation.WindowsAPI.SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG =
 Gu.Wpf.UiAutomation.WindowsAPI.SetWindowPosFlags
 Gu.Wpf.UiAutomation.WindowsAPI.ShowWindowTypes
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CXDOUBLECLK = 36 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CXSCREEN = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CXVIRTUALSCREEN = 78 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CYDOUBLECLK = 37 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CYSCREEN = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_CYVIRTUALSCREEN = 79 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_SWAPBUTTON = 23 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_XVIRTUALSCREEN = 76 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
 Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric.SM_YVIRTUALSCREEN = 77 -> Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.INDIRECT = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.NONE = 3 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FLAGS
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.CONTACTAREA = 1 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.NONE = 0 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.ORIENTATION = 2 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
+Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK.PRESSURE = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_MASK
 Gu.Wpf.UiAutomation.WindowsAPI.User32
 Gu.Wpf.UiAutomation.WindowsAPI.VkKeyScanModifiers
 Gu.Wpf.UiAutomation.WindowsAPI.VkKeyScanModifiers.ALT = 4 -> Gu.Wpf.UiAutomation.WindowsAPI.VkKeyScanModifiers
@@ -1505,7 +1624,6 @@ const Gu.Wpf.UiAutomation.WindowsAPI.WindowsMessages.WM_WTSSESSION_CHANGE = 689 
 const Gu.Wpf.UiAutomation.WindowsAPI.WindowsMessages.WM_XBUTTONDBLCLK = 525 -> uint
 const Gu.Wpf.UiAutomation.WindowsAPI.WindowsMessages.WM_XBUTTONDOWN = 523 -> uint
 const Gu.Wpf.UiAutomation.WindowsAPI.WindowsMessages.WM_XBUTTONUP = 524 -> uint
-override Gu.Wpf.UiAutomation.AssertException.ToString() -> string
 override Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.BaseURI.get -> string
 override Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.Clone() -> System.Xml.XPath.XPathNavigator
 override Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.GetAttribute(string localName, string namespaceUri) -> string
@@ -1561,6 +1679,8 @@ override Gu.Wpf.UiAutomation.Logging.TraceLogger.GatedFatal(string message) -> v
 override Gu.Wpf.UiAutomation.Logging.TraceLogger.GatedInfo(string message) -> void
 override Gu.Wpf.UiAutomation.Logging.TraceLogger.GatedTrace(string message) -> void
 override Gu.Wpf.UiAutomation.Logging.TraceLogger.GatedWarn(string message) -> void
+override Gu.Wpf.UiAutomation.TwoFingers.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.TwoFingers.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.UiElement.Equals(object obj) -> bool
 override Gu.Wpf.UiAutomation.UiElement.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.UiElement.ToString() -> string
@@ -1568,7 +1688,28 @@ override Gu.Wpf.UiAutomation.VerticalScrollBar.LargeDecrementText.get -> string
 override Gu.Wpf.UiAutomation.VerticalScrollBar.LargeIncrementText.get -> string
 override Gu.Wpf.UiAutomation.VerticalScrollBar.SmallDecrementText.get -> string
 override Gu.Wpf.UiAutomation.VerticalScrollBar.SmallIncrementText.get -> string
+override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.GetHashCode() -> int
 override Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.ToString() -> string
+override Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.RECT.Equals(object obj) -> bool
+override Gu.Wpf.UiAutomation.WindowsAPI.RECT.GetHashCode() -> int
+override Gu.Wpf.UiAutomation.WindowsAPI.SafeCursorHandle.ReleaseHandle() -> bool
 static Gu.Wpf.UiAutomation.AccessibilityTextResolver.GetRoleText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityRole role) -> string
 static Gu.Wpf.UiAutomation.AccessibilityTextResolver.GetStateBitText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState state) -> string
 static Gu.Wpf.UiAutomation.AccessibilityTextResolver.GetStateText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState state) -> string
@@ -1819,7 +1960,6 @@ static Gu.Wpf.UiAutomation.EnumerableExt.TryGetSingle<T>(this System.Collections
 static Gu.Wpf.UiAutomation.ExtensionMethods.Clamp<T>(this T source, T min, T max) -> T
 static Gu.Wpf.UiAutomation.ExtensionMethods.GetFlags(this System.Enum variable) -> System.Collections.Generic.IEnumerable<System.Enum>
 static Gu.Wpf.UiAutomation.ExtensionMethods.HasValue(this double value) -> bool
-static Gu.Wpf.UiAutomation.ExtensionMethods.ToInt(this double value) -> int
 static Gu.Wpf.UiAutomation.GridViewCell.Create(Gu.Wpf.UiAutomation.UiElement content) -> Gu.Wpf.UiAutomation.GridViewCell
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(Gu.Wpf.UiAutomation.UiElement expected, Gu.Wpf.UiAutomation.UiElement actual) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, Gu.Wpf.UiAutomation.UiElement element) -> void
@@ -1846,6 +1986,12 @@ static Gu.Wpf.UiAutomation.ImageAssert.ToBitmap(this System.Windows.UIElement el
 static Gu.Wpf.UiAutomation.ImageAssert.ToRenderTargetBitmap(this System.Windows.UIElement element, System.Windows.Size size) -> System.Windows.Media.Imaging.RenderTargetBitmap
 static Gu.Wpf.UiAutomation.ImageAssert.ToRenderTargetBitmap(this System.Windows.UIElement element, System.Windows.Size size, System.Windows.Media.PixelFormat pixelFormat) -> System.Windows.Media.Imaging.RenderTargetBitmap
 static Gu.Wpf.UiAutomation.ImageDiffWindow.Show(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> void
+static Gu.Wpf.UiAutomation.Interpolation.Duration(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> System.TimeSpan
+static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Point from, System.Windows.Point to, double speed) -> System.TimeSpan
+static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Interpolation.Start(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, System.TimeSpan time) -> Gu.Wpf.UiAutomation.Interpolation
+static Gu.Wpf.UiAutomation.Interpolation.Start(System.Windows.Point from, System.Windows.Point to, double speed) -> Gu.Wpf.UiAutomation.Interpolation
 static Gu.Wpf.UiAutomation.ItemContainerPatternExt.AllItems(this System.Windows.Automation.ItemContainerPattern pattern) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
 static Gu.Wpf.UiAutomation.ItemContainerPatternExt.AllItems<T>(this System.Windows.Automation.ItemContainerPattern pattern, System.Func<System.Windows.Automation.AutomationElement, T> wrap) -> System.Collections.Generic.IEnumerable<T>
 static Gu.Wpf.UiAutomation.ItemContainerPatternExt.FindAtIndex(this System.Windows.Automation.ItemContainerPattern pattern, int index) -> System.Windows.Automation.AutomationElement
@@ -1855,6 +2001,7 @@ static Gu.Wpf.UiAutomation.ItemContainerPatternExt.FirstOrDefault(this System.Wi
 static Gu.Wpf.UiAutomation.ItemContainerPatternExt.LastOrDefault(this System.Windows.Automation.ItemContainerPattern pattern) -> System.Windows.Automation.AutomationElement
 static Gu.Wpf.UiAutomation.ItemRealizer.RealizeItems(Gu.Wpf.UiAutomation.UiElement itemContainerElement) -> void
 static Gu.Wpf.UiAutomation.Keyboard.ClearFocus() -> void
+static Gu.Wpf.UiAutomation.Keyboard.Hold(Gu.Wpf.UiAutomation.Key key) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Keyboard.Press(Gu.Wpf.UiAutomation.Key key) -> void
 static Gu.Wpf.UiAutomation.Keyboard.PressScanCode(ushort scanCode, bool isExtendedKey) -> void
 static Gu.Wpf.UiAutomation.Keyboard.PressVirtualKeyCode(ushort virtualKeyCode) -> void
@@ -1877,20 +2024,30 @@ static Gu.Wpf.UiAutomation.Mouse.Click(Gu.Wpf.UiAutomation.MouseButton mouseButt
 static Gu.Wpf.UiAutomation.Mouse.DoubleClick(Gu.Wpf.UiAutomation.MouseButton mouseButton) -> void
 static Gu.Wpf.UiAutomation.Mouse.DoubleClick(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.Down(Gu.Wpf.UiAutomation.MouseButton mouseButton) -> void
-static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point startingPoint, System.Windows.Point endPoint) -> void
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to) -> void
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Mouse.Drag(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point from, System.Windows.Point to, double speed) -> void
 static Gu.Wpf.UiAutomation.Mouse.DragHorizontally(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point startingPoint, double distance) -> void
 static Gu.Wpf.UiAutomation.Mouse.DragVertically(Gu.Wpf.UiAutomation.MouseButton mouseButton, System.Windows.Point startingPoint, double distance) -> void
+static Gu.Wpf.UiAutomation.Mouse.GetCursorState() -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static Gu.Wpf.UiAutomation.Mouse.Hold(Gu.Wpf.UiAutomation.MouseButton mouseButton) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Mouse.HorizontalScroll(double lines) -> void
 static Gu.Wpf.UiAutomation.Mouse.LeftClick() -> void
 static Gu.Wpf.UiAutomation.Mouse.LeftClick(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.LeftDoubleClick() -> void
 static Gu.Wpf.UiAutomation.Mouse.LeftDoubleClick(System.Windows.Point point) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveBy(System.Windows.Vector delta, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveBy(int deltaX, int deltaY) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveBy(int deltaX, int deltaY, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.get -> double
+static Gu.Wpf.UiAutomation.Mouse.MoveSpeed.set -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition) -> void
+static Gu.Wpf.UiAutomation.Mouse.MoveTo(System.Windows.Point newPosition, System.TimeSpan duration) -> void
 static Gu.Wpf.UiAutomation.Mouse.MoveTo(int newX, int newY) -> void
 static Gu.Wpf.UiAutomation.Mouse.Position.get -> System.Windows.Point
 static Gu.Wpf.UiAutomation.Mouse.Position.set -> void
+static Gu.Wpf.UiAutomation.Mouse.Restore() -> void
 static Gu.Wpf.UiAutomation.Mouse.RightClick() -> void
 static Gu.Wpf.UiAutomation.Mouse.RightClick(System.Windows.Point point) -> void
 static Gu.Wpf.UiAutomation.Mouse.RightDoubleClick() -> void
@@ -1919,9 +2076,25 @@ static Gu.Wpf.UiAutomation.Subscribe.ToFocusChangedEvent(System.Windows.Automati
 static Gu.Wpf.UiAutomation.Subscribe.ToPropertyChangedEvent(System.Windows.Automation.AutomationElement element, System.Windows.Automation.TreeScope treeScope, System.Windows.Automation.AutomationProperty property, System.Windows.Automation.AutomationPropertyChangedEventHandler handler) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Subscribe.ToStructureChangedEvent(System.Windows.Automation.AutomationElement element, System.Windows.Automation.TreeScope treeScope, System.Windows.Automation.StructureChangedEventHandler handler) -> System.IDisposable
 static Gu.Wpf.UiAutomation.TextBoxBase.Create(System.Windows.Automation.AutomationElement automationElement) -> Gu.Wpf.UiAutomation.TextBoxBase
+static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to) -> void
+static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Touch.Drag(System.Windows.Point from, System.Windows.Point to, double speed) -> void
+static Gu.Wpf.UiAutomation.Touch.DragTo(System.Windows.Point position) -> void
+static Gu.Wpf.UiAutomation.Touch.Hold(Gu.Wpf.UiAutomation.TwoFingers fingers) -> System.IDisposable
+static Gu.Wpf.UiAutomation.Touch.Hold(System.Windows.Point point) -> System.IDisposable
+static Gu.Wpf.UiAutomation.Touch.Initialize() -> void
+static Gu.Wpf.UiAutomation.Touch.MoveSpeed.get -> double
+static Gu.Wpf.UiAutomation.Touch.MoveSpeed.set -> void
+static Gu.Wpf.UiAutomation.Touch.Multi(Gu.Wpf.UiAutomation.TwoFingers from, Gu.Wpf.UiAutomation.TwoFingers to, System.TimeSpan duration) -> void
+static Gu.Wpf.UiAutomation.Touch.Pinch(System.Windows.Point around, double startRadius, double endRadius, System.TimeSpan duration, double angle = 45) -> void
+static Gu.Wpf.UiAutomation.Touch.Tap(System.Windows.Point point) -> void
+static Gu.Wpf.UiAutomation.Touch.Up() -> void
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Ancestors(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Children(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Descendants(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
+static Gu.Wpf.UiAutomation.TwoFingers.Around(System.Windows.Point around, double radius, double angle) -> Gu.Wpf.UiAutomation.TwoFingers
+static Gu.Wpf.UiAutomation.TwoFingers.operator !=(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
+static Gu.Wpf.UiAutomation.TwoFingers.operator ==(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
 static Gu.Wpf.UiAutomation.UiElement.FromAutomationElement(System.Windows.Automation.AutomationElement element) -> Gu.Wpf.UiAutomation.UiElement
 static Gu.Wpf.UiAutomation.UiElement.FromAutomationElementOrNull(System.Windows.Automation.AutomationElement element) -> Gu.Wpf.UiAutomation.UiElement
 static Gu.Wpf.UiAutomation.UiElement.FromPoint(System.Windows.Point point) -> Gu.Wpf.UiAutomation.UiElement
@@ -1937,10 +2110,33 @@ static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.implicit operator Gu.Wpf.UiAutoma
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.implicit operator Gu.Wpf.UiAutomation.WindowsAPI.COLORREF(System.Windows.Media.Color c) -> Gu.Wpf.UiAutomation.WindowsAPI.COLORREF
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.implicit operator System.Drawing.Color(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF c) -> System.Drawing.Color
 static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.implicit operator System.Windows.Media.Color(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF c) -> System.Windows.Media.Color
+static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.COLORREF.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.COLORREF left, Gu.Wpf.UiAutomation.WindowsAPI.COLORREF right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.Create() -> Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO
+static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO left, Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO left, Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.HardwareInput(Gu.Wpf.UiAutomation.WindowsAPI.HARDWAREINPUT hardwareInput) -> Gu.Wpf.UiAutomation.WindowsAPI.INPUT
 static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.KeyboardInput(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT keyboardInput) -> Gu.Wpf.UiAutomation.WindowsAPI.INPUT
 static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.MouseInput(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT mouseInput) -> Gu.Wpf.UiAutomation.WindowsAPI.INPUT
 static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.Size.get -> int
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.INPUT left, Gu.Wpf.UiAutomation.WindowsAPI.INPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.INPUT left, Gu.Wpf.UiAutomation.WindowsAPI.INPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION left, Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION left, Gu.Wpf.UiAutomation.WindowsAPI.INPUTUNION right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.KEYBDINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT left, Gu.Wpf.UiAutomation.WindowsAPI.MOUSEINPUT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_INFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.Create(System.Windows.Point point, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_FLAG flags, uint id = 0) -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO left, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.RECT.Create(Gu.Wpf.UiAutomation.WindowsAPI.POINT p, int radius) -> Gu.Wpf.UiAutomation.WindowsAPI.RECT
+static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator !=(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
+static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator ==(Gu.Wpf.UiAutomation.WindowsAPI.RECT left, Gu.Wpf.UiAutomation.WindowsAPI.RECT right) -> bool
 static Gu.Wpf.UiAutomation.WindowsStoreAppLauncher.Launch(string appUserModelId, string arguments) -> System.Diagnostics.Process
 static Gu.Wpf.UiAutomation.WindowsVersion.CurrentContains(string name) -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsAppVeyor() -> bool
@@ -1951,22 +2147,34 @@ static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8_1() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindowsServer2016() -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetRoleText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityRole dwRole, System.Text.StringBuilder lpszRole, uint cchRoleMax) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetStateText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState dwStateBit, System.Text.StringBuilder lpszStateBit, uint cchStateBitMax) -> uint
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetActiveWindow() -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursor() -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorInfo(ref Gu.Wpf.UiAutomation.WindowsAPI.CURSORINFO info) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetCursorPos(out Gu.Wpf.UiAutomation.WindowsAPI.POINT lpPoint) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetDesktopWindow() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetDoubleClickTime() -> uint
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetForegroundWindow() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetMessageExtraInfo() -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetSystemMetrics(Gu.Wpf.UiAutomation.WindowsAPI.SystemMetric nIndex) -> int
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetWindowDC(System.IntPtr handle) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetWindowLong(System.IntPtr hWnd, int nIndex) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetWindowThreadProcessId(System.IntPtr hWnd, out uint processId) -> uint
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InitializeTouchInjection(uint maxCount = 256, Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK feedbackMode = Gu.Wpf.UiAutomation.WindowsAPI.TOUCH_FEEDBACK.DEFAULT) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.InjectTouchInput(int count, Gu.Wpf.UiAutomation.WindowsAPI.POINTER_TOUCH_INFO[] contacts) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SendInput(uint nInputs, Gu.Wpf.UiAutomation.WindowsAPI.INPUT[] pInputs, int cbSize) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SendMessageTimeout(System.IntPtr hWnd, uint msg, System.UIntPtr wParam, System.IntPtr lParam, Gu.Wpf.UiAutomation.WindowsAPI.SendMessageTimeoutFlags fuFlags, uint uTimeout, out System.UIntPtr lpdwResult) -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.HandleRef hcursor) -> System.IntPtr
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursor(System.Runtime.InteropServices.SafeHandle hcursor) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetCursorPos(int x, int y) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetFocus(System.IntPtr hWnd) -> System.IntPtr
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetForegroundWindow(System.IntPtr windowHandle) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetLayeredWindowAttributes(System.IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetWindowLong(System.IntPtr hWnd, int nIndex, uint dwNewLong) -> int
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.SetWindowPos(System.IntPtr hWnd, System.IntPtr hwndAfter, int x, int y, int width, int height, int flags) -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.ShowCursor(bool bShow) -> Gu.Wpf.UiAutomation.WindowsAPI.CursorState
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.ShowWindow(System.IntPtr hWnd, int nCmdShow) -> bool
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.VkKeyScan(char ch) -> short
+static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.WindowFromPoint(Gu.Wpf.UiAutomation.WindowsAPI.POINT p) -> System.IntPtr
 static readonly Gu.Wpf.UiAutomation.DataGridCell.NewItemPlaceHolderRegex -> System.Text.RegularExpressions.Regex
 virtual Gu.Wpf.UiAutomation.ComboBox.EditableItem.get -> Gu.Wpf.UiAutomation.TextBox
 virtual Gu.Wpf.UiAutomation.ComboBox.IsEditable.get -> bool
