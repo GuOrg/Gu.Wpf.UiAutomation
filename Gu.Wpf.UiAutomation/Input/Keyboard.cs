@@ -24,6 +24,8 @@ namespace Gu.Wpf.UiAutomation
             {
                 Type(c);
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -96,6 +98,8 @@ namespace Gu.Wpf.UiAutomation
                 SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN);
                 SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP);
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
@@ -117,6 +121,8 @@ namespace Gu.Wpf.UiAutomation
             {
                 SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYUP);
             }
+
+            Wait.UntilInputIsProcessed();
         }
 
         /// <summary>
