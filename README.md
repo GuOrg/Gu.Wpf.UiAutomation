@@ -443,10 +443,16 @@ steps:
 - task: VSTest@2
   displayName: 'Test'
 
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     pathtoPublish: '$env:temp'
-#     artifactName: drop
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Agent.TempDirectory)
+    contents: *.png
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: Images
 ```
 
 ## AppVeyor
