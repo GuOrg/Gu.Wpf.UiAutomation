@@ -249,12 +249,14 @@ namespace Gu.Wpf.UiAutomation
                 duration);
         }
 
+#pragma warning disable CA1200 // Avoid using cref tags with a prefix
         /// <summary>
         /// Send raw input.
         /// </summary>
-        /// <param name="contacts">The <see cref="POINTER_TOUCH_INFO[]"/>.</param>
+        /// <param name="contacts">The <see cref="T:POINTER_TOUCH_INFO[]"/>.</param>
         /// <throws><see cref="Win32Exception"/>.</throws>
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+#pragma warning restore CA1200 // Avoid using cref tags with a prefix
         public static void InjectTouchInput(POINTER_TOUCH_INFO[] contacts)
         {
             // Demand the correct permissions
