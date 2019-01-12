@@ -10,6 +10,7 @@ group Test
 group Analyzers
   source http://www.nuget.org/api/v2/
   nuget AsyncUsageAnalyzers
+  nuget DotNetAnalyzers.DocumentationAnalyzers
   nuget Gu.Analyzers
   nuget IDisposableAnalyzers
   nuget Microsoft.CodeAnalysis.FxCopAnalyzers

@@ -3,6 +3,7 @@ group Build
 
 group Analyzers
   AsyncUsageAnalyzers
+  DotNetAnalyzers.DocumentationAnalyzers
   Gu.Analyzers
   IDisposableAnalyzers
   Microsoft.CodeAnalysis.FxCopAnalyzers
