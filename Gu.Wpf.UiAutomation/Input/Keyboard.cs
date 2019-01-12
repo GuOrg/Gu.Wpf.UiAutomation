@@ -124,8 +124,16 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
+            if (isExtendedKey)
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE | KeyEventFlags.KEYEVENTF_EXTENDEDKEY);
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE | KeyEventFlags.KEYEVENTF_EXTENDEDKEY);
+            }
+            else
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE);
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE);
+            }
         }
 
         /// <summary>
@@ -160,7 +168,14 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Prefer Hold")]
         public static void PressScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
+            if (isExtendedKey)
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE | KeyEventFlags.KEYEVENTF_EXTENDEDKEY);
+            }
+            else
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYDOWN | KeyEventFlags.KEYEVENTF_SCANCODE);
+            }
         }
 
         /// <summary>
@@ -185,7 +200,14 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ReleaseScanCode(ushort scanCode, bool isExtendedKey)
         {
-            SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE, isExtended: isExtendedKey);
+            if (isExtendedKey)
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE | KeyEventFlags.KEYEVENTF_EXTENDEDKEY);
+            }
+            else
+            {
+                SendInput(scanCode, KeyEventFlags.KEYEVENTF_KEYUP | KeyEventFlags.KEYEVENTF_SCANCODE);
+            }
         }
 
         /// <summary>
@@ -223,9 +245,15 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         /// <param name="keyCode">The key code to send. Can be the scan code or the virtual key code.</param>
         /// <param name="keyFlags">Flag if the key should be pressed or released.</param>
-        /// <param name="isExtended">Flag if the key is an extended key.</param>
-        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags, bool isExtended = false)
+        private static void SendInput(ushort keyCode, KeyEventFlags keyFlags)
         {
+            // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
+            // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
+            if ((keyCode & 0xFF00) == 0xE0)
+            {
+                keyFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
+            }
+
             // Prepare the basic object
             var keyboardInput = new KEYBDINPUT
             {
@@ -233,19 +261,8 @@ namespace Gu.Wpf.UiAutomation
                 dwFlags = keyFlags,
             };
 
-            if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_SCANCODE))
-            {
-                keyboardInput.wScan = keyCode;
-
-                // Add the extended flag if the flag is set or the keycode is prefixed with the byte 0xE0
-                // See https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
-                if (isExtended ||
-                    (keyCode & 0xFF00) == 0xE0)
-                {
-                    keyboardInput.dwFlags |= KeyEventFlags.KEYEVENTF_EXTENDEDKEY;
-                }
-            }
-            else if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_UNICODE))
+            if (keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_SCANCODE) ||
+                keyFlags.HasFlag(KeyEventFlags.KEYEVENTF_UNICODE))
             {
                 keyboardInput.wScan = keyCode;
             }
