@@ -90,8 +90,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 499,599",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchMove Position: 499,599",
-                    "TouchMove Position: 499,599",
                     "PreviewTouchMove Position: 509,609",
                     "TouchMove Position: 509,609",
                     "ManipulationDelta",
@@ -122,6 +120,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var events = window.FindListBox("Events");
 
                 Touch.Drag(area.Bounds.BottomRight, area.Bounds.BottomRight + new Vector(10, 10), TimeSpan.FromMilliseconds(milliseconds));
+
                 var expected = new[]
                 {
                     "TouchEnter Position: 499,599",
@@ -129,8 +128,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 499,599",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchMove Position: 499,599",
-                    "TouchMove Position: 499,599",
                     "PreviewTouchMove Position: 509,609",
                     "TouchMove Position: 509,609",
                     "ManipulationDelta",
@@ -222,10 +219,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 349,299",
                     "TouchDown Position: 349,299",
                     "ManipulationDelta",
-                    "PreviewTouchMove Position: 149,299",
-                    "TouchMove Position: 149,299",
-                    "PreviewTouchMove Position: 349,299",
-                    "TouchMove Position: 349,299",
                     "PreviewTouchMove Position: 199,299",
                     "TouchMove Position: 199,299",
                     "PreviewTouchMove Position: 299,299",
@@ -270,10 +263,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 178,228",
                     "TouchDown Position: 178,228",
                     "ManipulationDelta",
-                    "PreviewTouchMove Position: 319,369",
-                    "TouchMove Position: 319,369",
-                    "PreviewTouchMove Position: 178,228",
-                    "TouchMove Position: 178,228",
                     "PreviewTouchMove Position: 284,334",
                     "TouchMove Position: 284,334",
                     "PreviewTouchMove Position: 213,263",

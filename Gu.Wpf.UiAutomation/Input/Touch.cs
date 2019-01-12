@@ -186,7 +186,9 @@ namespace Gu.Wpf.UiAutomation
             {
                 using (Hold(from))
                 {
-                    var interpolation = Interpolation.Start(from, to, duration);
+                    var interpolation = Interpolation.Start(from, to, duration)
+                                                     .SkipFromPosition();
+
                     while (interpolation.TryGetPosition(out var pos))
                     {
                         contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
@@ -210,8 +212,10 @@ namespace Gu.Wpf.UiAutomation
         {
             using (Hold(from))
             {
-                var interpolation1 = Interpolation.Start(from.First, to.First, duration);
-                var interpolation2 = Interpolation.Start(from.Second, to.Second, duration);
+                var interpolation1 = Interpolation.Start(from.First, to.First, duration)
+                                                  .SkipFromPosition();
+                var interpolation2 = Interpolation.Start(from.Second, to.Second, duration)
+                                                  .SkipFromPosition();
                 while (interpolation1.TryGetPosition(out var pos1) &&
                        interpolation2.TryGetPosition(out var pos2))
                 {

@@ -155,5 +155,18 @@ namespace Gu.Wpf.UiAutomation
 
             return true;
         }
+
+        internal Interpolation SkipFromPosition()
+        {
+            if (this.status == Status.NotStarted)
+            {
+                this.status = Status.Running;
+                return this;
+            }
+            else
+            {
+                throw new InvalidOperationException("Expected status to be NotStarted when calling SkipFromPosition.");
+            }
+        }
     }
 }

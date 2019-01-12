@@ -237,6 +237,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.MoveBy(new Vector(-20, 0), speed);
                 Mouse.MoveBy(new Vector(0, -20), speed);
                 Mouse.MoveBy(new Vector(20, 20), speed);
+                Wait.UntilInputIsProcessed();
                 var expected = new[]
                 {
                     "MouseEnter Position: 250,300",
