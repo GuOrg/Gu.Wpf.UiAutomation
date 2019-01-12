@@ -443,10 +443,10 @@ steps:
 - task: VSTest@2
   displayName: 'Test'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$env:temp'
-    artifactName: drop
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathtoPublish: '$env:temp'
+#     artifactName: drop
 ```
 
 ## AppVeyor
