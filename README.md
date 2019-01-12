@@ -443,10 +443,10 @@ steps:
 - task: VSTest@2
   displayName: 'Test'
 
-- task: CopyFiles@2
-  contents: '*.png' 
-  sourceFolder: $env:temp
-  targetFolder: $env:BUILD_ARTIFACTSTAGINGDIRECTORY
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$env:temp'
+    artifactName: drop
 ```
 
 ## AppVeyor
