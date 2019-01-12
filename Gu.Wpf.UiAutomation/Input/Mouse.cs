@@ -495,6 +495,34 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Send raw input.
+        /// </summary>
+        /// <param name="mouseInput">The <see cref="MOUSEINPUT"/>.</param>
+        /// <throws><see cref="Win32Exception"/>.</throws>
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        public static void SendInput(MOUSEINPUT mouseInput)
+        {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            var input = new INPUT
+            {
+                type = InputType.INPUT_MOUSE,
+                u = new INPUTUNION
+                {
+                    mi = mouseInput,
+                },
+            };
+
+            // Send the command
+            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
+            {
+                throw new Win32Exception();
+            }
+        }
+
+        /// <summary>
         /// Swaps the left/right button if <see cref="AreButtonsSwapped" /> is set.
         /// </summary>
         private static MouseButton SwapButtonIfNeeded(MouseButton mouseButton)
@@ -523,29 +551,6 @@ namespace Gu.Wpf.UiAutomation
                 mouseData = data,
                 dwExtraInfo = User32.GetMessageExtraInfo(),
             });
-        }
-
-        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
-        private static void SendInput(MOUSEINPUT mouseInput)
-        {
-            // Demand the correct permissions
-            var permissions = new PermissionSet(PermissionState.Unrestricted);
-            permissions.Demand();
-
-            var input = new INPUT
-            {
-                type = InputType.INPUT_MOUSE,
-                u = new INPUTUNION
-                {
-                    mi = mouseInput,
-                },
-            };
-
-            // Send the command
-            if (User32.SendInput(1, new[] { input }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
-            }
         }
 
         private static void MoveAbsolute(Point p)

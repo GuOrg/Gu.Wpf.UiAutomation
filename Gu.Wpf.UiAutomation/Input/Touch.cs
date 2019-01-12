@@ -2,6 +2,8 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.ComponentModel;
+    using System.Security;
+    using System.Security.Permissions;
     using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
@@ -13,7 +15,7 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class Touch
     {
-        private static POINTER_TOUCH_INFO[] contacts = new POINTER_TOUCH_INFO[1];
+        private static POINTER_TOUCH_INFO[] contacts = null;
 
         static Touch()
         {
@@ -60,19 +62,12 @@ namespace Gu.Wpf.UiAutomation
         public static IDisposable Hold(Point point)
         {
             contacts = new[] { POINTER_TOUCH_INFO.Create(point, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT) };
-            if (!User32.InjectTouchInput(contacts.Length, contacts))
-            {
-                throw new Win32Exception();
-            }
+            InjectTouchInput(contacts);
 
             return new ActionDisposable(() =>
             {
                 contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
-                if (!User32.InjectTouchInput(contacts.Length, contacts))
-                {
-                    throw new Win32Exception();
-                }
-
+                InjectTouchInput(contacts);
                 contacts = null;
             });
         }
@@ -90,20 +85,13 @@ namespace Gu.Wpf.UiAutomation
                 POINTER_TOUCH_INFO.Create(fingers.Second, POINTER_FLAG.DOWN | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT, 1),
             };
 
-            if (!User32.InjectTouchInput(contacts.Length, contacts))
-            {
-                throw new Win32Exception();
-            }
+            InjectTouchInput(contacts);
 
             return new ActionDisposable(() =>
             {
                 contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
                 contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UP;
-                if (!User32.InjectTouchInput(contacts.Length, contacts))
-                {
-                    throw new Win32Exception();
-                }
-
+                InjectTouchInput(contacts);
                 contacts = null;
             });
         }
@@ -123,11 +111,7 @@ namespace Gu.Wpf.UiAutomation
                 contacts[i].PointerInfo.PointerFlags = POINTER_FLAG.UP;
             }
 
-            if (!User32.InjectTouchInput(contacts.Length, contacts))
-            {
-                throw new Win32Exception();
-            }
-
+            InjectTouchInput(contacts);
             contacts = null;
         }
 
@@ -195,11 +179,7 @@ namespace Gu.Wpf.UiAutomation
                 {
                     contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                     contacts[0].PointerInfo.PtPixelLocation = POINT.From(to);
-
-                    if (!User32.InjectTouchInput(1, contacts))
-                    {
-                        throw new Win32Exception();
-                    }
+                    InjectTouchInput(contacts);
                 }
             }
             else
@@ -211,12 +191,7 @@ namespace Gu.Wpf.UiAutomation
                     {
                         contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                         contacts[0].PointerInfo.PtPixelLocation = pos;
-
-                        if (!User32.InjectTouchInput(1, contacts))
-                        {
-                            throw new Win32Exception();
-                        }
-
+                        InjectTouchInput(contacts);
                         Wait.For(TimeSpan.FromMilliseconds(10));
                     }
                 }
@@ -245,10 +220,7 @@ namespace Gu.Wpf.UiAutomation
                     contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                     contacts[1].PointerInfo.PtPixelLocation = pos2;
 
-                    if (!User32.InjectTouchInput(2, contacts))
-                    {
-                        throw new Win32Exception();
-                    }
+                    InjectTouchInput(contacts);
 
                     Wait.For(TimeSpan.FromMilliseconds(10));
                 }
@@ -271,6 +243,24 @@ namespace Gu.Wpf.UiAutomation
                 TwoFingers.Around(around, startRadius, angle),
                 TwoFingers.Around(around, endRadius, angle),
                 duration);
+        }
+
+        /// <summary>
+        /// Send raw input.
+        /// </summary>
+        /// <param name="contacts">The <see cref="POINTER_TOUCH_INFO[]"/>.</param>
+        /// <throws><see cref="Win32Exception"/>.</throws>
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        public static void InjectTouchInput(POINTER_TOUCH_INFO[] contacts)
+        {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            if (!User32.InjectTouchInput(contacts.Length, contacts))
+            {
+                throw new Win32Exception();
+            }
         }
     }
 }

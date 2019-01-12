@@ -233,6 +233,24 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Send raw input.
+        /// </summary>
+        /// <param name="keyboardInput">The <see cref="KEYBDINPUT"/>.</param>
+        /// <throws><see cref="Win32Exception"/>.</throws>
+        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
+        public static void SendInput(KEYBDINPUT keyboardInput)
+        {
+            // Demand the correct permissions
+            var permissions = new PermissionSet(PermissionState.Unrestricted);
+            permissions.Demand();
+
+            if (User32.SendInput(1, new[] { INPUT.KeyboardInput(keyboardInput) }, INPUT.Size) == 0)
+            {
+                throw new Win32Exception();
+            }
+        }
+
+        /// <summary>
         /// Checks if a given byte has a specific VkKeyScan-modifier set.
         /// </summary>
         private static bool HasScanModifier(byte b, VkKeyScanModifiers modifierToTest)
@@ -272,20 +290,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             SendInput(keyboardInput);
-        }
-
-        [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
-        private static void SendInput(KEYBDINPUT keyboardInput)
-        {
-            // Demand the correct permissions
-            var permissions = new PermissionSet(PermissionState.Unrestricted);
-            permissions.Demand();
-
-            if (User32.SendInput(1, new[] { INPUT.KeyboardInput(keyboardInput) }, INPUT.Size) == 0)
-            {
-                throw new Win32Exception();
-            }
-
             Wait.For(TimeSpan.FromMilliseconds(10));
         }
 
