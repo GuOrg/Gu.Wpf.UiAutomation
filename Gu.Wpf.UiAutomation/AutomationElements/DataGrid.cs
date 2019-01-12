@@ -186,7 +186,9 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public DataGridRow GetRowByValue(int columnIndex, string value)
         {
+#pragma warning disable CA1826 // Do not use Enumerable methods on indexable collections. Instead use the collection directly
             return this.GetRowsByValue(columnIndex, value, 1).FirstOrDefault();
+#pragma warning restore CA1826 // Do not use Enumerable methods on indexable collections. Instead use the collection directly
         }
 
         /// <summary>

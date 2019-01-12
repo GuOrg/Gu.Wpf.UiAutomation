@@ -844,7 +844,9 @@ namespace Gu.Wpf.UiAutomation
             return itemList.ToArray();
         }
 
+#pragma warning disable CA1822
         public System.Windows.Automation.Condition CreateCondition(System.Windows.Automation.Condition controlTypeCondition, string name)
+#pragma warning restore CA1822
         {
             if (name == null)
             {

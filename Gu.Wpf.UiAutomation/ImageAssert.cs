@@ -573,6 +573,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 if (name.EndsWith(fileName, ignoreCase: true, culture: CultureInfo.InvariantCulture))
                 {
+                    // analyzer bug
                     result = callingAssembly.GetManifestResourceStream(name);
                     return true;
                 }
