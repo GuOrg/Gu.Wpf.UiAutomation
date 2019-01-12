@@ -106,6 +106,93 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
+        [TestCase(0)]
+        [TestCase(200)]
+        public void DragWithDuration(int milliseconds)
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+
+                Touch.Drag(area.Bounds.BottomRight, area.Bounds.BottomRight + new Vector(10, 10), TimeSpan.FromMilliseconds(milliseconds));
+                var expected = new[]
+                {
+                    "TouchEnter Position: 499,599",
+                    "PreviewTouchDown Position: 499,599",
+                    "TouchDown Position: 499,599",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchMove Position: 499,599",
+                    "TouchMove Position: 499,599",
+                    "PreviewTouchMove Position: 509,609",
+                    "TouchMove Position: 509,609",
+                    "ManipulationDelta",
+                    "PreviewTouchUp Position: 509,609",
+                    "TouchUp Position: 509,609",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 509,609",
+                };
+
+                if (milliseconds == 0)
+                {
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+                else
+                {
+                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                }
+            }
+        }
+
+        [Test]
+        public void DragTo()
+        {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
+            }
+
+            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            {
+                var window = app.MainWindow;
+                var area = window.FindGroupBox("Touch area");
+                var events = window.FindListBox("Events");
+                using (Touch.Hold(area.Bounds.BottomRight))
+                {
+                    Touch.DragTo(area.Bounds.BottomRight + new Vector(10, 10));
+                }
+
+                var expected = new[]
+                {
+                    "TouchEnter Position: 499,599",
+                    "PreviewTouchDown Position: 499,599",
+                    "TouchDown Position: 499,599",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchMove Position: 499,599",
+                    "TouchMove Position: 499,599",
+                    "PreviewTouchMove Position: 509,609",
+                    "TouchMove Position: 509,609",
+                    "ManipulationDelta",
+                    "PreviewTouchUp Position: 509,609",
+                    "TouchUp Position: 509,609",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 509,609",
+                };
+
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
+            }
+        }
+
         [Test]
         public void TwoFingers()
         {
@@ -199,47 +286,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
                     "TouchLeave Position: 213,263",
-                };
-
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
-            }
-        }
-
-        [Test]
-        public void DragTo()
-        {
-            if (WindowsVersion.IsAppVeyor())
-            {
-                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
-            }
-
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                using (Touch.Hold(area.Bounds.BottomRight))
-                {
-                    Touch.DragTo(area.Bounds.BottomRight + new Vector(10, 10));
-                }
-
-                var expected = new[]
-                {
-                    "TouchEnter Position: 499,599",
-                    "PreviewTouchDown Position: 499,599",
-                    "TouchDown Position: 499,599",
-                    "ManipulationStarting",
-                    "ManipulationStarted",
-                    "PreviewTouchMove Position: 499,599",
-                    "TouchMove Position: 499,599",
-                    "PreviewTouchMove Position: 509,609",
-                    "TouchMove Position: 509,609",
-                    "ManipulationDelta",
-                    "PreviewTouchUp Position: 509,609",
-                    "TouchUp Position: 509,609",
-                    "ManipulationInertiaStarting",
-                    "ManipulationCompleted",
-                    "TouchLeave Position: 509,609",
                 };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());

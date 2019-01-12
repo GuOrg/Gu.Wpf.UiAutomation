@@ -145,7 +145,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new UiAutomationException("Call Touch.Down first.");
             }
 
-            var interpolation = Interpolation.Start(contacts[0].PointerInfo.PtPixelLocation, POINT.Create(position), MoveSpeed);
+            var interpolation = Interpolation.Start(contacts[0].PointerInfo.PtPixelLocation, POINT.From(position), MoveSpeed);
             while (interpolation.TryGetPosition(out var pos))
             {
                 contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
@@ -189,20 +189,33 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to drag.</param>
         public static void Drag(Point from, Point to, TimeSpan duration)
         {
-            using (Hold(from))
+            if (duration.Ticks == 0)
             {
-                var interpolation = Interpolation.Start(from, to, duration);
-                while (interpolation.TryGetPosition(out var pos))
+                contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                contacts[0].PointerInfo.PtPixelLocation = POINT.From(to);
+
+                if (!User32.InjectTouchInput(1, contacts))
                 {
-                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
-                    contacts[0].PointerInfo.PtPixelLocation = pos;
-
-                    if (!User32.InjectTouchInput(1, contacts))
+                    throw new Win32Exception();
+                }
+            }
+            else
+            {
+                using (Hold(from))
+                {
+                    var interpolation = Interpolation.Start(from, to, duration);
+                    while (interpolation.TryGetPosition(out var pos))
                     {
-                        throw new Win32Exception();
-                    }
+                        contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                        contacts[0].PointerInfo.PtPixelLocation = pos;
 
-                    Wait.For(TimeSpan.FromMilliseconds(10));
+                        if (!User32.InjectTouchInput(1, contacts))
+                        {
+                            throw new Win32Exception();
+                        }
+
+                        Wait.For(TimeSpan.FromMilliseconds(10));
+                    }
                 }
             }
 

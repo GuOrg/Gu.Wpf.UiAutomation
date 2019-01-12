@@ -181,7 +181,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="mouseButton">The mouse button to click.</param>
         public static void Click(MouseButton mouseButton)
         {
-            var position = POINT.Create(Position);
+            var position = POINT.From(Position);
             if (lastClick is ButtonClick buttonClick &&
                 buttonClick.Button == mouseButton &&
                 Math.Abs(buttonClick.Point.X - position.X) < User32.GetSystemMetrics(SystemMetric.SM_CXDOUBLECLK) / 2 &&

@@ -44,7 +44,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="to">The end position.</param>
         /// <param name="speed">The speed in pixels / s.</param>
         /// <returns>An instance of <see cref="Interpolation"/>.</returns>
-        public static Interpolation Start(Point from, Point to, double speed) => Start(POINT.Create(from), POINT.Create(to), speed);
+        public static Interpolation Start(Point from, Point to, double speed) => Start(POINT.From(from), POINT.From(to), speed);
 
         /// <summary>
         /// Create an instance of <see cref="Interpolation"/>.
@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="from">The start position.</param>
         /// <param name="to">The end position.</param>
         /// <param name="time">The total time of the interpolation.</param>
-        public static Interpolation Start(Point from, Point to, TimeSpan time) => new Interpolation(POINT.Create(from), POINT.Create(to), time);
+        public static Interpolation Start(Point from, Point to, TimeSpan time) => new Interpolation(POINT.From(from), POINT.From(to), time);
 
         /// <summary>
         /// Create an instance of the class.

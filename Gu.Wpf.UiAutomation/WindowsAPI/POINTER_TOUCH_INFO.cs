@@ -67,7 +67,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// <returns>A <see cref="POINTER_TOUCH_INFO"/> structure.</returns>
         public static POINTER_TOUCH_INFO Create(Point point, POINTER_FLAG flags, uint id = 0)
         {
-            var touchPoint = POINT.Create(point);
+            var touchPoint = POINT.From(point);
             var contact = new POINTER_TOUCH_INFO
             {
                 PointerInfo =

@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             }
         }
 
-        internal static POINT Create(Point p)
+        internal static POINT From(Point p)
         {
             return new POINT
             {
