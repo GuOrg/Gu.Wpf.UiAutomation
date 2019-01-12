@@ -6,6 +6,91 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/wpxtooew9wicyuqa/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-uiautomation/branch/master)
 [![Build Status](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_apis/build/status/Gu.Wpf.UiAutomation-CI?branchName=master)](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_build/latest?definitionId=5&branchName=master)
 
+## Introduction
+Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
+The library wraps `UIAutomationClient` and tries to provide an API that is nice for WPF.
+
+The code inspired by [FlaUI](https://github.com/Roemer/FlaUI) and [White](https://github.com/TestStack/White).
+Tested on Windows 7, Windows 10, and the default AppVeyor image.
+
+### Typical test class
+
+Using the same window and restoring state can be a good strategy as the tests run faster and generate more input to the application finding more bugs.
+
+```cs
+public class FooTests
+{
+    // Current sln directory is searched rtecursively for this exe.
+    private const string ExeFileName = "WpfApplication.exe";
+    // This is optional
+    private const string WindowName = "FooWindow";
+
+    [SetUp]
+    public void SetUp()
+    {
+        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+        {
+            // restore state for the next test.
+            Wait.UntilInputIsProcessed();
+            app.MainWindow.FindButton("Clear").Click();
+        }
+    }
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        // Close the shared window after the last test.
+        Application.KillLaunched(ExeFileName);
+    }
+
+    [Test]
+    public void Test1()
+    {
+        // AttachOrLaunch uses the already open app.
+        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+        {
+            var window = app.MainWindow;
+            ...
+        }
+    }
+
+    [Test]
+    public void Test2()
+    {
+        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+        {
+            var window = app.MainWindow;
+            ...
+        }
+    }
+
+    [Test]
+    public void Test3()
+    {
+        // If we for some reason needs a separate instance of the application in a test we use Launch()
+        using (var app = Application.Launch(ExeFileName, WindowName))
+        {
+            var window = app.MainWindow;
+            ...
+        }
+    }
+}
+```
+
+Usage of the window parameter in App.Xaml.cs
+```cs
+protected override void OnStartup(StartupEventArgs e)
+{
+    if (e.Args.Length == 1)
+    {
+        var window = e.Args[0];
+        this.StartupUri = new Uri($"Windows/{window}.xaml", UriKind.Relative);
+    }
+
+    base.OnStartup(e);
+}
+```
+
 ## Table of contents
 
   - [Introduction](#introduction)
@@ -25,12 +110,6 @@
   - [AppVeyor](#appveyor)
     - [Contribution](#contribution)
 
-## Introduction
-Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
-The library wraps `UIAutomationClient` and tries to provide an API that is nice for WPF.
-
-The code inspired by [FlaUI](https://github.com/Roemer/FlaUI) and [White](https://github.com/TestStack/White).
-Tested on Windows 7, Windows 10, and the default AppVeyor image.
 
 ## Supported types
 
