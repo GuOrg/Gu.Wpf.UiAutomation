@@ -8,7 +8,7 @@ NUGET
       DotNetAnalyzers.DocumentationAnalyzers.Unstable (>= 1.0.0.59)
     DotNetAnalyzers.DocumentationAnalyzers.Unstable (1.0.0.59)
     Gu.Analyzers (1.3.1-dev)
-    IDisposableAnalyzers (2.0.7)
+    IDisposableAnalyzers (2.1.1)
     Microsoft.CodeAnalysis.FxCopAnalyzers (2.6.3)
       Microsoft.CodeQuality.Analyzers (2.6.3)
       Microsoft.NetCore.Analyzers (2.6.3)
