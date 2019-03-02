@@ -17,15 +17,15 @@ steps:
 - task: VSTest@2
   displayName: 'Test'
 
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    sourceFolder: '$(Agent.TempDirectory)'
-    contents: '*.png'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
+- powershell: Get-ChildItem -Path $env:TEMP\* -Include *.png | Copy-Item -Destination $env:ARTIFACTS_STAGING_DIRECTORY
+  displayName: 'Stage image assert errors.'
+  condition: failed()
+  env:
+    ARTIFACTS_STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Publish image assert errors.'
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'Images'
+  condition: failed()
