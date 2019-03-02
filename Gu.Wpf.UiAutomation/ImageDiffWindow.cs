@@ -2,9 +2,11 @@
 namespace Gu.Wpf.UiAutomation
 {
     using System;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Windows;
     using System.Windows.Automation;
@@ -27,30 +29,39 @@ namespace Gu.Wpf.UiAutomation
             this.Height = 400;
             this.Width = 400;
             this.Title = "Image diff";
-            var root = new Grid();
-            root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            var expectedImage = CreateImage(expected);
-            root.Children.Add(expectedImage);
 
-            var actualImage = CreateImage(actual);
-            root.Children.Add(actualImage);
+            this.Content = new Grid
+            {
+                RowDefinitions =
+                {
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = GridLength.Auto },
+                },
+                Children =
+                {
+                    CreateImage(expected, "Expected"),
+                    CreateImage(actual, "Actual"),
+                    CreateButtonGrid(),
+                },
+            };
+            this.DataContext = new ViewModel();
+        }
 
-            var buttonGrid = new UniformGrid
+        private static UniformGrid CreateButtonGrid()
+        {
+            var grid = new UniformGrid
             {
                 Rows = 1,
+                Children =
+                {
+                    CreateToggleButton("Expected"),
+                    CreateToggleButton("Actual"),
+                    CreateToggleButton("Both"),
+                },
             };
-            Grid.SetRow(buttonGrid, 1);
-            var expectedButton = CreateToggleButton("Expected", expectedImage);
-            buttonGrid.Children.Add(expectedButton);
 
-            var actualButton = CreateToggleButton("Actual", actualImage);
-            buttonGrid.Children.Add(actualButton);
-            root.Children.Add(buttonGrid);
-
-            BindOpacity(expectedImage, expectedButton, actualButton);
-            BindOpacity(actualImage, expectedButton, actualButton);
-            this.Content = root;
+            Grid.SetRow(grid, 1);
+            return grid;
         }
 
         public static void Show(Bitmap expected, Bitmap actual)
@@ -107,84 +118,120 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap)
+        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string name)
         {
             var image = new System.Windows.Controls.Image
             {
                 Source = CreateBitmapSource(bitmap),
-                Opacity = 0.5,
             };
+
+            _ = BindingOperations.SetBinding(
+                image,
+                System.Windows.Controls.Image.VisibilityProperty,
+                new Binding
+                {
+                    Path = new PropertyPath($"{name}Visibility"),
+                    Mode = BindingMode.OneWay,
+                });
+
+            _ = BindingOperations.SetBinding(
+                image,
+                System.Windows.Controls.Image.OpacityProperty,
+                new Binding
+                {
+                    Path = new PropertyPath($"Opacity"),
+                    Mode = BindingMode.OneWay,
+                });
 
             Grid.SetRow(image, 0);
             return image;
         }
 
-        private static System.Windows.Controls.Primitives.ToggleButton CreateToggleButton(string content, System.Windows.Controls.Image image)
+        private static System.Windows.Controls.Primitives.ToggleButton CreateToggleButton(string content)
         {
-            var actualButton = new System.Windows.Controls.Primitives.ToggleButton
+            var button = new System.Windows.Controls.RadioButton
             {
                 Content = content,
-                IsChecked = true,
             };
+
             _ = BindingOperations.SetBinding(
-                                    image,
-                                    VisibilityProperty,
-                                    new Binding
-                                    {
-                                        Path = new PropertyPath("IsChecked"),
-                                        Mode = BindingMode.TwoWay,
-                                        Converter = new BooleanToVisibilityConverter(),
-                                        Source = actualButton,
-                                    });
-            return actualButton;
+                        button,
+                        System.Windows.Controls.Primitives.ToggleButton.IsCheckedProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(content),
+                            Mode = BindingMode.TwoWay,
+                        });
+            return button;
         }
 
-        private static void BindOpacity(
-            System.Windows.Controls.Image image,
-            System.Windows.Controls.Primitives.ToggleButton expectedButton,
-            System.Windows.Controls.Primitives.ToggleButton actualButton)
+        private class ViewModel : INotifyPropertyChanged
         {
-            _ = BindingOperations.SetBinding(
-                                  image,
-                                  OpacityProperty,
-                                  new MultiBinding
-                                  {
-                                      Converter = new AndToOpacityConverter(),
-                                      Bindings =
-                                      {
-                                         new Binding
-                                         {
-                                             Path = new PropertyPath("IsChecked"),
-                                             Mode = BindingMode.OneWay,
-                                             Source = expectedButton,
-                                         },
-                                         new Binding
-                                         {
-                                             Path = new PropertyPath("IsChecked"),
-                                             Mode = BindingMode.OneWay,
-                                             Source = actualButton,
-                                         },
-                                      },
-                                  });
-        }
+            private bool expected;
+            private bool actual;
+            private bool both = true;
 
-        private class AndToOpacityConverter : IMultiValueConverter
-        {
-            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public bool Expected
             {
-                if (values.Length == 2 &&
-                    values[0] is bool b0 &&
-                    values[1] is bool b1)
+                get => this.expected;
+                set
                 {
-                    return b0 && b1 ? 0.5 : 1;
-                }
+                    if (value == this.expected)
+                    {
+                        return;
+                    }
 
-                return 1;
+                    this.expected = value;
+                    this.OnPropertyChanged();
+                    this.OnPropertyChanged(nameof(this.ExpectedVisibility));
+                }
             }
 
-            object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+            public bool Actual
             {
-                throw new NotImplementedException();
+                get => this.actual;
+                set
+                {
+                    if (value == this.actual)
+                    {
+                        return;
+                    }
+
+                    this.actual = value;
+                    this.OnPropertyChanged();
+                    this.OnPropertyChanged(nameof(this.ActualVisibility));
+                }
+            }
+
+            public bool Both
+            {
+                get => this.both;
+                set
+                {
+                    if (value == this.both)
+                    {
+                        return;
+                    }
+
+                    this.both = value;
+                    this.OnPropertyChanged();
+                    this.OnPropertyChanged(nameof(this.Opacity));
+                    this.OnPropertyChanged(nameof(this.ActualVisibility));
+                    this.OnPropertyChanged(nameof(this.ExpectedVisibility));
+                }
+            }
+
+            public Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
+
+            public Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
+
+            public double Opacity => this.Both ? 0.5 : 1;
+
+            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
