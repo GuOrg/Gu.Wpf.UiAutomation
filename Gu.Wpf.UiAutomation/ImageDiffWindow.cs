@@ -4,7 +4,6 @@ namespace Gu.Wpf.UiAutomation
     using System;
     using System.ComponentModel;
     using System.Drawing;
-    using System.Globalization;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Threading;
@@ -22,19 +21,16 @@ namespace Gu.Wpf.UiAutomation
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
             AutomationProperties.SetName(this, "Gu.Wpf.UiAutomationOverlayWindow");
+            this.SizeToContent = SizeToContent.WidthAndHeight;
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.Topmost = true;
             this.ShowActivated = false;
-            this.ShowInTaskbar = false;
-            this.Height = 400;
-            this.Width = 400;
             this.Title = "Image diff";
-
             this.Content = new Grid
             {
                 RowDefinitions =
                 {
-                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(Math.Max(expected.Height, actual.Height), GridUnitType.Pixel) },
                     new RowDefinition { Height = GridLength.Auto },
                 },
                 Children =
@@ -44,24 +40,46 @@ namespace Gu.Wpf.UiAutomation
                     CreateButtonGrid(),
                 },
             };
-            this.DataContext = new ViewModel();
-        }
 
-        private static UniformGrid CreateButtonGrid()
-        {
-            var grid = new UniformGrid
+            var viewModel = new ViewModel();
+            this.DataContext = viewModel;
+            this.KeyDown += (_, e) =>
             {
-                Rows = 1,
-                Children =
+                switch (e.Key)
                 {
-                    CreateToggleButton("Expected"),
-                    CreateToggleButton("Actual"),
-                    CreateToggleButton("Both"),
-                },
-            };
+                    case System.Windows.Input.Key.Left:
+                        if (viewModel.Expected)
+                        {
+                            viewModel.Both = true;
+                        }
+                        else if (viewModel.Actual)
+                        {
+                            viewModel.Expected = true;
+                        }
+                        else if (viewModel.Both)
+                        {
+                            viewModel.Actual = true;
+                        }
 
-            Grid.SetRow(grid, 1);
-            return grid;
+                        break;
+
+                    case System.Windows.Input.Key.Right:
+                        if (viewModel.Expected)
+                        {
+                            viewModel.Actual = true;
+                        }
+                        else if (viewModel.Actual)
+                        {
+                            viewModel.Both = true;
+                        }
+                        else if (viewModel.Both)
+                        {
+                            viewModel.Expected = true;
+                        }
+
+                        break;
+                }
+            };
         }
 
         public static void Show(Bitmap expected, Bitmap actual)
@@ -103,6 +121,24 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        private static UniformGrid CreateButtonGrid()
+        {
+            var grid = new UniformGrid
+            {
+                Rows = 1,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Children =
+                {
+                    CreateToggleButton("Expected"),
+                    CreateToggleButton("Actual"),
+                    CreateToggleButton("Both"),
+                },
+            };
+
+            Grid.SetRow(grid, 1);
+            return grid;
+        }
+
         private static BitmapSource CreateBitmapSource(Bitmap bitmap)
         {
             using (var memory = new MemoryStream())
@@ -123,6 +159,8 @@ namespace Gu.Wpf.UiAutomation
             var image = new System.Windows.Controls.Image
             {
                 Source = CreateBitmapSource(bitmap),
+                Height = bitmap.Height,
+                Width = bitmap.Width,
             };
 
             _ = BindingOperations.SetBinding(
