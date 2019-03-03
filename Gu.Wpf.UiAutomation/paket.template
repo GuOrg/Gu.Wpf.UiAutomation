@@ -4,8 +4,7 @@ projectUrl https://github.com/GuOrg/Gu.Wpf.UiAutomation
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes
-  FEATURE: touch & mouse drag with infinite speed.
-  Expose Mouse & Keyboard SendInput
+  FEATURE: better image diff window.
 
 excludedgroups
   Analyzers

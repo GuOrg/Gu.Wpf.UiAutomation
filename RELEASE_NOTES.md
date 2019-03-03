@@ -1,3 +1,6 @@
+# 0.2.8
+* FEATURE: better image diff window.
+
 # 0.2.7
 * FEATURE: touch & mouse drag with infinite speed.
 * Expose Mouse & Keyboard SendInput
