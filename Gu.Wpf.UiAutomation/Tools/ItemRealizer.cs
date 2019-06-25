@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Windows.Automation;
 
@@ -9,6 +9,11 @@
     {
         public static void RealizeItems(UiElement itemContainerElement)
         {
+            if (itemContainerElement == null)
+            {
+                throw new System.ArgumentNullException(nameof(itemContainerElement));
+            }
+
             // We save the scroll value to restore it afterwards
             if (itemContainerElement.AutomationElement.TryGetScrollPattern(out var scrollPattern))
             {

@@ -48,6 +48,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool UntilResponsive(UiElement uiElement, TimeSpan timeout)
         {
+            if (uiElement == null)
+            {
+                throw new ArgumentNullException(nameof(uiElement));
+            }
+
             if (uiElement.TryGetWindow(out var window))
             {
                 return UntilResponsive(window.NativeWindowHandle, timeout);

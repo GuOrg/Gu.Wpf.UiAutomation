@@ -15,6 +15,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static UiElement Create(AutomationElement automationElement)
         {
+            if (automationElement == null)
+            {
+                throw new System.ArgumentNullException(nameof(automationElement));
+            }
+
             if (Conditions.IsMatch(automationElement, Conditions.RepeatButton))
             {
                 return new RepeatButton(automationElement);

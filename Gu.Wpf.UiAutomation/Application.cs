@@ -188,6 +188,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, out Application result)
         {
+            if (processStartInfo == null)
+            {
+                throw new ArgumentNullException(nameof(processStartInfo));
+            }
+
             var exeFileName = Path.GetFullPath(processStartInfo.FileName);
             lock (Launched)
             {
@@ -236,6 +241,16 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryWithAttached(ProcessStartInfo processStartInfo, Action<Application> onAttached)
         {
+            if (processStartInfo == null)
+            {
+                throw new ArgumentNullException(nameof(processStartInfo));
+            }
+
+            if (onAttached == null)
+            {
+                throw new ArgumentNullException(nameof(onAttached));
+            }
+
 #pragma warning disable IDISP001 // Dispose created.
             if (TryAttach(processStartInfo, OnDispose.LeaveOpen, out var app))
 #pragma warning restore IDISP001 // Dispose created.
@@ -305,6 +320,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static Application Launch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.KillProcess)
         {
+            if (processStartInfo == null)
+            {
+                throw new ArgumentNullException(nameof(processStartInfo));
+            }
+
             if (string.IsNullOrEmpty(processStartInfo.WorkingDirectory))
             {
                 processStartInfo.WorkingDirectory = ".";
@@ -343,6 +363,11 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public static void WaitForMainWindow(Process process, TimeSpan? waitTimeout = null)
         {
+            if (process == null)
+            {
+                throw new ArgumentNullException(nameof(process));
+            }
+
             var start = DateTime.Now;
             do
             {

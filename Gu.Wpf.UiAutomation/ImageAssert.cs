@@ -36,6 +36,16 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="element">The UIElement.</param>
         public static void AreEqual(string fileName, System.Windows.UIElement element)
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
@@ -79,6 +89,21 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, System.Windows.UIElement element, Action<Exception, Bitmap> onFail)
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            if (onFail == null)
+            {
+                throw new ArgumentNullException(nameof(onFail));
+            }
+
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
@@ -114,6 +139,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static void AreEqual(Bitmap expected, System.Windows.UIElement actual)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
             using (var actualBmp = actual.ToBitmap(expected.Size(), expected.PixelFormat()))
             {
                 if (Equal(expected, actualBmp))
@@ -143,6 +178,16 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="element">The automation element.</param>
         public static void AreEqual(string fileName, UiElement element)
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
@@ -190,6 +235,21 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, UiElement element, Action<Exception, Bitmap> onFail)
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            if (onFail == null)
+            {
+                throw new ArgumentNullException(nameof(onFail));
+            }
+
             WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
@@ -231,6 +291,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static void AreEqual(UiElement expected, UiElement actual)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
             WaitForStartAnimation(actual);
 
             var start = DateTime.Now;
@@ -261,6 +331,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static void AreEqual(Bitmap expected, UiElement element)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             WaitForStartAnimation(element);
             if (Equal(expected, element, RetryTime))
             {
@@ -275,6 +355,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static void AreEqual(Bitmap expected, Bitmap actual)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
             if (expected.Size != actual.Size)
             {
                 if (Debugger.IsAttached)
@@ -309,6 +399,21 @@ namespace Gu.Wpf.UiAutomation
 
         public static void AreEqual(Bitmap expected, Bitmap actual, Action<Bitmap> onFail)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
+            if (onFail == null)
+            {
+                throw new ArgumentNullException(nameof(onFail));
+            }
+
             if (expected.Size != actual.Size)
             {
                 if (Debugger.IsAttached)
@@ -345,6 +450,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool Equal(Bitmap expected, UiElement element, TimeSpan retryTime)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, retryTime))
             {
@@ -364,6 +479,16 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool Equal(Bitmap expected, Bitmap actual)
         {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
             if (expected.Size != actual.Size)
             {
                 return false;
@@ -402,6 +527,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static RenderTargetBitmap ToRenderTargetBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             var result = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, pixelFormat);
             element.Measure(size);
             element.Arrange(new System.Windows.Rect(size));
@@ -427,6 +557,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static void SaveImage(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat, string fileName)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             using (var stream = File.OpenWrite(fileName))
             {
                 element.Measure(size);
