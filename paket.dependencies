@@ -16,7 +16,7 @@ group Analyzers
   nuget IDisposableAnalyzers
   nuget Microsoft.CodeAnalysis.FxCopAnalyzers
   nuget PropertyChangedAnalyzers
-  nuget PublicApiAnalyzer prerelease
+  nuget Microsoft.CodeAnalysis.PublicApiAnalyzers
   nuget ReflectionAnalyzers prerelease
   nuget StyleCop.Analyzers prerelease
   nuget WpfAnalyzers

@@ -7,6 +7,6 @@ group Analyzers
   Gu.Analyzers
   IDisposableAnalyzers
   Microsoft.CodeAnalysis.FxCopAnalyzers
-  PublicApiAnalyzer
+  Microsoft.CodeAnalysis.PublicApiAnalyzers
   ReflectionAnalyzers
   StyleCop.Analyzers
