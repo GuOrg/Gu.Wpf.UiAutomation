@@ -19,7 +19,7 @@ NUGET
     Microsoft.CodeQuality.Analyzers (2.9.3)
     Microsoft.NetCore.Analyzers (2.9.3)
     Microsoft.NetFramework.Analyzers (2.9.3)
-    PropertyChangedAnalyzers (2.7.1)
+    PropertyChangedAnalyzers (2.7.2)
     ReflectionAnalyzers (0.1.20-dev)
     StyleCop.Analyzers (1.1.118)
     WpfAnalyzers (2.2.0.3)
