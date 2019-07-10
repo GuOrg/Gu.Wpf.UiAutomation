@@ -211,7 +211,7 @@ namespace Gu.Wpf.UiAutomation
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            public bool Expected
+            internal bool Expected
             {
                 get => this.expected;
                 set
@@ -227,7 +227,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            public bool Actual
+            internal bool Actual
             {
                 get => this.actual;
                 set
@@ -243,7 +243,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            public bool Both
+            internal bool Both
             {
                 get => this.both;
                 set
@@ -261,11 +261,11 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            public Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
+            internal Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
 
-            public Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
+            internal Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
 
-            public double Opacity => this.Both ? 0.5 : 1;
+            internal double Opacity => this.Both ? 0.5 : 1;
 
             protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
             {

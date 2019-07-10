@@ -131,7 +131,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             private readonly UiElement mainWindow;
 
-            public LegacyCalc(UiElement mainWindow)
+            internal LegacyCalc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }

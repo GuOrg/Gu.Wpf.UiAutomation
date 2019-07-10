@@ -307,7 +307,7 @@ namespace Gu.Wpf.UiAutomation
         {
             private readonly Key key;
 
-            public PressedKey(Key key)
+            internal PressedKey(Key key)
             {
                 this.key = key;
                 SendInput((ushort)key, KeyEventFlags.KEYEVENTF_KEYDOWN);

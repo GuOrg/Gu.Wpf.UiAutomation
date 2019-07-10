@@ -583,7 +583,7 @@ namespace Gu.Wpf.UiAutomation
             internal readonly POINT Point;
             internal readonly DateTime Time;
 
-            public ButtonClick(MouseButton button, POINT point)
+            internal ButtonClick(MouseButton button, POINT point)
             {
                 this.Button = button;
                 this.Time = DateTime.UtcNow;
@@ -596,7 +596,7 @@ namespace Gu.Wpf.UiAutomation
         {
             private readonly MouseButton button;
 
-            public PressedButton(MouseButton button)
+            internal PressedButton(MouseButton button)
             {
                 this.button = button;
                 Down(button);

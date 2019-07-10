@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation
         /// Constructs a new disposable with the given action used for disposal.
         /// </summary>
         /// <param name="dispose">Disposal action which will be run upon calling Dispose.</param>
-        public ActionDisposable(Action dispose)
+        internal ActionDisposable(Action dispose)
         {
             this.dispose = dispose ?? throw new ArgumentNullException(nameof(dispose));
         }

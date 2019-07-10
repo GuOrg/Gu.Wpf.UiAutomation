@@ -382,6 +382,11 @@ namespace Gu.Wpf.UiAutomation
 
         protected void PerformMouseAction(bool moveMouse, Action action)
         {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             if (Mouse.GetCursorState() == WindowsAPI.CursorState.CURSOR_SUPPRESSED)
             {
                 Mouse.Restore();

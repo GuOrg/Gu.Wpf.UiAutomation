@@ -7,7 +7,7 @@ namespace Gu.Wpf.UiAutomation
 
     internal static class SafeDirectoryEnumeration
     {
-        public static IEnumerable<string> EnumerateFilesOpportunistic(string path, string searchPattern, SearchOption searchOption)
+        internal static IEnumerable<string> EnumerateFilesOpportunistic(string path, string searchPattern, SearchOption searchOption)
         {
             if (searchOption == SearchOption.AllDirectories)
             {

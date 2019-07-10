@@ -729,7 +729,7 @@ namespace Gu.Wpf.UiAutomation
         {
             private static readonly ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>> Cache = new ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>>();
 
-            public static bool TryFind(Assembly assembly, string resourceName, out Bitmap result)
+            internal static bool TryFind(Assembly assembly, string resourceName, out Bitmap result)
             {
                 var map = Cache.GetOrAdd(assembly, CreateMergedDictionary);
                 result = map.FirstOrDefault(x => x.Key.EndsWith(resourceName, StringComparison.CurrentCulture)).Value;

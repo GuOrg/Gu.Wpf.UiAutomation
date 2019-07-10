@@ -692,7 +692,7 @@ namespace Gu.Wpf.UiAutomation
 
         private sealed class ProcessReference : IDisposable
         {
-            public ProcessReference(Process process, OnDispose onDispose)
+            internal ProcessReference(Process process, OnDispose onDispose)
             {
                 this.Process = process;
                 this.OnDispose = onDispose;

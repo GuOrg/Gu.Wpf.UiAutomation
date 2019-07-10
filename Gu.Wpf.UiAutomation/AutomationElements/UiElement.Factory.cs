@@ -130,13 +130,13 @@ namespace Gu.Wpf.UiAutomation
             private readonly Condition condition;
             private readonly Func<AutomationElement, UiElement> create;
 
-            public ConditionAndCreate(Condition condition, Func<AutomationElement, UiElement> create)
+            internal ConditionAndCreate(Condition condition, Func<AutomationElement, UiElement> create)
             {
                 this.condition = condition ?? throw new ArgumentNullException(nameof(condition));
                 this.create = create ?? throw new ArgumentNullException(nameof(create));
             }
 
-            public bool TryCreate(AutomationElement element, out UiElement uiElement)
+            internal bool TryCreate(AutomationElement element, out UiElement uiElement)
             {
                 if (Conditions.IsMatch(element, this.condition))
                 {
