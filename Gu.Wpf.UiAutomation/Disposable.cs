@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
 
@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="dispose">Action to run during the first call to <see cref="IDisposable.Dispose"/>. The action is guaranteed to be run at most once.</param>
         /// <returns>The disposable object that runs the given action upon disposal.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="dispose"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="dispose"/> is <see langword="null"/>.</exception>
         public static IDisposable Create(Action dispose)
         {
             if (dispose == null)

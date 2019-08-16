@@ -129,7 +129,7 @@ namespace Gu.Wpf.UiAutomation
         {
             if (this.status == Status.Done)
             {
-                position = default(POINT);
+                position = default;
                 return false;
             }
 

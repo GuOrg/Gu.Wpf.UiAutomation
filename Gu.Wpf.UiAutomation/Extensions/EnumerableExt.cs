@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@
                     result = enumerator.Current;
                     if (enumerator.MoveNext())
                     {
-                        result = default(T);
+                        result = default;
                         return false;
                     }
 
@@ -27,7 +27,7 @@
                 }
             }
 
-            result = default(T);
+            result = default;
             return false;
         }
 
@@ -54,7 +54,7 @@
                         {
                             if (predicate(e.Current))
                             {
-                                result = default(T);
+                                result = default;
                                 return false;
                             }
                         }
@@ -64,7 +64,7 @@
                 }
             }
 
-            result = default(T);
+            result = default;
             return false;
         }
     }
