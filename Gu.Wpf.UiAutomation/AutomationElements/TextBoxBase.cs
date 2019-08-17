@@ -35,6 +35,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static TextBoxBase Create(AutomationElement automationElement)
         {
+            if (automationElement is null)
+            {
+                throw new ArgumentNullException(nameof(automationElement));
+            }
+
             if (Conditions.IsMatch(automationElement, Conditions.TextBox))
             {
                 return new TextBox(automationElement);

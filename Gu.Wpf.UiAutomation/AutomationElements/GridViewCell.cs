@@ -1,12 +1,14 @@
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
+
     /// <summary>
     /// Cell element for grids and tables.
     /// </summary>
     public class GridViewCell : SelectionItemControl
     {
         public GridViewCell(UiElement content)
-            : base(content.AutomationElement)
+            : base(content?.AutomationElement ?? throw new ArgumentNullException(nameof(content)))
         {
             this.Content = content;
         }

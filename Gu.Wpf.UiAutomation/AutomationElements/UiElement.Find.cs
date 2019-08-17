@@ -591,6 +591,11 @@ namespace Gu.Wpf.UiAutomation
         public bool TryFindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
         {
+            if (wrap == null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             result = null;
             var start = DateTime.Now;
             do

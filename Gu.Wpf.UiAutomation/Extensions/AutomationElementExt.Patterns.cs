@@ -270,6 +270,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static TableItemPattern TableItemPattern(this AutomationElement element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (TryGetTableItemPattern(element, out var pattern))
             {
                 return pattern;
@@ -280,6 +285,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool TryGetTableItemPattern(this AutomationElement element, out TableItemPattern result)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (element.TryGetCurrentPattern(System.Windows.Automation.TableItemPattern.Pattern, out var pattern))
             {
                 result = (TableItemPattern)pattern;
@@ -292,6 +302,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static TablePattern TablePattern(this AutomationElement element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (TryGetTablePattern(element, out var pattern))
             {
                 return pattern;
@@ -302,6 +317,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool TryGetTablePattern(this AutomationElement element, out TablePattern result)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (element.TryGetCurrentPattern(System.Windows.Automation.TablePattern.Pattern, out var pattern))
             {
                 result = (TablePattern)pattern;
@@ -324,6 +344,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool TryGetTextPattern(this AutomationElement element, out TextPattern result)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (element.TryGetCurrentPattern(System.Windows.Automation.TextPattern.Pattern, out var pattern))
             {
                 result = (TextPattern)pattern;
@@ -336,6 +361,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static TransformPattern TransformPattern(this AutomationElement element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             if (TryGetTransformPattern(element, out var pattern))
             {
                 return pattern;
