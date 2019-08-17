@@ -8,7 +8,6 @@ namespace Gu.Wpf.UiAutomation
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Media.Imaging;
-    using Gu.Wpf.UiAutomation.Logging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <summary>

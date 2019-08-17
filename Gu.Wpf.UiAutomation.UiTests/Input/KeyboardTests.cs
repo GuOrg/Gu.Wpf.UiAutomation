@@ -1,7 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
     using System.Diagnostics;
-    using System.Threading;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
 
