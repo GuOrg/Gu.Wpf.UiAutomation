@@ -1,7 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
-    using System.Globalization;
     using NUnit.Framework;
 
     public class ButtonTests

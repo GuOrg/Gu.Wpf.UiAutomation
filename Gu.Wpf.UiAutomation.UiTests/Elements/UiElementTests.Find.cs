@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +29,7 @@
                 using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
                 {
                     var window = app.MainWindow;
-                    var button = window.FindButton();
+                    var button = window.FindButton("EmptyButton");
                     var fromPoint = (Button)UiElement.FromPoint(button.GetClickablePoint());
                     Assert.AreEqual(button.Text, fromPoint.Text);
                 }
