@@ -22,7 +22,7 @@ NUGET
     PropertyChangedAnalyzers (2.7.2)
     ReflectionAnalyzers (0.1.20-dev)
     StyleCop.Analyzers (1.1.118)
-    WpfAnalyzers (2.3)
+    WpfAnalyzers (2.3.1)
 
 GROUP Build
 STORAGE: NONE
