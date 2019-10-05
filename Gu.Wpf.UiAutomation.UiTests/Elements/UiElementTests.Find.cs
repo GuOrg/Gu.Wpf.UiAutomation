@@ -100,7 +100,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 {
                     var window = app.MainWindow;
                     var child = window.FindFirstChild();
-                    Assert.AreEqual("title bar", child.LocalizedControlType);
+                    Assert.AreEqual("ControlType.TitleBar", child.ControlType.ProgrammaticName);
                 }
             }
 
