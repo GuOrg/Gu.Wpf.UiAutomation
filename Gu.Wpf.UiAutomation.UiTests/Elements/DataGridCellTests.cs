@@ -304,6 +304,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("SelectCellDataGrid")]
         public void SetInvalidValueThrows(string name)
         {
+            Assert.Inconclusive("VS test runner does not understand [Explicit].");
             using (var app = Application.Launch(ExeFileName, "DataGridWindow"))
             {
                 var window = app.MainWindow;

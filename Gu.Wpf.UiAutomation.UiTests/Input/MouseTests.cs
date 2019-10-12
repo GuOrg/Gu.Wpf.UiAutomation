@@ -713,13 +713,13 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 
                 Mouse.HorizontalScroll(scroll);
                 Assert.Inconclusive($"Not sure if we can detect any events here. Expected {expected}");
-                ////var expecteds = new[]
-                ////{
-                ////    $"PreviewMouseWheel Position: 250,300 {expected}",
-                ////    $"MouseWheel Position: 250,300 {expected}",
-                ////};
+                var expecteds = new[]
+                {
+                    $"PreviewMouseWheel Position: 250,300 {expected}",
+                    $"MouseWheel Position: 250,300 {expected}",
+                };
 
-                ////CollectionAssert.AreEqual(expecteds, events.Items.Select(x => x.Text).ToArray());
+                CollectionAssert.AreEqual(expecteds, events.Items.Select(x => x.Text).ToArray());
             }
         }
 
