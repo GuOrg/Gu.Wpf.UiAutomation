@@ -50,19 +50,27 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
                 Touch.Tap(area.Bounds.Center());
-                var expected = new[]
-                {
-                    "TouchEnter Position: 249,299",
-                    "PreviewTouchDown Position: 249,299",
-                    "TouchDown Position: 249,299",
-                    "ManipulationStarting",
-                    "ManipulationStarted",
-                    "PreviewTouchUp Position: 249,299",
-                    "TouchUp Position: 249,299",
-                    "ManipulationInertiaStarting",
-                    "ManipulationCompleted",
-                    "TouchLeave Position: 249,299",
-                };
+                var expected = WindowsVersion.IsWindows10()
+                    ? new[]
+                    {
+                        "TouchEnter Position: 250,300",
+                        "PreviewTouchDown Position: 250,300",
+                        "TouchDown Position: 250,300",
+                        "ManipulationStarting",
+                        "ManipulationStarted",
+                        "PreviewTouchUp Position: 250,300",
+                        "TouchUp Position: 250,300",
+                        "ManipulationInertiaStarting",
+                        "ManipulationCompleted",
+                        "TouchLeave Position: 250,300",
+                    }
+                    : new[]
+                    {
+                        "TouchEnter Position: 249,299", "PreviewTouchDown Position: 249,299",
+                        "TouchDown Position: 249,299", "ManipulationStarting", "ManipulationStarted",
+                        "PreviewTouchUp Position: 249,299", "TouchUp Position: 249,299",
+                        "ManipulationInertiaStarting", "ManipulationCompleted", "TouchLeave Position: 249,299",
+                    };
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
@@ -208,7 +216,32 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     new TwoFingers(cp + new Vector(-100, 0), cp + new Vector(100, 0)),
                     new TwoFingers(cp + new Vector(-50, 0), cp + new Vector(50, 0)),
                     TimeSpan.FromMilliseconds(10));
-                var expected = new[]
+                var expected = WindowsVersion.IsWindows10()
+                ? new[]
+                {
+                    "TouchEnter Position: 150,300",
+                    "PreviewTouchDown Position: 150,300",
+                    "TouchDown Position: 150,300",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "TouchEnter Position: 350,300",
+                    "PreviewTouchDown Position: 350,300",
+                    "TouchDown Position: 350,300",
+                    "ManipulationDelta",
+                    "PreviewTouchMove Position: 200,300",
+                    "TouchMove Position: 200,300",
+                    "PreviewTouchMove Position: 300,300",
+                    "TouchMove Position: 300,300",
+                    "PreviewTouchUp Position: 200,300",
+                    "TouchUp Position: 200,300",
+                    "TouchLeave Position: 200,300",
+                    "PreviewTouchUp Position: 300,300",
+                    "TouchUp Position: 300,300",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 300,300",
+                }
+                : new[]
                 {
                     "TouchEnter Position: 149,299",
                     "PreviewTouchDown Position: 149,299",
@@ -232,7 +265,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "ManipulationCompleted",
                     "TouchLeave Position: 299,299",
                 };
-
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
@@ -252,7 +284,32 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var events = window.FindListBox("Events");
                 var cp = area.Bounds.Center();
                 Touch.Pinch(cp, 100, 50, TimeSpan.FromMilliseconds(10));
-                var expected = new[]
+                var expected = WindowsVersion.IsWindows10()
+                ? new[]
+                {
+                    "TouchEnter Position: 320,370",
+                    "PreviewTouchDown Position: 320,370",
+                    "TouchDown Position: 320,370",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "TouchEnter Position: 179,229",
+                    "PreviewTouchDown Position: 179,229",
+                    "TouchDown Position: 179,229",
+                    "ManipulationDelta",
+                    "PreviewTouchMove Position: 285,335",
+                    "TouchMove Position: 285,335",
+                    "PreviewTouchMove Position: 214,264",
+                    "TouchMove Position: 214,264",
+                    "PreviewTouchUp Position: 285,335",
+                    "TouchUp Position: 285,335",
+                    "TouchLeave Position: 285,335",
+                    "PreviewTouchUp Position: 214,264",
+                    "TouchUp Position: 214,264",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 214,264",
+                }
+                : new[]
                 {
                     "TouchEnter Position: 319,369",
                     "PreviewTouchDown Position: 319,369",
@@ -295,7 +352,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
                 Touch.Tap(area.Bounds.Center());
-                var expected = new[]
+                var expected = WindowsVersion.IsWindows10()
+                ? new[]
+                {
+                    "TouchEnter Position: 250,300",
+                    "PreviewTouchDown Position: 250,300",
+                    "TouchDown Position: 250,300",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchUp Position: 250,300",
+                    "TouchUp Position: 250,300",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 250,300",
+                }
+                : new[]
                 {
                     "TouchEnter Position: 249,299",
                     "PreviewTouchDown Position: 249,299",
@@ -308,7 +379,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "ManipulationCompleted",
                     "TouchLeave Position: 249,299",
                 };
-
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
 
                 app.MainWindow.FindButton("Clear").Click(moveMouse: true);
@@ -331,7 +401,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 var area = window.FindGroupBox("Touch area");
                 var events = window.FindListBox("Events");
                 Touch.Tap(area.Bounds.Center());
-                var expected = new[]
+                var expected = WindowsVersion.IsWindows10()
+                ? new[]
+                {
+                    "TouchEnter Position: 250,300",
+                    "PreviewTouchDown Position: 250,300",
+                    "TouchDown Position: 250,300",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchUp Position: 250,300",
+                    "TouchUp Position: 250,300",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 250,300",
+                }
+                : new[]
                 {
                     "TouchEnter Position: 249,299",
                     "PreviewTouchDown Position: 249,299",
