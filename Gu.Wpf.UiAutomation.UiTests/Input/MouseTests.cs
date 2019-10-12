@@ -165,23 +165,33 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.MoveTo(mouseArea.Bounds.Center() + new Vector(-20, -20), speed);
                 Mouse.MoveTo(mouseArea.Bounds.Center(), speed);
                 Wait.UntilInputIsProcessed();
-                var expected = new[]
-                {
-                    "MouseEnter Position: 250,300",
-                    "PreviewMouseMove Position: 250,300",
-                    "MouseMove Position: 250,300",
-                    "PreviewMouseMove Position: 230,300",
-                    "MouseMove Position: 230,300",
-                    "PreviewMouseMove Position: 230,280",
-                    "MouseMove Position: 230,280",
-                };
 
                 if (double.IsInfinity(speed))
                 {
-                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
+                    var expected = new[]
+                    {
+                        "MouseEnter Position: 250,300",
+                        "PreviewMouseMove Position: 250,300",
+                        "MouseMove Position: 250,300",
+                        "PreviewMouseMove Position: 230,300",
+                        "MouseMove Position: 230,300",
+                        "PreviewMouseMove Position: 230,280",
+                        "MouseMove Position: 230,280",
+                    };
+                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
                 }
                 else
                 {
+                    var expected = new[]
+                    {
+                        "MouseEnter Position: 250,300",
+                        "PreviewMouseMove Position: 250,300",
+                        "MouseMove Position: 250,300",
+                        "PreviewMouseMove Position: 230,300",
+                        "MouseMove Position: 230,300",
+                        "PreviewMouseMove Position: 230,280",
+                        "MouseMove Position: 230,280",
+                    };
                     CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
                 }
             }
@@ -202,28 +212,39 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.MoveBy(new Vector(0, -20), TimeSpan.FromMilliseconds(milliseconds));
                 Mouse.MoveBy(new Vector(20, 20), TimeSpan.FromMilliseconds(milliseconds));
                 Wait.UntilInputIsProcessed();
-                var expected = new[]
-                {
-                    "MouseEnter Position: 250,300",
-                    "PreviewMouseMove Position: 250,300",
-                    "MouseMove Position: 250,300",
-                    "PreviewMouseMove Position: 230,300",
-                    "MouseMove Position: 230,300",
-                    "PreviewMouseMove Position: 230,280",
-                    "MouseMove Position: 230,280",
-                };
 
                 if (milliseconds == 0)
                 {
+                    var expected = new[]
+                    {
+                        "MouseEnter Position: 250,300",
+                        "PreviewMouseMove Position: 250,300",
+                        "MouseMove Position: 250,300",
+                        "PreviewMouseMove Position: 230,300",
+                        "MouseMove Position: 230,300",
+                        "PreviewMouseMove Position: 230,280",
+                        "MouseMove Position: 230,280",
+                    };
                     CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
                 }
                 else
                 {
+                    var expected = new[]
+                    {
+                        "MouseEnter Position: 250,300",
+                        "PreviewMouseMove Position: 250,300",
+                        "MouseMove Position: 250,300",
+                        "PreviewMouseMove Position: 230,300",
+                        "MouseMove Position: 230,300",
+                        "PreviewMouseMove Position: 230,280",
+                        "MouseMove Position: 230,280",
+                    };
                     CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
                 }
             }
         }
 
+        [TestCase(200)]
         [TestCase(2000)]
         [TestCase(double.PositiveInfinity)]
         public void MoveByWithSpeed(double speed)
@@ -238,7 +259,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Mouse.MoveBy(new Vector(-20, 0), speed);
                 Mouse.MoveBy(new Vector(0, -20), speed);
                 Mouse.MoveBy(new Vector(20, 20), speed);
-                Wait.UntilInputIsProcessed();
+
                 var expected = new[]
                 {
                     "MouseEnter Position: 250,300",
@@ -249,15 +270,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewMouseMove Position: 230,280",
                     "MouseMove Position: 230,280",
                 };
-
-                if (double.IsInfinity(speed))
-                {
-                    CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
-                }
-                else
-                {
-                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray());
-                }
+                CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray());
             }
         }
 

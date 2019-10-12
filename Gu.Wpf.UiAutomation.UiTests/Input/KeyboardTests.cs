@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Input
 {
+    using System;
     using System.Diagnostics;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
@@ -91,7 +92,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
                 Wait.UntilInputIsProcessed();
                 var textBox = mainWindow.FindTextBox();
-                var sw = Stopwatch.StartNew();
+                Wait.For(TimeSpan.FromMilliseconds(20));
                 Assert.AreEqual(expected, textBox.Text);
             }
         }

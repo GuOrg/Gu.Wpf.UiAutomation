@@ -173,6 +173,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to drag.</param>
         public static void Drag(Point from, Point to, TimeSpan duration)
         {
+            Wait.UntilInputIsProcessed();
             if (duration.Ticks == 0)
             {
                 using (Hold(from))

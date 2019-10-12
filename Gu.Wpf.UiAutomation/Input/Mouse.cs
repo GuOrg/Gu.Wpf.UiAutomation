@@ -55,7 +55,7 @@ namespace Gu.Wpf.UiAutomation
                     throw new Win32Exception();
                 }
 
-                Wait.UntilInputIsProcessed(TimeSpan.FromMilliseconds(10));
+                Wait.UntilInputIsProcessed();
             }
         }
 
@@ -151,6 +151,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="duration">The time to interpolate the move.</param>
         public static void MoveTo(Point newPosition, TimeSpan duration)
         {
+            Wait.UntilInputIsProcessed();
             if (duration.Ticks == 0)
             {
                 if (!User32.SetCursorPos((int)newPosition.X, (int)newPosition.Y))
@@ -168,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
                         throw new Win32Exception();
                     }
 
-                    Wait.For(TimeSpan.FromMilliseconds(10));
+                    Wait.For(TimeSpan.FromMilliseconds(20));
                 }
             }
 
