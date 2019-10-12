@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 15.0.26730.3
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1C84389-441E-4870-9EAC-F241B568B204}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{B1C84389-441E-4870-9EAC-F241B568B204}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{28EBF5DE
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netcore3App", "TestApplications\Netcore3App\Netcore3App.csproj", "{BDCB7394-7850-4685-965B-1477B1EF1C55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,12 +56,17 @@ Global
 		{AFE453D1-C9B6-43D0-835F-BAE465063453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE453D1-C9B6-43D0-835F-BAE465063453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE453D1-C9B6-43D0-835F-BAE465063453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDCB7394-7850-4685-965B-1477B1EF1C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCB7394-7850-4685-965B-1477B1EF1C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCB7394-7850-4685-965B-1477B1EF1C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCB7394-7850-4685-965B-1477B1EF1C55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C8276299-FA43-409B-A969-EF030AB56224} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
+		{BDCB7394-7850-4685-965B-1477B1EF1C55} = {00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA1E3AD6-06D8-4ECD-9AF7-37DD4785FEC5}

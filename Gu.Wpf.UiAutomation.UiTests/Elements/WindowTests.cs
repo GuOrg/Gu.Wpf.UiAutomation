@@ -64,5 +64,15 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 Assert.AreEqual("30,40,300,300", window.Bounds.ToString(CultureInfo.InvariantCulture));
             }
         }
+
+        [Test]
+        public void Netcore3App()
+        {
+            using (var app = Application.Launch("Netcore3App.exe"))
+            {
+                var window = app.MainWindow;
+                Assert.AreEqual("Test", window.FindTextBlock("TextBlock").Text);
+            }
+        }
     }
 }
