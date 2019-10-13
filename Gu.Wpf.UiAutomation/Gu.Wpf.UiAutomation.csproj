@@ -14,12 +14,12 @@
   <PropertyGroup>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
-    <Version>0.2.8.0</Version>
+    <Version>0.2.8.1</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
     <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>
-    <PackageReleaseNotes>FEATURE: better image diff window.</PackageReleaseNotes>
+    <PackageReleaseNotes>FEATURE: SourceLink.</PackageReleaseNotes>
     <Description>Library for writing UI-tests for WPF.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Windows" />
     <Reference Include="Accessibility" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
