@@ -89,7 +89,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void WhenNotEqual()
+        public void WhenNotEqualSize()
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
             {

@@ -35,13 +35,13 @@ namespace Gu.Wpf.UiAutomation
                 },
                 Children =
                 {
-                    CreateImage(expected, "Expected"),
-                    CreateImage(actual, "Actual"),
+                    CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
+                    CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
                     CreateButtonGrid(),
                 },
             };
 
-            var viewModel = new ViewModel();
+            var viewModel = new ImageDiffViewModel();
             this.DataContext = viewModel;
             this.KeyDown += (_, e) =>
             {
@@ -121,6 +121,37 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string visibilityPropertyName)
+        {
+            var image = new System.Windows.Controls.Image
+            {
+                Source = CreateBitmapSource(bitmap),
+                Height = bitmap.Height,
+                Width = bitmap.Width,
+            };
+
+            _ = BindingOperations.SetBinding(
+                image,
+                System.Windows.Controls.Image.VisibilityProperty,
+                new Binding
+                {
+                    Path = new PropertyPath(visibilityPropertyName),
+                    Mode = BindingMode.OneWay,
+                });
+
+            _ = BindingOperations.SetBinding(
+                image,
+                System.Windows.Controls.Image.OpacityProperty,
+                new Binding
+                {
+                    Path = new PropertyPath(nameof(ImageDiffViewModel.Opacity)),
+                    Mode = BindingMode.OneWay,
+                });
+
+            Grid.SetRow(image, 0);
+            return image;
+        }
+
         private static UniformGrid CreateButtonGrid()
         {
             var grid = new UniformGrid
@@ -129,14 +160,32 @@ namespace Gu.Wpf.UiAutomation
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Children =
                 {
-                    CreateToggleButton("Expected"),
-                    CreateToggleButton("Actual"),
-                    CreateToggleButton("Both"),
+                    CreateButton(nameof(ImageDiffViewModel.Expected)),
+                    CreateButton(nameof(ImageDiffViewModel.Actual)),
+                    CreateButton(nameof(ImageDiffViewModel.Both)),
                 },
             };
 
             Grid.SetRow(grid, 1);
             return grid;
+
+            System.Windows.Controls.RadioButton CreateButton(string content)
+            {
+                var button = new System.Windows.Controls.RadioButton
+                {
+                    Content = content,
+                };
+
+                _ = BindingOperations.SetBinding(
+                    button,
+                    System.Windows.Controls.Primitives.ToggleButton.IsCheckedProperty,
+                    new Binding
+                    {
+                        Path = new PropertyPath(content),
+                        Mode = BindingMode.TwoWay,
+                    });
+                return button;
+            }
         }
 
         private static BitmapSource CreateBitmapSource(Bitmap bitmap)
@@ -154,56 +203,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string name)
-        {
-            var image = new System.Windows.Controls.Image
-            {
-                Source = CreateBitmapSource(bitmap),
-                Height = bitmap.Height,
-                Width = bitmap.Width,
-            };
-
-            _ = BindingOperations.SetBinding(
-                image,
-                System.Windows.Controls.Image.VisibilityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath($"{name}Visibility"),
-                    Mode = BindingMode.OneWay,
-                });
-
-            _ = BindingOperations.SetBinding(
-                image,
-                System.Windows.Controls.Image.OpacityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath($"Opacity"),
-                    Mode = BindingMode.OneWay,
-                });
-
-            Grid.SetRow(image, 0);
-            return image;
-        }
-
-        private static System.Windows.Controls.Primitives.ToggleButton CreateToggleButton(string content)
-        {
-            var button = new System.Windows.Controls.RadioButton
-            {
-                Content = content,
-            };
-
-            _ = BindingOperations.SetBinding(
-                        button,
-                        System.Windows.Controls.Primitives.ToggleButton.IsCheckedProperty,
-                        new Binding
-                        {
-                            Path = new PropertyPath(content),
-                            Mode = BindingMode.TwoWay,
-                        });
-            return button;
-        }
-
-        private class ViewModel : INotifyPropertyChanged
+        public class ImageDiffViewModel : INotifyPropertyChanged
         {
             private bool expected;
             private bool actual;
@@ -211,7 +211,7 @@ namespace Gu.Wpf.UiAutomation
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            internal bool Expected
+            public bool Expected
             {
                 get => this.expected;
                 set
@@ -227,7 +227,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            internal bool Actual
+            public bool Actual
             {
                 get => this.actual;
                 set
@@ -243,7 +243,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            internal bool Both
+            public bool Both
             {
                 get => this.both;
                 set
@@ -261,11 +261,11 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            internal Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
+            public Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
 
-            internal Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
+            public Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
 
-            internal double Opacity => this.Both ? 0.5 : 1;
+            public double Opacity => this.Both ? 0.5 : 1;
 
             protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
             {
