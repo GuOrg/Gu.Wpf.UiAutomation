@@ -26,17 +26,26 @@ namespace Gu.Wpf.UiAutomation
             this.Topmost = true;
             this.ShowActivated = false;
             this.Title = "Image diff";
+            this.Background = System.Windows.Media.Brushes.Gray;
             this.Content = new Grid
             {
                 RowDefinitions =
                 {
-                    new RowDefinition { Height = new GridLength(Math.Max(expected.Height, actual.Height), GridUnitType.Pixel) },
+                    new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = GridLength.Auto },
                 },
                 Children =
                 {
-                    CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
-                    CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
+                    new Grid
+                    {
+                        Margin = new Thickness(10),
+                        Background = System.Windows.Media.Brushes.Transparent,
+                        Children =
+                        {
+                            CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
+                            CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
+                        },
+                    },
                     CreateButtonGrid(),
                 },
             };
@@ -158,6 +167,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 Rows = 1,
                 HorizontalAlignment = HorizontalAlignment.Center,
+                Background = System.Windows.Media.Brushes.White,
                 Children =
                 {
                     CreateButton(nameof(ImageDiffViewModel.Expected)),
