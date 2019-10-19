@@ -1,7 +1,6 @@
 // ReSharper disable RedundantNameQualifier
 namespace Gu.Wpf.UiAutomation
 {
-    using System;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
@@ -12,6 +11,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Data;
+    using System.Windows.Input;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
 
@@ -137,6 +137,25 @@ namespace Gu.Wpf.UiAutomation
                 Source = CreateBitmapSource(bitmap),
                 Height = bitmap.Height,
                 Width = bitmap.Width,
+                InputBindings =
+                {
+                    new MouseBinding(
+                        ApplicationCommands.Save,
+                        new MouseGesture(MouseAction.LeftDoubleClick)),
+                },
+                CommandBindings =
+                {
+                    new CommandBinding(
+                        ApplicationCommands.Save,
+                        (sender, args) =>
+                        {
+                            var dialog = new Microsoft.Win32.SaveFileDialog();
+                            if (dialog.ShowDialog() == true)
+                            {
+                                bitmap.Save(dialog.FileName);
+                            }
+                        }),
+                },
             };
 
             _ = BindingOperations.SetBinding(
