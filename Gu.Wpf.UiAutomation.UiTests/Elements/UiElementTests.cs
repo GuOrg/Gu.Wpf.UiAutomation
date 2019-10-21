@@ -94,9 +94,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 }
                 else
                 {
-                    Assert.AreEqual(new System.Windows.Rect(150, 312, 200, 100), button.Bounds);
+                    Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
                     Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
-                    Assert.AreEqual(new System.Windows.Rect(50, 112, 200, 100), button.RenderBounds);
+                    Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
                 }
             }
         }
