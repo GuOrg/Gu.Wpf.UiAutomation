@@ -5,5 +5,12 @@
     <!--<Application.StartupUri>Windows/DataGridWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>Windows/ContextMenuWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>Windows/TouchWindow.xaml</Application.StartupUri>-->
-    <Application.Resources />
+
+    <Application.Resources>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="UseLayoutRounding" Value="True" />
+            <Setter Property="Left" Value="200" />
+            <Setter Property="Top" Value="200" />
+        </Style>
+    </Application.Resources>
 </Application>
