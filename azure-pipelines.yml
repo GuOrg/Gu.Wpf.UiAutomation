@@ -32,7 +32,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-   - powershell: Get-ChildItem -Path $env:TEMP\* -Include *.png | Copy-Item -Destination $env:ARTIFACTS_STAGING_DIRECTORY
+- powershell: Get-ChildItem -Path $env:TEMP\* -Include *.png | Copy-Item -Destination $env:ARTIFACTS_STAGING_DIRECTORY
   displayName: 'Stage image assert errors.'
   condition: failed()
   env:
