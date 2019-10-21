@@ -68,11 +68,7 @@
     <Rule Id="CA2241" Action="Warning" />
     <Rule Id="CA2242" Action="Warning" />
   </Rules>
-  <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
-    <Rule Id="CA1303" Action="None" />
-  </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-    <Rule Id="SA0001" Action="None" />
     <Rule Id="SA1600" Action="None" />
     <Rule Id="SA1601" Action="None" />
     <Rule Id="SA1602" Action="None" />
@@ -113,6 +109,5 @@
     <Rule Id="SA1648" Action="None" />
     <Rule Id="SA1649" Action="None" />
     <Rule Id="SA1651" Action="None" />
-    <Rule Id="SA1652" Action="None" />
   </Rules>
 </RuleSet>

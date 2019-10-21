@@ -36,7 +36,7 @@ namespace Gu.Wpf.UiAutomation
         public override bool HasAttributes => !this.IsInAttribute;
 
         /// <inheritdoc/>
-        public override string Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
+        public override string? Value => this.IsInAttribute ? this.GetAttributeValue(this.attributeIndex) : this.currentElement.ToString();
 
         /// <inheritdoc/>
         public override object UnderlyingObject => new UiElement(this.currentElement);

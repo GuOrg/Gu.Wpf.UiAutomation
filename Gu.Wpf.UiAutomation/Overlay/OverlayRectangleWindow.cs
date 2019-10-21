@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
 
     public class OverlayRectangleWindow : Window
     {
-        private static OverlayRectangleWindow window;
+        private static OverlayRectangleWindow? window;
 
         private OverlayRectangleWindow(Rect rectangle, Color color, TimeSpan duration)
         {

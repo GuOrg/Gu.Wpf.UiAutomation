@@ -37,7 +37,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is RECT other && this.Equals(other);
+        public override bool Equals(object? obj) => obj is RECT other && this.Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode()

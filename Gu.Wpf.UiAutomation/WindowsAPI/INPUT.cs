@@ -57,7 +57,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                                            this.u.Equals(other.u);
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is INPUT other && this.Equals(other);
+        public override bool Equals(object? obj) => obj is INPUT other && this.Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode()

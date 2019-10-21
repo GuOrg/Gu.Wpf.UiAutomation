@@ -34,7 +34,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                                                 this.dwExtraInfo.Equals(other.dwExtraInfo);
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is KEYBDINPUT other && this.Equals(other);
+        public override bool Equals(object? obj) => obj is KEYBDINPUT other && this.Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode()

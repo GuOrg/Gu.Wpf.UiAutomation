@@ -117,7 +117,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is POINTER_TOUCH_INFO other &&
+        public override bool Equals(object? obj) => obj is POINTER_TOUCH_INFO other &&
                                                    this.Equals(other);
 
         /// <inheritdoc />

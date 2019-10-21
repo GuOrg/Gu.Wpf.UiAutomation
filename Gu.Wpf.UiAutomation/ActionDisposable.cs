@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     internal sealed class ActionDisposable : IDisposable
     {
-        private volatile Action dispose;
+        private volatile Action? dispose;
 
         /// <summary>
         /// Constructs a new disposable with the given action used for disposal.

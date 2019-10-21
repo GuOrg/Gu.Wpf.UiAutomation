@@ -28,9 +28,10 @@ namespace Gu.Wpf.UiAutomation
             return !double.IsNaN(value) && !double.IsInfinity(value);
         }
 
-        public static IEnumerable<Enum> GetFlags(this Enum variable)
+        public static IEnumerable<T> GetFlags<T>(this T variable)
+            where T : struct, Enum
         {
-            return Enum.GetValues(variable.GetType()).Cast<Enum>().Where(variable.HasFlag);
+            return Enum.GetValues(variable.GetType()).Cast<T>().Where(x => variable.HasFlag(x));
         }
     }
 }

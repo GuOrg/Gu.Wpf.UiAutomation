@@ -308,7 +308,7 @@ namespace Gu.Wpf.UiAutomation
 
             public double Opacity => this.Both ? 0.5 : 1;
 
-            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
             {
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }

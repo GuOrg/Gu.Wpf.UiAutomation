@@ -65,7 +65,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                                               this.B == other.B;
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is COLORREF other && this.Equals(other);
+        public override bool Equals(object? obj) => obj is COLORREF other && this.Equals(other);
 
         /// <inheritdoc/>
         public override int GetHashCode()

@@ -31,7 +31,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is HARDWAREINPUT other &&
+        public override bool Equals(object? obj) => obj is HARDWAREINPUT other &&
                                                    this.Equals(other);
 
         /// <inheritdoc />

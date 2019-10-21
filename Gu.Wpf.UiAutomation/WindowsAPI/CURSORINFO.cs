@@ -54,7 +54,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is CURSORINFO other &&
+        public override bool Equals(object? obj) => obj is CURSORINFO other &&
                                                    this.Equals(other);
 
         /// <inheritdoc />

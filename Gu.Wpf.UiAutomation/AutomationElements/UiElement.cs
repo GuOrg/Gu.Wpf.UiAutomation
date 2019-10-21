@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
     using System.Windows.Automation;
@@ -135,7 +136,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public UiElement CachedParent => new UiElement(this.AutomationElement.CachedParent);
 
-        public bool TryGetWindow(out Window window)
+        public bool TryGetWindow([NotNullWhen(true)]out Window? window)
         {
             if (this is Window w)
             {
@@ -361,9 +362,10 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return this.Equals(obj as UiElement);
+            return obj is UIElement element &&
+                 this.Equals(element);
         }
 
         /// <inheritdoc/>

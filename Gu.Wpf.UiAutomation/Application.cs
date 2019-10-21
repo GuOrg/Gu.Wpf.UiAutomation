@@ -23,7 +23,7 @@ namespace Gu.Wpf.UiAutomation
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
 
-        private volatile Window mainWindow;
+        private volatile Window? mainWindow;
         private bool disposed;
 
         /// <summary>

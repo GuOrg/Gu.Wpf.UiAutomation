@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Automation;
 
     public partial class UiElement
@@ -136,7 +137,7 @@ namespace Gu.Wpf.UiAutomation
                 this.create = create ?? throw new ArgumentNullException(nameof(create));
             }
 
-            internal bool TryCreate(AutomationElement element, out UiElement uiElement)
+            internal bool TryCreate(AutomationElement element, [NotNullWhen(true)] out UiElement? uiElement)
             {
                 if (Conditions.IsMatch(element, this.condition))
                 {

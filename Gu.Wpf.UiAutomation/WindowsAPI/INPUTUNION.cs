@@ -35,7 +35,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
                                                 this.hi.Equals(other.hi);
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is INPUTUNION other &&
+        public override bool Equals(object? obj) => obj is INPUTUNION other &&
                                                    this.Equals(other);
 
         /// <inheritdoc />

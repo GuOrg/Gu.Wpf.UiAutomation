@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is MOUSEINPUT other &&
+        public override bool Equals(object? obj) => obj is MOUSEINPUT other &&
                                                    this.Equals(other);
 
         /// <inheritdoc />
