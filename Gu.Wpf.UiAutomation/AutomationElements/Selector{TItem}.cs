@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public TItem SelectedItem
+        public TItem? SelectedItem
         {
             get
             {

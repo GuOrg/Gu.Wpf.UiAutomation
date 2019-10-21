@@ -75,7 +75,7 @@ namespace Gu.Wpf.UiAutomation
         /// Gets the contest menu for the window.
         /// Note: It uses the FrameworkType of the window as lookup logic. Use <see cref="GetContextMenuByFrameworkType" /> if you want to control this.
         /// </summary>
-        public ContextMenu ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
+        public ContextMenu? ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
         public IntPtr NativeWindowHandle => new IntPtr(this.AutomationElement.NativeWindowHandle());
 
@@ -85,7 +85,7 @@ namespace Gu.Wpf.UiAutomation
 
         public Window FindDialog() => this.FindFirstChild(Conditions.ModalWindow, e => new Window(e, isMainWindow: false));
 
-        public ContextMenu GetContextMenuByFrameworkType(FrameworkType frameworkType)
+        public ContextMenu? GetContextMenuByFrameworkType(FrameworkType frameworkType)
         {
             if (frameworkType == FrameworkType.Win32)
             {

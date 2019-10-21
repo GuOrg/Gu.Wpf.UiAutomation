@@ -39,9 +39,9 @@ namespace Gu.Wpf.UiAutomation
 
         protected Button LargeIncrementButton => this.FindButton(this.LargeIncrementText);
 
-        protected Thumb Thumb => this.FindThumb();
+        protected Thumb? Thumb => this.FindThumb();
 
-        private Thumb FindThumb()
+        private Thumb? FindThumb()
         {
             var thumb = this.AutomationElement.FindFirst(TreeScope.Children, Conditions.Thumb);
             return thumb != null ? new Thumb(thumb) : null;

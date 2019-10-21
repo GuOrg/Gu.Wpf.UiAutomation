@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 var cell = this.ItemContainerPattern.LastOrDefault();
-                if (cell.Name() == "{NewItemPlaceholder}")
+                if (cell?.Name() == "{NewItemPlaceholder}")
                 {
                     return cell.BoundingRectangle().IsEmpty;
                 }
@@ -106,7 +106,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the first selected item or null otherwise.
         /// </summary>
-        public UiElement SelectedItem
+        public UiElement? SelectedItem
         {
             get
             {
@@ -142,7 +142,7 @@ namespace Gu.Wpf.UiAutomation
 
         public DataGridRow Row(int row) => (DataGridRow)FromAutomationElement(this.ItemContainerPattern.FindAtIndex(row));
 
-        public DataGridRowHeader RowHeader(int row) => this.Row(row).Header;
+        public DataGridRowHeader? RowHeader(int row) => this.Row(row).Header;
 
         /// <summary>
         /// Select a row by index.

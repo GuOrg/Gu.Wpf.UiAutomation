@@ -5,6 +5,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
@@ -664,7 +665,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private static bool TryGetStream(string fileName, Assembly callingAssembly, out Stream result)
+        private static bool TryGetStream(string fileName, Assembly callingAssembly, [NotNullWhen(true)]out Stream? result)
         {
             if (File.Exists(fileName))
             {
@@ -681,23 +682,19 @@ namespace Gu.Wpf.UiAutomation
                     return true;
                 }
 
-                // ReSharper disable once AssignNullToNotNullAttribute
-                candidate = Path.Combine(
-                    Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath),
-                    fileName);
-
-                if (File.Exists(candidate))
+                if (Assembly.GetExecutingAssembly().CodeBase is { } codeBase &&
+                    Path.GetDirectoryName(new Uri(codeBase).LocalPath) is { } dir &&
+                    (candidate = Path.Combine(dir, fileName)) is { } &&
+                    File.Exists(candidate))
                 {
                     result = File.OpenRead(candidate);
                     return true;
                 }
 
-                //// ReSharper disable once AssignNullToNotNullAttribute
-                candidate = Path.Combine(
-                    Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().Location).LocalPath),
-                    fileName);
-
-                if (File.Exists(candidate))
+                if (Assembly.GetExecutingAssembly().Location is { } location &&
+                    (dir = Path.GetDirectoryName(new Uri(location).LocalPath)) is { } &&
+                    (candidate = Path.Combine(dir, fileName)) is { } &&
+                    File.Exists(candidate))
                 {
                     result = File.OpenRead(candidate);
                     return true;
@@ -709,7 +706,7 @@ namespace Gu.Wpf.UiAutomation
                 if (name.EndsWith(fileName, ignoreCase: true, culture: CultureInfo.InvariantCulture))
                 {
                     // analyzer bug
-                    result = callingAssembly.GetManifestResourceStream(name);
+                    result = callingAssembly.GetManifestResourceStream(name)!;
                     return true;
                 }
             }

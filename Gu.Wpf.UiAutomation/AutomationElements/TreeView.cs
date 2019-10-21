@@ -14,9 +14,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// The currently selected <see cref="TreeViewItem" />.
         /// </summary>
-        public TreeViewItem SelectedTreeViewItem => this.SearchSelectedItem(this.Items);
+        public TreeViewItem? SelectedTreeViewItem => this.SearchSelectedItem(this.Items);
 
-        private TreeViewItem SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)
+        private TreeViewItem? SearchSelectedItem(IReadOnlyList<TreeViewItem> treeItems)
         {
             // Search for a selected item in the direct children
             var directSelectedItem = treeItems.FirstOrDefault(t => t.IsSelected);
@@ -25,7 +25,7 @@ namespace Gu.Wpf.UiAutomation
                 return directSelectedItem;
             }
 
-            // Loop thru the children and search in their children
+            // Loop through the children and search in their children
             foreach (var treeItem in treeItems)
             {
                 var selectedInChildItem = this.SearchSelectedItem(treeItem.Items);

@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
 
         public ListView ContainingListView => (ListView)FromAutomationElement(this.SelectionItemPattern.Current.SelectionContainer);
 
-        public string Text
+        public string? Text
         {
             get
             {

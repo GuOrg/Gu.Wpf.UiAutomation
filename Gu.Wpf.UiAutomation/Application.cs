@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
     public sealed class Application : IDisposable
     {
         private static readonly List<Process> Launched = new List<Process>();
-        private static readonly ConcurrentDictionary<string, string> ExeNames = new ConcurrentDictionary<string, string>();
+        private static readonly ConcurrentDictionary<string, string?> ExeNames = new ConcurrentDictionary<string, string?>();
 
         private readonly ProcessReference processReference;
         private readonly object gate = new object();
@@ -141,7 +141,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, out Application result)
+        public static bool TryAttach(string exeFileName, [NotNullWhen(true)]out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
@@ -150,7 +150,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, OnDispose onDispose, out Application result)
+        public static bool TryAttach(string exeFileName, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
@@ -159,7 +159,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, string args, out Application result)
+        public static bool TryAttach(string exeFileName, string args, [NotNullWhen(true)]out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
@@ -168,7 +168,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, out Application result)
+        public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName);
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
@@ -177,7 +177,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(ProcessStartInfo processStartInfo, out Application result)
+        public static bool TryAttach(ProcessStartInfo processStartInfo, [NotNullWhen(true)]out Application? result)
         {
             return TryAttach(processStartInfo, OnDispose.LeaveOpen, out result);
         }
@@ -348,7 +348,9 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(appUserModelId));
             }
 
+#pragma warning disable CS8604 // Possible null reference argument.
             var app = new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
+#pragma warning restore CS8604 // Possible null reference argument.
             if (onDispose == OnDispose.LeaveOpen)
             {
                 lock (Launched)
@@ -515,7 +517,9 @@ namespace Gu.Wpf.UiAutomation
                 this.processReference.Process.Kill();
                 this.processReference.Process.WaitForExit();
             }
+#pragma warning disable CA1031 // Do not catch general exception types, not sure what exceptions can happen here. Not very important.
             catch
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // NOOP
             }
@@ -634,7 +638,9 @@ namespace Gu.Wpf.UiAutomation
 
         private static string FindExeOrDefault(string exeFileName, string @default)
         {
-            string Create(string fileName)
+            return ExeNames.GetOrAdd(exeFileName, Create) ?? @default;
+
+            string? Create(string fileName)
             {
                 if (Path.GetExtension(fileName) != ".exe")
                 {
@@ -647,7 +653,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 var match = SafeDirectoryEnumeration.EnumerateFilesOpportunistic(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
-                                     .FirstOrDefault();
+                                                    .FirstOrDefault();
                 if (match != null)
                 {
                     return match;
@@ -682,8 +688,6 @@ namespace Gu.Wpf.UiAutomation
 
                 return null;
             }
-
-            return ExeNames.GetOrAdd(exeFileName, Create) ?? @default;
         }
 
         private void ThrowIfDisposed()

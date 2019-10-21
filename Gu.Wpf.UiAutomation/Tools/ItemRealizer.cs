@@ -24,7 +24,7 @@ namespace Gu.Wpf.UiAutomation
                 if (itemContainerElement.AutomationElement.TryGetItemContainerPattern(out var itemContainerPattern))
                 {
                     // There's the item container pattern so we can go thru all elements and just realize them
-                    AutomationElement currElement = null;
+                    AutomationElement? currElement = null;
                     while (true)
                     {
                         currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);

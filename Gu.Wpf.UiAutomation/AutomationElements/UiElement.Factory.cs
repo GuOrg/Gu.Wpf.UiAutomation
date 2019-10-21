@@ -81,7 +81,7 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Conditions.Window, e => new Window(e)),
         };
 
-        public static UiElement FromAutomationElementOrNull(AutomationElement element)
+        public static UiElement? FromAutomationElementOrNull(AutomationElement element)
         {
             if (element == null)
             {

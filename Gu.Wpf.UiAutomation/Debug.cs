@@ -78,14 +78,16 @@ namespace Gu.Wpf.UiAutomation
 
                 return stringBuilder.ToString();
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 Console.WriteLine("Failed to dump info: " + ex);
                 return string.Empty;
             }
         }
 
-        private static string GetXPathToElement(AutomationElement element, TreeWalker treeWalker, UiElement rootElement = null)
+        private static string GetXPathToElement(AutomationElement element, TreeWalker treeWalker, UiElement? rootElement = null)
         {
             var parent = treeWalker.GetParent(element);
             if (parent == null ||
@@ -104,7 +106,7 @@ namespace Gu.Wpf.UiAutomation
                 var indexInParent = 1; // Index starts with 1
                 foreach (var child in allChildren)
                 {
-                    if (child.Equals(element))
+                    if (element.Equals(child))
                     {
                         break;
                     }
@@ -148,7 +150,7 @@ namespace Gu.Wpf.UiAutomation
             var availablePatterns = uiElement.GetSupportedPatterns();
             foreach (var automationPattern in availablePatterns)
             {
-                WriteWithPadding(stringBuilder, automationPattern.ToString(), displayPadding);
+                WriteWithPadding(stringBuilder, automationPattern.ToString()!, displayPadding);
             }
 
             stringBuilder.AppendLine();

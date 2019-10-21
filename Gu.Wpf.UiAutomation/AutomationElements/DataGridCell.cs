@@ -129,8 +129,12 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public void Enter(string value, TimeSpan? delay = null)
         {
-            if (value != null &&
-                value.Contains('\n'))
+            if (value is null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if (value.Contains('\n'))
             {
                 throw new NotSupportedException("Only single line allowed for now.");
             }

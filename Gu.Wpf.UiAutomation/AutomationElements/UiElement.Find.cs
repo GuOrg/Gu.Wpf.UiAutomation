@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
     using System.Windows.Automation;
@@ -492,17 +493,32 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds all elements in the given tree scope and with the given condition within the given timeout.
         /// </summary>
-        public bool TryFindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
+        public bool TryFindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, [NotNullWhen(true)]out IReadOnlyList<UiElement>? result)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             return this.TryFindAll(treeScope, condition, FromAutomationElement, timeOut, out result);
         }
 
         /// <summary>
         /// Finds all elements in the given tree scope and with the given condition within the given timeout.
         /// </summary>
-        public bool TryFindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out IReadOnlyList<T> result)
+        public bool TryFindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, [NotNullWhen(true)]out IReadOnlyList<T>? result)
             where T : UiElement
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             result = null;
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
@@ -525,6 +541,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             return this.FindFirst(treeScope, condition, Retry.Time);
         }
 
@@ -534,6 +555,16 @@ namespace Gu.Wpf.UiAutomation
         public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             return this.FindFirst(treeScope, condition, wrap, Retry.Time);
         }
 
@@ -542,6 +573,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             if (this.TryFindFirst(treeScope, condition, timeOut, out var result))
             {
                 return result;
@@ -553,8 +589,13 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out UiElement result)
+        public bool TryFindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, [NotNullWhen(true)]out UiElement? result)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             result = null;
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
@@ -577,6 +618,16 @@ namespace Gu.Wpf.UiAutomation
         public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             if (this.TryFindFirst(treeScope, condition, wrap, timeOut, out var result))
             {
                 return result;
@@ -588,10 +639,15 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
+        public bool TryFindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, [NotNullWhen(true)]out T? result)
             where T : UiElement
         {
-            if (wrap == null)
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
+            if (wrap is null)
             {
                 throw new ArgumentNullException(nameof(wrap));
             }
@@ -618,6 +674,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public UiElement FindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             if (this.TryFindAt(treeScope, condition, index, timeOut, out var result))
             {
                 return result;
@@ -629,8 +690,13 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut, out UiElement result)
+        public bool TryFindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut, [NotNullWhen(true)]out UiElement? result)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             result = null;
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
@@ -653,6 +719,16 @@ namespace Gu.Wpf.UiAutomation
         public T FindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
         {
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             if (this.TryFindAt(treeScope, condition, index, wrap, timeOut, out var result))
             {
                 return result;
@@ -664,7 +740,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
-        public bool TryFindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
+        public bool TryFindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, [NotNullWhen(true)] out T? result)
             where T : UiElement
         {
             if (condition is null)
@@ -798,7 +874,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds the first element by looping thru all conditions.
         /// </summary>
-        public UiElement FindFirstNested(params System.Windows.Automation.Condition[] nestedConditions)
+        public UiElement? FindFirstNested(params System.Windows.Automation.Condition[] nestedConditions)
         {
             var currentElement = this;
             foreach (var condition in nestedConditions)

@@ -260,7 +260,7 @@ namespace Gu.Wpf.UiAutomation
                 case var c when c == Condition.FalseCondition:
                     return "Condition.FalseCondition";
                 default:
-                    return condition.ToString();
+                    return condition.ToString()!;
             }
         }
 

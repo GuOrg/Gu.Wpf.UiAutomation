@@ -19,6 +19,11 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A string representing the automation tree of <paramref name="element"/>.</returns>
         public static string Recursive(UiElement element, bool allPropertiesAndPatterns = false)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return Recursive(element.AutomationElement, allPropertiesAndPatterns);
         }
 
@@ -30,6 +35,11 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>A string representing the automation tree of <paramref name="element"/>.</returns>
         public static string Recursive(AutomationElement element, bool allPropertiesAndPatterns = false)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             var builder = new StringBuilder();
             using (var writer = new IndentedTextWriter(new StringWriter(builder)))
             {
@@ -60,10 +70,9 @@ namespace Gu.Wpf.UiAutomation
                     writer.WriteLine(pattern.ProgrammaticName);
                     var currentPattern = element.GetCurrentPattern(pattern);
                     writer.WriteLine(currentPattern);
-                    var currentProperty = currentPattern.GetType().GetProperty("Current");
-                    if (currentProperty != null)
+                    if (currentPattern.GetType().GetProperty("Current") is { } currentProperty &&
+                         currentProperty.GetValue(currentPattern) is { } value)
                     {
-                        var value = currentProperty.GetValue(currentPattern);
                         foreach (var property in value.GetType().GetProperties())
                         {
                             writer.WriteLine($"{property.Name} {property.GetValue(value)}");
