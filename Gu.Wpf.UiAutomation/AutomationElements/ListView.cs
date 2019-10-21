@@ -54,7 +54,21 @@ namespace Gu.Wpf.UiAutomation
 
         public TablePattern TablePattern => this.AutomationElement.TablePattern();
 
-        public GridViewCell this[int row, int col] => (GridViewCell)FromAutomationElement(this.GridPattern.GetItem(row, col));
+        public GridViewCell this[int row, int col]
+        {
+            get
+            {
+                return (GridViewCell)FromAutomationElement(this.GridPattern.GetItem(row, col) ?? GetItem());
+
+                AutomationElement GetItem()
+                {
+                    // work around for bug introduced in the framework.
+                    // GetItem started returning null
+                    _ = this.AutomationElement.FindFirst(TreeScope.Children, Conditions.TrueCondition);
+                    return this.GridPattern.GetItem(row, col);
+                }
+            }
+        }
 
         public ListViewItem Row(int row) => (ListViewItem)FromAutomationElement(this.GridPattern.GetItem(row, 0).Parent());
 
