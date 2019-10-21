@@ -74,7 +74,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
         {
             using (var startedEvent = new ManualResetEventSlim(initialState: false))
             {
-                Dispatcher dispatcher = null;
+                Dispatcher? dispatcher = null;
                 var uiThread = new Thread(() =>
                 {
                     // Create and install a new dispatcher context
@@ -98,7 +98,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
                 // Start the thread
                 uiThread.Start();
                 startedEvent.Wait();
-                dispatcher.Invoke(action);
+                dispatcher!.Invoke(action);
                 dispatcher.InvokeShutdown();
                 _ = uiThread.Join(1000);
             }

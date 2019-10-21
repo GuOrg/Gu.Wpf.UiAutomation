@@ -10,8 +10,13 @@ namespace Gu.Wpf.UiAutomation
         /// Gets the XPath to the element until the desktop or the given root element.
         /// Warning: This is quite a heavy operation.
         /// </summary>
-        public static string GetXPathToElement(UiElement element, UiElement rootElement = null)
+        public static string GetXPathToElement(UiElement element, UiElement? rootElement = null)
         {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             return GetXPathToElement(element.AutomationElement, TreeWalker.ControlViewWalker, rootElement);
         }
 

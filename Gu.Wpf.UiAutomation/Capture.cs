@@ -62,6 +62,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static Bitmap Element(UiElement element)
         {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
             return Rectangle(element.Bounds);
         }
 
@@ -71,6 +76,16 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ElementToFile(UiElement element, string filePath)
         {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             using (var bmp = Rectangle(element.Bounds))
             {
                 bmp.Save(filePath, ImageFormat.Png);
@@ -123,6 +138,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static BitmapImage ToWpf(this Bitmap bitmap)
         {
+            if (bitmap is null)
+            {
+                throw new ArgumentNullException(nameof(bitmap));
+            }
+
             using (var memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Png);

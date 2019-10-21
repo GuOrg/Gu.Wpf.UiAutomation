@@ -6,8 +6,13 @@ namespace Gu.Wpf.UiAutomation
 
     public static class ItemContainerPatternExt
     {
-        public static AutomationElement FirstOrDefault(this ItemContainerPattern pattern)
+        public static AutomationElement? FirstOrDefault(this ItemContainerPattern pattern)
         {
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
             var item = pattern.FindItemByProperty(null, null, null);
             if (item != null &&
                 item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
@@ -18,8 +23,13 @@ namespace Gu.Wpf.UiAutomation
             return item;
         }
 
-        public static AutomationElement LastOrDefault(this ItemContainerPattern pattern)
+        public static AutomationElement? LastOrDefault(this ItemContainerPattern pattern)
         {
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
             var item = pattern.FindItemByProperty(null, null, null);
             if (item == null)
             {
@@ -45,7 +55,12 @@ namespace Gu.Wpf.UiAutomation
 
         public static IEnumerable<AutomationElement> AllItems(this ItemContainerPattern pattern)
         {
-            AutomationElement item = null;
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
+            AutomationElement? item = null;
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
@@ -65,7 +80,17 @@ namespace Gu.Wpf.UiAutomation
 
         public static IEnumerable<T> AllItems<T>(this ItemContainerPattern pattern, Func<AutomationElement, T> wrap)
         {
-            AutomationElement item = null;
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
+            AutomationElement? item = null;
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
@@ -85,8 +110,13 @@ namespace Gu.Wpf.UiAutomation
 
         public static AutomationElement FindAtIndex(this ItemContainerPattern pattern, int index)
         {
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
             var current = 0;
-            AutomationElement item = null;
+            AutomationElement? item = null;
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
@@ -111,11 +141,31 @@ namespace Gu.Wpf.UiAutomation
 
         public static T FindAtIndex<T>(this ItemContainerPattern pattern, int index, Func<AutomationElement, T> wrap)
         {
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             return wrap(FindAtIndex(pattern, index));
         }
 
         public static AutomationElement FindByText(this ItemContainerPattern pattern, string text)
         {
+            if (pattern is null)
+            {
+                throw new ArgumentNullException(nameof(pattern));
+            }
+
+            if (text is null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             var item = pattern.FindItemByProperty(null, AutomationElement.NameProperty, text);
             if (item != null)
             {

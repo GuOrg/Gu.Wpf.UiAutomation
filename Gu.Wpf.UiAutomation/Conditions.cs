@@ -231,6 +231,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static string Description(this Condition condition)
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
             switch (condition)
             {
                 case PropertyCondition propertyCondition:

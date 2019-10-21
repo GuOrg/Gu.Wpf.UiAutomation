@@ -93,9 +93,19 @@ namespace Gu.Wpf.UiAutomation
 
         public static void Show(Bitmap expected, Bitmap actual)
         {
+            if (expected is null)
+            {
+                throw new System.ArgumentNullException(nameof(expected));
+            }
+
+            if (actual is null)
+            {
+                throw new System.ArgumentNullException(nameof(actual));
+            }
+
             using (var startedEvent = new ManualResetEventSlim(initialState: false))
             {
-                System.Windows.Threading.Dispatcher dispatcher = null;
+                System.Windows.Threading.Dispatcher? dispatcher = null;
                 var uiThread = new Thread(() =>
                 {
                     // Create and install a new dispatcher context
@@ -119,7 +129,7 @@ namespace Gu.Wpf.UiAutomation
                 // Start the thread
                 uiThread.Start();
                 startedEvent.Wait();
-                dispatcher.Invoke(() =>
+                dispatcher!.Invoke(() =>
                 {
                     var window = new ImageDiffWindow(expected, actual);
                     _ = window.ShowDialog();
@@ -232,13 +242,15 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+#pragma warning disable CA1034 // Nested types should not be visible
         public class ImageDiffViewModel : INotifyPropertyChanged
+#pragma warning restore CA1034 // Nested types should not be visible
         {
             private bool expected;
             private bool actual;
             private bool both = true;
 
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public bool Expected
             {

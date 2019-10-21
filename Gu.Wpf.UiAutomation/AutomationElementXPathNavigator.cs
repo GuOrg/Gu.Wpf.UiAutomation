@@ -20,7 +20,7 @@ namespace Gu.Wpf.UiAutomation
         public AutomationElementXPathNavigator(UiElement rootElement)
         {
             this.treeWalker = TreeWalker.ControlViewWalker;
-            this.rootElement = rootElement;
+            this.rootElement = rootElement ?? throw new ArgumentNullException(nameof(rootElement));
             this.currentElement = rootElement.AutomationElement;
         }
 

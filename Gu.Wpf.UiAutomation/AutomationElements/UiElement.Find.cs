@@ -667,6 +667,16 @@ namespace Gu.Wpf.UiAutomation
         public bool TryFindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
         {
+            if (condition is null)
+            {
+                throw new ArgumentNullException(nameof(condition));
+            }
+
+            if (wrap is null)
+            {
+                throw new ArgumentNullException(nameof(wrap));
+            }
+
             result = null;
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, timeOut))
@@ -806,7 +816,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds all elements by looping thru all conditions.
         /// </summary>
-        public IReadOnlyList<UiElement> FindAllNested(params System.Windows.Automation.Condition[] nestedConditions)
+        public IReadOnlyList<UiElement>? FindAllNested(params System.Windows.Automation.Condition[] nestedConditions)
         {
             var currentElement = this;
             for (var i = 0; i < nestedConditions.Length - 1; i++)
@@ -825,11 +835,11 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Finds for the first item which matches the given xpath.
         /// </summary>
-        public UiElement FindFirstByXPath(string xPath)
+        public UiElement? FindFirstByXPath(string xPath)
         {
             var xPathNavigator = new AutomationElementXPathNavigator(this);
             var nodeItem = xPathNavigator.SelectSingleNode(xPath);
-            return (UiElement)nodeItem?.UnderlyingObject;
+            return (UiElement?)nodeItem?.UnderlyingObject;
         }
 
         /// <summary>
