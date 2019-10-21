@@ -37,6 +37,8 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using (var app = StartApplication())
             {
+                // Looks like it can take a long time on CI
+                app.WaitForMainWindow(TimeSpan.FromSeconds(30));
                 var window = app.MainWindow;
                 var calc = WindowsVersion.IsWindows10()
                     ? (ICalculator)new Win10Calc(window)
@@ -44,11 +46,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 Wait.For(TimeSpan.FromMilliseconds(200));
 
                 // Switch to default mode
-                using (Keyboard.Hold(Key.ALT))
-                {
-                    Keyboard.Hold(Key.KEY_1).Dispose();
-                }
-
+                Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
                 window.WaitUntilResponsive();
 
                 // Simple addition
