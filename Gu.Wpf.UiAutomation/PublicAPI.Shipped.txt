@@ -26,6 +26,10 @@ Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.AutomationElementXPathNavigator(Gu.Wpf.UiAutomation.UiElement rootElement) -> void
 Gu.Wpf.UiAutomation.Button
@@ -207,6 +211,18 @@ Gu.Wpf.UiAutomation.HorizontalScrollBar
 Gu.Wpf.UiAutomation.HorizontalScrollBar.HorizontalScrollBar(System.Windows.Automation.AutomationElement automationElement) -> void
 Gu.Wpf.UiAutomation.ImageAssert
 Gu.Wpf.UiAutomation.ImageDiffWindow
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Actual.get -> bool
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Actual.set -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.ActualVisibility.get -> System.Windows.Visibility
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Both.get -> bool
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Both.set -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Expected.get -> bool
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Expected.set -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.ExpectedVisibility.get -> System.Windows.Visibility
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.ImageDiffViewModel() -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Opacity.get -> double
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler
 Gu.Wpf.UiAutomation.Interpolation
 Gu.Wpf.UiAutomation.Interpolation.TryGetPosition(out Gu.Wpf.UiAutomation.WindowsAPI.POINT position) -> bool
 Gu.Wpf.UiAutomation.InvokeControl
@@ -699,6 +715,9 @@ Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Exception
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message, System.Exception innerException) -> void
+Gu.Wpf.UiAutomation.UiElement
+Gu.Wpf.UiAutomation.UiElement
+Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.ActualHeight.get -> double
 Gu.Wpf.UiAutomation.UiElement.ActualWidth.get -> double
@@ -2192,6 +2211,7 @@ virtual Gu.Wpf.UiAutomation.HorizontalScrollBar.ScrollLeft() -> void
 virtual Gu.Wpf.UiAutomation.HorizontalScrollBar.ScrollLeftLarge() -> void
 virtual Gu.Wpf.UiAutomation.HorizontalScrollBar.ScrollRight() -> void
 virtual Gu.Wpf.UiAutomation.HorizontalScrollBar.ScrollRightLarge() -> void
+virtual Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.OnPropertyChanged(string propertyName = null) -> void
 virtual Gu.Wpf.UiAutomation.ListView.RowCount.get -> int
 virtual Gu.Wpf.UiAutomation.Selector<TItem>.Items.get -> System.Collections.Generic.IReadOnlyList<TItem>
 virtual Gu.Wpf.UiAutomation.TabItem.Content.get -> Gu.Wpf.UiAutomation.UiElement
