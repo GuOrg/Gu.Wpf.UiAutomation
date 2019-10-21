@@ -35,6 +35,11 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void CalculatorTest()
         {
+            if (WindowsVersion.IsAppVeyor())
+            {
+                return;
+            }
+
             using (var app = StartApplication())
             {
                 // Looks like it can take a long time on CI
