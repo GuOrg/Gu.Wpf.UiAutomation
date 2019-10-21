@@ -44,7 +44,11 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 Wait.For(TimeSpan.FromMilliseconds(200));
 
                 // Switch to default mode
-                Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
+                using (Keyboard.Hold(Key.ALT))
+                {
+                    Keyboard.Hold(Key.KEY_1).Dispose();
+                }
+
                 window.WaitUntilResponsive();
 
                 // Simple addition
