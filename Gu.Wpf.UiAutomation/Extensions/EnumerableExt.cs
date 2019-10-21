@@ -2,12 +2,13 @@ namespace Gu.Wpf.UiAutomation
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     public static class EnumerableExt
     {
-        public static bool TryGetSingle<T>(this IEnumerable<T> source, out T result)
+        public static bool TryGetSingle<T>(this IEnumerable<T> source, [MaybeNull]out T result)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -31,14 +32,14 @@ namespace Gu.Wpf.UiAutomation
             return false;
         }
 
-        public static bool TryGetSingle<T>(this IEnumerable<T> source, Func<T, bool> predicate, out T result)
+        public static bool TryGetSingle<T>(this IEnumerable<T> source, Func<T, bool> predicate, [MaybeNull]out T result)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (predicate == null)
+            if (predicate is null)
             {
                 throw new ArgumentNullException(nameof(predicate));
             }

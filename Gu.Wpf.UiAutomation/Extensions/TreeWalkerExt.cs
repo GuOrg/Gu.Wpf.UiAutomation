@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation
+namespace Gu.Wpf.UiAutomation
 {
     using System.Collections.Generic;
     using System.Windows.Automation;
@@ -7,6 +7,16 @@
     {
         public static IEnumerable<AutomationElement> Ancestors(this TreeWalker walker, AutomationElement element)
         {
+            if (walker is null)
+            {
+                throw new System.ArgumentNullException(nameof(walker));
+            }
+
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             var parent = walker.GetParent(element);
             while (parent != null)
             {
@@ -17,6 +27,16 @@
 
         public static IEnumerable<AutomationElement> Children(this TreeWalker walker, AutomationElement element)
         {
+            if (walker is null)
+            {
+                throw new System.ArgumentNullException(nameof(walker));
+            }
+
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             var child = walker.GetFirstChild(element);
             while (child != null)
             {
@@ -27,6 +47,16 @@
 
         public static IEnumerable<AutomationElement> Descendants(this TreeWalker walker, AutomationElement element)
         {
+            if (walker is null)
+            {
+                throw new System.ArgumentNullException(nameof(walker));
+            }
+
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             foreach (var child in Children(walker, element))
             {
                 yield return child;

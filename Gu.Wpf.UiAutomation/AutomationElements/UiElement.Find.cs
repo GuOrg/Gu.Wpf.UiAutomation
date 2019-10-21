@@ -17,7 +17,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Button"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Button FindButton(string name = null) => this.FindFirst(
+        public Button FindButton(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Button, name),
             x => new Button(x),
@@ -27,7 +27,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Calendar"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Calendar FindCalendar(string name = null) => this.FindFirst(
+        public Calendar FindCalendar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Calendar, name),
             x => new Calendar(x),
@@ -37,7 +37,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="CalendarDayButton"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public CalendarDayButton FindCalendarDayButton(string name = null) => this.FindFirst(
+        public CalendarDayButton FindCalendarDayButton(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.CalendarDayButton, name),
             x => new CalendarDayButton(x),
@@ -47,7 +47,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="CheckBox"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public CheckBox FindCheckBox(string name = null) => this.FindFirst(
+        public CheckBox FindCheckBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.CheckBox, name),
             x => new CheckBox(x),
@@ -57,7 +57,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ComboBox"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ComboBox FindComboBox(string name = null) => this.FindFirst(
+        public ComboBox FindComboBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ComboBox, name),
             x => new ComboBox(x),
@@ -67,7 +67,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="DataGrid"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public DataGrid FindDataGrid(string name = null) => this.FindFirst(
+        public DataGrid FindDataGrid(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.DataGrid, name),
             x => new DataGrid(x),
@@ -77,7 +77,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="DatePicker"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public DatePicker FindDatePicker(string name = null) => this.FindFirst(
+        public DatePicker FindDatePicker(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.DatePicker, name),
             x => new DatePicker(x),
@@ -87,7 +87,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Frame"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Frame FindFrame(string name = null) => this.FindFirst(
+        public Frame FindFrame(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Frame, name),
             x => new Frame(x),
@@ -97,7 +97,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Label"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Label FindLabel(string name = null) => this.FindFirst(
+        public Label FindLabel(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Label, name),
             x => new Label(x),
@@ -107,7 +107,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="GridSplitter"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public GridSplitter FindGridSplitter(string name = null) => this.FindFirst(
+        public GridSplitter FindGridSplitter(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.GridSplitter, name),
             x => new GridSplitter(x),
@@ -117,7 +117,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="GroupBox"/> box by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public GroupBox FindGroupBox(string name = null) => this.FindFirst(
+        public GroupBox FindGroupBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.GroupBox, name),
             x => new GroupBox(x),
@@ -127,7 +127,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Expander"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Expander FindExpander(string name = null) => this.FindFirst(
+        public Expander FindExpander(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Expander, name),
             x => new Expander(x),
@@ -137,7 +137,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Menu"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Menu FindMenu(string name = null) => this.FindFirst(
+        public Menu FindMenu(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Menu, name),
             x => new Menu(x),
@@ -147,7 +147,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="MenuItem"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public MenuItem FindMenuItem(string name = null) => this.FindFirst(
+        public MenuItem FindMenuItem(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.MenuItem, name),
             x => new MenuItem(x),
@@ -157,7 +157,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="HorizontalScrollBar"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public HorizontalScrollBar FindHorizontalScrollBar(string name = null) => this.FindFirst(
+        public HorizontalScrollBar FindHorizontalScrollBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.HorizontalScrollBar, name),
             x => new HorizontalScrollBar(x),
@@ -167,7 +167,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="VerticalScrollBar"/> bar by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public VerticalScrollBar FindVerticalScrollBar(string name = null) => this.FindFirst(
+        public VerticalScrollBar FindVerticalScrollBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.VerticalScrollBar, name),
             x => new VerticalScrollBar(x),
@@ -177,7 +177,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ListBox"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ListBox FindListBox(string name = null) => this.FindFirst(
+        public ListBox FindListBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ListBox, name),
             x => new ListBox(x),
@@ -187,7 +187,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ListView"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ListView FindListView(string name = null) => this.FindFirst(
+        public ListView FindListView(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ListView, name),
             x => new ListView(x),
@@ -197,7 +197,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="OpenFileDialog"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public OpenFileDialog FindOpenFileDialog(string name = null) => this.FindFirst(
+        public OpenFileDialog FindOpenFileDialog(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.OpenFileDialog, name),
             x => new OpenFileDialog(x),
@@ -207,7 +207,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="PasswordBox"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public PasswordBox FindPasswordBox(string name = null) => this.FindFirst(
+        public PasswordBox FindPasswordBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.PasswordBox, name),
             x => new PasswordBox(x),
@@ -217,7 +217,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="RichTextBox"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public RichTextBox FindRichTextBox(string name = null) => this.FindFirst(
+        public RichTextBox FindRichTextBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.RichTextBox, name),
             x => new RichTextBox(x),
@@ -227,7 +227,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ProgressBar"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ProgressBar FindProgressBar(string name = null) => this.FindFirst(
+        public ProgressBar FindProgressBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ProgressBar, name),
             x => new ProgressBar(x),
@@ -237,7 +237,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="RadioButton"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public RadioButton FindRadioButton(string name) => this.FindFirst(
+        public RadioButton FindRadioButton(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.RadioButton, name),
             x => new RadioButton(x),
@@ -247,7 +247,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="RepeatButton"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public RepeatButton FindRepeatButton(string name) => this.FindFirst(
+        public RepeatButton FindRepeatButton(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.RepeatButton, name),
             x => new RepeatButton(x),
@@ -257,7 +257,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="SaveFileDialog"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public SaveFileDialog FindSaveFileDialog(string name = null) => this.FindFirst(
+        public SaveFileDialog FindSaveFileDialog(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.SaveFileDialog, name),
             x => new SaveFileDialog(x),
@@ -267,7 +267,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Separator"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Separator FindSeparator(string name = null) => this.FindFirst(
+        public Separator FindSeparator(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Separator, name),
             x => new Separator(x),
@@ -277,7 +277,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="Slider"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public Slider FindSlider(string name = null) => this.FindFirst(
+        public Slider FindSlider(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.Slider, name),
             x => new Slider(x),
@@ -287,7 +287,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ScrollViewer"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ScrollViewer FindScrollViewer(string name = null) => this.FindFirst(
+        public ScrollViewer FindScrollViewer(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ScrollViewer, name),
             x => new ScrollViewer(x),
@@ -297,7 +297,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TextBlock"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TextBlock FindTextBlock(string name = null) => this.FindFirst(
+        public TextBlock FindTextBlock(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TextBlock, name),
             x => new TextBlock(x),
@@ -307,7 +307,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TextBox"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TextBox FindTextBox(string name = null) => this.FindFirst(
+        public TextBox FindTextBox(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TextBox, name),
             x => new TextBox(x),
@@ -317,7 +317,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TextBoxBase"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TextBoxBase FindTextBoxBase(string name = null) => this.FindFirst(
+        public TextBoxBase FindTextBoxBase(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TextBoxBase, name),
             x => new TextBoxBase(x),
@@ -327,7 +327,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ToggleButton"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ToggleButton FindToggleButton(string name = null) => this.FindFirst(
+        public ToggleButton FindToggleButton(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ToggleButton, name),
             x => new ToggleButton(x),
@@ -337,7 +337,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TabControl"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TabControl FindTabControl(string name = null) => this.FindFirst(
+        public TabControl FindTabControl(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TabControl, name),
             x => new TabControl(x),
@@ -347,7 +347,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TitleBar"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TitleBar FindTitleBar(string name = null) => this.FindFirst(
+        public TitleBar FindTitleBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TitleBar, name),
             x => new TitleBar(x),
@@ -357,7 +357,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="ToolBar"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public ToolBar FindToolBar(string name = null) => this.FindFirst(
+        public ToolBar FindToolBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.ToolBar, name),
             x => new ToolBar(x),
@@ -367,7 +367,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="TreeView"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public TreeView FindTreeView(string name = null) => this.FindFirst(
+        public TreeView FindTreeView(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.TreeView, name),
             x => new TreeView(x),
@@ -377,7 +377,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="UserControl"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public UserControl FindUserControl(string name = null) => this.FindFirst(
+        public UserControl FindUserControl(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.UserControl, name),
             x => new UserControl(x),
@@ -387,7 +387,7 @@ namespace Gu.Wpf.UiAutomation
         /// Find the first <see cref="StatusBar"/> by x:Name, Header or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>
-        public StatusBar FindStatusBar(string name = null) => this.FindFirst(
+        public StatusBar FindStatusBar(string? name = null) => this.FindFirst(
             TreeScope.Descendants,
             this.CreateCondition(Conditions.StatusBar, name),
             x => new StatusBar(x),
@@ -460,7 +460,7 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition.
+        /// Finds all elements in the given tree scope and with the given condition.
         /// </summary>
         public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
@@ -468,7 +468,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition.
+        /// Finds all elements in the given tree scope and with the given condition.
         /// </summary>
         public IReadOnlyList<T> FindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
@@ -477,7 +477,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition within the given timeout.
+        /// Finds all elements in the given tree scope and with the given condition within the given timeout.
         /// </summary>
         public IReadOnlyList<UiElement> FindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut)
         {
@@ -490,7 +490,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition within the given timeout.
+        /// Finds all elements in the given tree scope and with the given condition within the given timeout.
         /// </summary>
         public bool TryFindAll(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out IReadOnlyList<UiElement> result)
         {
@@ -498,7 +498,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds all elements in the given treescope and with the given condition within the given timeout.
+        /// Finds all elements in the given tree scope and with the given condition within the given timeout.
         /// </summary>
         public bool TryFindAll<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out IReadOnlyList<T> result)
             where T : UiElement
@@ -521,7 +521,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition.
+        /// Finds the first element which is in the given tree scope with the given condition.
         /// </summary>
         public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition)
         {
@@ -529,7 +529,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition.
+        /// Finds the first element which is in the given tree scope with the given condition.
         /// </summary>
         public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap)
             where T : UiElement
@@ -538,7 +538,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public UiElement FindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut)
         {
@@ -551,7 +551,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public bool TryFindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, out UiElement result)
         {
@@ -572,7 +572,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public T FindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
@@ -586,7 +586,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public bool TryFindFirst<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
@@ -614,7 +614,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public UiElement FindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut)
         {
@@ -627,7 +627,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public bool TryFindAt(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, TimeSpan timeOut, out UiElement result)
         {
@@ -648,7 +648,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public T FindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut)
             where T : UiElement
@@ -662,7 +662,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Finds the first element which is in the given treescope with the given condition within the given timeout period.
+        /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public bool TryFindAt<T>(TreeScope treeScope, System.Windows.Automation.Condition condition, int index, Func<AutomationElement, T> wrap, TimeSpan timeOut, out T result)
             where T : UiElement
@@ -860,7 +860,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
 #pragma warning disable CA1822
-        public System.Windows.Automation.Condition CreateCondition(System.Windows.Automation.Condition controlTypeCondition, string name)
+        public System.Windows.Automation.Condition CreateCondition(System.Windows.Automation.Condition controlTypeCondition, string? name)
 #pragma warning restore CA1822
         {
             if (name == null)

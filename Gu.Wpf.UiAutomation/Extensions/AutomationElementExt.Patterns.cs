@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support DockPattern");
         }
 
-        public static bool TryGetDockPattern(this AutomationElement element, out DockPattern? result)
+        public static bool TryGetDockPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out DockPattern? result)
         {
             if (element is null)
             {
@@ -51,7 +51,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support ExpandCollapsePattern");
         }
 
-        public static bool TryGetExpandCollapsePattern(this AutomationElement element, out ExpandCollapsePattern? result)
+        public static bool TryGetExpandCollapsePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out ExpandCollapsePattern? result)
         {
             if (element is null)
             {
@@ -83,7 +83,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support GridItemPattern");
         }
 
-        public static bool TryGetGridItemPattern(this AutomationElement element, out GridItemPattern? result)
+        public static bool TryGetGridItemPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out GridItemPattern? result)
         {
             if (element is null)
             {
@@ -115,7 +115,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support GridPattern");
         }
 
-        public static bool TryGetGridPattern(this AutomationElement element, out GridPattern? result)
+        public static bool TryGetGridPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out GridPattern? result)
         {
             if (element is null)
             {
@@ -147,7 +147,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support InvokePattern");
         }
 
-        public static bool TryGetInvokePattern(this AutomationElement element, out InvokePattern? result)
+        public static bool TryGetInvokePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out InvokePattern? result)
         {
             if (element is null)
             {
@@ -179,7 +179,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support MultipleViewPattern");
         }
 
-        public static bool TryGetMultipleViewPattern(this AutomationElement element, out MultipleViewPattern? result)
+        public static bool TryGetMultipleViewPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out MultipleViewPattern? result)
         {
             if (element is null)
             {
@@ -211,7 +211,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support RangeValuePattern");
         }
 
-        public static bool TryGetRangeValuePattern(this AutomationElement element, out RangeValuePattern? result)
+        public static bool TryGetRangeValuePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out RangeValuePattern? result)
         {
             if (element is null)
             {
@@ -243,7 +243,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support ScrollPattern");
         }
 
-        public static bool TryGetScrollPattern(this AutomationElement element, out ScrollPattern? result)
+        public static bool TryGetScrollPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out ScrollPattern? result)
         {
             if (element is null)
             {
@@ -275,7 +275,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support ScrollItemPattern");
         }
 
-        public static bool TryGetScrollItemPattern(this AutomationElement element, out ScrollItemPattern? result)
+        public static bool TryGetScrollItemPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out ScrollItemPattern? result)
         {
             if (element is null)
             {
@@ -307,7 +307,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support SelectionPattern");
         }
 
-        public static bool TryGetSelectionPattern(this AutomationElement element, out SelectionPattern? result)
+        public static bool TryGetSelectionPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out SelectionPattern? result)
         {
             if (element is null)
             {
@@ -339,7 +339,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support SelectionItemPattern");
         }
 
-        public static bool TryGetSelectionItemPattern(this AutomationElement element, out SelectionItemPattern? result)
+        public static bool TryGetSelectionItemPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out SelectionItemPattern? result)
         {
             if (element is null)
             {
@@ -371,7 +371,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support SynchronizedInputPattern");
         }
 
-        public static bool TryGetSynchronizedInputPattern(this AutomationElement element, out SynchronizedInputPattern? result)
+        public static bool TryGetSynchronizedInputPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out SynchronizedInputPattern? result)
         {
             if (element is null)
             {
@@ -403,7 +403,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support TableItemPattern");
         }
 
-        public static bool TryGetTableItemPattern(this AutomationElement element, out TableItemPattern? result)
+        public static bool TryGetTableItemPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out TableItemPattern? result)
         {
             if (element is null)
             {
@@ -435,7 +435,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support TablePattern");
         }
 
-        public static bool TryGetTablePattern(this AutomationElement element, out TablePattern? result)
+        public static bool TryGetTablePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out TablePattern? result)
         {
             if (element is null)
             {
@@ -462,7 +462,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support TextPattern");
         }
 
-        public static bool TryGetTextPattern(this AutomationElement element, out TextPattern? result)
+        public static bool TryGetTextPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out TextPattern? result)
         {
             if (element is null)
             {
@@ -494,7 +494,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support TransformPattern");
         }
 
-        public static bool TryGetTransformPattern(this AutomationElement element, out TransformPattern? result)
+        public static bool TryGetTransformPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out TransformPattern? result)
         {
             if (element is null)
             {
@@ -521,7 +521,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support TogglePattern");
         }
 
-        public static bool TryGetTogglePattern(this AutomationElement element, out TogglePattern? result)
+        public static bool TryGetTogglePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out TogglePattern? result)
         {
             if (element is null)
             {
@@ -553,7 +553,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support ValuePattern");
         }
 
-        public static bool TryGetValuePattern(this AutomationElement element, out ValuePattern? result)
+        public static bool TryGetValuePattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out ValuePattern? result)
         {
             if (element is null)
             {
@@ -585,7 +585,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support WindowPattern");
         }
 
-        public static bool TryGetWindowPattern(this AutomationElement element, out WindowPattern? result)
+        public static bool TryGetWindowPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out WindowPattern? result)
         {
             if (element is null)
             {
@@ -617,7 +617,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support VirtualizedItemPattern");
         }
 
-        public static bool TryGetVirtualizedItemPattern(this AutomationElement element, out VirtualizedItemPattern? result)
+        public static bool TryGetVirtualizedItemPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out VirtualizedItemPattern? result)
         {
             if (element is null)
             {
@@ -649,7 +649,7 @@ namespace Gu.Wpf.UiAutomation
             throw new System.NotSupportedException($"The element {element} does not support ItemContainerPattern");
         }
 
-        public static bool TryGetItemContainerPattern(this AutomationElement element, out ItemContainerPattern? result)
+        public static bool TryGetItemContainerPattern(this AutomationElement element, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out ItemContainerPattern? result)
         {
             if (element is null)
             {

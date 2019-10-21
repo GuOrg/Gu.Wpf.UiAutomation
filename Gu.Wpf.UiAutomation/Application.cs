@@ -4,6 +4,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -184,7 +185,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, out Application result)
+        public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
             if (processStartInfo == null)
             {
@@ -318,7 +319,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static Application Launch(ProcessStartInfo processStartInfo, OnDispose onDispose = OnDispose.KillProcess)
         {
-            if (processStartInfo == null)
+            if (processStartInfo is null)
             {
                 throw new ArgumentNullException(nameof(processStartInfo));
             }
@@ -340,8 +341,13 @@ namespace Gu.Wpf.UiAutomation
             return app;
         }
 
-        public static Application LaunchStoreApp(string appUserModelId, string arguments = null, OnDispose onDispose = OnDispose.KillProcess)
+        public static Application LaunchStoreApp(string appUserModelId, string? arguments = null, OnDispose onDispose = OnDispose.KillProcess)
         {
+            if (appUserModelId is null)
+            {
+                throw new ArgumentNullException(nameof(appUserModelId));
+            }
+
             var app = new Application(new ProcessReference(WindowsStoreAppLauncher.Launch(appUserModelId, arguments), onDispose), isStoreApp: true);
             if (onDispose == OnDispose.LeaveOpen)
             {

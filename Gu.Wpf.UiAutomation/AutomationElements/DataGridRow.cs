@@ -12,7 +12,7 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public DataGridRowHeader Header
+        public DataGridRowHeader? Header
         {
             get
             {

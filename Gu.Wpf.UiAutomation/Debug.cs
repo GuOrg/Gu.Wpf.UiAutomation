@@ -22,6 +22,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static string Details(UiElement uiElement)
         {
+            if (uiElement is null)
+            {
+                throw new ArgumentNullException(nameof(uiElement));
+            }
+
             try
             {
                 var stringBuilder = new StringBuilder();
