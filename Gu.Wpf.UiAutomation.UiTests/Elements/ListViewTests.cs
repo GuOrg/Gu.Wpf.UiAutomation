@@ -79,15 +79,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             }
         }
 
-        [Test]
-        public void Cell()
+        [TestCase(0, 0, "1")]
+        [TestCase(1, 0, "2")]
+        [TestCase(2, 0, "3")]
+        [TestCase(0, 1, "10")]
+        [TestCase(1, 1, "20")]
+        [TestCase(2, 1, "30")]
+        public void Cell(int row, int column, string expected)
         {
             using (var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow"))
             {
                 var window = app.MainWindow;
                 var listView = window.FindListView();
-                var cell = listView[0, 0];
+                var cell = listView[row, column];
                 Assert.IsInstanceOf<GridViewCell>(cell);
+                Assert.AreEqual(expected, cell.Text);
                 Assert.IsInstanceOf<GridViewCell>(UiElement.FromAutomationElement(cell.AutomationElement));
             }
         }
