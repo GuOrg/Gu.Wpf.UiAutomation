@@ -283,19 +283,14 @@ namespace Gu.Wpf.UiAutomation
 
         private static string GetAttributeName(int index)
         {
-            switch ((ElementAttributes)index)
+            return ((ElementAttributes)index) switch
             {
-                case ElementAttributes.AutomationId:
-                    return nameof(ElementAttributes.AutomationId);
-                case ElementAttributes.Name:
-                    return nameof(ElementAttributes.Name);
-                case ElementAttributes.ClassName:
-                    return nameof(ElementAttributes.ClassName);
-                case ElementAttributes.HelpText:
-                    return nameof(ElementAttributes.HelpText);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(index));
-            }
+                ElementAttributes.AutomationId => nameof(ElementAttributes.AutomationId),
+                ElementAttributes.Name => nameof(ElementAttributes.Name),
+                ElementAttributes.ClassName => nameof(ElementAttributes.ClassName),
+                ElementAttributes.HelpText => nameof(ElementAttributes.HelpText),
+                _ => throw new ArgumentOutOfRangeException(nameof(index)),
+            };
         }
 
         private static int GetAttributeIndexFromName(string attributeName)
@@ -310,19 +305,14 @@ namespace Gu.Wpf.UiAutomation
 
         private string GetAttributeValue(int index)
         {
-            switch ((ElementAttributes)index)
+            return ((ElementAttributes)index) switch
             {
-                case ElementAttributes.AutomationId:
-                    return this.currentElement.AutomationId();
-                case ElementAttributes.Name:
-                    return this.currentElement.Name();
-                case ElementAttributes.ClassName:
-                    return this.currentElement.ClassName();
-                case ElementAttributes.HelpText:
-                    return this.currentElement.HelpText();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(index));
-            }
+                ElementAttributes.AutomationId => this.currentElement.AutomationId(),
+                ElementAttributes.Name => this.currentElement.Name(),
+                ElementAttributes.ClassName => this.currentElement.ClassName(),
+                ElementAttributes.HelpText => this.currentElement.HelpText(),
+                _ => throw new ArgumentOutOfRangeException(nameof(index)),
+            };
         }
     }
 }

@@ -640,7 +640,7 @@ namespace Gu.Wpf.UiAutomation
         {
             return ExeNames.GetOrAdd(exeFileName, Create) ?? @default;
 
-            string? Create(string fileName)
+            static string? Create(string fileName)
             {
                 if (Path.GetExtension(fileName) != ".exe")
                 {

@@ -533,15 +533,12 @@ namespace Gu.Wpf.UiAutomation
                 return mouseButton;
             }
 
-            switch (mouseButton)
+            return mouseButton switch
             {
-                case MouseButton.Left:
-                    return MouseButton.Right;
-                case MouseButton.Right:
-                    return MouseButton.Left;
-                default:
-                    return mouseButton;
-            }
+                MouseButton.Left => MouseButton.Right,
+                MouseButton.Right => MouseButton.Left,
+                _ => mouseButton,
+            };
         }
 
         private static void SendInput(MouseEventFlags flags, int data = 0)

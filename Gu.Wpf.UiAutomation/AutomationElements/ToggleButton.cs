@@ -17,20 +17,13 @@ namespace Gu.Wpf.UiAutomation
 
         public bool? IsChecked
         {
-            get
+            get => this.State switch
             {
-                switch (this.State)
-                {
-                    case ToggleState.Off:
-                        return false;
-                    case ToggleState.On:
-                        return true;
-                    case ToggleState.Indeterminate:
-                        return null;
-                    default:
-                        throw new InvalidOperationException($"Not handling state {this.State}");
-                }
-            }
+                ToggleState.Off => false,
+                ToggleState.On => true,
+                ToggleState.Indeterminate => (bool?)null,
+                _ => throw new InvalidOperationException($"Not handling state {this.State}"),
+            };
 
             set
             {

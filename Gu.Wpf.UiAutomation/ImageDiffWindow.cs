@@ -208,7 +208,7 @@ namespace Gu.Wpf.UiAutomation
             Grid.SetRow(grid, 1);
             return grid;
 
-            System.Windows.Controls.RadioButton CreateButton(string content)
+            static System.Windows.Controls.RadioButton CreateButton(string content)
             {
                 var button = new System.Windows.Controls.RadioButton
                 {

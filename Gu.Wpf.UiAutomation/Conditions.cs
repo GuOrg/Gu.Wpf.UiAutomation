@@ -278,15 +278,12 @@ namespace Gu.Wpf.UiAutomation
                             return controlType.Id == id;
                         }
 
-                        switch (propertyCondition.Flags)
+                        return propertyCondition.Flags switch
                         {
-                            case PropertyConditionFlags.None:
-                                return Equals(value, propertyCondition.Value);
-                            case PropertyConditionFlags.IgnoreCase:
-                                return string.Equals((string)value, (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase);
-                            default:
-                                throw new ArgumentOutOfRangeException(nameof(condition), propertyCondition.Flags, "Unknown flags.");
-                        }
+                            PropertyConditionFlags.None => Equals(value, propertyCondition.Value),
+                            PropertyConditionFlags.IgnoreCase => string.Equals((string)value, (string)propertyCondition.Value, StringComparison.OrdinalIgnoreCase),
+                            _ => throw new ArgumentOutOfRangeException(nameof(condition), propertyCondition.Flags, "Unknown flags."),
+                        };
                     }
 
                 case AndCondition andCondition:

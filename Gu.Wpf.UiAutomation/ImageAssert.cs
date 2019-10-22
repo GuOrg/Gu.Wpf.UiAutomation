@@ -656,13 +656,11 @@ namespace Gu.Wpf.UiAutomation
 
         private static PixelFormat PixelFormat(this Image bitmap)
         {
-            switch (bitmap.PixelFormat)
+            return bitmap.PixelFormat switch
             {
-                case System.Drawing.Imaging.PixelFormat.Format32bppArgb:
-                    return PixelFormats.Pbgra32;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(bitmap), bitmap.PixelFormat, "Unhandled pixel format.");
-            }
+                System.Drawing.Imaging.PixelFormat.Format32bppArgb => PixelFormats.Pbgra32,
+                _ => throw new ArgumentOutOfRangeException(nameof(bitmap), bitmap.PixelFormat, "Unhandled pixel format."),
+            };
         }
 
         private static bool TryGetStream(string fileName, Assembly callingAssembly, [NotNullWhen(true)]out Stream? result)
