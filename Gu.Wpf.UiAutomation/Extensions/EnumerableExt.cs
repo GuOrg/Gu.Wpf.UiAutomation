@@ -52,7 +52,7 @@ namespace Gu.Wpf.UiAutomation
                         {
                             if (predicate(e.Current))
                             {
-                                result = default;
+                                result = default!;
                                 return false;
                             }
                         }
@@ -62,7 +62,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            result = default;
+            result = default!;
             return false;
         }
     }

@@ -106,7 +106,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static Application Attach(string exeFileName, int index = 0)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             var processes = FindProcess(exeFileName);
             if (processes.Count == 0)
             {
@@ -143,7 +143,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(string exeFileName, [NotNullWhen(true)]out Application? result)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
         }
 
@@ -152,7 +152,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(string exeFileName, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
         }
 
@@ -161,7 +161,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, [NotNullWhen(true)]out Application? result)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
         }
 
@@ -170,7 +170,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
         }
 
@@ -222,7 +222,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryWithAttached(string exeFileName, Action<Application> onAttached)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryWithAttached(new ProcessStartInfo(exeFileName), onAttached);
         }
 
@@ -231,7 +231,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryWithAttached(string exeFileName, string args, Action<Application> onAttached)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryWithAttached(new ProcessStartInfo(exeFileName) { Arguments = args }, onAttached);
         }
 
@@ -266,7 +266,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return AttachOrLaunch(new ProcessStartInfo(exeFileName), onDispose);
         }
 
@@ -275,7 +275,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static Application AttachOrLaunch(string exeFileName, string args, OnDispose onDispose = OnDispose.LeaveOpen)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return AttachOrLaunch(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose);
         }
 
@@ -299,7 +299,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, OnDispose onDispose = OnDispose.KillProcess)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             var processStartInfo = new ProcessStartInfo(exeFileName);
             return Launch(processStartInfo, onDispose);
         }
@@ -312,7 +312,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="onDispose">Specify if the app should be left running when this instance is disposed.</param>
         public static Application Launch(string exeFileName, string args, OnDispose onDispose = OnDispose.KillProcess)
         {
-            exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+            exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             var processStartInfo = new ProcessStartInfo(exeFileName) { Arguments = args };
             return Launch(processStartInfo, onDispose);
         }
@@ -419,7 +419,7 @@ namespace Gu.Wpf.UiAutomation
         {
             lock (Launched)
             {
-                exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+                exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName)).ToArray();
                 foreach (var process in launched)
@@ -445,7 +445,7 @@ namespace Gu.Wpf.UiAutomation
         {
             lock (Launched)
             {
-                exeFileName = FindExeOrDefault(exeFileName, exeFileName);
+                exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
                 exeFileName = Path.GetFullPath(exeFileName);
                 var launched = Launched.Where(x => exeFileName == Path.GetFullPath(x.StartInfo.FileName) &&
                                                    x.StartInfo.Arguments == args).ToArray();
@@ -636,7 +636,7 @@ namespace Gu.Wpf.UiAutomation
             return Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName));
         }
 
-        private static string FindExeOrDefault(string exeFileName, string @default)
+        private static string? FindExeOrDefault(string exeFileName, string? @default)
         {
             return ExeNames.GetOrAdd(exeFileName, Create) ?? @default;
 
@@ -659,31 +659,33 @@ namespace Gu.Wpf.UiAutomation
                     return match;
                 }
 
-                // ReSharper disable once AssignNullToNotNullAttribute
-                var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath));
-                while (dir?.Parent != null)
+                if (Assembly.GetExecutingAssembly().CodeBase is string codeBase)
                 {
-                    if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+                    var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(codeBase).LocalPath));
+                    while (dir?.Parent != null)
                     {
-                        var files = dir.EnumerateFiles(fileName, SearchOption.AllDirectories).ToArray();
-                        if (files.Length == 0)
+                        if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
                         {
-                            return null;
-                        }
-
-                        var latest = files[0];
-                        foreach (var file in files)
-                        {
-                            if (file.LastWriteTime > latest.LastWriteTime)
+                            var files = dir.EnumerateFiles(fileName, SearchOption.AllDirectories).ToArray();
+                            if (files.Length == 0)
                             {
-                                latest = file;
+                                return null;
                             }
+
+                            var latest = files[0];
+                            foreach (var file in files)
+                            {
+                                if (file.LastWriteTime > latest.LastWriteTime)
+                                {
+                                    latest = file;
+                                }
+                            }
+
+                            return latest.FullName;
                         }
 
-                        return latest.FullName;
+                        dir = dir.Parent;
                     }
-
-                    dir = dir.Parent;
                 }
 
                 return null;

@@ -32,7 +32,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
             borderBrush.Freeze();
             this.Content = new Border { BorderThickness = new Thickness(2), BorderBrush = borderBrush };
             var timer = new DispatcherTimer { Interval = duration };
-            timer.Tick += this.TimerTick;
+            timer.Tick += this.TimerTick!;
             timer.Start();
         }
 
@@ -114,7 +114,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
         private void TimerTick(object sender, EventArgs e)
         {
             var timer = (DispatcherTimer)sender;
-            timer.Tick -= this.TimerTick;
+            timer.Tick -= this.TimerTick!;
             timer.Stop();
             this.Close();
             window = null;

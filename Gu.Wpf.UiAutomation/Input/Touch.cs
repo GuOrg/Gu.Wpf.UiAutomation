@@ -180,7 +180,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 using (Hold(from))
                 {
-                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts![0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                     contacts[0].PointerInfo.PtPixelLocation = POINT.From(to);
                     InjectTouchInput(contacts);
                 }
@@ -194,7 +194,7 @@ namespace Gu.Wpf.UiAutomation
 
                     while (interpolation.TryGetPosition(out var pos))
                     {
-                        contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                        contacts![0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                         contacts[0].PointerInfo.PtPixelLocation = pos;
                         InjectTouchInput(contacts);
                         Wait.For(TimeSpan.FromMilliseconds(10));
@@ -222,7 +222,7 @@ namespace Gu.Wpf.UiAutomation
                 while (interpolation1.TryGetPosition(out var pos1) &&
                        interpolation2.TryGetPosition(out var pos2))
                 {
-                    contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
+                    contacts![0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                     contacts[0].PointerInfo.PtPixelLocation = pos1;
                     contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                     contacts[1].PointerInfo.PtPixelLocation = pos2;
