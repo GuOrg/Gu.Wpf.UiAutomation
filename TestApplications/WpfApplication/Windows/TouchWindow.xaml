@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="TouchWindow"
         SizeToContent="WidthAndHeight"
+        WindowStartupLocation="Manual"
+        Left="200"
+        Top="200"
         mc:Ignorable="d">
     <Grid Height="600">
         <Grid.ColumnDefinitions>
