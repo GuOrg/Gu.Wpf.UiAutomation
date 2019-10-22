@@ -1,5 +1,6 @@
 namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
+    using System.Globalization;
     using NUnit.Framework;
 
     public class SliderTests
@@ -51,10 +52,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
                 slider.Value = 5;
 
                 var thumb = slider.Thumb;
-                var oldPos = thumb.Bounds.Center();
+                Assert.AreEqual("350.5,240", thumb.Bounds.Center().ToString(CultureInfo.InvariantCulture));
                 thumb.SlideHorizontally(50);
-                Assert.AreEqual(oldPos.X + 50, thumb.Bounds.Center().X);
-                Assert.AreEqual(oldPos.Y, thumb.Bounds.Center().Y);
+                Assert.AreEqual("397.5,240", thumb.Bounds.Center().ToString(CultureInfo.InvariantCulture));
             }
         }
 

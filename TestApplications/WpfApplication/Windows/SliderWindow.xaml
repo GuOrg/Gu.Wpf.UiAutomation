@@ -13,6 +13,7 @@
                 Maximum="10"
                 Minimum="0"
                 SmallChange="1"
+                IsSnapToTickEnabled="True"
                 Value="5" />
 
         <Slider AutomationProperties.AutomationId="AutomationId" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
