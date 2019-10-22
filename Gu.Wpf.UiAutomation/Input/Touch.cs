@@ -69,6 +69,7 @@ namespace Gu.Wpf.UiAutomation
                 contacts[0].PointerInfo.PointerFlags = POINTER_FLAG.UP;
                 InjectTouchInput(contacts);
                 contacts = null;
+                Wait.UntilInputIsProcessed();
             });
         }
 
@@ -93,6 +94,7 @@ namespace Gu.Wpf.UiAutomation
                 contacts[1].PointerInfo.PointerFlags = POINTER_FLAG.UP;
                 InjectTouchInput(contacts);
                 contacts = null;
+                Wait.UntilInputIsProcessed();
             });
         }
 
