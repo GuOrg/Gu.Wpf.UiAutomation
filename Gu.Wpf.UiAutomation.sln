@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation", "Gu.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApplications", "TestApplications", "{00BCF82A-388A-4DC9-A1E2-6D6D983BAEE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApplication", "TestApplications\WpfApplication\WpfApplication.csproj", "{C8276299-FA43-409B-A969-EF030AB56224}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.UiAutomation.UiTests", "Gu.Wpf.UiAutomation.UiTests\Gu.Wpf.UiAutomation.UiTests.csproj", "{93D2F76D-8C08-407B-AE64-0F6475CDB348}"
 EndProject
@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{28EBF5DE
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netcore3App", "TestApplications\Netcore3App\Netcore3App.csproj", "{BDCB7394-7850-4685-965B-1477B1EF1C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netcore3App", "TestApplications\Netcore3App\Netcore3App.csproj", "{BDCB7394-7850-4685-965B-1477B1EF1C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
