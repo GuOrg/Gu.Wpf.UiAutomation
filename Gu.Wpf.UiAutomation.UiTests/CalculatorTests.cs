@@ -35,9 +35,10 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void CalculatorTest()
         {
-            if (WindowsVersion.IsAppVeyor())
+            if (WindowsVersion.IsAppVeyor() ||
+                WindowsVersion.IsDevops())
             {
-                return;
+                Assert.Inconclusive("Bug in store calc.");
             }
 
             using (var app = StartApplication())

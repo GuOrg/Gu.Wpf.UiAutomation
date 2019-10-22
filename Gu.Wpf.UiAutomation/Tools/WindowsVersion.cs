@@ -20,6 +20,8 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>True if on AppVeyor.</returns>
         public static bool IsAppVeyor() => Environment.GetEnvironmentVariable("APPVEYOR") != null;
 
+        public static bool IsDevops() => Environment.GetEnvironmentVariable("TF_BUILD") != null;
+
         /// <summary>
         /// Check if the installed operating system is Windows 7.
         /// </summary>

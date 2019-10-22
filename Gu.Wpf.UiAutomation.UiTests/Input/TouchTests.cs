@@ -146,11 +146,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void DragTo()
         {
-            if (WindowsVersion.IsAppVeyor())
-            {
-                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
-            }
-
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
@@ -317,9 +312,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void TapThenClickWithMove()
         {
-            if (WindowsVersion.IsAppVeyor())
+            if (WindowsVersion.IsAppVeyor() ||
+                WindowsVersion.IsDevops())
             {
-                Assert.Inconclusive("Not sure why this breaks on AppVeyor.");
+                Assert.Inconclusive("Not sure why this breaks on CI.");
             }
 
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
@@ -367,7 +363,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void TapThenClickNoMove()
         {
-            if (WindowsVersion.IsAppVeyor())
+            if (WindowsVersion.IsAppVeyor() ||
+                WindowsVersion.IsDevops())
             {
                 Assert.Inconclusive("Not sure why this breaks on AppVeyor.");
             }
