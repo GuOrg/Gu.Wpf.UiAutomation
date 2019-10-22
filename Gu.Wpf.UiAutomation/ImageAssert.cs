@@ -683,8 +683,8 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 if (Assembly.GetExecutingAssembly().CodeBase is { } codeBase &&
-                    Path.GetDirectoryName(new Uri(codeBase).LocalPath) is { } dir &&
-                    (candidate = Path.Combine(dir, fileName)) is { } &&
+                    Path.GetDirectoryName(new Uri(codeBase).LocalPath) is { } codeBaseDirectory &&
+                    (candidate = Path.Combine(codeBaseDirectory, fileName)) is { } &&
                     File.Exists(candidate))
                 {
                     result = File.OpenRead(candidate);
@@ -692,8 +692,8 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 if (Assembly.GetExecutingAssembly().Location is { } location &&
-                    (dir = Path.GetDirectoryName(new Uri(location).LocalPath)) is { } &&
-                    (candidate = Path.Combine(dir, fileName)) is { } &&
+                    Path.GetDirectoryName(new Uri(location).LocalPath) is { } localDirectory &&
+                    (candidate = Path.Combine(localDirectory, fileName)) is { } &&
                     File.Exists(candidate))
                 {
                     result = File.OpenRead(candidate);

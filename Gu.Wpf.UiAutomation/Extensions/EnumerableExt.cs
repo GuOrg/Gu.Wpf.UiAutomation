@@ -18,17 +18,14 @@ namespace Gu.Wpf.UiAutomation
                 if (enumerator.MoveNext())
                 {
                     result = enumerator.Current;
-                    if (enumerator.MoveNext())
+                    if (!enumerator.MoveNext())
                     {
-                        result = default;
-                        return false;
+                        return true;
                     }
-
-                    return true;
                 }
             }
 
-            result = default;
+            result = default!;
             return false;
         }
 

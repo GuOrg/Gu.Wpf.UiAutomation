@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation.Logging
         }
 
         /// <inheritdoc/>
-        public void Log(LogLevel logLevel, string message, Exception exception, params object[] args)
+        public void Log(LogLevel logLevel, string message, Exception? exception, params object[] args)
         {
             switch (logLevel)
             {
@@ -161,7 +161,7 @@ namespace Gu.Wpf.UiAutomation.Logging
         }
 
         /// <inheritdoc/>
-        public void Fatal(string message, Exception exception, params object[] args)
+        public void Fatal(string message, Exception? exception, params object[] args)
         {
             this.Log(LogLevel.Fatal, message, exception, args);
         }
@@ -178,7 +178,7 @@ namespace Gu.Wpf.UiAutomation.Logging
 
         protected abstract void GatedFatal(string message);
 
-        private static string GetFormattedMessage(string message, Exception exception, params object[] args)
+        private static string GetFormattedMessage(string message, Exception? exception, params object[] args)
         {
             var formattedMsg = args == null ? message : string.Format(CultureInfo.InvariantCulture, message, args);
             return exception == null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);
