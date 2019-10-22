@@ -6,15 +6,13 @@
         Title="TouchWindow"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d">
-    <Grid>
+    <Grid Height="600">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
-        <GroupBox Background="Gray"
-                  Width="500"
-                  Height="600"
-                  VerticalAlignment="Top"
+        <GroupBox Width="500"
+                  Background="Gray"
                   Header="Touch area"
                   IsManipulationEnabled="True"
                   ManipulationBoundaryFeedback="OnManipulation"
@@ -33,7 +31,7 @@
                   TouchUp="OnTouch">
             <GroupBox.Template>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
-                    <Border Background="{TemplateBinding Background}" BorderThickness="0"/>
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" />
                 </ControlTemplate>
             </GroupBox.Template>
         </GroupBox>
