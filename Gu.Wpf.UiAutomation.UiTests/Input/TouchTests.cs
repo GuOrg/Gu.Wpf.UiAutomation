@@ -357,7 +357,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 };
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
 
-                app.MainWindow.FindButton("Clear").Click(moveMouse: true);
+                window.FindButton("Clear").Click(moveMouse: true);
+                window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(events.Items);
                 Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
             }
@@ -402,7 +403,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 
                 CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
 
-                app.MainWindow.FindButton("Clear").Click();
+                window.FindButton("Clear").Click();
+                window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(events.Items);
                 Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
             }
