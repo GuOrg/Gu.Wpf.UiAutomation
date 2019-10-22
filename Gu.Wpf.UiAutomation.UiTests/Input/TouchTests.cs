@@ -313,7 +313,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         public void TapThenClickWithMove()
         {
             if (WindowsVersion.IsAppVeyor() ||
-                WindowsVersion.IsDevops())
+                WindowsVersion.IsAzureDevops())
             {
                 Assert.Inconclusive("Not sure why this breaks on CI.");
             }
@@ -364,7 +364,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         public void TapThenClickNoMove()
         {
             if (WindowsVersion.IsAppVeyor() ||
-                WindowsVersion.IsDevops())
+                WindowsVersion.IsAzureDevops())
             {
                 Assert.Inconclusive("Not sure why this breaks on AppVeyor.");
             }

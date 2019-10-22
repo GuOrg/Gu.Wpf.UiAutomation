@@ -36,7 +36,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         public void CalculatorTest()
         {
             if (WindowsVersion.IsAppVeyor() ||
-                WindowsVersion.IsDevops())
+                WindowsVersion.IsAzureDevops())
             {
                 Assert.Inconclusive("Bug in store calc.");
             }

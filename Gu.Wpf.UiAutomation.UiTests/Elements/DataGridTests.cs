@@ -84,7 +84,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("ReadonlyColumnsDataGrid", new[] { "Row 1", "Row 2", "Row 3", "" })]
         public void RowsHeaders(string name, string[] expected)
         {
-            if (name == "DataGrid10" && WindowsVersion.IsDevops())
+            if (name == "DataGrid10" && WindowsVersion.IsAzureDevops())
             {
                 Assert.Inconclusive("Not sure why this fails on devops.");
             }
