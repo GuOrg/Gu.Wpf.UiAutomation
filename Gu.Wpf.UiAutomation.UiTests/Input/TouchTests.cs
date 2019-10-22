@@ -33,7 +33,8 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             {
                 var window = app.MainWindow;
                 window.WaitUntilResponsive();
-                Touch.Tap(window.FindButton("Clear").Bounds.Center());
+                window.FindButton("Clear").Invoke();
+                window.WaitUntilResponsive();
             }
         }
 
