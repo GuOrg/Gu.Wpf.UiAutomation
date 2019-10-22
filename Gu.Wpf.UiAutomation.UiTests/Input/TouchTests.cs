@@ -24,11 +24,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [SetUp]
         public void SetUp()
         {
-            if (WindowsVersion.IsAppVeyor())
-            {
-                Assert.Inconclusive("We need a Win 10 image on AppVeyor for testing touch.");
-            }
-
             using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
             {
                 var window = app.MainWindow;
