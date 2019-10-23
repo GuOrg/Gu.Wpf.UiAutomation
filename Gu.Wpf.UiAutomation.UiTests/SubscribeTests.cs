@@ -154,24 +154,20 @@ namespace Gu.Wpf.UiAutomation.UiTests
 
         private static string GetResizeText()
         {
-            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
+            return CultureInfo.InstalledUICulture.TwoLetterISOLanguageName switch
             {
-                case "de":
-                    return "Größe ändern";
-                default:
-                    return "Resize";
-            }
+                "de" => "Größe ändern",
+                _ => "Resize",
+            };
         }
 
         private static string GetPixelsText()
         {
-            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
+            return CultureInfo.InstalledUICulture.TwoLetterISOLanguageName switch
             {
-                case "de":
-                    return "Pixel";
-                default:
-                    return "Pixels";
-            }
+                "de" => "Pixel",
+                _ => "Pixels",
+            };
         }
     }
 }
