@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/Gu.Wpf.UiAutomation.svg)](https://www.nuget.org/packages/Gu.Wpf.UiAutomation/)
 [![Build status](https://ci.appveyor.com/api/projects/status/wpxtooew9wicyuqa/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-uiautomation/branch/master)
-[![Build Status](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_apis/build/status/Gu.Wpf.UiAutomation-CI?branchName=master)](https://dev.azure.com/johan-larsson/Gu.Wpf.UiAutomation/_build/latest?definitionId=5&branchName=master)
+[![Build Status](https://dev.azure.com/guorg/Gu.Wpf.UiAutomation/_apis/build/status/GuOrg.Gu.Wpf.UiAutomation?branchName=master)](https://dev.azure.com/guorg/Gu.Wpf.UiAutomation/_build/latest?definitionId=7&branchName=master)
 
 ## Introduction
 Gu.Wpf.UiAutomation is a .NET library which helps with automated UI testing of WPF applications.
