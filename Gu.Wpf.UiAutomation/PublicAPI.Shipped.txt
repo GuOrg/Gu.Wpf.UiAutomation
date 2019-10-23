@@ -712,9 +712,6 @@ Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Runtime.S
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.UiElement
-Gu.Wpf.UiAutomation.UiElement
-Gu.Wpf.UiAutomation.UiElement
-Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.ActualHeight.get -> double
 Gu.Wpf.UiAutomation.UiElement.ActualWidth.get -> double
 Gu.Wpf.UiAutomation.UiElement.AsButton() -> Gu.Wpf.UiAutomation.Button
