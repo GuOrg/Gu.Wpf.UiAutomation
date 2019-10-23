@@ -823,8 +823,8 @@ Gu.Wpf.UiAutomation.UiElement.FindMenuItem(string name = null) -> Gu.Wpf.UiAutom
 Gu.Wpf.UiAutomation.UiElement.FindOpenFileDialog(string name = null) -> Gu.Wpf.UiAutomation.OpenFileDialog
 Gu.Wpf.UiAutomation.UiElement.FindPasswordBox(string name = null) -> Gu.Wpf.UiAutomation.PasswordBox
 Gu.Wpf.UiAutomation.UiElement.FindProgressBar(string name = null) -> Gu.Wpf.UiAutomation.ProgressBar
-Gu.Wpf.UiAutomation.UiElement.FindRadioButton(string name) -> Gu.Wpf.UiAutomation.RadioButton
-Gu.Wpf.UiAutomation.UiElement.FindRepeatButton(string name) -> Gu.Wpf.UiAutomation.RepeatButton
+Gu.Wpf.UiAutomation.UiElement.FindRadioButton(string name = null) -> Gu.Wpf.UiAutomation.RadioButton
+Gu.Wpf.UiAutomation.UiElement.FindRepeatButton(string name = null) -> Gu.Wpf.UiAutomation.RepeatButton
 Gu.Wpf.UiAutomation.UiElement.FindRichTextBox(string name = null) -> Gu.Wpf.UiAutomation.RichTextBox
 Gu.Wpf.UiAutomation.UiElement.FindSaveFileDialog(string name = null) -> Gu.Wpf.UiAutomation.SaveFileDialog
 Gu.Wpf.UiAutomation.UiElement.FindScrollViewer(string name = null) -> Gu.Wpf.UiAutomation.ScrollViewer
@@ -1970,7 +1970,7 @@ static Gu.Wpf.UiAutomation.Dump.Recursive(System.Windows.Automation.AutomationEl
 static Gu.Wpf.UiAutomation.EnumerableExt.TryGetSingle<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T, bool> predicate, out T result) -> bool
 static Gu.Wpf.UiAutomation.EnumerableExt.TryGetSingle<T>(this System.Collections.Generic.IEnumerable<T> source, out T result) -> bool
 static Gu.Wpf.UiAutomation.ExtensionMethods.Clamp<T>(this T source, T min, T max) -> T
-static Gu.Wpf.UiAutomation.ExtensionMethods.GetFlags(this System.Enum variable) -> System.Collections.Generic.IEnumerable<System.Enum>
+static Gu.Wpf.UiAutomation.ExtensionMethods.GetFlags<T>(this T variable) -> System.Collections.Generic.IEnumerable<T>
 static Gu.Wpf.UiAutomation.ExtensionMethods.HasValue(this double value) -> bool
 static Gu.Wpf.UiAutomation.GridViewCell.Create(Gu.Wpf.UiAutomation.UiElement content) -> Gu.Wpf.UiAutomation.GridViewCell
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(Gu.Wpf.UiAutomation.UiElement expected, Gu.Wpf.UiAutomation.UiElement actual) -> void
@@ -2158,6 +2158,7 @@ static Gu.Wpf.UiAutomation.WindowsAPI.RECT.operator ==(Gu.Wpf.UiAutomation.Windo
 static Gu.Wpf.UiAutomation.WindowsStoreAppLauncher.Launch(string appUserModelId, string arguments) -> System.Diagnostics.Process
 static Gu.Wpf.UiAutomation.WindowsVersion.CurrentContains(string name) -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsAppVeyor() -> bool
+static Gu.Wpf.UiAutomation.WindowsVersion.IsAzureDevops() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows10() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows7() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8() -> bool
