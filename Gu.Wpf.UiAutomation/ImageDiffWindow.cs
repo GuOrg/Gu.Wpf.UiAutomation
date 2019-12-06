@@ -126,18 +126,24 @@ namespace Gu.Wpf.UiAutomation
                         ApplicationCommands.Save,
                         new MouseGesture(MouseAction.LeftDoubleClick)),
                 },
+                ContextMenu = new System.Windows.Controls.ContextMenu
+                {
+                    Items =
+                    {
+                        new System.Windows.Controls.MenuItem
+                        {
+                            Header = "Save",
+                            Command = ApplicationCommands.Save,
+                            CommandBindings =
+                            {
+                                SaveBinding(),
+                            },
+                        },
+                    },
+                },
                 CommandBindings =
                 {
-                    new CommandBinding(
-                        ApplicationCommands.Save,
-                        (sender, args) =>
-                        {
-                            var dialog = new Microsoft.Win32.SaveFileDialog();
-                            if (dialog.ShowDialog() == true)
-                            {
-                                bitmap.Save(dialog.FileName);
-                            }
-                        }),
+                    SaveBinding(),
                 },
             };
 
@@ -161,6 +167,20 @@ namespace Gu.Wpf.UiAutomation
 
             Grid.SetRow(image, 0);
             return image;
+
+            CommandBinding SaveBinding()
+            {
+                return new CommandBinding(
+                    ApplicationCommands.Save,
+                    (sender, args) =>
+                    {
+                        var dialog = new Microsoft.Win32.SaveFileDialog();
+                        if (dialog.ShowDialog() == true)
+                        {
+                            bitmap.Save(dialog.FileName);
+                        }
+                    });
+            }
         }
 
         private static UniformGrid CreateButtonGrid()
