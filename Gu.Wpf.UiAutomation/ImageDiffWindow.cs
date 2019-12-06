@@ -285,11 +285,13 @@ namespace Gu.Wpf.UiAutomation
                 {
                     var ep = expected.GetPixel(x, y);
                     var ap = actual.GetPixel(x, y);
-                    diff.SetPixel(x, y, System.Drawing.Color.FromArgb(
-                        Diff(x => x.A),
-                        Diff(x => x.R),
-                        Diff(x => x.G),
-                        Diff(x => x.B)));
+                    var color = ep.A != ap.A
+                        ? System.Drawing.Color.HotPink
+                        : System.Drawing.Color.FromArgb(
+                            Diff(x => x.R),
+                            Diff(x => x.G),
+                            Diff(x => x.B));
+                    diff.SetPixel(x, y, color);
 
                     int Diff(Func<Color, byte> func)
                     {
