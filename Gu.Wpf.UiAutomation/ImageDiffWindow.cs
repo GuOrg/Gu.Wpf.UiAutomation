@@ -1,6 +1,7 @@
 // ReSharper disable RedundantNameQualifier
 namespace Gu.Wpf.UiAutomation
 {
+    using System;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
@@ -11,11 +12,20 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Controls.Primitives;
     using System.Windows.Data;
     using System.Windows.Input;
+    using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.Internals;
 
     public class ImageDiffWindow : System.Windows.Window
     {
+        private static readonly SolidColorBrush[] Backgrounds = new[]
+        {
+            System.Windows.Media.Brushes.Gray,
+            System.Windows.Media.Brushes.White,
+            System.Windows.Media.Brushes.Black,
+            System.Windows.Media.Brushes.LightGreen,
+        };
+
         private ImageDiffWindow(Bitmap expected, Bitmap actual)
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
@@ -88,35 +98,11 @@ namespace Gu.Wpf.UiAutomation
                         break;
 
                     case System.Windows.Input.Key.Up:
-                        if (this.Background == System.Windows.Media.Brushes.Gray)
-                        {
-                            this.Background = System.Windows.Media.Brushes.White;
-                        }
-                        else if (this.Background == System.Windows.Media.Brushes.White)
-                        {
-                            this.Background = System.Windows.Media.Brushes.Black;
-                        }
-                        else if (this.Background == System.Windows.Media.Brushes.Black)
-                        {
-                            this.Background = System.Windows.Media.Brushes.Gray;
-                        }
-
+                        this.Background = NextBackground(1);
                         break;
 
                     case System.Windows.Input.Key.Down:
-                        if (this.Background == System.Windows.Media.Brushes.Gray)
-                        {
-                            this.Background = System.Windows.Media.Brushes.Black;
-                        }
-                        else if (this.Background == System.Windows.Media.Brushes.White)
-                        {
-                            this.Background = System.Windows.Media.Brushes.Gray;
-                        }
-                        else if (this.Background == System.Windows.Media.Brushes.Black)
-                        {
-                            this.Background = System.Windows.Media.Brushes.White;
-                        }
-
+                        this.Background = NextBackground(-1);
                         break;
                 }
             };
@@ -127,6 +113,22 @@ namespace Gu.Wpf.UiAutomation
                     Text = "Use left and right arrows to change image. Up and down to change background.",
                 },
             };
+
+            SolidColorBrush NextBackground(int increment)
+            {
+                var index = Array.IndexOf(Backgrounds, this.Background) + increment;
+                if (index >= Backgrounds.Length)
+                {
+                    index = 0;
+                }
+
+                if (index < 0)
+                {
+                    index = Backgrounds.Length - 1;
+                }
+
+                return Backgrounds[index];
+            }
         }
 
         public static void Show(Bitmap expected, Bitmap actual)
