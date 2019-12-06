@@ -65,6 +65,7 @@ namespace Gu.Wpf.UiAutomation.Overlay
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
+
             // Make the window click-thru
             this.SetWindowTransparent();
         }

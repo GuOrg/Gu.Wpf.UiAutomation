@@ -444,6 +444,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 for (var y = 0; y < expected.Size.Height; y++)
                 {
+                    // comparing names here to handle different pixel formats.
                     if (expected.GetPixel(x, y).Name != actual.GetPixel(x, y).Name)
                     {
                         return false;

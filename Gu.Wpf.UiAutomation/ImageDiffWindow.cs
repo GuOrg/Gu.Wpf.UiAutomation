@@ -30,7 +30,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 RowDefinitions =
                 {
-                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
                     new RowDefinition { Height = GridLength.Auto },
                 },
                 Children =
@@ -168,7 +168,6 @@ namespace Gu.Wpf.UiAutomation
             var grid = new UniformGrid
             {
                 Rows = 1,
-                HorizontalAlignment = HorizontalAlignment.Center,
                 Background = System.Windows.Media.Brushes.White,
                 Children =
                 {
