@@ -516,15 +516,13 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(element));
             }
 
-            using (var stream = File.OpenWrite(fileName))
-            {
-                element.Measure(size);
-                element.Arrange(new System.Windows.Rect(size));
-                var renderTargetBitmap = element.ToRenderTargetBitmap(size, pixelFormat);
-                var encoder = GetEncoder(fileName);
-                encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-                encoder.Save(stream);
-            }
+            using var stream = File.OpenWrite(fileName);
+            element.Measure(size);
+            element.Arrange(new System.Windows.Rect(size));
+            var renderTargetBitmap = element.ToRenderTargetBitmap(size, pixelFormat);
+            var encoder = GetEncoder(fileName);
+            encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            encoder.Save(stream);
         }
 
         private static void WaitForStartAnimation(UiElement element)
@@ -536,13 +534,11 @@ namespace Gu.Wpf.UiAutomation
 
             var window = element.Window;
             _ = User32.GetWindowThreadProcessId(window.NativeWindowHandle, out var id);
-            using (var process = Process.GetProcessById((int)id))
+            using var process = Process.GetProcessById((int)id);
+            var upTime = DateTime.Now - process.StartTime;
+            if (upTime < StartAnimation)
             {
-                var upTime = DateTime.Now - process.StartTime;
-                if (upTime < StartAnimation)
-                {
-                    Wait.For(StartAnimation - upTime);
-                }
+                Wait.For(StartAnimation - upTime);
             }
         }
 
@@ -691,19 +687,13 @@ namespace Gu.Wpf.UiAutomation
                 {
                     if (name.EndsWith(".resources", ignoreCase: true, culture: CultureInfo.InvariantCulture))
                     {
-                        using (var stream = assembly.GetManifestResourceStream(name))
+                        using var stream = assembly.GetManifestResourceStream(name);
+                        using var reader = new ResourceReader(stream ?? throw new InvalidOperationException("Did not find a stream."));
+                        foreach (var item in reader)
                         {
-                            using (var reader = new ResourceReader(stream ?? throw new InvalidOperationException("Did not find a stream.")))
+                            if (item is DictionaryEntry { Key: string key, Value: Bitmap bitmap })
                             {
-                                foreach (var item in reader)
-                                {
-                                    if (item is DictionaryEntry entry &&
-                                        entry.Key is string key &&
-                                        entry.Value is Bitmap bitmap)
-                                    {
-                                        map.Add(new KeyValuePair<string, Bitmap>(key, bitmap));
-                                    }
-                                }
+                                map.Add(new KeyValuePair<string, Bitmap>(key, bitmap));
                             }
                         }
                     }

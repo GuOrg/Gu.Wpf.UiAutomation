@@ -303,7 +303,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>Disposable class which presses the key on creation and releases it on dispose.</summary>
-        private class PressedKey : IDisposable
+        private sealed class PressedKey : IDisposable
         {
             private readonly Key key;
 

@@ -30,7 +30,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Dump the visual tree of <paramref name="element"/>.
         /// </summary>
-        /// <param name="element">The <see cref="UiElement"/>.</param>
+        /// <param name="element">The <see cref="AutomationElement"/>.</param>
         /// <param name="allPropertiesAndPatterns">If all automation properties and patterns should be written to the result.</param>
         /// <returns>A string representing the automation tree of <paramref name="element"/>.</returns>
         public static string Recursive(AutomationElement element, bool allPropertiesAndPatterns = false)
@@ -41,11 +41,9 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var builder = new StringBuilder();
-            using (var writer = new IndentedTextWriter(new StringWriter(builder)))
-            {
-                Recursive(element, writer, allPropertiesAndPatterns);
-            }
-
+            using var stringWriter = new StringWriter(builder);
+            using var writer = new IndentedTextWriter(stringWriter);
+            Recursive(element, writer, allPropertiesAndPatterns);
             return builder.ToString();
         }
 

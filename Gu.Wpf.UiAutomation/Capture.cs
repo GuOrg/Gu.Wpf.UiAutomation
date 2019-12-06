@@ -39,10 +39,8 @@ namespace Gu.Wpf.UiAutomation
 
         public static BitmapImage ScreenWpf()
         {
-            using (var screen = Screen())
-            {
-                return screen.ToWpf();
-            }
+            using var screen = Screen();
+            return screen.ToWpf();
         }
 
         /// <summary>
@@ -50,10 +48,8 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void ScreenToFile(string filePath)
         {
-            using (var bmp = Screen())
-            {
-                bmp.Save(filePath, ImageFormat.Png);
-            }
+            using var bmp = Screen();
+            bmp.Save(filePath, ImageFormat.Png);
         }
 
         /// <summary>
@@ -86,10 +82,8 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(filePath));
             }
 
-            using (var bmp = Rectangle(element.Bounds))
-            {
-                bmp.Save(filePath, ImageFormat.Png);
-            }
+            using var bmp = Rectangle(element.Bounds);
+            bmp.Save(filePath, ImageFormat.Png);
         }
 
         /// <summary>
@@ -97,18 +91,14 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void RectangleToFile(Rect bounds, string filePath)
         {
-            using (var bmp = Rectangle(bounds))
-            {
-                bmp.Save(filePath, ImageFormat.Png);
-            }
+            using var bmp = Rectangle(bounds);
+            bmp.Save(filePath, ImageFormat.Png);
         }
 
         public static BitmapImage RectangleWpf(Rect bounds)
         {
-            using (var rectangle = Rectangle(bounds))
-            {
-                return rectangle.ToWpf();
-            }
+            using var rectangle = Rectangle(bounds);
+            return rectangle.ToWpf();
         }
 
         /// <summary>
@@ -143,19 +133,17 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(bitmap));
             }
 
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                _ = memory.Seek(0, SeekOrigin.Begin);
-                bitmapImage.StreamSource = memory;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-                return bitmapImage;
-            }
+            using var memory = new MemoryStream();
+            bitmap.Save(memory, ImageFormat.Png);
+            memory.Position = 0;
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            _ = memory.Seek(0, SeekOrigin.Begin);
+            bitmapImage.StreamSource = memory;
+            bitmapImage.EndInit();
+            bitmapImage.Freeze();
+            return bitmapImage;
         }
 
         // P/Invoke declarations

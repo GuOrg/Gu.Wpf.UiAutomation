@@ -590,7 +590,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>Disposable class which presses the button on creation and releases it on dispose.</summary>
-        private class PressedButton : IDisposable
+        private sealed class PressedButton : IDisposable
         {
             private readonly MouseButton button;
 
