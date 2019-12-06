@@ -15,6 +15,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.Internals;
+    using Color = System.Drawing.Color;
 
     public class ImageDiffWindow : System.Windows.Window
     {
@@ -53,6 +54,7 @@ namespace Gu.Wpf.UiAutomation
                         {
                             CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
                             CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
+                            CreateImage(Diff(expected, actual), nameof(ImageDiffViewModel.DiffVisibility)),
                         },
                     },
                     CreateButtonGrid(),
@@ -235,6 +237,7 @@ namespace Gu.Wpf.UiAutomation
                     CreateButton(nameof(ImageDiffViewModel.Expected)),
                     CreateButton(nameof(ImageDiffViewModel.Actual)),
                     CreateButton(nameof(ImageDiffViewModel.Both)),
+                    CreateButton(nameof(ImageDiffViewModel.Diff)),
                 },
             };
 
@@ -273,6 +276,31 @@ namespace Gu.Wpf.UiAutomation
             return bitmapImage;
         }
 
+        private static Bitmap Diff(Bitmap expected, Bitmap actual)
+        {
+            var diff = new Bitmap(Math.Min(expected.Width, actual.Width), Math.Min(expected.Height, actual.Height));
+            for (var x = 0; x < diff.Size.Width; x++)
+            {
+                for (var y = 0; y < diff.Size.Height; y++)
+                {
+                    var ep = expected.GetPixel(x, y);
+                    var ap = actual.GetPixel(x, y);
+                    diff.SetPixel(x, y, System.Drawing.Color.FromArgb(
+                        Diff(x => x.A),
+                        Diff(x => x.R),
+                        Diff(x => x.G),
+                        Diff(x => x.B)));
+
+                    int Diff(Func<Color, byte> func)
+                    {
+                        return Math.Abs(func(ep) - func(ap));
+                    }
+                }
+            }
+
+            return diff;
+        }
+
 #pragma warning disable CA1034 // Nested types should not be visible
         public class ImageDiffViewModel : INotifyPropertyChanged
 #pragma warning restore CA1034 // Nested types should not be visible
@@ -280,6 +308,7 @@ namespace Gu.Wpf.UiAutomation
             private bool expected;
             private bool actual;
             private bool both = true;
+            private bool diff;
 
             public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -333,9 +362,27 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            public Visibility ExpectedVisibility => this.Expected || this.Both ? Visibility.Visible : Visibility.Hidden;
+            public bool Diff
+            {
+                get => this.diff;
+                set
+                {
+                    if (value == this.diff)
+                    {
+                        return;
+                    }
 
-            public Visibility ActualVisibility => this.Actual || this.Both ? Visibility.Visible : Visibility.Hidden;
+                    this.diff = value;
+                    this.OnPropertyChanged();
+                    this.OnPropertyChanged(nameof(this.DiffVisibility));
+                }
+            }
+
+            public Visibility ExpectedVisibility => this.expected || this.both ? Visibility.Visible : Visibility.Hidden;
+
+            public Visibility ActualVisibility => this.actual || this.both ? Visibility.Visible : Visibility.Hidden;
+
+            public Visibility DiffVisibility => this.diff ? Visibility.Visible : Visibility.Hidden;
 
             public double Opacity => this.Both ? 0.5 : 1;
 
