@@ -1,13 +1,13 @@
 namespace Gu.Wpf.UiAutomation.Overlay
 {
     using System;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
     using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Threading;
+    using Gu.Wpf.UiAutomation.Internals;
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     public class OverlayRectangleWindow : Window
@@ -65,33 +65,16 @@ namespace Gu.Wpf.UiAutomation.Overlay
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-
             // Make the window click-thru
             this.SetWindowTransparent();
         }
 
         private static void Show(Action action)
         {
-            using var startedEvent = new ManualResetEventSlim(initialState: false);
-            Dispatcher? dispatcher = null;
-            var uiThread = new Thread(() =>
-            {
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                dispatcher = Dispatcher.CurrentDispatcher;
-                //// ReSharper disable once AccessToDisposedClosure
-                startedEvent.Set();
-                Dispatcher.Run();
-            });
-
-            uiThread.SetApartmentState(ApartmentState.STA);
-            uiThread.IsBackground = true;
-
-            // Start the thread
-            uiThread.Start();
-            startedEvent.Wait();
+            var dispatcher = WpfDispatcher.Create();
             dispatcher!.Invoke(action);
             dispatcher.InvokeShutdown();
-            _ = uiThread.Join(1000);
+            _ = dispatcher.Thread.Join(1000);
         }
 
         private void SetWindowTransparent()

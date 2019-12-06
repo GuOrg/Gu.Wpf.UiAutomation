@@ -5,7 +5,6 @@ namespace Gu.Wpf.UiAutomation
     using System.Drawing;
     using System.IO;
     using System.Runtime.CompilerServices;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
@@ -13,7 +12,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
-    using System.Windows.Threading;
+    using Gu.Wpf.UiAutomation.Internals;
 
     public class ImageDiffWindow : System.Windows.Window
     {
@@ -103,22 +102,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new System.ArgumentNullException(nameof(actual));
             }
 
-            using var startedEvent = new ManualResetEventSlim(initialState: false);
-            System.Windows.Threading.Dispatcher? dispatcher = null;
-            var uiThread = new Thread(() =>
-            {
-                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                dispatcher = Dispatcher.CurrentDispatcher;
-                //// ReSharper disable once AccessToDisposedClosure
-                startedEvent.Set();
-                Dispatcher.Run();
-            });
-
-            uiThread.SetApartmentState(ApartmentState.STA);
-            uiThread.IsBackground = true;
-
-            uiThread.Start();
-            startedEvent.Wait();
+            var dispatcher = WpfDispatcher.Create();
             dispatcher!.Invoke(() =>
             {
                 var window = new ImageDiffWindow(expected, actual);
@@ -126,7 +110,7 @@ namespace Gu.Wpf.UiAutomation
             });
 
             dispatcher.InvokeShutdown();
-            _ = uiThread.Join(1000);
+            _ = dispatcher.Thread.Join(1000);
         }
 
         private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string visibilityPropertyName)
@@ -218,17 +202,15 @@ namespace Gu.Wpf.UiAutomation
 
         private static BitmapSource CreateBitmapSource(Bitmap bitmap)
         {
-            using (var memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                memory.Position = 0;
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                return bitmapImage;
-            }
+            using var memory = new MemoryStream();
+            bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+            memory.Position = 0;
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = memory;
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.EndInit();
+            return bitmapImage;
         }
 
 #pragma warning disable CA1034 // Nested types should not be visible
