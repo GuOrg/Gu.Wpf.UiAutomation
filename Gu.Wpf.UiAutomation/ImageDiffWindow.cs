@@ -86,7 +86,46 @@ namespace Gu.Wpf.UiAutomation
                         }
 
                         break;
+
+                    case System.Windows.Input.Key.Up:
+                        if (this.Background == System.Windows.Media.Brushes.Gray)
+                        {
+                            this.Background = System.Windows.Media.Brushes.White;
+                        }
+                        else if (this.Background == System.Windows.Media.Brushes.White)
+                        {
+                            this.Background = System.Windows.Media.Brushes.Black;
+                        }
+                        else if (this.Background == System.Windows.Media.Brushes.Black)
+                        {
+                            this.Background = System.Windows.Media.Brushes.Gray;
+                        }
+
+                        break;
+
+                    case System.Windows.Input.Key.Down:
+                        if (this.Background == System.Windows.Media.Brushes.Gray)
+                        {
+                            this.Background = System.Windows.Media.Brushes.Black;
+                        }
+                        else if (this.Background == System.Windows.Media.Brushes.White)
+                        {
+                            this.Background = System.Windows.Media.Brushes.Gray;
+                        }
+                        else if (this.Background == System.Windows.Media.Brushes.Black)
+                        {
+                            this.Background = System.Windows.Media.Brushes.White;
+                        }
+
+                        break;
                 }
+            };
+            this.ToolTip = new System.Windows.Controls.ToolTip
+            {
+                Content = new System.Windows.Controls.TextBlock
+                {
+                    Text = "Use left and right arrows to change image. Up and down to change background.",
+                },
             };
         }
 
