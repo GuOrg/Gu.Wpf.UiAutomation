@@ -95,28 +95,30 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
             var window = app.MainWindow;
-            var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
-            var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
+            var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button_wrong.png");
+            var tempFile = Path.Combine(Path.GetTempPath(), "button_wrong.png");
             File.Delete(tempFile);
+            var button = window.FindButton("SizeButton");
             ImageAssert.OnFail = OnFail.SaveImageToTemp;
-            Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
+            Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, button));
             Assert.AreEqual(true, File.Exists(tempFile));
         }
 
-        [TestCase(@".\Images\button.png")]
-        [TestCase(@"Images\button.png")]
+        [TestCase(@".\Images\button_wrong.png")]
+        [TestCase(@"Images\button_wrong.png")]
         public void WhenNotEqualSaveFileToTempRelativePath(string fileName)
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
             var window = app.MainWindow;
-            var tempFile = Path.Combine(Path.GetTempPath(), "button.png");
+            var tempFile = Path.Combine(Path.GetTempPath(), "button_wrong.png");
             if (File.Exists(tempFile))
             {
                 File.Delete(tempFile);
             }
 
+            var button = window.FindButton("SizeButton");
             ImageAssert.OnFail = OnFail.SaveImageToTemp;
-            Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
+            Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, button));
             Assert.AreEqual(true, File.Exists(tempFile));
         }
 

@@ -70,7 +70,7 @@ namespace Gu.Wpf.UiAutomation
                     case System.Windows.Input.Key.Left:
                         if (viewModel.Expected)
                         {
-                            viewModel.Both = true;
+                            viewModel.Diff = true;
                         }
                         else if (viewModel.Actual)
                         {
@@ -79,6 +79,10 @@ namespace Gu.Wpf.UiAutomation
                         else if (viewModel.Both)
                         {
                             viewModel.Actual = true;
+                        }
+                        else if (viewModel.Diff)
+                        {
+                            viewModel.Both = true;
                         }
 
                         break;
@@ -93,6 +97,10 @@ namespace Gu.Wpf.UiAutomation
                             viewModel.Both = true;
                         }
                         else if (viewModel.Both)
+                        {
+                            viewModel.Diff = true;
+                        }
+                        else if (viewModel.Diff)
                         {
                             viewModel.Expected = true;
                         }
