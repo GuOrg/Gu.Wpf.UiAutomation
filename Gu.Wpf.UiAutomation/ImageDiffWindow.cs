@@ -103,41 +103,30 @@ namespace Gu.Wpf.UiAutomation
                 throw new System.ArgumentNullException(nameof(actual));
             }
 
-            using (var startedEvent = new ManualResetEventSlim(initialState: false))
+            using var startedEvent = new ManualResetEventSlim(initialState: false);
+            System.Windows.Threading.Dispatcher? dispatcher = null;
+            var uiThread = new Thread(() =>
             {
-                System.Windows.Threading.Dispatcher? dispatcher = null;
-                var uiThread = new Thread(() =>
-                {
-                    // Create and install a new dispatcher context
-                    SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                    dispatcher = Dispatcher.CurrentDispatcher;
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                dispatcher = Dispatcher.CurrentDispatcher;
+                //// ReSharper disable once AccessToDisposedClosure
+                startedEvent.Set();
+                Dispatcher.Run();
+            });
 
-                    // Signal that it is initialized
-                    // ReSharper disable once AccessToDisposedClosure
-                    startedEvent.Set();
+            uiThread.SetApartmentState(ApartmentState.STA);
+            uiThread.IsBackground = true;
 
-                    // Start the dispatcher processing
-                    Dispatcher.Run();
-                });
+            uiThread.Start();
+            startedEvent.Wait();
+            dispatcher!.Invoke(() =>
+            {
+                var window = new ImageDiffWindow(expected, actual);
+                _ = window.ShowDialog();
+            });
 
-                // Set the apartment state
-                uiThread.SetApartmentState(ApartmentState.STA);
-
-                // Make the thread a background thread
-                uiThread.IsBackground = true;
-
-                // Start the thread
-                uiThread.Start();
-                startedEvent.Wait();
-                dispatcher!.Invoke(() =>
-                {
-                    var window = new ImageDiffWindow(expected, actual);
-                    _ = window.ShowDialog();
-                });
-
-                dispatcher.InvokeShutdown();
-                _ = uiThread.Join(1000);
-            }
+            dispatcher.InvokeShutdown();
+            _ = uiThread.Join(1000);
         }
 
         private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string visibilityPropertyName)
