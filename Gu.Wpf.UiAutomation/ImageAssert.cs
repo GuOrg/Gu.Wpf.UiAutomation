@@ -442,7 +442,7 @@ namespace Gu.Wpf.UiAutomation
                 return false;
             }
 
-            if (FastEqual())
+            if (EqualFast(expected, actual))
             {
                 return true;
             }
@@ -464,26 +464,47 @@ namespace Gu.Wpf.UiAutomation
             }
 
             return true;
+        }
 
+        /// <summary>
+        /// Calls msvcrt.memcmp
+        /// </summary>
+        /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
+        /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
+        /// <returns>True if equal.</returns>
+        public static bool EqualFast(Bitmap expected, Bitmap actual)
+        {
             // https://stackoverflow.com/a/2038515/1069200
-            bool FastEqual()
+            if (expected == null)
             {
-                var expectedBits = expected.LockBits(new Rectangle(new Point(0, 0), expected.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                var actualBits = actual.LockBits(new Rectangle(new Point(0, 0), actual.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                throw new ArgumentNullException(nameof(expected));
+            }
 
-                try
-                {
-                    var expectedStart = expectedBits.Scan0;
-                    var actualStart = actualBits.Scan0;
-                    int stride = expectedBits.Stride;
-                    int len = stride * expected.Height;
-                    return Msvcrt.memcmp(expectedStart, actualStart, len) == 0;
-                }
-                finally
-                {
-                    expected.UnlockBits(expectedBits);
-                    actual.UnlockBits(actualBits);
-                }
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
+            if (expected.Size != actual.Size ||
+                expected.PixelFormat != actual.PixelFormat)
+            {
+                return false;
+            }
+
+            var expectedBits = expected.LockBits(new Rectangle(new Point(0, 0), expected.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            var actualBits = actual.LockBits(new Rectangle(new Point(0, 0), actual.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            try
+            {
+                return Msvcrt.memcmp(
+                           expectedBits.Scan0,
+                           actualBits.Scan0,
+                           new UIntPtr((uint)(expectedBits.Stride * expectedBits.Height))) == 0;
+            }
+            finally
+            {
+                expected.UnlockBits(expectedBits);
+                actual.UnlockBits(actualBits);
             }
         }
 
