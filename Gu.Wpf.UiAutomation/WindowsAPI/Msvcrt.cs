@@ -6,6 +6,6 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     public static class Msvcrt
     {
         [DllImport("msvcrt.dll")]
-        public static extern int Memcmp(IntPtr b1, IntPtr b2, long count);
+        public static extern int memcmp(IntPtr b1, IntPtr b2, long count);
     }
 }

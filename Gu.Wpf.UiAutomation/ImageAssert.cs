@@ -477,7 +477,7 @@ namespace Gu.Wpf.UiAutomation
                     var actualStart = actualBits.Scan0;
                     int stride = expectedBits.Stride;
                     int len = stride * expected.Height;
-                    return Msvcrt.Memcmp(expectedStart, actualStart, len) == 0;
+                    return Msvcrt.memcmp(expectedStart, actualStart, len) == 0;
                 }
                 finally
                 {
