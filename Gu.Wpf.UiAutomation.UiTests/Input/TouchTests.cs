@@ -403,7 +403,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
         }
 
-        private class EventStringComparer : IComparer
+        private sealed class EventStringComparer : IComparer
         {
             internal static readonly IComparer Default = new EventStringComparer();
 

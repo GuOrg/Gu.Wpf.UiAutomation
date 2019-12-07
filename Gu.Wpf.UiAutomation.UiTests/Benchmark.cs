@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +13,7 @@
         public void OneTimeSetUp()
         {
             using var app = Application.AttachOrLaunch(ExeFileName);
+
             // for side effect of having the app open.
             var window = app.MainWindow;
             var checkBox = window.FindCheckBox("Test Checkbox");

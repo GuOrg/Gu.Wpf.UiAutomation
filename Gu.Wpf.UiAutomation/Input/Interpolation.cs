@@ -70,7 +70,7 @@ namespace Gu.Wpf.UiAutomation
         /// Create an instance of the class.
         /// </summary>
         /// <remarks>
-        /// Calls Restart() on <see cref="stopwatch"/>.
+        /// <para>Calls Restart() on <see cref="stopwatch"/>.</para>
         /// </remarks>
         /// <param name="from">The start position.</param>
         /// <param name="to">The end position.</param>

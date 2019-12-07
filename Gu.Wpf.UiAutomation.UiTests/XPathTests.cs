@@ -43,13 +43,11 @@ namespace Gu.Wpf.UiAutomation.UiTests
 
         private static string GetFileMenuText()
         {
-            switch (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName)
+            return CultureInfo.InstalledUICulture.TwoLetterISOLanguageName switch
             {
-                case "de":
-                    return "Datei";
-                default:
-                    return "File";
-            }
+                "de" => "Datei",
+                _ => "File",
+            };
         }
     }
 }

@@ -25,9 +25,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         /// An identifier common to multiple pointers for which the source device reported an update in a single input frame.
         /// For example, a parallel-mode multi-touch digitizer may report the positions of multiple touch contacts in a single update to the system.
         /// <remarks>
-        /// Note that frame identifier is assigned as input is reported to the system for all pointers across all devices.
+        /// <para>Note that frame identifier is assigned as input is reported to the system for all pointers across all devices.
         /// Therefore, this field may not contain strictly sequential values in a single series of messages that a window receives.
-        /// However, this field will contain the same numerical value for all input updates that were reported in the same input frame by a single device.
+        /// However, this field will contain the same numerical value for all input updates that were reported in the same input frame by a single device.</para>
         /// </remarks>
         /// </summary>
         public uint FrameId;

@@ -467,7 +467,7 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Calls msvcrt.memcmp
+        /// Calls msvcrt.memcmp.
         /// </summary>
         /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
         /// <param name="actual">The actual <see cref="Bitmap"/>.</param>

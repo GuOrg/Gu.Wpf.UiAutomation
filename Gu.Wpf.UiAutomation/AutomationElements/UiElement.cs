@@ -13,10 +13,12 @@ namespace Gu.Wpf.UiAutomation
     using GdiColor = System.Drawing.Color;
     using WpfColor = System.Windows.Media.Color;
 
+#pragma warning disable GU0025 // Seal type with overridden equality.
     /// <summary>
     /// Wrapper object for each ui element which is automatable.
     /// </summary>
     public partial class UiElement : IEquatable<UiElement>
+#pragma warning restore GU0025 // Seal type with overridden equality.
     {
         public UiElement(AutomationElement automationElement)
         {
