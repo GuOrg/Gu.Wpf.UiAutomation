@@ -5,7 +5,7 @@ namespace Gu.Wpf.UiAutomation.Tests.Extensions
     using NUnit.Framework;
 
     [TestFixture]
-    public class EnumeranbleExtTests
+    public class EnumerableExtTests
     {
         [TestCase("", false, 0)]
         [TestCase("1, 2", false, 0)]
