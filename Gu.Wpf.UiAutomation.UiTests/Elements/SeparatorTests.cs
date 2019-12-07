@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "SeparatorWindow"))
-            {
-                var window = app.MainWindow;
-                var separator = window.FindSeparator();
-                Assert.IsInstanceOf<Separator>(UiElement.FromAutomationElement(separator.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "SeparatorWindow");
+            var window = app.MainWindow;
+            var separator = window.FindSeparator();
+            Assert.IsInstanceOf<Separator>(UiElement.FromAutomationElement(separator.AutomationElement));
         }
     }
 }

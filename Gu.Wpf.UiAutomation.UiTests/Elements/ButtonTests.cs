@@ -20,12 +20,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("Content")]
         public void FindButton(string key)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton(key);
-                Assert.IsAssignableFrom<Button>(UiElement.FromAutomationElement(button.AutomationElement));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton(key);
+            Assert.IsAssignableFrom<Button>(UiElement.FromAutomationElement(button.AutomationElement));
         }
 
         [TestCase("AutomationId", "AutomationProperties.AutomationId")]
@@ -33,12 +31,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("Content", "Content")]
         public void Text(string key, string expected)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton(key);
-                Assert.AreEqual(expected, button.Text);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton(key);
+            Assert.AreEqual(expected, button.Text);
         }
 
         [TestCase("AutomationId", "AutomationProperties.AutomationId")]
@@ -46,12 +42,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("Content", "Content")]
         public void Content(string key, string expected)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton(key);
-                Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton(key);
+            Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
         }
 
         [TestCase("AutomationId")]
@@ -60,174 +54,154 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         public void FindButtonThrowsWhenNotFound(string key)
         {
             Retry.Time = TimeSpan.FromMilliseconds(10);
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                var window = app.MainWindow;
-                var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
-                Assert.AreEqual($"Did not find a Button matching ((ControlType == Button && IsTogglePatternAvailable == False) && (Name == {key} || AutomationId == {key})).", exception.Message);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            var window = app.MainWindow;
+            var exception = Assert.Throws<InvalidOperationException>(() => window.FindButton(key));
+            Assert.AreEqual($"Did not find a Button matching ((ControlType == Button && IsTogglePatternAvailable == False) && (Name == {key} || AutomationId == {key})).", exception.Message);
         }
 
         [Test]
         public void Click()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("1", textBlock.Text);
-            }
+            button.Click();
+            Assert.AreEqual("1", textBlock.Text);
         }
 
         [Test]
         public void ClickThrice()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("1", textBlock.Text);
+            button.Click();
+            Assert.AreEqual("1", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("2", textBlock.Text);
+            button.Click();
+            Assert.AreEqual("2", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("3", textBlock.Text);
-            }
+            button.Click();
+            Assert.AreEqual("3", textBlock.Text);
         }
 
         [Test]
         public void Invoke()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("1", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("1", textBlock.Text);
         }
 
         [Test]
         public void InvokeThrice()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("1", textBlock.Text);
+            button.Invoke();
+            Assert.AreEqual("1", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("2", textBlock.Text);
+            button.Invoke();
+            Assert.AreEqual("2", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("3", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("3", textBlock.Text);
         }
 
         [Test]
         public void ClickSleep()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Sleep Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Sleep Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("1", textBlock.Text);
-            }
+            button.Click();
+            Assert.AreEqual("1", textBlock.Text);
         }
 
         [Test]
         public void ClickSleepThrice()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Sleep Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Sleep Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("1", textBlock.Text);
+            button.Click();
+            Assert.AreEqual("1", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("2", textBlock.Text);
+            button.Invoke();
+            Assert.AreEqual("2", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("3", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("3", textBlock.Text);
         }
 
         [Test]
         public void InvokeSleep()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Sleep Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Sleep Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("1", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("1", textBlock.Text);
         }
 
         [Test]
         public void InvokeSleepThrice()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Sleep Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Sleep Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("1", textBlock.Text);
+            button.Invoke();
+            Assert.AreEqual("1", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("2", textBlock.Text);
+            button.Invoke();
+            Assert.AreEqual("2", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("3", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("3", textBlock.Text);
         }
 
         [Test]
         public void ClickThenInvoke()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                button.Click();
-                Assert.AreEqual("1", textBlock.Text);
+            button.Click();
+            Assert.AreEqual("1", textBlock.Text);
 
-                button.Invoke();
-                Assert.AreEqual("2", textBlock.Text);
-            }
+            button.Invoke();
+            Assert.AreEqual("2", textBlock.Text);
         }
 
         [Test]
@@ -259,20 +233,18 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void GetClickablePoint()
         {
-            using (var app = Application.Launch(ExeFileName, "ButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("Test Button");
-                var textBlock = window.FindTextBlock("CountTextBlock");
-                Assert.AreEqual("0", textBlock.Text);
+            using var app = Application.Launch(ExeFileName, "ButtonWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("Test Button");
+            var textBlock = window.FindTextBlock("CountTextBlock");
+            Assert.AreEqual("0", textBlock.Text);
 
-                Mouse.LeftClick(button.GetClickablePoint());
-                Assert.AreEqual("1", textBlock.Text);
+            Mouse.LeftClick(button.GetClickablePoint());
+            Assert.AreEqual("1", textBlock.Text);
 
-                Assert.AreEqual(true, button.TryGetClickablePoint(out var p));
-                Mouse.LeftClick(p);
-                Assert.AreEqual("2", textBlock.Text);
-            }
+            Assert.AreEqual(true, button.TryGetClickablePoint(out var p));
+            Mouse.LeftClick(p);
+            Assert.AreEqual("2", textBlock.Text);
         }
     }
 }

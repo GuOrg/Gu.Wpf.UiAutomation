@@ -41,40 +41,38 @@ namespace Gu.Wpf.UiAutomation.UiTests
                 Assert.Inconclusive("Bug in store calc.");
             }
 
-            using (var app = StartApplication())
+            using var app = StartApplication();
+            // Looks like it can take a long time on CI
+            app.WaitForMainWindow(TimeSpan.FromSeconds(30));
+            var window = app.MainWindow;
+            var calc = WindowsVersion.IsWindows10()
+                ? (ICalculator)new Win10Calc(window)
+                : new LegacyCalc(window);
+            Wait.For(TimeSpan.FromMilliseconds(200));
+
+            // Switch to default mode
+            Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
+            window.WaitUntilResponsive();
+
+            // Simple addition
+            calc.Button1.Click();
+            calc.Button2.Click();
+            calc.Button3.Click();
+            calc.Button4.Click();
+            calc.ButtonAdd.Click();
+            calc.Button5.Click();
+            calc.Button6.Click();
+            calc.Button7.Click();
+            calc.Button8.Click();
+            calc.ButtonEquals.Click();
+            app.WaitWhileBusy();
+            var result = calc.Result;
+            Assert.AreEqual("6912", result);
+
+            // Date comparison
+            using (Keyboard.Hold(Key.CONTROL))
             {
-                // Looks like it can take a long time on CI
-                app.WaitForMainWindow(TimeSpan.FromSeconds(30));
-                var window = app.MainWindow;
-                var calc = WindowsVersion.IsWindows10()
-                    ? (ICalculator)new Win10Calc(window)
-                    : new LegacyCalc(window);
-                Wait.For(TimeSpan.FromMilliseconds(200));
-
-                // Switch to default mode
-                Keyboard.TypeSimultaneously(Key.ALT, Key.KEY_1);
-                window.WaitUntilResponsive();
-
-                // Simple addition
-                calc.Button1.Click();
-                calc.Button2.Click();
-                calc.Button3.Click();
-                calc.Button4.Click();
-                calc.ButtonAdd.Click();
-                calc.Button5.Click();
-                calc.Button6.Click();
-                calc.Button7.Click();
-                calc.Button8.Click();
-                calc.ButtonEquals.Click();
-                app.WaitWhileBusy();
-                var result = calc.Result;
-                Assert.AreEqual("6912", result);
-
-                // Date comparison
-                using (Keyboard.Hold(Key.CONTROL))
-                {
-                    Keyboard.Type(Key.KEY_E);
-                }
+                Keyboard.Type(Key.KEY_E);
             }
         }
 

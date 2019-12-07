@@ -18,96 +18,86 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("Content")]
         public void FindToggleButton(string key)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton(key);
-                Assert.IsInstanceOf<ToggleButton>(UiElement.FromAutomationElement(toggleButton.AutomationElement));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
+            var window = app.MainWindow;
+            var toggleButton = window.FindToggleButton(key);
+            Assert.IsInstanceOf<ToggleButton>(UiElement.FromAutomationElement(toggleButton.AutomationElement));
         }
 
         [Test]
         public void IsChecked()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton("Test ToggleButton");
-                toggleButton.IsChecked = true;
-                Assert.AreEqual(true, toggleButton.IsChecked);
+            using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
+            var window = app.MainWindow;
+            var toggleButton = window.FindToggleButton("Test ToggleButton");
+            toggleButton.IsChecked = true;
+            Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.IsChecked = false;
-                Assert.AreEqual(false, toggleButton.IsChecked);
+            toggleButton.IsChecked = false;
+            Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.IsChecked = true;
-                Assert.AreEqual(true, toggleButton.IsChecked);
+            toggleButton.IsChecked = true;
+            Assert.AreEqual(true, toggleButton.IsChecked);
 
-                var exception = Assert.Throws<UiAutomationException>(() => toggleButton.IsChecked = null);
-                Assert.AreEqual($"Setting ToggleButton Test ToggleButton.IsChecked to null failed.", exception.Message);
-            }
+            var exception = Assert.Throws<UiAutomationException>(() => toggleButton.IsChecked = null);
+            Assert.AreEqual($"Setting ToggleButton Test ToggleButton.IsChecked to null failed.", exception.Message);
         }
 
         [Test]
         public void ThreeStateIsChecked()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
-                toggleButton.IsChecked = true;
-                Assert.AreEqual(true, toggleButton.IsChecked);
+            using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
+            var window = app.MainWindow;
+            var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
+            toggleButton.IsChecked = true;
+            Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.IsChecked = false;
-                Assert.AreEqual(false, toggleButton.IsChecked);
+            toggleButton.IsChecked = false;
+            Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.IsChecked = null;
-                Assert.AreEqual(null, toggleButton.IsChecked);
+            toggleButton.IsChecked = null;
+            Assert.AreEqual(null, toggleButton.IsChecked);
 
-                toggleButton.IsChecked = true;
-                Assert.AreEqual(true, toggleButton.IsChecked);
-            }
+            toggleButton.IsChecked = true;
+            Assert.AreEqual(true, toggleButton.IsChecked);
         }
 
         [Test]
         public void Click()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton("Test ToggleButton");
-                toggleButton.IsChecked = false;
-                Assert.AreEqual(false, toggleButton.IsChecked);
+            using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
+            var window = app.MainWindow;
+            var toggleButton = window.FindToggleButton("Test ToggleButton");
+            toggleButton.IsChecked = false;
+            Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(true, toggleButton.IsChecked);
+            toggleButton.Click();
+            Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(false, toggleButton.IsChecked);
+            toggleButton.Click();
+            Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(true, toggleButton.IsChecked);
-            }
+            toggleButton.Click();
+            Assert.AreEqual(true, toggleButton.IsChecked);
         }
 
         [Test]
         public void ThreeStateClick()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow"))
-            {
-                var window = app.MainWindow;
-                var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
-                toggleButton.IsChecked = false;
-                Assert.AreEqual(false, toggleButton.IsChecked);
+            using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
+            var window = app.MainWindow;
+            var toggleButton = window.FindToggleButton("3-Way Test ToggleButton");
+            toggleButton.IsChecked = false;
+            Assert.AreEqual(false, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(true, toggleButton.IsChecked);
+            toggleButton.Click();
+            Assert.AreEqual(true, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(null, toggleButton.IsChecked);
+            toggleButton.Click();
+            Assert.AreEqual(null, toggleButton.IsChecked);
 
-                toggleButton.Click();
-                Assert.AreEqual(false, toggleButton.IsChecked);
-            }
+            toggleButton.Click();
+            Assert.AreEqual(false, toggleButton.IsChecked);
         }
     }
 }

@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "FrameWindow"))
-            {
-                var window = app.MainWindow;
-                var frame = window.FindFrame();
-                Assert.IsInstanceOf<Frame>(UiElement.FromAutomationElement(frame.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "FrameWindow");
+            var window = app.MainWindow;
+            var frame = window.FindFrame();
+            Assert.IsInstanceOf<Frame>(UiElement.FromAutomationElement(frame.AutomationElement));
         }
     }
 }

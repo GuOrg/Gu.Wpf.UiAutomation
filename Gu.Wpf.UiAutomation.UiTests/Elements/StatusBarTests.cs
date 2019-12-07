@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "StatusBarWindow"))
-            {
-                var window = app.MainWindow;
-                var statusBar = window.FindStatusBar();
-                Assert.IsInstanceOf<StatusBar>(UiElement.FromAutomationElement(statusBar.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "StatusBarWindow");
+            var window = app.MainWindow;
+            var statusBar = window.FindStatusBar();
+            Assert.IsInstanceOf<StatusBar>(UiElement.FromAutomationElement(statusBar.AutomationElement));
         }
     }
 }

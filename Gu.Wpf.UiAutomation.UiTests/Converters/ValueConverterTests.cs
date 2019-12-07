@@ -10,34 +10,28 @@ namespace Gu.Wpf.UiAutomation.UiTests.Converters
         [Test]
         public void CheckBoxControlType()
         {
-            using (var app = Application.Launch(ExeFileName))
-            {
-                var window = app.MainWindow;
-                var checkBox = window.FindCheckBox("Test Checkbox");
-                Assert.AreEqual(ControlType.CheckBox, checkBox.ControlType);
-            }
+            using var app = Application.Launch(ExeFileName);
+            var window = app.MainWindow;
+            var checkBox = window.FindCheckBox("Test Checkbox");
+            Assert.AreEqual(ControlType.CheckBox, checkBox.ControlType);
         }
 
         [Test]
         public void CheckBoxIsChecked()
         {
-            using (var app = Application.Launch(ExeFileName))
-            {
-                var window = app.MainWindow;
-                var checkBox = window.FindCheckBox("Test Checkbox");
-                Assert.AreEqual(false, checkBox.IsChecked);
-            }
+            using var app = Application.Launch(ExeFileName);
+            var window = app.MainWindow;
+            var checkBox = window.FindCheckBox("Test Checkbox");
+            Assert.AreEqual(false, checkBox.IsChecked);
         }
 
         [Test]
         public void CheckBoxBounds()
         {
-            using (var app = Application.Launch(ExeFileName))
-            {
-                var window = app.MainWindow;
-                var checkBox = window.FindCheckBox("Test Checkbox");
-                Assert.IsInstanceOf<System.Windows.Rect>(checkBox.Bounds);
-            }
+            using var app = Application.Launch(ExeFileName);
+            var window = app.MainWindow;
+            var checkBox = window.FindCheckBox("Test Checkbox");
+            Assert.IsInstanceOf<System.Windows.Rect>(checkBox.Bounds);
         }
     }
 }

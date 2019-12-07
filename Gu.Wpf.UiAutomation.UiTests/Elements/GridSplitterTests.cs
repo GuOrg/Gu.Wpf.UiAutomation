@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "GridSplitterWindow"))
-            {
-                var window = app.MainWindow;
-                var gridSplitter = window.FindGridSplitter();
-                Assert.IsInstanceOf<GridSplitter>(UiElement.FromAutomationElement(gridSplitter.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "GridSplitterWindow");
+            var window = app.MainWindow;
+            var gridSplitter = window.FindGridSplitter();
+            Assert.IsInstanceOf<GridSplitter>(UiElement.FromAutomationElement(gridSplitter.AutomationElement));
         }
     }
 }

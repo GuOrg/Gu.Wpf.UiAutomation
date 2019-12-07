@@ -15,40 +15,34 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void FromAutomationElement()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow"))
-            {
-                var window = app.MainWindow;
-                window.FindButton("Show OpenFileDialog").Click();
-                var dialog = window.FindOpenFileDialog();
-                dialog.Close();
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow");
+            var window = app.MainWindow;
+            window.FindButton("Show OpenFileDialog").Click();
+            var dialog = window.FindOpenFileDialog();
+            dialog.Close();
         }
 
         [Test]
         public void FileTextBox()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow"))
-            {
-                var window = app.MainWindow;
-                window.FindButton("Show OpenFileDialog").Click();
-                var dialog = window.FindOpenFileDialog();
-                Assert.NotNull(dialog.FileTextBox);
-                dialog.SetFileName("C:\\Temp\\Foo.txt");
-                dialog.Close();
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow");
+            var window = app.MainWindow;
+            window.FindButton("Show OpenFileDialog").Click();
+            var dialog = window.FindOpenFileDialog();
+            Assert.NotNull(dialog.FileTextBox);
+            dialog.SetFileName("C:\\Temp\\Foo.txt");
+            dialog.Close();
         }
 
         [Test]
         public void OpenButton()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow"))
-            {
-                var window = app.MainWindow;
-                window.FindButton("Show OpenFileDialog").Click();
-                var dialog = window.FindOpenFileDialog();
-                Assert.NotNull(dialog.OpenButton);
-                dialog.Close();
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "DialogWindow");
+            var window = app.MainWindow;
+            window.FindButton("Show OpenFileDialog").Click();
+            var dialog = window.FindOpenFileDialog();
+            Assert.NotNull(dialog.OpenButton);
+            dialog.Close();
         }
     }
 }

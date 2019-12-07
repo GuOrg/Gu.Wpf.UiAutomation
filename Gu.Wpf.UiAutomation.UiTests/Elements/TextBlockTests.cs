@@ -17,13 +17,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("Content", "Content")]
         public void FindTextBlock(string key, string expected)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBlockWindow"))
-            {
-                var window = app.MainWindow;
-                var textBlock = window.FindTextBlock(key);
-                Assert.AreEqual(expected, textBlock.Text);
-                Assert.IsInstanceOf<TextBlock>(UiElement.FromAutomationElement(textBlock.AutomationElement));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "TextBlockWindow");
+            var window = app.MainWindow;
+            var textBlock = window.FindTextBlock(key);
+            Assert.AreEqual(expected, textBlock.Text);
+            Assert.IsInstanceOf<TextBlock>(UiElement.FromAutomationElement(textBlock.AutomationElement));
         }
     }
 }

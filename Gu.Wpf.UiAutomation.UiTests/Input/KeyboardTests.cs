@@ -13,40 +13,34 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void TypeKeysThenBackspace()
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                Keyboard.Type("abc");
-                Keyboard.Type(Key.BACK);
-                var textBox = window.FindTextBox();
-                window.WaitUntilResponsive();
-                Assert.AreEqual("ab", textBox.Text);
-            }
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            Keyboard.Type("abc");
+            Keyboard.Type(Key.BACK);
+            var textBox = window.FindTextBox();
+            window.WaitUntilResponsive();
+            Assert.AreEqual("ab", textBox.Text);
         }
 
         [TestCase(Key.KEY_Z, "z")]
         public void TypeKey(Key key, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
-            {
-                var mainWindow = app.MainWindow;
-                Keyboard.Type(key);
-                var textBox = mainWindow.FindTextBox();
-                Assert.AreEqual(expected, textBox.Text);
-            }
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var mainWindow = app.MainWindow;
+            Keyboard.Type(key);
+            var textBox = mainWindow.FindTextBox();
+            Assert.AreEqual(expected, textBox.Text);
         }
 
         [TestCase(new[] { Key.KEY_Z }, "z")]
         [TestCase(new[] { Key.KEY_Z, Key.KEY_Z, Key.KEY_Z }, "zzz")]
         public void TypeKeys(Key[] keys, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
-            {
-                var mainWindow = app.MainWindow;
-                Keyboard.Type(keys);
-                var textBox = mainWindow.FindTextBox();
-                Assert.AreEqual(expected, textBox.Text);
-            }
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var mainWindow = app.MainWindow;
+            Keyboard.Type(keys);
+            var textBox = mainWindow.FindTextBox();
+            Assert.AreEqual(expected, textBox.Text);
         }
 
         [TestCase("abc")]
@@ -54,47 +48,41 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [TestCase("ঋ ঌ এ ঐ ও ঔ ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ")]
         public void TypeString(string text)
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
-            {
-                var mainWindow = app.MainWindow;
-                Keyboard.Type(text);
-                var textBox = mainWindow.FindTextBox();
-                Wait.UntilInputIsProcessed();
-                Assert.AreEqual(text, textBox.Text);
-            }
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var mainWindow = app.MainWindow;
+            Keyboard.Type(text);
+            var textBox = mainWindow.FindTextBox();
+            Wait.UntilInputIsProcessed();
+            Assert.AreEqual(text, textBox.Text);
         }
 
         [TestCase(Key.KEY_Z, "Z")]
         public void TypeKeyWhileHoldingShift(Key key, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var mainWindow = app.MainWindow;
+            using (Keyboard.Hold(Key.SHIFT))
             {
-                var mainWindow = app.MainWindow;
-                using (Keyboard.Hold(Key.SHIFT))
-                {
-                    Keyboard.Type(key);
-                }
-
-                var textBox = mainWindow.FindTextBox();
-                Assert.AreEqual(expected, textBox.Text);
+                Keyboard.Type(key);
             }
+
+            var textBox = mainWindow.FindTextBox();
+            Assert.AreEqual(expected, textBox.Text);
         }
 
         [TestCase(ScanCodeShort.KEY_A, false, "a")]
         public void PressScanCode(ScanCodeShort scanCode, bool isExtendedKey, string expected)
         {
-            using (var app = Application.Launch(ExeFileName, WindowName))
-            {
-                var mainWindow = app.MainWindow;
+            using var app = Application.Launch(ExeFileName, WindowName);
+            var mainWindow = app.MainWindow;
 #pragma warning disable CS0618 // Type or member is obsolete
-                Keyboard.PressScanCode((ushort)scanCode, isExtendedKey);
+            Keyboard.PressScanCode((ushort)scanCode, isExtendedKey);
 #pragma warning restore CS0618 // Type or member is obsolete
-                Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
-                Wait.UntilInputIsProcessed();
-                var textBox = mainWindow.FindTextBox();
-                Wait.For(TimeSpan.FromMilliseconds(20));
-                Assert.AreEqual(expected, textBox.Text);
-            }
+            Keyboard.ReleaseScanCode((ushort)scanCode, isExtendedKey);
+            Wait.UntilInputIsProcessed();
+            var textBox = mainWindow.FindTextBox();
+            Wait.For(TimeSpan.FromMilliseconds(20));
+            Assert.AreEqual(expected, textBox.Text);
         }
     }
 }

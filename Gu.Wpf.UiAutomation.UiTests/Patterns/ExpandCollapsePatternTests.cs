@@ -10,20 +10,18 @@
         [Test]
         public void ExpanderTest()
         {
-            using (var app = Application.Launch(ExeFileName, "ExpanderWindow"))
-            {
-                var window = app.MainWindow;
-                var expander = window.FindExpander();
-                Assert.NotNull(expander);
-                var ecp = expander.AutomationElement.ExpandCollapsePattern();
-                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
+            using var app = Application.Launch(ExeFileName, "ExpanderWindow");
+            var window = app.MainWindow;
+            var expander = window.FindExpander();
+            Assert.NotNull(expander);
+            var ecp = expander.AutomationElement.ExpandCollapsePattern();
+            Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
 
-                ecp.Collapse();
-                Assert.AreEqual(ExpandCollapseState.Collapsed, ecp.Current.ExpandCollapseState);
+            ecp.Collapse();
+            Assert.AreEqual(ExpandCollapseState.Collapsed, ecp.Current.ExpandCollapseState);
 
-                ecp.Expand();
-                Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
-            }
+            ecp.Expand();
+            Assert.AreEqual(ExpandCollapseState.Expanded, ecp.Current.ExpandCollapseState);
         }
     }
 }

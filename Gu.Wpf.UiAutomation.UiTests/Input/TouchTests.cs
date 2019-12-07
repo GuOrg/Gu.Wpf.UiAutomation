@@ -24,13 +24,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [SetUp]
         public void SetUp()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                window.WaitUntilResponsive();
-                window.FindButton("Clear").Invoke();
-                window.WaitUntilResponsive();
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            window.WaitUntilResponsive();
+            window.FindButton("Clear").Invoke();
+            window.WaitUntilResponsive();
         }
 
         [OneTimeTearDown]
@@ -42,157 +40,148 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         [Test]
         public void Tap()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                Touch.Tap(area.Bounds.Center());
-                var expected = WindowsVersion.IsWindows10()
-                    ? new[]
-                    {
-                        "TouchEnter Position: 250,300",
-                        "PreviewTouchDown Position: 250,300",
-                        "TouchDown Position: 250,300",
-                        "ManipulationStarting",
-                        "ManipulationStarted",
-                        "PreviewTouchUp Position: 250,300",
-                        "TouchUp Position: 250,300",
-                        "ManipulationInertiaStarting",
-                        "ManipulationCompleted",
-                        "TouchLeave Position: 250,300",
-                    }
-                    : new[]
-                    {
-                        "TouchEnter Position: 249,299", "PreviewTouchDown Position: 249,299",
-                        "TouchDown Position: 249,299", "ManipulationStarting", "ManipulationStarted",
-                        "PreviewTouchUp Position: 249,299", "TouchUp Position: 249,299",
-                        "ManipulationInertiaStarting", "ManipulationCompleted", "TouchLeave Position: 249,299",
-                    };
-
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-            }
-        }
-
-        [Test]
-        public void Drag()
-        {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-
-                Touch.Drag(area.Bounds.Center(), area.Bounds.Center() + new Vector(10, 10));
-                var expected = new[]
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            Touch.Tap(area.Bounds.Center());
+            var expected = WindowsVersion.IsWindows10()
+                ? new[]
                 {
                     "TouchEnter Position: 250,300",
                     "PreviewTouchDown Position: 250,300",
                     "TouchDown Position: 250,300",
                     "ManipulationStarting",
                     "ManipulationStarted",
-                    "PreviewTouchMove Position: 260,310",
-                    "TouchMove Position: 260,310",
-                    "ManipulationDelta",
-                    "PreviewTouchUp Position: 260,310",
-                    "TouchUp Position: 260,310",
+                    "PreviewTouchUp Position: 250,300",
+                    "TouchUp Position: 250,300",
                     "ManipulationInertiaStarting",
                     "ManipulationCompleted",
-                    "TouchLeave Position: 260,310",
+                    "TouchLeave Position: 250,300",
+                }
+                : new[]
+                {
+                    "TouchEnter Position: 249,299", "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299", "ManipulationStarting", "ManipulationStarted",
+                    "PreviewTouchUp Position: 249,299", "TouchUp Position: 249,299",
+                    "ManipulationInertiaStarting", "ManipulationCompleted", "TouchLeave Position: 249,299",
                 };
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-            }
+
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+        }
+
+        [Test]
+        public void Drag()
+        {
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+
+            Touch.Drag(area.Bounds.Center(), area.Bounds.Center() + new Vector(10, 10));
+            var expected = new[]
+            {
+                "TouchEnter Position: 250,300",
+                "PreviewTouchDown Position: 250,300",
+                "TouchDown Position: 250,300",
+                "ManipulationStarting",
+                "ManipulationStarted",
+                "PreviewTouchMove Position: 260,310",
+                "TouchMove Position: 260,310",
+                "ManipulationDelta",
+                "PreviewTouchUp Position: 260,310",
+                "TouchUp Position: 260,310",
+                "ManipulationInertiaStarting",
+                "ManipulationCompleted",
+                "TouchLeave Position: 260,310",
+            };
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
         [TestCase(0)]
         [TestCase(200)]
         public void DragWithDuration(int milliseconds)
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+
+            Touch.Drag(area.Bounds.Center(), area.Bounds.Center() + new Vector(10, 10), TimeSpan.FromMilliseconds(milliseconds));
+
+            var expected = new[]
             {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-
-                Touch.Drag(area.Bounds.Center(), area.Bounds.Center() + new Vector(10, 10), TimeSpan.FromMilliseconds(milliseconds));
-
-                var expected = new[]
-                {
-                    "TouchEnter Position: 250,300",
-                    "PreviewTouchDown Position: 250,300",
-                    "TouchDown Position: 250,300",
-                    "ManipulationStarting",
-                    "ManipulationStarted",
-                    "PreviewTouchMove Position: 260,310",
-                    "TouchMove Position: 260,310",
-                    "ManipulationDelta",
-                    "PreviewTouchUp Position: 260,310",
-                    "TouchUp Position: 260,310",
-                    "ManipulationInertiaStarting",
-                    "ManipulationCompleted",
-                    "TouchLeave Position: 260,310",
-                };
-                if (milliseconds == 0)
-                {
-                    CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-                }
-                else
-                {
-                    // CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-                }
+                "TouchEnter Position: 250,300",
+                "PreviewTouchDown Position: 250,300",
+                "TouchDown Position: 250,300",
+                "ManipulationStarting",
+                "ManipulationStarted",
+                "PreviewTouchMove Position: 260,310",
+                "TouchMove Position: 260,310",
+                "ManipulationDelta",
+                "PreviewTouchUp Position: 260,310",
+                "TouchUp Position: 260,310",
+                "ManipulationInertiaStarting",
+                "ManipulationCompleted",
+                "TouchLeave Position: 260,310",
+            };
+            if (milliseconds == 0)
+            {
+                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+            }
+            else
+            {
+                // CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
             }
         }
 
         [Test]
         public void DragTo()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            using (Touch.Hold(area.Bounds.Center()))
             {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                using (Touch.Hold(area.Bounds.Center()))
-                {
-                    Touch.DragTo(area.Bounds.Center() + new Vector(10, 10));
-                }
-
-                var expected = new[]
-                {
-                    "TouchEnter Position: 250,300",
-                    "PreviewTouchDown Position: 250,300",
-                    "TouchDown Position: 250,300",
-                    "ManipulationStarting",
-                    "ManipulationStarted",
-                    "PreviewTouchMove Position: 250,300",
-                    "TouchMove Position: 250,300",
-                    "PreviewTouchMove Position: 260,310",
-                    "TouchMove Position: 260,310",
-                    "ManipulationDelta",
-                    "PreviewTouchUp Position: 260,310",
-                    "TouchUp Position: 260,310",
-                    "ManipulationInertiaStarting",
-                    "ManipulationCompleted",
-                    "TouchLeave Position: 260,310",
-                };
-
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+                Touch.DragTo(area.Bounds.Center() + new Vector(10, 10));
             }
+
+            var expected = new[]
+            {
+                "TouchEnter Position: 250,300",
+                "PreviewTouchDown Position: 250,300",
+                "TouchDown Position: 250,300",
+                "ManipulationStarting",
+                "ManipulationStarted",
+                "PreviewTouchMove Position: 250,300",
+                "TouchMove Position: 250,300",
+                "PreviewTouchMove Position: 260,310",
+                "TouchMove Position: 260,310",
+                "ManipulationDelta",
+                "PreviewTouchUp Position: 260,310",
+                "TouchUp Position: 260,310",
+                "ManipulationInertiaStarting",
+                "ManipulationCompleted",
+                "TouchLeave Position: 260,310",
+            };
+
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
         [Test]
         public void TwoFingers()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                var cp = area.Bounds.Center();
-                Touch.Multi(
-                    new TwoFingers(cp + new Vector(-100, 0), cp + new Vector(100, 0)),
-                    new TwoFingers(cp + new Vector(-50, 0), cp + new Vector(50, 0)),
-                    TimeSpan.FromMilliseconds(10));
-                var expected = WindowsVersion.IsWindows10()
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            var cp = area.Bounds.Center();
+            Touch.Multi(
+                new TwoFingers(cp + new Vector(-100, 0), cp + new Vector(100, 0)),
+                new TwoFingers(cp + new Vector(-50, 0), cp + new Vector(50, 0)),
+                TimeSpan.FromMilliseconds(10));
+            var expected = WindowsVersion.IsWindows10()
                 ? new[]
                 {
                     "TouchEnter Position: 150,300",
@@ -241,21 +230,19 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "ManipulationCompleted",
                     "TouchLeave Position: 299,299",
                 };
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-            }
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
         [Test]
         public void Pinch()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                var cp = area.Bounds.Center();
-                Touch.Pinch(cp, 100, 50, TimeSpan.FromMilliseconds(10));
-                var expected = WindowsVersion.IsWindows10()
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            var cp = area.Bounds.Center();
+            Touch.Pinch(cp, 100, 50, TimeSpan.FromMilliseconds(10));
+            var expected = WindowsVersion.IsWindows10()
                 ? new[]
                 {
                     "TouchEnter Position: 320,370",
@@ -305,8 +292,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: 213,263",
                 };
 
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
-            }
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
         [Test]
@@ -318,13 +304,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Assert.Inconclusive("Not sure why this breaks on CI.");
             }
 
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                Touch.Tap(area.Bounds.Center());
-                var expected = WindowsVersion.IsWindows10()
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            Touch.Tap(area.Bounds.Center());
+            var expected = WindowsVersion.IsWindows10()
                 ? new[]
                 {
                     "TouchEnter Position: 250,300",
@@ -351,13 +336,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "ManipulationCompleted",
                     "TouchLeave Position: 249,299",
                 };
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
 
-                window.FindButton("Clear").Click(moveMouse: true);
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(events.Items);
-                Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
-            }
+            window.FindButton("Clear").Click(moveMouse: true);
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(events.Items);
+            Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
         }
 
         [Test]
@@ -369,13 +353,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 Assert.Inconclusive("Not sure why this breaks on AppVeyor.");
             }
 
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var area = window.FindGroupBox("Touch area");
-                var events = window.FindListBox("Events");
-                Touch.Tap(area.Bounds.Center());
-                var expected = WindowsVersion.IsWindows10()
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var area = window.FindGroupBox("Touch area");
+            var events = window.FindListBox("Events");
+            Touch.Tap(area.Bounds.Center());
+            var expected = WindowsVersion.IsWindows10()
                 ? new[]
                 {
                     "TouchEnter Position: 250,300",
@@ -403,13 +386,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: 249,299",
                 };
 
-                CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+            CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
 
-                window.FindButton("Clear").Click();
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(events.Items);
-                Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
-            }
+            window.FindButton("Clear").Click();
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(events.Items);
+            Assert.AreEqual(CursorState.CURSOR_SHOWING, Mouse.GetCursorState());
         }
 
         // ReSharper disable once UnusedMember.Local

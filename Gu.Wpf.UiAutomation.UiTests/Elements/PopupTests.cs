@@ -9,38 +9,34 @@
         [Test]
         public void CheckBoxInPopupTest()
         {
-            using (var app = Application.Launch(ExeFileName, "PopupWindow"))
-            {
-                var window = app.MainWindow;
-                var btn = window.FindToggleButton("PopupToggleButton1");
-                btn.Click();
-                Wait.UntilInputIsProcessed();
-                var popup = window.Popup;
-                Assert.NotNull(popup);
-                var popupChildren = popup.FindAllChildren();
-                Assert.AreEqual(1, popupChildren.Count);
-                var check = (CheckBox)popupChildren[0];
-                Assert.AreEqual("This is a popup", check.Text);
-            }
+            using var app = Application.Launch(ExeFileName, "PopupWindow");
+            var window = app.MainWindow;
+            var btn = window.FindToggleButton("PopupToggleButton1");
+            btn.Click();
+            Wait.UntilInputIsProcessed();
+            var popup = window.Popup;
+            Assert.NotNull(popup);
+            var popupChildren = popup.FindAllChildren();
+            Assert.AreEqual(1, popupChildren.Count);
+            var check = (CheckBox)popupChildren[0];
+            Assert.AreEqual("This is a popup", check.Text);
         }
 
         [Test]
         public void MenuInPopupTest()
         {
-            using (var app = Application.Launch(ExeFileName, "PopupWindow"))
-            {
-                var window = app.MainWindow;
-                var btn = window.FindToggleButton("PopupToggleButton2");
-                btn.Click();
-                Wait.UntilInputIsProcessed();
-                var popup = window.Popup;
-                var popupChildren = popup.FindAllChildren();
-                Assert.AreEqual(1, popupChildren.Count);
-                var menu = (Menu)popupChildren[0];
-                Assert.AreEqual(1, menu.Items.Count);
-                var menuItem = menu.Items[0];
-                Assert.AreEqual("Some MenuItem", menuItem.Text);
-            }
+            using var app = Application.Launch(ExeFileName, "PopupWindow");
+            var window = app.MainWindow;
+            var btn = window.FindToggleButton("PopupToggleButton2");
+            btn.Click();
+            Wait.UntilInputIsProcessed();
+            var popup = window.Popup;
+            var popupChildren = popup.FindAllChildren();
+            Assert.AreEqual(1, popupChildren.Count);
+            var menu = (Menu)popupChildren[0];
+            Assert.AreEqual(1, menu.Items.Count);
+            var menuItem = menu.Items[0];
+            Assert.AreEqual("Some MenuItem", menuItem.Text);
         }
     }
 }

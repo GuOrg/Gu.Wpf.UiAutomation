@@ -26,38 +26,32 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             [Test]
             public void FromPoint()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow"))
-                {
-                    var window = app.MainWindow;
-                    var button = window.FindButton("EmptyButton");
-                    var fromPoint = (Button)UiElement.FromPoint(button.GetClickablePoint());
-                    Assert.AreEqual(button.Text, fromPoint.Text);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow");
+                var window = app.MainWindow;
+                var button = window.FindButton("EmptyButton");
+                var fromPoint = (Button)UiElement.FromPoint(button.GetClickablePoint());
+                Assert.AreEqual(button.Text, fromPoint.Text);
             }
 
             [Test]
             public void FocusedElement()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var textBox = window.FindTextBox();
-                    textBox.Text = "focused";
-                    textBox.Focus();
-                    var fromPoint = (TextBox)window.FocusedElement();
-                    Assert.AreEqual("focused", fromPoint.Text);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow");
+                var window = app.MainWindow;
+                var textBox = window.FindTextBox();
+                textBox.Text = "focused";
+                textBox.Focus();
+                var fromPoint = (TextBox)window.FocusedElement();
+                Assert.AreEqual("focused", fromPoint.Text);
             }
 
             [Test]
             public void FindCheckBox()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var checkBox = window.FindCheckBox();
-                    Assert.IsInstanceOf<CheckBox>(checkBox);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                var checkBox = window.FindCheckBox();
+                Assert.IsInstanceOf<CheckBox>(checkBox);
             }
 
             //// [TestCase("CheckBoxXName")]
@@ -65,12 +59,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             [TestCase("CheckBox1Content")]
             public void FindCheckBoxWithXNameAndAutomationId(string key)
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "FindWindow"))
-                {
-                    var window = app.MainWindow;
-                    var checkBox = window.FindCheckBox(key);
-                    Assert.NotNull(checkBox);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "FindWindow");
+                var window = app.MainWindow;
+                var checkBox = window.FindCheckBox(key);
+                Assert.NotNull(checkBox);
             }
 
             [TestCase(null)]
@@ -96,78 +88,68 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             [Test]
             public void FindFirstChild()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var child = window.FindFirstChild();
-                    Assert.AreEqual("ControlType.TitleBar", child.ControlType.ProgrammaticName);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                var child = window.FindFirstChild();
+                Assert.AreEqual("ControlType.TitleBar", child.ControlType.ProgrammaticName);
             }
 
             [Test]
             public void FindFirstChildWithWrap()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var child = window.FindFirstChild(x => new CheckBox(x));
-                    Assert.AreEqual(ControlType.TitleBar, child.ControlType);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                var child = window.FindFirstChild(x => new CheckBox(x));
+                Assert.AreEqual(ControlType.TitleBar, child.ControlType);
             }
 
             [TestCaseSource(nameof(FindAtCases))]
             public void FindAt(int index, ControlType expected)
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var child = window.FindAt(TreeScope.Descendants, Conditions.TrueCondition, index, TimeSpan.FromMilliseconds(100));
-                    Assert.AreEqual(expected, child.ControlType);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                var child = window.FindAt(TreeScope.Descendants, Conditions.TrueCondition, index, TimeSpan.FromMilliseconds(100));
+                Assert.AreEqual(expected, child.ControlType);
             }
 
             [Test]
             public void FindAtWithWrap()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    var child = window.FindAt(
-                        TreeScope.Descendants,
-                        Conditions.CheckBox,
-                        1,
-                        x => new CheckBox(x),
-                        TimeSpan.FromMilliseconds(100));
-                    Assert.IsInstanceOf<CheckBox>(child);
-                    Assert.AreEqual("XName", child.AutomationId);
-                }
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                var child = window.FindAt(
+                    TreeScope.Descendants,
+                    Conditions.CheckBox,
+                    1,
+                    x => new CheckBox(x),
+                    TimeSpan.FromMilliseconds(100));
+                Assert.IsInstanceOf<CheckBox>(child);
+                Assert.AreEqual("XName", child.AutomationId);
             }
 
             [Test]
             public void TryFindAtWithWrap()
             {
-                using (var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow"))
-                {
-                    var window = app.MainWindow;
-                    Assert.AreEqual(true, window.TryFindAt(
-                        TreeScope.Descendants,
-                        Conditions.CheckBox,
-                        1,
-                        x => new CheckBox(x),
-                        TimeSpan.FromMilliseconds(100),
-                        out var child));
-                    Assert.IsInstanceOf<CheckBox>(child);
-                    Assert.AreEqual("XName", child.AutomationId);
+                using var app = Application.AttachOrLaunch(ExeFileName, "CheckBoxWindow");
+                var window = app.MainWindow;
+                Assert.AreEqual(true, window.TryFindAt(
+                    TreeScope.Descendants,
+                    Conditions.CheckBox,
+                    1,
+                    x => new CheckBox(x),
+                    TimeSpan.FromMilliseconds(100),
+                    out var child));
+                Assert.IsInstanceOf<CheckBox>(child);
+                Assert.AreEqual("XName", child.AutomationId);
 
-                    Assert.AreEqual(false, window.TryFindAt(
-                        TreeScope.Descendants,
-                        Conditions.CheckBox,
-                        100,
-                        x => new CheckBox(x),
-                        TimeSpan.FromMilliseconds(100),
-                        out child));
-                    Assert.IsNull(child);
-                }
+                Assert.AreEqual(false, window.TryFindAt(
+                    TreeScope.Descendants,
+                    Conditions.CheckBox,
+                    100,
+                    x => new CheckBox(x),
+                    TimeSpan.FromMilliseconds(100),
+                    out child));
+                Assert.IsNull(child);
             }
         }
     }

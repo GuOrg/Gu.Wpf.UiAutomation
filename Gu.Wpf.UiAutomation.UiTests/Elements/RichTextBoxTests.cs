@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "RichTextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var richTextBox = window.FindRichTextBox();
-                Assert.IsInstanceOf<RichTextBox>(UiElement.FromAutomationElement(richTextBox.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "RichTextBoxWindow");
+            var window = app.MainWindow;
+            var richTextBox = window.FindRichTextBox();
+            Assert.IsInstanceOf<RichTextBox>(UiElement.FromAutomationElement(richTextBox.AutomationElement));
         }
     }
 }

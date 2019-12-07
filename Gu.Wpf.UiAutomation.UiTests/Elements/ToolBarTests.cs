@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "ToolBarWindow"))
-            {
-                var window = app.MainWindow;
-                var toolBar = window.FindToolBar();
-                Assert.IsInstanceOf<ToolBar>(UiElement.FromAutomationElement(toolBar.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "ToolBarWindow");
+            var window = app.MainWindow;
+            var toolBar = window.FindToolBar();
+            Assert.IsInstanceOf<ToolBar>(UiElement.FromAutomationElement(toolBar.AutomationElement));
         }
     }
 }

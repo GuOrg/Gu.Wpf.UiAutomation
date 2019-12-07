@@ -16,25 +16,21 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeader);
-                Assert.IsInstanceOf<DataGridColumnHeader>(UiElement.FromAutomationElement(header.AutomationElement));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow");
+            var window = app.MainWindow;
+            var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeader);
+            Assert.IsInstanceOf<DataGridColumnHeader>(UiElement.FromAutomationElement(header.AutomationElement));
         }
 
         [Test]
         public void Properties()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow"))
-            {
-                var window = app.MainWindow;
-                var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeader);
-                Assert.AreEqual("IntValue", header.Text);
-                Assert.NotNull(header.LeftHeaderGripper);
-                Assert.NotNull(header.RightHeaderGripper);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SingleDataGridWindow");
+            var window = app.MainWindow;
+            var header = (DataGridColumnHeader)window.FindFirst(TreeScope.Descendants, Conditions.DataGridColumnHeader);
+            Assert.AreEqual("IntValue", header.Text);
+            Assert.NotNull(header.LeftHeaderGripper);
+            Assert.NotNull(header.RightHeaderGripper);
         }
     }
 }

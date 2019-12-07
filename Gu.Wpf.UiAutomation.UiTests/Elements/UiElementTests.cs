@@ -17,116 +17,98 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Parent()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                var parent = button.Parent;
-                Assert.AreEqual(window.AutomationElement, parent.AutomationElement);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            var parent = button.Parent;
+            Assert.AreEqual(window.AutomationElement, parent.AutomationElement);
         }
 
         [Test]
         public void Window()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                var buttonWindow = button.Window;
-                Assert.AreEqual(window.AutomationElement, buttonWindow.AutomationElement);
-                Assert.AreEqual(true, buttonWindow.IsMainWindow);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            var buttonWindow = button.Window;
+            Assert.AreEqual(window.AutomationElement, buttonWindow.AutomationElement);
+            Assert.AreEqual(true, buttonWindow.IsMainWindow);
         }
 
         [Test]
         public void IsKeyboardFocusable()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox();
-                Assert.AreEqual(true, textBox.IsKeyboardFocusable);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox();
+            Assert.AreEqual(true, textBox.IsKeyboardFocusable);
         }
 
         [Test]
         public void HasKeyboardFocus()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox();
-                Assert.AreEqual(false, textBox.HasKeyboardFocus);
+            using var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox();
+            Assert.AreEqual(false, textBox.HasKeyboardFocus);
 
-                textBox.Click();
-                Assert.AreEqual(true, textBox.HasKeyboardFocus);
+            textBox.Click();
+            Assert.AreEqual(true, textBox.HasKeyboardFocus);
 
-                Keyboard.ClearFocus();
-            }
+            Keyboard.ClearFocus();
         }
 
         [Test]
         public void Size()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                Assert.AreEqual(200, button.ActualWidth);
-                Assert.AreEqual(100, button.ActualHeight);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            Assert.AreEqual(200, button.ActualWidth);
+            Assert.AreEqual(100, button.ActualHeight);
         }
 
         [Test]
         public void RenderBounds()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            window.MoveTo(100, 200);
+            if (WindowsVersion.IsWindows7())
             {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                window.MoveTo(100, 200);
-                if (WindowsVersion.IsWindows7())
-                {
-                    Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
-                    Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
-                    Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
-                }
-                else
-                {
-                    Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
-                    Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
-                    Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
-                }
+                Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
+                Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
+                Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
+            }
+            else
+            {
+                Assert.AreEqual(new System.Windows.Rect(150, 311, 200, 100), button.Bounds);
+                Assert.AreEqual(new System.Windows.Rect(100, 200, 300, 300), window.Bounds);
+                Assert.AreEqual(new System.Windows.Rect(50, 111, 200, 100), button.RenderBounds);
             }
         }
 
         [Test]
         public void DrawHighlight()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                button.DrawHighlight();
-                var bounds = button.Bounds;
-                bounds.Inflate(2, 2);
-                using (var actual = Capture.Rectangle(bounds))
-                {
-                    ImageAssert.AreEqual(Properties.Resources.HiglightedButton, actual);
-                }
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            button.DrawHighlight();
+            var bounds = button.Bounds;
+            bounds.Inflate(2, 2);
+            using var actual = Capture.Rectangle(bounds);
+            ImageAssert.AreEqual(Properties.Resources.HiglightedButton, actual);
         }
 
         [Test]
         public void DrawHighlightBlocking()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("SizeButton");
-                button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(500));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("SizeButton");
+            button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(500));
         }
     }
 }

@@ -15,23 +15,19 @@
         [Test]
         public void FindButton()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ControlTemplateWindow"))
-            {
-                var window = app.MainWindow;
-                var button = window.FindButton("ButtonInControlTemplate");
-                Assert.NotNull(button);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ControlTemplateWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("ButtonInControlTemplate");
+            Assert.NotNull(button);
         }
 
         [Test]
         public void FindTextBlock()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "ControlTemplateWindow"))
-            {
-                var window = app.MainWindow;
-                var textBlock = window.FindTextBlock("TextBlockInControlTemplate");
-                Assert.NotNull(textBlock);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "ControlTemplateWindow");
+            var window = app.MainWindow;
+            var textBlock = window.FindTextBlock("TextBlockInControlTemplate");
+            Assert.NotNull(textBlock);
         }
     }
 }

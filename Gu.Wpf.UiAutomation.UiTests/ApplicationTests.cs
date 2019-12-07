@@ -18,26 +18,22 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void DisposeWhenClosed()
         {
-            using (var app = Application.Launch("notepad.exe"))
-            {
-                app.Close();
-            }
+            using var app = Application.Launch("notepad.exe");
+            app.Close();
         }
 
         [Test]
         public void Properties()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                Assert.AreEqual(app.MainWindow.NativeWindowHandle, app.MainWindowHandle);
-                Assert.AreNotEqual(IntPtr.Zero, app.MainWindowHandle);
-                Assert.NotZero(app.ProcessId);
-                Assert.AreEqual("WpfApplication", app.Name);
-                Assert.AreEqual(false, app.HasExited);
-                app.Close();
-                Assert.AreEqual(true, app.HasExited);
-                Assert.AreEqual(0, app.ExitCode);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            Assert.AreEqual(app.MainWindow.NativeWindowHandle, app.MainWindowHandle);
+            Assert.AreNotEqual(IntPtr.Zero, app.MainWindowHandle);
+            Assert.NotZero(app.ProcessId);
+            Assert.AreEqual("WpfApplication", app.Name);
+            Assert.AreEqual(false, app.HasExited);
+            app.Close();
+            Assert.AreEqual(true, app.HasExited);
+            Assert.AreEqual(0, app.ExitCode);
         }
 
         [Test]
@@ -49,82 +45,66 @@ namespace Gu.Wpf.UiAutomation.UiTests
         [Test]
         public void KillLaunched()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                app.WaitForMainWindow();
-                Application.KillLaunched();
-                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            app.WaitForMainWindow();
+            Application.KillLaunched();
+            Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
         }
 
         [Test]
         public void KillLaunchedExeFileName()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                app.WaitForMainWindow();
-                Application.KillLaunched(ExeFileName);
-                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            app.WaitForMainWindow();
+            Application.KillLaunched(ExeFileName);
+            Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
         }
 
         [Test]
         public void KillLaunchedExeFileNameAndArgs()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                app.WaitForMainWindow();
-                Application.KillLaunched(ExeFileName, "EmptyWindow");
-                Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            app.WaitForMainWindow();
+            Application.KillLaunched(ExeFileName, "EmptyWindow");
+            Assert.Throws<InvalidOperationException>(() => app.WaitForMainWindow());
         }
 
         [Test]
         public void Kill()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                app.WaitForMainWindow();
-                app.Kill();
-                Assert.AreEqual(-1, app.ExitCode);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            app.WaitForMainWindow();
+            app.Kill();
+            Assert.AreEqual(-1, app.ExitCode);
         }
 
         [Test]
         public void GetAllTopLevelWindows()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                app.WaitForMainWindow();
-                Assert.AreEqual(1, app.GetAllTopLevelWindows().Count);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            app.WaitForMainWindow();
+            Assert.AreEqual(1, app.GetAllTopLevelWindows().Count);
         }
 
         [Test]
         public void GetMainWindowThrowsWithTimeOut()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "SlowWindow"))
-            {
-                var exception = Assert.Throws<TimeoutException>(() => app.GetMainWindow(TimeSpan.FromMilliseconds(10)));
-                Assert.AreEqual("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.", exception.Message);
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "SlowWindow");
+            var exception = Assert.Throws<TimeoutException>(() => app.GetMainWindow(TimeSpan.FromMilliseconds(10)));
+            Assert.AreEqual("Did not find Process.MainWindowHandle, if startup is slow try with a longer timeout.", exception.Message);
         }
 
         [Test]
         public void StartWaitForMainWindowAndClose()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow"))
-            {
-                var id = app.ProcessId;
-                using (var process = Process.GetProcessById(id))
-                {
-                    Assert.NotNull(process);
-                    Application.WaitForMainWindow(process);
+            using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
+            var id = app.ProcessId;
+            using var process = Process.GetProcessById(id);
+            Assert.NotNull(process);
+            Application.WaitForMainWindow(process);
 
-                    Application.KillLaunched(ExeFileName);
-                    Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
-                }
-            }
+            Application.KillLaunched(ExeFileName);
+            Assert.Throws<ArgumentException>(() => Process.GetProcessById(id));
         }
 
         [Test]

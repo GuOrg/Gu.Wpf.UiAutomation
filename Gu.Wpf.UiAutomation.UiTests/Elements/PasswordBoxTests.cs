@@ -9,12 +9,10 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void Find()
         {
-            using (var app = Application.Launch(ExeFileName, "PasswordBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var passwordBox = window.FindPasswordBox();
-                Assert.IsInstanceOf<PasswordBox>(UiElement.FromAutomationElement(passwordBox.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "PasswordBoxWindow");
+            var window = app.MainWindow;
+            var passwordBox = window.FindPasswordBox();
+            Assert.IsInstanceOf<PasswordBox>(UiElement.FromAutomationElement(passwordBox.AutomationElement));
         }
     }
 }

@@ -15,12 +15,10 @@
         [Test]
         public void Find()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow"))
-            {
-                var window = app.MainWindow;
-                var menuItem = window.FindMenu().Items[0];
-                Assert.IsInstanceOf<MenuItem>(UiElement.FromAutomationElement(menuItem.AutomationElement));
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow");
+            var window = app.MainWindow;
+            var menuItem = window.FindMenu().Items[0];
+            Assert.IsInstanceOf<MenuItem>(UiElement.FromAutomationElement(menuItem.AutomationElement));
         }
     }
 }

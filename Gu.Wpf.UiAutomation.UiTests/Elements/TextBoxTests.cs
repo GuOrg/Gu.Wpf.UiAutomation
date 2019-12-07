@@ -10,13 +10,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("XName")]
         public void FindTextBox(string key)
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox(key);
-                Assert.AreEqual(true, textBox.IsEnabled);
-                Assert.IsInstanceOf<TextBox>(UiElement.FromAutomationElement(textBox.AutomationElement));
-            }
+            using var app = Application.Launch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox(key);
+            Assert.AreEqual(true, textBox.IsEnabled);
+            Assert.IsInstanceOf<TextBox>(UiElement.FromAutomationElement(textBox.AutomationElement));
         }
 
         [TestCase("AutomationId", false)]
@@ -24,60 +22,52 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [TestCase("ReadOnlyTextBox", true)]
         public void IsReadOnly(string key, bool expected)
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox(key);
-                Assert.AreEqual(expected, textBox.IsReadOnly);
-            }
+            using var app = Application.Launch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox(key);
+            Assert.AreEqual(expected, textBox.IsReadOnly);
         }
 
         [Test]
         public void DirectSetText()
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox("TestTextBox");
-                Assert.AreEqual("Test TextBox", textBox.Text);
+            using var app = Application.Launch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox("TestTextBox");
+            Assert.AreEqual("Test TextBox", textBox.Text);
 
-                textBox.Text = "Hello World";
-                Assert.AreEqual("Hello World", textBox.Text);
+            textBox.Text = "Hello World";
+            Assert.AreEqual("Hello World", textBox.Text);
 
-                textBox.Text = string.Empty;
-                Assert.AreEqual(string.Empty, textBox.Text);
+            textBox.Text = string.Empty;
+            Assert.AreEqual(string.Empty, textBox.Text);
 
-                textBox.Text = null;
-                Assert.AreEqual(string.Empty, textBox.Text);
-            }
+            textBox.Text = null;
+            Assert.AreEqual(string.Empty, textBox.Text);
         }
 
         [TestCase("Hello World")]
         public void EnterTest(string text)
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox("TestTextBox");
-                textBox.Enter(text);
-                Assert.AreEqual(text, textBox.Text);
-            }
+            using var app = Application.Launch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox("TestTextBox");
+            textBox.Enter(text);
+            Assert.AreEqual(text, textBox.Text);
         }
 
         [Test]
         public void Focus()
         {
-            using (var app = Application.Launch(ExeFileName, "TextBoxWindow"))
-            {
-                var window = app.MainWindow;
-                var textBox = window.FindTextBox("TestTextBox");
-                textBox.Focus();
-                Assert.AreEqual(true, textBox.HasKeyboardFocus);
+            using var app = Application.Launch(ExeFileName, "TextBoxWindow");
+            var window = app.MainWindow;
+            var textBox = window.FindTextBox("TestTextBox");
+            textBox.Focus();
+            Assert.AreEqual(true, textBox.HasKeyboardFocus);
 
-                textBox = window.FindTextBox("TestTextBox1");
-                textBox.Focus();
-                Assert.AreEqual(true, textBox.HasKeyboardFocus);
-            }
+            textBox = window.FindTextBox("TestTextBox1");
+            textBox.Focus();
+            Assert.AreEqual(true, textBox.HasKeyboardFocus);
         }
     }
 }
