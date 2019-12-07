@@ -42,7 +42,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             }
 
             using var app = StartApplication();
-            
+
             // Looks like it can take a long time on CI
             app.WaitForMainWindow(TimeSpan.FromSeconds(30));
             var window = app.MainWindow;
