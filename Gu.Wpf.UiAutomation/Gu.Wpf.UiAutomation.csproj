@@ -14,6 +14,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
     <Version>0.2.13</Version>
@@ -27,13 +33,7 @@
       FEATURE: <Nullable>enable</Nullable>
     </PackageReleaseNotes>
     <Description>Library for writing UI-tests for WPF.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup>
