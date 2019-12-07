@@ -26,6 +26,10 @@ Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
+Gu.Wpf.UiAutomation.AutomationElementExt
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.AutomationElementXPathNavigator(Gu.Wpf.UiAutomation.UiElement rootElement) -> void
 Gu.Wpf.UiAutomation.Button
@@ -213,6 +217,9 @@ Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Actual.set -> void
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.ActualVisibility.get -> System.Windows.Visibility
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Both.get -> bool
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Both.set -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Diff.get -> bool
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Diff.set -> void
+Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.DiffVisibility.get -> System.Windows.Visibility
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Expected.get -> bool
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Expected.set -> void
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.ExpectedVisibility.get -> System.Windows.Visibility
@@ -712,6 +719,9 @@ Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Runtime.S
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.UiElement
+Gu.Wpf.UiAutomation.UiElement
+Gu.Wpf.UiAutomation.UiElement
+Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.ActualHeight.get -> double
 Gu.Wpf.UiAutomation.UiElement.ActualWidth.get -> double
 Gu.Wpf.UiAutomation.UiElement.AsButton() -> Gu.Wpf.UiAutomation.Button
@@ -1080,6 +1090,7 @@ Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_VIRTUALDESK = 16384 -
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_WHEEL = 2048 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_XDOWN = 128 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
 Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags.MOUSEEVENTF_XUP = 256 -> Gu.Wpf.UiAutomation.WindowsAPI.MouseEventFlags
+Gu.Wpf.UiAutomation.WindowsAPI.Msvcrt
 Gu.Wpf.UiAutomation.WindowsAPI.Oleacc
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
 Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE.FIFTHBUTTON_DOWN = 9 -> Gu.Wpf.UiAutomation.WindowsAPI.POINTER_BUTTON_CHANGE_TYPE
@@ -2164,6 +2175,7 @@ static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows7() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8_1() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindowsServer2016() -> bool
+static extern Gu.Wpf.UiAutomation.WindowsAPI.Msvcrt.Memcmp(System.IntPtr b1, System.IntPtr b2, long count) -> int
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetRoleText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityRole dwRole, System.Text.StringBuilder lpszRole, uint cchRoleMax) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetStateText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState dwStateBit, System.Text.StringBuilder lpszStateBit, uint cchStateBitMax) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetActiveWindow() -> System.IntPtr
