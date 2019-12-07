@@ -7,6 +7,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -16,6 +17,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using Image = System.Drawing.Image;
+    using PixelFormat = System.Windows.Media.PixelFormat;
     using Size = System.Windows.Size;
 
     public static class ImageAssert
@@ -440,19 +442,49 @@ namespace Gu.Wpf.UiAutomation
                 return false;
             }
 
+            if (FastEqual())
+            {
+                return true;
+            }
+
             for (var x = 0; x < expected.Size.Width; x++)
             {
                 for (var y = 0; y < expected.Size.Height; y++)
                 {
                     // comparing names here to handle different pixel formats.
-                    if (expected.GetPixel(x, y).Name != actual.GetPixel(x, y).Name)
+                    var ep = expected.GetPixel(x, y);
+                    var ap = actual.GetPixel(x, y);
+                    if (!ep.Equals(ap) &&
+                        ep.Name != ap.Name)
                     {
+                        System.Diagnostics.Debug.WriteLine($"Mismatch at ({x}, {y}), expected {ep.Name} was {ap.Name}");
                         return false;
                     }
                 }
             }
 
             return true;
+
+            // https://stackoverflow.com/a/2038515/1069200
+            bool FastEqual()
+            {
+                var expectedBits = expected.LockBits(new Rectangle(new Point(0, 0), expected.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                var actualBits = actual.LockBits(new Rectangle(new Point(0, 0), actual.Size), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                try
+                {
+                    var expectedStart = expectedBits.Scan0;
+                    var actualStart = actualBits.Scan0;
+                    int stride = expectedBits.Stride;
+                    int len = stride * expected.Height;
+                    return Msvcrt.Memcmp(expectedStart, actualStart, len) == 0;
+                }
+                finally
+                {
+                    expected.UnlockBits(expectedBits);
+                    actual.UnlockBits(actualBits);
+                }
+            }
         }
 
         public static Bitmap ToBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
