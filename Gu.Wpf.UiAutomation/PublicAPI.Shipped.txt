@@ -1988,6 +1988,7 @@ static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, System.Windows.
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, System.Windows.UIElement element, System.Action<System.Exception, System.Drawing.Bitmap> onFail) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.Equal(System.Drawing.Bitmap expected, Gu.Wpf.UiAutomation.UiElement element, System.TimeSpan retryTime) -> bool
 static Gu.Wpf.UiAutomation.ImageAssert.Equal(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> bool
+static Gu.Wpf.UiAutomation.ImageAssert.EqualFast(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> bool
 static Gu.Wpf.UiAutomation.ImageAssert.OnFail.get -> Gu.Wpf.UiAutomation.OnFail
 static Gu.Wpf.UiAutomation.ImageAssert.OnFail.set -> void
 static Gu.Wpf.UiAutomation.ImageAssert.RetryTime.get -> System.TimeSpan
@@ -2168,7 +2169,7 @@ static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows7() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindows8_1() -> bool
 static Gu.Wpf.UiAutomation.WindowsVersion.IsWindowsServer2016() -> bool
-static extern Gu.Wpf.UiAutomation.WindowsAPI.Msvcrt.Memcmp(System.IntPtr b1, System.IntPtr b2, long count) -> int
+static extern Gu.Wpf.UiAutomation.WindowsAPI.Msvcrt.memcmp(System.IntPtr b1, System.IntPtr b2, System.UIntPtr count) -> int
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetRoleText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityRole dwRole, System.Text.StringBuilder lpszRole, uint cchRoleMax) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.Oleacc.GetStateText(Gu.Wpf.UiAutomation.WindowsAPI.AccessibilityState dwStateBit, System.Text.StringBuilder lpszStateBit, uint cchStateBitMax) -> uint
 static extern Gu.Wpf.UiAutomation.WindowsAPI.User32.GetActiveWindow() -> System.IntPtr
