@@ -87,7 +87,28 @@ namespace Gu.Wpf.UiAutomation.UiTests
             var window = app.MainWindow;
             var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button.png");
             var exception = Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, window));
-            Assert.AreEqual("Sizes did not match\r\nExpected: {Width=200, Height=100}\r\nActual:   {Width=300, Height=300}", exception.Message);
+            string expected = "Images do not match.\r\n" +
+                              "Expected width: 200 height: 100 pixel format: Format32bppArgb\r\n" +
+                              "Actual   width: 300 height: 300 pixel format: Format32bppArgb\r\n";
+            Assert.AreEqual(expected, exception.Message);
+        }
+
+        [Test]
+        public void WhenNotEqualPixels()
+        {
+            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
+            var window = app.MainWindow;
+            var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button_wrong.png");
+            var button = window.FindButton("SizeButton");
+            var exception = Assert.Throws<AssertException>(() => ImageAssert.AreEqual(fileName, button));
+            string expected = "Images do not match.\r\n" +
+                              "Expected width: 200 height: 100 pixel format: Format32bppArgb\r\n" +
+                              "Actual   width: 200 height: 100 pixel format: Format32bppArgb\r\n" +
+                              "The following pixels are not matching:\r\n" +
+                              "x    y    Expected Actual\r\n" +
+                              "12   5    FF000000 FFE6E6FA\r\n" +
+                              "139  69   FF000000 FFE6E6FA\r\n";
+            Assert.AreEqual(expected, exception.Message);
         }
 
         [Test]

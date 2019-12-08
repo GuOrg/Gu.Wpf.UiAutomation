@@ -13,6 +13,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Reflection;
     using System.Resources;
+    using System.Text;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
@@ -336,10 +337,7 @@ namespace Gu.Wpf.UiAutomation
                     ImageDiffWindow.Show(expected, actual);
                 }
 
-                throw AssertException.Create(
-                    "Sizes did not match\r\n" +
-                    $"Expected: {expected.Size}\r\n" +
-                    $"Actual:   {actual.Size}");
+                throw ImageMatchException(expected, actual);
             }
 
             if (!Equal(expected, actual))
@@ -349,7 +347,7 @@ namespace Gu.Wpf.UiAutomation
                     ImageDiffWindow.Show(expected, actual);
                 }
 
-                throw AssertException.Create("Images do not match.");
+                throw ImageMatchException(expected, actual);
             }
         }
 
@@ -378,10 +376,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 onFail(actual);
-                throw AssertException.Create(
-                    "Sizes did not match\r\n" +
-                    $"Expected: {expected.Size}\r\n" +
-                    $"Actual:   {actual.Size}");
+                throw ImageMatchException(expected, actual);
             }
 
             if (!Equal(expected, actual))
@@ -392,7 +387,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 onFail(actual);
-                throw AssertException.Create("Images do not match.");
+                throw ImageMatchException(expected, actual);
             }
         }
 
@@ -457,7 +452,6 @@ namespace Gu.Wpf.UiAutomation
                     if (!ep.Equals(ap) &&
                         ep.Name != ap.Name)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Mismatch at ({x}, {y}), expected {ep.Name} was {ap.Name}");
                         return false;
                     }
                 }
@@ -711,6 +705,37 @@ namespace Gu.Wpf.UiAutomation
 
             result = null;
             return false;
+        }
+
+        private static AssertException ImageMatchException(Bitmap expected, Bitmap actual)
+        {
+            var builder = new StringBuilder()
+                .AppendLine("Images do not match.")
+                .AppendLine($"Expected width: {expected.Width} height: {expected.Height} pixel format: {expected.PixelFormat}")
+                .AppendLine($"Actual   width: {actual.Width} height: {actual.Height} pixel format: {expected.PixelFormat}");
+
+            if (expected.Size == actual.Size)
+            {
+                builder.AppendLine("The following pixels are not matching:")
+                       .AppendLine("x    y    Expected Actual");
+
+                for (var x = 0; x < expected.Size.Width; x++)
+                {
+                    for (var y = 0; y < expected.Size.Height; y++)
+                    {
+                        // comparing names here to handle different pixel formats.
+                        var ep = expected.GetPixel(x, y);
+                        var ap = actual.GetPixel(x, y);
+                        if (!ep.Equals(ap) &&
+                            ep.Name != ap.Name)
+                        {
+                            builder.AppendLine($"{x,-4} {y,-4} {ep.Name.ToUpperInvariant()} {ap.Name.ToUpperInvariant()}");
+                        }
+                    }
+                }
+            }
+
+            return new AssertException(builder.ToString());
         }
 
         private static class ResourceChache
