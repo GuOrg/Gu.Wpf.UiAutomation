@@ -15,7 +15,6 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
         public void SetUp()
         {
             using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
-            Wait.UntilInputIsProcessed();
             app.MainWindow.FindButton("Clear").Click();
         }
 
