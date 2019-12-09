@@ -210,7 +210,7 @@ namespace Gu.Wpf.UiAutomation
             else
             {
                 Capture.ElementToFile(element, TempFileName(fileName));
-                throw AssertException.Create($"Did not find a file nor resource named {fileName}\r\n Saved the element to {TempFileName(fileName)}.");
+                throw new AssertException($"Did not find a file nor resource named {fileName}\r\n Saved the element to {TempFileName(fileName)}.");
             }
         }
 
