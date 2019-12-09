@@ -55,29 +55,14 @@ namespace Gu.Wpf.UiAutomation
                 using (stream)
                 {
                     using var expected = (Bitmap)Image.FromStream(stream);
-                    switch (OnFail)
-                    {
-                        case OnFail.DoNothing:
-                            AreEqual(expected, element);
-                            break;
-                        case OnFail.SaveImageToTemp:
-                            using (var actual = element.ToBitmap(expected.Size(), expected.PixelFormat()))
-                            {
-                                AreEqual(expected, actual, (bitmap) => bitmap.Save(TempFileName(fileName), GetImageFormat(fileName)));
-                            }
-
-                            break;
-                        default:
-                            throw new InvalidOperationException($"Not handling OnFail {OnFail}");
-                    }
+                    using var actual = element.ToBitmap(expected.Size(), expected.PixelFormat());
+                    AreEqual(expected, actual, fileName);
                 }
             }
             else
             {
                 using var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName));
-                actual.Save(TempFileName(fileName), GetImageFormat(fileName));
-
-                throw new AssertException($"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.");
+                throw MissingResourceException(actual, fileName);
             }
         }
 
@@ -123,10 +108,10 @@ namespace Gu.Wpf.UiAutomation
             }
             else
             {
-                var exception = AssertException.Create($"Did not find a file nor resource named {fileName}");
                 using var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName));
-                onFail(exception, actual);
-                throw exception;
+                var e = MissingResourceException(actual, fileName);
+                onFail(e, actual);
+                throw e;
             }
         }
 
@@ -179,38 +164,25 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(element));
             }
 
-            WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
                 {
                     using var expected = (Bitmap)Image.FromStream(stream);
-                    if (Equal(expected, element, RetryTime))
+                    using var actual = Capture.Rectangle(element.Bounds);
+                    if (Equal(expected, actual))
                     {
                         return;
                     }
 
-                    using var actual = Capture.Rectangle(element.Bounds);
-                    switch (OnFail)
-                    {
-                        case OnFail.DoNothing:
-                            AreEqual(expected, actual);
-                            break;
-                        case OnFail.SaveImageToTemp:
-                            AreEqual(
-                                expected,
-                                actual,
-                                (bitmap) => bitmap.Save(TempFileName(fileName), GetImageFormat(fileName)));
-                            break;
-                        default:
-                            throw new InvalidOperationException($"Not handling OnFail {OnFail}");
-                    }
+                    WaitForStartAnimation(element);
+                    AreEqual(expected, actual, fileName);
                 }
             }
             else
             {
-                Capture.ElementToFile(element, TempFileName(fileName));
-                throw new AssertException($"Did not find a file nor resource named {fileName}\r\n Saved the element to {TempFileName(fileName)}.");
+                using var actual = Capture.Rectangle(element.Bounds);
+                throw MissingResourceException(actual, fileName);
             }
         }
 
@@ -237,38 +209,39 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(onFail));
             }
 
-            WaitForStartAnimation(element);
             if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
             {
                 using (stream)
                 {
                     using var expected = (Bitmap)Image.FromStream(stream);
-                    if (Equal(expected, element, RetryTime))
+                    using (var actual = Capture.Rectangle(element.Bounds))
                     {
-                        return;
+                        if (Equal(expected, actual))
+                        {
+                            return;
+                        }
                     }
 
-                    using var actual = Capture.Rectangle(element.Bounds);
-                    try
+                    WaitForStartAnimation(element);
+                    using (var actual = Capture.Rectangle(element.Bounds))
                     {
-                        AreEqual(expected, actual);
-                    }
-                    catch (Exception e)
-                    {
+                        if (Equal(expected, actual))
+                        {
+                            return;
+                        }
+
+                        var e = ImageMatchException(expected, actual, fileName);
                         onFail(e, actual);
-                        throw;
+                        throw e;
                     }
                 }
             }
             else
             {
-                var exception = AssertException.Create($"Did not find a file nor resource named {fileName}");
-                using (var actual = Capture.Rectangle(element.Bounds))
-                {
-                    onFail(exception, actual);
-                }
-
-                throw exception;
+                using var actual = Capture.Rectangle(element.Bounds);
+                var e = MissingResourceException(actual, fileName);
+                onFail(e, actual);
+                throw e;
             }
         }
 
@@ -284,16 +257,22 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(actual));
             }
 
-            WaitForStartAnimation(actual);
-
-            using var expectedBmp = Capture.Rectangle(expected.Bounds);
-            if (Equal(expectedBmp, actual, RetryTime))
+            if (EqualsFast(expected, actual))
             {
                 return;
             }
 
+            WaitForStartAnimation(actual);
+            using var expectedBmp = Capture.Rectangle(expected.Bounds);
             using var actualBmp = Capture.Rectangle(actual.Bounds);
             AreEqual(expectedBmp, actualBmp);
+
+            static bool EqualsFast(UiElement expected, UiElement actual)
+            {
+                using var expectedBmp = Capture.Rectangle(expected.Bounds);
+                using var actualBmp = Capture.Rectangle(actual.Bounds);
+                return Equal(expectedBmp, actualBmp);
+            }
         }
 
         public static void AreEqual(Bitmap expected, UiElement element)
@@ -308,12 +287,12 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(element));
             }
 
-            WaitForStartAnimation(element);
             if (Equal(expected, element, RetryTime))
             {
                 return;
             }
 
+            WaitForStartAnimation(element);
             using var actualBmp = Capture.Rectangle(element.Bounds);
             AreEqual(expected, actualBmp);
         }
@@ -337,7 +316,7 @@ namespace Gu.Wpf.UiAutomation
                     ImageDiffWindow.Show(expected, actual);
                 }
 
-                throw ImageMatchException(expected, actual);
+                throw ImageMatchException(expected, actual, null);
             }
 
             if (!Equal(expected, actual))
@@ -347,7 +326,35 @@ namespace Gu.Wpf.UiAutomation
                     ImageDiffWindow.Show(expected, actual);
                 }
 
-                throw ImageMatchException(expected, actual);
+                throw ImageMatchException(expected, actual, null);
+            }
+        }
+
+        public static void AreEqual(Bitmap expected, Bitmap actual, string fileName)
+        {
+            if (expected == null)
+            {
+                throw new ArgumentNullException(nameof(expected));
+            }
+
+            if (actual == null)
+            {
+                throw new ArgumentNullException(nameof(actual));
+            }
+
+            if (!Equal(expected, actual))
+            {
+                if (Debugger.IsAttached)
+                {
+                    ImageDiffWindow.Show(expected, actual);
+                }
+
+                if (OnFail == OnFail.SaveImageToTemp)
+                {
+                    actual.Save(TempFileName(fileName), GetImageFormat(fileName));
+                }
+
+                throw ImageMatchException(expected, actual, fileName);
             }
         }
 
@@ -368,17 +375,6 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(onFail));
             }
 
-            if (expected.Size != actual.Size)
-            {
-                if (Debugger.IsAttached)
-                {
-                    ImageDiffWindow.Show(expected, actual);
-                }
-
-                onFail(actual);
-                throw ImageMatchException(expected, actual);
-            }
-
             if (!Equal(expected, actual))
             {
                 if (Debugger.IsAttached)
@@ -387,7 +383,7 @@ namespace Gu.Wpf.UiAutomation
                 }
 
                 onFail(actual);
-                throw ImageMatchException(expected, actual);
+                throw ImageMatchException(expected, actual, null);
             }
         }
 
@@ -707,7 +703,7 @@ namespace Gu.Wpf.UiAutomation
             return false;
         }
 
-        private static AssertException ImageMatchException(Bitmap expected, Bitmap actual)
+        private static ImageAssertException ImageMatchException(Bitmap expected, Bitmap actual, string? fileName)
         {
             var builder = new StringBuilder()
                 .AppendLine("Images do not match.")
@@ -735,7 +731,18 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            return new AssertException(builder.ToString());
+            return new ImageAssertException(expected, actual, builder.ToString(), fileName);
+        }
+
+        private static ImageAssertException MissingResourceException(Bitmap actual, string fileName)
+        {
+            if (OnFail == OnFail.DoNothing)
+            {
+                throw new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.", fileName);
+            }
+
+            actual.Save(TempFileName(fileName), GetImageFormat(fileName));
+            throw new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.", fileName);
         }
 
         private static class ResourceChache

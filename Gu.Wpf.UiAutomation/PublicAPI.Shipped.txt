@@ -206,6 +206,12 @@ Gu.Wpf.UiAutomation.HeaderedContentControl.HeaderedContentControl(System.Windows
 Gu.Wpf.UiAutomation.HorizontalScrollBar
 Gu.Wpf.UiAutomation.HorizontalScrollBar.HorizontalScrollBar(System.Windows.Automation.AutomationElement automationElement) -> void
 Gu.Wpf.UiAutomation.ImageAssert
+Gu.Wpf.UiAutomation.ImageAssertException
+Gu.Wpf.UiAutomation.ImageAssertException.Actual.get -> System.Drawing.Bitmap
+Gu.Wpf.UiAutomation.ImageAssertException.Expected.get -> System.Drawing.Bitmap
+Gu.Wpf.UiAutomation.ImageAssertException.FileName.get -> string
+Gu.Wpf.UiAutomation.ImageAssertException.ImageAssertException(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual, string message, string fileName) -> void
+Gu.Wpf.UiAutomation.ImageAssertException.ImageAssertException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.ImageDiffWindow
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel
 Gu.Wpf.UiAutomation.ImageDiffWindow.ImageDiffViewModel.Actual.get -> bool
@@ -1671,6 +1677,7 @@ override Gu.Wpf.UiAutomation.HorizontalScrollBar.LargeDecrementText.get -> strin
 override Gu.Wpf.UiAutomation.HorizontalScrollBar.LargeIncrementText.get -> string
 override Gu.Wpf.UiAutomation.HorizontalScrollBar.SmallDecrementText.get -> string
 override Gu.Wpf.UiAutomation.HorizontalScrollBar.SmallIncrementText.get -> string
+override Gu.Wpf.UiAutomation.ImageAssertException.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 override Gu.Wpf.UiAutomation.Logging.ConsoleLogger.GatedDebug(string message) -> void
 override Gu.Wpf.UiAutomation.Logging.ConsoleLogger.GatedError(string message) -> void
 override Gu.Wpf.UiAutomation.Logging.ConsoleLogger.GatedFatal(string message) -> void
@@ -1981,6 +1988,7 @@ static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(Gu.Wpf.UiAutomation.UiElement ex
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, Gu.Wpf.UiAutomation.UiElement element) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual, System.Action<System.Drawing.Bitmap> onFail) -> void
+static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual, string fileName) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Windows.UIElement actual) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, Gu.Wpf.UiAutomation.UiElement element) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, Gu.Wpf.UiAutomation.UiElement element, System.Action<System.Exception, System.Drawing.Bitmap> onFail) -> void
