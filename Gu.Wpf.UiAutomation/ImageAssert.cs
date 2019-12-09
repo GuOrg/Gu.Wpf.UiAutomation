@@ -27,6 +27,9 @@ namespace Gu.Wpf.UiAutomation
 
         public static TimeSpan RetryTime { get; set; } = TimeSpan.FromMilliseconds(2000);
 
+        /// <summary>
+        /// The time the operating system animates when starting the application.
+        /// </summary>
         public static TimeSpan StartAnimation { get; set; } = WindowsVersion.IsWindows10() ||
                                                               WindowsVersion.IsWindows8() ||
                                                               WindowsVersion.IsWindows8_1()
@@ -738,11 +741,11 @@ namespace Gu.Wpf.UiAutomation
         {
             if (OnFail == OnFail.DoNothing)
             {
-                throw new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.", fileName);
+                return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.", fileName);
             }
 
             actual.Save(TempFileName(fileName), GetImageFormat(fileName));
-            throw new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.", fileName);
+            return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.", fileName);
         }
 
         private static class ResourceChache
