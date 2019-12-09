@@ -9,9 +9,12 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class WindowsVersion
     {
-        private static readonly string CurrentProductName = GetCurrentProductName();
+        /// <summary>
+        /// Get the current windows version name from registry.
+        /// </summary>
+        public static readonly string CurrentVersionProductName = GetCurrentProductName();
 
-        public static bool CurrentContains(string name) => CurrentProductName.Contains(name);
+        public static bool CurrentContains(string name) => CurrentVersionProductName.Contains(name);
 
         /// <summary>
         /// Returns true if running on AppVeyor.
@@ -20,6 +23,11 @@ namespace Gu.Wpf.UiAutomation
         /// <returns>True if on AppVeyor.</returns>
         public static bool IsAppVeyor() => Environment.GetEnvironmentVariable("APPVEYOR") != null;
 
+        /// <summary>
+        /// Returns true if running on Devops.
+        /// Checks if environment variable TF_BUILD is defined.
+        /// </summary>
+        /// <returns>True if on Devops.</returns>
         public static bool IsAzureDevops() => Environment.GetEnvironmentVariable("TF_BUILD") != null;
 
         /// <summary>

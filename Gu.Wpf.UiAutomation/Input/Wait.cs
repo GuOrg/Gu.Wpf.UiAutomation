@@ -24,12 +24,11 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
-        /// Waits 100 ms for a generic time which was found to be sufficient to allow
-        /// input (mouse, keyboard, ...) do be processed.
+        /// Waits 200 ms on Appveyor and Devops or 50 ms to allow input (mouse, keyboard, ...) do be processed.
         /// </summary>
         public static void UntilInputIsProcessed()
         {
-            For(TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() ? 200 : 50));
+            For(TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 50));
         }
 
         /// <summary>
