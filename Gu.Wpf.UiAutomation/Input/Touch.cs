@@ -197,7 +197,7 @@ namespace Gu.Wpf.UiAutomation
                         contacts![0].PointerInfo.PointerFlags = POINTER_FLAG.UPDATE | POINTER_FLAG.INRANGE | POINTER_FLAG.INCONTACT;
                         contacts[0].PointerInfo.PtPixelLocation = pos;
                         InjectTouchInput(contacts);
-                        Wait.For(TimeSpan.FromMilliseconds(10));
+                        Wait.For(TimeSpan.FromMilliseconds(20));
                     }
                 }
             }
@@ -229,7 +229,7 @@ namespace Gu.Wpf.UiAutomation
 
                     InjectTouchInput(contacts);
 
-                    Wait.For(TimeSpan.FromMilliseconds(10));
+                    Wait.For(TimeSpan.FromMilliseconds(20));
                 }
             }
 

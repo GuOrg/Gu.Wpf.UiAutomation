@@ -183,7 +183,7 @@ namespace Gu.Wpf.UiAutomation
         public static void Click(MouseButton mouseButton)
         {
             var position = POINT.From(Position);
-            if (lastClick is ButtonClick buttonClick &&
+            if (lastClick is { } buttonClick &&
                 buttonClick.Button == mouseButton &&
                 Math.Abs(buttonClick.Point.X - position.X) < User32.GetSystemMetrics(SystemMetric.SM_CXDOUBLECLK) / 2 &&
                 Math.Abs(buttonClick.Point.Y - position.Y) < User32.GetSystemMetrics(SystemMetric.SM_CYDOUBLECLK) / 2)

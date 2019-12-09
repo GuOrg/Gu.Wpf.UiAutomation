@@ -9,7 +9,9 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class Wait
     {
-        private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
+        internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
+
+        internal static readonly TimeSpan DefaultWait = TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 50);
 
         public static void For(TimeSpan time)
         {
@@ -28,7 +30,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void UntilInputIsProcessed()
         {
-            For(TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 50));
+            For(DefaultWait);
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace Gu.Wpf.UiAutomation
 
             // There might be other things going on so do a small sleep anyway...
             // Other sources: http://blogs.msdn.com/b/oldnewthing/archive/2014/02/13/10499047.aspx
-            For(TimeSpan.FromMilliseconds(20));
+            For(DefaultWait);
             return ret != new IntPtr(0);
         }
     }
