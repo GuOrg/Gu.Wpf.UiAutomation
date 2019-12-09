@@ -26,10 +26,6 @@ Gu.Wpf.UiAutomation.AssertException.AssertException(System.Runtime.Serialization
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message) -> void
 Gu.Wpf.UiAutomation.AssertException.AssertException(string message, System.Exception innerException) -> void
 Gu.Wpf.UiAutomation.AutomationElementExt
-Gu.Wpf.UiAutomation.AutomationElementExt
-Gu.Wpf.UiAutomation.AutomationElementExt
-Gu.Wpf.UiAutomation.AutomationElementExt
-Gu.Wpf.UiAutomation.AutomationElementExt
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator
 Gu.Wpf.UiAutomation.AutomationElementXPathNavigator.AutomationElementXPathNavigator(Gu.Wpf.UiAutomation.UiElement rootElement) -> void
 Gu.Wpf.UiAutomation.Button
@@ -718,9 +714,6 @@ Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Exception
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message) -> void
 Gu.Wpf.UiAutomation.UiAutomationException.UiAutomationException(string message, System.Exception innerException) -> void
-Gu.Wpf.UiAutomation.UiElement
-Gu.Wpf.UiAutomation.UiElement
-Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.UiElement.ActualHeight.get -> double
 Gu.Wpf.UiAutomation.UiElement.ActualWidth.get -> double
