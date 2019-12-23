@@ -13,9 +13,9 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             var window = app.MainWindow;
             var button = window.FindButton("With ToolTip");
             button.Click();
-            app.WaitWhileBusy();
             var toolTip = button.FindToolTip();
             Assert.AreEqual(false, toolTip.IsOffscreen);
+            Assert.AreEqual("Tool tip text.", toolTip.Text);
             Assert.IsInstanceOf<ToolTip>(UiElement.FromAutomationElement(toolTip.AutomationElement));
 
             button.Click();
