@@ -384,12 +384,23 @@ For asserting using an expected image of how the control will render.
 [Test]
 public void DefaultAdornerWhenNotFocused()
 {
-    using (var app = Application.Launch("Gu.Wpf.Adorners.Demo.exe", "WatermarkWindow"))
-    {
-        var window = app.MainWindow;
-        var textBox = window.FindTextBox("WithDefaultAdorner");
-        ImageAssert.AreEqual(".\\Images\\WithDefaultAdorner_not_focused.png", textBox);
-    }
+    using var app = Application.Launch("Gu.Wpf.Adorners.Demo.exe", "WatermarkWindow");
+    var window = app.MainWindow;
+    var textBox = window.FindTextBox("WithDefaultAdorner");
+    ImageAssert.AreEqual("Images\\WithDefaultAdorner_not_focused.png", textBox);
+}
+```
+
+#### OnFail
+
+```cs
+[Test]
+public void DefaultAdornerWhenNotFocused()
+{
+    using var app = Application.Launch("Gu.Wpf.Adorners.Demo.exe", "WatermarkWindow");
+    var window = app.MainWindow;
+    var textBox = window.FindTextBox("WithDefaultAdorner");
+    ImageAssert.AreEqual("Images\\WithDefaultAdorner_not_focused.png", textBox, (expected, actual, resourceName) => );
 }
 ```
 

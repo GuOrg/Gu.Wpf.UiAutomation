@@ -14,16 +14,14 @@ namespace Gu.Wpf.UiAutomation
     using System.Reflection;
     using System.Resources;
     using System.Text;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
     using Gu.Wpf.UiAutomation.WindowsAPI;
-    using Image = System.Drawing.Image;
-    using PixelFormat = System.Windows.Media.PixelFormat;
-    using Size = System.Windows.Size;
 
     public delegate void OnImageAssertFail(Bitmap? expected, Bitmap actual, string resource);
 
-    public static partial class ImageAssert
+    /// <summary>
+    /// For asserting equality by comparing pixels.
+    /// </summary>
+    public static class ImageAssert
     {
         /// <summary>
         /// The time to retry checking for equality. This compensates for animations etc.
@@ -107,11 +105,6 @@ namespace Gu.Wpf.UiAutomation
                     }
 
                     using var actual = Capture.Rectangle(element.Bounds);
-                    if (Equal(expected, actual))
-                    {
-                        return;
-                    }
-
                     onFail(expected, actual, fileName);
                     throw ImageMatchException(expected, actual, fileName);
                 }
@@ -183,6 +176,12 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        /// <summary>
+        /// Check if <paramref name="expected"/> is equal to <paramref name="element"/> by comparing pixels.
+        /// </summary>
+        /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
+        /// <param name="element">The actual <see cref="UiElement"/>.</param>
+        /// <param name="retryTime">The time to retry before returning false.</param>
         public static bool Equal(Bitmap expected, UiElement element, TimeSpan retryTime)
         {
             if (expected == null)
@@ -208,6 +207,11 @@ namespace Gu.Wpf.UiAutomation
             return false;
         }
 
+        /// <summary>
+        /// Check if <paramref name="expected"/> is equal to <paramref name="actual"/> by comparing pixels.
+        /// </summary>
+        /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
+        /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
         public static bool Equal(Bitmap expected, Bitmap actual)
         {
             if (expected == null)
@@ -249,11 +253,12 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <summary>
+        /// Check if <paramref name="expected"/> is equal to <paramref name="actual"/> by comparing pixels.
         /// Calls msvcrt.memcmp.
         /// </summary>
         /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
         /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
-        /// <returns>True if equal.</returns>
+        /// <returns>True if pixels are equal.</returns>
         public static bool EqualFast(Bitmap expected, Bitmap actual)
         {
             // https://stackoverflow.com/a/2038515/1069200
@@ -290,43 +295,7 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        private static string TempFileName(string fileName)
-        {
-            var extension = Path.GetExtension(fileName);
-            if (string.IsNullOrEmpty(extension))
-            {
-                extension = ".png";
-            }
-
-            return Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + extension);
-        }
-
-        private static BitmapEncoder GetEncoder(string fileName)
-        {
-            if (string.Equals(Path.GetExtension(fileName), ".png", StringComparison.OrdinalIgnoreCase))
-            {
-                return new PngBitmapEncoder();
-            }
-
-            throw new ArgumentException($"Cannot save {Path.GetExtension(fileName)}");
-        }
-
-        private static PixelFormat GetPixelFormat(string fileName)
-        {
-            if (string.Equals(Path.GetExtension(fileName), ".png", StringComparison.OrdinalIgnoreCase))
-            {
-                return PixelFormats.Pbgra32;
-            }
-
-            if (string.Equals(Path.GetExtension(fileName), ".bmp", StringComparison.OrdinalIgnoreCase))
-            {
-                return PixelFormats.Bgr24;
-            }
-
-            throw new ArgumentException($"Cannot save {Path.GetExtension(fileName)}");
-        }
-
-        private static System.Drawing.Imaging.ImageFormat GetImageFormat(string fileName)
+        private static ImageFormat GetImageFormat(string fileName)
         {
             if (!Path.HasExtension(fileName))
             {
@@ -344,20 +313,6 @@ namespace Gu.Wpf.UiAutomation
             }
 
             throw new ArgumentException($"Cannot save {Path.GetExtension(fileName)}");
-        }
-
-        private static Size Size(this Image bitmap)
-        {
-            return new Size(bitmap.Width, bitmap.Height);
-        }
-
-        private static PixelFormat PixelFormat(this Image bitmap)
-        {
-            return bitmap.PixelFormat switch
-            {
-                System.Drawing.Imaging.PixelFormat.Format32bppArgb => PixelFormats.Pbgra32,
-                _ => throw new ArgumentOutOfRangeException(nameof(bitmap), bitmap.PixelFormat, "Unhandled pixel format."),
-            };
         }
 
         private static bool TryGetStream(string fileName, Assembly callingAssembly, [NotNullWhen(true)]out Stream? result)
@@ -450,13 +405,7 @@ namespace Gu.Wpf.UiAutomation
 
         private static ImageAssertException MissingResourceException(Bitmap actual, string fileName)
         {
-            if (OnFail == OnFail.DoNothing)
-            {
-                return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.", fileName);
-            }
-
-            actual.Save(TempFileName(fileName), GetImageFormat(fileName));
-            return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.", fileName);
+            return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.", fileName);
         }
 
         private static class ResourceCache

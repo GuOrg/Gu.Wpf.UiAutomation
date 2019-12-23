@@ -8,12 +8,6 @@ namespace Gu.Wpf.UiAutomation.UiTests
     {
         private const string ExeFileName = "WpfApplication.exe";
 
-        [SetUp]
-        public void SetUp()
-        {
-            ImageAssert.OnFail = OnFail.DoNothing;
-        }
-
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
@@ -61,23 +55,19 @@ namespace Gu.Wpf.UiAutomation.UiTests
         public void WhenEqualBmp()
         {
             ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquareBmp);
-            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquareBmp, _ => { });
         }
 
         [Test]
         public void WhenEqualPng()
         {
             ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquarePng);
-            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquarePng, _ => { });
         }
 
         [Test]
         public void WhenEqualBmpPng()
         {
             ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquarePng);
-            ImageAssert.AreEqual(Properties.Resources.SquareBmp, Properties.Resources.SquarePng, _ => { });
             ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquareBmp);
-            ImageAssert.AreEqual(Properties.Resources.SquarePng, Properties.Resources.SquareBmp, _ => { });
         }
 
         [Test]
@@ -112,54 +102,6 @@ namespace Gu.Wpf.UiAutomation.UiTests
         }
 
         [Test]
-        public void WhenNotEqualSaveFileToTempRootedPath()
-        {
-            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
-            var window = app.MainWindow;
-            var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button_wrong.png");
-            var tempFile = Path.Combine(Path.GetTempPath(), "button_wrong.png");
-            File.Delete(tempFile);
-            var button = window.FindButton("SizeButton");
-            ImageAssert.OnFail = OnFail.SaveImageToTemp;
-            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(fileName, button));
-            Assert.AreEqual(true, File.Exists(tempFile));
-        }
-
-        [TestCase(@".\Images\button_wrong.png")]
-        [TestCase(@"Images\button_wrong.png")]
-        public void WhenNotEqualSaveFileToTempRelativePath(string fileName)
-        {
-            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
-            var window = app.MainWindow;
-            var tempFile = Path.Combine(Path.GetTempPath(), "button_wrong.png");
-            if (File.Exists(tempFile))
-            {
-                File.Delete(tempFile);
-            }
-
-            var button = window.FindButton("SizeButton");
-            ImageAssert.OnFail = OnFail.SaveImageToTemp;
-            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(fileName, button));
-            Assert.AreEqual(true, File.Exists(tempFile));
-        }
-
-        [TestCase("button_resource")]
-        public void WhenNotEqualSaveFileToResourceName(string fileName)
-        {
-            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
-            var window = app.MainWindow;
-            var tempFile = Path.Combine(Path.GetTempPath(), "button_resource.png");
-            if (File.Exists(tempFile))
-            {
-                File.Delete(tempFile);
-            }
-
-            ImageAssert.OnFail = OnFail.SaveImageToTemp;
-            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(fileName, window));
-            Assert.AreEqual(true, File.Exists(tempFile));
-        }
-
-        [Test]
         public void WhenNotEqualWithAction()
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
@@ -167,26 +109,8 @@ namespace Gu.Wpf.UiAutomation.UiTests
             var fileName = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Images\button_wrong.png");
             var button = window.FindButton("SizeButton");
             var count = 0;
-            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(fileName, button, (exception, bitmap) => count++));
+            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(fileName, button, (expected, actual, resource) => count++));
             Assert.AreEqual(1, count);
-        }
-
-        [Test]
-        public void WhenEqualElements()
-        {
-            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
-            var window = app.MainWindow;
-            var button = window.FindButton("SizeButton");
-            ImageAssert.AreEqual(button, button);
-        }
-
-        [Test]
-        public void WhenNotEqualElements()
-        {
-            using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
-            var window = app.MainWindow;
-            var button = window.FindButton("SizeButton");
-            Assert.Throws<ImageAssertException>(() => ImageAssert.AreEqual(window, button));
         }
     }
 }

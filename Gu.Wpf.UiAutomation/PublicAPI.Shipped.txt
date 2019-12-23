@@ -550,6 +550,7 @@ Gu.Wpf.UiAutomation.OnDispose.LeaveOpen = 1 -> Gu.Wpf.UiAutomation.OnDispose
 Gu.Wpf.UiAutomation.OnFail
 Gu.Wpf.UiAutomation.OnFail.DoNothing = 0 -> Gu.Wpf.UiAutomation.OnFail
 Gu.Wpf.UiAutomation.OnFail.SaveImageToTemp = 1 -> Gu.Wpf.UiAutomation.OnFail
+Gu.Wpf.UiAutomation.OnImageAssertFail
 Gu.Wpf.UiAutomation.OpenFileDialog
 Gu.Wpf.UiAutomation.OpenFileDialog.FileTextBox.get -> Gu.Wpf.UiAutomation.TextBoxBase
 Gu.Wpf.UiAutomation.OpenFileDialog.OpenButton.get -> Gu.Wpf.UiAutomation.Button
@@ -1984,32 +1985,15 @@ static Gu.Wpf.UiAutomation.ExtensionMethods.Clamp<T>(this T source, T min, T max
 static Gu.Wpf.UiAutomation.ExtensionMethods.GetFlags<T>(this T variable) -> System.Collections.Generic.IEnumerable<T>
 static Gu.Wpf.UiAutomation.ExtensionMethods.HasValue(this double value) -> bool
 static Gu.Wpf.UiAutomation.GridViewCell.Create(Gu.Wpf.UiAutomation.UiElement content) -> Gu.Wpf.UiAutomation.GridViewCell
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(Gu.Wpf.UiAutomation.UiElement expected, Gu.Wpf.UiAutomation.UiElement actual) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, Gu.Wpf.UiAutomation.UiElement element) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual, System.Action<System.Drawing.Bitmap> onFail) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual, string fileName) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(System.Drawing.Bitmap expected, System.Windows.UIElement actual) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, Gu.Wpf.UiAutomation.UiElement element) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, Gu.Wpf.UiAutomation.UiElement element, System.Action<System.Exception, System.Drawing.Bitmap> onFail) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, System.Windows.UIElement element) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, System.Windows.UIElement element, System.Action<System.Exception, System.Drawing.Bitmap> onFail) -> void
+static Gu.Wpf.UiAutomation.ImageAssert.AreEqual(string fileName, Gu.Wpf.UiAutomation.UiElement element, Gu.Wpf.UiAutomation.OnImageAssertFail onFail) -> void
 static Gu.Wpf.UiAutomation.ImageAssert.Equal(System.Drawing.Bitmap expected, Gu.Wpf.UiAutomation.UiElement element, System.TimeSpan retryTime) -> bool
 static Gu.Wpf.UiAutomation.ImageAssert.Equal(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> bool
 static Gu.Wpf.UiAutomation.ImageAssert.EqualFast(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> bool
-static Gu.Wpf.UiAutomation.ImageAssert.OnFail.get -> Gu.Wpf.UiAutomation.OnFail
-static Gu.Wpf.UiAutomation.ImageAssert.OnFail.set -> void
 static Gu.Wpf.UiAutomation.ImageAssert.RetryTime.get -> System.TimeSpan
 static Gu.Wpf.UiAutomation.ImageAssert.RetryTime.set -> void
-static Gu.Wpf.UiAutomation.ImageAssert.SaveImage(this System.Windows.UIElement element, System.Windows.Size size, System.Windows.Media.PixelFormat pixelFormat, string fileName) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.SaveImage(this System.Windows.UIElement element, System.Windows.Size size, string fileName) -> void
-static Gu.Wpf.UiAutomation.ImageAssert.StartAnimation.get -> System.TimeSpan
-static Gu.Wpf.UiAutomation.ImageAssert.StartAnimation.set -> void
-static Gu.Wpf.UiAutomation.ImageAssert.ToBitmap(this System.Windows.Media.Imaging.RenderTargetBitmap bitmap) -> System.Drawing.Bitmap
-static Gu.Wpf.UiAutomation.ImageAssert.ToBitmap(this System.Windows.UIElement element, System.Windows.Size size) -> System.Drawing.Bitmap
-static Gu.Wpf.UiAutomation.ImageAssert.ToBitmap(this System.Windows.UIElement element, System.Windows.Size size, System.Windows.Media.PixelFormat pixelFormat) -> System.Drawing.Bitmap
-static Gu.Wpf.UiAutomation.ImageAssert.ToRenderTargetBitmap(this System.Windows.UIElement element, System.Windows.Size size) -> System.Windows.Media.Imaging.RenderTargetBitmap
-static Gu.Wpf.UiAutomation.ImageAssert.ToRenderTargetBitmap(this System.Windows.UIElement element, System.Windows.Size size, System.Windows.Media.PixelFormat pixelFormat) -> System.Windows.Media.Imaging.RenderTargetBitmap
 static Gu.Wpf.UiAutomation.ImageDiffWindow.Show(System.Drawing.Bitmap expected, System.Drawing.Bitmap actual) -> void
 static Gu.Wpf.UiAutomation.Interpolation.Duration(Gu.Wpf.UiAutomation.WindowsAPI.POINT from, Gu.Wpf.UiAutomation.WindowsAPI.POINT to, double speed) -> System.TimeSpan
 static Gu.Wpf.UiAutomation.Interpolation.Duration(System.Windows.Point from, System.Windows.Point to, double speed) -> System.TimeSpan
