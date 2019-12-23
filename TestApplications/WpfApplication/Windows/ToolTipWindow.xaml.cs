@@ -10,11 +10,11 @@ namespace WpfApplication.Windows
             this.InitializeComponent();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void OnClick(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button)
+            if (sender is Button { ToolTip: ToolTip toolTip })
             {
-                button.SetValue(ToolTipService.IsOpenProperty, !(bool)button.GetValue(ToolTipService.IsOpenProperty));
+                toolTip.IsOpen = !toolTip.IsOpen;
             }
         }
     }

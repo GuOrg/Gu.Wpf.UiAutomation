@@ -1,4 +1,4 @@
-﻿namespace WpfApplication
+namespace WpfApplication
 {
     using System;
     using System.Diagnostics;
@@ -6,13 +6,13 @@
 
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> methodToExecute;
-        private readonly Func<object, bool> canExecuteEvaluator;
+        private readonly Action<object> execute;
+        private readonly Func<object, bool> canExecute;
 
-        public RelayCommand(Action<object> methodToExecute, Func<object, bool> canExecuteEvaluator = null)
+        public RelayCommand(Action<object> execute, Func<object, bool>? canExecute = null)
         {
-            this.methodToExecute = methodToExecute ?? throw new ArgumentNullException(nameof(methodToExecute));
-            this.canExecuteEvaluator = canExecuteEvaluator;
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this.canExecute = canExecute ?? (_ => true);
         }
 
         public event EventHandler CanExecuteChanged
@@ -24,12 +24,12 @@
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return this.canExecuteEvaluator == null || this.canExecuteEvaluator.Invoke(parameter);
+            return this.canExecute == null || this.canExecute.Invoke(parameter);
         }
 
         public void Execute(object parameter)
         {
-            this.methodToExecute.Invoke(parameter);
+            this.execute.Invoke(parameter);
         }
     }
 }

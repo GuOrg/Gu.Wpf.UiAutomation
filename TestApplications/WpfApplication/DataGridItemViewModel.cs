@@ -1,4 +1,4 @@
-﻿namespace WpfApplication
+namespace WpfApplication
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -6,10 +6,10 @@
     public class DataGridItemViewModel : INotifyPropertyChanged
     {
         private int intValue;
-        private string stringValue;
+        private string? stringValue;
         private bool boolValue;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public int IntValue
         {
@@ -27,7 +27,7 @@
             }
         }
 
-        public string StringValue
+        public string? StringValue
         {
             get => this.stringValue;
 
@@ -59,7 +59,7 @@
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

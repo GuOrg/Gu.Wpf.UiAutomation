@@ -7,7 +7,7 @@ namespace WpfApplication
 
     public class MainViewModel : INotifyPropertyChanged
     {
-        private string invokeButtonText;
+        private string? invokeButtonText;
 
         public MainViewModel()
         {
@@ -22,13 +22,13 @@ namespace WpfApplication
             this.InvokeButtonCommand = new RelayCommand(o => this.InvokeButtonText = "Invoked!");
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ObservableCollection<DataGridItemViewModel> DataGridItems { get; }
 
         public ICommand InvokeButtonCommand { get; }
 
-        public string InvokeButtonText
+        public string? InvokeButtonText
         {
             get => this.invokeButtonText;
 
@@ -44,7 +44,7 @@ namespace WpfApplication
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

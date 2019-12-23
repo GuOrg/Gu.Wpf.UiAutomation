@@ -5,6 +5,7 @@
     <!--<Application.StartupUri>Windows/DataGridWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>Windows/ContextMenuWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>Windows/TouchWindow.xaml</Application.StartupUri>-->
+    <!--<Application.StartupUri>Windows/ToolTipWindow.xaml</Application.StartupUri>-->
 
     <Application.Resources>
         <Style TargetType="{x:Type Window}">

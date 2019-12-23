@@ -1,15 +1,15 @@
-﻿namespace WpfApplication.Windows
+namespace WpfApplication.Windows
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
     public class ListBoxItemViewModel : INotifyPropertyChanged
     {
-        private string name;
+        private string? name;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public string Name
+        public string? Name
         {
             get => this.name;
 
@@ -25,7 +25,7 @@
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -9,9 +9,12 @@
         Height="450"
         mc:Ignorable="d">
     <StackPanel>
-        <Button Click="ButtonBase_OnClick"
-                Content="With ToolTip"
-                ToolTip="Tool tip text." />
+        <Button Click="OnClick"
+                Content="With ToolTip">
+            <Button.ToolTip>
+                <ToolTip>Tool tip text.</ToolTip>
+            </Button.ToolTip>
+        </Button>
         <Button Content="Lose focus" />
     </StackPanel>
 </Window>

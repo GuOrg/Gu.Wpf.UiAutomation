@@ -20,7 +20,7 @@ namespace WpfApplication.Windows
             });
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ICommand IncreaseCommand { get; }
 
@@ -42,7 +42,7 @@ namespace WpfApplication.Windows
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
