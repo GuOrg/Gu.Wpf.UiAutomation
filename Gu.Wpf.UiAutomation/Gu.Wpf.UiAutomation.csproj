@@ -22,15 +22,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
-    <Version>0.2.18</Version>
+    <Version>0.2.19</Version>
     <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
     <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>
     <PackageReleaseNotes>
-      FEATURE: SourceLink.
-      BUGFIX: diff window.
-      FEATURE: save from diff window
-      FEATURE: <Nullable>enable</Nullable>
+      OBSOLETE: Mark useless ImageAssert overloads obsolete.
     </PackageReleaseNotes>
     <Description>Library for writing UI-tests for WPF.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

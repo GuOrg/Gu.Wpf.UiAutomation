@@ -21,134 +21,14 @@ namespace Gu.Wpf.UiAutomation
     using PixelFormat = System.Windows.Media.PixelFormat;
     using Size = System.Windows.Size;
 
-    public static class ImageAssert
+    public delegate void OnImageAssertFail(Bitmap? expected, Bitmap actual, string resource);
+
+    public static partial class ImageAssert
     {
-        public static OnFail OnFail { get; set; }
-
+        /// <summary>
+        /// The time to retry checking for equality. This compensates for animations etc.
+        /// </summary>
         public static TimeSpan RetryTime { get; set; } = TimeSpan.FromMilliseconds(2000);
-
-        /// <summary>
-        /// The time the operating system animates when starting the application.
-        /// </summary>
-        public static TimeSpan StartAnimation { get; set; } = WindowsVersion.IsWindows10() ||
-                                                              WindowsVersion.IsWindows8() ||
-                                                              WindowsVersion.IsWindows8_1()
-            ? TimeSpan.FromMilliseconds(1000)
-            : TimeSpan.Zero;
-
-        /// <summary>
-        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
-        /// </summary>
-        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
-        /// <param name="element">The UIElement.</param>
-        public static void AreEqual(string fileName, System.Windows.UIElement element)
-        {
-            if (fileName == null)
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
-
-            if (element == null)
-            {
-                throw new ArgumentNullException(nameof(element));
-            }
-
-            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
-            {
-                using (stream)
-                {
-                    using var expected = (Bitmap)Image.FromStream(stream);
-                    using var actual = element.ToBitmap(expected.Size(), expected.PixelFormat());
-                    AreEqual(expected, actual, fileName);
-                }
-            }
-            else
-            {
-                using var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName));
-                throw MissingResourceException(actual, fileName);
-            }
-        }
-
-        /// <summary>
-        /// Compare Capture.Rectangle(element.Bounds) to the expected image.
-        /// </summary>
-        /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
-        /// <param name="element">The UIElement.</param>
-        /// <param name="onFail">Useful for saving the actual image on error for example.</param>
-        public static void AreEqual(string fileName, System.Windows.UIElement element, Action<Exception, Bitmap> onFail)
-        {
-            if (fileName == null)
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
-
-            if (element == null)
-            {
-                throw new ArgumentNullException(nameof(element));
-            }
-
-            if (onFail == null)
-            {
-                throw new ArgumentNullException(nameof(onFail));
-            }
-
-            if (TryGetStream(fileName, Assembly.GetCallingAssembly(), out var stream))
-            {
-                using (stream)
-                {
-                    using var expected = (Bitmap)Image.FromStream(stream);
-                    using var actual = element.ToBitmap(expected.Size(), expected.PixelFormat());
-                    try
-                    {
-                        AreEqual(expected, actual);
-                    }
-                    catch (Exception e)
-                    {
-                        onFail(e, actual);
-                        throw;
-                    }
-                }
-            }
-            else
-            {
-                using var actual = element.ToBitmap(element.RenderSize, GetPixelFormat(fileName));
-                var e = MissingResourceException(actual, fileName);
-                onFail(e, actual);
-                throw e;
-            }
-        }
-
-        public static void AreEqual(Bitmap expected, System.Windows.UIElement actual)
-        {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            if (actual == null)
-            {
-                throw new ArgumentNullException(nameof(actual));
-            }
-
-            using var actualBmp = actual.ToBitmap(expected.Size(), expected.PixelFormat());
-            if (Equal(expected, actualBmp))
-            {
-                return;
-            }
-
-            var start = DateTime.Now;
-            while (!Retry.IsTimeouted(start, RetryTime))
-            {
-                if (Equal(expected, actualBmp))
-                {
-                    return;
-                }
-
-                Wait.For(Retry.PollInterval);
-            }
-
-            AreEqual(expected, actualBmp);
-        }
 
         /// <summary>
         /// Compare Capture.Rectangle(element.Bounds) to the expected image.
@@ -172,14 +52,18 @@ namespace Gu.Wpf.UiAutomation
                 using (stream)
                 {
                     using var expected = (Bitmap)Image.FromStream(stream);
-                    using var actual = Capture.Rectangle(element.Bounds);
-                    if (Equal(expected, actual))
+                    if (Equal(expected, element, RetryTime))
                     {
                         return;
                     }
 
-                    WaitForStartAnimation(element);
-                    AreEqual(expected, actual, fileName);
+                    using var actual = Capture.Rectangle(element.Bounds);
+                    if (Debugger.IsAttached)
+                    {
+                        ImageDiffWindow.Show(expected, actual);
+                    }
+
+                    throw ImageMatchException(expected, actual, fileName);
                 }
             }
             else
@@ -195,7 +79,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="fileName">Can be a full file name relative filename or the name of a resource.</param>
         /// <param name="element">The automation element.</param>
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
-        public static void AreEqual(string fileName, UiElement element, Action<Exception, Bitmap> onFail)
+        public static void AreEqual(string fileName, UiElement element, OnImageAssertFail onFail)
         {
             if (fileName == null)
             {
@@ -217,67 +101,34 @@ namespace Gu.Wpf.UiAutomation
                 using (stream)
                 {
                     using var expected = (Bitmap)Image.FromStream(stream);
-                    using (var actual = Capture.Rectangle(element.Bounds))
+                    if (Equal(expected, element, RetryTime))
                     {
-                        if (Equal(expected, actual))
-                        {
-                            return;
-                        }
+                        return;
                     }
 
-                    WaitForStartAnimation(element);
-                    using (var actual = Capture.Rectangle(element.Bounds))
+                    using var actual = Capture.Rectangle(element.Bounds);
+                    if (Equal(expected, actual))
                     {
-                        if (Equal(expected, actual))
-                        {
-                            return;
-                        }
-
-                        var e = ImageMatchException(expected, actual, fileName);
-                        onFail(e, actual);
-                        throw e;
+                        return;
                     }
+
+                    onFail(expected, actual, fileName);
+                    throw ImageMatchException(expected, actual, fileName);
                 }
             }
             else
             {
                 using var actual = Capture.Rectangle(element.Bounds);
-                var e = MissingResourceException(actual, fileName);
-                onFail(e, actual);
-                throw e;
+                onFail(null, actual, fileName);
+                throw MissingResourceException(actual, fileName);
             }
         }
 
-        public static void AreEqual(UiElement expected, UiElement actual)
-        {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            if (actual == null)
-            {
-                throw new ArgumentNullException(nameof(actual));
-            }
-
-            if (EqualsFast(expected, actual))
-            {
-                return;
-            }
-
-            WaitForStartAnimation(actual);
-            using var expectedBmp = Capture.Rectangle(expected.Bounds);
-            using var actualBmp = Capture.Rectangle(actual.Bounds);
-            AreEqual(expectedBmp, actualBmp);
-
-            static bool EqualsFast(UiElement expected, UiElement actual)
-            {
-                using var expectedBmp = Capture.Rectangle(expected.Bounds);
-                using var actualBmp = Capture.Rectangle(actual.Bounds);
-                return Equal(expectedBmp, actualBmp);
-            }
-        }
-
+        /// <summary>
+        /// Assert that <paramref name="expected"/> is equal to <paramref name="element"/> by comparing pixels.
+        /// </summary>
+        /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
+        /// <param name="element">The actual <see cref="UiElement"/>.</param>
         public static void AreEqual(Bitmap expected, UiElement element)
         {
             if (expected == null)
@@ -295,11 +146,20 @@ namespace Gu.Wpf.UiAutomation
                 return;
             }
 
-            WaitForStartAnimation(element);
-            using var actualBmp = Capture.Rectangle(element.Bounds);
-            AreEqual(expected, actualBmp);
+            using var actual = Capture.Rectangle(element.Bounds);
+            if (Debugger.IsAttached)
+            {
+                ImageDiffWindow.Show(expected, actual);
+            }
+
+            throw ImageMatchException(expected, actual, null);
         }
 
+        /// <summary>
+        /// Assert that <paramref name="expected"/> is equal to <paramref name="actual"/> by comparing pixels.
+        /// </summary>
+        /// <param name="expected">The expected <see cref="Bitmap"/>.</param>
+        /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
         public static void AreEqual(Bitmap expected, Bitmap actual)
         {
             if (expected == null)
@@ -312,16 +172,6 @@ namespace Gu.Wpf.UiAutomation
                 throw new ArgumentNullException(nameof(actual));
             }
 
-            if (expected.Size != actual.Size)
-            {
-                if (Debugger.IsAttached)
-                {
-                    ImageDiffWindow.Show(expected, actual);
-                }
-
-                throw ImageMatchException(expected, actual, null);
-            }
-
             if (!Equal(expected, actual))
             {
                 if (Debugger.IsAttached)
@@ -329,63 +179,6 @@ namespace Gu.Wpf.UiAutomation
                     ImageDiffWindow.Show(expected, actual);
                 }
 
-                throw ImageMatchException(expected, actual, null);
-            }
-        }
-
-        public static void AreEqual(Bitmap expected, Bitmap actual, string fileName)
-        {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            if (actual == null)
-            {
-                throw new ArgumentNullException(nameof(actual));
-            }
-
-            if (!Equal(expected, actual))
-            {
-                if (Debugger.IsAttached)
-                {
-                    ImageDiffWindow.Show(expected, actual);
-                }
-
-                if (OnFail == OnFail.SaveImageToTemp)
-                {
-                    actual.Save(TempFileName(fileName), GetImageFormat(fileName));
-                }
-
-                throw ImageMatchException(expected, actual, fileName);
-            }
-        }
-
-        public static void AreEqual(Bitmap expected, Bitmap actual, Action<Bitmap> onFail)
-        {
-            if (expected == null)
-            {
-                throw new ArgumentNullException(nameof(expected));
-            }
-
-            if (actual == null)
-            {
-                throw new ArgumentNullException(nameof(actual));
-            }
-
-            if (onFail == null)
-            {
-                throw new ArgumentNullException(nameof(onFail));
-            }
-
-            if (!Equal(expected, actual))
-            {
-                if (Debugger.IsAttached)
-                {
-                    ImageDiffWindow.Show(expected, actual);
-                }
-
-                onFail(actual);
                 throw ImageMatchException(expected, actual, null);
             }
         }
@@ -405,15 +198,11 @@ namespace Gu.Wpf.UiAutomation
             var start = DateTime.Now;
             while (!Retry.IsTimeouted(start, retryTime))
             {
-                using (var actual = Capture.Rectangle(element.Bounds))
+                using var actual = Capture.Rectangle(element.Bounds);
+                if (Equal(expected, actual))
                 {
-                    if (Equal(expected, actual))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                Wait.For(Retry.PollInterval);
             }
 
             return false;
@@ -498,84 +287,6 @@ namespace Gu.Wpf.UiAutomation
             {
                 expected.UnlockBits(expectedBits);
                 actual.UnlockBits(actualBits);
-            }
-        }
-
-        public static Bitmap ToBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
-        {
-            return element.ToRenderTargetBitmap(size, pixelFormat)
-                          .ToBitmap();
-        }
-
-        public static Bitmap ToBitmap(this System.Windows.UIElement element, Size size)
-        {
-            return element.ToRenderTargetBitmap(size, PixelFormats.Pbgra32)
-                          .ToBitmap();
-        }
-
-        public static RenderTargetBitmap ToRenderTargetBitmap(this System.Windows.UIElement element, Size size)
-        {
-            return element.ToRenderTargetBitmap(size, PixelFormats.Pbgra32);
-        }
-
-        public static RenderTargetBitmap ToRenderTargetBitmap(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException(nameof(element));
-            }
-
-            var result = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, pixelFormat);
-            element.Measure(size);
-            element.Arrange(new System.Windows.Rect(size));
-            result.Render(element);
-            return result;
-        }
-
-        public static Bitmap ToBitmap(this RenderTargetBitmap bitmap)
-        {
-            using var stream = new MemoryStream();
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmap));
-            encoder.Save(stream);
-            return new Bitmap(stream);
-        }
-
-        public static void SaveImage(this System.Windows.UIElement element, Size size, string fileName)
-        {
-            SaveImage(element, size, GetPixelFormat(fileName), fileName);
-        }
-
-        public static void SaveImage(this System.Windows.UIElement element, Size size, PixelFormat pixelFormat, string fileName)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException(nameof(element));
-            }
-
-            using var stream = File.OpenWrite(fileName);
-            element.Measure(size);
-            element.Arrange(new System.Windows.Rect(size));
-            var renderTargetBitmap = element.ToRenderTargetBitmap(size, pixelFormat);
-            var encoder = GetEncoder(fileName);
-            encoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            encoder.Save(stream);
-        }
-
-        private static void WaitForStartAnimation(UiElement element)
-        {
-            if (StartAnimation <= TimeSpan.Zero)
-            {
-                return;
-            }
-
-            var window = element.Window;
-            _ = User32.GetWindowThreadProcessId(window.NativeWindowHandle, out var id);
-            using var process = Process.GetProcessById((int)id);
-            var upTime = DateTime.Now - process.StartTime;
-            if (upTime < StartAnimation)
-            {
-                Wait.For(StartAnimation - upTime);
             }
         }
 
@@ -695,7 +406,7 @@ namespace Gu.Wpf.UiAutomation
                 }
             }
 
-            if (ResourceChache.TryFind(callingAssembly, fileName, out var bitmap))
+            if (ResourceCache.TryFind(callingAssembly, fileName, out var bitmap))
             {
                 result = new MemoryStream();
                 bitmap.Save(result, GetImageFormat(fileName));
@@ -748,7 +459,7 @@ namespace Gu.Wpf.UiAutomation
             return new ImageAssertException(null, actual, $"Did not find a file nor resource named {fileName}.\r\n Saved the element to {TempFileName(fileName)}.", fileName);
         }
 
-        private static class ResourceChache
+        private static class ResourceCache
         {
             private static readonly ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>> Cache = new ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>>();
 
