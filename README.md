@@ -28,12 +28,9 @@ public class FooTests
     [SetUp]
     public void SetUp()
     {
-        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-        {
-            // restore state for the next test.
-            Wait.UntilInputIsProcessed();
-            app.MainWindow.FindButton("Clear").Click();
-        }
+        // restore state for the next test if the application is reused.
+        using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+        app.MainWindow.FindButton("Reset").Click();
     }
 
     [OneTimeTearDown]
@@ -46,33 +43,27 @@ public class FooTests
     [Test]
     public void Test1()
     {
-        // AttachOrLaunch uses the already open app.
-        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-        {
-            var window = app.MainWindow;
-            ...
-        }
+        // AttachOrLaunch uses the already open app or creates a new. Dispose does not close the app.
+        using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+        var window = app.MainWindow;
+        ...
     }
 
     [Test]
     public void Test2()
     {
-        using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-        {
-            var window = app.MainWindow;
-            ...
-        }
+        using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+        var window = app.MainWindow;
+        ...
     }
 
     [Test]
     public void Test3()
     {
         // If we for some reason needs a separate instance of the application in a test we use Launch()
-        using (var app = Application.Launch(ExeFileName, WindowName))
-        {
-            var window = app.MainWindow;
-            ...
-        }
+        using var app = Application.Launch(ExeFileName, WindowName);
+        var window = app.MainWindow;
+        ...
     }
 }
 ```
@@ -81,9 +72,9 @@ Usage of the window parameter in App.Xaml.cs
 ```cs
 protected override void OnStartup(StartupEventArgs e)
 {
-    if (e.Args.Length == 1)
+    if (e is { Args: { Length: 1 } args })
     {
-        var window = e.Args[0];
+        var window = args[0];
         this.StartupUri = new Uri($"Windows/{window}.xaml", UriKind.Relative);
     }
 
@@ -202,13 +193,11 @@ Since the application is not related to any UIA library, you need to create the 
 [Test]
 public void CheckBoxIsChecked()
 {
-    using (var app = Application.Launch("WpfApplication.exe"))
-    {
-        var window = app.MainWindow;
-        var checkBox = window.FindCheckBox("Test Checkbox");
-        checkBox.IsChecked = true;
-        Assert.AreEqual(true, checkBox.IsChecked);
-    }
+    using var app = Application.Launch("WpfApplication.exe");
+    var window = app.MainWindow;
+    var checkBox = window.FindCheckBox("Test Checkbox");
+    checkBox.IsChecked = true;
+    Assert.AreEqual(true, checkBox.IsChecked);
 }
 ```
 
@@ -223,13 +212,11 @@ Launch is useful for tests that mutate state where resetting can be slow and pai
 [Test]
 public void IsChecked()
 {
-    using (var app = Application.Launch("WpfApplication.exe"))
-    {
-        var window = app.MainWindow;
-        var checkBox = window.FindCheckBox("Test Checkbox");
-        checkBox.IsChecked = true;
-        Assert.AreEqual(true, checkBox.IsChecked);
-    }
+    using var app = Application.Launch("WpfApplication.exe");
+    var window = app.MainWindow;
+    var checkBox = window.FindCheckBox("Test Checkbox");
+    checkBox.IsChecked = true;
+    Assert.AreEqual(true, checkBox.IsChecked);
 }
 ```
 
@@ -263,12 +250,10 @@ public void OneTimeTearDown()
 [TestCase("Content", "Content")]
 public void Content(string key, string expected)
 {
-    using (var app = Application.AttachOrLaunch("WpfApplication.exe", "ButtonWindow"))
-    {
-        var window = app.MainWindow;
-        var button = window.FindButton(key);
-        Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
-    }
+    using var app = Application.AttachOrLaunch("WpfApplication.exe", "ButtonWindow");
+    var window = app.MainWindow;
+    var button = window.FindButton(key);
+    Assert.AreEqual(expected, ((TextBlock)button.Content).Text);
 }
 ```
 
@@ -285,23 +270,21 @@ public void OneTimeTearDown()
 [Test]
 public void SelectByIndex()
 {
-    using (var app = Application.AttachOrLaunch("WpfApplication.exe", "ListBoxWindow"))
-    {
-        var window = app.MainWindow;
-        var listBox = window.FindListBox("BoundListBox");
-        Assert.AreEqual(2, listBox.Items.Count);
-        Assert.IsInstanceOf<ListBoxItem>(listBox.Items[0]);
-        Assert.IsInstanceOf<ListBoxItem>(listBox.Items[1]);
-        Assert.IsNull(listBox.SelectedItem);
+    using var app = Application.AttachOrLaunch("WpfApplication.exe", "ListBoxWindow");
+    var window = app.MainWindow;
+    var listBox = window.FindListBox("BoundListBox");
+    Assert.AreEqual(2, listBox.Items.Count);
+    Assert.IsInstanceOf<ListBoxItem>(listBox.Items[0]);
+    Assert.IsInstanceOf<ListBoxItem>(listBox.Items[1]);
+    Assert.IsNull(listBox.SelectedItem);
 
-        var item = listBox.Select(0);
-        Assert.AreEqual("Johan", item.FindTextBlock().Text);
-        Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
+    var item = listBox.Select(0);
+    Assert.AreEqual("Johan", item.FindTextBlock().Text);
+    Assert.AreEqual("Johan", listBox.SelectedItem.FindTextBlock().Text);
 
-        item = listBox.Select(1);
-        Assert.AreEqual("Erik", item.FindTextBlock().Text);
-        Assert.AreEqual("Erik", listBox.SelectedItem.FindTextBlock().Text);
-    }
+    item = listBox.Select(1);
+    Assert.AreEqual("Erik", item.FindTextBlock().Text);
+    Assert.AreEqual("Erik", listBox.SelectedItem.FindTextBlock().Text);
 }
 ```
 
@@ -310,9 +293,9 @@ public partial class App
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        if (e.Args.Length == 1)
+        if (e is { Args: { Length: 1 } args })
         {
-            var window = e.Args[0];
+            var window = args[0];
             this.StartupUri = new Uri($"Windows/{window}.xaml", UriKind.Relative);
         }
 
@@ -331,12 +314,10 @@ For mouse input like click, drag, scroll etc.
 [Test]
 public void DragFromCenterToTopLeft()
 {
-    using (var app = Application.Launch("WpfApplication.exe"))
-    {
-        var window = app.MainWindow;
-        Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
-        Assert.AreEqual(...);
-    }
+    using var app = Application.Launch("WpfApplication.exe");
+    var window = app.MainWindow;
+    Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
+    Assert.AreEqual(...);
 }
 ```
 
@@ -348,14 +329,12 @@ For typing or holding modifier keys.
 [Test]
 public void ShiftDragFromCenterToTopLeft()
 {
-    using (var app = Application.Launch("WpfApplication.exe"))
+    using var app = Application.Launch("WpfApplication.exe");
+    var window = app.MainWindow;
+    using (Keyboard.Hold(Key.SHIFT))
     {
-        var window = app.MainWindow;
-        using (Keyboard.Hold(Key.SHIFT))
-        {
-            Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
-            Assert.AreEqual(...);
-        }
+        Mouse.Drag(window.Bound.Center(), window.Bound.TopLeft);
+        Assert.AreEqual(...);
     }
 }
 ```
@@ -368,12 +347,10 @@ For mouse input like click, drag, scroll etc.
 [Test]
 public void DragFromCenterToTopLeft()
 {
-    using (var app = Application.Launch("WpfApplication.exe"))
-    {
-        var window = app.MainWindow;
-        Touch.Drag(window.Bound.Center(), window.Bound.TopLeft);
-        Assert.AreEqual(...);
-    }
+    using var app = Application.Launch("WpfApplication.exe");
+    var window = app.MainWindow;
+    Touch.Drag(window.Bound.Center(), window.Bound.TopLeft);
+    Assert.AreEqual(...);
 }
 ```
 
@@ -400,10 +377,26 @@ public void DefaultAdornerWhenNotFocused()
     using var app = Application.Launch("Gu.Wpf.Adorners.Demo.exe", "WatermarkWindow");
     var window = app.MainWindow;
     var textBox = window.FindTextBox("WithDefaultAdorner");
-    ImageAssert.AreEqual("Images\\WithDefaultAdorner_not_focused.png", textBox, (expected, actual, resourceName) => );
+    ImageAssert.AreEqual("Images\\WithDefaultAdorner_not_focused.png", textBox, OnFail);
+}
+
+
+private static void OnFail(Bitmap bitmap, Bitmap actual, string resource)
+{
+    var fullFileName = Path.Combine(Path.GetTempPath(), resource);
+    _ = Directory.CreateDirectory(Path.GetDirectoryName(fullFileName));
+    actual.Save(fullFileName);
+    TestContext.AddTestAttachment(fullFileName);
 }
 ```
 
+And in `appveyor.yml`
+```
+on_failure:
+  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+```
+
+#### Normalize styles
 For image asserts to work on build servers forcing a theme may be needed:
 
 ```xml
@@ -415,58 +408,10 @@ For image asserts to work on build servers forcing a theme may be needed:
     </ResourceDictionary>
 </Window.Resources>
 ```
-### OnFail
-Convenience property for saving the actual image to %Temp%
 
-```cs
-[OneTimeSetUp]
-public void OneTimeSetUp()
-{
-    ImageAssert.OnFail = OnFail.SaveImageToTemp;
-}
-```
-
-And in `appveyor.yml`
-```
-on_failure:
-  - ps: Get-ChildItem $env:temp\*.png | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-```
 
 ## Azure devops pipelines
 
-```yml
-queue:
-  name: Hosted VS2017
-  demands: 
-  - msbuild
-  - visualstudio
-  - vstest
-
-steps:
-- powershell: dotnet restore
-  displayName: 'Restore'
-
-- task: VSBuild@1
-  displayName: 'Build'
-  inputs:
-    configuration: Release
-
-- task: VSTest@2
-  displayName: 'Test'
-
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    sourceFolder: '$(Agent.TempDirectory)'
-    contents: '*.png'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'Images'
-```
 
 ## AppVeyor
 Troubleshooting failing UI-tests on AppVeyor is tricky. Here is a snippet that can be used for getting a screenshot of what things look like.
@@ -477,10 +422,8 @@ public void SomeTest()
 {
     try
     {
-        using (var app = Application.AttachOrLaunch("SomeApp.exe"))
-        {
-            ...
-        }
+        using var app = Application.AttachOrLaunch("SomeApp.exe");
+        ...
     }
     catch (TimeoutException)
     {
