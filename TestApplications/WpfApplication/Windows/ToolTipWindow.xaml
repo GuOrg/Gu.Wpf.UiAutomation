@@ -1,0 +1,17 @@
+<Window x:Class="WpfApplication.Windows.ToolTipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfApplication.Windows"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="ToolTipWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <StackPanel>
+        <Button Click="ButtonBase_OnClick"
+                Content="With ToolTip"
+                ToolTip="Tool tip text." />
+        <Button Content="Lose focus" />
+    </StackPanel>
+</Window>
