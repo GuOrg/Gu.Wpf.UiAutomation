@@ -66,6 +66,7 @@ namespace Gu.Wpf.UiAutomation
                 foreach (var pattern in element.GetSupportedPatterns())
                 {
                     writer.WriteLine(pattern.ProgrammaticName);
+                    writer.Indent++;
                     var currentPattern = element.GetCurrentPattern(pattern);
                     writer.WriteLine(currentPattern);
                     if (currentPattern.GetType().GetProperty("Current") is { } currentProperty &&
@@ -73,14 +74,16 @@ namespace Gu.Wpf.UiAutomation
                     {
                         foreach (var property in value.GetType().GetProperties())
                         {
-                            writer.WriteLine($"{property.Name} {property.GetValue(value)}");
+                            writer.WriteLine($"{property.Name} {property.GetValue(value) ?? "null"}");
                         }
                     }
+
+                    writer.Indent--;
                 }
 
                 foreach (var property in element.GetSupportedProperties().OrderBy(x => x.ProgrammaticName))
                 {
-                    writer.WriteLine($"{property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} {element.GetCurrentPropertyValue(property)}");
+                    writer.WriteLine($"{property.ProgrammaticName.TrimStart("AutomationElementIdentifiers.").TrimEnd("Property")} {element.GetCurrentPropertyValue(property) ?? "null"}");
                 }
 
                 writer.WriteLine();

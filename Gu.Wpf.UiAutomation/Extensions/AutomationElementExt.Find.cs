@@ -75,7 +75,28 @@ namespace Gu.Wpf.UiAutomation
                 return first;
             }
 
-            throw new InvalidOperationException($"Did not find a {treeScope} matching {condition.Description()}.");
+            throw new InvalidOperationException($"Did not find {Relative()} matching {condition.Description()}.");
+
+            string Relative()
+            {
+                switch (treeScope)
+                {
+                    case TreeScope.Element:
+                        return "an element";
+                    case TreeScope.Children:
+                        return "a child";
+                    case TreeScope.Descendants:
+                        return "a descendant";
+                    case TreeScope.Parent:
+                        return "a parent";
+                    case TreeScope.Ancestors:
+                        return "an ancestor";
+                    case TreeScope.Subtree:
+                        return "a subtree";
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null);
+                }
+            }
         }
 
         public static AutomationElement FindFirstChild(this AutomationElement element, Condition condition)

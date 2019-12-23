@@ -335,6 +335,15 @@ namespace Gu.Wpf.UiAutomation
             Retry.Time);
 
         /// <summary>
+        /// Find the first <see cref="ToolTip"/>.
+        /// </summary>
+        public ToolTip FindToolTip() => Desktop.Instance.FindFirst(
+            TreeScope.Descendants,
+            this.CreateCondition(Conditions.ToolTip, this.HelpText),
+            x => new ToolTip(x),
+            Retry.Time);
+
+        /// <summary>
         /// Find the first <see cref="TabControl"/> by x:Name, Content or AutomationID.
         /// </summary>
         /// <param name="name">x:Name, Content or AutomationID.</param>

@@ -9,8 +9,7 @@
         Height="450"
         mc:Ignorable="d">
     <StackPanel>
-        <Button Click="OnClick"
-                Content="With ToolTip">
+        <Button Click="OnClick" Content="With ToolTip">
             <Button.ToolTip>
                 <ToolTip>Tool tip text.</ToolTip>
             </Button.ToolTip>
