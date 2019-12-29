@@ -5,11 +5,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
     public class ToolTipTests
     {
         private const string ExeFileName = "WpfApplication.exe";
+        private const string Window = "ToolTipWindow";
 
         [Test]
         public void FindImplicit()
         {
-            using var app = Application.Launch(ExeFileName, "ToolTipWindow");
+            using var app = Application.Launch(ExeFileName, Window);
             var window = app.MainWindow;
             var button = window.FindButton("With ToolTip");
             Mouse.Position = button.Bounds.Center();
@@ -25,7 +26,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         [Test]
         public void FindExplicit()
         {
-            using var app = Application.Launch(ExeFileName, "ToolTipWindow");
+            using var app = Application.Launch(ExeFileName, Window);
             var window = app.MainWindow;
             var button = window.FindButton("With explicit ToolTip");
             Mouse.Position = button.Bounds.Center();
