@@ -1,5 +1,4 @@
-<Window x:Class="WpfApplication.Windows.ToolTipWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:WpfApplication.Windows"
@@ -9,9 +8,10 @@
         Height="450"
         mc:Ignorable="d">
     <StackPanel>
-        <Button Click="OnClick" Content="With ToolTip">
+        <Button Content="With ToolTip" ToolTip="Tool tip text."/>
+        <Button Content="With explicit ToolTip">
             <Button.ToolTip>
-                <ToolTip>Tool tip text.</ToolTip>
+                <ToolTip>Explicit tool tip text.</ToolTip>
             </Button.ToolTip>
         </Button>
         <Button Content="Lose focus" />

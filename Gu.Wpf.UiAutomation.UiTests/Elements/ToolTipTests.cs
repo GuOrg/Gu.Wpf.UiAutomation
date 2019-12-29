@@ -7,18 +7,34 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
         private const string ExeFileName = "WpfApplication.exe";
 
         [Test]
-        public void Find()
+        public void FindImplicit()
         {
             using var app = Application.Launch(ExeFileName, "ToolTipWindow");
             var window = app.MainWindow;
             var button = window.FindButton("With ToolTip");
-            button.Click();
+            Mouse.Position = button.Bounds.Center();
             var toolTip = button.FindToolTip();
             Assert.AreEqual(false, toolTip.IsOffscreen);
             Assert.AreEqual("Tool tip text.", toolTip.Text);
             Assert.IsInstanceOf<ToolTip>(UiElement.FromAutomationElement(toolTip.AutomationElement));
 
-            button.Click();
+            window.FindButton("Lose focus").Click();
+            Assert.AreEqual(true, toolTip.IsOffscreen);
+        }
+
+        [Test]
+        public void FindExplicit()
+        {
+            using var app = Application.Launch(ExeFileName, "ToolTipWindow");
+            var window = app.MainWindow;
+            var button = window.FindButton("With explicit ToolTip");
+            Mouse.Position = button.Bounds.Center();
+            var toolTip = button.FindToolTip();
+            Assert.AreEqual(false, toolTip.IsOffscreen);
+            Assert.AreEqual("Explicit tool tip text.", toolTip.Text);
+            Assert.IsInstanceOf<ToolTip>(UiElement.FromAutomationElement(toolTip.AutomationElement));
+
+            window.FindButton("Lose focus").Click();
             Assert.AreEqual(true, toolTip.IsOffscreen);
         }
     }
