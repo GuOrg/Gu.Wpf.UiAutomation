@@ -27,7 +27,7 @@ namespace Gu.Wpf.UiAutomation
             System.Windows.Media.Brushes.LightGreen,
         };
 
-        private ImageDiffWindow(Bitmap expected, Bitmap actual)
+        private ImageDiffWindow(Bitmap? expected, Bitmap actual)
         {
             AutomationProperties.SetAutomationId(this, "Gu.Wpf.UiAutomationOverlayWindow");
             AutomationProperties.SetName(this, "Gu.Wpf.UiAutomationOverlayWindow");
@@ -37,92 +37,120 @@ namespace Gu.Wpf.UiAutomation
             this.ShowActivated = false;
             this.Title = "Image diff";
             this.Background = System.Windows.Media.Brushes.Gray;
-            this.Content = new Grid
+            if (expected is null)
             {
-                RowDefinitions =
+                this.Padding = new Thickness(10);
+                this.Content = CreateImage(actual, null);
+                this.KeyDown += (_, e) =>
                 {
-                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-                    new RowDefinition { Height = GridLength.Auto },
-                },
-                Children =
-                {
-                    new Grid
+                    switch (e.Key)
                     {
-                        Margin = new Thickness(10),
-                        Background = System.Windows.Media.Brushes.Transparent,
-                        Children =
-                        {
-                            CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
-                            CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
-                            CreateImage(Diff(expected, actual), nameof(ImageDiffViewModel.DiffVisibility)),
-                        },
+                        case System.Windows.Input.Key.Up:
+                            this.Background = NextBackground(1);
+                            break;
+
+                        case System.Windows.Input.Key.Down:
+                            this.Background = NextBackground(-1);
+                            break;
+                    }
+                };
+                this.ToolTip = new System.Windows.Controls.ToolTip
+                {
+                    Content = new System.Windows.Controls.TextBlock
+                    {
+                        Text = "Up and down to change background.",
                     },
-                    CreateButtonGrid(),
-                },
-            };
-
-            var viewModel = new ImageDiffViewModel();
-            this.DataContext = viewModel;
-            this.KeyDown += (_, e) =>
+                };
+            }
+            else
             {
-                switch (e.Key)
+                this.Content = new Grid
                 {
-                    case System.Windows.Input.Key.Left:
-                        if (viewModel.Expected)
+                    RowDefinitions =
+                    {
+                        new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                        new RowDefinition { Height = GridLength.Auto },
+                    },
+                    Children =
+                    {
+                        new Grid
                         {
-                            viewModel.Diff = true;
-                        }
-                        else if (viewModel.Actual)
-                        {
-                            viewModel.Expected = true;
-                        }
-                        else if (viewModel.Both)
-                        {
-                            viewModel.Actual = true;
-                        }
-                        else if (viewModel.Diff)
-                        {
-                            viewModel.Both = true;
-                        }
+                            Margin = new Thickness(10),
+                            Background = System.Windows.Media.Brushes.Transparent,
+                            Children =
+                            {
+                                CreateImage(expected, nameof(ImageDiffViewModel.ExpectedVisibility)),
+                                CreateImage(actual, nameof(ImageDiffViewModel.ActualVisibility)),
+                                CreateImage(Diff(expected, actual), nameof(ImageDiffViewModel.DiffVisibility)),
+                            },
+                        },
+                        CreateButtonGrid(),
+                    },
+                };
 
-                        break;
-
-                    case System.Windows.Input.Key.Right:
-                        if (viewModel.Expected)
-                        {
-                            viewModel.Actual = true;
-                        }
-                        else if (viewModel.Actual)
-                        {
-                            viewModel.Both = true;
-                        }
-                        else if (viewModel.Both)
-                        {
-                            viewModel.Diff = true;
-                        }
-                        else if (viewModel.Diff)
-                        {
-                            viewModel.Expected = true;
-                        }
-
-                        break;
-
-                    case System.Windows.Input.Key.Up:
-                        this.Background = NextBackground(1);
-                        break;
-
-                    case System.Windows.Input.Key.Down:
-                        this.Background = NextBackground(-1);
-                        break;
-                }
-            };
-            this.ToolTip = new System.Windows.Controls.ToolTip
-            {
-                Content = new System.Windows.Controls.TextBlock
+                var viewModel = new ImageDiffViewModel();
+                this.DataContext = viewModel;
+                this.KeyDown += (_, e) =>
                 {
-                    Text = "Use left and right arrows to change image. Up and down to change background.",
-                },
-            };
+                    switch (e.Key)
+                    {
+                        case System.Windows.Input.Key.Left:
+                            if (viewModel.Expected)
+                            {
+                                viewModel.Diff = true;
+                            }
+                            else if (viewModel.Actual)
+                            {
+                                viewModel.Expected = true;
+                            }
+                            else if (viewModel.Both)
+                            {
+                                viewModel.Actual = true;
+                            }
+                            else if (viewModel.Diff)
+                            {
+                                viewModel.Both = true;
+                            }
+
+                            break;
+
+                        case System.Windows.Input.Key.Right:
+                            if (viewModel.Expected)
+                            {
+                                viewModel.Actual = true;
+                            }
+                            else if (viewModel.Actual)
+                            {
+                                viewModel.Both = true;
+                            }
+                            else if (viewModel.Both)
+                            {
+                                viewModel.Diff = true;
+                            }
+                            else if (viewModel.Diff)
+                            {
+                                viewModel.Expected = true;
+                            }
+
+                            break;
+
+                        case System.Windows.Input.Key.Up:
+                            this.Background = NextBackground(1);
+                            break;
+
+                        case System.Windows.Input.Key.Down:
+                            this.Background = NextBackground(-1);
+                            break;
+                    }
+                };
+                this.ToolTip = new System.Windows.Controls.ToolTip
+                {
+                    Content = new System.Windows.Controls.TextBlock
+                    {
+                        Text = "Use left and right arrows to change image. Up and down to change background.",
+                    },
+                };
+            }
 
             SolidColorBrush NextBackground(int increment)
             {
@@ -141,13 +169,8 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
-        public static void Show(Bitmap expected, Bitmap actual)
+        public static void Show(Bitmap? expected, Bitmap actual)
         {
-            if (expected is null)
-            {
-                throw new System.ArgumentNullException(nameof(expected));
-            }
-
             if (actual is null)
             {
                 throw new System.ArgumentNullException(nameof(actual));
@@ -164,7 +187,7 @@ namespace Gu.Wpf.UiAutomation
             _ = dispatcher.Thread.Join(1000);
         }
 
-        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string visibilityPropertyName)
+        private static System.Windows.Controls.Image CreateImage(Bitmap bitmap, string? visibilityPropertyName)
         {
             var image = new System.Windows.Controls.Image
             {
@@ -198,23 +221,26 @@ namespace Gu.Wpf.UiAutomation
                 },
             };
 
-            _ = BindingOperations.SetBinding(
-                image,
-                System.Windows.Controls.Image.VisibilityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath(visibilityPropertyName),
-                    Mode = BindingMode.OneWay,
-                });
+            if (visibilityPropertyName is { })
+            {
+                _ = BindingOperations.SetBinding(
+                    image,
+                    System.Windows.Controls.Image.VisibilityProperty,
+                    new Binding
+                    {
+                        Path = new PropertyPath(visibilityPropertyName),
+                        Mode = BindingMode.OneWay,
+                    });
 
-            _ = BindingOperations.SetBinding(
-                image,
-                System.Windows.Controls.Image.OpacityProperty,
-                new Binding
-                {
-                    Path = new PropertyPath(nameof(ImageDiffViewModel.Opacity)),
-                    Mode = BindingMode.OneWay,
-                });
+                _ = BindingOperations.SetBinding(
+                    image,
+                    System.Windows.Controls.Image.OpacityProperty,
+                    new Binding
+                    {
+                        Path = new PropertyPath(nameof(ImageDiffViewModel.Opacity)),
+                        Mode = BindingMode.OneWay,
+                    });
+            }
 
             Grid.SetRow(image, 0);
             return image;
