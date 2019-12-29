@@ -18,53 +18,28 @@ namespace Gu.Wpf.UiAutomation
             return TreeWalker.RawViewWalker.Children(element);
         }
 
-        public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, Condition condition, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]out AutomationElement? match)
+        public static bool TryFindFirst(this AutomationElement element, TreeScope treeScope, Condition condition, [NotNullWhen(true)]out AutomationElement? match)
         {
             if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
 
-            match = treeScope == TreeScope.Ancestors
-                ? new TreeWalker(condition).Ancestors(element).FirstOrDefault()
-                : element.FindFirst(treeScope, condition);
-            if (match == null)
+            if (condition is null)
             {
-                switch (treeScope)
-                {
-                    case TreeScope.Children:
-                        foreach (var child in TreeWalker.RawViewWalker.Children(element))
-                        {
-                            if (Conditions.IsMatch(child, condition))
-                            {
-                                match = child;
-                                return true;
-                            }
-                        }
-
-                        break;
-                    case TreeScope.Descendants:
-                        foreach (var child in TreeWalker.RawViewWalker.Descendants(element))
-                        {
-                            if (Conditions.IsMatch(child, condition))
-                            {
-                                match = child;
-                                return true;
-                            }
-                        }
-
-                        break;
-                    case TreeScope.Parent:
-                        break;
-                    case TreeScope.Ancestors:
-                        break;
-                    case TreeScope.Subtree:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null);
-                }
+                throw new ArgumentNullException(nameof(condition));
             }
 
+            match = treeScope switch
+            {
+                TreeScope.Element => element.FindFirst(treeScope, condition),
+                TreeScope.Children => element.FindFirst(treeScope, condition),
+                TreeScope.Descendants => element.FindFirst(treeScope, condition),
+                TreeScope.Parent => new TreeWalker(condition).GetParent(element),
+                TreeScope.Ancestors => new TreeWalker(condition).Ancestors(element).FirstOrDefault(),
+                TreeScope.Subtree => Desktop.AutomationElement.FindFirst(TreeScope.Descendants, condition),
+                _ => throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null)
+            };
             return match != null;
         }
 
