@@ -67,6 +67,11 @@ namespace Gu.Wpf.UiAutomation
             else
             {
                 using var actual = Capture.Rectangle(element.Bounds);
+                if (Debugger.IsAttached)
+                {
+                    ImageDiffWindow.Show(null, actual);
+                }
+
                 throw MissingResourceException(actual, fileName);
             }
         }
@@ -105,6 +110,11 @@ namespace Gu.Wpf.UiAutomation
                     }
 
                     using var actual = Capture.Rectangle(element.Bounds);
+                    if (Debugger.IsAttached)
+                    {
+                        ImageDiffWindow.Show(expected, actual);
+                    }
+
                     onFail(expected, actual, fileName);
                     throw ImageMatchException(expected, actual, fileName);
                 }
@@ -112,6 +122,11 @@ namespace Gu.Wpf.UiAutomation
             else
             {
                 using var actual = Capture.Rectangle(element.Bounds);
+                if (Debugger.IsAttached)
+                {
+                    ImageDiffWindow.Show(null, actual);
+                }
+
                 onFail(null, actual, fileName);
                 throw MissingResourceException(actual, fileName);
             }
