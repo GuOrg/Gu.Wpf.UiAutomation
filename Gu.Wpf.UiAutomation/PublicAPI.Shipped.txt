@@ -848,6 +848,7 @@ Gu.Wpf.UiAutomation.UiElement.FindTextBoxBase(string name = null) -> Gu.Wpf.UiAu
 Gu.Wpf.UiAutomation.UiElement.FindTitleBar(string name = null) -> Gu.Wpf.UiAutomation.TitleBar
 Gu.Wpf.UiAutomation.UiElement.FindToggleButton(string name = null) -> Gu.Wpf.UiAutomation.ToggleButton
 Gu.Wpf.UiAutomation.UiElement.FindToolBar(string name = null) -> Gu.Wpf.UiAutomation.ToolBar
+Gu.Wpf.UiAutomation.UiElement.FindToolTip() -> Gu.Wpf.UiAutomation.ToolTip
 Gu.Wpf.UiAutomation.UiElement.FindTreeView(string name = null) -> Gu.Wpf.UiAutomation.TreeView
 Gu.Wpf.UiAutomation.UiElement.FindUserControl(string name = null) -> Gu.Wpf.UiAutomation.UserControl
 Gu.Wpf.UiAutomation.UiElement.FindVerticalScrollBar(string name = null) -> Gu.Wpf.UiAutomation.VerticalScrollBar
@@ -1975,6 +1976,7 @@ static Gu.Wpf.UiAutomation.Converters.FrameworkIds.ConvertToFrameworkType(string
 static Gu.Wpf.UiAutomation.Debug.Details(Gu.Wpf.UiAutomation.UiElement uiElement) -> string
 static Gu.Wpf.UiAutomation.Debug.GetXPathToElement(Gu.Wpf.UiAutomation.UiElement element, Gu.Wpf.UiAutomation.UiElement rootElement = null) -> string
 static Gu.Wpf.UiAutomation.Desktop.AutomationElement.get -> System.Windows.Automation.AutomationElement
+static Gu.Wpf.UiAutomation.Desktop.Instance.get -> Gu.Wpf.UiAutomation.Window
 static Gu.Wpf.UiAutomation.Disposable.Create(System.Action dispose) -> System.IDisposable
 static Gu.Wpf.UiAutomation.Disposable.Empty.get -> System.IDisposable
 static Gu.Wpf.UiAutomation.Dump.Recursive(Gu.Wpf.UiAutomation.UiElement element, bool allPropertiesAndPatterns = false) -> string
@@ -2107,6 +2109,8 @@ static Gu.Wpf.UiAutomation.Touch.Up() -> void
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Ancestors(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Children(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
 static Gu.Wpf.UiAutomation.TreeWalkerExt.Descendants(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element) -> System.Collections.Generic.IEnumerable<System.Windows.Automation.AutomationElement>
+static Gu.Wpf.UiAutomation.TreeWalkerExt.FindFirstChild(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element, System.Windows.Automation.Condition condition) -> System.Windows.Automation.AutomationElement
+static Gu.Wpf.UiAutomation.TreeWalkerExt.FindFirstDescendant(this System.Windows.Automation.TreeWalker walker, System.Windows.Automation.AutomationElement element, System.Windows.Automation.Condition condition) -> System.Windows.Automation.AutomationElement
 static Gu.Wpf.UiAutomation.TwoFingers.Around(System.Windows.Point around, double radius, double angle) -> Gu.Wpf.UiAutomation.TwoFingers
 static Gu.Wpf.UiAutomation.TwoFingers.operator !=(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
 static Gu.Wpf.UiAutomation.TwoFingers.operator ==(Gu.Wpf.UiAutomation.TwoFingers left, Gu.Wpf.UiAutomation.TwoFingers right) -> bool
