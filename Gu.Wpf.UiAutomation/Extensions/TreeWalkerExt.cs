@@ -45,6 +45,29 @@ namespace Gu.Wpf.UiAutomation
             }
         }
 
+        public static AutomationElement? FindFirstChild(this TreeWalker walker, AutomationElement element, Condition condition)
+        {
+            if (walker is null)
+            {
+                throw new System.ArgumentNullException(nameof(walker));
+            }
+
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
+            foreach (var candidate in walker.Children(element))
+            {
+                if (Conditions.IsMatch(candidate, condition))
+                {
+                    return candidate;
+                }
+            }
+
+            return null;
+        }
+
         public static IEnumerable<AutomationElement> Descendants(this TreeWalker walker, AutomationElement element)
         {
             if (walker is null)
@@ -65,6 +88,29 @@ namespace Gu.Wpf.UiAutomation
                     yield return descendants;
                 }
             }
+        }
+
+        public static AutomationElement? FindFirstDescendant(this TreeWalker walker, AutomationElement element, Condition condition)
+        {
+            if (walker is null)
+            {
+                throw new System.ArgumentNullException(nameof(walker));
+            }
+
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
+            foreach (var candidate in walker.Descendants(element))
+            {
+                if (Conditions.IsMatch(candidate, condition))
+                {
+                    return candidate;
+                }
+            }
+
+            return null;
         }
     }
 }

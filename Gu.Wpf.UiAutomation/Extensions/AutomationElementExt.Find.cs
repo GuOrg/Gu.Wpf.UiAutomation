@@ -33,8 +33,8 @@ namespace Gu.Wpf.UiAutomation
             match = treeScope switch
             {
                 TreeScope.Element => element.FindFirst(treeScope, condition),
-                TreeScope.Children => element.FindFirst(treeScope, condition),
-                TreeScope.Descendants => element.FindFirst(treeScope, condition),
+                TreeScope.Children => element.FindFirst(treeScope, condition) ?? TreeWalker.RawViewWalker.FindFirstChild(element, condition),
+                TreeScope.Descendants => element.FindFirst(treeScope, condition) ?? TreeWalker.RawViewWalker.FindFirstDescendant(element, condition),
                 TreeScope.Parent => new TreeWalker(condition).GetParent(element),
                 TreeScope.Ancestors => new TreeWalker(condition).Ancestors(element).FirstOrDefault(),
                 TreeScope.Subtree => Desktop.AutomationElement.FindFirst(TreeScope.Descendants, condition),
