@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests.Elements
+namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using NUnit.Framework;
 
@@ -14,7 +14,7 @@
             var btn = window.FindToggleButton("PopupToggleButton1");
             btn.Click();
             Wait.UntilInputIsProcessed();
-            var popup = window.Popup;
+            var popup = window.FindPopup();
             Assert.NotNull(popup);
             var popupChildren = popup.FindAllChildren();
             Assert.AreEqual(1, popupChildren.Count);
@@ -30,7 +30,7 @@
             var btn = window.FindToggleButton("PopupToggleButton2");
             btn.Click();
             Wait.UntilInputIsProcessed();
-            var popup = window.Popup;
+            var popup = window.FindPopup();
             var popupChildren = popup.FindAllChildren();
             Assert.AreEqual(1, popupChildren.Count);
             var menu = (Menu)popupChildren[0];

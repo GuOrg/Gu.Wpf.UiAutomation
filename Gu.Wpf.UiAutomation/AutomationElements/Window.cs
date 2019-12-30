@@ -52,6 +52,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the current WPF popup window.
         /// </summary>
+        [Obsolete("Changed to method FindPopup()")]
         public Popup Popup
         {
             get
@@ -61,7 +62,7 @@ namespace Gu.Wpf.UiAutomation
                     new AndCondition(
                         Conditions.Window,
                         Conditions.ByName(string.Empty),
-                        Conditions.ByClassName(nameof(this.Popup))));
+                        Conditions.ByClassName("Popup")));
                 if (popup == null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
@@ -82,6 +83,16 @@ namespace Gu.Wpf.UiAutomation
         public WindowPattern WindowPattern => this.AutomationElement.WindowPattern();
 
         public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Conditions.MessageBox));
+
+        /// <summary>
+        /// Find the first <see cref="Popup"/>.
+        /// </summary>
+        public Popup FindPopup() => this.FindFirstChild(
+            new AndCondition(
+                Conditions.Window,
+                Conditions.ByName(string.Empty),
+                Conditions.ByClassName("Popup")),
+            x => new Popup(x));
 
         public Window FindDialog() => this.FindFirstChild(Conditions.ModalWindow, e => new Window(e, isMainWindow: false));
 
@@ -123,7 +134,7 @@ namespace Gu.Wpf.UiAutomation
             if (frameworkType == FrameworkType.Wpf)
             {
                 // In WPF, there is a window (Popup) where the menu is inside
-                var popup = this.Popup;
+                var popup = this.FindPopup();
                 var ctxMenu = popup.AutomationElement.FindFirstChild(Conditions.Menu);
                 return new ContextMenu(ctxMenu);
             }
