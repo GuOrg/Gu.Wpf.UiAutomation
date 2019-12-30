@@ -53,6 +53,7 @@ namespace Gu.Wpf.UiAutomation
             new ConditionAndCreate(Conditions.ModalWindow, e => new Window(e, isMainWindow: false)),
             ////new ConditionAndCreate(Conditions.Pane, e => new Pane(e)),
             new ConditionAndCreate(Conditions.PasswordBox, e => new PasswordBox(e)),
+            new ConditionAndCreate(Conditions.Popup, e => new Popup(e)),
             new ConditionAndCreate(Conditions.ProgressBar, e => new ProgressBar(e)),
             new ConditionAndCreate(Conditions.RadioButton, e => new RadioButton(e)),
             new ConditionAndCreate(Conditions.RepeatButton, e => new RepeatButton(e)),
