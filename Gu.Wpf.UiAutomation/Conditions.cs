@@ -112,6 +112,11 @@ namespace Gu.Wpf.UiAutomation
 
         public static Condition PasswordBox { get; } = ByClassName(nameof(PasswordBox));
 
+        public static Condition Popup { get; } = new AndCondition(
+            ByControlType(ControlType.Window),
+            Conditions.ByName(string.Empty),
+            Conditions.ByClassName("Popup"));
+
         public static Condition ProgressBar { get; } = ByControlType(ControlType.ProgressBar);
 
         public static Condition RadioButton { get; } = ByControlType(ControlType.RadioButton);

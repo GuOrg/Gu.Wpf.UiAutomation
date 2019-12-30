@@ -337,11 +337,13 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Find the first <see cref="ToolTip"/>.
         /// </summary>
-        public ToolTip FindToolTip() => Desktop.Instance.FindFirst(
-            TreeScope.Descendants,
-            this.CreateCondition(Conditions.ToolTip, this.HelpText),
-            x => new ToolTip(x),
-            Retry.Time);
+        public ToolTip FindToolTip() => this.Window
+                                            .FindPopup()
+                                            .FindFirst(
+                                                TreeScope.Descendants,
+                                                this.CreateCondition(Conditions.ToolTip, this.HelpText),
+                                                x => new ToolTip(x),
+                                                Retry.Time);
 
         /// <summary>
         /// Find the first <see cref="TabControl"/> by x:Name, Content or AutomationID.

@@ -87,12 +87,10 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Find the first <see cref="Popup"/>.
         /// </summary>
-        public Popup FindPopup() => this.FindFirstChild(
-            new AndCondition(
-                Conditions.Window,
-                Conditions.ByName(string.Empty),
-                Conditions.ByClassName("Popup")),
-            x => new Popup(x));
+        public Popup FindPopup() => this.TryFindFirst(TreeScope.Children, Conditions.Popup, x => new Popup(x), Retry.Time, out var result) ||
+                                    Desktop.Instance.TryFindFirst(TreeScope.Children, Conditions.Popup, x => new Popup(x), Retry.Time, out result)
+        ? result
+        : throw new InvalidOperationException($"Did not find a {typeof(Popup).Name} matching {Conditions.Popup.Description()}.");
 
         public Window FindDialog() => this.FindFirstChild(Conditions.ModalWindow, e => new Window(e, isMainWindow: false));
 
