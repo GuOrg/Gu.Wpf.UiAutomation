@@ -1,1 +1,1 @@
-﻿Gu.Wpf.UiAutomation.Window.FindPopup() -> Gu.Wpf.UiAutomation.Popup
+﻿

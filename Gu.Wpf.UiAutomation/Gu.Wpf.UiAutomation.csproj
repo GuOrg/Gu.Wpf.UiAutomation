@@ -22,7 +22,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
-    <Version>0.3.3</Version>
+    <Version>0.3.4</Version>
     <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
     <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>

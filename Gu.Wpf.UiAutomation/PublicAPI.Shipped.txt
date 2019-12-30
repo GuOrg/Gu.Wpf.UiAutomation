@@ -900,6 +900,7 @@ Gu.Wpf.UiAutomation.Window.Close() -> void
 Gu.Wpf.UiAutomation.Window.ContextMenu.get -> Gu.Wpf.UiAutomation.ContextMenu
 Gu.Wpf.UiAutomation.Window.FindDialog() -> Gu.Wpf.UiAutomation.Window
 Gu.Wpf.UiAutomation.Window.FindMessageBox() -> Gu.Wpf.UiAutomation.MessageBox
+Gu.Wpf.UiAutomation.Window.FindPopup() -> Gu.Wpf.UiAutomation.Popup
 Gu.Wpf.UiAutomation.Window.FocusedElement() -> Gu.Wpf.UiAutomation.UiElement
 Gu.Wpf.UiAutomation.Window.GetContextMenuByFrameworkType(Gu.Wpf.UiAutomation.FrameworkType frameworkType) -> Gu.Wpf.UiAutomation.ContextMenu
 Gu.Wpf.UiAutomation.Window.IsMainWindow.get -> bool
@@ -1943,6 +1944,7 @@ static Gu.Wpf.UiAutomation.Conditions.NotHeaderSite.get -> System.Windows.Automa
 static Gu.Wpf.UiAutomation.Conditions.OpenFileDialog.get -> System.Windows.Automation.Condition
 static Gu.Wpf.UiAutomation.Conditions.Pane.get -> System.Windows.Automation.Condition
 static Gu.Wpf.UiAutomation.Conditions.PasswordBox.get -> System.Windows.Automation.Condition
+static Gu.Wpf.UiAutomation.Conditions.Popup.get -> System.Windows.Automation.Condition
 static Gu.Wpf.UiAutomation.Conditions.ProgressBar.get -> System.Windows.Automation.Condition
 static Gu.Wpf.UiAutomation.Conditions.RadioButton.get -> System.Windows.Automation.Condition
 static Gu.Wpf.UiAutomation.Conditions.RepeatButton.get -> System.Windows.Automation.Condition
