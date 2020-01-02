@@ -144,7 +144,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             else
             {
                 Assert.Inconclusive("No assert here.");
-                // CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
+                //// CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
             }
         }
 
