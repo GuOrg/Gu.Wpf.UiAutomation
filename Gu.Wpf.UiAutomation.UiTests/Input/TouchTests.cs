@@ -61,10 +61,16 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 }
                 : new[]
                 {
-                    "TouchEnter Position: 249,299", "PreviewTouchDown Position: 249,299",
-                    "TouchDown Position: 249,299", "ManipulationStarting", "ManipulationStarted",
-                    "PreviewTouchUp Position: 249,299", "TouchUp Position: 249,299",
-                    "ManipulationInertiaStarting", "ManipulationCompleted", "TouchLeave Position: 249,299",
+                    "TouchEnter Position: 249,299",
+                    "PreviewTouchDown Position: 249,299",
+                    "TouchDown Position: 249,299",
+                    "ManipulationStarting",
+                    "ManipulationStarted",
+                    "PreviewTouchUp Position: 249,299",
+                    "TouchUp Position: 249,299",
+                    "ManipulationInertiaStarting",
+                    "ManipulationCompleted",
+                    "TouchLeave Position: 249,299",
                 };
 
             CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
