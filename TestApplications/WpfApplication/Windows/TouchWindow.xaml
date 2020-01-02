@@ -31,7 +31,8 @@
                   TouchEnter="OnTouch"
                   TouchLeave="OnTouch"
                   TouchMove="OnTouch"
-                  TouchUp="OnTouch">
+                  TouchUp="OnTouch"
+                  StylusSystemGesture="OnStylusSystemGesture">
             <GroupBox.Template>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
                     <Border Background="{TemplateBinding Background}" BorderThickness="0" />

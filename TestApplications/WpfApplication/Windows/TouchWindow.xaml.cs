@@ -25,5 +25,10 @@ namespace WpfApplication.Windows
         {
             this.Events.Items.Add($"{e.RoutedEvent.Name}");
         }
+
+        private void OnStylusSystemGesture(object sender, StylusSystemGestureEventArgs e)
+        {
+            this.Events.Items.Add($"{e.RoutedEvent.Name} SystemGesture: {e.SystemGesture}");
+        }
     }
 }

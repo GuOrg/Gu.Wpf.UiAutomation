@@ -53,6 +53,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 250,300",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 250,300",
                     "TouchUp Position: 250,300",
                     "ManipulationInertiaStarting",
@@ -66,6 +67,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 249,299",
                     "TouchUp Position: 249,299",
                     "ManipulationInertiaStarting",
@@ -73,6 +75,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchLeave Position: 249,299",
                 };
 
+            Dump(events);
             CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
@@ -92,6 +95,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 "TouchDown Position: 250,300",
                 "ManipulationStarting",
                 "ManipulationStarted",
+                "StylusSystemGesture SystemGesture: Drag",
                 "PreviewTouchMove Position: 260,310",
                 "TouchMove Position: 260,310",
                 "ManipulationDelta",
@@ -101,6 +105,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 "ManipulationCompleted",
                 "TouchLeave Position: 260,310",
             };
+
             CollectionAssert.AreEqual(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
         }
 
@@ -122,6 +127,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 "TouchDown Position: 250,300",
                 "ManipulationStarting",
                 "ManipulationStarted",
+                "StylusSystemGesture SystemGesture: Drag",
                 "PreviewTouchMove Position: 260,310",
                 "TouchMove Position: 260,310",
                 "ManipulationDelta",
@@ -137,6 +143,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
             }
             else
             {
+                Assert.Inconclusive("No assert here.");
                 // CollectionAssert.IsSubsetOf(expected, events.Items.Select(x => x.Text).ToArray(), EventStringComparer.Default);
             }
         }
@@ -162,6 +169,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                 "ManipulationStarted",
                 "PreviewTouchMove Position: 250,300",
                 "TouchMove Position: 250,300",
+                "StylusSystemGesture SystemGesture: Drag",
                 "PreviewTouchMove Position: 260,310",
                 "TouchMove Position: 260,310",
                 "ManipulationDelta",
@@ -199,6 +207,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 350,300",
                     "TouchDown Position: 350,300",
                     "ManipulationDelta",
+                    "StylusSystemGesture SystemGesture: Drag",
                     "PreviewTouchMove Position: 200,300",
                     "TouchMove Position: 200,300",
                     "PreviewTouchMove Position: 300,300",
@@ -223,6 +232,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 349,299",
                     "TouchDown Position: 349,299",
                     "ManipulationDelta",
+                    "StylusSystemGesture SystemGesture: Drag",
                     "PreviewTouchMove Position: 199,299",
                     "TouchMove Position: 199,299",
                     "PreviewTouchMove Position: 299,299",
@@ -260,6 +270,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 178,229",
                     "TouchDown Position: 178,229",
                     "ManipulationDelta",
+                    "StylusSystemGesture SystemGesture: Drag",
                     "PreviewTouchMove Position: 285,335",
                     "TouchMove Position: 285,335",
                     "PreviewTouchMove Position: 213,264",
@@ -284,6 +295,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "PreviewTouchDown Position: 178,228",
                     "TouchDown Position: 178,228",
                     "ManipulationDelta",
+                    "StylusSystemGesture SystemGesture: Drag",
                     "PreviewTouchMove Position: 284,334",
                     "TouchMove Position: 284,334",
                     "PreviewTouchMove Position: 213,263",
@@ -323,6 +335,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 250,300",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 250,300",
                     "TouchUp Position: 250,300",
                     "ManipulationInertiaStarting",
@@ -336,6 +349,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 249,299",
                     "TouchUp Position: 249,299",
                     "ManipulationInertiaStarting",
@@ -372,6 +386,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 250,300",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 250,300",
                     "TouchUp Position: 250,300",
                     "ManipulationInertiaStarting",
@@ -385,6 +400,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
                     "TouchDown Position: 249,299",
                     "ManipulationStarting",
                     "ManipulationStarted",
+                    "StylusSystemGesture SystemGesture: Tap",
                     "PreviewTouchUp Position: 249,299",
                     "TouchUp Position: 249,299",
                     "ManipulationInertiaStarting",
@@ -417,6 +433,11 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
 
             private static int Compare(string x, string y)
             {
+                if (x == y)
+                {
+                    return 0;
+                }
+
                 var i = x.IndexOf(' ');
                 if (i < 0)
                 {
