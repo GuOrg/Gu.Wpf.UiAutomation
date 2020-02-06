@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Calls <see cref="GetMainWindow"/> with a timeout of ten seconds.
         /// </summary>
-        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsAppVeyor() ? 100 : 10));
+        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 20));
 #pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
@@ -659,7 +659,7 @@ namespace Gu.Wpf.UiAutomation
                     return match;
                 }
 
-                if (Assembly.GetExecutingAssembly().CodeBase is string codeBase)
+                if (Assembly.GetExecutingAssembly().CodeBase is { } codeBase)
                 {
                     var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(codeBase).LocalPath));
                     while (dir?.Parent != null)
