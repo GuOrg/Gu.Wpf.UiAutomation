@@ -1,3 +1,6 @@
+# 0.3.5
+* TUNING: Longer timeout when getting main window on CI
+
 # 0.2.8
 * FEATURE: better image diff window.
 
