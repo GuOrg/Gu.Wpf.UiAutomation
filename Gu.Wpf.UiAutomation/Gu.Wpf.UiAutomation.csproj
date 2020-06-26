@@ -22,11 +22,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Company>Johan Larsson</Company>
-    <Version>0.3.5</Version>
+    <Version>0.3.6</Version>
     <PackageProjectUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</PackageProjectUrl>
     <PackageTags>UI Automation WPF Test UIA3 UIA System.Windows.Automation</PackageTags>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.UiAutomation</RepositoryUrl>
     <PackageReleaseNotes>
+      0.3.6
+      TUNING: Longer timeouts overall on CI
       0.3.5
       TUNING: Longer timeout when getting main window on CI
       0.3.4

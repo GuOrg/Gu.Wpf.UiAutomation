@@ -1,3 +1,6 @@
+# 0.3.6
+* TUNING: Longer timeouts overall on CI
+
 # 0.3.5
 * TUNING: Longer timeout when getting main window on CI
 
