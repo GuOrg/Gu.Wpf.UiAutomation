@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// The time to retry when searching for elements. Default is one second.
         /// </summary>
-        public static TimeSpan Time { get; set; } = TimeSpan.FromMilliseconds(1000);
+        public static TimeSpan Time { get; set; } = TimeSpan.FromSeconds(WindowsVersion.IsRunningOnCiServer ? 20 : 1);
 
         /// <summary>
         /// The poll interval, default 100 ms.

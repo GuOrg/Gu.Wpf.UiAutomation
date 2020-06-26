@@ -9,6 +9,8 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class WindowsVersion
     {
+        public static bool IsRunningOnCiServer => WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops();
+
         /// <summary>
         /// Get the current windows version name from registry.
         /// </summary>

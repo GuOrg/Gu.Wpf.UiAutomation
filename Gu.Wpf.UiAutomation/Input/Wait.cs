@@ -9,9 +9,9 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class Wait
     {
-        internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(1);
+        internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(WindowsVersion.IsRunningOnCiServer ? 20 : 1);
 
-        internal static readonly TimeSpan DefaultWait = TimeSpan.FromMilliseconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 50);
+        internal static readonly TimeSpan DefaultWait = TimeSpan.FromMilliseconds(WindowsVersion.IsRunningOnCiServer ? 200 : 50);
 
         public static void For(TimeSpan time)
         {

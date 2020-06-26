@@ -46,7 +46,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Calls <see cref="GetMainWindow"/> with a timeout of ten seconds.
         /// </summary>
-        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsAppVeyor() || WindowsVersion.IsAzureDevops() ? 200 : 20));
+        public Window MainWindow => this.GetMainWindow(TimeSpan.FromSeconds(WindowsVersion.IsRunningOnCiServer ? 200 : 20));
 #pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
