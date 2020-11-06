@@ -20,7 +20,7 @@ namespace Gu.Wpf.UiAutomation
         /// <exception cref="ArgumentNullException"><paramref name="dispose"/> is <see langword="null"/>.</exception>
         public static IDisposable Create(Action dispose)
         {
-            if (dispose == null)
+            if (dispose is null)
             {
                 throw new ArgumentNullException(nameof(dispose));
             }

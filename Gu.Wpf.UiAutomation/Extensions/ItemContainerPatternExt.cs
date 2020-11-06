@@ -31,7 +31,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var item = pattern.FindItemByProperty(null, null, null);
-            if (item == null)
+            if (item is null)
             {
                 return null;
             }
@@ -39,7 +39,7 @@ namespace Gu.Wpf.UiAutomation
             while (true)
             {
                 var temp = pattern.FindItemByProperty(item, null, null);
-                if (temp == null)
+                if (temp is null)
                 {
                     if (item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
                     {
@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
-                if (item == null)
+                if (item is null)
                 {
                     break;
                 }
@@ -94,7 +94,7 @@ namespace Gu.Wpf.UiAutomation
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
-                if (item == null)
+                if (item is null)
                 {
                     break;
                 }
@@ -120,7 +120,7 @@ namespace Gu.Wpf.UiAutomation
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
-                if (item == null)
+                if (item is null)
                 {
                     throw new ArgumentOutOfRangeException(nameof(index), index, "Could not get item at index.");
                 }
@@ -176,7 +176,7 @@ namespace Gu.Wpf.UiAutomation
             while (true)
             {
                 item = pattern.FindItemByProperty(item, null, null);
-                if (item == null)
+                if (item is null)
                 {
                     throw new InvalidOperationException($"Did not find an item by text {text}");
                 }

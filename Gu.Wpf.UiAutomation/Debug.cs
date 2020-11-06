@@ -90,7 +90,7 @@ namespace Gu.Wpf.UiAutomation
         private static string GetXPathToElement(AutomationElement element, TreeWalker treeWalker, UiElement? rootElement = null)
         {
             var parent = treeWalker.GetParent(element);
-            if (parent == null ||
+            if (parent is null ||
                 (rootElement != null &&
                  Equals(parent, rootElement.AutomationElement)))
             {

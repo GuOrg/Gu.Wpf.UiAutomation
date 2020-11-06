@@ -9,7 +9,7 @@ namespace Gu.Wpf.UiAutomation
     {
         public static void RealizeItems(UiElement itemContainerElement)
         {
-            if (itemContainerElement == null)
+            if (itemContainerElement is null)
             {
                 throw new System.ArgumentNullException(nameof(itemContainerElement));
             }
@@ -28,7 +28,7 @@ namespace Gu.Wpf.UiAutomation
                     while (true)
                     {
                         currElement = itemContainerPattern.FindItemByProperty(currElement, null, null);
-                        if (currElement == null)
+                        if (currElement is null)
                         {
                             break;
                         }

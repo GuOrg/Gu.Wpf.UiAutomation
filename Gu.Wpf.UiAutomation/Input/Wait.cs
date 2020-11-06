@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static bool UntilResponsive(UiElement uiElement, TimeSpan timeout)
         {
-            if (uiElement == null)
+            if (uiElement is null)
             {
                 throw new ArgumentNullException(nameof(uiElement));
             }

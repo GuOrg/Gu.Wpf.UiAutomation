@@ -24,7 +24,7 @@ namespace WpfApplication
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null || this.canExecute.Invoke(parameter);
+            return this.canExecute is null || this.canExecute.Invoke(parameter);
         }
 
         public void Execute(object parameter)

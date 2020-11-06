@@ -386,7 +386,7 @@ namespace Gu.Wpf.UiAutomation
 
         protected void PerformMouseAction(bool moveMouse, Action action)
         {
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }

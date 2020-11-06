@@ -15,7 +15,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static UiElement Create(AutomationElement automationElement)
         {
-            if (automationElement == null)
+            if (automationElement is null)
             {
                 throw new System.ArgumentNullException(nameof(automationElement));
             }

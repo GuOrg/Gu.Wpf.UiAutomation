@@ -85,7 +85,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static UiElement? FromAutomationElementOrNull(AutomationElement element)
         {
-            if (element == null)
+            if (element is null)
             {
                 return null;
             }
@@ -95,7 +95,7 @@ namespace Gu.Wpf.UiAutomation
 
         public static UiElement FromAutomationElement(AutomationElement element)
         {
-            if (element == null)
+            if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }

@@ -35,12 +35,12 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="element">The automation element.</param>
         public static void AreEqual(string fileName, UiElement element)
         {
-            if (fileName == null)
+            if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            if (element == null)
+            if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
@@ -84,17 +84,17 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="onFail">Useful for saving the actual image on error for example.</param>
         public static void AreEqual(string fileName, UiElement element, OnImageAssertFail onFail)
         {
-            if (fileName == null)
+            if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            if (element == null)
+            if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
 
-            if (onFail == null)
+            if (onFail is null)
             {
                 throw new ArgumentNullException(nameof(onFail));
             }
@@ -139,12 +139,12 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="element">The actual <see cref="UiElement"/>.</param>
         public static void AreEqual(Bitmap expected, UiElement element)
         {
-            if (expected == null)
+            if (expected is null)
             {
                 throw new ArgumentNullException(nameof(expected));
             }
 
-            if (element == null)
+            if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
@@ -170,12 +170,12 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
         public static void AreEqual(Bitmap expected, Bitmap actual)
         {
-            if (expected == null)
+            if (expected is null)
             {
                 throw new ArgumentNullException(nameof(expected));
             }
 
-            if (actual == null)
+            if (actual is null)
             {
                 throw new ArgumentNullException(nameof(actual));
             }
@@ -199,12 +199,12 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="retryTime">The time to retry before returning false.</param>
         public static bool Equal(Bitmap expected, UiElement element, TimeSpan retryTime)
         {
-            if (expected == null)
+            if (expected is null)
             {
                 throw new ArgumentNullException(nameof(expected));
             }
 
-            if (element == null)
+            if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
@@ -229,12 +229,12 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="actual">The actual <see cref="Bitmap"/>.</param>
         public static bool Equal(Bitmap expected, Bitmap actual)
         {
-            if (expected == null)
+            if (expected is null)
             {
                 throw new ArgumentNullException(nameof(expected));
             }
 
-            if (actual == null)
+            if (actual is null)
             {
                 throw new ArgumentNullException(nameof(actual));
             }
@@ -277,12 +277,12 @@ namespace Gu.Wpf.UiAutomation
         public static bool EqualFast(Bitmap expected, Bitmap actual)
         {
             // https://stackoverflow.com/a/2038515/1069200
-            if (expected == null)
+            if (expected is null)
             {
                 throw new ArgumentNullException(nameof(expected));
             }
 
-            if (actual == null)
+            if (actual is null)
             {
                 throw new ArgumentNullException(nameof(actual));
             }

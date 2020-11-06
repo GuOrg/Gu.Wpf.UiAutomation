@@ -21,7 +21,7 @@ namespace Gu.Wpf.UiAutomation.Tests
             Assert.AreEqual(true, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(0), out var p));
             Assert.AreEqual(@from, $"{p.X},{p.Y}");
 
-            if (expected == null)
+            if (expected is null)
             {
                 Assert.AreEqual(true, interpolation.TryGetPosition(TimeSpan.FromMilliseconds(elapsed), out p));
                 Assert.AreEqual(to, $"{p.X},{p.Y}");

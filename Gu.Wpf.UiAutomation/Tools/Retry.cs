@@ -18,6 +18,11 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static void WhileException(Action retryAction, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
+            if (retryAction is null)
+            {
+                throw new ArgumentNullException(nameof(retryAction));
+            }
+
             var startTime = DateTime.Now;
             while (true)
             {
@@ -41,6 +46,11 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static T WhileException<T>(Func<T> retryMethod, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
+            if (retryMethod is null)
+            {
+                throw new ArgumentNullException(nameof(retryMethod));
+            }
+
             var startTime = DateTime.Now;
             while (true)
             {
@@ -63,6 +73,16 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static T While<T>(Func<T> retryMethod, Predicate<T> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
+            if (retryMethod is null)
+            {
+                throw new ArgumentNullException(nameof(retryMethod));
+            }
+
+            if (whilePredicate is null)
+            {
+                throw new ArgumentNullException(nameof(whilePredicate));
+            }
+
             var startTime = DateTime.Now;
             while (true)
             {

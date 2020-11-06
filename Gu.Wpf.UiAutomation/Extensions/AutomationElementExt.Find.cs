@@ -38,7 +38,7 @@ namespace Gu.Wpf.UiAutomation
                 TreeScope.Parent => new TreeWalker(condition).GetParent(element),
                 TreeScope.Ancestors => new TreeWalker(condition).Ancestors(element).FirstOrDefault(),
                 TreeScope.Subtree => Desktop.AutomationElement.FindFirst(TreeScope.Descendants, condition),
-                _ => throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null),
             };
             return match != null;
         }
@@ -54,23 +54,16 @@ namespace Gu.Wpf.UiAutomation
 
             string Relative()
             {
-                switch (treeScope)
+                return treeScope switch
                 {
-                    case TreeScope.Element:
-                        return "an element";
-                    case TreeScope.Children:
-                        return "a child";
-                    case TreeScope.Descendants:
-                        return "a descendant";
-                    case TreeScope.Parent:
-                        return "a parent";
-                    case TreeScope.Ancestors:
-                        return "an ancestor";
-                    case TreeScope.Subtree:
-                        return "a subtree";
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null);
-                }
+                    TreeScope.Element => "an element",
+                    TreeScope.Children => "a child",
+                    TreeScope.Descendants => "a descendant",
+                    TreeScope.Parent => "a parent",
+                    TreeScope.Ancestors => "an ancestor",
+                    TreeScope.Subtree => "a subtree",
+                    _ => throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null),
+                };
             }
         }
 

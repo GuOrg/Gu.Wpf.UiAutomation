@@ -4,6 +4,7 @@
 #pragma warning disable SA1310 // Field names must not contain underscore
 #pragma warning disable GU0060 // Enum member value conflict.
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1028 // Enum Storage should be Int32
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;

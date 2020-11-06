@@ -35,7 +35,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using var app = Application.AttachOrLaunch(ExeFileName, "EmptyWindow");
             var window = app.MainWindow;
             var exception = Assert.Throws<InvalidOperationException>(() => window.FindCheckBox(key));
-            var expected = key == null
+            var expected = key is null
                 ? $"Did not find a CheckBox matching ControlType == CheckBox."
                 : $"Did not find a CheckBox matching (ControlType == CheckBox && (Name == {key} || AutomationId == {key})).";
             Assert.AreEqual(expected, exception.Message);

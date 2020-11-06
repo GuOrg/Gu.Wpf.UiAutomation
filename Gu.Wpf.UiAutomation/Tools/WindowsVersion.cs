@@ -65,13 +65,13 @@ namespace Gu.Wpf.UiAutomation
         private static string GetCurrentProductName()
         {
             using var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-            if (reg == null)
+            if (reg is null)
             {
                 throw new Exception("Could not find the registry path needed for determining the OS version.");
             }
 
             var productName = (string)reg.GetValue("ProductName");
-            if (productName == null)
+            if (productName is null)
             {
                 throw new Exception("Could not find the registry key needed for determining the OS version.");
             }

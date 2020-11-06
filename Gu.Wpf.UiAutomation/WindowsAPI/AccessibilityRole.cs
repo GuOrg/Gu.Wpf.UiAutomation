@@ -4,7 +4,11 @@
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
+#pragma warning disable CA1008 // Enums should have zero value
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum AccessibilityRole : uint
+#pragma warning restore CA1028 // Enum Storage should be Int32
+#pragma warning restore CA1008 // Enums should have zero value
     {
         ROLE_SYSTEM_TITLEBAR = 0x00000001,
         ROLE_SYSTEM_MENUBAR = 0x00000002,

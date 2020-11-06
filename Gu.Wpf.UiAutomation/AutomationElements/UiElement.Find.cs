@@ -891,7 +891,7 @@ namespace Gu.Wpf.UiAutomation
             foreach (var condition in nestedConditions)
             {
                 currentElement = currentElement.FindFirstChild(condition);
-                if (currentElement == null)
+                if (currentElement is null)
                 {
                     return null;
                 }
@@ -910,7 +910,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 var condition = nestedConditions[i];
                 currentElement = currentElement.FindFirstChild(condition);
-                if (currentElement == null)
+                if (currentElement is null)
                 {
                     return null;
                 }
@@ -950,7 +950,7 @@ namespace Gu.Wpf.UiAutomation
         public System.Windows.Automation.Condition CreateCondition(System.Windows.Automation.Condition controlTypeCondition, string? name)
 #pragma warning restore CA1822
         {
-            if (name == null)
+            if (name is null)
             {
                 return controlTypeCondition;
             }

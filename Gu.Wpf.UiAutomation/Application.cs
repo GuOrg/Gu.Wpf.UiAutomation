@@ -187,7 +187,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
         {
-            if (processStartInfo == null)
+            if (processStartInfo is null)
             {
                 throw new ArgumentNullException(nameof(processStartInfo));
             }
@@ -240,12 +240,12 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static bool TryWithAttached(ProcessStartInfo processStartInfo, Action<Application> onAttached)
         {
-            if (processStartInfo == null)
+            if (processStartInfo is null)
             {
                 throw new ArgumentNullException(nameof(processStartInfo));
             }
 
-            if (onAttached == null)
+            if (onAttached is null)
             {
                 throw new ArgumentNullException(nameof(onAttached));
             }
@@ -369,7 +369,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="waitTimeout">An optional timeout. If null is passed, the timeout is infinite.</param>
         public static void WaitForMainWindow(Process process, TimeSpan? waitTimeout = null)
         {
-            if (process == null)
+            if (process is null)
             {
                 throw new ArgumentNullException(nameof(process));
             }

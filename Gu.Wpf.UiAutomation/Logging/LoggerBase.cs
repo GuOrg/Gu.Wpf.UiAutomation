@@ -180,8 +180,8 @@ namespace Gu.Wpf.UiAutomation.Logging
 
         private static string GetFormattedMessage(string message, Exception? exception, params object[] args)
         {
-            var formattedMsg = args == null ? message : string.Format(CultureInfo.InvariantCulture, message, args);
-            return exception == null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);
+            var formattedMsg = args is null ? message : string.Format(CultureInfo.InvariantCulture, message, args);
+            return exception is null ? formattedMsg : string.Concat(formattedMsg, Environment.NewLine, exception);
         }
     }
 }

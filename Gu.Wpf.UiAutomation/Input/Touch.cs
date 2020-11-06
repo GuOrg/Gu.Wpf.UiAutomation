@@ -103,7 +103,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Up()
         {
-            if (contacts == null)
+            if (contacts is null)
             {
                 throw new UiAutomationException("Call Touch.Down first.");
             }
@@ -125,7 +125,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="position">The position.</param>
         public static void DragTo(Point position)
         {
-            if (contacts == null ||
+            if (contacts is null ||
                 contacts.Length != 1)
             {
                 throw new UiAutomationException("Call Touch.Down first.");
@@ -262,7 +262,7 @@ namespace Gu.Wpf.UiAutomation
 #pragma warning restore CA1200 // Avoid using cref tags with a prefix
         public static void InjectTouchInput(POINTER_TOUCH_INFO[] contacts)
         {
-            if (contacts == null)
+            if (contacts is null)
             {
                 throw new ArgumentNullException(nameof(contacts));
             }

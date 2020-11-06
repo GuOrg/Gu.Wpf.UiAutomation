@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Type(string text)
         {
-            if (text == null)
+            if (text is null)
             {
                 throw new ArgumentNullException(nameof(text));
             }
@@ -91,7 +91,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void Type(params Key[] keys)
         {
-            if (keys == null)
+            if (keys is null)
             {
                 return;
             }
@@ -110,7 +110,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public static void TypeSimultaneously(params Key[] keys)
         {
-            if (keys == null)
+            if (keys is null)
             {
                 return;
             }

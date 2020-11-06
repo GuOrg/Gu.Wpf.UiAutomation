@@ -189,7 +189,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var nextElement = this.treeWalker.GetNextSibling(this.currentElement);
-            if (nextElement == null)
+            if (nextElement is null)
             {
                 return false;
             }
@@ -207,7 +207,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var previousElement = this.treeWalker.GetPreviousSibling(this.currentElement);
-            if (previousElement == null)
+            if (previousElement is null)
             {
                 return false;
             }
@@ -225,7 +225,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var childElement = this.treeWalker.GetFirstChild(this.currentElement);
-            if (childElement == null)
+            if (childElement is null)
             {
                 return false;
             }

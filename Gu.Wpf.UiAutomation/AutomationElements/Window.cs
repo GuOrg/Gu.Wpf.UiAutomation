@@ -63,7 +63,7 @@ namespace Gu.Wpf.UiAutomation
                         Conditions.Window,
                         Conditions.ByName(string.Empty),
                         Conditions.ByClassName("Popup")));
-                if (popup == null)
+                if (popup is null)
                 {
                     throw new InvalidOperationException("Did not find a popup");
                 }
@@ -115,7 +115,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var mainWindow = this.GetMainWindow();
-            if (mainWindow == null)
+            if (mainWindow is null)
             {
                 throw new InvalidOperationException("Could not find MainWindow");
             }
