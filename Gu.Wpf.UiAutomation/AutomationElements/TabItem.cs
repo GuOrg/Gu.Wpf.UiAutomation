@@ -20,7 +20,7 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 var header = this.Header;
-                if (header != null)
+                if (header is { })
                 {
                     return header.Name;
                 }

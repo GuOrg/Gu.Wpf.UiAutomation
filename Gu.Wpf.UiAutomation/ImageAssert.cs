@@ -431,7 +431,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 var map = Cache.GetOrAdd(assembly, CreateMergedDictionary);
                 result = map.FirstOrDefault(x => x.Key.EndsWith(resourceName, StringComparison.CurrentCulture)).Value;
-                return result != null;
+                return result is { };
             }
 
             private static List<KeyValuePair<string, Bitmap>> CreateMergedDictionary(Assembly assembly)

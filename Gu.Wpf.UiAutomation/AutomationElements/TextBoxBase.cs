@@ -92,7 +92,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             // give some time to process input.
-            if (valuePattern != null)
+            if (valuePattern is { })
             {
                 var stopTime = DateTime.Now.AddSeconds(1);
 

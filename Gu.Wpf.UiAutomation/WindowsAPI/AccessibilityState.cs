@@ -10,7 +10,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     using System;
 
     [Flags]
+#pragma warning disable CA1714 // Flags enums should have plural names
     public enum AccessibilityState : uint
+#pragma warning restore CA1714 // Flags enums should have plural names
     {
         STATE_SYSTEM_UNAVAILABLE = 0x00000001,
         STATE_SYSTEM_SELECTED = 0x00000002,

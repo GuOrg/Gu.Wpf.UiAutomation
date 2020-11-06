@@ -23,14 +23,14 @@ namespace Gu.Wpf.UiAutomation
         /// Checks if environment variable APPVEYOR is defined.
         /// </summary>
         /// <returns>True if on AppVeyor.</returns>
-        public static bool IsAppVeyor() => Environment.GetEnvironmentVariable("APPVEYOR") != null;
+        public static bool IsAppVeyor() => Environment.GetEnvironmentVariable("APPVEYOR") is { };
 
         /// <summary>
         /// Returns true if running on Devops.
         /// Checks if environment variable TF_BUILD is defined.
         /// </summary>
         /// <returns>True if on Devops.</returns>
-        public static bool IsAzureDevops() => Environment.GetEnvironmentVariable("TF_BUILD") != null;
+        public static bool IsAzureDevops() => Environment.GetEnvironmentVariable("TF_BUILD") is { };
 
         /// <summary>
         /// Check if the installed operating system is Windows 7.

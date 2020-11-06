@@ -18,7 +18,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var parent = walker.GetParent(element);
-            while (parent != null)
+            while (parent is { })
             {
                 yield return parent;
                 parent = walker.GetParent(parent);
@@ -38,7 +38,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var child = walker.GetFirstChild(element);
-            while (child != null)
+            while (child is { })
             {
                 yield return child;
                 child = walker.GetNextSibling(child);

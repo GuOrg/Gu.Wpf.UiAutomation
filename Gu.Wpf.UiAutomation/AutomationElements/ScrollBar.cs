@@ -44,7 +44,7 @@ namespace Gu.Wpf.UiAutomation
         private Thumb? FindThumb()
         {
             var thumb = this.AutomationElement.FindFirst(TreeScope.Children, Conditions.Thumb);
-            return thumb != null ? new Thumb(thumb) : null;
+            return thumb is { } ? new Thumb(thumb) : null;
         }
     }
 }

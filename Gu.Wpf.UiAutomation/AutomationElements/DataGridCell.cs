@@ -161,7 +161,7 @@ namespace Gu.Wpf.UiAutomation
                 Keyboard.Type(value);
             }
 
-            if (delay != null)
+            if (delay is { })
             {
                 // give some time to process input.
                 var stopTime = DateTime.Now + delay.Value;

@@ -20,7 +20,7 @@ namespace Gu.Wpf.UiAutomation
         {
             // Search for a selected item in the direct children
             var directSelectedItem = treeItems.FirstOrDefault(t => t.IsSelected);
-            if (directSelectedItem != null)
+            if (directSelectedItem is { })
             {
                 return directSelectedItem;
             }
@@ -29,7 +29,7 @@ namespace Gu.Wpf.UiAutomation
             foreach (var treeItem in treeItems)
             {
                 var selectedInChildItem = this.SearchSelectedItem(treeItem.Items);
-                if (selectedInChildItem != null)
+                if (selectedInChildItem is { })
                 {
                     return selectedInChildItem;
                 }

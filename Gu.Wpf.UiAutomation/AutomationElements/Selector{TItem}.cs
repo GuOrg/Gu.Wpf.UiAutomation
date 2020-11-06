@@ -22,7 +22,7 @@ namespace Gu.Wpf.UiAutomation
             get
             {
                 var element = this.SelectionPattern.Current.GetSelection().SingleOrDefault();
-                return element != null ? (TItem)FromAutomationElement(element) : null;
+                return element is { } ? (TItem)FromAutomationElement(element) : null;
             }
         }
 

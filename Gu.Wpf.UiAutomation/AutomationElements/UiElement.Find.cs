@@ -535,7 +535,7 @@ namespace Gu.Wpf.UiAutomation
             while (!Retry.IsTimeouted(start, timeOut))
             {
                 result = this.AutomationElement.FindAll(treeScope, condition, wrap);
-                if (result != null &&
+                if (result is { } &&
                     result.Count > 0)
                 {
                     return true;
@@ -544,7 +544,7 @@ namespace Gu.Wpf.UiAutomation
                 Wait.For(Retry.PollInterval);
             }
 
-            return result != null;
+            return result is { };
         }
 
         /// <summary>
@@ -612,7 +612,7 @@ namespace Gu.Wpf.UiAutomation
             while (!Retry.IsTimeouted(start, timeOut))
             {
                 result = this.AutomationElement.FindFirst(treeScope, condition, FromAutomationElement);
-                if (result != null)
+                if (result is { })
                 {
                     return true;
                 }
@@ -620,7 +620,7 @@ namespace Gu.Wpf.UiAutomation
                 Wait.For(Retry.PollInterval);
             }
 
-            return result != null;
+            return result is { };
         }
 
         /// <summary>
@@ -677,7 +677,7 @@ namespace Gu.Wpf.UiAutomation
             }
             while (!Retry.IsTimeouted(start, timeOut));
 
-            return result != null;
+            return result is { };
         }
 
         /// <summary>
@@ -713,7 +713,7 @@ namespace Gu.Wpf.UiAutomation
             while (!Retry.IsTimeouted(start, timeOut))
             {
                 result = this.AutomationElement.FindIndexed(treeScope, condition, index, FromAutomationElement);
-                if (result != null)
+                if (result is { })
                 {
                     return true;
                 }
@@ -721,7 +721,7 @@ namespace Gu.Wpf.UiAutomation
                 Wait.For(Retry.PollInterval);
             }
 
-            return result != null;
+            return result is { };
         }
 
         /// <summary>
@@ -777,7 +777,7 @@ namespace Gu.Wpf.UiAutomation
                 Wait.For(Retry.PollInterval);
             }
 
-            return result != null;
+            return result is { };
         }
 
         public UiElement FindFirstChild()

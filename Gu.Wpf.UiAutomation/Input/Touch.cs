@@ -15,7 +15,7 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public static class Touch
     {
-        private static POINTER_TOUCH_INFO[]? contacts = null;
+        private static POINTER_TOUCH_INFO[]? contacts;
 
         static Touch()
         {

@@ -14,7 +14,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var item = pattern.FindItemByProperty(null, null, null);
-            if (item != null &&
+            if (item is { } &&
                 item.TryGetVirtualizedItemPattern(out var virtualizedItemPattern))
             {
                 virtualizedItemPattern.Realize();
@@ -167,7 +167,7 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var item = pattern.FindItemByProperty(null, AutomationElement.NameProperty, text);
-            if (item != null)
+            if (item is { })
             {
                 return item;
             }

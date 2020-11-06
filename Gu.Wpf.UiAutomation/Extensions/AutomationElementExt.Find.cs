@@ -40,7 +40,7 @@ namespace Gu.Wpf.UiAutomation
                 TreeScope.Subtree => Desktop.AutomationElement.FindFirst(TreeScope.Descendants, condition),
                 _ => throw new ArgumentOutOfRangeException(nameof(treeScope), treeScope, null),
             };
-            return match != null;
+            return match is { };
         }
 
         public static AutomationElement FindFirst(this AutomationElement element, TreeScope treeScope, Condition condition)

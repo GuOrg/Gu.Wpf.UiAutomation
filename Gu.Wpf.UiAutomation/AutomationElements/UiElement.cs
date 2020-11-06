@@ -360,7 +360,7 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public bool Equals(UiElement? other)
         {
-            return other != null && Equals(this.AutomationElement, other.AutomationElement);
+            return other is { } && Equals(this.AutomationElement, other.AutomationElement);
         }
 
         /// <inheritdoc/>

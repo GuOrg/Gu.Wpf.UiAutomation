@@ -1,9 +1,12 @@
+#pragma warning disable CA1024 // Use properties where appropriate
 namespace Gu.Wpf.UiAutomation.WindowsAPI
 {
     using System;
     using System.Runtime.InteropServices;
 
+#pragma warning disable CA1060 // Move pinvokes to native methods class
     public static class User32
+#pragma warning restore CA1060 // Move pinvokes to native methods class
     {
         [DllImport("user32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
         public static extern IntPtr GetCursor();

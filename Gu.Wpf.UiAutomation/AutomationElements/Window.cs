@@ -149,7 +149,7 @@ namespace Gu.Wpf.UiAutomation
             if (!WindowsVersion.IsWindows7())
             {
                 var closeButton = this.TitleBar?.CloseButton;
-                if (closeButton != null)
+                if (closeButton is { })
                 {
                     closeButton.Invoke();
                     return;

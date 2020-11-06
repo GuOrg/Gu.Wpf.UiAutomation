@@ -7,7 +7,13 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// <summary>
     /// These are the hardware keyboard codes.
     /// </summary>
+#pragma warning disable CA1008 // Enums should have zero value
+#pragma warning disable CA1027 // Mark enums with FlagsAttribute
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum ScanCodeShort : ushort
+#pragma warning restore CA1028 // Enum Storage should be Int32
+#pragma warning restore CA1027 // Mark enums with FlagsAttribute
+#pragma warning restore CA1008 // Enums should have zero value
     {
         ESCAPE = 0x01,
         ESC = ESCAPE,

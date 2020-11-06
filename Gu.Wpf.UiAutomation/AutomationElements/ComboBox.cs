@@ -49,7 +49,7 @@ namespace Gu.Wpf.UiAutomation
                     var itemsList = this.FindFirstChild(Conditions.ListBox);
 
                     // UIA3 does not see the list if it is collapsed
-                    return itemsList != null && !itemsList.IsOffscreen;
+                    return itemsList is { IsOffscreen: false };
                 }
 
                 // WPF

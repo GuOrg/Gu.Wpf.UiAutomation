@@ -9,6 +9,7 @@ namespace Gu.Wpf.UiAutomation
     using System.Linq;
     using System.Reflection;
     using System.Windows.Automation;
+
     using Gu.Wpf.UiAutomation.WindowsAPI;
 
     /// <inheritdoc />
@@ -141,7 +142,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(string exeFileName, [NotNullWhen(true)] out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName), OnDispose.LeaveOpen, out result);
@@ -150,7 +151,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(string exeFileName, OnDispose onDispose, [NotNullWhen(true)] out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName), onDispose, out result);
@@ -159,7 +160,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, string args, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(string exeFileName, string args, [NotNullWhen(true)] out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, OnDispose.LeaveOpen, out result);
@@ -168,7 +169,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(string exeFileName, string args, OnDispose onDispose, [NotNullWhen(true)] out Application? result)
         {
             exeFileName = FindExeOrDefault(exeFileName, exeFileName)!;
             return TryAttach(new ProcessStartInfo(exeFileName) { Arguments = args }, onDispose, out result);
@@ -177,7 +178,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(ProcessStartInfo processStartInfo, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(ProcessStartInfo processStartInfo, [NotNullWhen(true)] out Application? result)
         {
             return TryAttach(processStartInfo, OnDispose.LeaveOpen, out result);
         }
@@ -185,7 +186,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Attach to a running process if found.
         /// </summary>
-        public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, [NotNullWhen(true)]out Application? result)
+        public static bool TryAttach(ProcessStartInfo processStartInfo, OnDispose onDispose, [NotNullWhen(true)] out Application? result)
         {
             if (processStartInfo is null)
             {
@@ -197,7 +198,7 @@ namespace Gu.Wpf.UiAutomation
             {
                 var launched = Launched.FirstOrDefault(x => Path.GetFullPath(x.StartInfo.FileName) == exeFileName &&
                                                             x.StartInfo.Arguments == processStartInfo.Arguments);
-                if (launched != null)
+                if (launched is { })
                 {
                     result = Attach(launched, onDispose);
                     return true;
@@ -207,7 +208,7 @@ namespace Gu.Wpf.UiAutomation
             var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
                                  .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
 
-            if (running != null)
+            if (running is { })
             {
                 result = Attach(running, onDispose);
                 return true;
@@ -553,21 +554,21 @@ namespace Gu.Wpf.UiAutomation
         public Window GetMainWindow(TimeSpan? waitTimeout = null)
         {
             this.ThrowIfDisposed();
-            if (this.mainWindow != null)
+            if (this.mainWindow is { })
             {
                 return this.mainWindow;
             }
 
             var start = DateTime.Now;
             this.WaitForMainWindow(waitTimeout);
-            if (this.mainWindow != null)
+            if (this.mainWindow is { })
             {
                 return this.mainWindow;
             }
 
             lock (this.gate)
             {
-                if (this.mainWindow != null)
+                if (this.mainWindow is { })
                 {
                     return this.mainWindow;
                 }
@@ -578,7 +579,7 @@ namespace Gu.Wpf.UiAutomation
                     throw new InvalidOperationException($"Did not find main window for {this.processReference.Process.ProcessName}. If startup is slow try with a longer wait.");
                 }
 
-                if (waitTimeout != null)
+                if (waitTimeout is { })
                 {
                     waitTimeout = waitTimeout - (DateTime.Now - start);
                 }
@@ -654,7 +655,7 @@ namespace Gu.Wpf.UiAutomation
 
                 var match = SafeDirectoryEnumeration.EnumerateFilesOpportunistic(Directory.GetCurrentDirectory(), fileName, SearchOption.AllDirectories)
                                                     .FirstOrDefault();
-                if (match != null)
+                if (match is { })
                 {
                     return match;
                 }
@@ -662,7 +663,7 @@ namespace Gu.Wpf.UiAutomation
                 if (Assembly.GetExecutingAssembly().CodeBase is { } codeBase)
                 {
                     var dir = new DirectoryInfo(Path.GetDirectoryName(new Uri(codeBase).LocalPath));
-                    while (dir?.Parent != null)
+                    while (dir?.Parent is { })
                     {
                         if (dir.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
                         {

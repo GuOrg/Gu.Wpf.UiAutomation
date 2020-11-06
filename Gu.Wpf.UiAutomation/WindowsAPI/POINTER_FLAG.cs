@@ -9,7 +9,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// https://docs.microsoft.com/en-us/previous-versions/windows/desktop/inputmsg/pointer-flags-contants.
     /// </summary>
     [Flags]
+#pragma warning disable CA1714 // Flags enums should have plural names
     public enum POINTER_FLAG
+#pragma warning restore CA1714 // Flags enums should have plural names
     {
         /// <summary>
         /// Default

@@ -7,7 +7,9 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
     /// <summary>
     /// https://stackoverflow.com/a/16050600/1069200.
     /// </summary>
+#pragma warning disable CA1060 // Move pinvokes to native methods class
     public class SafeCursorHandle : SafeHandleZeroOrMinusOneIsInvalid
+#pragma warning restore CA1060 // Move pinvokes to native methods class
     {
         public SafeCursorHandle(IntPtr handle)
             : base(ownsHandle: true)

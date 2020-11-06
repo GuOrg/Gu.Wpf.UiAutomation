@@ -91,7 +91,7 @@ namespace Gu.Wpf.UiAutomation
         {
             var parent = treeWalker.GetParent(element);
             if (parent is null ||
-                (rootElement != null &&
+                (rootElement is { } &&
                  Equals(parent, rootElement.AutomationElement)))
             {
                 return string.Empty;

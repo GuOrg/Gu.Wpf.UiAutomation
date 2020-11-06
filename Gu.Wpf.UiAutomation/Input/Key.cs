@@ -7,7 +7,9 @@
 namespace Gu.Wpf.UiAutomation
 {
 #pragma warning disable CA1008 // Enums should have zero value
+#pragma warning disable CA1028 // Enum Storage should be Int32
     public enum Key : ushort
+#pragma warning restore CA1028 // Enum Storage should be Int32
 #pragma warning restore CA1008 // Enums should have zero value
     {
         /// <summary>
@@ -94,7 +96,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// IME Hangul mode
         /// </summary>
+#pragma warning disable CA1069 // Enums values should not be duplicated
         HANGUL = 0x15,
+#pragma warning restore CA1069 // Enums values should not be duplicated
 
         /// <summary>
         /// IME Junja mode
@@ -114,7 +118,9 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// IME Kanji mode
         /// </summary>
+#pragma warning disable CA1069 // Enums values should not be duplicated
         KANJI = 0x19,
+#pragma warning restore CA1069 // Enums values should not be duplicated
 
         /// <summary>
         /// ESC key
