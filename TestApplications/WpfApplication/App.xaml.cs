@@ -7,10 +7,9 @@ namespace WpfApplication
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (e != null &&
-                e.Args.Length == 1)
+            if (e is { Args: { Length: 1 } args })
             {
-                var window = e.Args[0];
+                var window = args[0];
                 this.StartupUri = new Uri($"Windows/{window}.xaml", UriKind.Relative);
             }
 
