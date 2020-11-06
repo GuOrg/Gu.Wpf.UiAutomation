@@ -32,7 +32,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "ButtonWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindButton().AutomationElement);
+            _ = Dump.Recursive(window.FindButton().AutomationElement);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "CalendarWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindFirst(TreeScope.Descendants, Conditions.Calendar).AutomationElement);
+            _ = Dump.Recursive(window.FindFirst(TreeScope.Descendants, Conditions.Calendar).AutomationElement);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindComboBox().AutomationElement);
+            _ = Dump.Recursive(window.FindComboBox().AutomationElement);
         }
 
         [Test]
@@ -58,14 +58,14 @@ namespace Gu.Wpf.UiAutomation.UiTests
             var window = app.MainWindow;
             var comboBox = window.FindComboBox();
             comboBox.Expand();
-            Dump.Recursive(comboBox.AutomationElement);
+            _ = Dump.Recursive(comboBox.AutomationElement);
         }
 
         [Test]
         public void DumpFrame()
         {
             using var app = Application.Launch(ExeFileName, "FrameWindow");
-            Dump.Recursive(app.MainWindow.FindFrame().AutomationElement);
+            _ = Dump.Recursive(app.MainWindow.FindFrame().AutomationElement);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.Launch(ExeFileName, "SingleDataGridWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindDataGrid().AutomationElement);
+            _ = Dump.Recursive(window.FindDataGrid().AutomationElement);
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.Launch(ExeFileName, "DataGridWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindDataGrid("DataGrid10").AutomationElement);
+            _ = Dump.Recursive(window.FindDataGrid("DataGrid10").AutomationElement);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             window.FindButton("Show Dialog").Click();
             var dialog = window.FindDialog();
             var element = dialog.AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
             dialog.Close();
         }
 
@@ -102,14 +102,14 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "ExpanderWindow");
             var window = app.MainWindow;
             var element = window.FindExpander().AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
         public void DumpGridSplitterWindow()
         {
             using var app = Application.Launch(ExeFileName, "GridSplitterWindow");
-            Dump.Recursive(app.MainWindow.AutomationElement);
+            _ = Dump.Recursive(app.MainWindow.AutomationElement);
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             var window = app.MainWindow;
             window.FindButton("Show OpenFileDialog").Click();
             var dialog = window.FindOpenFileDialog();
-            Dump.Recursive(dialog.AutomationElement);
+            _ = Dump.Recursive(dialog.AutomationElement);
             dialog.AutomationElement.WindowPattern().Close();
         }
 
@@ -130,7 +130,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             var window = app.MainWindow;
             window.FindButton("Show SaveFileDialog").Click();
             var dialog = window.FindSaveFileDialog();
-            Dump.Recursive(dialog.AutomationElement);
+            _ = Dump.Recursive(dialog.AutomationElement);
             dialog.AutomationElement.WindowPattern().Close();
         }
 
@@ -139,7 +139,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "MenuWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindMenu().AutomationElement);
+            _ = Dump.Recursive(window.FindMenu().AutomationElement);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "TabControlWindow");
             var window = app.MainWindow;
             var element = window.FindTabControl().AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
@@ -157,7 +157,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "TabControlWindow");
             var window = app.MainWindow;
             var element = window.FindTabControl().Items[0].AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "GroupBoxWindow");
             var window = app.MainWindow;
             var element = window.FindGroupBox().AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "RichTextBoxWindow");
             var window = app.MainWindow;
             var element = window.FindFirstDescendant(Conditions.ByClassName("RichTextBox")).AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
@@ -184,21 +184,21 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "PasswordBoxWindow");
             var window = app.MainWindow;
             var element = window.FindFirstDescendant(new PropertyCondition(AutomationElement.IsPasswordProperty, true)).AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
         public void DumpSeparatorWindow()
         {
             using var app = Application.Launch(ExeFileName, "SeparatorWindow");
-            Dump.Recursive(app.MainWindow.AutomationElement);
+            _ = Dump.Recursive(app.MainWindow.AutomationElement);
         }
 
         [Test]
         public void DumpStatusBar()
         {
             using var app = Application.Launch(ExeFileName, "StatusBarWindow");
-            Dump.Recursive(app.MainWindow.FindStatusBar().AutomationElement);
+            _ = Dump.Recursive(app.MainWindow.FindStatusBar().AutomationElement);
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.Launch(ExeFileName, "EmptyWindow");
             var window = app.MainWindow;
             var element = window.AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
         }
 
         [Test]
@@ -215,7 +215,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.Launch(ExeFileName, "DataGridWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindDataGrid()[0, 0].AutomationElement);
+            _ = Dump.Recursive(window.FindDataGrid()[0, 0].AutomationElement);
         }
 
         [Test]
@@ -223,7 +223,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindListBox().AutomationElement);
+            _ = Dump.Recursive(window.FindListBox().AutomationElement);
         }
 
         [Test]
@@ -231,7 +231,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "ListBoxWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindListBox("ListBox10").AutomationElement);
+            _ = Dump.Recursive(window.FindListBox("ListBox10").AutomationElement);
         }
 
         [Test]
@@ -239,7 +239,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "ListViewWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindListView().AutomationElement);
+            _ = Dump.Recursive(window.FindListView().AutomationElement);
         }
 
         [Test]
@@ -250,7 +250,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             window.FindButton("Show MessageBox OKCancel").Click();
             var messageBox = window.FindMessageBox();
             var element = messageBox.AutomationElement;
-            Dump.Recursive(element);
+            _ = Dump.Recursive(element);
             messageBox.Close();
         }
 
@@ -259,7 +259,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.Launch(ExeFileName, "ScrollBarWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindScrollViewer().AutomationElement);
+            _ = Dump.Recursive(window.FindScrollViewer().AutomationElement);
         }
 
         [Test]
@@ -267,7 +267,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "TextBoxWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindTextBox().AutomationElement);
+            _ = Dump.Recursive(window.FindTextBox().AutomationElement);
         }
 
         [Test]
@@ -276,7 +276,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             using var app = Application.AttachOrLaunch(ExeFileName, "ToggleButtonWindow");
             var window = app.MainWindow;
             var toggleButton = window.FindToggleButton();
-            Dump.Recursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
+            _ = Dump.Recursive(toggleButton.AutomationElement, allPropertiesAndPatterns: true);
         }
 
         [Test]
@@ -284,7 +284,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         {
             using var app = Application.AttachOrLaunch(ExeFileName, "TreeViewWindow");
             var window = app.MainWindow;
-            Dump.Recursive(window.FindTreeView().AutomationElement);
+            _ = Dump.Recursive(window.FindTreeView().AutomationElement);
         }
     }
 }

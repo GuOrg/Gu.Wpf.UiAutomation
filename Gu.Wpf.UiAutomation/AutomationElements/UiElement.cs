@@ -358,7 +358,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Compares two elements.
         /// </summary>
-        public bool Equals(UiElement other)
+        public bool Equals(UiElement? other)
         {
             return other != null && Equals(this.AutomationElement, other.AutomationElement);
         }
