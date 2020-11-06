@@ -104,6 +104,11 @@ namespace Gu.Wpf.UiAutomation
         [Obsolete("Refactor away from this. Saves so little duplication.")]
         public static void While(Func<bool> whilePredicate, TimeSpan timeout, TimeSpan? retryInterval = null)
         {
+            if (whilePredicate is null)
+            {
+                throw new ArgumentNullException(nameof(whilePredicate));
+            }
+
             var startTime = DateTime.Now;
             while (true)
             {

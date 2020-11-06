@@ -1,1 +1,1 @@
-﻿
+﻿static Gu.Wpf.UiAutomation.WindowsVersion.IsRunningOnCiServer.get -> bool
