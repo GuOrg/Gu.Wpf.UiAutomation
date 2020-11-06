@@ -9,8 +9,30 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public Thumb LeftHeaderGripper => (Thumb)this.FindFirstChild(Conditions.Thumb);
+        public Thumb LeftHeaderGripper
+        {
+            get
+            {
+                if (this.TryFindFirst(TreeScope.Children, new AndCondition(Conditions.ByAutomationId("PART_LeftHeaderGripper"), Conditions.Thumb), Retry.Time, out var result))
+                {
+                    return (Thumb)result;
+                }
 
-        public Thumb RightHeaderGripper => (Thumb)this.FindAt(TreeScope.Children, Conditions.Thumb, 1, Retry.Time);
+                return (Thumb)this.FindFirstChild(Conditions.Thumb);
+            }
+        }
+
+        public Thumb RightHeaderGripper
+        {
+            get
+            {
+                if (this.TryFindFirst(TreeScope.Children, new AndCondition(Conditions.ByAutomationId("PART_RightHeaderGripper"), Conditions.Thumb), Retry.Time, out var result))
+                {
+                    return (Thumb)result;
+                }
+
+                return (Thumb)this.FindAt(TreeScope.Children, Conditions.Thumb, 1, Retry.Time);
+            }
+        }
     }
 }
