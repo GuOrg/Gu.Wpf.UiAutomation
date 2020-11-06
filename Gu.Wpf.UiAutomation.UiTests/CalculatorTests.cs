@@ -94,11 +94,11 @@ namespace Gu.Wpf.UiAutomation.UiTests
             return Application.Launch("calc.exe");
         }
 
-        public class Win10Calc : ICalculator
+        private class Win10Calc : ICalculator
         {
             private readonly UiElement mainWindow;
 
-            public Win10Calc(UiElement mainWindow)
+            internal Win10Calc(UiElement mainWindow)
             {
                 this.mainWindow = mainWindow;
             }

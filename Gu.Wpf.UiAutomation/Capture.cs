@@ -13,7 +13,9 @@ namespace Gu.Wpf.UiAutomation
     /// <summary>
     /// Provides methods to capture screenshots or partially screenshots.
     /// </summary>
+#pragma warning disable CA1060 // Move pinvokes to native methods class
     public static class Capture
+#pragma warning restore CA1060 // Move pinvokes to native methods class
     {
         /// <summary>
         /// Captures the whole screen (all monitors).

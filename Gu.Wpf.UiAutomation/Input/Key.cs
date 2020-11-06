@@ -6,7 +6,9 @@
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 namespace Gu.Wpf.UiAutomation
 {
+#pragma warning disable CA1008 // Enums should have zero value
     public enum Key : ushort
+#pragma warning restore CA1008 // Enums should have zero value
     {
         /// <summary>
         /// Left mouse button
