@@ -7,6 +7,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using System.Windows;
     using Gu.Wpf.UiAutomation.WindowsAPI;
     using NUnit.Framework;
+    using Application = Gu.Wpf.UiAutomation.Application;
 
     public class TouchTests
     {
