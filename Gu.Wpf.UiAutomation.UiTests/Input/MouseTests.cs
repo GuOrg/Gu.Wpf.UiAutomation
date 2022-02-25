@@ -5,6 +5,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Input
     using System.Linq;
     using System.Windows;
     using NUnit.Framework;
+    using Application = Gu.Wpf.UiAutomation.Application;
 
     public class MouseTests
     {
