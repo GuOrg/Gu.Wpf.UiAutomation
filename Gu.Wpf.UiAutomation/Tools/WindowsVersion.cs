@@ -70,7 +70,7 @@ namespace Gu.Wpf.UiAutomation
                 throw new Exception("Could not find the registry path needed for determining the OS version.");
             }
 
-            var productName = (string)reg.GetValue("ProductName");
+            var productName = (string?)reg.GetValue("ProductName");
             if (productName is null)
             {
                 throw new Exception("Could not find the registry key needed for determining the OS version.");
