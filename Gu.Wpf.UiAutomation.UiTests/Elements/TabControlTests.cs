@@ -77,12 +77,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             Assert.AreEqual(0, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
-            tab.Select(1);
+            Assert.AreEqual(tab.Items[1], tab.Select(1));
             Wait.UntilInputIsProcessed();
             Assert.AreEqual(1, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
-            tab.Select(0);
+            Assert.AreEqual(tab.Items[0], tab.Select(0));
             Wait.UntilInputIsProcessed();
             Assert.AreEqual(0, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[0], tab.SelectedItem);
@@ -98,12 +98,12 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             Assert.AreEqual(0, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[0], tab.SelectedItem);
 
-            tab.Select("Header");
+            Assert.AreEqual(tab.Items[1], tab.Select("Header"));
             Wait.UntilInputIsProcessed();
             Assert.AreEqual(1, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[1], tab.SelectedItem);
 
-            tab.Select("x:Name");
+            Assert.AreEqual(tab.Items[0], tab.Select("x:Name"));
             Wait.UntilInputIsProcessed();
             Assert.AreEqual(0, tab.SelectedIndex);
             Assert.AreEqual(tab.Items[0], tab.SelectedItem);

@@ -81,7 +81,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow");
             var window = app.MainWindow;
             var comboBox = window.FindComboBox(comboBoxId);
-            comboBox.Select(1);
+            Assert.AreEqual("Item 2", comboBox.Select(1).Text);
             var selectedItem = comboBox.SelectedItem;
             Assert.AreEqual("Item 2", selectedItem.Text);
         }
@@ -93,7 +93,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using var app = Application.AttachOrLaunch(ExeFileName, "ComboBoxWindow");
             var window = app.MainWindow;
             var comboBox = window.FindComboBox(comboBoxId);
-            comboBox.Select("Item 2");
+            Assert.AreEqual("Item 2", comboBox.Select("Item 2").Text);
             var selectedItem = comboBox.SelectedItem;
             Assert.AreEqual("Item 2", selectedItem.Text);
         }

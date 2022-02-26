@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.UiAutomation.UiTests
+namespace Gu.Wpf.UiAutomation.UiTests
 {
     using System.Diagnostics;
     using NUnit.Framework;
@@ -59,7 +59,7 @@
                 var window = app.MainWindow;
                 Assert.NotNull(window);
                 Assert.NotNull(window.Title);
-                app.Close();
+                Assert.AreEqual(true, app.Close());
             }
         }
     }

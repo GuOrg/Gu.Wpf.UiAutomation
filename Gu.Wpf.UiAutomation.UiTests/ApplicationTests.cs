@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
         public void DisposeWhenClosed()
         {
             using var app = Application.Launch("notepad.exe");
-            app.Close();
+            Assert.AreEqual(false, app.Close());
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Gu.Wpf.UiAutomation.UiTests
             Assert.NotZero(app.ProcessId);
             Assert.AreEqual("WpfApplication", app.Name);
             Assert.AreEqual(false, app.HasExited);
-            app.Close();
+            Assert.AreEqual(true, app.Close());
             Assert.AreEqual(true, app.HasExited);
             Assert.AreEqual(0, app.ExitCode);
         }

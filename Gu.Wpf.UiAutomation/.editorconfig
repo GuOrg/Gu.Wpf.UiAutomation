@@ -17,3 +17,6 @@ dotnet_diagnostic.CA1401.severity = none
 
 # CA1051: Do not declare visible instance fields
 dotnet_diagnostic.CA1051.severity = none
+
+# SYSLIB0003: Type or member is obsolete
+dotnet_diagnostic.SYSLIB0003.severity = none

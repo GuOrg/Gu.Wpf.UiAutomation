@@ -2,6 +2,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
 {
     using System;
     using System.Drawing;
+
     using NUnit.Framework;
 
     public partial class UiElementTests
@@ -95,7 +96,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
             var window = app.MainWindow;
             var button = window.FindButton("SizeButton");
-            button.DrawHighlight();
+            _ = button.DrawHighlight();
             var bounds = button.Bounds;
             bounds.Inflate(2, 2);
             using var actual = Capture.Rectangle(bounds);
@@ -108,7 +109,7 @@ namespace Gu.Wpf.UiAutomation.UiTests.Elements
             using var app = Application.AttachOrLaunch(ExeFileName, "SizeWindow");
             var window = app.MainWindow;
             var button = window.FindButton("SizeButton");
-            button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(500));
+            _ = button.DrawHighlight(blocking: true, color: Color.Blue, duration: TimeSpan.FromMilliseconds(500));
         }
     }
 }
