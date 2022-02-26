@@ -8,7 +8,7 @@ namespace Gu.Wpf.UiAutomation
 
     public class DataGridCell : SelectionItemControl
     {
-        public static readonly Regex NewItemPlaceHolderRegex = new Regex("^[^:]+: {NewItemPlaceholder}, [^:]+: \\d+$", RegexOptions.Singleline | RegexOptions.Compiled);
+        public static readonly Regex NewItemPlaceHolderRegex = new("^[^:]+: {NewItemPlaceholder}, [^:]+: \\d+$", RegexOptions.Singleline | RegexOptions.Compiled);
 
         public DataGridCell(AutomationElement automationElement)
             : base(automationElement)

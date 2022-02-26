@@ -7,7 +7,7 @@ namespace Gu.Wpf.UiAutomation
 
     public partial class UiElement
     {
-        private static readonly List<ConditionAndCreate> ConditionAndCreates = new List<ConditionAndCreate>
+        private static readonly List<ConditionAndCreate> ConditionAndCreates = new()
         {
             new ConditionAndCreate(Conditions.Button, Button.Create),
             //// Calendar

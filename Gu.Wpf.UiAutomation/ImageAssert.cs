@@ -425,7 +425,7 @@ namespace Gu.Wpf.UiAutomation
 
         private static class ResourceCache
         {
-            private static readonly ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>> Cache = new ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>>();
+            private static readonly ConcurrentDictionary<Assembly, List<KeyValuePair<string, Bitmap>>> Cache = new();
 
             internal static bool TryFind(Assembly assembly, string resourceName, out Bitmap result)
             {

@@ -18,11 +18,11 @@ namespace Gu.Wpf.UiAutomation
     /// </summary>
     public sealed class Application : IDisposable
     {
-        private static readonly List<Process> Launched = new List<Process>();
-        private static readonly ConcurrentDictionary<string, string?> ExeNames = new ConcurrentDictionary<string, string?>();
+        private static readonly List<Process> Launched = new();
+        private static readonly ConcurrentDictionary<string, string?> ExeNames = new();
 
         private readonly ProcessReference processReference;
-        private readonly object gate = new object();
+        private readonly object gate = new();
 
         private volatile Window? mainWindow;
         private bool disposed;

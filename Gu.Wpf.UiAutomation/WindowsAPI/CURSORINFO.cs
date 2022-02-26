@@ -39,7 +39,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
         }
 
         public static CURSORINFO Create() =>
-            new CURSORINFO
+            new()
             {
                 Size = Marshal.SizeOf(typeof(CURSORINFO)),
             };

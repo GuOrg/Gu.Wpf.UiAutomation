@@ -19,7 +19,7 @@ namespace Gu.Wpf.UiAutomation.WindowsAPI
             return !left.Equals(right);
         }
 
-        public static RECT Create(POINT p, int radius) => new RECT
+        public static RECT Create(POINT p, int radius) => new()
         {
             Left = p.X - radius,
             Right = p.X + radius,

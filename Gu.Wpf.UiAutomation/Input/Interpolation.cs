@@ -64,7 +64,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="from">The start position.</param>
         /// <param name="to">The end position.</param>
         /// <param name="time">The total time of the interpolation.</param>
-        public static Interpolation Start(Point from, Point to, TimeSpan time) => new Interpolation(POINT.From(from), POINT.From(to), time);
+        public static Interpolation Start(Point from, Point to, TimeSpan time) => new(POINT.From(from), POINT.From(to), time);
 
         /// <summary>
         /// Create an instance of the class.
@@ -75,7 +75,7 @@ namespace Gu.Wpf.UiAutomation
         /// <param name="from">The start position.</param>
         /// <param name="to">The end position.</param>
         /// <param name="time">The total time of the interpolation.</param>
-        public static Interpolation Start(POINT @from, POINT to, TimeSpan time) => new Interpolation(from, to, time);
+        public static Interpolation Start(POINT @from, POINT to, TimeSpan time) => new(from, to, time);
 
         /// <summary>
         /// Calculate the time it takes to travel from <paramref name="from"/> to <paramref name="to"/> at <paramref name="speed"/>.

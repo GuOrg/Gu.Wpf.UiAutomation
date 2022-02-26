@@ -43,7 +43,7 @@ namespace Gu.Wpf.UiAutomation
 
         public bool IsModal => this.AutomationElement.WindowPattern().Current.IsModal;
 
-        public TitleBar TitleBar => new TitleBar(this.AutomationElement.FindFirstChild(Conditions.TitleBar));
+        public TitleBar TitleBar => new(this.AutomationElement.FindFirstChild(Conditions.TitleBar));
 
         public IReadOnlyList<Window> ModalWindows => this.FindAllChildren(Conditions.ModalWindow)
                                                          .Select(e => new Window(e.AutomationElement, isMainWindow: false))
@@ -78,11 +78,11 @@ namespace Gu.Wpf.UiAutomation
         /// </summary>
         public ContextMenu? ContextMenu => this.GetContextMenuByFrameworkType(this.FrameworkType);
 
-        public IntPtr NativeWindowHandle => new IntPtr(this.AutomationElement.NativeWindowHandle());
+        public IntPtr NativeWindowHandle => new(this.AutomationElement.NativeWindowHandle());
 
         public WindowPattern WindowPattern => this.AutomationElement.WindowPattern();
 
-        public MessageBox FindMessageBox() => new MessageBox(this.AutomationElement.FindFirstChild(Conditions.MessageBox));
+        public MessageBox FindMessageBox() => new(this.AutomationElement.FindFirstChild(Conditions.MessageBox));
 
         /// <summary>
         /// Find the first <see cref="Popup"/>.

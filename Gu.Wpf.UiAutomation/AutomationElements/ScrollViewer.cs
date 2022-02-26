@@ -9,10 +9,10 @@ namespace Gu.Wpf.UiAutomation
         {
         }
 
-        public HorizontalScrollBar HorizontalScrollBar => new HorizontalScrollBar(
+        public HorizontalScrollBar HorizontalScrollBar => new(
             this.AutomationElement.FindFirst(TreeScope.Children, Conditions.ByAutomationId(nameof(this.HorizontalScrollBar))));
 
-        public HorizontalScrollBar VerticalScrollBar => new HorizontalScrollBar(
+        public HorizontalScrollBar VerticalScrollBar => new(
             this.AutomationElement.FindFirst(TreeScope.Children, Conditions.ByAutomationId(nameof(this.VerticalScrollBar))));
 
         public ScrollPattern ScrollPattern => this.AutomationElement.ScrollPattern();

@@ -4,7 +4,7 @@ namespace Gu.Wpf.UiAutomation
 
     public static class Desktop
     {
-        public static Window Instance => new Window(AutomationElement);
+        public static Window Instance => new(AutomationElement);
 
         public static AutomationElement AutomationElement => AutomationElement.RootElement;
     }

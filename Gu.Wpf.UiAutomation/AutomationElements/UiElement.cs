@@ -33,7 +33,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Get the parent <see cref="UiElement"/>.
         /// </summary>
-        public UiElement Parent => new UiElement(TreeWalker.RawViewWalker.GetParent(this.AutomationElement));
+        public UiElement Parent => new(TreeWalker.RawViewWalker.GetParent(this.AutomationElement));
 
         /// <summary>
         /// Get the children.
@@ -136,7 +136,7 @@ namespace Gu.Wpf.UiAutomation
         /// <summary>
         /// Gets the cached parent for this element.
         /// </summary>
-        public UiElement CachedParent => new UiElement(this.AutomationElement.CachedParent);
+        public UiElement CachedParent => new(this.AutomationElement.CachedParent);
 
         public bool TryGetWindow([NotNullWhen(true)]out Window? window)
         {

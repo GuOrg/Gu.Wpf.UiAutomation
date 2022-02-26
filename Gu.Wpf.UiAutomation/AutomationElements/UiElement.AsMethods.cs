@@ -2,64 +2,64 @@ namespace Gu.Wpf.UiAutomation
 {
     public partial class UiElement
     {
-        public Button AsButton() => new Button(this.AutomationElement);
+        public Button AsButton() => new(this.AutomationElement);
 
-        public CheckBox AsCheckBox() => new CheckBox(this.AutomationElement);
+        public CheckBox AsCheckBox() => new(this.AutomationElement);
 
-        public ToggleButton AsToggleButton() => new ToggleButton(this.AutomationElement);
+        public ToggleButton AsToggleButton() => new(this.AutomationElement);
 
-        public ComboBox AsComboBox() => new ComboBox(this.AutomationElement);
+        public ComboBox AsComboBox() => new(this.AutomationElement);
 
-        public Label AsLabel() => new Label(this.AutomationElement);
+        public Label AsLabel() => new(this.AutomationElement);
 
-        public TextBlock AsTextBlock() => new TextBlock(this.AutomationElement);
+        public TextBlock AsTextBlock() => new(this.AutomationElement);
 
-        public GroupBox AsGroupBox() => new GroupBox(this.AutomationElement);
+        public GroupBox AsGroupBox() => new(this.AutomationElement);
 
-        public Expander AsExpander() => new Expander(this.AutomationElement);
+        public Expander AsExpander() => new(this.AutomationElement);
 
-        public ListBox AsListBox() => new ListBox(this.AutomationElement);
+        public ListBox AsListBox() => new(this.AutomationElement);
 
-        public ListView AsListView() => new ListView(this.AutomationElement);
+        public ListView AsListView() => new(this.AutomationElement);
 
-        public DataGrid AsDataGrid() => new DataGrid(this.AutomationElement);
+        public DataGrid AsDataGrid() => new(this.AutomationElement);
 
-        public ListBoxItem AsListBoxItem() => new ListBoxItem(this.AutomationElement);
+        public ListBoxItem AsListBoxItem() => new(this.AutomationElement);
 
-        public GridViewCell AsGridCell() => new GridViewCell(FromAutomationElement(this.AutomationElement));
+        public GridViewCell AsGridCell() => new(FromAutomationElement(this.AutomationElement));
 
-        public Menu AsMenu() => new Menu(this.AutomationElement);
+        public Menu AsMenu() => new(this.AutomationElement);
 
-        public ContextMenu AsContextMenu() => new ContextMenu(this.AutomationElement);
+        public ContextMenu AsContextMenu() => new(this.AutomationElement);
 
-        public MenuItem AsMenuItem() => new MenuItem(this.AutomationElement);
+        public MenuItem AsMenuItem() => new(this.AutomationElement);
 
-        public ProgressBar AsProgressBar() => new ProgressBar(this.AutomationElement);
+        public ProgressBar AsProgressBar() => new(this.AutomationElement);
 
-        public RadioButton AsRadioButton() => new RadioButton(this.AutomationElement);
+        public RadioButton AsRadioButton() => new(this.AutomationElement);
 
-        public Slider AsSlider() => new Slider(this.AutomationElement);
+        public Slider AsSlider() => new(this.AutomationElement);
 
-        public TabControl AsTabControl() => new TabControl(this.AutomationElement);
+        public TabControl AsTabControl() => new(this.AutomationElement);
 
-        public TabItem AsTabItem() => new TabItem(this.AutomationElement);
+        public TabItem AsTabItem() => new(this.AutomationElement);
 
-        public TextBox AsTextBox() => new TextBox(this.AutomationElement);
+        public TextBox AsTextBox() => new(this.AutomationElement);
 
-        public Thumb AsThumb() => new Thumb(this.AutomationElement);
+        public Thumb AsThumb() => new(this.AutomationElement);
 
-        public TitleBar AsTitleBar() => new TitleBar(this.AutomationElement);
+        public TitleBar AsTitleBar() => new(this.AutomationElement);
 
-        public TreeView AsTreeView() => new TreeView(this.AutomationElement);
+        public TreeView AsTreeView() => new(this.AutomationElement);
 
-        public TreeViewItem AsTreeViewItem() => new TreeViewItem(this.AutomationElement);
+        public TreeViewItem AsTreeViewItem() => new(this.AutomationElement);
 
-        public HorizontalScrollBar AsHorizontalScrollBar() => new HorizontalScrollBar(this.AutomationElement);
+        public HorizontalScrollBar AsHorizontalScrollBar() => new(this.AutomationElement);
 
-        public VerticalScrollBar AsVerticalScrollBar() => new VerticalScrollBar(this.AutomationElement);
+        public VerticalScrollBar AsVerticalScrollBar() => new(this.AutomationElement);
 
-        public Window AsWindow(bool isMainWindow) => new Window(this.AutomationElement, isMainWindow);
+        public Window AsWindow(bool isMainWindow) => new(this.AutomationElement, isMainWindow);
 
-        public MessageBox AsMessageBox() => new MessageBox(this.AutomationElement);
+        public MessageBox AsMessageBox() => new(this.AutomationElement);
     }
 }
