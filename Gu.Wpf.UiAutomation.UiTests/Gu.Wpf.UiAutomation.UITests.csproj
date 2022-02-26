@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-	  <UseWpf>true</UseWpf>
-	  <UseWindowsForms>true</UseWindowsForms>
+	<UseWpf>true</UseWpf>
+	<UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   
   <PropertyGroup>

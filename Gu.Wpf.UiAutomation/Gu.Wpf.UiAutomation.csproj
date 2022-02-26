@@ -4,8 +4,8 @@
     <TargetFrameworks>net45;net6.0-windows</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-	  <UseWpf>true</UseWpf>
-	  <UseWindowsForms>true</UseWindowsForms>
+	<UseWpf>true</UseWpf>
+	<UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup>
