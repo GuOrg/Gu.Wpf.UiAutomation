@@ -1,4 +1,4 @@
-namespace Netcore3App
+namespace Net6App
 {
     using System.Windows;
 

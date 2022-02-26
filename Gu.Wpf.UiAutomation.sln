@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29409.12
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 15.0.26730.3
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{B1C84389-441E-4870-9EAC-F241B568B204}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{28EBF5DE
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netcore3App", "TestApplications\Netcore3App\Netcore3App.csproj", "{BDCB7394-7850-4685-965B-1477B1EF1C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net6App", "TestApplications\Netcore3App\Net6App.csproj", "{BDCB7394-7850-4685-965B-1477B1EF1C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
