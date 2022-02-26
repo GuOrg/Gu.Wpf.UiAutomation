@@ -23,7 +23,7 @@ public class FooTests
     // Current sln directory is searched rtecursively for this exe.
     private const string ExeFileName = "WpfApplication.exe";
     // This is optional
-    private const string WindowName = "FooWindow";
+    private const string WindowName = "MainWindow";
 
     [SetUp]
     public void SetUp()
