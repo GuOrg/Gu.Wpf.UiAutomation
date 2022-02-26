@@ -1,3 +1,6 @@
+# 0.4.0
+* FEATURE: Multitarget net45;net6.0-windows
+
 # 0.3.6
 * TUNING: Longer timeouts overall on CI
 
