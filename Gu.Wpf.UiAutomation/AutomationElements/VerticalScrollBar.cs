@@ -11,76 +11,36 @@ namespace Gu.Wpf.UiAutomation
         }
 
         /// <inheritdoc/>
-        protected override string SmallDecrementText
+        protected override string SmallDecrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PART_LineUpButton";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "UpButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.SmallDecrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PART_LineUpButton",
+            FrameworkType.WinForms or FrameworkType.Win32 => "UpButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.SmallDecrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         /// <inheritdoc/>
-        protected override string SmallIncrementText
+        protected override string SmallIncrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PART_LineDownButton";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "DownButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.SmallIncrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PART_LineDownButton",
+            FrameworkType.WinForms or FrameworkType.Win32 => "DownButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.SmallIncrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         /// <inheritdoc/>
-        protected override string LargeDecrementText
+        protected override string LargeDecrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PageUp";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "DownPageButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.LargeDecrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PageUp",
+            FrameworkType.WinForms or FrameworkType.Win32 => "DownPageButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.LargeDecrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         /// <inheritdoc/>
-        protected override string LargeIncrementText
+        protected override string LargeIncrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PageDown";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "UpPageButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.LargeIncrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PageDown",
+            FrameworkType.WinForms or FrameworkType.Win32 => "UpPageButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.LargeIncrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         public void ScrollUp()
         {

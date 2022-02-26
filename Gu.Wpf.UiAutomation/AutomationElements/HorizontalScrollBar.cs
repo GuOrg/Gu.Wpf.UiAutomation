@@ -15,16 +15,12 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                switch (this.FrameworkType)
+                return this.FrameworkType switch
                 {
-                    case FrameworkType.Wpf:
-                        return "PART_LineLeftButton";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "UpButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.SmallDecrementText)} for framework type: {this.FrameworkType}");
-                }
+                    FrameworkType.Wpf => "PART_LineLeftButton",
+                    FrameworkType.WinForms or FrameworkType.Win32 => "UpButton",
+                    _ => throw new InvalidOperationException($"Did not find {nameof(this.SmallDecrementText)} for framework type: {this.FrameworkType}"),
+                };
             }
         }
 
@@ -33,54 +29,30 @@ namespace Gu.Wpf.UiAutomation
         {
             get
             {
-                switch (this.FrameworkType)
+                return this.FrameworkType switch
                 {
-                    case FrameworkType.Wpf:
-                        return "PART_LineRightButton";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "DownButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.SmallIncrementText)} for framework type: {this.FrameworkType}");
-                }
+                    FrameworkType.Wpf => "PART_LineRightButton",
+                    FrameworkType.WinForms or FrameworkType.Win32 => "DownButton",
+                    _ => throw new InvalidOperationException($"Did not find {nameof(this.SmallIncrementText)} for framework type: {this.FrameworkType}"),
+                };
             }
         }
 
         /// <inheritdoc/>
-        protected override string LargeDecrementText
+        protected override string LargeDecrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PageLeft";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "DownPageButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.LargeDecrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PageLeft",
+            FrameworkType.WinForms or FrameworkType.Win32 => "DownPageButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.LargeDecrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         /// <inheritdoc/>
-        protected override string LargeIncrementText
+        protected override string LargeIncrementText => this.FrameworkType switch
         {
-            get
-            {
-                switch (this.FrameworkType)
-                {
-                    case FrameworkType.Wpf:
-                        return "PageRight";
-                    case FrameworkType.WinForms:
-                    case FrameworkType.Win32:
-                        return "UpPageButton";
-                    default:
-                        throw new InvalidOperationException($"Did not find {nameof(this.LargeIncrementText)} for framework type: {this.FrameworkType}");
-                }
-            }
-        }
+            FrameworkType.Wpf => "PageRight",
+            FrameworkType.WinForms or FrameworkType.Win32 => "UpPageButton",
+            _ => throw new InvalidOperationException($"Did not find {nameof(this.LargeIncrementText)} for framework type: {this.FrameworkType}"),
+        };
 
         public virtual void ScrollLeft()
         {
