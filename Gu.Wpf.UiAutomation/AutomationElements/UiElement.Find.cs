@@ -601,7 +601,7 @@ namespace Gu.Wpf.UiAutomation
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
         /// </summary>
         public bool TryFindFirst(TreeScope treeScope, System.Windows.Automation.Condition condition, TimeSpan timeOut, [NotNullWhen(true)]out UiElement? result)
-            => TryFindFirst<UiElement>(treeScope, condition, FromAutomationElement, timeOut, out result);
+            => this.TryFindFirst(treeScope, condition, FromAutomationElement, timeOut, out result);
 
         /// <summary>
         /// Finds the first element which is in the given tree scope with the given condition within the given timeout period.
