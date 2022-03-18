@@ -20,7 +20,7 @@
     </ResourceDictionary>
   </Window.Resources>
   <DockPanel>
-    <Menu DockPanel.Dock="Top">
+    <Menu x:Name="TopMenu" DockPanel.Dock="Top">
       <MenuItem Header="_File">
         <MenuItem Header="E_xit" />
       </MenuItem>

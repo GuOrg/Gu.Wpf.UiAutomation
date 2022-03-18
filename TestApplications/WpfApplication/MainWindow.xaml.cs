@@ -1,5 +1,6 @@
 namespace WpfApplication
 {
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -11,6 +12,13 @@ namespace WpfApplication
         public MainWindow()
         {
             this.InitializeComponent();
+
+            Task.Delay(2000).ContinueWith(_
+                => this.Dispatcher.Invoke(()
+                    => AddMenuItem("DelayedMenuItem")));
+
+            void AddMenuItem(string header)
+                => this.TopMenu.Items.Add(new MenuItem() { Header = header });
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
