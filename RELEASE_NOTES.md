@@ -1,3 +1,6 @@
+# 0.4.1
+* BUGFIX: Don't throw in TryFind
+
 # 0.4.0
 * FEATURE: Multitarget net45;net6.0-windows
 
