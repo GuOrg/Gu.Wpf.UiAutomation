@@ -40,6 +40,8 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '${{ env.CI_DOTNET_VERSION }}'
+      - name: Build Gu.Wpf.UiAutomation
+        run: dotnet build "${{ github.workspace }}/Gu.Wpf.UiAutomation/Gu.Wpf.UiAutomation.csproj" --configuration Release
       - name: Package Gu.Wpf.UiAutomation
         run: dotnet pack "${{ github.workspace }}/Gu.Wpf.UiAutomation/Gu.Wpf.UiAutomation.csproj" --configuration Release --output ${{ env.CI_NUGET_OUTPUT }}
       - name: Upload Artifacts (NuGet Packages)
