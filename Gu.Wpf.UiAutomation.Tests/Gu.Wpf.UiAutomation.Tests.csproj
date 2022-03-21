@@ -4,6 +4,7 @@
     <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
 	<UseWpf>true</UseWpf>
 	<UseWindowsForms>true</UseWindowsForms>
+	<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
 
   <PropertyGroup>
