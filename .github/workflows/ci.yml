@@ -1,0 +1,70 @@
+name: CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - '*'
+
+env:
+  CI_DOTNET_VERSION: 6.0.x
+  CI_NUGET_OUTPUT: ${{ github.workspace }}/nuget
+
+jobs:
+  build_and_test:
+    name: Build & Test Solution
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup .NET ${{ env.CI_DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '${{ env.CI_DOTNET_VERSION }}'
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build solution
+        run: dotnet build --configuration Release
+      - name: Test solution
+        run: dotnet test --configuration Release --logger nunit
+  package:
+    name: Package Source Projects
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup .NET ${{ env.CI_DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '${{ env.CI_DOTNET_VERSION }}'
+      - name: Package Source Projects
+        run: for f in ${{ github.workspace }}/src/**/*.csproj; do dotnet pack "$f" --configuration Release --output ${{ env.CI_NUGET_OUTPUT }}; done
+      - name: Upload Artifacts (NuGet Packages)
+        uses: actions/upload-artifact@v2
+        with:
+          name: nuget
+          if-no-files-found: error
+          retention-days: 3
+          path: ${{ env.CI_NUGET_OUTPUT }}/**/*
+  deploy:
+    name: Publish NuGet Packages
+    runs-on: ubuntu-latest
+    needs: [ build_and_test, package ]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download Artifacts (NuGet Packages)
+        uses: actions/download-artifact@v2
+        with:
+          name: nuget
+          path: ${{ env.CI_NUGET_OUTPUT }}
+      - name: Setup .NET ${{ env.CI_DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '${{ env.CI_DOTNET_VERSION }}'
+      - name: Publish NuGet Packages
+        run: for f in ${{ env.CI_NUGET_OUTPUT }}/*.nupkg; do dotnet nuget push "$f" --api-key ${{ env.CI_NUGET_API_KEY }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate; done
+        env:
+          CI_NUGET_API_KEY: ${{ secrets.CI_NUGET_API_KEY }}
