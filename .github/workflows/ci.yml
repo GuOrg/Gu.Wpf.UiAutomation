@@ -31,7 +31,7 @@ jobs:
       - name: Test solution
         run: dotnet test --configuration Release --logger nunit
   package:
-    name: Package Source Projects
+    name: Package Source Project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -40,8 +40,8 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '${{ env.CI_DOTNET_VERSION }}'
-      - name: Package Source Projects
-        run: for f in ${{ github.workspace }}/src/**/*.csproj; do dotnet pack "$f" --configuration Release --output ${{ env.CI_NUGET_OUTPUT }}; done
+      - name: Package Source Project
+        run: dotnet pack "${{ github.workspace }}/Gu.Wpf.UiAutomation/Gu.Wpf.UiAutomation.csproj" --configuration Release --output ${{ env.CI_NUGET_OUTPUT }}
       - name: Upload Artifacts (NuGet Packages)
         uses: actions/upload-artifact@v2
         with:
