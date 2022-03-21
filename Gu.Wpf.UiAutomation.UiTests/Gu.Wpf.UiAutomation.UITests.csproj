@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" PrivateAssets="all" />
     <PackageReference Include="Gu.Analyzers" Version="2.0.2" PrivateAssets="all" />
     <PackageReference Include="IDisposableAnalyzers" Version="4.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
