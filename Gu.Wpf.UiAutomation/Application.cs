@@ -206,7 +206,18 @@ namespace Gu.Wpf.UiAutomation
             }
 
             var running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(exeFileName))
-                                 .FirstOrDefault(x => x.StartInfo.Arguments == processStartInfo.Arguments);
+                                 .FirstOrDefault(x =>
+                                 {
+                                     try
+                                     {
+                                         return x.StartInfo.Arguments == processStartInfo.Arguments;
+                                     }
+                                     catch (InvalidOperationException)
+                                     {
+                                         // This can happen for processes that we didn't start
+                                         return false;
+                                     }
+                                 });
 
             if (running is { })
             {
